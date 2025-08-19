@@ -44,7 +44,7 @@
 
       function htmTooltipSitePage(feature, layer) {
         return `{%- block htmTooltipSitePagePage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipSitePagePage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var pageId = {% if result.pageId is defined %}{{ result.pageId | tojson }}{% else %}null{% endif %};
@@ -149,6 +150,7 @@
           searchpageSitePage();
           return false;
         });
+{%- block htmScriptInitSitePagePage %}{%- endblock htmScriptInitSitePagePage %}
       });
     </script>
 {%- endblock htmScriptSitePagePage %}
@@ -169,17 +171,12 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartSitePagePage %}
-{%- endblock htmBodyStartSitePagePage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleSitePagePage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-solid fa-newspaper"></i>
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
               all articles
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -188,7 +185,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-solid fa-newspaper"></i>
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
             </div>
             <span class="wa-heading-m ">no article found</span>
             <p class="wa-caption-l ">Read the latest articles to learn more</p>
@@ -198,7 +195,7 @@
 {% else %}
 {%- include en-us/search/article/SitePageSidebar.htm %}
 {%- include en-us/search/article/SitePageSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/article" id="SitePageForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -211,7 +208,7 @@
               <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-solid fa-newspaper"></i>
+                  <i class="fa-duotone fa-regular fa-newspaper"></i>
                   all articles
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -220,6 +217,13 @@
               </wa-breadcrumb>
 {% include en-us/search/article/SitePageSearchForm.htm %}
 {% include en-us/search/article/SitePageSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartSitePagePage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleSitePagePage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/article/SitePagePaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -228,42 +232,45 @@
                 <wa-button variant="brand" slot="trigger" caret>title</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSitePage_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SitePage').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-name-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by title ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSitePage_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SitePage').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-name-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by title descending
                   </wa-menu-item>
                 </wa-menu>
               </wa-dropdown>
-              <div></div>
+              <wa-dropdown id="htmDropdown-description">
+                <wa-button variant="brand" slot="trigger" caret>description</wa-button>
+                <wa-menu>
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSitePage_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SitePage').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    sort by description ascending
+                  </wa-menu-item>
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSitePage_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SitePage').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    sort by description descending
+                  </wa-menu-item>
+                </wa-menu>
+              </wa-dropdown>
                   </div>
                   {% for item in listSitePage%}
                   <div>
               <a href="{{ item.displayPage }}">
-                <i class="fa-duotone fa-solid fa-newspaper"></i>
+                <i class="fa-duotone fa-regular fa-newspaper"></i>
               <span>{{ item.name | e }}
 </span>              </a>
-              <wa-button variant="brand"
-                  id="{{classApiMethodMethod}}_editPage"
-                  placeholder="[String] edit"
-                  label="edit"
-                  title="Edit this"
-                  class="button-on-left {{classApiMethodMethod}}_editPage classSitePage inputSitePage{{ result.pageId }}EditPage "
-                  name="setEditPage"
-                  href="{{ item.editPage | e }}"
-                  >
-                <i class="fa-duotone fa-regular fa-pen-to-square"></i>
-                edit
-              </wa-button>
+              <a href="{{ item.displayPage }}">
+              <span>{{ item.description | e }}
+</span>              </a>
                   </div>
                   {% endfor %}
               {% if getColumnName is defined %}
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnEditPage is defined %}
+              {% if getColumnDescription is defined %}
                 <div>
                 </div>
               {% endif %}
@@ -277,7 +284,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndSitePagePage %}
+{%- include en-us/search/article/SitePageLocation.htm %}
 {%- endblock htmBodyEndSitePagePage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

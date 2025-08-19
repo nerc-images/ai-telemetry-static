@@ -44,7 +44,7 @@
 
       function htmTooltipClusterTemplate(feature, layer) {
         return `{%- block htmTooltipClusterTemplatePage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -169,6 +170,7 @@
           deletefilterClusterTemplate(event.target);
           return false;
         });
+{%- block htmScriptInitClusterTemplatePage %}{%- endblock htmScriptInitClusterTemplatePage %}
       });
     </script>
 {%- endblock htmScriptClusterTemplatePage %}
@@ -193,7 +195,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip>
             <wa-button id="return-to-ClusterTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
+              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
               all OpenShift cluster templates
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
@@ -209,7 +211,7 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterTemplatePage %}
-        <div>
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip></wa-tooltip>
@@ -255,7 +257,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-      {{ super() }}
 {%- block htmBodyEndClusterTemplatePage %}
+{%- include en-us/search/cluster-template/ClusterTemplateLocation.htm %}
 {%- endblock htmBodyEndClusterTemplatePage %}
+      {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

@@ -144,6 +144,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var gpuDeviceResource = {% if result.gpuDeviceResource is defined %}{{ result.gpuDeviceResource | tojson }}{% else %}null{% endif %};
@@ -332,6 +333,7 @@
           deletefilterGpuDevice(event.target);
           return false;
         });
+{%- block htmScriptInitGpuDevicePage %}{%- endblock htmScriptInitGpuDevicePage %}
       });
     </script>
 {%- endblock htmScriptGpuDevicePage %}
@@ -372,7 +374,7 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleGpuDevicePage %}
-        <div>
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-GpuDevice">back to all GPU devices</wa-tooltip></wa-tooltip>
@@ -418,7 +420,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-      {{ super() }}
 {%- block htmBodyEndGpuDevicePage %}
+{%- include en-us/search/gpu-device/GpuDeviceLocation.htm %}
 {%- endblock htmBodyEndGpuDevicePage %}
+      {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

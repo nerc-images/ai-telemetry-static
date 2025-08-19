@@ -44,7 +44,7 @@
 
       function htmTooltipBareMetalNetwork(feature, layer) {
         return `{%- block htmTooltipBareMetalNetworkPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNetworkPage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -169,6 +170,7 @@
           deletefilterBareMetalNetwork(event.target);
           return false;
         });
+{%- block htmScriptInitBareMetalNetworkPage %}{%- endblock htmScriptInitBareMetalNetworkPage %}
       });
     </script>
 {%- endblock htmScriptBareMetalNetworkPage %}
@@ -189,11 +191,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartBareMetalNetworkPage %}
-{%- endblock htmBodyStartBareMetalNetworkPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleBareMetalNetworkPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalNetwork">back to all bare metal networks</wa-tooltip></wa-tooltip>
@@ -218,7 +215,7 @@
 {% else %}
 {%- include en-us/search/bare-metal-network/BareMetalNetworkSidebar.htm %}
 {%- include en-us/search/bare-metal-network/BareMetalNetworkSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/bare-metal-network" id="BareMetalNetworkForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -240,6 +237,13 @@
               </wa-breadcrumb>
 {% include en-us/search/bare-metal-network/BareMetalNetworkSearchForm.htm %}
 {% include en-us/search/bare-metal-network/BareMetalNetworkSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartBareMetalNetworkPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleBareMetalNetworkPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/bare-metal-network/BareMetalNetworkPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -248,11 +252,11 @@
                 <wa-button variant="brand" slot="trigger" caret>network name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNetwork_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNetwork').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-name-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by network name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNetwork_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNetwork').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-name-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by network name descending
                   </wa-menu-item>
                 </wa-menu>
@@ -261,11 +265,11 @@
                 <wa-button variant="brand" slot="trigger" caret>provider segmentation ID</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNetwork_providerSegmentationId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNetwork').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-providerSegmentationId-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by provider segmentation ID ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNetwork_providerSegmentationId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNetwork').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-providerSegmentationId-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by provider segmentation ID descending
                   </wa-menu-item>
                 </wa-menu>
@@ -300,7 +304,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndBareMetalNetworkPage %}
+{%- include en-us/search/bare-metal-network/BareMetalNetworkLocation.htm %}
 {%- endblock htmBodyEndBareMetalNetworkPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

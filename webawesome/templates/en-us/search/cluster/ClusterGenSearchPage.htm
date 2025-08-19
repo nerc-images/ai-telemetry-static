@@ -45,7 +45,7 @@
 
       function htmTooltipCluster(feature, layer) {
         return `{%- block htmTooltipClusterPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterPage %}`;
       }
 
@@ -80,7 +80,7 @@
         htm += `{%- block htmLegendClusterPage %}
     <div title="${quoteattr(title)}">
     <div style="width: 20px; ">
-      <i class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></i>
+      <wa-icon class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></wa-icon>
     </div>
     <div class="text-overflow-ellipsis ">
       <span class="" data-solrId="${result.solrId}" onclick="window.mapLayers[this.getAttribute('data-solrId')].openPopup(); return false;" href="">${title}</span>
@@ -142,6 +142,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var clusterResource = {% if result.clusterResource is defined %}{{ result.clusterResource | tojson }}{% else %}null{% endif %};
@@ -268,6 +269,7 @@
           deletefilterCluster(event.target);
           return false;
         });
+{%- block htmScriptInitClusterPage %}{%- endblock htmScriptInitClusterPage %}
       });
     </script>
 {%- endblock htmScriptClusterPage %}
@@ -288,11 +290,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterPage %}
-{%- endblock htmBodyStartClusterPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleClusterPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Cluster">back to all OpenShift clusters</wa-tooltip></wa-tooltip>
@@ -317,7 +314,7 @@
 {% else %}
 {%- include en-us/search/cluster/ClusterSidebar.htm %}
 {%- include en-us/search/cluster/ClusterSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/cluster" id="ClusterForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -339,6 +336,13 @@
               </wa-breadcrumb>
 {% include en-us/search/cluster/ClusterSearchForm.htm %}
 {% include en-us/search/cluster/ClusterSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartClusterPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleClusterPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/cluster/ClusterPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -347,11 +351,11 @@
                 <wa-button variant="brand" slot="trigger" caret>ACM Hub</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortCluster_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Cluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by ACM Hub ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortCluster_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Cluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by ACM Hub descending
                   </wa-menu-item>
                 </wa-menu>
@@ -360,11 +364,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortCluster_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Cluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterName-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by cluster name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortCluster_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Cluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterName-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by cluster name descending
                   </wa-menu-item>
                 </wa-menu>
@@ -399,7 +403,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndClusterPage %}
+{%- include en-us/search/cluster/ClusterLocation.htm %}
 {%- endblock htmBodyEndClusterPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

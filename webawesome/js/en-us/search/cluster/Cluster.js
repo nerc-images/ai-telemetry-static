@@ -69,6 +69,14 @@ function searchClusterFilters($formFilters) {
     if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
       filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
 
+    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
+    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
+      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
+
+    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
+    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
+      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
       filters.push({ name: 'fq', value: 'id:' + filterId });
@@ -189,46 +197,48 @@ function searchClusterVals(filters, target, success, error) {
 
 function suggestClusterHubResource(filters, $list, clusterResource = null, hubResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['hubResource'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(clusterResource.toString()) : val == hubResource);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_hubResource_' + clusterResource + '_hubResource_' + o['hubResource']);
-      $input.setAttribute('name', 'hubResource');
-      $input.setAttribute('value', o['hubResource']);
-      $input.setAttribute('class', 'valueHubResource ');
-      if(clusterResource != null) {
-        $input.addEventListener('change', function(event) {
-          patchClusterVals([{ name: 'fq', value: 'clusterResource:' + clusterResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestClusterHubResource(filters, $list, clusterResource, hubResource, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['hubResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(clusterResource.toString()) : val == hubResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_hubResource_' + clusterResource + '_hubResource_' + o['hubResource']);
+        $input.setAttribute('name', 'hubResource');
+        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('class', 'valueHubResource ');
+        if(clusterResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchClusterVals([{ name: 'fq', value: 'clusterResource:' + clusterResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestClusterHubResource(filters, $list, clusterResource, hubResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchHubVals(filters, target, success, error);
@@ -236,17 +246,19 @@ o['objectTitle'];
 
 function suggestClusterObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var $i = document.querySelector('<i class="fa-regular fa-server"></i>');
-      var $span = document.createElement('span');      $span.setAttribute('class', '');      $span.innerText = o['objectTitle'];
-      var $li = document.createElement('li');
-      var $a = document.createElement('a').setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      $li.append($a);
-      $list.append($li);
-    });
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-server"></i>');
+        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $li = document.createElement('li');
+        var $a = document.createElement('a').setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchClusterVals($formFilters, target, success, error);
@@ -428,6 +440,30 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value;
   if(removeGrafanaUrl != null && removeGrafanaUrl !== '')
     vals['removeGrafanaUrl'] = removeGrafanaUrl;
+
+  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
+  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value === 'true';
+  var setCpuCoresTotal = removeCpuCoresTotal ? null : $formValues.querySelector('.setCpuCoresTotal')?.value;
+  var addCpuCoresTotal = $formValues.querySelector('.addCpuCoresTotal')?.value;
+  if(removeCpuCoresTotal || setCpuCoresTotal != null && setCpuCoresTotal !== '')
+    vals['setCpuCoresTotal'] = setCpuCoresTotal;
+  if(addCpuCoresTotal != null && addCpuCoresTotal !== '')
+    vals['addCpuCoresTotal'] = addCpuCoresTotal;
+  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value;
+  if(removeCpuCoresTotal != null && removeCpuCoresTotal !== '')
+    vals['removeCpuCoresTotal'] = removeCpuCoresTotal;
+
+  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
+  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value === 'true';
+  var setMemoryBytesTotal = removeMemoryBytesTotal ? null : $formValues.querySelector('.setMemoryBytesTotal')?.value;
+  var addMemoryBytesTotal = $formValues.querySelector('.addMemoryBytesTotal')?.value;
+  if(removeMemoryBytesTotal || setMemoryBytesTotal != null && setMemoryBytesTotal !== '')
+    vals['setMemoryBytesTotal'] = setMemoryBytesTotal;
+  if(addMemoryBytesTotal != null && addMemoryBytesTotal !== '')
+    vals['addMemoryBytesTotal'] = addMemoryBytesTotal;
+  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value;
+  if(removeMemoryBytesTotal != null && removeMemoryBytesTotal !== '')
+    vals['removeMemoryBytesTotal'] = removeMemoryBytesTotal;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   var removeId = $formValues.querySelector('.removeId')?.value === 'true';
@@ -614,6 +650,14 @@ function patchClusterFilters($formFilters) {
     var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
     if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
       filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
+
+    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
+    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
+      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
+
+    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
+    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
+      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
@@ -804,6 +848,14 @@ async function postCluster($formValues, target, success, error) {
   var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
   if(valueGrafanaUrl != null && valueGrafanaUrl !== '')
     vals['grafanaUrl'] = valueGrafanaUrl;
+
+  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
+  if(valueCpuCoresTotal != null && valueCpuCoresTotal !== '')
+    vals['cpuCoresTotal'] = valueCpuCoresTotal;
+
+  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
+  if(valueMemoryBytesTotal != null && valueMemoryBytesTotal !== '')
+    vals['memoryBytesTotal'] = valueMemoryBytesTotal;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   if(valueId != null && valueId !== '')
@@ -1075,6 +1127,8 @@ async function websocketClusterInner(apiRequest) {
         var inputAiNodesTotal = null;
         var inputGpuDevicesTotal = null;
         var inputGrafanaUrl = null;
+        var inputCpuCoresTotal = null;
+        var inputMemoryBytesTotal = null;
         var inputId = null;
         var inputNgsildTenant = null;
         var inputNgsildPath = null;
@@ -1124,6 +1178,10 @@ async function websocketClusterInner(apiRequest) {
           inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
         if(vars.includes('grafanaUrl'))
           inputGrafanaUrl = $response.querySelector('.Page_grafanaUrl');
+        if(vars.includes('cpuCoresTotal'))
+          inputCpuCoresTotal = $response.querySelector('.Page_cpuCoresTotal');
+        if(vars.includes('memoryBytesTotal'))
+          inputMemoryBytesTotal = $response.querySelector('.Page_memoryBytesTotal');
         if(vars.includes('id'))
           inputId = $response.querySelector('.Page_id');
         if(vars.includes('ngsildTenant'))
@@ -1296,6 +1354,26 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputGrafanaUrl.textContent;
           });
           addGlow(document.querySelector('.Page_grafanaUrl'));
+        }
+
+        if(inputCpuCoresTotal) {
+          document.querySelectorAll('.Page_cpuCoresTotal').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCpuCoresTotal.getAttribute('value');
+            else
+              item.textContent = inputCpuCoresTotal.textContent;
+          });
+          addGlow(document.querySelector('.Page_cpuCoresTotal'));
+        }
+
+        if(inputMemoryBytesTotal) {
+          document.querySelectorAll('.Page_memoryBytesTotal').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputMemoryBytesTotal.getAttribute('value');
+            else
+              item.textContent = inputMemoryBytesTotal.textContent;
+          });
+          addGlow(document.querySelector('.Page_memoryBytesTotal'));
         }
 
         if(inputId) {

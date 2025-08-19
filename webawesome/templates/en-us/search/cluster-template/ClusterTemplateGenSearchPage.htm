@@ -44,7 +44,7 @@
 
       function htmTooltipClusterTemplate(feature, layer) {
         return `{%- block htmTooltipClusterTemplatePage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -169,6 +170,7 @@
           deletefilterClusterTemplate(event.target);
           return false;
         });
+{%- block htmScriptInitClusterTemplatePage %}{%- endblock htmScriptInitClusterTemplatePage %}
       });
     </script>
 {%- endblock htmScriptClusterTemplatePage %}
@@ -189,11 +191,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterTemplatePage %}
-{%- endblock htmBodyStartClusterTemplatePage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleClusterTemplatePage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip></wa-tooltip>
@@ -218,7 +215,7 @@
 {% else %}
 {%- include en-us/search/cluster-template/ClusterTemplateSidebar.htm %}
 {%- include en-us/search/cluster-template/ClusterTemplateSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/cluster-template" id="ClusterTemplateForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -240,6 +237,13 @@
               </wa-breadcrumb>
 {% include en-us/search/cluster-template/ClusterTemplateSearchForm.htm %}
 {% include en-us/search/cluster-template/ClusterTemplateSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartClusterTemplatePage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleClusterTemplatePage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/cluster-template/ClusterTemplatePaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -248,11 +252,11 @@
                 <wa-button variant="brand" slot="trigger" caret>template title</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterTemplate_title'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterTemplate').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-title-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by template title ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterTemplate_title'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterTemplate').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-title-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by template title descending
                   </wa-menu-item>
                 </wa-menu>
@@ -261,11 +265,11 @@
                 <wa-button variant="brand" slot="trigger" caret>template description</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterTemplate_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterTemplate').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by template description ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterTemplate_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterTemplate').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by template description descending
                   </wa-menu-item>
                 </wa-menu>
@@ -300,7 +304,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndClusterTemplatePage %}
+{%- include en-us/search/cluster-template/ClusterTemplateLocation.htm %}
 {%- endblock htmBodyEndClusterTemplatePage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

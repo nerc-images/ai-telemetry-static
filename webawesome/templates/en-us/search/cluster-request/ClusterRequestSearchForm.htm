@@ -228,7 +228,7 @@ The name of this cluster"
 {%- macro htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                 {{ inputClusterTemplateTitleClusterRequestPage(authForWrite=authForWrite, authForRead=authForRead) }}
                 <div class="label-on-left-ul-label ">
-                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  <wa-icon class="{{ FONTAWESOME_STYLE }} fa-search "></wa-icon>
                   relate an OpenShift cluster template to this OpenShift cluster request
                 </div>
                 <ul class="label-on-left-ul " id="listClusterRequestClusterTemplateTitle_{{classApiMethodMethod}}">
@@ -281,7 +281,7 @@ The name of this cluster"
 {%- macro htmUserIdClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                 {{ inputUserIdClusterRequestPage(authForWrite=authForWrite, authForRead=authForRead) }}
                 <div class="label-on-left-ul-label ">
-                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  <wa-icon class="{{ FONTAWESOME_STYLE }} fa-search "></wa-icon>
                   relate a site user to this OpenShift cluster request
                 </div>
                 <ul class="label-on-left-ul " id="listClusterRequestUserId_{{classApiMethodMethod}}">
@@ -298,7 +298,7 @@ The name of this cluster"
                 {%- endif %}
 {%- endmacro %}
 
-{%- macro htmButton_patchClusterRequest() %}<wa-button variant="brand" id="htmButton_patchClusterRequest" data-name={{ result.name | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchClusterRequest() %}<wa-button variant="brand" id="htmButton_patchClusterRequest" data-name={{ result.name | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></wa-icon>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchClusterRequest() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchClusterRequest" duration="5000" closable class="wa-header-l ">
@@ -354,7 +354,7 @@ The name of this cluster"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postClusterRequest() %}<wa-button variant="brand" id="htmButton_postClusterRequest" data-name={{ result.name | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postClusterRequest() %}<wa-button variant="brand" id="htmButton_postClusterRequest" data-name={{ result.name | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></wa-icon>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postClusterRequest() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postClusterRequest" duration="5000" closable class="wa-header-l ">
@@ -411,7 +411,7 @@ The name of this cluster"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteClusterRequest() %}<wa-button variant="brand" id="htmButton_deleteClusterRequest" data-name={{ result.name | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteClusterRequest() %}<wa-button variant="brand" id="htmButton_deleteClusterRequest" data-name={{ result.name | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteClusterRequest() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteClusterRequest" duration="5000" closable class="wa-header-l ">
@@ -430,7 +430,7 @@ The name of this cluster"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_putimportClusterRequest() %}<wa-button variant="brand" id="htmButton_putimportClusterRequest" data-name={{ result.name | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportClusterRequest() %}<wa-button variant="brand" id="htmButton_putimportClusterRequest" data-name={{ result.name | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></wa-icon>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportClusterRequest() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportClusterRequest" duration="5000" closable class="wa-header-l ">
@@ -561,7 +561,7 @@ The name of this cluster"
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterClusterRequest() %}<wa-button variant="brand" id="htmButton_deletefilterClusterRequest" data-name={{ result.name | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterClusterRequest() %}<wa-button variant="brand" id="htmButton_deletefilterClusterRequest" data-name={{ result.name | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterClusterRequest() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterClusterRequest" duration="5000" closable class="wa-header-l ">
@@ -587,7 +587,7 @@ The name of this cluster"
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisClusterRequestGenPage"
                      onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'name:{{ result.name }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisClusterRequestGenPage')); }, function() { addError(document.querySelector('#refreshThisClusterRequestGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></wa-icon>
                   refresh
                 </wa-button>
     {% endif %}
@@ -595,7 +595,7 @@ The name of this cluster"
                 <wa-button variant="brand" id="refreshAllClusterRequestGenPage{{ result.name | e }}"
                      onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllClusterRequestGenPage{{ result.name | e }}')); }, function() { addError(document.querySelector('#refreshAllClusterRequestGenPage{{ result.name | e }}')); }); "
                     >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></wa-icon>
                   Refresh all 
                 </wa-button>
     {% endif %}

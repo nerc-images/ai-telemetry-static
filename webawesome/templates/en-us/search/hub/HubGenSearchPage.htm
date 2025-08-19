@@ -44,7 +44,7 @@
 
       function htmTooltipHub(feature, layer) {
         return `{%- block htmTooltipHubPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipHubPage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var hubResource = {% if result.hubResource is defined %}{{ result.hubResource | tojson }}{% else %}null{% endif %};
@@ -169,6 +170,7 @@
           deletefilterHub(event.target);
           return false;
         });
+{%- block htmScriptInitHubPage %}{%- endblock htmScriptInitHubPage %}
       });
     </script>
 {%- endblock htmScriptHubPage %}
@@ -189,11 +191,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartHubPage %}
-{%- endblock htmBodyStartHubPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleHubPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip></wa-tooltip>
@@ -218,7 +215,7 @@
 {% else %}
 {%- include en-us/search/hub/HubSidebar.htm %}
 {%- include en-us/search/hub/HubSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/hub" id="HubForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -240,6 +237,13 @@
               </wa-breadcrumb>
 {% include en-us/search/hub/HubSearchForm.htm %}
 {% include en-us/search/hub/HubSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartHubPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleHubPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/hub/HubPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -248,25 +252,25 @@
                 <wa-button variant="brand" slot="trigger" caret>hub name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubName-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by hub name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubName-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by hub name descending
                   </wa-menu-item>
                 </wa-menu>
               </wa-dropdown>
-              <wa-dropdown id="htmDropdown-hubId">
-                <wa-button variant="brand" slot="trigger" caret>hub ID</wa-button>
+              <wa-dropdown id="htmDropdown-localClusterName">
+                <wa-button variant="brand" slot="trigger" caret>ACM cluster name</wa-button>
                 <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by hub ID ascending
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_localClusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-localClusterName-asc">
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    sort by ACM cluster name ascending
                   </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by hub ID descending
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_localClusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-localClusterName-desc">
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    sort by ACM cluster name descending
                   </wa-menu-item>
                 </wa-menu>
               </wa-dropdown>
@@ -274,11 +278,11 @@
                 <wa-button variant="brand" slot="trigger" caret>description</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by description ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by description descending
                   </wa-menu-item>
                 </wa-menu>
@@ -291,7 +295,7 @@
               <span>{{ item.hubName | e }}
 </span>              </a>
               <a href="{{ item.displayPage }}">
-              <span>{{ item.hubId | e }}
+              <span>{{ item.localClusterName | e }}
 </span>              </a>
               <a href="{{ item.displayPage }}">
               <span>{{ item.description | e }}
@@ -302,7 +306,7 @@
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnHubId is defined %}
+              {% if getColumnLocalClusterName is defined %}
                 <div>
                 </div>
               {% endif %}
@@ -320,7 +324,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndHubPage %}
+{%- include en-us/search/hub/HubLocation.htm %}
 {%- endblock htmBodyEndHubPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

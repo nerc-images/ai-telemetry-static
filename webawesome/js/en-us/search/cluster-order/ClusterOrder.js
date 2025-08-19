@@ -132,46 +132,48 @@ function searchClusterOrderVals(filters, target, success, error) {
 
 function suggestClusterOrderTemplateId(filters, $list, id = null, templateId = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['id'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(id.toString()) : val == templateId);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_templateId_' + id + '_id_' + o['id']);
-      $input.setAttribute('name', 'id');
-      $input.setAttribute('value', o['id']);
-      $input.setAttribute('class', 'valueTemplateId ');
-      if(id != null) {
-        $input.addEventListener('change', function(event) {
-          patchClusterOrderVals([{ name: 'fq', value: 'id:' + id }], { [(event.target.checked ? 'set' : 'remove') + 'TemplateId']: o['id'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestClusterOrderTemplateId(filters, $list, id, templateId, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['id'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(id.toString()) : val == templateId);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_templateId_' + id + '_id_' + o['id']);
+        $input.setAttribute('name', 'id');
+        $input.setAttribute('value', o['id']);
+        $input.setAttribute('class', 'valueTemplateId ');
+        if(id != null) {
+          $input.addEventListener('change', function(event) {
+            patchClusterOrderVals([{ name: 'fq', value: 'id:' + id }], { [(event.target.checked ? 'set' : 'remove') + 'TemplateId']: o['id'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestClusterOrderTemplateId(filters, $list, id, templateId, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchClusterTemplateVals(filters, target, success, error);
@@ -179,17 +181,19 @@ o['objectTitle'];
 
 function suggestClusterOrderObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var $i = document.querySelector('<i class="fa-regular fa-server"></i>');
-      var $span = document.createElement('span');      $span.setAttribute('class', '');      $span.innerText = o['objectTitle'];
-      var $li = document.createElement('li');
-      var $a = document.createElement('a').setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      $li.append($a);
-      $list.append($li);
-    });
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-server"></i>');
+        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $li = document.createElement('li');
+        var $a = document.createElement('a').setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchClusterOrderVals($formFilters, target, success, error);

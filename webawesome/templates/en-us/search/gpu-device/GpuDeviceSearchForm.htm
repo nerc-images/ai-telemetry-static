@@ -303,6 +303,43 @@ The number of this GPU device"
 {%- macro htmGpuDeviceNumberGpuDevicePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputGpuDeviceNumberGpuDevicePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputModelNameGpuDevicePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modelName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] model name"
+                      label="model name"
+                      hint="
+The GPU model"
+                      id="{{classApiMethodMethod}}_modelName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_modelName setModelName classGpuDevice inputGpuDevice{{ result.gpuDeviceResource }}ModelName "
+                      name="setModelName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_modelName setModelName classGpuDevice inputGpuDevice{{ result.gpuDeviceResource }}ModelName "
+                      name="setModelName"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_modelName valueModelName classGpuDevice inputGpuDevice{{ result.gpuDeviceResource }}ModelName "
+                      name="modelName"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.modelName | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModelNameGpuDevicePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModelNameGpuDevicePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputDescriptionGpuDevicePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_description">
@@ -662,6 +699,16 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
+                {{ htmModelNameGpuDevicePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmModelNameGpuDevicePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmModelNameGpuDevicePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmDescriptionGpuDevicePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -821,6 +868,16 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmGpuDeviceNumberGpuDevicePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmGpuDeviceNumberGpuDevicePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmModelNameGpuDevicePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmModelNameGpuDevicePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmModelNameGpuDevicePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -1078,6 +1135,16 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmGpuDeviceNumberGpuDevicePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmGpuDeviceNumberGpuDevicePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmModelNameGpuDevicePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmModelNameGpuDevicePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmModelNameGpuDevicePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 

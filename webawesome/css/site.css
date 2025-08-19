@@ -52,59 +52,27 @@ wa-dropdown {
   --wa-color-purple: var(--wa-color-purple-50);
 }
 
-wa-card.pink-purple-background {
-  background: linear-gradient(130deg, var(--wa-color-pink-50), var(--wa-color-purple-40));
-  color: white;
-  &:is(wa-button, wa-dialog)::part(base) {
-    border: solid 1px var(--wa-color-pink-30);
-  }
-}
-.pink-purple-background-headers {
-  wa-card::part(header) {
-    background: linear-gradient(130deg, var(--wa-color-pink-50), var(--wa-color-purple-40));
-    color: white;
-    &:is(wa-button, wa-dialog)::part(base) {
-      border: solid 1px var(--wa-color-pink-30);
-    }
-  }
-}
-
-wa-card.red-pink-background {
-  background: linear-gradient(130deg, var(--wa-color-red-40), var(--wa-color-pink-50));
-  color: white;
-  &:is(wa-button, wa-dialog)::part(base) {
-    border: solid 1px var(--wa-color-red-30);
-  }
-}
-.red-pink-background-headers {
-  wa-card::part(header) {
-    background: linear-gradient(130deg, var(--wa-color-red-40), var(--wa-color-pink-50));
-    color: white;
-    &:is(wa-button, wa-dialog)::part(base) {
-      border: solid 1px var(--wa-color-red-30);
-    }
-  }
-}
-
-wa-card.purple-blue-background {
-  background: linear-gradient(130deg, var(--wa-color-purple-40), var(--wa-color-blue-50));
-  color: white;
-  &:is(wa-button, wa-dialog)::part(base) {
-    border: solid 1px var(--wa-color-purple-30);
-  }
-}
-.purple-blue-background-headers {
-  wa-card::part(header) {
-    background: linear-gradient(130deg, var(--wa-color-purple-40), var(--wa-color-blue-50));
-    color: white;
-    &:is(wa-button, wa-dialog)::part(base) {
-      border: solid 1px var(--wa-color-purple-30);
-    }
-  }
-}
 footer {
   margin-block-start: 100px;
 }
+
+wa-button.tile {
+  &::part(base) {
+    height: 100%;
+    text-wrap-mode: wrap;
+    line-height: var(--wa-line-height-normal);
+  }
+  &:not(.no-padding)::part(base) {
+    padding-block: var(--wa-space, var(--wa-space-m));
+  }
+}
+
+/* .sidebar-connections {
+  wa-button::part(base) {
+    height: 4rem;
+  }
+} */
+
 /* @media stuff */
 @media (max-width: 767px) {
   /* Mobile mode */
@@ -123,7 +91,7 @@ main, footer {
   }
   wa-page {
     --menu-width: 25vw;
-    
+
     & > .main-sidebar {
       overflow: auto;
       max-height: 100%;
@@ -316,30 +284,6 @@ main, footer {
 
     .col-span-2 {grid-column: span 2} .col-span-3 {grid-column: span 3} .col-span-4 {grid-column: span 4} .col-span-5 {grid-column: span 5} .col-span-6 {grid-column: span 6}
 
-    /* so like, this is better than #site-results grid but were not using this because it says that it's slow but it's not so if you want to use it it is super smart and it supports up to 6 columns but you can add more if you want to make give it more support I left it here cause it's useful but we aren't using it which is why it's commented out */
-    /* .item-list {
-      background-color: bisque;
-      > * {
-        background-color: aqua;
-        padding: var(--item-list-gap);
-        display: grid;
-        grid-template-columns: subgrid;
-        grid-column: span var(--result-columns);
-        > * {
-          align-content: center;
-          background-color: aquamarine;
-        }
-      }
-
-      &:has(> * > :nth-child(1)) {--result-columns: 1}
-      &:has(> * > :nth-child(2)) {--result-columns: 2}
-      &:has(> * > :nth-child(3)) {--result-columns: 3}
-      &:has(> * > :nth-child(4)) {--result-columns: 4}
-      &:has(> * > :nth-child(5)) {--result-columns: 5}
-      &:has(> * > :nth-child(6)) {--result-columns: 6}
-    } 
-      */
-
     /************************/
     /* Crazy rounding stuff */
     /************************/
@@ -440,14 +384,6 @@ main, footer {
       height: var(--footer-logo-height);
     }
 
-    .sidebar-close-button {
-      font-size: var(--icon-button-size);
-    }
-
-    .nav-toggle-button {
-      font-size: var(--icon-button-size);
-    }
-
     .text-center {text-align: center;}
 
     .text-end {text-align: end;}
@@ -478,6 +414,7 @@ main, footer {
     transition: all var(--wa-transition-fast);
   }
 }
+
 
 /* label-on-left */
 
@@ -515,7 +452,7 @@ main, footer {
   list-style-type: none;
 }
 @media (max-width:800px) {
-  .label-on-left::part(form-control-label), wa-button.button-on-left {
+  .label-on-left::part(label), wa-button.button-on-left {
     grid-column: 1 / span 2;
   }
   .label-on-left::part(form-control-input), div.button-description-on-right {
@@ -550,7 +487,7 @@ main, footer {
     grid-column: 1 / span 2;
     grid-row: 2;
   }
-  .label-on-left::part(label) {
+  .label-on-left::part(form-control-label) {
     text-align: left;
     grid-column: 1;
     grid-row: 2;
@@ -571,24 +508,6 @@ main, footer {
 
 .htmBodyGraphLocation {
   height: 40em;
-}
-
-
-/* not map */
-.cursor-pointer {cursor: pointer;}
-.raised-item {
-  background-color: var(--wa-color-surface-lowered);
-  padding-inline: var(--wa-space-s);
-  &:hover {
-    background-color: var(--wa-color-brand-fill-normal);
-  }
-}
-/* .pageFacetField {
-  border-radius: var(--wa-border-radius-l);
-} */
-
-.SearchButtons_Search, .SearchButtons_Sort, .SearchButtons_Range, .SearchButtons_Pivot, .SearchButtons_FieldList, .SearchButtons_Stats {
-  display: none;
 }
 
 #site-results-grid {
@@ -615,4 +534,8 @@ main, footer {
 
     padding: var(--wa-space-xs) var(--wa-space-s);
   }
+}
+
+.SearchButtons_Pivot {
+  display: none;
 }

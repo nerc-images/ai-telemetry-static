@@ -1,37 +1,60 @@
 {% extends "en-us/PageLayout.htm" %}
 {% block htmTitlePageLayout %}
-		<title>ai-telemetry</title>
+        <title>ai-telemetry</title>
 {% endblock %}
 {% block htmBodyMiddlePageLayout %}
-        <div class="wa-stack ">
-
-          <wa-card class="pink-purple-background wa-stack ">
-            <div class="wa-stack main-content ">
-              <div class="wa-flank">
-                <i class="fa-duotone fa-regular fa-conveyor-belt fa-5x "></i>
-                <div class="wa-heading-2xl ">
-                  I need resources to run an AI workload. 
-                </div>
-              </div>
-              <div class="wa-heading-l ">
-                Get your own bare metal or Red Hat OpenShift cluster here. 
-              </div>
-              <wa-card>
-                <div>
-                  <wa-button pill id="order-button" size="large" class="pink-purple-background" href="{{ SITE_BASE_URL }}/en-us/search/cluster-order">
-                    <i class="fa-duotone fa-regular fa-person-running-fast"></i>
-                    OpenShift Cluster
-                  </wa-button>
-                </div>
-                <div>
-                  <wa-button pill id="order-button" size="large" class="pink-purple-background" href="{{ SITE_BASE_URL }}/en-us/search/bare-metal-order">
-                    <i class="fa-duotone fa-regular fa-person-running-fast"></i>
-                    Bare Metal
-                  </wa-button>
-                </div>
-              </wa-card>
+<div class="wa-stack">
+  <h3>Current activity at the {{ SITE_POWERED_BY_NAME }}</h3>
+  <div class="wa-grid">
+    <wa-callout variant="neutral" appearance="filled">
+      <wa-icon slot="icon" class="fa-regular fa-book fa-2xl "></wa-icon>
+      <div class="wa-stack wa-gap-0">
+        <h4 class="wa-heading-xs">Managed Red Hat ACM Hubs</h4>
+        <div class="wa-heading-2xl">{{ facetClass.counts.Hub }}</div>
+      </div>
+    </wa-callout>
+    <wa-callout variant="brand" appearance="filled">
+      <wa-icon slot="icon" class="fa-kit fa-openshift fa-2xl "></wa-icon>
+      <div class="wa-stack wa-gap-0">
+        <h4 class="wa-heading-xs">Managed OpenShift Clusters</h4>
+        <div class="wa-heading-2xl">{{ facetClass.counts.Cluster }}</div>
+      </div>
+    </wa-callout>
+    <wa-callout variant="success" appearance="filled">
+      <wa-icon slot="icon" class="fa-regular fa-wand-sparkles fa-2xl "></wa-icon>
+      <div class="wa-stack wa-gap-0">
+        <h4 class="wa-heading-xs">AI related research projects</h4>
+        <div class="wa-heading-2xl">{{ facetClass.counts.Project }}</div>
+      </div>
+    </wa-callout>
+  </div>
+  <div class="wa-grid">
+    <wa-card>
+      <div slot="header" class="wa-flank wa-gap-xl">
+        <wa-icon name="graduation-cap" class="wa-heading-xl"></wa-icon>
+        <span class="wa-gap-2xs wa-stack">
+          <h4>GPUs</h4>
+          <span class="wa-caption-m">The number of GPUs available</span>
+        </span>
+      </div>
+      <div class="wa-stack">
+        <ol class="wa-stack">
+          {% for modelName, modelCount in facetGpuDevice.counts.items() %}
+          <li class="wa-flank">
+            <wa-avatar
+              image="https://images.unsplash.com/photo-1620428268482-cf1851a36764?q=80&w=3418&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              shape="rounded"
+            ></wa-avatar>
+            <div class="wa-split wa-gap-xs">
+              <span>{{ modelName }}</span>
+              <small class="wa-caption-l">{{ modelCount }}</small>
             </div>
-          </wa-card>
-
-		</div>
+          </li>
+          <wa-divider></wa-divider>
+          {% endfor %}
+        </ol>
+      </div>
+    </wa-card>
+  </div>
+</div>
 {% endblock %}

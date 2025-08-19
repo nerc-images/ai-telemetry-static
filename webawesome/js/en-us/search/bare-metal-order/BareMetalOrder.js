@@ -91,10 +91,6 @@ function searchBareMetalOrderFilters($formFilters) {
     if(filterStatus != null && filterStatus !== '')
       filters.push({ name: 'fq', value: 'status:' + filterStatus });
 
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -115,21 +111,17 @@ function searchBareMetalOrderFilters($formFilters) {
     if(filterUserKey != null && filterUserKey !== '')
       filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
 
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
     var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
     if(filterObjectTitle != null && filterObjectTitle !== '')
       filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
 
-    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
-    if(filterSolrId != null && filterSolrId !== '')
-      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
     var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
     if(filterDisplayPage != null && filterDisplayPage !== '')
       filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
-
-    var filterNetworkName = $formFilters.querySelector('.valueNetworkName')?.value;
-    if(filterNetworkName != null && filterNetworkName !== '')
-      filters.push({ name: 'fq', value: 'networkName:' + filterNetworkName });
 
     var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
     if(filterEditPage != null && filterEditPage !== '')
@@ -146,6 +138,18 @@ function searchBareMetalOrderFilters($formFilters) {
     var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
     if(filterObjectSuggest != null && filterObjectSuggest !== '')
       filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterNetworkName = $formFilters.querySelector('.valueNetworkName')?.value;
+    if(filterNetworkName != null && filterNetworkName !== '')
+      filters.push({ name: 'fq', value: 'networkName:' + filterNetworkName });
   }
   return filters;
 }
@@ -170,46 +174,48 @@ function searchBareMetalOrderVals(filters, target, success, error) {
 
 function suggestBareMetalOrderNetworkId(filters, $list, pk = null, networkId = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-network-wired"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-network-wired"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['id'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(pk.toString()) : val == networkId);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_networkId_' + pk + '_id_' + o['id']);
-      $input.setAttribute('name', 'id');
-      $input.setAttribute('value', o['id']);
-      $input.setAttribute('class', 'valueNetworkId ');
-      if(pk != null) {
-        $input.addEventListener('change', function(event) {
-          patchBareMetalOrderVals([{ name: 'fq', value: 'pk:' + pk }], { [(event.target.checked ? 'set' : 'remove') + 'NetworkId']: o['id'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestBareMetalOrderNetworkId(filters, $list, pk, networkId, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['id'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(pk.toString()) : val == networkId);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_networkId_' + pk + '_id_' + o['id']);
+        $input.setAttribute('name', 'id');
+        $input.setAttribute('value', o['id']);
+        $input.setAttribute('class', 'valueNetworkId ');
+        if(pk != null) {
+          $input.addEventListener('change', function(event) {
+            patchBareMetalOrderVals([{ name: 'fq', value: 'pk:' + pk }], { [(event.target.checked ? 'set' : 'remove') + 'NetworkId']: o['id'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestBareMetalOrderNetworkId(filters, $list, pk, networkId, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchBareMetalNetworkVals(filters, target, success, error);
@@ -217,17 +223,19 @@ o['objectTitle'];
 
 function suggestBareMetalOrderObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var $i = document.querySelector('<i class="fa-regular fa-share-nodes"></i>');
-      var $span = document.createElement('span');      $span.setAttribute('class', '');      $span.innerText = o['objectTitle'];
-      var $li = document.createElement('li');
-      var $a = document.createElement('a').setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      $li.append($a);
-      $list.append($li);
-    });
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-share-nodes"></i>');
+        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $li = document.createElement('li');
+        var $a = document.createElement('a').setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchBareMetalOrderVals($formFilters, target, success, error);
@@ -601,10 +609,6 @@ function patchBareMetalOrderFilters($formFilters) {
     if(filterStatus != null && filterStatus !== '')
       filters.push({ name: 'fq', value: 'status:' + filterStatus });
 
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -625,21 +629,17 @@ function patchBareMetalOrderFilters($formFilters) {
     if(filterUserKey != null && filterUserKey !== '')
       filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
 
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
     var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
     if(filterObjectTitle != null && filterObjectTitle !== '')
       filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
 
-    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
-    if(filterSolrId != null && filterSolrId !== '')
-      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
     var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
     if(filterDisplayPage != null && filterDisplayPage !== '')
       filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
-
-    var filterNetworkName = $formFilters.querySelector('.valueNetworkName')?.value;
-    if(filterNetworkName != null && filterNetworkName !== '')
-      filters.push({ name: 'fq', value: 'networkName:' + filterNetworkName });
 
     var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
     if(filterEditPage != null && filterEditPage !== '')
@@ -656,6 +656,18 @@ function patchBareMetalOrderFilters($formFilters) {
     var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
     if(filterObjectSuggest != null && filterObjectSuggest !== '')
       filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterNetworkName = $formFilters.querySelector('.valueNetworkName')?.value;
+    if(filterNetworkName != null && filterNetworkName !== '')
+      filters.push({ name: 'fq', value: 'networkName:' + filterNetworkName });
   }
   return filters;
 }
@@ -990,20 +1002,21 @@ async function websocketBareMetalOrderInner(apiRequest) {
         var inputSshPublicKey = null;
         var inputFloatingIp = null;
         var inputStatus = null;
-        var inputSaves = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
         var inputSessionId = null;
         var inputUserKey = null;
+        var inputSaves = null;
         var inputObjectTitle = null;
-        var inputSolrId = null;
         var inputDisplayPage = null;
-        var inputNetworkName = null;
         var inputEditPage = null;
         var inputUserPage = null;
         var inputDownload = null;
         var inputObjectSuggest = null;
+        var inputObjectText = null;
+        var inputSolrId = null;
+        var inputNetworkName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -1037,8 +1050,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
           inputFloatingIp = $response.querySelector('.Page_floatingIp');
         if(vars.includes('status'))
           inputStatus = $response.querySelector('.Page_status');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1049,14 +1060,12 @@ async function websocketBareMetalOrderInner(apiRequest) {
           inputSessionId = $response.querySelector('.Page_sessionId');
         if(vars.includes('userKey'))
           inputUserKey = $response.querySelector('.Page_userKey');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.Page_saves');
         if(vars.includes('objectTitle'))
           inputObjectTitle = $response.querySelector('.Page_objectTitle');
-        if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
         if(vars.includes('displayPage'))
           inputDisplayPage = $response.querySelector('.Page_displayPage');
-        if(vars.includes('networkName'))
-          inputNetworkName = $response.querySelector('.Page_networkName');
         if(vars.includes('editPage'))
           inputEditPage = $response.querySelector('.Page_editPage');
         if(vars.includes('userPage'))
@@ -1065,6 +1074,12 @@ async function websocketBareMetalOrderInner(apiRequest) {
           inputDownload = $response.querySelector('.Page_download');
         if(vars.includes('objectSuggest'))
           inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+        if(vars.includes('objectText'))
+          inputObjectText = $response.querySelector('.Page_objectText');
+        if(vars.includes('solrId'))
+          inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('networkName'))
+          inputNetworkName = $response.querySelector('.Page_networkName');
 
         jsWebsocketBareMetalOrder(pk, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -1231,16 +1246,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
           addGlow(document.querySelector('.Page_status'));
         }
 
-        if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.Page_saves'));
-        }
-
         if(inputClassCanonicalName) {
           document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1291,6 +1296,16 @@ async function websocketBareMetalOrderInner(apiRequest) {
           addGlow(document.querySelector('.Page_userKey'));
         }
 
+        if(inputSaves) {
+          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.Page_saves'));
+        }
+
         if(inputObjectTitle) {
           document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1301,16 +1316,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
           addGlow(document.querySelector('.Page_objectTitle'));
         }
 
-        if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSolrId.getAttribute('value');
-            else
-              item.textContent = inputSolrId.textContent;
-          });
-          addGlow(document.querySelector('.Page_solrId'));
-        }
-
         if(inputDisplayPage) {
           document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1319,16 +1324,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
               item.textContent = inputDisplayPage.textContent;
           });
           addGlow(document.querySelector('.Page_displayPage'));
-        }
-
-        if(inputNetworkName) {
-          document.querySelectorAll('.Page_networkName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNetworkName.getAttribute('value');
-            else
-              item.textContent = inputNetworkName.textContent;
-          });
-          addGlow(document.querySelector('.Page_networkName'));
         }
 
         if(inputEditPage) {
@@ -1369,6 +1364,36 @@ async function websocketBareMetalOrderInner(apiRequest) {
               item.textContent = inputObjectSuggest.textContent;
           });
           addGlow(document.querySelector('.Page_objectSuggest'));
+        }
+
+        if(inputObjectText) {
+          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectText.getAttribute('value');
+            else
+              item.textContent = inputObjectText.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectText'));
+        }
+
+        if(inputSolrId) {
+          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSolrId.getAttribute('value');
+            else
+              item.textContent = inputSolrId.textContent;
+          });
+          addGlow(document.querySelector('.Page_solrId'));
+        }
+
+        if(inputNetworkName) {
+          document.querySelectorAll('.Page_networkName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNetworkName.getAttribute('value');
+            else
+              item.textContent = inputNetworkName.textContent;
+          });
+          addGlow(document.querySelector('.Page_networkName'));
         }
 
           pageGraphBareMetalOrder();

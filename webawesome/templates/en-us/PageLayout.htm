@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ SITE_LOCALE }}" class="wa-{{ userSiteTheme | default(SITE_THEME) }}">
+<html lang="{{ SITE_LOCALE }}" class="wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default('default') }} ">
   <head>
 {%- block htmHeadPageLayout %}
     <meta charset="UTF-8" />
@@ -11,8 +11,8 @@
 {%- endblock htmTitlePageLayout %}
 {%- block htmStylesPageLayout %}
     <link rel="icon" href="{{ STATIC_BASE_URL }}/favicon.svg" />
-    {{ WEB_COMPONENTS_CSS }}
-<link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-alpha.12/dist/styles/themes/{{ userWebComponentsTheme | default('tailspin') }}.css" />
+    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css" />
+    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/themes/{{ userWebComponentsTheme | default('default') }}.css" />
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.draw.css" />
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.contextmenu.css"/>
@@ -66,7 +66,7 @@
         document.querySelector('#siteSearchInput')?.addEventListener('focus', siteSearchInput);
       });
     </script>
-    {{ WEB_COMPONENTS_JS }}
+    <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/site.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/sockjs.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/vertx-eventbus.js"></script>
@@ -93,20 +93,6 @@
               <img id="site-aside-left-img-logo" src="{{ STATIC_BASE_URL }}/svg/logo-{{ userSiteTheme | default(SITE_THEME) }}.svg"/>
             </a>
           </div>
-          <wa-tooltip for="site-aside-left-model-button-SitePage" placement="right" hoist>Read the latest articles to learn more</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-Cluster" placement="right" hoist>A Red Hat OpenShift cluster containing GPUs</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-Tenant" placement="right" hoist>A partner or tenant organization running a Red Hat ACM Hub cluster. </wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-AiNode" placement="right" hoist>A Red Hat OpenShift node containing GPUs</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-GpuDevice" placement="right" hoist>A Red Hat OpenShift GPU device containing GPUs</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-Project" placement="right" hoist>A research project using AI and GPUs</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-ClusterOrder" placement="right" hoist>Manage your own Red Hat OpenShift cluster in the cloud. </wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-ClusterTemplate" placement="right" hoist>An OpenShift cluster template</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-ManagedCluster" placement="right" hoist>An OpenShift tenant cluster</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-BareMetalResourceClass" placement="right" hoist>A bare metal resource class</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-ClusterRequest" placement="right" hoist>An OpenShift cluster request</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-BareMetalNetwork" placement="right" hoist>An OpenStack bare metal network</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-BareMetalNode" placement="right" hoist>An OpenStack bare metal node</wa-tooltip>
-          <wa-tooltip for="site-aside-left-model-button-BareMetalOrder" placement="right" hoist>A bare metal order</wa-tooltip>
           <div class="wa-stack ">
             <div>
 {%- if userName is defined %}
@@ -129,6 +115,15 @@
                     <span>sign out</span>
                   </wa-button>
                 </div>
+                <wa-details summary="User groups" open="true">
+                  <div class="wa-stack ">
+                    <div>
+                      {% for group in userGroups %}
+                      <wa-badge variant="success">{{ group }}</wa-badge>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </wa-details>
                 <wa-details summary="Current scopes" open="true">
                   <div class="wa-stack ">
                     <div>
@@ -154,31 +149,33 @@
                 articles
               </wa-button>
 
+{% if ENABLE_FEATURE_OBSERVABILITY %}
+{% if userGroups is defined and ("/HUB" in userGroups or "/Admin" in userGroups or "/SuperAdmin" in userGroups) %}
             <wa-details summary="ACM Hubs" open="true" class="wa-stack ">
               <div class="wa-stack ">
-                <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub">
+                <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub?facet.field=hubId">
                   <wa-icon class="fa-regular fa-sitemap"></wa-icon>
                   ACM hubs
                 </wa-button>
               </div>
             </wa-details>
-{% if ENABLE_FEATURE_OBSERVABILITY %}
+{% endif %}
 
             <wa-details summary="AI Telemetry" open="true" class="wa-stack ">
               <div class="wa-stack ">
-                <wa-button variant="brand" id="site-aside-left-model-button-Cluster" href="{{ SITE_BASE_URL }}/en-us/search/cluster">
+                <wa-button variant="brand" id="site-aside-left-model-button-Cluster" href="{{ SITE_BASE_URL }}/en-us/search/cluster?facet.field=hubId">
                 <wa-icon class="fa-regular fa-server"></wa-icon>
                 clusters
               </wa-button>
-                  <wa-button variant="brand" id="site-aside-left-model-button-AiNode" href="{{ SITE_BASE_URL }}/en-us/search/ai-node">
+                  <wa-button variant="brand" id="site-aside-left-model-button-AiNode" href="{{ SITE_BASE_URL }}/en-us/search/ai-node?facet.field=hubId">
                 <wa-icon class="fa-regular fa-computer"></wa-icon>
                 AI nodes
               </wa-button>
-                  <wa-button variant="brand" id="site-aside-left-model-button-GpuDevice" href="{{ SITE_BASE_URL }}/en-us/search/gpu-device">
+                  <wa-button variant="brand" id="site-aside-left-model-button-GpuDevice" href="{{ SITE_BASE_URL }}/en-us/search/gpu-device?facet.field=hubId">
                 <wa-icon class="fa-regular fa-memory"></wa-icon>
                 GPU devices
               </wa-button>
-                <wa-button variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project">
+                <wa-button variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project?facet.field=hubId">
                 <wa-icon class="fa-regular fa-school"></wa-icon>
                 projects
               </wa-button>
@@ -246,9 +243,15 @@
           </div>
             </div>
       </nav>
-      <main>
+      <main class="wa-stack ">
+        <wa-drawer id="warnings-drawer" label="Warnings">
+          <div id="warnings-drawer-stack" class="wa-stack ">
+          </div>
+        </wa-drawer>
         <header slot="header" class="wa-flank margin-block-start ">
-          <wa-icon-button data-toggle-nav name="bars" class="nav-toggle-button hide-desktop " label="open menu" appearance="text"></wa-icon-button>
+          <wa-button data-toggle-nav variant="brand" label="open menu">
+            <wa-icon name="bars"></wa-icon>
+          </wa-button>
           <wa-input placeholder="search" id="siteSearchInput">
             <wa-icon slot="start" class="fa-regular fa-regular  fa-magnifying-glass"></wa-icon>
           </wa-input>
@@ -285,9 +288,9 @@
           </a>
           {% endif %}
         </footer>
-      </main>
-    </wa-page>
 {%- endblock htmBodyEndPageLayout %}
 {%- endblock htmBodyPageLayout %}
+      </main>
+    </wa-page>
   </body>
 </html>

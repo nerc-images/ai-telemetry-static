@@ -44,7 +44,7 @@
 
       function htmTooltipBareMetalNetwork(feature, layer) {
         return `{%- block htmTooltipBareMetalNetworkPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNetworkPage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -169,6 +170,7 @@
           deletefilterBareMetalNetwork(event.target);
           return false;
         });
+{%- block htmScriptInitBareMetalNetworkPage %}{%- endblock htmScriptInitBareMetalNetworkPage %}
       });
     </script>
 {%- endblock htmScriptBareMetalNetworkPage %}
@@ -193,7 +195,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-BareMetalNetwork">back to all bare metal networks</wa-tooltip>
             <wa-button id="return-to-BareMetalNetwork" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
+              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
               all bare metal networks
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-network-wired"></i> {{ result.objectTitle | e }}</h1>
@@ -209,7 +211,7 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNetworkPage %}
-        <div>
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalNetwork">back to all bare metal networks</wa-tooltip></wa-tooltip>
@@ -255,7 +257,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-      {{ super() }}
 {%- block htmBodyEndBareMetalNetworkPage %}
+{%- include en-us/search/bare-metal-network/BareMetalNetworkLocation.htm %}
 {%- endblock htmBodyEndBareMetalNetworkPage %}
+      {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

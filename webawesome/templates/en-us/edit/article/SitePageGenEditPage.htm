@@ -44,7 +44,7 @@
 
       function htmTooltipSitePage(feature, layer) {
         return `{%- block htmTooltipSitePagePage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipSitePagePage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var pageId = {% if result.pageId is defined %}{{ result.pageId | tojson }}{% else %}null{% endif %};
@@ -149,6 +150,7 @@
           searchpageSitePage();
           return false;
         });
+{%- block htmScriptInitSitePagePage %}{%- endblock htmScriptInitSitePagePage %}
       });
     </script>
 {%- endblock htmScriptSitePagePage %}
@@ -173,10 +175,10 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip>
             <wa-button id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
+              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
               all articles
             </wa-button>
-            <h1 class="Page_objectTitle"><i class="fa-duotone fa-solid fa-newspaper"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-newspaper"></i> {{ result.objectTitle | e }}</h1>
           </div>
           <div class="margin-block">
           </div>
@@ -189,13 +191,13 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleSitePagePage %}
-        <div>
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-solid fa-newspaper"></i>
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
               all articles
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -204,7 +206,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-solid fa-newspaper"></i>
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
             </div>
             <span class="wa-heading-m ">no article found</span>
             <p class="wa-caption-l ">Read the latest articles to learn more</p>
@@ -235,7 +237,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-      {{ super() }}
 {%- block htmBodyEndSitePagePage %}
+{%- include en-us/search/article/SitePageLocation.htm %}
 {%- endblock htmBodyEndSitePagePage %}
+      {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

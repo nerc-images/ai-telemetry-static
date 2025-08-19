@@ -303,7 +303,7 @@ The ID for this page. "
                             {{ inputPageIdHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchHub() %}<wa-button variant="brand" id="htmButton_patchHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchHub() %}<wa-button variant="brand" id="htmButton_patchHub" data-hubResource={{ result.hubResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></wa-icon>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchHub" duration="5000" closable class="wa-header-l ">
@@ -376,7 +376,7 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postHub() %}<wa-button variant="brand" id="htmButton_postHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postHub() %}<wa-button variant="brand" id="htmButton_postHub" data-hubResource={{ result.hubResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></wa-icon>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postHub" duration="5000" closable class="wa-header-l ">
@@ -450,7 +450,7 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteHub() %}<wa-button variant="brand" id="htmButton_deleteHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteHub() %}<wa-button variant="brand" id="htmButton_deleteHub" data-hubResource={{ result.hubResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteHub" duration="5000" closable class="wa-header-l ">
@@ -469,7 +469,7 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_putimportHub() %}<wa-button variant="brand" id="htmButton_putimportHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportHub() %}<wa-button variant="brand" id="htmButton_putimportHub" data-hubResource={{ result.hubResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></wa-icon>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHub" duration="5000" closable class="wa-header-l ">
@@ -617,7 +617,7 @@ The ID for this page. "
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterHub() %}<wa-button variant="brand" id="htmButton_deletefilterHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterHub() %}<wa-button variant="brand" id="htmButton_deletefilterHub" data-hubResource={{ result.hubResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterHub" duration="5000" closable class="wa-header-l ">
@@ -643,7 +643,7 @@ The ID for this page. "
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisHubGenPage"
                      onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'hubResource:{{ result.hubResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHubGenPage')); }, function() { addError(document.querySelector('#refreshThisHubGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></wa-icon>
                   refresh
                 </wa-button>
     {% endif %}
@@ -651,7 +651,7 @@ The ID for this page. "
                 <wa-button variant="brand" id="refreshAllHubGenPage{{ result.hubResource | e }}"
                      onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHubGenPage{{ result.hubResource | e }}')); }, function() { addError(document.querySelector('#refreshAllHubGenPage{{ result.hubResource | e }}')); }); "
                     >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></wa-icon>
                   Refresh all 
                 </wa-button>
     {% endif %}

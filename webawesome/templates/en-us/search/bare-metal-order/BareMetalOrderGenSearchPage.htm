@@ -45,7 +45,7 @@
 
       function htmTooltipBareMetalOrder(feature, layer) {
         return `{%- block htmTooltipBareMetalOrderPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalOrderPage %}`;
       }
     </script>
@@ -60,6 +60,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var pk = {% if result.pk is defined %}{{ result.pk | tojson }}{% else %}null{% endif %};
@@ -176,6 +177,7 @@
           deletefilterBareMetalOrder(event.target);
           return false;
         });
+{%- block htmScriptInitBareMetalOrderPage %}{%- endblock htmScriptInitBareMetalOrderPage %}
       });
     </script>
 {%- endblock htmScriptBareMetalOrderPage %}
@@ -196,11 +198,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartBareMetalOrderPage %}
-{%- endblock htmBodyStartBareMetalOrderPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleBareMetalOrderPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalOrder">back to all bare metal orders</wa-tooltip></wa-tooltip>
@@ -225,7 +222,7 @@
 {% else %}
 {%- include en-us/search/bare-metal-order/BareMetalOrderSidebar.htm %}
 {%- include en-us/search/bare-metal-order/BareMetalOrderSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/bare-metal-order" id="BareMetalOrderForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -247,6 +244,13 @@
               </wa-breadcrumb>
 {% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
 {% include en-us/search/bare-metal-order/BareMetalOrderSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartBareMetalOrderPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleBareMetalOrderPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/bare-metal-order/BareMetalOrderPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -255,11 +259,11 @@
                 <wa-button variant="brand" slot="trigger" caret>primary key</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-pk-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by primary key ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-pk-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by primary key descending
                   </wa-menu-item>
                 </wa-menu>
@@ -268,11 +272,11 @@
                 <wa-button variant="brand" slot="trigger" caret>bare metal order description</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by bare metal order description ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by bare metal order description descending
                   </wa-menu-item>
                 </wa-menu>
@@ -281,11 +285,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order status</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_status'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-status-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by order status ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_status'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-status-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by order status descending
                   </wa-menu-item>
                 </wa-menu>
@@ -327,7 +331,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndBareMetalOrderPage %}
+{%- include en-us/search/bare-metal-order/BareMetalOrderLocation.htm %}
 {%- endblock htmBodyEndBareMetalOrderPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

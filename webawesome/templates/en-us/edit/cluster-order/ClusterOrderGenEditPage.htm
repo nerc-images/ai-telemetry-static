@@ -45,7 +45,7 @@
 
       function htmTooltipClusterOrder(feature, layer) {
         return `{%- block htmTooltipClusterOrderPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterOrderPage %}`;
       }
     </script>
@@ -60,6 +60,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -196,6 +197,7 @@
           deletefilterClusterOrder(event.target);
           return false;
         });
+{%- block htmScriptInitClusterOrderPage %}{%- endblock htmScriptInitClusterOrderPage %}
       });
     </script>
 {%- endblock htmScriptClusterOrderPage %}
@@ -220,7 +222,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-ClusterOrder">back to all OpenShift cluster orders</wa-tooltip>
             <wa-button id="return-to-ClusterOrder" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
+              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
               all OpenShift cluster orders
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
@@ -236,7 +238,7 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterOrderPage %}
-        <div>
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterOrder">back to all OpenShift cluster orders</wa-tooltip></wa-tooltip>
@@ -282,7 +284,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-      {{ super() }}
 {%- block htmBodyEndClusterOrderPage %}
+{%- include en-us/search/cluster-order/ClusterOrderLocation.htm %}
 {%- endblock htmBodyEndClusterOrderPage %}
+      {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

@@ -46,7 +46,7 @@
 
       function htmTooltipClusterRequest(feature, layer) {
         return `{%- block htmTooltipClusterRequestPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterRequestPage %}`;
       }
     </script>
@@ -61,6 +61,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var name = {% if result.name is defined %}{{ result.name | tojson }}{% else %}null{% endif %};
@@ -203,6 +204,7 @@
           deletefilterClusterRequest(event.target);
           return false;
         });
+{%- block htmScriptInitClusterRequestPage %}{%- endblock htmScriptInitClusterRequestPage %}
       });
     </script>
 {%- endblock htmScriptClusterRequestPage %}
@@ -223,11 +225,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterRequestPage %}
-{%- endblock htmBodyStartClusterRequestPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleClusterRequestPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterRequest">back to all OpenShift cluster requests</wa-tooltip></wa-tooltip>
@@ -252,7 +249,7 @@
 {% else %}
 {%- include en-us/search/cluster-request/ClusterRequestSidebar.htm %}
 {%- include en-us/search/cluster-request/ClusterRequestSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/cluster-request" id="ClusterRequestForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -274,6 +271,13 @@
               </wa-breadcrumb>
 {% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
 {% include en-us/search/cluster-request/ClusterRequestSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartClusterRequestPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleClusterRequestPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/cluster-request/ClusterRequestPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -282,11 +286,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterRequest_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterRequest').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-name-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by cluster name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterRequest_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterRequest').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-name-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by cluster name descending
                   </wa-menu-item>
                 </wa-menu>
@@ -295,11 +299,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster template</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterRequest_clusterTemplateTitle'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterRequest').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterTemplateTitle-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by cluster template ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterRequest_clusterTemplateTitle'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterRequest').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterTemplateTitle-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by cluster template descending
                   </wa-menu-item>
                 </wa-menu>
@@ -308,11 +312,11 @@
                 <wa-button variant="brand" slot="trigger" caret>user</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterRequest_userId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterRequest').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userId-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by user ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterRequest_userId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterRequest').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userId-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by user descending
                   </wa-menu-item>
                 </wa-menu>
@@ -354,7 +358,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndClusterRequestPage %}
+{%- include en-us/search/cluster-request/ClusterRequestLocation.htm %}
 {%- endblock htmBodyEndClusterRequestPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

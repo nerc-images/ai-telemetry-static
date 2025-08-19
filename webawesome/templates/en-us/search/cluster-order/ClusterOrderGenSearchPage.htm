@@ -45,7 +45,7 @@
 
       function htmTooltipClusterOrder(feature, layer) {
         return `{%- block htmTooltipClusterOrderPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterOrderPage %}`;
       }
     </script>
@@ -60,6 +60,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -186,6 +187,7 @@
           deletefilterClusterOrder(event.target);
           return false;
         });
+{%- block htmScriptInitClusterOrderPage %}{%- endblock htmScriptInitClusterOrderPage %}
       });
     </script>
 {%- endblock htmScriptClusterOrderPage %}
@@ -206,11 +208,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterOrderPage %}
-{%- endblock htmBodyStartClusterOrderPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleClusterOrderPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterOrder">back to all OpenShift cluster orders</wa-tooltip></wa-tooltip>
@@ -235,7 +232,7 @@
 {% else %}
 {%- include en-us/search/cluster-order/ClusterOrderSidebar.htm %}
 {%- include en-us/search/cluster-order/ClusterOrderSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/cluster-order" id="ClusterOrderForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -257,6 +254,13 @@
               </wa-breadcrumb>
 {% include en-us/search/cluster-order/ClusterOrderSearchForm.htm %}
 {% include en-us/search/cluster-order/ClusterOrderSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartClusterOrderPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleClusterOrderPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/cluster-order/ClusterOrderPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -265,11 +269,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order ID</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-id-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by order ID ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-id-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by order ID descending
                   </wa-menu-item>
                 </wa-menu>
@@ -278,11 +282,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order template id</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_templateId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-templateId-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by order template id ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_templateId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-templateId-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by order template id descending
                   </wa-menu-item>
                 </wa-menu>
@@ -291,11 +295,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order state</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-state-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by order state ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-state-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by order state descending
                   </wa-menu-item>
                 </wa-menu>
@@ -304,11 +308,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order cluster id</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_clusterId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterId-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by order cluster id ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_clusterId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterId-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by order cluster id descending
                   </wa-menu-item>
                 </wa-menu>
@@ -357,7 +361,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndClusterOrderPage %}
+{%- include en-us/search/cluster-order/ClusterOrderLocation.htm %}
 {%- endblock htmBodyEndClusterOrderPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

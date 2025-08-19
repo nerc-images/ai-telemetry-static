@@ -228,7 +228,7 @@ The description of this bare metal order"
 {%- macro htmNetworkIdBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                 {{ inputNetworkIdBareMetalOrderPage(authForWrite=authForWrite, authForRead=authForRead) }}
                 <div class="label-on-left-ul-label ">
-                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  <wa-icon class="{{ FONTAWESOME_STYLE }} fa-search "></wa-icon>
                   relate a bare metal network to this bare metal order
                 </div>
                 <ul class="label-on-left-ul " id="listBareMetalOrderNetworkId_{{classApiMethodMethod}}">
@@ -649,7 +649,7 @@ The order status of a bare metal fulfillment"
                             {{ inputStatusBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchBareMetalOrder() %}<wa-button variant="brand" id="htmButton_patchBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchBareMetalOrder() %}<wa-button variant="brand" id="htmButton_patchBareMetalOrder" data-pk={{ result.pk | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></wa-icon>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchBareMetalOrder" duration="5000" closable class="wa-header-l ">
@@ -825,7 +825,7 @@ The order status of a bare metal fulfillment"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postBareMetalOrder() %}<wa-button variant="brand" id="htmButton_postBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postBareMetalOrder() %}<wa-button variant="brand" id="htmButton_postBareMetalOrder" data-pk={{ result.pk | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></wa-icon>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postBareMetalOrder" duration="5000" closable class="wa-header-l ">
@@ -1002,7 +1002,7 @@ The order status of a bare metal fulfillment"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deleteBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deleteBareMetalOrder" data-pk={{ result.pk | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteBareMetalOrder" duration="5000" closable class="wa-header-l ">
@@ -1262,7 +1262,7 @@ The order status of a bare metal fulfillment"
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deletefilterBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deletefilterBareMetalOrder" data-pk={{ result.pk | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterBareMetalOrder" duration="5000" closable class="wa-header-l ">
@@ -1288,7 +1288,7 @@ The order status of a bare metal fulfillment"
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisBareMetalOrderGenPage"
                      onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'pk:{{ result.pk }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisBareMetalOrderGenPage')); }, function() { addError(document.querySelector('#refreshThisBareMetalOrderGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></wa-icon>
                   refresh
                 </wa-button>
     {% endif %}
@@ -1296,7 +1296,7 @@ The order status of a bare metal fulfillment"
                 <wa-button variant="brand" id="refreshAllBareMetalOrderGenPage{{ result.pk | e }}"
                      onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllBareMetalOrderGenPage{{ result.pk | e }}')); }, function() { addError(document.querySelector('#refreshAllBareMetalOrderGenPage{{ result.pk | e }}')); }); "
                     >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></wa-icon>
                   Refresh all 
                 </wa-button>
     {% endif %}

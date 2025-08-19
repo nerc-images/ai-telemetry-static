@@ -45,7 +45,7 @@
 
       function htmTooltipCluster(feature, layer) {
         return `{%- block htmTooltipClusterPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterPage %}`;
       }
 
@@ -80,7 +80,7 @@
         htm += `{%- block htmLegendClusterPage %}
     <div title="${quoteattr(title)}">
     <div style="width: 20px; ">
-      <i class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></i>
+      <wa-icon class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></wa-icon>
     </div>
     <div class="text-overflow-ellipsis ">
       <span class="" data-solrId="${result.solrId}" onclick="window.mapLayers[this.getAttribute('data-solrId')].openPopup(); return false;" href="">${title}</span>
@@ -142,6 +142,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var clusterResource = {% if result.clusterResource is defined %}{{ result.clusterResource | tojson }}{% else %}null{% endif %};
@@ -278,6 +279,7 @@
           deletefilterCluster(event.target);
           return false;
         });
+{%- block htmScriptInitClusterPage %}{%- endblock htmScriptInitClusterPage %}
       });
     </script>
 {%- endblock htmScriptClusterPage %}
@@ -302,7 +304,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-Cluster">back to all OpenShift clusters</wa-tooltip>
             <wa-button id="return-to-Cluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
+              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
               all OpenShift clusters
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
@@ -318,7 +320,7 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterPage %}
-        <div>
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Cluster">back to all OpenShift clusters</wa-tooltip></wa-tooltip>
@@ -364,7 +366,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-      {{ super() }}
 {%- block htmBodyEndClusterPage %}
+{%- include en-us/search/cluster/ClusterLocation.htm %}
 {%- endblock htmBodyEndClusterPage %}
+      {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

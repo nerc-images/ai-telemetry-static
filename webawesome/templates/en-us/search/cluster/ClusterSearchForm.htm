@@ -469,6 +469,82 @@ Explore this cluster's GPU utilization in Grafana. "
 {%- macro htmGrafanaUrlClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputGrafanaUrlClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputCpuCoresTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_cpuCoresTotal">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] CPU cores total"
+                      label="CPU cores total"
+                      type="number"
+                      hint="
+The total number of CPU cores on this cluster. "
+                      id="{{classApiMethodMethod}}_cpuCoresTotal"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-clusterResource={{ result.clusterResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal setCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
+                      name="setCpuCoresTotal"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal setCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
+                      name="setCpuCoresTotal"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal valueCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
+                      name="cpuCoresTotal"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.cpuCoresTotal | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCpuCoresTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCpuCoresTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputMemoryBytesTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_memoryBytesTotal">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Long] memory bytes total"
+                      label="memory bytes total"
+                      type="number"
+                      hint="
+The total number of memory bytes on this cluster. "
+                      id="{{classApiMethodMethod}}_memoryBytesTotal"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-clusterResource={{ result.clusterResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_memoryBytesTotal setMemoryBytesTotal classCluster inputCluster{{ result.clusterResource }}MemoryBytesTotal "
+                      name="setMemoryBytesTotal"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_memoryBytesTotal setMemoryBytesTotal classCluster inputCluster{{ result.clusterResource }}MemoryBytesTotal "
+                      name="setMemoryBytesTotal"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_memoryBytesTotal valueMemoryBytesTotal classCluster inputCluster{{ result.clusterResource }}MemoryBytesTotal "
+                      name="memoryBytesTotal"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.memoryBytesTotal | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmMemoryBytesTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputMemoryBytesTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputIdClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_id">
@@ -655,7 +731,7 @@ The NGSILD data with @context from the context broker"
                             {{ inputNgsildDataClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchCluster() %}<wa-button variant="brand" id="htmButton_patchCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchCluster() %}<wa-button variant="brand" id="htmButton_patchCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></wa-icon>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchCluster" duration="5000" closable class="wa-header-l ">
@@ -761,6 +837,26 @@ The NGSILD data with @context from the context broker"
                   {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
               </div>
             </wa-details>
             <wa-details class="HtmRow" id="ngsi-ld-data">
@@ -825,7 +921,7 @@ The NGSILD data with @context from the context broker"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postCluster() %}<wa-button variant="brand" id="htmButton_postCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postCluster() %}<wa-button variant="brand" id="htmButton_postCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></wa-icon>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postCluster" duration="5000" closable class="wa-header-l ">
@@ -932,6 +1028,26 @@ The NGSILD data with @context from the context broker"
                   {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
               </div>
             </wa-details>
             <wa-details class="HtmRow" id="ngsi-ld-data">
@@ -996,7 +1112,7 @@ The NGSILD data with @context from the context broker"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteCluster() %}<wa-button variant="brand" id="htmButton_deleteCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteCluster() %}<wa-button variant="brand" id="htmButton_deleteCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteCluster" duration="5000" closable class="wa-header-l ">
@@ -1015,7 +1131,7 @@ The NGSILD data with @context from the context broker"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_putimportCluster() %}<wa-button variant="brand" id="htmButton_putimportCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportCluster() %}<wa-button variant="brand" id="htmButton_putimportCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></wa-icon>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportCluster" duration="5000" closable class="wa-header-l ">
@@ -1197,6 +1313,26 @@ The NGSILD data with @context from the context broker"
                   {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
               </div>
             </wa-details>
             <wa-details class="HtmRow" id="ngsi-ld-data">
@@ -1260,7 +1396,7 @@ The NGSILD data with @context from the context broker"
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterCluster() %}<wa-button variant="brand" id="htmButton_deletefilterCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterCluster() %}<wa-button variant="brand" id="htmButton_deletefilterCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterCluster" duration="5000" closable class="wa-header-l ">
@@ -1286,7 +1422,7 @@ The NGSILD data with @context from the context broker"
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisClusterGenPage"
                      onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'clusterResource:{{ result.clusterResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisClusterGenPage')); }, function() { addError(document.querySelector('#refreshThisClusterGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></wa-icon>
                   refresh
                 </wa-button>
     {% endif %}
@@ -1294,7 +1430,7 @@ The NGSILD data with @context from the context broker"
                 <wa-button variant="brand" id="refreshAllClusterGenPage{{ result.clusterResource | e }}"
                      onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllClusterGenPage{{ result.clusterResource | e }}')); }, function() { addError(document.querySelector('#refreshAllClusterGenPage{{ result.clusterResource | e }}')); }); "
                     >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></wa-icon>
                   Refresh all 
                 </wa-button>
     {% endif %}

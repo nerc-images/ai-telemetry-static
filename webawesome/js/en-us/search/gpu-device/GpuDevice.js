@@ -53,6 +53,10 @@ function searchGpuDeviceFilters($formFilters) {
     if(filterGpuDeviceNumber != null && filterGpuDeviceNumber !== '')
       filters.push({ name: 'fq', value: 'gpuDeviceNumber:' + filterGpuDeviceNumber });
 
+    var filterModelName = $formFilters.querySelector('.valueModelName')?.value;
+    if(filterModelName != null && filterModelName !== '')
+      filters.push({ name: 'fq', value: 'modelName:' + filterModelName });
+
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
@@ -85,6 +89,34 @@ function searchGpuDeviceFilters($formFilters) {
     if(filterLocation != null && filterLocation !== '')
       filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
     var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
     if(filterDisplayPage != null && filterDisplayPage !== '')
       filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
@@ -109,37 +141,9 @@ function searchGpuDeviceFilters($formFilters) {
     if(filterObjectText != null && filterObjectText !== '')
       filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
 
-    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
-    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
-
-    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
-    if(filterClassSimpleName != null && filterClassSimpleName !== '')
-      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
-
-    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
-    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
-
-    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
-    if(filterSessionId != null && filterSessionId !== '')
-      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
-
-    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
-    if(filterUserKey != null && filterUserKey !== '')
-      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
-
-    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
-    if(filterObjectTitle != null && filterObjectTitle !== '')
-      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
 
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
@@ -182,6 +186,7 @@ function searchGpuDeviceFilters($formFilters) {
 
 function searchGpuDeviceVals(filters, target, success, error) {
 
+
   fetch(
     '/en-us/api/gpu-device?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
@@ -200,46 +205,48 @@ function searchGpuDeviceVals(filters, target, success, error) {
 
 function suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource = null, hubResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['hubResource'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(gpuDeviceResource.toString()) : val == hubResource);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_hubResource_' + gpuDeviceResource + '_hubResource_' + o['hubResource']);
-      $input.setAttribute('name', 'hubResource');
-      $input.setAttribute('value', o['hubResource']);
-      $input.setAttribute('class', 'valueHubResource ');
-      if(gpuDeviceResource != null) {
-        $input.addEventListener('change', function(event) {
-          patchGpuDeviceVals([{ name: 'fq', value: 'gpuDeviceResource:' + gpuDeviceResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource, hubResource, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['hubResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(gpuDeviceResource.toString()) : val == hubResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_hubResource_' + gpuDeviceResource + '_hubResource_' + o['hubResource']);
+        $input.setAttribute('name', 'hubResource');
+        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('class', 'valueHubResource ');
+        if(gpuDeviceResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchGpuDeviceVals([{ name: 'fq', value: 'gpuDeviceResource:' + gpuDeviceResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource, hubResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchHubVals(filters, target, success, error);
@@ -247,46 +254,48 @@ o['objectTitle'];
 
 function suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource = null, clusterResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['clusterResource'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(gpuDeviceResource.toString()) : val == clusterResource);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_clusterResource_' + gpuDeviceResource + '_clusterResource_' + o['clusterResource']);
-      $input.setAttribute('name', 'clusterResource');
-      $input.setAttribute('value', o['clusterResource']);
-      $input.setAttribute('class', 'valueClusterResource ');
-      if(gpuDeviceResource != null) {
-        $input.addEventListener('change', function(event) {
-          patchGpuDeviceVals([{ name: 'fq', value: 'gpuDeviceResource:' + gpuDeviceResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource, clusterResource, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['clusterResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(gpuDeviceResource.toString()) : val == clusterResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_clusterResource_' + gpuDeviceResource + '_clusterResource_' + o['clusterResource']);
+        $input.setAttribute('name', 'clusterResource');
+        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('class', 'valueClusterResource ');
+        if(gpuDeviceResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchGpuDeviceVals([{ name: 'fq', value: 'gpuDeviceResource:' + gpuDeviceResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource, clusterResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchClusterVals(filters, target, success, error);
@@ -294,46 +303,48 @@ o['objectTitle'];
 
 function suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource = null, nodeResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-computer"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-computer"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['nodeResource'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(gpuDeviceResource.toString()) : val == nodeResource);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_nodeResource_' + gpuDeviceResource + '_nodeResource_' + o['nodeResource']);
-      $input.setAttribute('name', 'nodeResource');
-      $input.setAttribute('value', o['nodeResource']);
-      $input.setAttribute('class', 'valueNodeResource ');
-      if(gpuDeviceResource != null) {
-        $input.addEventListener('change', function(event) {
-          patchGpuDeviceVals([{ name: 'fq', value: 'gpuDeviceResource:' + gpuDeviceResource }], { [(event.target.checked ? 'set' : 'remove') + 'NodeResource']: o['nodeResource'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource, nodeResource, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['nodeResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(gpuDeviceResource.toString()) : val == nodeResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_nodeResource_' + gpuDeviceResource + '_nodeResource_' + o['nodeResource']);
+        $input.setAttribute('name', 'nodeResource');
+        $input.setAttribute('value', o['nodeResource']);
+        $input.setAttribute('class', 'valueNodeResource ');
+        if(gpuDeviceResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchGpuDeviceVals([{ name: 'fq', value: 'gpuDeviceResource:' + gpuDeviceResource }], { [(event.target.checked ? 'set' : 'remove') + 'NodeResource']: o['nodeResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource, nodeResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchAiNodeVals(filters, target, success, error);
@@ -341,17 +352,19 @@ o['objectTitle'];
 
 function suggestGpuDeviceObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var $i = document.querySelector('<i class="fa-regular fa-memory"></i>');
-      var $span = document.createElement('span');      $span.setAttribute('class', '');      $span.innerText = o['objectTitle'];
-      var $li = document.createElement('li');
-      var $a = document.createElement('a').setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      $li.append($a);
-      $list.append($li);
-    });
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-memory"></i>');
+        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $li = document.createElement('li');
+        var $a = document.createElement('a').setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchGpuDeviceVals($formFilters, target, success, error);
@@ -486,6 +499,18 @@ async function patchGpuDevice($formFilters, $formValues, target, gpuDeviceResour
   if(removeGpuDeviceNumber != null && removeGpuDeviceNumber !== '')
     vals['removeGpuDeviceNumber'] = removeGpuDeviceNumber;
 
+  var valueModelName = $formValues.querySelector('.valueModelName')?.value;
+  var removeModelName = $formValues.querySelector('.removeModelName')?.value === 'true';
+  var setModelName = removeModelName ? null : $formValues.querySelector('.setModelName')?.value;
+  var addModelName = $formValues.querySelector('.addModelName')?.value;
+  if(removeModelName || setModelName != null && setModelName !== '')
+    vals['setModelName'] = setModelName;
+  if(addModelName != null && addModelName !== '')
+    vals['addModelName'] = addModelName;
+  var removeModelName = $formValues.querySelector('.removeModelName')?.value;
+  if(removeModelName != null && removeModelName !== '')
+    vals['removeModelName'] = removeModelName;
+
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
   var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
@@ -582,18 +607,6 @@ async function patchGpuDevice($formFilters, $formValues, target, gpuDeviceResour
   if(removeLocation != null && removeLocation !== '')
     vals['removeLocation'] = removeLocation;
 
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
-  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
-  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
-  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
-    vals['setDisplayPage'] = setDisplayPage;
-  if(addDisplayPage != null && addDisplayPage !== '')
-    vals['addDisplayPage'] = addDisplayPage;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
-  if(removeDisplayPage != null && removeDisplayPage !== '')
-    vals['removeDisplayPage'] = removeDisplayPage;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -629,6 +642,18 @@ async function patchGpuDevice($formFilters, $formValues, target, gpuDeviceResour
   var removeObjectTitle = $formValues.querySelector('.removeObjectTitle')?.value;
   if(removeObjectTitle != null && removeObjectTitle !== '')
     vals['removeObjectTitle'] = removeObjectTitle;
+
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
+  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
+  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
+  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
+    vals['setDisplayPage'] = setDisplayPage;
+  if(addDisplayPage != null && addDisplayPage !== '')
+    vals['addDisplayPage'] = addDisplayPage;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
+  if(removeDisplayPage != null && removeDisplayPage !== '')
+    vals['removeDisplayPage'] = removeDisplayPage;
 
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
@@ -700,6 +725,10 @@ function patchGpuDeviceFilters($formFilters) {
     if(filterGpuDeviceNumber != null && filterGpuDeviceNumber !== '')
       filters.push({ name: 'fq', value: 'gpuDeviceNumber:' + filterGpuDeviceNumber });
 
+    var filterModelName = $formFilters.querySelector('.valueModelName')?.value;
+    if(filterModelName != null && filterModelName !== '')
+      filters.push({ name: 'fq', value: 'modelName:' + filterModelName });
+
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
@@ -732,6 +761,34 @@ function patchGpuDeviceFilters($formFilters) {
     if(filterLocation != null && filterLocation !== '')
       filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
     var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
     if(filterDisplayPage != null && filterDisplayPage !== '')
       filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
@@ -756,37 +813,9 @@ function patchGpuDeviceFilters($formFilters) {
     if(filterObjectText != null && filterObjectText !== '')
       filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
 
-    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
-    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
-
-    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
-    if(filterClassSimpleName != null && filterClassSimpleName !== '')
-      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
-
-    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
-    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
-
-    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
-    if(filterSessionId != null && filterSessionId !== '')
-      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
-
-    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
-    if(filterUserKey != null && filterUserKey !== '')
-      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
-
-    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
-    if(filterObjectTitle != null && filterObjectTitle !== '')
-      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
 
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
@@ -902,6 +931,10 @@ async function postGpuDevice($formValues, target, success, error) {
   if(valueGpuDeviceNumber != null && valueGpuDeviceNumber !== '')
     vals['gpuDeviceNumber'] = valueGpuDeviceNumber;
 
+  var valueModelName = $formValues.querySelector('.valueModelName')?.value;
+  if(valueModelName != null && valueModelName !== '')
+    vals['modelName'] = valueModelName;
+
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
@@ -934,10 +967,6 @@ async function postGpuDevice($formValues, target, success, error) {
   if(valueLocation != null && valueLocation !== '')
     vals['location'] = JSON.parse(valueLocation);
 
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  if(valueDisplayPage != null && valueDisplayPage !== '')
-    vals['displayPage'] = valueDisplayPage;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
     vals['sessionId'] = valueSessionId;
@@ -949,6 +978,10 @@ async function postGpuDevice($formValues, target, success, error) {
   var valueObjectTitle = $formValues.querySelector('.valueObjectTitle')?.value;
   if(valueObjectTitle != null && valueObjectTitle !== '')
     vals['objectTitle'] = valueObjectTitle;
+
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  if(valueDisplayPage != null && valueDisplayPage !== '')
+    vals['displayPage'] = valueDisplayPage;
 
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
@@ -1202,6 +1235,7 @@ async function websocketGpuDeviceInner(apiRequest) {
         var inputClusterName = null;
         var inputNodeName = null;
         var inputGpuDeviceNumber = null;
+        var inputModelName = null;
         var inputDescription = null;
         var inputGpuDeviceUtilization = null;
         var inputId = null;
@@ -1210,20 +1244,20 @@ async function websocketGpuDeviceInner(apiRequest) {
         var inputNgsildContext = null;
         var inputNgsildData = null;
         var inputLocation = null;
+        var inputClassCanonicalName = null;
+        var inputClassSimpleName = null;
+        var inputClassCanonicalNames = null;
+        var inputSessionId = null;
+        var inputUserKey = null;
+        var inputSaves = null;
+        var inputObjectTitle = null;
         var inputDisplayPage = null;
         var inputEditPage = null;
         var inputUserPage = null;
         var inputDownload = null;
         var inputObjectSuggest = null;
         var inputObjectText = null;
-        var inputClassCanonicalName = null;
-        var inputClassSimpleName = null;
-        var inputClassCanonicalNames = null;
-        var inputSessionId = null;
-        var inputUserKey = null;
-        var inputObjectTitle = null;
         var inputSolrId = null;
-        var inputSaves = null;
         var inputHubResource = null;
         var inputClusterResource = null;
         var inputNodeResource = null;
@@ -1250,6 +1284,8 @@ async function websocketGpuDeviceInner(apiRequest) {
           inputNodeName = $response.querySelector('.Page_nodeName');
         if(vars.includes('gpuDeviceNumber'))
           inputGpuDeviceNumber = $response.querySelector('.Page_gpuDeviceNumber');
+        if(vars.includes('modelName'))
+          inputModelName = $response.querySelector('.Page_modelName');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Page_description');
         if(vars.includes('gpuDeviceUtilization'))
@@ -1266,6 +1302,20 @@ async function websocketGpuDeviceInner(apiRequest) {
           inputNgsildData = $response.querySelector('.Page_ngsildData');
         if(vars.includes('location'))
           inputLocation = $response.querySelector('.Page_location');
+        if(vars.includes('classCanonicalName'))
+          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+        if(vars.includes('classSimpleName'))
+          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+        if(vars.includes('classCanonicalNames'))
+          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+        if(vars.includes('sessionId'))
+          inputSessionId = $response.querySelector('.Page_sessionId');
+        if(vars.includes('userKey'))
+          inputUserKey = $response.querySelector('.Page_userKey');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.Page_saves');
+        if(vars.includes('objectTitle'))
+          inputObjectTitle = $response.querySelector('.Page_objectTitle');
         if(vars.includes('displayPage'))
           inputDisplayPage = $response.querySelector('.Page_displayPage');
         if(vars.includes('editPage'))
@@ -1278,22 +1328,8 @@ async function websocketGpuDeviceInner(apiRequest) {
           inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
         if(vars.includes('objectText'))
           inputObjectText = $response.querySelector('.Page_objectText');
-        if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
-        if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
-        if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
-        if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
-        if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
-        if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
         if(vars.includes('hubResource'))
           inputHubResource = $response.querySelector('.Page_hubResource');
         if(vars.includes('clusterResource'))
@@ -1398,6 +1434,16 @@ async function websocketGpuDeviceInner(apiRequest) {
           addGlow(document.querySelector('.Page_gpuDeviceNumber'));
         }
 
+        if(inputModelName) {
+          document.querySelectorAll('.Page_modelName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputModelName.getAttribute('value');
+            else
+              item.textContent = inputModelName.textContent;
+          });
+          addGlow(document.querySelector('.Page_modelName'));
+        }
+
         if(inputDescription) {
           document.querySelectorAll('.Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1478,6 +1524,76 @@ async function websocketGpuDeviceInner(apiRequest) {
           addGlow(document.querySelector('.Page_location'));
         }
 
+        if(inputClassCanonicalName) {
+          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalName.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalName'));
+        }
+
+        if(inputClassSimpleName) {
+          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassSimpleName.getAttribute('value');
+            else
+              item.textContent = inputClassSimpleName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classSimpleName'));
+        }
+
+        if(inputClassCanonicalNames) {
+          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalNames.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalNames.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalNames'));
+        }
+
+        if(inputSessionId) {
+          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSessionId.getAttribute('value');
+            else
+              item.textContent = inputSessionId.textContent;
+          });
+          addGlow(document.querySelector('.Page_sessionId'));
+        }
+
+        if(inputUserKey) {
+          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserKey.getAttribute('value');
+            else
+              item.textContent = inputUserKey.textContent;
+          });
+          addGlow(document.querySelector('.Page_userKey'));
+        }
+
+        if(inputSaves) {
+          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.Page_saves'));
+        }
+
+        if(inputObjectTitle) {
+          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectTitle.getAttribute('value');
+            else
+              item.textContent = inputObjectTitle.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectTitle'));
+        }
+
         if(inputDisplayPage) {
           document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1538,66 +1654,6 @@ async function websocketGpuDeviceInner(apiRequest) {
           addGlow(document.querySelector('.Page_objectText'));
         }
 
-        if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalName.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
-        }
-
-        if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassSimpleName.getAttribute('value');
-            else
-              item.textContent = inputClassSimpleName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classSimpleName'));
-        }
-
-        if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalNames.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalNames.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
-        }
-
-        if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSessionId.getAttribute('value');
-            else
-              item.textContent = inputSessionId.textContent;
-          });
-          addGlow(document.querySelector('.Page_sessionId'));
-        }
-
-        if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserKey.getAttribute('value');
-            else
-              item.textContent = inputUserKey.textContent;
-          });
-          addGlow(document.querySelector('.Page_userKey'));
-        }
-
-        if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectTitle.getAttribute('value');
-            else
-              item.textContent = inputObjectTitle.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectTitle'));
-        }
-
         if(inputSolrId) {
           document.querySelectorAll('.Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1606,16 +1662,6 @@ async function websocketGpuDeviceInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
-        }
-
-        if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.Page_saves'));
         }
 
         if(inputHubResource) {

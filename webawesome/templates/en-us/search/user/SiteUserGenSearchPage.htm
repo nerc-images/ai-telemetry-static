@@ -44,7 +44,7 @@
 
       function htmTooltipSiteUser(feature, layer) {
         return `{%- block htmTooltipSiteUserPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipSiteUserPage %}`;
       }
     </script>
@@ -59,6 +59,7 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var userId = {% if result.userId is defined %}{{ result.userId | tojson }}{% else %}null{% endif %};
@@ -139,6 +140,7 @@
           searchpageSiteUser();
           return false;
         });
+{%- block htmScriptInitSiteUserPage %}{%- endblock htmScriptInitSiteUserPage %}
       });
     </script>
 {%- endblock htmScriptSiteUserPage %}
@@ -159,11 +161,6 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartSiteUserPage %}
-{%- endblock htmBodyStartSiteUserPage %}
-{%- endblock htmBodyStartPageLayout %}
-
-{%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleSiteUserPage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip></wa-tooltip>
@@ -188,7 +185,7 @@
 {% else %}
 {%- include en-us/search/user/SiteUserSidebar.htm %}
 {%- include en-us/search/user/SiteUserSuggestedSearch.htm %}
-          <div>
+          <div class="pageContent ">
             <form action="/en-us/api/user" id="SiteUserForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
@@ -210,6 +207,13 @@
               </wa-breadcrumb>
 {% include en-us/search/user/SiteUserSearchForm.htm %}
 {% include en-us/search/user/SiteUserSearchButtons.htm %}
+{% endif %}
+{%- endblock htmBodyStartSiteUserPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleSiteUserPage %}
+{% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
 {% include en-us/search/user/SiteUserPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
@@ -218,11 +222,11 @@
                 <wa-button variant="brand" slot="trigger" caret></wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userFullName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userFullName-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by null ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userFullName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userFullName-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by null descending
                   </wa-menu-item>
                 </wa-menu>
@@ -231,11 +235,11 @@
                 <wa-button variant="brand" slot="trigger" caret></wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userName-asc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
                     sort by null ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userName-desc">
-                    <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
                     sort by null descending
                   </wa-menu-item>
                 </wa-menu>
@@ -270,7 +274,8 @@
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-  {{ super() }}
 {%- block htmBodyEndSiteUserPage %}
+{%- include en-us/search/user/SiteUserLocation.htm %}
 {%- endblock htmBodyEndSiteUserPage %}
+  {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

@@ -53,6 +53,34 @@ function searchProjectFilters($formFilters) {
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
     var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
     if(filterDisplayPage != null && filterDisplayPage !== '')
       filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
@@ -77,37 +105,9 @@ function searchProjectFilters($formFilters) {
     if(filterObjectText != null && filterObjectText !== '')
       filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
 
-    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
-    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
-
-    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
-    if(filterClassSimpleName != null && filterClassSimpleName !== '')
-      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
-
-    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
-    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
-
-    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
-    if(filterSessionId != null && filterSessionId !== '')
-      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
-
-    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
-    if(filterUserKey != null && filterUserKey !== '')
-      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
-
-    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
-    if(filterObjectTitle != null && filterObjectTitle !== '')
-      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
 
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
@@ -149,46 +149,48 @@ function searchProjectVals(filters, target, success, error) {
 
 function suggestProjectHubResource(filters, $list, projectResource = null, hubResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['hubResource'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == hubResource);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_hubResource_' + projectResource + '_hubResource_' + o['hubResource']);
-      $input.setAttribute('name', 'hubResource');
-      $input.setAttribute('value', o['hubResource']);
-      $input.setAttribute('class', 'valueHubResource ');
-      if(projectResource != null) {
-        $input.addEventListener('change', function(event) {
-          patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestProjectHubResource(filters, $list, projectResource, hubResource, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['hubResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == hubResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_hubResource_' + projectResource + '_hubResource_' + o['hubResource']);
+        $input.setAttribute('name', 'hubResource');
+        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('class', 'valueHubResource ');
+        if(projectResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestProjectHubResource(filters, $list, projectResource, hubResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchHubVals(filters, target, success, error);
@@ -196,46 +198,48 @@ o['objectTitle'];
 
 function suggestProjectClusterResource(filters, $list, projectResource = null, clusterResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
-      var $i = iTemplate.content;
-      var $span = document.createElement('span');
-      $span.setAttribute('class', '');
-      $span.innerText = 
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
 o['objectTitle'];
-      var $a = document.createElement('a');
-      $a.setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      var val = o['clusterResource'];
-      var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == clusterResource);
-      var $input = document.createElement('wa-checkbox');
-      $input.setAttribute('id', 'GET_clusterResource_' + projectResource + '_clusterResource_' + o['clusterResource']);
-      $input.setAttribute('name', 'clusterResource');
-      $input.setAttribute('value', o['clusterResource']);
-      $input.setAttribute('class', 'valueClusterResource ');
-      if(projectResource != null) {
-        $input.addEventListener('change', function(event) {
-          patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
-              , target
-              , function(response, target) {
-                addGlow(target);
-                suggestProjectClusterResource(filters, $list, projectResource, clusterResource, relate, target);
-              }
-              , function(response, target) { addError(target); }
-          );
-        });
-      }
-      if(checked)
-        $input.setAttribute('checked', 'checked');
-      var $li = document.createElement('li');
-      if(relate)
-        $li.append($input);
-      $li.append($a);
-      $list.append($li);
-    });
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['clusterResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == clusterResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_clusterResource_' + projectResource + '_clusterResource_' + o['clusterResource']);
+        $input.setAttribute('name', 'clusterResource');
+        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('class', 'valueClusterResource ');
+        if(projectResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestProjectClusterResource(filters, $list, projectResource, clusterResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchClusterVals(filters, target, success, error);
@@ -243,17 +247,19 @@ o['objectTitle'];
 
 function suggestProjectObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
-    $list.innerHTML = '';
-    data['list'].forEach((o, i) => {
-      var $i = document.querySelector('<i class="fa-regular fa-school"></i>');
-      var $span = document.createElement('span');      $span.setAttribute('class', '');      $span.innerText = o['objectTitle'];
-      var $li = document.createElement('li');
-      var $a = document.createElement('a').setAttribute('href', o['editPage']);
-      $a.append($i);
-      $a.append($span);
-      $li.append($a);
-      $list.append($li);
-    });
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-school"></i>');
+        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $li = document.createElement('li');
+        var $a = document.createElement('a').setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
   };
   error = function( jqXhr, target2 ) {};
   searchProjectVals($formFilters, target, success, error);
@@ -388,18 +394,6 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeDescription != null && removeDescription !== '')
     vals['removeDescription'] = removeDescription;
 
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
-  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
-  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
-  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
-    vals['setDisplayPage'] = setDisplayPage;
-  if(addDisplayPage != null && addDisplayPage !== '')
-    vals['addDisplayPage'] = addDisplayPage;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
-  if(removeDisplayPage != null && removeDisplayPage !== '')
-    vals['removeDisplayPage'] = removeDisplayPage;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -435,6 +429,18 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   var removeObjectTitle = $formValues.querySelector('.removeObjectTitle')?.value;
   if(removeObjectTitle != null && removeObjectTitle !== '')
     vals['removeObjectTitle'] = removeObjectTitle;
+
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
+  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
+  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
+  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
+    vals['setDisplayPage'] = setDisplayPage;
+  if(addDisplayPage != null && addDisplayPage !== '')
+    vals['addDisplayPage'] = addDisplayPage;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
+  if(removeDisplayPage != null && removeDisplayPage !== '')
+    vals['removeDisplayPage'] = removeDisplayPage;
 
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
@@ -502,6 +508,34 @@ function patchProjectFilters($formFilters) {
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
     var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
     if(filterDisplayPage != null && filterDisplayPage !== '')
       filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
@@ -526,37 +560,9 @@ function patchProjectFilters($formFilters) {
     if(filterObjectText != null && filterObjectText !== '')
       filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
 
-    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
-    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
-
-    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
-    if(filterClassSimpleName != null && filterClassSimpleName !== '')
-      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
-
-    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
-    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
-
-    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
-    if(filterSessionId != null && filterSessionId !== '')
-      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
-
-    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
-    if(filterUserKey != null && filterUserKey !== '')
-      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
-
-    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
-    if(filterObjectTitle != null && filterObjectTitle !== '')
-      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
 
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
@@ -652,10 +658,6 @@ async function postProject($formValues, target, success, error) {
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
 
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  if(valueDisplayPage != null && valueDisplayPage !== '')
-    vals['displayPage'] = valueDisplayPage;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
     vals['sessionId'] = valueSessionId;
@@ -667,6 +669,10 @@ async function postProject($formValues, target, success, error) {
   var valueObjectTitle = $formValues.querySelector('.valueObjectTitle')?.value;
   if(valueObjectTitle != null && valueObjectTitle !== '')
     vals['objectTitle'] = valueObjectTitle;
+
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  if(valueDisplayPage != null && valueDisplayPage !== '')
+    vals['displayPage'] = valueDisplayPage;
 
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
@@ -909,20 +915,20 @@ async function websocketProjectInner(apiRequest) {
         var inputClusterName = null;
         var inputProjectName = null;
         var inputDescription = null;
+        var inputClassCanonicalName = null;
+        var inputClassSimpleName = null;
+        var inputClassCanonicalNames = null;
+        var inputSessionId = null;
+        var inputUserKey = null;
+        var inputSaves = null;
+        var inputObjectTitle = null;
         var inputDisplayPage = null;
         var inputEditPage = null;
         var inputUserPage = null;
         var inputDownload = null;
         var inputObjectSuggest = null;
         var inputObjectText = null;
-        var inputClassCanonicalName = null;
-        var inputClassSimpleName = null;
-        var inputClassCanonicalNames = null;
-        var inputSessionId = null;
-        var inputUserKey = null;
-        var inputObjectTitle = null;
         var inputSolrId = null;
-        var inputSaves = null;
         var inputHubResource = null;
         var inputClusterResource = null;
         var inputProjectResource = null;
@@ -944,6 +950,20 @@ async function websocketProjectInner(apiRequest) {
           inputProjectName = $response.querySelector('.Page_projectName');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('classCanonicalName'))
+          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+        if(vars.includes('classSimpleName'))
+          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+        if(vars.includes('classCanonicalNames'))
+          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+        if(vars.includes('sessionId'))
+          inputSessionId = $response.querySelector('.Page_sessionId');
+        if(vars.includes('userKey'))
+          inputUserKey = $response.querySelector('.Page_userKey');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.Page_saves');
+        if(vars.includes('objectTitle'))
+          inputObjectTitle = $response.querySelector('.Page_objectTitle');
         if(vars.includes('displayPage'))
           inputDisplayPage = $response.querySelector('.Page_displayPage');
         if(vars.includes('editPage'))
@@ -956,22 +976,8 @@ async function websocketProjectInner(apiRequest) {
           inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
         if(vars.includes('objectText'))
           inputObjectText = $response.querySelector('.Page_objectText');
-        if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
-        if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
-        if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
-        if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
-        if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
-        if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
         if(vars.includes('hubResource'))
           inputHubResource = $response.querySelector('.Page_hubResource');
         if(vars.includes('clusterResource'))
@@ -1066,6 +1072,76 @@ async function websocketProjectInner(apiRequest) {
           addGlow(document.querySelector('.Page_description'));
         }
 
+        if(inputClassCanonicalName) {
+          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalName.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalName'));
+        }
+
+        if(inputClassSimpleName) {
+          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassSimpleName.getAttribute('value');
+            else
+              item.textContent = inputClassSimpleName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classSimpleName'));
+        }
+
+        if(inputClassCanonicalNames) {
+          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalNames.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalNames.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalNames'));
+        }
+
+        if(inputSessionId) {
+          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSessionId.getAttribute('value');
+            else
+              item.textContent = inputSessionId.textContent;
+          });
+          addGlow(document.querySelector('.Page_sessionId'));
+        }
+
+        if(inputUserKey) {
+          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserKey.getAttribute('value');
+            else
+              item.textContent = inputUserKey.textContent;
+          });
+          addGlow(document.querySelector('.Page_userKey'));
+        }
+
+        if(inputSaves) {
+          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.Page_saves'));
+        }
+
+        if(inputObjectTitle) {
+          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectTitle.getAttribute('value');
+            else
+              item.textContent = inputObjectTitle.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectTitle'));
+        }
+
         if(inputDisplayPage) {
           document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1126,66 +1202,6 @@ async function websocketProjectInner(apiRequest) {
           addGlow(document.querySelector('.Page_objectText'));
         }
 
-        if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalName.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
-        }
-
-        if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassSimpleName.getAttribute('value');
-            else
-              item.textContent = inputClassSimpleName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classSimpleName'));
-        }
-
-        if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalNames.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalNames.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
-        }
-
-        if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSessionId.getAttribute('value');
-            else
-              item.textContent = inputSessionId.textContent;
-          });
-          addGlow(document.querySelector('.Page_sessionId'));
-        }
-
-        if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserKey.getAttribute('value');
-            else
-              item.textContent = inputUserKey.textContent;
-          });
-          addGlow(document.querySelector('.Page_userKey'));
-        }
-
-        if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectTitle.getAttribute('value');
-            else
-              item.textContent = inputObjectTitle.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectTitle'));
-        }
-
         if(inputSolrId) {
           document.querySelectorAll('.Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1194,16 +1210,6 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
-        }
-
-        if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.Page_saves'));
         }
 
         if(inputHubResource) {

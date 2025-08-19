@@ -8,6 +8,16 @@
   </div>
   <div class="wa-stack ">
     <div class="wa-grid ">
+      <wa-card with-header>
+        <header slot="header" class="wa-heading-m ">Percent of total memory usage for {{ result.clusterName }} cluster</header>
+        <div id="visualization-cluster-memory-bytes" class=""></div>
+      </wa-card>
+      <wa-card with-header>
+        <header slot="header" class="wa-heading-m ">Percent of total CPU usage for {{ result.clusterName }} cluster</header>
+        <div id="visualization-cluster-cpu-bytes" class=""></div>
+      </wa-card>
+    </div>
+    <div class="wa-grid ">
       <div class="wa-stack ">
         <div class="wa-grid ">
           <wa-card with-header>
@@ -22,6 +32,10 @@
         <wa-card with-header>
           <header slot="header" class="wa-heading-m ">GPU Nodes in not ready state in cluster {{ result.clusterName }}</header>
           <div id="visualization-gpu-nodes-not-ready" class="wa-grid "></div>
+        </wa-card>
+        <wa-card with-header>
+          <header slot="header" class="wa-heading-m ">GPU Nodes without GPU product taint in cluster {{ result.clusterName }}</header>
+          <div id="visualization-gpu-nodes-without-taint" class="wa-grid "></div>
         </wa-card>
       </div>
       <wa-card with-header>
@@ -67,43 +81,160 @@
   }
 }
 {%- endblock htmStyleClusterPage %}
-{%- block htmScriptsClusterPage %}
-{{ super() }}
-  <script type="module">
-    Promise.all([
-      customElements.whenDefined('wa-button')
-      , customElements.whenDefined('wa-input')
-    ]).then(() => {
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-      var query = {
-        start: start.toISOString()
-        , end: end.toISOString()
-        , step: '5'
+{%- block htmScriptInitClusterPage %}
+
+      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
+      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+      var step;
+      switch (facetRangeGapVal) {
+        case "+1YEAR":
+          step = "1y";
+          break;
+        case "+1MONTH":
+          step = "1M";
+          break;
+        case "+1DAY":
+          step = "1d";
+          break;
+        case "+1HOUR":
+          step = "1h";
+          break;
+        case "+1MINUTE":
+          step = "1m";
+          break;
+        default:
+          dayType = "Weekend";
+      }
+
+      var timeQuery = {
+        start: start
+        , end: end
+        , step: step
       };
 
       Promise.all([
-          queryGpuNodesTotal()
+          queryMemoryBytesTotal(timeQuery)
+          , queryCpuBytesTotal(timeQuery)
+          , queryGpuNodesTotal()
           , queryGpuDevicesByNode()
           , queryGpuDevicesTotal()
           , queryGpuNodesNotReady()
+          , queryGpuNodesWithoutTaint()
           , queryGpuTemperature()
           , queryGpuUtilization()
           , queryGpuUtilizationPerProject()
           ]);
-    });
+{%- endblock htmScriptInitClusterPage %}
+{%- block htmScriptsClusterPage %}
+{{ super() }}
+  <script>
+
+    async function queryMemoryBytesTotal(timeQuery) {
+      const urls = [];
+      const hubIds = ['{{ result.hubId }}'];
+      hubIds.forEach((hubId, i) => {
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: 'cluster:memory_usage_bytes:sum{cluster="{{ result.clusterName }}"} / cluster:capacity_memory_bytes:sum{cluster="{{ result.clusterName }}", label_node_role_kubernetes_io!="master"}' 
+            }, timeQuery)).toString());
+      });
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+      var end = new Date();
+      var start = new Date(new Date().setHours(end.getHours() - 1));
+
+      var panelId = 'visualization-cluster-memory-bytes';
+      var traces = [];
+      responseJsons.forEach((responseJson, i) => {
+        responseJson.data.result.forEach((result, j) => {
+          var hubId = hubIds[i];
+          traces.push({
+            x: result.values.map(values => new Date(values[0] * 1000))
+            , y: result.values.map(values => parseFloat(values[1]))
+            , mode: 'scatter'
+            , name: result.metric.cluster + ' in ' + hubId
+            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + '</a>')
+          });
+        });
+      });
+
+      var layout = {
+        xaxis: {
+          title: 'Time in {{ defaultZoneId }}'
+        }
+        , yaxis: {
+          title: 'Percent of total memory usage'
+          , tickformat: '.0%'
+        }
+        , legend: {
+          title: {
+            text: 'Clusters'
+          }
+        }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
+
+    async function queryCpuBytesTotal(timeQuery) {
+      const urls = [];
+      const hubIds = ['{{ result.hubId }}'];
+      hubIds.forEach((hubId, i) => {
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterName }}"} / on(cluster) cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"}' 
+            }, timeQuery)).toString());
+      });
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+      var end = new Date();
+      var start = new Date(new Date().setHours(end.getHours() - 1));
+
+      var panelId = 'visualization-cluster-cpu-bytes';
+      var traces = [];
+      responseJsons.forEach((responseJson, i) => {
+        responseJson.data.result.forEach((result, j) => {
+          var hubId = hubIds[i];
+          traces.push({
+            x: result.values.map(values => new Date(values[0] * 1000))
+            , y: result.values.map(values => parseFloat(values[1]))
+            , mode: 'scatter'
+            , name: result.metric.cluster + ' in ' + hubId
+            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + '</a>')
+          });
+        });
+      });
+
+      var layout = {
+        xaxis: {
+          title: 'Time in {{ defaultZoneId }}'
+        }
+        , yaxis: {
+          title: 'Percent of total CPU usage'
+          , tickformat: '.0%'
+        }
+        , legend: {
+          title: {
+            text: 'Clusters'
+          }
+        }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
 
     async function queryGpuNodesTotal() {
       var query = Object.assign({ query: 'sum(gpu_operator_gpu_nodes_total{cluster="{{ result.clusterName }}"})' });
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
 
-          var avatar = document.createElement('wa-avatar');
-          avatar.setAttribute('initials', responseJson.data.result[0].value[1])
-          avatar.setAttribute('class', 'wa-accent wa-brand wa-heading-3xl ');
-          avatar.setAttribute('slot', 'icon');
-          document.querySelector('#visualization-cluster-gpu-nodes').append(avatar);
+          if(responseJson.data.result.length > 0) {
+            var avatar = document.createElement('wa-avatar');
+            avatar.setAttribute('initials', responseJson.data.result[0].value[1])
+            avatar.setAttribute('class', 'wa-accent wa-brand wa-heading-3xl ');
+            avatar.setAttribute('slot', 'icon');
+            document.querySelector('#visualization-cluster-gpu-nodes').append(avatar);
+          }
         });
       } else {
         throw new Error(`Failed to query GPU nodes total: ${response.status}`);
@@ -112,7 +243,7 @@
 
     async function queryGpuDevicesByNode() {
       var query = Object.assign({ query: 'sum(gpu_operator_node_device_plugin_devices_total{cluster="{{ result.clusterName }}"}) by (cluster, node)' });
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
           var panelId = 'visualization-cluster-gpu-devices-by-node';
@@ -147,8 +278,6 @@
             var elem1 = document.createElement('div');
             elem1.innerText = result.metric.node;
             stack.append(elem1);
-
-            // <i class="fa-regular fa-computer" aria-hidden="true"></i>
           });
         });
       } else {
@@ -158,15 +287,17 @@
 
     async function queryGpuDevicesTotal() {
       var query = Object.assign({ query: 'sum(gpu_operator_node_device_plugin_devices_total{cluster="{{ result.clusterName }}"})' });
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
 
-          var avatar = document.createElement('wa-avatar');
-          avatar.setAttribute('initials', responseJson.data.result[0].value[1])
-          avatar.setAttribute('class', 'wa-accent wa-brand wa-heading-3xl ');
-          avatar.setAttribute('slot', 'icon');
-          document.querySelector('#visualization-cluster-gpu-devices').append(avatar);
+          if(responseJson.data.result.length > 0) {
+            var avatar = document.createElement('wa-avatar');
+            avatar.setAttribute('initials', responseJson.data.result[0].value[1])
+            avatar.setAttribute('class', 'wa-accent wa-brand wa-heading-3xl ');
+            avatar.setAttribute('slot', 'icon');
+            document.querySelector('#visualization-cluster-gpu-devices').append(avatar);
+          }
         });
       } else {
         throw new Error(`Failed to query GPU nodes total: ${response.status}`);
@@ -174,8 +305,8 @@
     }
 
     async function queryGpuNodesNotReady() {
-      var query = Object.assign({ query: 'kube_node_status_condition{cluster="{{ result.clusterName }}", status="unknown", condition="Ready"} * on (cluster, node) group_left(label_nvidia_com_gpu_present) kube_node_labels{label_nvidia_com_gpu_present="true"} == 1' });
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var query = Object.assign({ query: 'kube_node_status_condition{cluster="{{ result.clusterName }}", status="unknown", condition="Ready"} * on (cluster, node) group_left(label_nvidia_com_gpu_present) (sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{label_nvidia_com_gpu_present="true"})) == 1' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
           var panelId = 'visualization-gpu-nodes-not-ready';
@@ -217,6 +348,50 @@
       }
     }
 
+    async function queryGpuNodesWithoutTaint() {
+      var query = Object.assign({ query: '(sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{cluster="{{ result.clusterName }}", label_nvidia_com_gpu_present="true"})) > 0 unless on(cluster, node) kube_node_spec_taint{key="nvidia.com/gpu.product"}' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      if(response.ok) {
+        response.json().then(function(responseJson) {
+          var panelId = 'visualization-gpu-nodes-without-taint';
+          responseJson.data.result.forEach((result, i) => {
+            var elemId = 'visualization-gpu-nodes-without-taint-' + result.metric.cluster + '-' + result.metric.node;
+
+            var a = document.createElement('a');
+            a.setAttribute('href', '/en-us/edit/ai-node/' + result.metric.cluster + '-' + result.metric.node);
+            document.querySelector('#' + panelId).append(a);
+
+            var callout = document.createElement('wa-callout');
+            callout.setAttribute('id', elemId);
+            callout.setAttribute('appearance', 'accent outlined');
+            callout.setAttribute('variant', 'brand');
+            callout.setAttribute('class', 'pill');
+            a.append(callout);
+
+            var icon = document.createElement('wa-icon');
+            icon.setAttribute('slot', 'icon')
+            icon.setAttribute('name', 'triangle-exclamation')
+            icon.setAttribute('variant', 'solid')
+            callout.append(icon);
+
+            var stack = document.createElement('div');
+            stack.setAttribute('class', 'wa-stack wa-gap-s ')
+            callout.append(stack);
+
+            var elem0 = document.createElement('div');
+            elem0.innerText = result.metric.cluster;
+            stack.append(elem0);
+
+            var elem1 = document.createElement('div');
+            elem1.innerText = result.metric.node;
+            stack.append(elem1);
+          });
+        });
+      } else {
+        throw new Error(`Failed to query nodes not ready: ${response.status}`);
+      }
+    }
+
     async function queryGpuTemperature() {
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 24));
@@ -226,7 +401,7 @@
         , step: '100'
       };
       var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_MEMORY_TEMP{cluster="{{ result.clusterName }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
           var end = new Date();
@@ -237,7 +412,7 @@
           var results = responseJson.data.result;
           results.forEach((result, i) => {
             traces.push({
-              x: result.values.map(values => new Date(values[0]))
+              x: result.values.map(values => new Date(values[0] * 1000))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName
@@ -263,7 +438,7 @@
         , step: '100'
       };
       var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
           var end = new Date();
@@ -274,7 +449,7 @@
           var results = responseJson.data.result;
           results.forEach((result, i) => {
             traces.push({
-              x: result.values.map(values => new Date(values[0]))
+              x: result.values.map(values => new Date(values[0] * 1000))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName
@@ -300,7 +475,7 @@
         , step: '100'
       };
       var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}"}) by (cluster,exported_namespace)' }, timeQuery));
-      var response = await fetch( '/prom-keycloak-proxy/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
           var end = new Date();
@@ -311,7 +486,44 @@
           var results = responseJson.data.result;
           results.forEach((result, i) => {
             traces.push({
-              x: result.values.map(values => new Date(values[0]))
+              x: result.values.map(values => new Date(values[0] * 1000))
+              , y: result.values.map(values => parseFloat(values[1]))
+              , mode: 'lines+markers'
+              , name: result.metric.cluster + ' ' + result.metric.exported_namespace
+              , text: result.values.map(values => '<a href="/en-us/edit/ai-node/' + result.metric.cluster + '-' + result.metric.exported_namespace + '">' + result.metric.cluster + ' ' + result.metric.exported_namespace + '</a>')
+            });
+          });
+
+          var layout = {
+          };
+          Plotly.newPlot(panelId, traces, layout);
+        });
+      } else {
+        throw new Error(`Failed to query projects not ready: ${response.status}`);
+      }
+    }
+
+    async function queryGpuUtilizationPerProject() {
+      var end = new Date();
+      var start = new Date(new Date().setHours(end.getHours() - 24));
+      var timeQuery = {
+        start: start.toISOString()
+        , end: end.toISOString()
+        , step: '100'
+      };
+      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}"}) by (cluster,exported_namespace)' }, timeQuery));
+      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
+      if(response.ok) {
+        response.json().then(function(responseJson) {
+          var end = new Date();
+          var start = new Date(new Date().setHours(end.getHours() - 1));
+
+          var panelId = 'visualization-project-gpu-utilization';
+          var traces = [];
+          var results = responseJson.data.result;
+          results.forEach((result, i) => {
+            traces.push({
+              x: result.values.map(values => new Date(values[0] * 1000))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: result.metric.cluster + ' ' + result.metric.exported_namespace
