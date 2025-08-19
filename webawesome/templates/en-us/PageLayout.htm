@@ -153,7 +153,7 @@
 {% if userGroups is defined and ("/HUB" in userGroups or "/Admin" in userGroups or "/SuperAdmin" in userGroups) %}
             <wa-details summary="ACM Hubs" open="true" class="wa-stack ">
               <div class="wa-stack ">
-                <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub">
+                <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub?facet.field=hubId">
                   <wa-icon class="fa-regular fa-sitemap"></wa-icon>
                   ACM hubs
                 </wa-button>
