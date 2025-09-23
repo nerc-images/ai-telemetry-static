@@ -53,14 +53,6 @@ function searchHubFilters($formFilters) {
     if(filterPageId != null && filterPageId !== '')
       filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
 
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
-    if(filterLocalClusterName != null && filterLocalClusterName !== '')
-      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -116,6 +108,14 @@ function searchHubFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
+    if(filterLocalClusterName != null && filterLocalClusterName !== '')
+      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
   }
   return filters;
 }
@@ -287,30 +287,6 @@ async function patchHub($formFilters, $formValues, target, hubResource, success,
   if(removePageId != null && removePageId !== '')
     vals['removePageId'] = removePageId;
 
-  var valueHubResource = $formValues.querySelector('.valueHubResource')?.value;
-  var removeHubResource = $formValues.querySelector('.removeHubResource')?.value === 'true';
-  var setHubResource = removeHubResource ? null : $formValues.querySelector('.setHubResource')?.value;
-  var addHubResource = $formValues.querySelector('.addHubResource')?.value;
-  if(removeHubResource || setHubResource != null && setHubResource !== '')
-    vals['setHubResource'] = setHubResource;
-  if(addHubResource != null && addHubResource !== '')
-    vals['addHubResource'] = addHubResource;
-  var removeHubResource = $formValues.querySelector('.removeHubResource')?.value;
-  if(removeHubResource != null && removeHubResource !== '')
-    vals['removeHubResource'] = removeHubResource;
-
-  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
-  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value === 'true';
-  var setLocalClusterName = removeLocalClusterName ? null : $formValues.querySelector('.setLocalClusterName')?.value;
-  var addLocalClusterName = $formValues.querySelector('.addLocalClusterName')?.value;
-  if(removeLocalClusterName || setLocalClusterName != null && setLocalClusterName !== '')
-    vals['setLocalClusterName'] = setLocalClusterName;
-  if(addLocalClusterName != null && addLocalClusterName !== '')
-    vals['addLocalClusterName'] = addLocalClusterName;
-  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value;
-  if(removeLocalClusterName != null && removeLocalClusterName !== '')
-    vals['removeLocalClusterName'] = removeLocalClusterName;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -359,6 +335,30 @@ async function patchHub($formFilters, $formValues, target, hubResource, success,
   if(removeDisplayPage != null && removeDisplayPage !== '')
     vals['removeDisplayPage'] = removeDisplayPage;
 
+  var valueHubResource = $formValues.querySelector('.valueHubResource')?.value;
+  var removeHubResource = $formValues.querySelector('.removeHubResource')?.value === 'true';
+  var setHubResource = removeHubResource ? null : $formValues.querySelector('.setHubResource')?.value;
+  var addHubResource = $formValues.querySelector('.addHubResource')?.value;
+  if(removeHubResource || setHubResource != null && setHubResource !== '')
+    vals['setHubResource'] = setHubResource;
+  if(addHubResource != null && addHubResource !== '')
+    vals['addHubResource'] = addHubResource;
+  var removeHubResource = $formValues.querySelector('.removeHubResource')?.value;
+  if(removeHubResource != null && removeHubResource !== '')
+    vals['removeHubResource'] = removeHubResource;
+
+  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
+  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value === 'true';
+  var setLocalClusterName = removeLocalClusterName ? null : $formValues.querySelector('.setLocalClusterName')?.value;
+  var addLocalClusterName = $formValues.querySelector('.addLocalClusterName')?.value;
+  if(removeLocalClusterName || setLocalClusterName != null && setLocalClusterName !== '')
+    vals['setLocalClusterName'] = setLocalClusterName;
+  if(addLocalClusterName != null && addLocalClusterName !== '')
+    vals['addLocalClusterName'] = addLocalClusterName;
+  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value;
+  if(removeLocalClusterName != null && removeLocalClusterName !== '')
+    vals['removeLocalClusterName'] = removeLocalClusterName;
+
   patchHubVals(hubResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hubResource:' + hubResource}], vals, target, success, error);
 }
 
@@ -404,14 +404,6 @@ function patchHubFilters($formFilters) {
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
       filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
-    if(filterLocalClusterName != null && filterLocalClusterName !== '')
-      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -468,6 +460,14 @@ function patchHubFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
+    if(filterLocalClusterName != null && filterLocalClusterName !== '')
+      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
   }
   return filters;
 }
@@ -547,14 +547,6 @@ async function postHub($formValues, target, success, error) {
   if(valuePageId != null && valuePageId !== '')
     vals['pageId'] = valuePageId;
 
-  var valueHubResource = $formValues.querySelector('.valueHubResource')?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['hubResource'] = valueHubResource;
-
-  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
-  if(valueLocalClusterName != null && valueLocalClusterName !== '')
-    vals['localClusterName'] = valueLocalClusterName;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
     vals['sessionId'] = valueSessionId;
@@ -570,6 +562,14 @@ async function postHub($formValues, target, success, error) {
   var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
   if(valueDisplayPage != null && valueDisplayPage !== '')
     vals['displayPage'] = valueDisplayPage;
+
+  var valueHubResource = $formValues.querySelector('.valueHubResource')?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['hubResource'] = valueHubResource;
+
+  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
+  if(valueLocalClusterName != null && valueLocalClusterName !== '')
+    vals['localClusterName'] = valueLocalClusterName;
 
   fetch(
     '/en-us/api/hub'
@@ -786,8 +786,6 @@ async function websocketHubInner(apiRequest) {
         var inputHubId = null;
         var inputDescription = null;
         var inputPageId = null;
-        var inputHubResource = null;
-        var inputLocalClusterName = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -802,6 +800,8 @@ async function websocketHubInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputHubResource = null;
+        var inputLocalClusterName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -819,10 +819,6 @@ async function websocketHubInner(apiRequest) {
           inputDescription = $response.querySelector('.Page_description');
         if(vars.includes('pageId'))
           inputPageId = $response.querySelector('.Page_pageId');
-        if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
-        if(vars.includes('localClusterName'))
-          inputLocalClusterName = $response.querySelector('.Page_localClusterName');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -851,6 +847,10 @@ async function websocketHubInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('hubResource'))
+          inputHubResource = $response.querySelector('.Page_hubResource');
+        if(vars.includes('localClusterName'))
+          inputLocalClusterName = $response.querySelector('.Page_localClusterName');
 
         jsWebsocketHub(hubResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -935,26 +935,6 @@ async function websocketHubInner(apiRequest) {
               item.textContent = inputPageId.textContent;
           });
           addGlow(document.querySelector('.Page_pageId'));
-        }
-
-        if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHubResource.getAttribute('value');
-            else
-              item.textContent = inputHubResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_hubResource'));
-        }
-
-        if(inputLocalClusterName) {
-          document.querySelectorAll('.Page_localClusterName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocalClusterName.getAttribute('value');
-            else
-              item.textContent = inputLocalClusterName.textContent;
-          });
-          addGlow(document.querySelector('.Page_localClusterName'));
         }
 
         if(inputClassCanonicalName) {
@@ -1095,6 +1075,26 @@ async function websocketHubInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
+        }
+
+        if(inputHubResource) {
+          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubResource.getAttribute('value');
+            else
+              item.textContent = inputHubResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_hubResource'));
+        }
+
+        if(inputLocalClusterName) {
+          document.querySelectorAll('.Page_localClusterName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocalClusterName.getAttribute('value');
+            else
+              item.textContent = inputLocalClusterName.textContent;
+          });
+          addGlow(document.querySelector('.Page_localClusterName'));
         }
 
           pageGraphHub();

@@ -44,7 +44,7 @@
 
       function htmTooltipBareMetalNode(feature, layer) {
         return `{%- block htmTooltipBareMetalNodePage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNodePage %}`;
       }
     </script>
@@ -252,11 +252,11 @@
                 <wa-button variant="brand" slot="trigger" caret>name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodeName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-nodeName-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodeName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-nodeName-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by name descending
                   </wa-menu-item>
                 </wa-menu>
@@ -265,11 +265,11 @@
                 <wa-button variant="brand" slot="trigger" caret>resource class</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodeResourceClass'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-nodeResourceClass-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by resource class ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodeResourceClass'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-nodeResourceClass-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by resource class descending
                   </wa-menu-item>
                 </wa-menu>
@@ -278,11 +278,11 @@
                 <wa-button variant="brand" slot="trigger" caret>power state</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodePowerState'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-nodePowerState-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by power state ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodePowerState'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-nodePowerState-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by power state descending
                   </wa-menu-item>
                 </wa-menu>
@@ -291,11 +291,11 @@
                 <wa-button variant="brand" slot="trigger" caret>provision state</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodeProvisionState'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-nodeProvisionState-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by provision state ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalNode_nodeProvisionState'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalNode').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-nodeProvisionState-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by provision state descending
                   </wa-menu-item>
                 </wa-menu>

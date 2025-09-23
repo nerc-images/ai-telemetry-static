@@ -47,7 +47,7 @@
 
       function htmTooltipGpuDevice(feature, layer) {
         return `{%- block htmTooltipGpuDevicePage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipGpuDevicePage %}`;
       }
 
@@ -82,7 +82,7 @@
         htm += `{%- block htmLegendGpuDevicePage %}
     <div title="${quoteattr(title)}">
     <div style="width: 20px; ">
-      <wa-icon class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></wa-icon>
+      <i class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></i>
     </div>
     <div class="text-overflow-ellipsis ">
       <span class="" data-solrId="${result.solrId}" onclick="window.mapLayers[this.getAttribute('data-solrId')].openPopup(); return false;" href="">${title}</span>
@@ -385,11 +385,11 @@
                 <wa-button variant="brand" slot="trigger" caret>ACM Hub</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by ACM Hub ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by ACM Hub descending
                   </wa-menu-item>
                 </wa-menu>
@@ -398,11 +398,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterName-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by cluster name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterName-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by cluster name descending
                   </wa-menu-item>
                 </wa-menu>
@@ -411,11 +411,11 @@
                 <wa-button variant="brand" slot="trigger" caret>node name</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_nodeName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-nodeName-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by node name ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_nodeName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-nodeName-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by node name descending
                   </wa-menu-item>
                 </wa-menu>
@@ -424,11 +424,11 @@
                 <wa-button variant="brand" slot="trigger" caret>GPU device number</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_gpuDeviceNumber'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-gpuDeviceNumber-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by GPU device number ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_gpuDeviceNumber'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-gpuDeviceNumber-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by GPU device number descending
                   </wa-menu-item>
                 </wa-menu>

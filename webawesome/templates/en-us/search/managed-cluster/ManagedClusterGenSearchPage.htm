@@ -44,7 +44,7 @@
 
       function htmTooltipManagedCluster(feature, layer) {
         return `{%- block htmTooltipManagedClusterPage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipManagedClusterPage %}`;
       }
     </script>
@@ -252,11 +252,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster ID</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-id-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by cluster ID ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-id-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by cluster ID descending
                   </wa-menu-item>
                 </wa-menu>
@@ -265,11 +265,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster state</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-state-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by cluster state ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-state-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by cluster state descending
                   </wa-menu-item>
                 </wa-menu>
@@ -278,11 +278,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster API URL</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_apiUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-apiUrl-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by cluster API URL ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_apiUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-apiUrl-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by cluster API URL descending
                   </wa-menu-item>
                 </wa-menu>
@@ -291,11 +291,11 @@
                 <wa-button variant="brand" slot="trigger" caret>cluster console URL</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_consoleUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-consoleUrl-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by cluster console URL ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_consoleUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-consoleUrl-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by cluster console URL descending
                   </wa-menu-item>
                 </wa-menu>

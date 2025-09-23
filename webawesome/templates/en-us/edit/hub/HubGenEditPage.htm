@@ -44,7 +44,7 @@
 
       function htmTooltipHub(feature, layer) {
         return `{%- block htmTooltipHubPage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipHubPage %}`;
       }
     </script>
@@ -195,7 +195,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip>
             <wa-button id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
+              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
               all hubs
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-sitemap"></i> {{ result.objectTitle | e }}</h1>

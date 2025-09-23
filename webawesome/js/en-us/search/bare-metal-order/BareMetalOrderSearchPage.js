@@ -337,17 +337,6 @@ Promise.all([
     facetStatsChange('BareMetalOrder', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortBareMetalOrder_networkName')?.addEventListener('change', (event) => {
-    sort('BareMetalOrder', 'networkName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsBareMetalOrder_networkName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('BareMetalOrder', 'networkName', true);
-  });
-  document.querySelector('#pageStatsBareMetalOrder_networkName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('BareMetalOrder', 'networkName', false);
-  });
-
   document.querySelector('#htmButton_patchBareMetalOrder')?.addEventListener('click', (event) => {
     document.querySelector('#patchBareMetalOrderDialog').open = true;
   });

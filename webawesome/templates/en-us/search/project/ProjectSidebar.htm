@@ -2,8 +2,8 @@
 {%- block htmBodySidebarProjectPage %}
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSearch">
             <div slot="label">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-magnifying-glass "></wa-icon>
-              Search
+              <i class="{{ FONTAWESOME_STYLE }} fa-magnifying-glass "></i>
+              search
             </div>
             <div>
               {%- block htmBodySearchProjectPage %}
@@ -50,7 +50,7 @@
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFilters">
             <div slot="label">
               <span>
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-filters "></wa-icon> Filters</span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-filters "></i> filters</span>
             </div>
             <div>
               {%- block htmBodyFiltersProjectPage %}
@@ -61,7 +61,7 @@
                     <label for="fqProject_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
                     <wa-tooltip for="buttonFacetProject_{{ key }}">see values</wa-tooltip>
                     <div class="flex round-column pill-smart-border-radius ">
-                      <wa-button variant="brand" id="buttonFacetProject_{{ key }}" data-var="{{ value.var }}" data-clear="{% if value.facetField is defined %}true{% else %}false{% endif %}"><wa-icon class="{{ FONTAWESOME_STYLE }} fa-list "></wa-icon></wa-button>
+                      <wa-button variant="brand" id="buttonFacetProject_{{ key }}" data-var="{{ value.var }}" data-clear="{% if value.facetField is defined %}true{% else %}false{% endif %}"><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-list "></i></wa-button>
                       <wa-input id="fqProject_{{ key }}" placeholder="{{ value.displayName }}" class="" onchange="fqChange('Project', this); " data-var="{{ value.var }}" autocomplete="off=" value="{{ value.val }}"></wa-input>
                     </div>
                     <div class="pageSearchVal " id="pageSearchVal-fqProject_{{ key }}">{% if value.val is defined %}fq={{ value.var }}:{{ value.val | urlencode() }}{% endif %}</div>
@@ -85,8 +85,8 @@
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSort">
             <div slot="label">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z "></wa-icon>
-              Sort
+              <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z "></i>
+              sort
             </div>
             <div>
               {%- block htmBodySortProjectPage %}
@@ -126,7 +126,7 @@
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleRange">
             <div slot="label">
               <span>
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-calendar-range "></wa-icon> Range</span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-calendar-range "></i> range</span>
             </div>
             <div>
               {%- block htmBodyRangeProjectPage %}
@@ -188,7 +188,7 @@
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarTogglePivot">
             <div slot="label">
               <span>
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-table-pivot "></wa-icon> Pivot</span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-table-pivot "></i> pivot</span>
             </div>
             <div>
               {%- block htmBodyPivotProjectPage %}
@@ -213,7 +213,7 @@
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFieldList">
             <div slot="label">
               <span>
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-list-ul "></wa-icon> Field List</span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-list-ul "></i> field list</span>
             </div>
             <div>
 {%- block htmBodyFieldListProjectPage %}
@@ -239,8 +239,8 @@
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleStats">
             <div slot="label">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-chart-candlestick "></wa-icon>
-              Stats
+              <i class="{{ FONTAWESOME_STYLE }} fa-chart-candlestick "></i>
+              stats
             </div>
             <div>
 {%- block htmBodyStatsProjectPage %}

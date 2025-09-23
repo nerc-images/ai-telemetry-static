@@ -45,7 +45,7 @@
 
       function htmTooltipClusterOrder(feature, layer) {
         return `{%- block htmTooltipClusterOrderPage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterOrderPage %}`;
       }
     </script>
@@ -269,11 +269,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order ID</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-id-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by order ID ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-id-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by order ID descending
                   </wa-menu-item>
                 </wa-menu>
@@ -282,11 +282,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order template id</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_templateId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-templateId-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by order template id ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_templateId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-templateId-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by order template id descending
                   </wa-menu-item>
                 </wa-menu>
@@ -295,11 +295,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order state</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-state-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by order state ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-state-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by order state descending
                   </wa-menu-item>
                 </wa-menu>
@@ -308,11 +308,11 @@
                 <wa-button variant="brand" slot="trigger" caret>order cluster id</wa-button>
                 <wa-menu>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_clusterId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterId-asc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by order cluster id ascending
                   </wa-menu-item>
                   <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortClusterOrder_clusterId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ClusterOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterId-desc">
-                    <wa-icon class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></wa-icon>
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by order cluster id descending
                   </wa-menu-item>
                 </wa-menu>
