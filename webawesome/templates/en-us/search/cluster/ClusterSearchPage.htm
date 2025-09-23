@@ -182,7 +182,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'cluster:cpu_usage_cores:sum / on(cluster) cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"}' 
+              query: 'cluster:cpu_usage_cores:sum{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName}}{% endfor %}"}{% endif %} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"{% if filteredScope %},cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName}}{% endfor %}"{% endif %}})' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
