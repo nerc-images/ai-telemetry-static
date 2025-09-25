@@ -731,7 +731,7 @@ The NGSILD data with @context from the context broker"
                             {{ inputNgsildDataClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchCluster() %}<wa-button variant="brand" id="htmButton_patchCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></wa-icon>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchCluster() %}<wa-button variant="brand" id="htmButton_patchCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchCluster" duration="5000" closable class="wa-header-l ">
@@ -921,7 +921,7 @@ The NGSILD data with @context from the context broker"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postCluster() %}<wa-button variant="brand" id="htmButton_postCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></wa-icon>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postCluster() %}<wa-button variant="brand" id="htmButton_postCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postCluster" duration="5000" closable class="wa-header-l ">
@@ -1112,7 +1112,7 @@ The NGSILD data with @context from the context broker"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteCluster() %}<wa-button variant="brand" id="htmButton_deleteCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteCluster() %}<wa-button variant="brand" id="htmButton_deleteCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteCluster" duration="5000" closable class="wa-header-l ">
@@ -1131,7 +1131,7 @@ The NGSILD data with @context from the context broker"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_putimportCluster() %}<wa-button variant="brand" id="htmButton_putimportCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></wa-icon>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportCluster() %}<wa-button variant="brand" id="htmButton_putimportCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportCluster" duration="5000" closable class="wa-header-l ">
@@ -1396,7 +1396,7 @@ The NGSILD data with @context from the context broker"
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterCluster() %}<wa-button variant="brand" id="htmButton_deletefilterCluster" data-clusterResource={{ result.clusterResource | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterCluster() %}<wa-button variant="brand" id="htmButton_deletefilterCluster" data-clusterResource={{ result.clusterResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterCluster() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterCluster" duration="5000" closable class="wa-header-l ">
@@ -1422,7 +1422,7 @@ The NGSILD data with @context from the context broker"
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisClusterGenPage"
                      onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'clusterResource:{{ result.clusterResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisClusterGenPage')); }, function() { addError(document.querySelector('#refreshThisClusterGenPage')); }); return false; ">
-                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></wa-icon>
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
                   refresh
                 </wa-button>
     {% endif %}
@@ -1430,8 +1430,8 @@ The NGSILD data with @context from the context broker"
                 <wa-button variant="brand" id="refreshAllClusterGenPage{{ result.clusterResource | e }}"
                      onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllClusterGenPage{{ result.clusterResource | e }}')); }, function() { addError(document.querySelector('#refreshAllClusterGenPage{{ result.clusterResource | e }}')); }); "
                     >
-                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></wa-icon>
-                  Refresh all 
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
                 </wa-button>
     {% endif %}
   {% endif %}

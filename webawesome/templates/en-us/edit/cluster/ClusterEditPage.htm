@@ -181,7 +181,7 @@
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterName }}"} / on(cluster) cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"}' 
+            query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterName }}"} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"})' 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));

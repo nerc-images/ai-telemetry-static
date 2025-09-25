@@ -228,7 +228,7 @@ The ID of this order"
 {%- macro htmTemplateIdClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                 {{ inputTemplateIdClusterOrderPage(authForWrite=authForWrite, authForRead=authForRead) }}
                 <div class="label-on-left-ul-label ">
-                  <wa-icon class="{{ FONTAWESOME_STYLE }} fa-search "></wa-icon>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate an OpenShift cluster template to this OpenShift cluster order
                 </div>
                 <ul class="label-on-left-ul " id="listClusterOrderTemplateId_{{classApiMethodMethod}}">
@@ -319,7 +319,7 @@ The cluster id associated with the order"
                             {{ inputClusterIdClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchClusterOrder() %}<wa-button variant="brand" id="htmButton_patchClusterOrder" data-id={{ result.id | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></wa-icon>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchClusterOrder() %}<wa-button variant="brand" id="htmButton_patchClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchClusterOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchClusterOrder" duration="5000" closable class="wa-header-l ">
@@ -351,7 +351,7 @@ The cluster id associated with the order"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postClusterOrder() %}<wa-button variant="brand" id="htmButton_postClusterOrder" data-id={{ result.id | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></wa-icon>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postClusterOrder() %}<wa-button variant="brand" id="htmButton_postClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postClusterOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postClusterOrder" duration="5000" closable class="wa-header-l ">
@@ -384,7 +384,7 @@ The cluster id associated with the order"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteClusterOrder() %}<wa-button variant="brand" id="htmButton_deleteClusterOrder" data-id={{ result.id | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteClusterOrder() %}<wa-button variant="brand" id="htmButton_deleteClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteClusterOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteClusterOrder" duration="5000" closable class="wa-header-l ">
@@ -403,7 +403,7 @@ The cluster id associated with the order"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_putimportClusterOrder() %}<wa-button variant="brand" id="htmButton_putimportClusterOrder" data-id={{ result.id | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></wa-icon>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportClusterOrder() %}<wa-button variant="brand" id="htmButton_putimportClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportClusterOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportClusterOrder" duration="5000" closable class="wa-header-l ">
@@ -544,7 +544,7 @@ The cluster id associated with the order"
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterClusterOrder() %}<wa-button variant="brand" id="htmButton_deletefilterClusterOrder" data-id={{ result.id | tojson }}><wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></wa-icon>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterClusterOrder() %}<wa-button variant="brand" id="htmButton_deletefilterClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterClusterOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterClusterOrder" duration="5000" closable class="wa-header-l ">
@@ -570,7 +570,7 @@ The cluster id associated with the order"
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisClusterOrderGenPage"
                      onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{ result.id }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisClusterOrderGenPage')); }, function() { addError(document.querySelector('#refreshThisClusterOrderGenPage')); }); return false; ">
-                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></wa-icon>
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
                   refresh
                 </wa-button>
     {% endif %}
@@ -578,8 +578,8 @@ The cluster id associated with the order"
                 <wa-button variant="brand" id="refreshAllClusterOrderGenPage{{ result.id | e }}"
                      onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllClusterOrderGenPage{{ result.id | e }}')); }, function() { addError(document.querySelector('#refreshAllClusterOrderGenPage{{ result.id | e }}')); }); "
                     >
-                  <wa-icon slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></wa-icon>
-                  Refresh all 
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
                 </wa-button>
     {% endif %}
   {% endif %}

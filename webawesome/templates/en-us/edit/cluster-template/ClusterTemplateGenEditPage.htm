@@ -44,7 +44,7 @@
 
       function htmTooltipClusterTemplate(feature, layer) {
         return `{%- block htmTooltipClusterTemplatePage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
     </script>
@@ -195,7 +195,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip>
             <wa-button id="return-to-ClusterTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
+              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
               all OpenShift cluster templates
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>

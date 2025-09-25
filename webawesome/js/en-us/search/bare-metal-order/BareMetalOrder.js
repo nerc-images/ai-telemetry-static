@@ -146,10 +146,6 @@ function searchBareMetalOrderFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterNetworkName = $formFilters.querySelector('.valueNetworkName')?.value;
-    if(filterNetworkName != null && filterNetworkName !== '')
-      filters.push({ name: 'fq', value: 'networkName:' + filterNetworkName });
   }
   return filters;
 }
@@ -513,18 +509,6 @@ async function patchBareMetalOrder($formFilters, $formValues, target, pk, succes
   if(removeDisplayPage != null && removeDisplayPage !== '')
     vals['removeDisplayPage'] = removeDisplayPage;
 
-  var valueNetworkName = $formValues.querySelector('.valueNetworkName')?.value;
-  var removeNetworkName = $formValues.querySelector('.removeNetworkName')?.value === 'true';
-  var setNetworkName = removeNetworkName ? null : $formValues.querySelector('.setNetworkName')?.value;
-  var addNetworkName = $formValues.querySelector('.addNetworkName')?.value;
-  if(removeNetworkName || setNetworkName != null && setNetworkName !== '')
-    vals['setNetworkName'] = setNetworkName;
-  if(addNetworkName != null && addNetworkName !== '')
-    vals['addNetworkName'] = addNetworkName;
-  var removeNetworkName = $formValues.querySelector('.removeNetworkName')?.value;
-  if(removeNetworkName != null && removeNetworkName !== '')
-    vals['removeNetworkName'] = removeNetworkName;
-
   patchBareMetalOrderVals(pk == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'pk:' + pk}], vals, target, success, error);
 }
 
@@ -664,10 +648,6 @@ function patchBareMetalOrderFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterNetworkName = $formFilters.querySelector('.valueNetworkName')?.value;
-    if(filterNetworkName != null && filterNetworkName !== '')
-      filters.push({ name: 'fq', value: 'networkName:' + filterNetworkName });
   }
   return filters;
 }
@@ -794,10 +774,6 @@ async function postBareMetalOrder($formValues, target, success, error) {
   var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
   if(valueDisplayPage != null && valueDisplayPage !== '')
     vals['displayPage'] = valueDisplayPage;
-
-  var valueNetworkName = $formValues.querySelector('.valueNetworkName')?.value;
-  if(valueNetworkName != null && valueNetworkName !== '')
-    vals['networkName'] = valueNetworkName;
 
   fetch(
     '/en-us/api/bare-metal-order'
@@ -1016,7 +992,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputNetworkName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -1078,8 +1053,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('networkName'))
-          inputNetworkName = $response.querySelector('.Page_networkName');
 
         jsWebsocketBareMetalOrder(pk, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -1384,16 +1357,6 @@ async function websocketBareMetalOrderInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
-        }
-
-        if(inputNetworkName) {
-          document.querySelectorAll('.Page_networkName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNetworkName.getAttribute('value');
-            else
-              item.textContent = inputNetworkName.textContent;
-          });
-          addGlow(document.querySelector('.Page_networkName'));
         }
 
           pageGraphBareMetalOrder();

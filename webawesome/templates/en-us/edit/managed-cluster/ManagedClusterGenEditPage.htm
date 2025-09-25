@@ -44,7 +44,7 @@
 
       function htmTooltipManagedCluster(feature, layer) {
         return `{%- block htmTooltipManagedClusterPage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipManagedClusterPage %}`;
       }
     </script>
@@ -195,7 +195,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-ManagedCluster">back to all tenant clusters</wa-tooltip>
             <wa-button id="return-to-ManagedCluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
+              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
               all tenant clusters
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>

@@ -46,7 +46,7 @@
 
       function htmTooltipAiNode(feature, layer) {
         return `{%- block htmTooltipAiNodePage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipAiNodePage %}`;
       }
 
@@ -81,7 +81,7 @@
         htm += `{%- block htmLegendAiNodePage %}
     <div title="${quoteattr(title)}">
     <div style="width: 20px; ">
-      <wa-icon class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></wa-icon>
+      <i class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></i>
     </div>
     <div class="text-overflow-ellipsis ">
       <span class="" data-solrId="${result.solrId}" onclick="window.mapLayers[this.getAttribute('data-solrId')].openPopup(); return false;" href="">${title}</span>
@@ -331,7 +331,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip>
             <wa-button id="return-to-AiNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
+              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
               all AI nodes
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-computer"></i> {{ result.objectTitle | e }}</h1>

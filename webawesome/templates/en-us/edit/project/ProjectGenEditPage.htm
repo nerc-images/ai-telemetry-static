@@ -46,7 +46,7 @@
 
       function htmTooltipProject(feature, layer) {
         return `{%- block htmTooltipProjectPage %}
-<h3><wa-icon class="{{ classIconCssClasses }}  "></wa-icon><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipProjectPage %}`;
       }
     </script>
@@ -249,7 +249,7 @@
           <div class="wa-flank ">
             <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip>
             <wa-button id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <wa-icon class="{{ FONTAWESOME_STYLE }} fa-angle-left"></wa-icon>
+              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
               all projects
             </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-school"></i> {{ result.objectTitle | e }}</h1>
