@@ -7,6 +7,20 @@
     Observability dashboard for cluster {{ result.clusterName }}
   </div>
   <div class="wa-stack ">
+    <div class="wa-stack ">
+      <div>
+        <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/project?fq={{ 'hubId:' + result.hubId | urlencode() }}&fq={{ 'clusterName:' + result.clusterName | urlencode() }}&facet.field=hubId&facet.field=clusterName">
+          <i slot="start" class="fa-regular fa-school"></i>
+          View all projects in the {{ result.clusterName | e }} cluster in the {{ result.hubId }} hub
+        </wa-button>
+      </div>
+      <div>
+        <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/ai-node?fq={{ 'hubId:' + result.hubId | urlencode() }}&fq={{ 'clusterName:' + result.clusterName | urlencode() }}&facet.field=hubId&facet.field=clusterName">
+          <i slot="start" class="fa-regular fa-computer"></i>
+          View all nodes in the {{ result.clusterName | e }} cluster in the {{ result.hubId }} hub
+        </wa-button>
+      </div>
+    </div>
     <div class="wa-grid ">
       <wa-card with-header>
         <header slot="header" class="wa-heading-m ">Percent of total memory usage for {{ result.clusterName }} cluster</header>
