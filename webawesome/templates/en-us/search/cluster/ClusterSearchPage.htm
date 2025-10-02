@@ -3,7 +3,7 @@
 {% if resultCount > 0 %}
 <wa-details open class="HtmRow" id="observability-dashboard">
   <div slot="summary">
-    Observability dashboard for all OpenShift clusters
+    Observability dashboard for OpenShift clusters
   </div>
   <div class="wa-stack ">
     <div class="wa-grid ">
@@ -129,7 +129,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'cluster:memory_usage_bytes:sum / on(cluster) cluster:capacity_memory_bytes:sum{label_node_role_kubernetes_io!="master"}' 
+              query: 'cluster:memory_usage_bytes:sum{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %} / on(cluster) cluster:capacity_memory_bytes:sum{ {% if filteredScope %}cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}", {% endif %}label_node_role_kubernetes_io!="master" }' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -182,7 +182,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'cluster:cpu_usage_cores:sum{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName}}{% endfor %}"}{% endif %} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"{% if filteredScope %},cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName}}{% endfor %}"{% endif %}})' 
+              query: 'cluster:cpu_usage_cores:sum{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"{% if filteredScope %},cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName}}{% endfor %}"{% endif %}})' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -235,7 +235,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'sum(DCGM_FI_DEV_GPU_UTIL) by (cluster)' 
+            query: 'sum(DCGM_FI_DEV_GPU_UTIL{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %} / 100) by (cluster)' 
           }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -288,7 +288,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams(Object.assign({ 
-              query: 'sum(gpu_operator_gpu_nodes_total)' 
+              query: 'sum(gpu_operator_gpu_nodes_total{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %})' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -313,7 +313,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams(Object.assign({ 
-              query: 'sum(gpu_operator_node_device_plugin_devices_total)' 
+              query: 'sum(gpu_operator_node_device_plugin_devices_total{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %})' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -338,7 +338,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams(Object.assign({ 
-              query: 'sum(gpu_operator_node_device_plugin_devices_total) by (cluster)' 
+              query: 'sum(gpu_operator_node_device_plugin_devices_total{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %}) by (cluster)' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -388,7 +388,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams(Object.assign({ 
-              query: 'sum(gpu_operator_node_device_plugin_devices_total) by (cluster, node)' 
+              query: 'sum(gpu_operator_node_device_plugin_devices_total{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %}) by (cluster, node)' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -443,7 +443,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams(Object.assign({ 
-              query: 'kube_node_status_condition{status="unknown", condition="Ready"} * on (cluster, node) group_left(label_nvidia_com_gpu_present) (sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{label_nvidia_com_gpu_present="true"})) > 0' 
+              query: 'kube_node_status_condition{ {% if filteredScope %}cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}", {% endif %}status="unknown", condition="Ready"} * on (cluster, node) group_left(label_nvidia_com_gpu_present) (sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{ {% if filteredScope %}cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}", {% endif %}label_nvidia_com_gpu_present="true" })) > 0' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -498,7 +498,7 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams(Object.assign({ 
-              query: '(sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{label_nvidia_com_gpu_present="true"})) > 0 unless on(cluster, node) kube_node_spec_taint{key="nvidia.com/gpu.product"}' 
+              query: '(sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{ {% if filteredScope %}cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}", {% endif %}label_nvidia_com_gpu_present="true" })) > 0 unless on(cluster, node) kube_node_spec_taint{ {% if filteredScope %}cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}", {% endif %}key="nvidia.com/gpu.product" }' 
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
