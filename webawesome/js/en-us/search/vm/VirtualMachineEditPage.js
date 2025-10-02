@@ -16,7 +16,7 @@ Promise.all([
               var t = moment(t3);
               if(t) {
                 var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']';
-                patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+                patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                     , 'setCreated', s
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -40,7 +40,7 @@ Promise.all([
             if(valid) {
               var confirmResponse = confirm('Are you sure you want to archive that?'); 
               if(confirmResponse) { 
-                patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+                patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                     , 'setArchived', !(event.currentTarget.getAttribute('data-val') === 'true')
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -62,7 +62,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_hubId');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setHubId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -83,7 +83,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_clusterName');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setClusterName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -99,24 +99,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH location
-          document.querySelector('#Page_location')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_location');
+          // PATCH vmProject
+          document.querySelector('#Page_vmProject')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_vmProject');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setLocation', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setVmProject', event.currentTarget.value
                   , event.currentTarget
-                  , function(response, target) { addGlow(target); }
+                , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_location')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_vmProject')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_location')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_location');
+          document.querySelector('#Page_vmProject')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_vmProject');
             const valid = form.reportValidity();
           });
 
@@ -125,7 +125,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_description');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -141,108 +141,45 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH aiNodesTotal
-          document.querySelector('#Page_aiNodesTotal')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_aiNodesTotal');
+          // PATCH vmName
+          document.querySelector('#Page_vmName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_vmName');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setAiNodesTotal', event.currentTarget.value
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setVmName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_aiNodesTotal')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_vmName')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_aiNodesTotal')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_aiNodesTotal');
+          document.querySelector('#Page_vmName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_vmName');
             const valid = form.reportValidity();
           });
 
-          // PATCH gpuDevicesTotal
-          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_gpuDevicesTotal');
+          // PATCH os
+          document.querySelector('#Page_os')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_os');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setGpuDevicesTotal', event.currentTarget.value
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setOs', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_os')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_gpuDevicesTotal');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH vmsTotal
-          document.querySelector('#Page_vmsTotal')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_vmsTotal');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setVmsTotal', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_vmsTotal')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_vmsTotal')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_vmsTotal');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH cpuCoresTotal
-          document.querySelector('#Page_cpuCoresTotal')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_cpuCoresTotal');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setCpuCoresTotal', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_cpuCoresTotal')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_cpuCoresTotal')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_cpuCoresTotal');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH memoryBytesTotal
-          document.querySelector('#Page_memoryBytesTotal')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_memoryBytesTotal');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setMemoryBytesTotal', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_memoryBytesTotal')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_memoryBytesTotal')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_memoryBytesTotal');
+          document.querySelector('#Page_os')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_os');
             const valid = form.reportValidity();
           });
 
@@ -251,7 +188,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_id');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -267,12 +204,33 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH gpuDevicesTotal
+          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_gpuDevicesTotal');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setGpuDevicesTotal', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_gpuDevicesTotal');
+            const valid = form.reportValidity();
+          });
+
           // PATCH ngsildTenant
           document.querySelector('#Page_ngsildTenant')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_ngsildTenant');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setNgsildTenant', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -293,7 +251,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_ngsildPath');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setNgsildPath', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -314,7 +272,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_ngsildContext');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setNgsildContext', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -335,7 +293,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_ngsildData');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setNgsildData', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
@@ -351,12 +309,33 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH location
+          document.querySelector('#Page_location')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_location');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setLocation', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
+                  , event.currentTarget
+                  , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_location')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_location')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_location');
+            const valid = form.reportValidity();
+          });
+
           // PATCH sessionId
           document.querySelector('#Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setSessionId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -377,7 +356,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setUserKey', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -398,7 +377,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setObjectTitle', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -419,7 +398,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setDisplayPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -440,7 +419,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setEditPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -461,7 +440,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setUserPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -482,7 +461,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
                   , 'setDownload', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -498,24 +477,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH clusterResource
-          document.querySelector('#Page_clusterResource')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_clusterResource');
+          // PATCH vmResource
+          document.querySelector('#Page_vmResource')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_vmResource');
             const valid = form.checkValidity();
             if(valid) {
-              patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + event.currentTarget.getAttribute('data-clusterResource') }]
-                  , 'setClusterResource', event.currentTarget.value
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setVmResource', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_clusterResource')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_vmResource')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_clusterResource')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_clusterResource');
+          document.querySelector('#Page_vmResource')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_vmResource');
             const valid = form.reportValidity();
           });
 });

@@ -1,17 +1,17 @@
 
 // Search //
 
-async function searchCluster($formFilters, success, error) {
-  var filters = searchClusterFilters($formFilters);
+async function searchVirtualMachine($formFilters, success, error) {
+  var filters = searchVirtualMachineFilters($formFilters);
   if(success == null)
     success = function( data, textStatus, jQxhr ) {};
   if(error == null)
     error = function( jqXhr, target2 ) {};
 
-  searchClusterVals(filters, target, success, error);
+  searchVirtualMachineVals(filters, target, success, error);
 }
 
-function searchClusterFilters($formFilters) {
+function searchVirtualMachineFilters($formFilters) {
   var filters = [];
   if($formFilters) {
 
@@ -45,45 +45,29 @@ function searchClusterFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
-    var filterUniqueName = $formFilters.querySelector('.valueUniqueName')?.value;
-    if(filterUniqueName != null && filterUniqueName !== '')
-      filters.push({ name: 'fq', value: 'uniqueName:' + filterUniqueName });
-
-    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
-    if(filterLocation != null && filterLocation !== '')
-      filters.push({ name: 'fq', value: 'location:' + filterLocation });
+    var filterVmProject = $formFilters.querySelector('.valueVmProject')?.value;
+    if(filterVmProject != null && filterVmProject !== '')
+      filters.push({ name: 'fq', value: 'vmProject:' + filterVmProject });
 
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
-    var filterAiNodesTotal = $formFilters.querySelector('.valueAiNodesTotal')?.value;
-    if(filterAiNodesTotal != null && filterAiNodesTotal !== '')
-      filters.push({ name: 'fq', value: 'aiNodesTotal:' + filterAiNodesTotal });
+    var filterVmName = $formFilters.querySelector('.valueVmName')?.value;
+    if(filterVmName != null && filterVmName !== '')
+      filters.push({ name: 'fq', value: 'vmName:' + filterVmName });
 
-    var filterGpuDevicesTotal = $formFilters.querySelector('.valueGpuDevicesTotal')?.value;
-    if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
-      filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
-
-    var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
-    if(filterVmsTotal != null && filterVmsTotal !== '')
-      filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
-
-    var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
-    if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
-      filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
-
-    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
-    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
-      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
-
-    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
-    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
-      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+    var filterOs = $formFilters.querySelector('.valueOs')?.value;
+    if(filterOs != null && filterOs !== '')
+      filters.push({ name: 'fq', value: 'os:' + filterOs });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
       filters.push({ name: 'fq', value: 'id:' + filterId });
+
+    var filterGpuDevicesTotal = $formFilters.querySelector('.valueGpuDevicesTotal')?.value;
+    if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
+      filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
 
     var filterNgsildTenant = $formFilters.querySelector('.valueNgsildTenant')?.value;
     if(filterNgsildTenant != null && filterNgsildTenant !== '')
@@ -100,6 +84,10 @@ function searchClusterFilters($formFilters) {
     var filterNgsildData = $formFilters.querySelector('.valueNgsildData')?.value;
     if(filterNgsildData != null && filterNgsildData !== '')
       filters.push({ name: 'fq', value: 'ngsildData:' + filterNgsildData });
+
+    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
+    if(filterLocation != null && filterLocation !== '')
+      filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -165,6 +153,14 @@ function searchClusterFilters($formFilters) {
     if(filterClusterResource != null && filterClusterResource !== '')
       filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
 
+    var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
+    if(filterVmResource != null && filterVmResource !== '')
+      filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
+
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
       filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
@@ -176,15 +172,19 @@ function searchClusterFilters($formFilters) {
     var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
     if(filterLocationLinks != null && filterLocationLinks !== '')
       filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
+
+    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
+    if(filterEntityShortId != null && filterEntityShortId !== '')
+      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
   }
   return filters;
 }
 
-function searchClusterVals(filters, target, success, error) {
+function searchVirtualMachineVals(filters, target, success, error) {
 
 
   fetch(
-    '/en-us/api/cluster?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/vm?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -199,7 +199,7 @@ function searchClusterVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestClusterHubResource(filters, $list, clusterResource = null, hubResource = null, relate=true, target) {
+function suggestVirtualMachineHubResource(filters, $list, vmResource = null, hubResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -216,19 +216,19 @@ o['objectTitle'];
         $a.append($i);
         $a.append($span);
         var val = o['hubResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(clusterResource.toString()) : val == hubResource);
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(vmResource.toString()) : val == hubResource);
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hubResource_' + clusterResource + '_hubResource_' + o['hubResource']);
+        $input.setAttribute('id', 'GET_hubResource_' + vmResource + '_hubResource_' + o['hubResource']);
         $input.setAttribute('name', 'hubResource');
         $input.setAttribute('value', o['hubResource']);
         $input.setAttribute('class', 'valueHubResource ');
-        if(clusterResource != null) {
+        if(vmResource != null) {
           $input.addEventListener('change', function(event) {
-            patchClusterVals([{ name: 'fq', value: 'clusterResource:' + clusterResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+            patchVirtualMachineVals([{ name: 'fq', value: 'vmResource:' + vmResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterHubResource(filters, $list, clusterResource, hubResource, relate, target);
+                  suggestVirtualMachineHubResource(filters, $list, vmResource, hubResource, relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -248,12 +248,61 @@ o['objectTitle'];
   searchHubVals(filters, target, success, error);
 }
 
-function suggestClusterObjectSuggest($formFilters, $list, target) {
+function suggestVirtualMachineClusterResource(filters, $list, vmResource = null, clusterResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-regular fa-server"></i>');
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = 
+o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['clusterResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(vmResource.toString()) : val == clusterResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_clusterResource_' + vmResource + '_clusterResource_' + o['clusterResource']);
+        $input.setAttribute('name', 'clusterResource');
+        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('class', 'valueClusterResource ');
+        if(vmResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchVirtualMachineVals([{ name: 'fq', value: 'vmResource:' + vmResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestVirtualMachineClusterResource(filters, $list, vmResource, clusterResource, relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchClusterVals(filters, target, success, error);
+}
+
+function suggestVirtualMachineObjectSuggest($formFilters, $list, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-sidebar"></i>');
         var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
         var $li = document.createElement('li');
         var $a = document.createElement('a').setAttribute('href', o['editPage']);
@@ -265,14 +314,14 @@ function suggestClusterObjectSuggest($formFilters, $list, target) {
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchClusterVals($formFilters, target, success, error);
+  searchVirtualMachineVals($formFilters, target, success, error);
 }
 
 // GET //
 
-async function getCluster(pk) {
+async function getVirtualMachine(pk) {
   fetch(
-    '/en-us/api/cluster/' + clusterResource
+    '/en-us/api/vm/' + vmResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -289,8 +338,8 @@ async function getCluster(pk) {
 
 // PATCH //
 
-async function patchCluster($formFilters, $formValues, target, clusterResource, success, error) {
-  var filters = patchClusterFilters($formFilters);
+async function patchVirtualMachine($formFilters, $formValues, target, vmResource, success, error) {
+  var filters = patchVirtualMachineFilters($formFilters);
 
   var vals = {};
 
@@ -373,29 +422,17 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
 
-  var valueUniqueName = $formValues.querySelector('.valueUniqueName')?.value;
-  var removeUniqueName = $formValues.querySelector('.removeUniqueName')?.value === 'true';
-  var setUniqueName = removeUniqueName ? null : $formValues.querySelector('.setUniqueName')?.value;
-  var addUniqueName = $formValues.querySelector('.addUniqueName')?.value;
-  if(removeUniqueName || setUniqueName != null && setUniqueName !== '')
-    vals['setUniqueName'] = setUniqueName;
-  if(addUniqueName != null && addUniqueName !== '')
-    vals['addUniqueName'] = addUniqueName;
-  var removeUniqueName = $formValues.querySelector('.removeUniqueName')?.value;
-  if(removeUniqueName != null && removeUniqueName !== '')
-    vals['removeUniqueName'] = removeUniqueName;
-
-  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
-  var removeLocation = $formValues.querySelector('.removeLocation')?.value === 'true';
-  var setLocation = removeLocation ? null : $formValues.querySelector('.setLocation')?.value;
-  var addLocation = $formValues.querySelector('.addLocation')?.value;
-  if(removeLocation || setLocation != null && setLocation !== '')
-    vals['setLocation'] = JSON.parse(setLocation);
-  if(addLocation != null && addLocation !== '')
-    vals['addLocation'] = addLocation;
-  var removeLocation = $formValues.querySelector('.removeLocation')?.value;
-  if(removeLocation != null && removeLocation !== '')
-    vals['removeLocation'] = removeLocation;
+  var valueVmProject = $formValues.querySelector('.valueVmProject')?.value;
+  var removeVmProject = $formValues.querySelector('.removeVmProject')?.value === 'true';
+  var setVmProject = removeVmProject ? null : $formValues.querySelector('.setVmProject')?.value;
+  var addVmProject = $formValues.querySelector('.addVmProject')?.value;
+  if(removeVmProject || setVmProject != null && setVmProject !== '')
+    vals['setVmProject'] = setVmProject;
+  if(addVmProject != null && addVmProject !== '')
+    vals['addVmProject'] = addVmProject;
+  var removeVmProject = $formValues.querySelector('.removeVmProject')?.value;
+  if(removeVmProject != null && removeVmProject !== '')
+    vals['removeVmProject'] = removeVmProject;
 
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
@@ -409,77 +446,29 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeDescription != null && removeDescription !== '')
     vals['removeDescription'] = removeDescription;
 
-  var valueAiNodesTotal = $formValues.querySelector('.valueAiNodesTotal')?.value;
-  var removeAiNodesTotal = $formValues.querySelector('.removeAiNodesTotal')?.value === 'true';
-  var setAiNodesTotal = removeAiNodesTotal ? null : $formValues.querySelector('.setAiNodesTotal')?.value;
-  var addAiNodesTotal = $formValues.querySelector('.addAiNodesTotal')?.value;
-  if(removeAiNodesTotal || setAiNodesTotal != null && setAiNodesTotal !== '')
-    vals['setAiNodesTotal'] = setAiNodesTotal;
-  if(addAiNodesTotal != null && addAiNodesTotal !== '')
-    vals['addAiNodesTotal'] = addAiNodesTotal;
-  var removeAiNodesTotal = $formValues.querySelector('.removeAiNodesTotal')?.value;
-  if(removeAiNodesTotal != null && removeAiNodesTotal !== '')
-    vals['removeAiNodesTotal'] = removeAiNodesTotal;
+  var valueVmName = $formValues.querySelector('.valueVmName')?.value;
+  var removeVmName = $formValues.querySelector('.removeVmName')?.value === 'true';
+  var setVmName = removeVmName ? null : $formValues.querySelector('.setVmName')?.value;
+  var addVmName = $formValues.querySelector('.addVmName')?.value;
+  if(removeVmName || setVmName != null && setVmName !== '')
+    vals['setVmName'] = setVmName;
+  if(addVmName != null && addVmName !== '')
+    vals['addVmName'] = addVmName;
+  var removeVmName = $formValues.querySelector('.removeVmName')?.value;
+  if(removeVmName != null && removeVmName !== '')
+    vals['removeVmName'] = removeVmName;
 
-  var valueGpuDevicesTotal = $formValues.querySelector('.valueGpuDevicesTotal')?.value;
-  var removeGpuDevicesTotal = $formValues.querySelector('.removeGpuDevicesTotal')?.value === 'true';
-  var setGpuDevicesTotal = removeGpuDevicesTotal ? null : $formValues.querySelector('.setGpuDevicesTotal')?.value;
-  var addGpuDevicesTotal = $formValues.querySelector('.addGpuDevicesTotal')?.value;
-  if(removeGpuDevicesTotal || setGpuDevicesTotal != null && setGpuDevicesTotal !== '')
-    vals['setGpuDevicesTotal'] = setGpuDevicesTotal;
-  if(addGpuDevicesTotal != null && addGpuDevicesTotal !== '')
-    vals['addGpuDevicesTotal'] = addGpuDevicesTotal;
-  var removeGpuDevicesTotal = $formValues.querySelector('.removeGpuDevicesTotal')?.value;
-  if(removeGpuDevicesTotal != null && removeGpuDevicesTotal !== '')
-    vals['removeGpuDevicesTotal'] = removeGpuDevicesTotal;
-
-  var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
-  var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value === 'true';
-  var setVmsTotal = removeVmsTotal ? null : $formValues.querySelector('.setVmsTotal')?.value;
-  var addVmsTotal = $formValues.querySelector('.addVmsTotal')?.value;
-  if(removeVmsTotal || setVmsTotal != null && setVmsTotal !== '')
-    vals['setVmsTotal'] = setVmsTotal;
-  if(addVmsTotal != null && addVmsTotal !== '')
-    vals['addVmsTotal'] = addVmsTotal;
-  var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value;
-  if(removeVmsTotal != null && removeVmsTotal !== '')
-    vals['removeVmsTotal'] = removeVmsTotal;
-
-  var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
-  var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value === 'true';
-  var setGrafanaUrl = removeGrafanaUrl ? null : $formValues.querySelector('.setGrafanaUrl')?.value;
-  var addGrafanaUrl = $formValues.querySelector('.addGrafanaUrl')?.value;
-  if(removeGrafanaUrl || setGrafanaUrl != null && setGrafanaUrl !== '')
-    vals['setGrafanaUrl'] = setGrafanaUrl;
-  if(addGrafanaUrl != null && addGrafanaUrl !== '')
-    vals['addGrafanaUrl'] = addGrafanaUrl;
-  var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value;
-  if(removeGrafanaUrl != null && removeGrafanaUrl !== '')
-    vals['removeGrafanaUrl'] = removeGrafanaUrl;
-
-  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
-  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value === 'true';
-  var setCpuCoresTotal = removeCpuCoresTotal ? null : $formValues.querySelector('.setCpuCoresTotal')?.value;
-  var addCpuCoresTotal = $formValues.querySelector('.addCpuCoresTotal')?.value;
-  if(removeCpuCoresTotal || setCpuCoresTotal != null && setCpuCoresTotal !== '')
-    vals['setCpuCoresTotal'] = setCpuCoresTotal;
-  if(addCpuCoresTotal != null && addCpuCoresTotal !== '')
-    vals['addCpuCoresTotal'] = addCpuCoresTotal;
-  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value;
-  if(removeCpuCoresTotal != null && removeCpuCoresTotal !== '')
-    vals['removeCpuCoresTotal'] = removeCpuCoresTotal;
-
-  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
-  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value === 'true';
-  var setMemoryBytesTotal = removeMemoryBytesTotal ? null : $formValues.querySelector('.setMemoryBytesTotal')?.value;
-  var addMemoryBytesTotal = $formValues.querySelector('.addMemoryBytesTotal')?.value;
-  if(removeMemoryBytesTotal || setMemoryBytesTotal != null && setMemoryBytesTotal !== '')
-    vals['setMemoryBytesTotal'] = setMemoryBytesTotal;
-  if(addMemoryBytesTotal != null && addMemoryBytesTotal !== '')
-    vals['addMemoryBytesTotal'] = addMemoryBytesTotal;
-  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value;
-  if(removeMemoryBytesTotal != null && removeMemoryBytesTotal !== '')
-    vals['removeMemoryBytesTotal'] = removeMemoryBytesTotal;
+  var valueOs = $formValues.querySelector('.valueOs')?.value;
+  var removeOs = $formValues.querySelector('.removeOs')?.value === 'true';
+  var setOs = removeOs ? null : $formValues.querySelector('.setOs')?.value;
+  var addOs = $formValues.querySelector('.addOs')?.value;
+  if(removeOs || setOs != null && setOs !== '')
+    vals['setOs'] = setOs;
+  if(addOs != null && addOs !== '')
+    vals['addOs'] = addOs;
+  var removeOs = $formValues.querySelector('.removeOs')?.value;
+  if(removeOs != null && removeOs !== '')
+    vals['removeOs'] = removeOs;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   var removeId = $formValues.querySelector('.removeId')?.value === 'true';
@@ -492,6 +481,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeId = $formValues.querySelector('.removeId')?.value;
   if(removeId != null && removeId !== '')
     vals['removeId'] = removeId;
+
+  var valueGpuDevicesTotal = $formValues.querySelector('.valueGpuDevicesTotal')?.value;
+  var removeGpuDevicesTotal = $formValues.querySelector('.removeGpuDevicesTotal')?.value === 'true';
+  var setGpuDevicesTotal = removeGpuDevicesTotal ? null : $formValues.querySelector('.setGpuDevicesTotal')?.value;
+  var addGpuDevicesTotal = $formValues.querySelector('.addGpuDevicesTotal')?.value;
+  if(removeGpuDevicesTotal || setGpuDevicesTotal != null && setGpuDevicesTotal !== '')
+    vals['setGpuDevicesTotal'] = setGpuDevicesTotal;
+  if(addGpuDevicesTotal != null && addGpuDevicesTotal !== '')
+    vals['addGpuDevicesTotal'] = addGpuDevicesTotal;
+  var removeGpuDevicesTotal = $formValues.querySelector('.removeGpuDevicesTotal')?.value;
+  if(removeGpuDevicesTotal != null && removeGpuDevicesTotal !== '')
+    vals['removeGpuDevicesTotal'] = removeGpuDevicesTotal;
 
   var valueNgsildTenant = $formValues.querySelector('.valueNgsildTenant')?.value;
   var removeNgsildTenant = $formValues.querySelector('.removeNgsildTenant')?.value === 'true';
@@ -540,6 +541,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeNgsildData = $formValues.querySelector('.removeNgsildData')?.value;
   if(removeNgsildData != null && removeNgsildData !== '')
     vals['removeNgsildData'] = removeNgsildData;
+
+  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
+  var removeLocation = $formValues.querySelector('.removeLocation')?.value === 'true';
+  var setLocation = removeLocation ? null : $formValues.querySelector('.setLocation')?.value;
+  var addLocation = $formValues.querySelector('.addLocation')?.value;
+  if(removeLocation || setLocation != null && setLocation !== '')
+    vals['setLocation'] = JSON.parse(setLocation);
+  if(addLocation != null && addLocation !== '')
+    vals['addLocation'] = addLocation;
+  var removeLocation = $formValues.querySelector('.removeLocation')?.value;
+  if(removeLocation != null && removeLocation !== '')
+    vals['removeLocation'] = removeLocation;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
@@ -629,22 +642,26 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(valueHubResource != null && valueHubResource !== '')
     vals['setHubResource'] = valueHubResource;
 
-  var valueClusterResource = $formValues.querySelector('.valueClusterResource')?.value;
-  var removeClusterResource = $formValues.querySelector('.removeClusterResource')?.value === 'true';
-  var setClusterResource = removeClusterResource ? null : $formValues.querySelector('.setClusterResource')?.value;
-  var addClusterResource = $formValues.querySelector('.addClusterResource')?.value;
-  if(removeClusterResource || setClusterResource != null && setClusterResource !== '')
-    vals['setClusterResource'] = setClusterResource;
-  if(addClusterResource != null && addClusterResource !== '')
-    vals['addClusterResource'] = addClusterResource;
-  var removeClusterResource = $formValues.querySelector('.removeClusterResource')?.value;
-  if(removeClusterResource != null && removeClusterResource !== '')
-    vals['removeClusterResource'] = removeClusterResource;
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['setClusterResource'] = valueClusterResource;
 
-  patchClusterVals(clusterResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'clusterResource:' + clusterResource}], vals, target, success, error);
+  var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
+  var removeVmResource = $formValues.querySelector('.removeVmResource')?.value === 'true';
+  var setVmResource = removeVmResource ? null : $formValues.querySelector('.setVmResource')?.value;
+  var addVmResource = $formValues.querySelector('.addVmResource')?.value;
+  if(removeVmResource || setVmResource != null && setVmResource !== '')
+    vals['setVmResource'] = setVmResource;
+  if(addVmResource != null && addVmResource !== '')
+    vals['addVmResource'] = addVmResource;
+  var removeVmResource = $formValues.querySelector('.removeVmResource')?.value;
+  if(removeVmResource != null && removeVmResource !== '')
+    vals['removeVmResource'] = removeVmResource;
+
+  patchVirtualMachineVals(vmResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'vmResource:' + vmResource}], vals, target, success, error);
 }
 
-function patchClusterFilters($formFilters) {
+function patchVirtualMachineFilters($formFilters) {
   var filters = [];
   if($formFilters) {
     filters.push({ name: 'softCommit', value: 'true' });
@@ -679,45 +696,29 @@ function patchClusterFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
-    var filterUniqueName = $formFilters.querySelector('.valueUniqueName')?.value;
-    if(filterUniqueName != null && filterUniqueName !== '')
-      filters.push({ name: 'fq', value: 'uniqueName:' + filterUniqueName });
-
-    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
-    if(filterLocation != null && filterLocation !== '')
-      filters.push({ name: 'fq', value: 'location:' + filterLocation });
+    var filterVmProject = $formFilters.querySelector('.valueVmProject')?.value;
+    if(filterVmProject != null && filterVmProject !== '')
+      filters.push({ name: 'fq', value: 'vmProject:' + filterVmProject });
 
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
-    var filterAiNodesTotal = $formFilters.querySelector('.valueAiNodesTotal')?.value;
-    if(filterAiNodesTotal != null && filterAiNodesTotal !== '')
-      filters.push({ name: 'fq', value: 'aiNodesTotal:' + filterAiNodesTotal });
+    var filterVmName = $formFilters.querySelector('.valueVmName')?.value;
+    if(filterVmName != null && filterVmName !== '')
+      filters.push({ name: 'fq', value: 'vmName:' + filterVmName });
 
-    var filterGpuDevicesTotal = $formFilters.querySelector('.valueGpuDevicesTotal')?.value;
-    if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
-      filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
-
-    var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
-    if(filterVmsTotal != null && filterVmsTotal !== '')
-      filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
-
-    var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
-    if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
-      filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
-
-    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
-    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
-      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
-
-    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
-    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
-      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+    var filterOs = $formFilters.querySelector('.valueOs')?.value;
+    if(filterOs != null && filterOs !== '')
+      filters.push({ name: 'fq', value: 'os:' + filterOs });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
       filters.push({ name: 'fq', value: 'id:' + filterId });
+
+    var filterGpuDevicesTotal = $formFilters.querySelector('.valueGpuDevicesTotal')?.value;
+    if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
+      filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
 
     var filterNgsildTenant = $formFilters.querySelector('.valueNgsildTenant')?.value;
     if(filterNgsildTenant != null && filterNgsildTenant !== '')
@@ -734,6 +735,10 @@ function patchClusterFilters($formFilters) {
     var filterNgsildData = $formFilters.querySelector('.valueNgsildData')?.value;
     if(filterNgsildData != null && filterNgsildData !== '')
       filters.push({ name: 'fq', value: 'ngsildData:' + filterNgsildData });
+
+    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
+    if(filterLocation != null && filterLocation !== '')
+      filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -799,6 +804,14 @@ function patchClusterFilters($formFilters) {
     if(filterClusterResource != null && filterClusterResource !== '')
       filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
 
+    var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
+    if(filterVmResource != null && filterVmResource !== '')
+      filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
+
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
       filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
@@ -810,19 +823,23 @@ function patchClusterFilters($formFilters) {
     var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
     if(filterLocationLinks != null && filterLocationLinks !== '')
       filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
+
+    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
+    if(filterEntityShortId != null && filterEntityShortId !== '')
+      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
   }
   return filters;
 }
 
-function patchClusterVal(filters, v, val, target, success, error) {
+function patchVirtualMachineVal(filters, v, val, target, success, error) {
   var vals = {};
   vals[v] = val;
-  patchClusterVals(filters, vals, target, success, error);
+  patchVirtualMachineVals(filters, vals, target, success, error);
 }
 
-function patchClusterVals(filters, vals, target, success, error) {
+function patchVirtualMachineVals(filters, vals, target, success, error) {
   fetch(
-    '/en-us/api/cluster?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/vm?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PATCH'
@@ -841,7 +858,7 @@ function patchClusterVals(filters, vals, target, success, error) {
 
 // POST //
 
-async function postCluster($formValues, target, success, error) {
+async function postVirtualMachine($formValues, target, success, error) {
   var vals = {};
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
@@ -881,45 +898,29 @@ async function postCluster($formValues, target, success, error) {
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
 
-  var valueUniqueName = $formValues.querySelector('.valueUniqueName')?.value;
-  if(valueUniqueName != null && valueUniqueName !== '')
-    vals['uniqueName'] = valueUniqueName;
-
-  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
-  if(valueLocation != null && valueLocation !== '')
-    vals['location'] = JSON.parse(valueLocation);
+  var valueVmProject = $formValues.querySelector('.valueVmProject')?.value;
+  if(valueVmProject != null && valueVmProject !== '')
+    vals['vmProject'] = valueVmProject;
 
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
 
-  var valueAiNodesTotal = $formValues.querySelector('.valueAiNodesTotal')?.value;
-  if(valueAiNodesTotal != null && valueAiNodesTotal !== '')
-    vals['aiNodesTotal'] = valueAiNodesTotal;
+  var valueVmName = $formValues.querySelector('.valueVmName')?.value;
+  if(valueVmName != null && valueVmName !== '')
+    vals['vmName'] = valueVmName;
 
-  var valueGpuDevicesTotal = $formValues.querySelector('.valueGpuDevicesTotal')?.value;
-  if(valueGpuDevicesTotal != null && valueGpuDevicesTotal !== '')
-    vals['gpuDevicesTotal'] = valueGpuDevicesTotal;
-
-  var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
-  if(valueVmsTotal != null && valueVmsTotal !== '')
-    vals['vmsTotal'] = valueVmsTotal;
-
-  var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
-  if(valueGrafanaUrl != null && valueGrafanaUrl !== '')
-    vals['grafanaUrl'] = valueGrafanaUrl;
-
-  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
-  if(valueCpuCoresTotal != null && valueCpuCoresTotal !== '')
-    vals['cpuCoresTotal'] = valueCpuCoresTotal;
-
-  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
-  if(valueMemoryBytesTotal != null && valueMemoryBytesTotal !== '')
-    vals['memoryBytesTotal'] = valueMemoryBytesTotal;
+  var valueOs = $formValues.querySelector('.valueOs')?.value;
+  if(valueOs != null && valueOs !== '')
+    vals['os'] = valueOs;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   if(valueId != null && valueId !== '')
     vals['id'] = valueId;
+
+  var valueGpuDevicesTotal = $formValues.querySelector('.valueGpuDevicesTotal')?.value;
+  if(valueGpuDevicesTotal != null && valueGpuDevicesTotal !== '')
+    vals['gpuDevicesTotal'] = valueGpuDevicesTotal;
 
   var valueNgsildTenant = $formValues.querySelector('.valueNgsildTenant')?.value;
   if(valueNgsildTenant != null && valueNgsildTenant !== '')
@@ -936,6 +937,10 @@ async function postCluster($formValues, target, success, error) {
   var valueNgsildData = $formValues.querySelector('.valueNgsildData')?.value;
   if(valueNgsildData != null && valueNgsildData !== '')
     vals['ngsildData'] = JSON.parse(valueNgsildData);
+
+  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
+  if(valueLocation != null && valueLocation !== '')
+    vals['location'] = JSON.parse(valueLocation);
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -969,12 +974,16 @@ async function postCluster($formValues, target, success, error) {
   if(valueHubResource != null && valueHubResource !== '')
     vals['hubResource'] = valueHubResource;
 
-  var valueClusterResource = $formValues.querySelector('.valueClusterResource')?.value;
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueClusterResource != null && valueClusterResource !== '')
     vals['clusterResource'] = valueClusterResource;
 
+  var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
+  if(valueVmResource != null && valueVmResource !== '')
+    vals['vmResource'] = valueVmResource;
+
   fetch(
-    '/en-us/api/cluster'
+    '/en-us/api/vm'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -991,9 +1000,9 @@ async function postCluster($formValues, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function postClusterVals(vals, target, success, error) {
+function postVirtualMachineVals(vals, target, success, error) {
   fetch(
-    '/en-us/api/cluster'
+    '/en-us/api/vm'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -1012,7 +1021,7 @@ function postClusterVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteCluster(target, clusterResource, success, error) {
+async function deleteVirtualMachine(target, vmResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1028,7 +1037,7 @@ async function deleteCluster(target, clusterResource, success, error) {
   }
 
   fetch(
-    '/en-us/api/cluster/' + encodeURIComponent(clusterResource)
+    '/en-us/api/vm/' + encodeURIComponent(vmResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1044,15 +1053,15 @@ async function deleteCluster(target, clusterResource, success, error) {
 
 // PUTImport //
 
-async function putimportCluster($formValues, target, clusterResource, success, error) {
+async function putimportVirtualMachine($formValues, target, vmResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
-    putimportClusterVals(JSON.parse(json), target, success, error);
+    putimportVirtualMachineVals(JSON.parse(json), target, success, error);
 }
 
-function putimportClusterVals(json, target, success, error) {
+function putimportVirtualMachineVals(json, target, success, error) {
   fetch(
-    '/en-us/api/cluster-import'
+    '/en-us/api/vm-import'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PUT'
@@ -1071,7 +1080,7 @@ function putimportClusterVals(json, target, success, error) {
 
 // DELETEFilter //
 
-async function deletefilterCluster(target, success, error) {
+async function deletefilterVirtualMachine(target, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1087,7 +1096,7 @@ async function deletefilterCluster(target, success, error) {
   }
 
   fetch(
-    '/en-us/api/cluster'
+    '/en-us/api/vm'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1101,51 +1110,51 @@ async function deletefilterCluster(target, success, error) {
     .catch(response => error(response, target));
 }
 
-async function websocketCluster(success) {
+async function websocketVirtualMachine(success) {
   window.eventBus.onopen = function () {
 
-    window.eventBus.registerHandler('websocketCluster', function (error, message) {
+    window.eventBus.registerHandler('websocketVirtualMachine', function (error, message) {
       var json = JSON.parse(message['body']);
-      var clusterResource = json['id'];
+      var vmResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + clusterResource + ' ');
-      $box.setAttribute('id', 'box-' + clusterResource);
+      $box.setAttribute('class', 'w3-quarter box-' + vmResource + ' ');
+      $box.setAttribute('id', 'box-' + vmResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + clusterResource);
+      $margin.setAttribute('id', 'margin-' + vmResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + clusterResource);
+      $card.setAttribute('id', 'card-' + vmResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + clusterResource);
+      $header.setAttribute('id', 'header-' + vmResource);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
+      iTemplate.innerHTML = '<i class="fa-regular fa-sidebar"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify OpenShift clusters in ' + json.timeRemaining;
+      $headerSpan.innerText = 'modify virtual machines in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + clusterResource + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + vmResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + clusterResource);
+      $x.setAttribute('id', 'x-' + vmResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + clusterResource);
+      $body.setAttribute('id', 'text-' + vmResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + clusterResource);
+      $bar.setAttribute('id', 'bar-' + vmResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + clusterResource);
+      $progress.setAttribute('id', 'progress-' + vmResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -1157,11 +1166,11 @@ async function websocketCluster(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + clusterResource);
+        var $old_box = document.querySelector('.box-' + vmResource);
       } else {
-        document.querySelector('.box-' + clusterResource)?.remove();
+        document.querySelector('.box-' + vmResource)?.remove();
       }
-      if(clusterResource) {
+      if(vmResource) {
         if(success)
           success(json);
       }
@@ -1173,15 +1182,22 @@ async function websocketCluster(success) {
       document.querySelector('.Page_hubResource_add').classList.remove('w3-disabled');
       document.querySelector('.Page_hubResource_add').setAttribute('disabled', false);
     });
+
+    window.eventBus.registerHandler('websocketCluster', function (error, message) {
+      document.querySelector('.Page_clusterResource').trigger('oninput');
+      document.querySelector('.Page_clusterResource_add').innerText = 'add an OpenShift cluster';
+      document.querySelector('.Page_clusterResource_add').classList.remove('w3-disabled');
+      document.querySelector('.Page_clusterResource_add').setAttribute('disabled', false);
+    });
   }
 }
-async function websocketClusterInner(apiRequest) {
-  var clusterResource = apiRequest['id'];
+async function websocketVirtualMachineInner(apiRequest) {
+  var vmResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(clusterResource != null && vars.length > 0) {
+  if(vmResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -1193,20 +1209,17 @@ async function websocketClusterInner(apiRequest) {
         var inputArchived = null;
         var inputHubId = null;
         var inputClusterName = null;
-        var inputUniqueName = null;
-        var inputLocation = null;
+        var inputVmProject = null;
         var inputDescription = null;
-        var inputAiNodesTotal = null;
-        var inputGpuDevicesTotal = null;
-        var inputVmsTotal = null;
-        var inputGrafanaUrl = null;
-        var inputCpuCoresTotal = null;
-        var inputMemoryBytesTotal = null;
+        var inputVmName = null;
+        var inputOs = null;
         var inputId = null;
+        var inputGpuDevicesTotal = null;
         var inputNgsildTenant = null;
         var inputNgsildPath = null;
         var inputNgsildContext = null;
         var inputNgsildData = null;
+        var inputLocation = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1223,9 +1236,12 @@ async function websocketClusterInner(apiRequest) {
         var inputSolrId = null;
         var inputHubResource = null;
         var inputClusterResource = null;
+        var inputVmResource = null;
+        var inputVmDisplayName = null;
         var inputLocationColors = null;
         var inputLocationTitles = null;
         var inputLocationLinks = null;
+        var inputEntityShortId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -1239,26 +1255,18 @@ async function websocketClusterInner(apiRequest) {
           inputHubId = $response.querySelector('.Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Page_clusterName');
-        if(vars.includes('uniqueName'))
-          inputUniqueName = $response.querySelector('.Page_uniqueName');
-        if(vars.includes('location'))
-          inputLocation = $response.querySelector('.Page_location');
+        if(vars.includes('vmProject'))
+          inputVmProject = $response.querySelector('.Page_vmProject');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Page_description');
-        if(vars.includes('aiNodesTotal'))
-          inputAiNodesTotal = $response.querySelector('.Page_aiNodesTotal');
-        if(vars.includes('gpuDevicesTotal'))
-          inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
-        if(vars.includes('vmsTotal'))
-          inputVmsTotal = $response.querySelector('.Page_vmsTotal');
-        if(vars.includes('grafanaUrl'))
-          inputGrafanaUrl = $response.querySelector('.Page_grafanaUrl');
-        if(vars.includes('cpuCoresTotal'))
-          inputCpuCoresTotal = $response.querySelector('.Page_cpuCoresTotal');
-        if(vars.includes('memoryBytesTotal'))
-          inputMemoryBytesTotal = $response.querySelector('.Page_memoryBytesTotal');
+        if(vars.includes('vmName'))
+          inputVmName = $response.querySelector('.Page_vmName');
+        if(vars.includes('os'))
+          inputOs = $response.querySelector('.Page_os');
         if(vars.includes('id'))
           inputId = $response.querySelector('.Page_id');
+        if(vars.includes('gpuDevicesTotal'))
+          inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
         if(vars.includes('ngsildTenant'))
           inputNgsildTenant = $response.querySelector('.Page_ngsildTenant');
         if(vars.includes('ngsildPath'))
@@ -1267,6 +1275,8 @@ async function websocketClusterInner(apiRequest) {
           inputNgsildContext = $response.querySelector('.Page_ngsildContext');
         if(vars.includes('ngsildData'))
           inputNgsildData = $response.querySelector('.Page_ngsildData');
+        if(vars.includes('location'))
+          inputLocation = $response.querySelector('.Page_location');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1299,16 +1309,22 @@ async function websocketClusterInner(apiRequest) {
           inputHubResource = $response.querySelector('.Page_hubResource');
         if(vars.includes('clusterResource'))
           inputClusterResource = $response.querySelector('.Page_clusterResource');
+        if(vars.includes('vmResource'))
+          inputVmResource = $response.querySelector('.Page_vmResource');
+        if(vars.includes('vmDisplayName'))
+          inputVmDisplayName = $response.querySelector('.Page_vmDisplayName');
         if(vars.includes('locationColors'))
           inputLocationColors = $response.querySelector('.Page_locationColors');
         if(vars.includes('locationTitles'))
           inputLocationTitles = $response.querySelector('.Page_locationTitles');
         if(vars.includes('locationLinks'))
           inputLocationLinks = $response.querySelector('.Page_locationLinks');
+        if(vars.includes('entityShortId'))
+          inputEntityShortId = $response.querySelector('.Page_entityShortId');
 
-        jsWebsocketCluster(clusterResource, vars, $response);
+        jsWebsocketVirtualMachine(vmResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
-        window.listCluster = JSON.parse($response.querySelector('.pageForm .listCluster')?.value);
+        window.listVirtualMachine = JSON.parse($response.querySelector('.pageForm .listVirtualMachine')?.value);
 
 
         if(inputPk) {
@@ -1371,24 +1387,14 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_clusterName'));
         }
 
-        if(inputUniqueName) {
-          document.querySelectorAll('.Page_uniqueName').forEach((item, index) => {
+        if(inputVmProject) {
+          document.querySelectorAll('.Page_vmProject').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputUniqueName.getAttribute('value');
+              item.value = inputVmProject.getAttribute('value');
             else
-              item.textContent = inputUniqueName.textContent;
+              item.textContent = inputVmProject.textContent;
           });
-          addGlow(document.querySelector('.Page_uniqueName'));
-        }
-
-        if(inputLocation) {
-          document.querySelectorAll('.Page_location').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocation.getAttribute('value');
-            else
-              item.textContent = inputLocation.textContent;
-          });
-          addGlow(document.querySelector('.Page_location'));
+          addGlow(document.querySelector('.Page_vmProject'));
         }
 
         if(inputDescription) {
@@ -1401,64 +1407,24 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_description'));
         }
 
-        if(inputAiNodesTotal) {
-          document.querySelectorAll('.Page_aiNodesTotal').forEach((item, index) => {
+        if(inputVmName) {
+          document.querySelectorAll('.Page_vmName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputAiNodesTotal.getAttribute('value');
+              item.value = inputVmName.getAttribute('value');
             else
-              item.textContent = inputAiNodesTotal.textContent;
+              item.textContent = inputVmName.textContent;
           });
-          addGlow(document.querySelector('.Page_aiNodesTotal'));
+          addGlow(document.querySelector('.Page_vmName'));
         }
 
-        if(inputGpuDevicesTotal) {
-          document.querySelectorAll('.Page_gpuDevicesTotal').forEach((item, index) => {
+        if(inputOs) {
+          document.querySelectorAll('.Page_os').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputGpuDevicesTotal.getAttribute('value');
+              item.value = inputOs.getAttribute('value');
             else
-              item.textContent = inputGpuDevicesTotal.textContent;
+              item.textContent = inputOs.textContent;
           });
-          addGlow(document.querySelector('.Page_gpuDevicesTotal'));
-        }
-
-        if(inputVmsTotal) {
-          document.querySelectorAll('.Page_vmsTotal').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputVmsTotal.getAttribute('value');
-            else
-              item.textContent = inputVmsTotal.textContent;
-          });
-          addGlow(document.querySelector('.Page_vmsTotal'));
-        }
-
-        if(inputGrafanaUrl) {
-          document.querySelectorAll('.Page_grafanaUrl').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputGrafanaUrl.getAttribute('value');
-            else
-              item.textContent = inputGrafanaUrl.textContent;
-          });
-          addGlow(document.querySelector('.Page_grafanaUrl'));
-        }
-
-        if(inputCpuCoresTotal) {
-          document.querySelectorAll('.Page_cpuCoresTotal').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputCpuCoresTotal.getAttribute('value');
-            else
-              item.textContent = inputCpuCoresTotal.textContent;
-          });
-          addGlow(document.querySelector('.Page_cpuCoresTotal'));
-        }
-
-        if(inputMemoryBytesTotal) {
-          document.querySelectorAll('.Page_memoryBytesTotal').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputMemoryBytesTotal.getAttribute('value');
-            else
-              item.textContent = inputMemoryBytesTotal.textContent;
-          });
-          addGlow(document.querySelector('.Page_memoryBytesTotal'));
+          addGlow(document.querySelector('.Page_os'));
         }
 
         if(inputId) {
@@ -1469,6 +1435,16 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputId.textContent;
           });
           addGlow(document.querySelector('.Page_id'));
+        }
+
+        if(inputGpuDevicesTotal) {
+          document.querySelectorAll('.Page_gpuDevicesTotal').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputGpuDevicesTotal.getAttribute('value');
+            else
+              item.textContent = inputGpuDevicesTotal.textContent;
+          });
+          addGlow(document.querySelector('.Page_gpuDevicesTotal'));
         }
 
         if(inputNgsildTenant) {
@@ -1509,6 +1485,16 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputNgsildData.textContent;
           });
           addGlow(document.querySelector('.Page_ngsildData'));
+        }
+
+        if(inputLocation) {
+          document.querySelectorAll('.Page_location').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocation.getAttribute('value');
+            else
+              item.textContent = inputLocation.textContent;
+          });
+          addGlow(document.querySelector('.Page_location'));
         }
 
         if(inputClassCanonicalName) {
@@ -1671,6 +1657,26 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_clusterResource'));
         }
 
+        if(inputVmResource) {
+          document.querySelectorAll('.Page_vmResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVmResource.getAttribute('value');
+            else
+              item.textContent = inputVmResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_vmResource'));
+        }
+
+        if(inputVmDisplayName) {
+          document.querySelectorAll('.Page_vmDisplayName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVmDisplayName.getAttribute('value');
+            else
+              item.textContent = inputVmDisplayName.textContent;
+          });
+          addGlow(document.querySelector('.Page_vmDisplayName'));
+        }
+
         if(inputLocationColors) {
           document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1701,13 +1707,23 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_locationLinks'));
         }
 
-          pageGraphCluster();
+        if(inputEntityShortId) {
+          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEntityShortId.getAttribute('value');
+            else
+              item.textContent = inputEntityShortId.textContent;
+          });
+          addGlow(document.querySelector('.Page_entityShortId'));
+        }
+
+          pageGraphVirtualMachine();
       });
     });
   }
 }
 
-function pageGraphCluster(apiRequest) {
+function pageGraphVirtualMachine(apiRequest) {
   var r = document.querySelector('.pageForm .pageResponse')?.value;
   if(r) {
     var json = JSON.parse(r);
@@ -1739,7 +1755,7 @@ function pageGraphCluster(apiRequest) {
         var data = [];
         var layout = {};
         if(range) {
-          layout['title'] = 'OpenShift clusters';
+          layout['title'] = 'virtual machines';
           layout['xaxis'] = {
             title: rangeVarFq.displayName
           }
@@ -1802,7 +1818,7 @@ function pageGraphCluster(apiRequest) {
               data.push(trace);
             });
           }
-          Plotly.react('htmBodyGraphClusterPage', data, layout);
+          Plotly.react('htmBodyGraphVirtualMachinePage', data, layout);
         }
       }
     }
@@ -1810,19 +1826,19 @@ function pageGraphCluster(apiRequest) {
     // Graph Location
     window.mapLayers = {};
     window.bounds = null;
-    if(listCluster.filter(o => o.location)) {
-      window.bounds = L.latLngBounds(listCluster.filter(o => o.location).map((c) => {
+    if(listVirtualMachine.filter(o => o.location)) {
+      window.bounds = L.latLngBounds(listVirtualMachine.filter(o => o.location).map((c) => {
         return [c.location.coordinates[1], c.location.coordinates[0]];
       }));
     }
     function onEachFeature(feature, layer) {
-      let popupContent = htmTooltipCluster(feature, layer);
+      let popupContent = htmTooltipVirtualMachine(feature, layer);
       layer.bindPopup(popupContent);
       window.mapLayers[feature.properties.id] = layer;
     };
-    if(window.mapCluster) {
-      window.geoJSONCluster.clearLayers();
-      window.listCluster.forEach((result, index) => {
+    if(window.mapVirtualMachine) {
+      window.geoJSONVirtualMachine.clearLayers();
+      window.listVirtualMachine.forEach((result, index) => {
         if(result.location) {
           var shapes = [];
           if(Array.isArray(result.location))
@@ -1838,17 +1854,17 @@ function pageGraphCluster(apiRequest) {
             }];
             var layerGeoJson = L.geoJSON(features, {
               onEachFeature: onEachFeature
-              , style: jsStyleCluster
+              , style: jsStyleVirtualMachine
               , pointToLayer: function(feature, latlng) {
-                return L.circleMarker(latlng, jsStyleCluster(feature));
+                return L.circleMarker(latlng, jsStyleVirtualMachine(feature));
               }
             });
-            window.geoJSONCluster.addLayer(layerGeoJson);
+            window.geoJSONVirtualMachine.addLayer(layerGeoJson);
           });
         }
       });
-    } else if(document.getElementById('htmBodyGraphLocationClusterPage')) {
-      window.mapCluster = L.map('htmBodyGraphLocationClusterPage', {
+    } else if(document.getElementById('htmBodyGraphLocationVirtualMachinePage')) {
+      window.mapVirtualMachine = L.map('htmBodyGraphLocationVirtualMachinePage', {
         position: 'topright'
         , zoomControl: true
         , scrollWheelZoom: true
@@ -1864,37 +1880,37 @@ function pageGraphCluster(apiRequest) {
           }
           ]
       });
-      window.mapCluster.zoomControl.setPosition('topright');
+      window.mapVirtualMachine.zoomControl.setPosition('topright');
       var data = [];
       var layout = {};
       layout['showlegend'] = true;
       layout['dragmode'] = 'zoom';
       layout['uirevision'] = 'true';
       var legend = L.control({position: 'bottomright'});
-      legend.onAdd = jsLegendCluster;
+      legend.onAdd = jsLegendVirtualMachine;
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-      }).addTo(window.mapCluster);
+      }).addTo(window.mapVirtualMachine);
 
       if(window.bounds && window['DEFAULT_MAP_ZOOM'] && window.bounds.getNorthEast()) {
-        if(listCluster.length == 1) {
-          window.mapCluster.setView(window.bounds.getNorthEast(), window['DEFAULT_MAP_ZOOM']);
+        if(listVirtualMachine.length == 1) {
+          window.mapVirtualMachine.setView(window.bounds.getNorthEast(), window['DEFAULT_MAP_ZOOM']);
         } else {
-          window.mapCluster.fitBounds(window.bounds);
+          window.mapVirtualMachine.fitBounds(window.bounds);
         }
       } else {
         if(window['DEFAULT_MAP_LOCATION'] && window['DEFAULT_MAP_ZOOM'])
-          window.mapCluster.setView([window['DEFAULT_MAP_LOCATION']['coordinates'][1], window['DEFAULT_MAP_LOCATION']['coordinates'][0]], window['DEFAULT_MAP_ZOOM']);
+          window.mapVirtualMachine.setView([window['DEFAULT_MAP_LOCATION']['coordinates'][1], window['DEFAULT_MAP_LOCATION']['coordinates'][0]], window['DEFAULT_MAP_ZOOM']);
         else if(window['DEFAULT_MAP_ZOOM'])
-          window.mapCluster.setView(null, window['DEFAULT_MAP_ZOOM']);
+          window.mapVirtualMachine.setView(null, window['DEFAULT_MAP_ZOOM']);
         else if(window['DEFAULT_MAP_LOCATION'])
-          window.mapCluster.setView([window['DEFAULT_MAP_LOCATION']['coordinates'][1], window['DEFAULT_MAP_LOCATION']['coordinates'][0]]);
+          window.mapVirtualMachine.setView([window['DEFAULT_MAP_LOCATION']['coordinates'][1], window['DEFAULT_MAP_LOCATION']['coordinates'][0]]);
       }
 
       layout['margin'] = { r: 0, t: 0, b: 0, l: 0 };
-      window.geoJSONCluster = L.geoJSON().addTo(window.mapCluster);
-      window.listCluster.forEach((result, index) => {
+      window.geoJSONVirtualMachine = L.geoJSON().addTo(window.mapVirtualMachine);
+      window.listVirtualMachine.forEach((result, index) => {
         if(result.location) {
           var shapes = [];
           if(Array.isArray(result.location))
@@ -1910,23 +1926,23 @@ function pageGraphCluster(apiRequest) {
             }];
             var layerGeoJson = L.geoJSON(features, {
               onEachFeature: onEachFeature
-              , style: jsStyleCluster
+              , style: jsStyleVirtualMachine
               , pointToLayer: function(feature, latlng) {
-                return L.circleMarker(latlng, jsStyleCluster(feature));
+                return L.circleMarker(latlng, jsStyleVirtualMachine(feature));
               }
             });
-            window.geoJSONCluster.addLayer(layerGeoJson);
+            window.geoJSONVirtualMachine.addLayer(layerGeoJson);
           });
         }
       });
-      window.mapCluster.on('popupopen', function(e) {
+      window.mapVirtualMachine.on('popupopen', function(e) {
         if(e.popup._source) {
           var feature = e.popup._source.feature;
-          jsTooltipCluster(e, feature);
+          jsTooltipVirtualMachine(e, feature);
         }
       });
       const drawnItems = new L.FeatureGroup();
-      window.mapCluster.addLayer(drawnItems);
+      window.mapVirtualMachine.addLayer(drawnItems);
       const drawControl = new L.Control.Draw({
         position: 'topright'
         , edit: {
@@ -1940,8 +1956,8 @@ function pageGraphCluster(apiRequest) {
           , marker: true
         }
       });
-      window.mapCluster.addControl(drawControl);
-      window.mapCluster.on(L.Draw.Event.CREATED, function (event) {
+      window.mapVirtualMachine.addControl(drawControl);
+      window.mapVirtualMachine.on(L.Draw.Event.CREATED, function (event) {
         drawnItems.addLayer(event.layer);
         var contextmenuItems = [];
         if(event.layerType == 'marker') {
@@ -1961,7 +1977,7 @@ function pageGraphCluster(apiRequest) {
   }
 }
 function patchLocation(target, location) {
-  patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + result.clusterResource }]
+  patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + result.vmResource }]
       , 'setLocation', location
       , target
       , function(response, e) { addGlow(target); }
@@ -1970,8 +1986,8 @@ function patchLocation(target, location) {
 }
 
 function animateStats() {
-  document.querySelector('#pageSearchVal-fqCluster_time').innerText = '';
-  searchPage('Cluster', function() {
+  document.querySelector('#pageSearchVal-fqVirtualMachine_time').innerText = '';
+  searchPage('VirtualMachine', function() {
     let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
     let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
     let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
@@ -1983,9 +1999,9 @@ function animateStats() {
       if (x > xMax || x < 0) {
         clearInterval(animateInterval);
       }
-      document.querySelector('#fqCluster_time').value = x;
-      document.querySelector('#fqCluster_time').onchange();
-      searchPage('Cluster');
+      document.querySelector('#fqVirtualMachine_time').value = x;
+      document.querySelector('#fqVirtualMachine_time').onchange();
+      searchPage('VirtualMachine');
     }, speedRate);
   });
 }

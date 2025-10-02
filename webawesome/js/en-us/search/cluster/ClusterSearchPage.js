@@ -128,6 +128,17 @@ Promise.all([
     facetStatsChange('Cluster', 'gpuDevicesTotal', false);
   });
 
+  document.querySelector('#pageSelectSortCluster_vmsTotal')?.addEventListener('change', (event) => {
+    sort('Cluster', 'vmsTotal', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_vmsTotal')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'vmsTotal', true);
+  });
+  document.querySelector('#pageStatsCluster_vmsTotal')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'vmsTotal', false);
+  });
+
   document.querySelector('#pageSelectSortCluster_grafanaUrl')?.addEventListener('change', (event) => {
     sort('Cluster', 'grafanaUrl', event.currentTarget.value);
   });
@@ -546,6 +557,18 @@ Promise.all([
             facetPivotChange('Cluster', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapCluster_gpuDevicesTotal')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#fqCluster_vmsTotal')?.addEventListener('change', (event) => {
+            fqChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetCluster_vmsTotal')?.addEventListener('click', (event) => {
+            facetFieldChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotCluster_vmsTotal')?.addEventListener('change', (event) => {
+            facetPivotChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapCluster_vmsTotal')?.addEventListener('change', (event) => {
             facetRangeGapChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_cpuCoresTotal')?.addEventListener('change', (event) => {
