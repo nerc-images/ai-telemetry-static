@@ -326,6 +326,50 @@ Promise.all([
     facetStatsChange('SitePage', 'pageImageAlt', false);
   });
 
+  document.querySelector('#pageSelectSortSitePage_prerequisiteArticleIds')?.addEventListener('change', (event) => {
+    sort('SitePage', 'prerequisiteArticleIds', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_prerequisiteArticleIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'prerequisiteArticleIds', true);
+  });
+  document.querySelector('#pageStatsSitePage_prerequisiteArticleIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'prerequisiteArticleIds', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_nextArticleIds')?.addEventListener('change', (event) => {
+    sort('SitePage', 'nextArticleIds', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_nextArticleIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'nextArticleIds', true);
+  });
+  document.querySelector('#pageStatsSitePage_nextArticleIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'nextArticleIds', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_labelsString')?.addEventListener('change', (event) => {
+    sort('SitePage', 'labelsString', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_labelsString')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'labelsString', true);
+  });
+  document.querySelector('#pageStatsSitePage_labelsString')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'labelsString', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_labels')?.addEventListener('change', (event) => {
+    sort('SitePage', 'labels', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_labels')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'labels', true);
+  });
+  document.querySelector('#pageStatsSitePage_labels')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'labels', false);
+  });
+
   document.querySelector('#pageSelectSortSitePage_relatedArticleIds')?.addEventListener('change', (event) => {
     sort('SitePage', 'relatedArticleIds', event.currentTarget.value);
   });
