@@ -24,7 +24,7 @@
             Deploy required microservices to OpenShift Local
           </div>
           <p>
-            Several microservices are required first before deploying the {{ SITE_DISPLAY_NAME }} platform. 
+            Several microservices are required first before deploying the AI Telemetry platform. 
             These microservices include: 
           </p>
           <ul>
@@ -157,6 +157,13 @@
             </p>
             {{ code('crc start') }}
           </wa-callout>
+
+          <div class="wa-heading-m ">
+            Sync the main <kbd>in-cluster-aoa</kbd> Application Set
+          </div>
+          <p>
+            There is one main application called <kbd>in-cluster-aoa</kbd> that the rest of the applications are deployed from. 
+          </p>
           <ol>
             <li>
               Click on the <kbd>in-cluster-aoa</kbd> Application in ArgoCD. 
@@ -169,18 +176,16 @@
             </li>
           </ol>
           <p>
-          </p>
-          <p>
-            The deployment of all the Applications in ArgoCD will probably take around 20 minutes to complete. 
+            The deployment of all the Applications in ArgoCD will probably take around 10 minutes to complete. 
           </p>
 
           <div class="wa-heading-2xl ">
             <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
-            Deploy {{ SITE_DISPLAY_NAME }} to OpenShift Local with ArgoCD GitOps
+            Deploy AI Telemetry to OpenShift Local with ArgoCD GitOps
           </div>
           <p>
             Once you have successfully synced all of the dependent microservice Applications,
-            You are ready to deploy the rest of the {{ SITE_DISPLAY_NAME }} Applications to ArgoCD. 
+            You are ready to deploy the rest of the AI Telemetry Applications to ArgoCD. 
           </p>
           <p>
             Clone the <kbd>{{ SITE_NAME }}</kbd> repository into a new directory <kbd>%USERPROFILE%\\src\\{{ SITE_NAME }}</kbd> in your source directory. 
@@ -197,7 +202,7 @@
           {{ code('oc apply -k openshift-local\\applications\\') }}
           <p>
             Then you need to wait patiently for the new Applications to sync. 
-            Access the ArgoCD application to watch the {{ SITE_DISPLAY_NAME }} Applications sync. 
+            Access the ArgoCD application to watch the AI Telemetry Applications sync. 
           </p>
           <div class="wa-stack wa-align-items-center ">
             <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
@@ -314,17 +319,35 @@
             </p>
             {{ code('crc start') }}
           </wa-callout>
+
+          <div class="wa-heading-m ">
+            Sync the main <kbd>in-cluster-aoa</kbd> Application Set
+          </div>
           <p>
-            The deployment of all the Applications in ArgoCD will probably take around 20 minutes to complete. 
+            There is one main application called <kbd>in-cluster-aoa</kbd> that the rest of the applications are deployed from. 
+          </p>
+          <ol>
+            <li>
+              Click on the <kbd>in-cluster-aoa</kbd> Application in ArgoCD. 
+            </li>
+            <li>
+              Click <kbd>Sync</kbd>. 
+            </li>
+            <li>
+              Click <kbd>Synchronize</kbd>. 
+            </li>
+          </ol>
+          <p>
+            The deployment of all the Applications in ArgoCD will probably take around 10 minutes to complete. 
           </p>
 
           <div class="wa-heading-2xl ">
             <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
-            Deploy {{ SITE_DISPLAY_NAME }} to OpenShift Local with ArgoCD GitOps
+            Deploy AI Telemetry to OpenShift Local with ArgoCD GitOps
           </div>
           <p>
             Once you have successfully synced all of the dependent microservice Applications,
-            You are ready to deploy the rest of the {{ SITE_DISPLAY_NAME }} Applications to ArgoCD. 
+            You are ready to deploy the rest of the AI Telemetry Applications to ArgoCD. 
           </p>
           <p>
             Clone the <kbd>{{ SITE_NAME }}</kbd> repository into a new directory <kbd>~/.local/src/{{ SITE_NAME }}</kbd> in your source directory. 
@@ -341,7 +364,7 @@
           {{ code('oc apply -k openshift-local/applications/') }}
           <p>
             Then you need to wait patiently for the new Applications to sync. 
-            Access the ArgoCD application to watch the {{ SITE_DISPLAY_NAME }} Applications sync and become healthy. 
+            Access the ArgoCD application to watch the AI Telemetry Applications sync and become healthy. 
           </p>
           <div class="wa-stack wa-align-items-center ">
             <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
