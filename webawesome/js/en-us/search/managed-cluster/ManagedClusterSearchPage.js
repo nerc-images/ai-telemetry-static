@@ -372,4 +372,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapManagedCluster_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('ManagedCluster', event.currentTarget);
           });
+          document.querySelector('#fqManagedCluster_editPage')?.addEventListener('change', (event) => {
+            fqChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetManagedCluster_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotManagedCluster_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapManagedCluster_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#fqManagedCluster_userPage')?.addEventListener('change', (event) => {
+            fqChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetManagedCluster_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotManagedCluster_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapManagedCluster_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#fqManagedCluster_download')?.addEventListener('change', (event) => {
+            fqChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetManagedCluster_download')?.addEventListener('click', (event) => {
+            facetFieldChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotManagedCluster_download')?.addEventListener('change', (event) => {
+            facetPivotChange('ManagedCluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapManagedCluster_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ManagedCluster', event.currentTarget);
+          });
 });

@@ -143,7 +143,6 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
-        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var nodeResource = {% if result.nodeResource is defined %}{{ result.nodeResource | tojson }}{% else %}null{% endif %};

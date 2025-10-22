@@ -326,4 +326,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
           });
+          document.querySelector('#fqBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalResourceClass_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalResourceClass_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalResourceClass_download')?.addEventListener('change', (event) => {
+            fqChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalResourceClass_download')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalResourceClass_download')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalResourceClass_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
 });

@@ -609,6 +609,42 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#fqAiNode_editPage')?.addEventListener('change', (event) => {
+            fqChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetAiNode_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotAiNode_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapAiNode_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#fqAiNode_userPage')?.addEventListener('change', (event) => {
+            fqChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetAiNode_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotAiNode_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapAiNode_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#fqAiNode_download')?.addEventListener('change', (event) => {
+            fqChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetAiNode_download')?.addEventListener('click', (event) => {
+            facetFieldChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotAiNode_download')?.addEventListener('change', (event) => {
+            facetPivotChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapAiNode_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_nodeResource')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });

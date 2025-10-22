@@ -540,4 +540,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalOrder_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalOrder', event.currentTarget);
           });
+          document.querySelector('#fqBareMetalOrder_editPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalOrder_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalOrder_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalOrder_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalOrder_userPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalOrder_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalOrder_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalOrder_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalOrder_download')?.addEventListener('change', (event) => {
+            fqChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalOrder_download')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalOrder_download')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalOrder_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalOrder', event.currentTarget);
+          });
 });

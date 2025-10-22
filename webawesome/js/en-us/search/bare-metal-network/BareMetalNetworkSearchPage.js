@@ -1062,4 +1062,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#fqBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalNetwork_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalNetwork_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalNetwork_download')?.addEventListener('change', (event) => {
+            fqChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalNetwork_download')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalNetwork_download')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalNetwork_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
 });

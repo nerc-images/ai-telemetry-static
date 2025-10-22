@@ -360,4 +360,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapClusterOrder_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('ClusterOrder', event.currentTarget);
           });
+          document.querySelector('#fqClusterOrder_editPage')?.addEventListener('change', (event) => {
+            fqChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterOrder_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterOrder_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterOrder_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#fqClusterOrder_userPage')?.addEventListener('change', (event) => {
+            fqChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterOrder_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterOrder_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterOrder_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#fqClusterOrder_download')?.addEventListener('change', (event) => {
+            fqChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterOrder_download')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterOrder_download')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterOrder', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterOrder_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterOrder', event.currentTarget);
+          });
 });

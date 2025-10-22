@@ -416,6 +416,42 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapProject_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('Project', event.currentTarget);
           });
+          document.querySelector('#fqProject_editPage')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_userPage')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_download')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_download')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_download')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
           document.querySelector('#fqProject_projectResource')?.addEventListener('change', (event) => {
             fqChange('Project', event.currentTarget);
           });

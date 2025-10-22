@@ -142,7 +142,6 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
-        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var clusterResource = {% if result.clusterResource is defined %}{{ result.clusterResource | tojson }}{% else %}null{% endif %};
