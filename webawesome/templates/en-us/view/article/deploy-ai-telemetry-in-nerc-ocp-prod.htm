@@ -1,0 +1,152 @@
+{% extends "en-us/Article.htm" %}
+{% block htmMetaPageLayout %}
+{{ super() }}
+    <meta name="result.pageId" content="{{ result.shortFileName }}" />
+    <meta name="result.name" content="Deploy AI Telemetry in NERC OCP Prod in the Mass Open Cloud" />
+    <meta name="result.description" content="Here is a review how the AI Telemetry platform was deployed in the ai-telemetry-cbca60 project in the nerc-ocp-prod in the Mass Open Cloud. " />
+    <meta name="result.authorName" content="Christopher Tate" />
+    <meta name="result.authorUrl" content="{{ SITE_BASE_URL }}/en-us/learn/about/about-christopher-tate" />
+    <meta name="result.created" content="2025-10-23T09:09:48.556[America/Denver]" />
+    <meta name="result.pageImageUri" content="/png/ai-telemetry-on-openshift-local.png" />
+    <meta name="result.pageImageAlt" content="" />
+    <meta name="result.prerequisiteArticleIds" content="deploy-ai-telemetry-on-openshift-local, install-openshift-local-on-your-computer" />
+    <meta name="result.importance" content="1" />
+{% endblock htmMetaPageLayout %}
+{% block htmBodyMiddleArticle %}
+{{ articleImage(result) }}
+
+    <div class="wa-stack">
+
+      <wa-card>
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-cloud-binary "></i>
+            Deploy required microservices to OpenShift Local
+          </div>
+          <p>
+            Several microservices are required first before deploying the AI Telemetry platform. 
+            These microservices include: 
+          </p>
+          <ul>
+            <li>
+              Apache Zookeeper cluster manager
+            </li>
+            <li>
+              Apache Solr search engine
+            </li>
+            <li>
+              PostgreSQL relational database
+            </li>
+            <li>
+              Configure Keycloak single sign-on for authentication and authorization
+            </li>
+          </ul>
+          <p class="wa-heading-l ">
+            Log into OpenShift in your terminal
+          </p>
+          <p>
+            Log into to the OpenShift cluster with the <kbd>oc</kbd> command on your computer. 
+          </p>
+          <p>
+            Connect to the OpenShift project where you would like to install AI Telemetry microservices. 
+          </p>
+          {{ code('oc project ai-telemetry-cbca60') }}
+
+          <p>
+            Grant access to the edit role on the <kbd>ai-telemetry-cbca60</kbd> namespace to the Zookeeper service accounts. 
+          </p>
+          {{ code('oc adm policy add-role-to-user edit -z zookeeper-operator -n ai-telemetry-cbca60
+oc adm policy add-role-to-user edit -z zookeeper-operator-pre-delete -n ai-telemetry-cbca60
+oc adm policy add-role-to-user edit -z zookeeper-operator-post-install-upgrade -n ai-telemetry-cbca60') }}
+          <p class="wa-heading-l ">
+            Deploy Zookeeper with helm
+          </p>
+          <p>
+            Add the <kbd>pravega.io</kbd> helm charts to your computer. 
+          </p>
+          {{ code('helm repo add pravega https://charts.pravega.io') }}
+          <p>
+            Update your helm repos, just in case you have alredy installed pravega helm charts and they are not up-to-date. 
+          </p>
+          {{ code('helm repo update') }}
+          <p class="wa-heading-m ">
+            Install the zookeeper-operator Helm Chart
+          </p>
+          <p>
+            Install the <kbd>zookeeper-operator</kbd> helm chart to deploy Zookeeper to your project in OpenShift. 
+          </p>
+          {{ code('helm install zookeeper-operator pravega/zookeeper-operator --version=0.2.14 \\
+  --set rbac.create=false \\
+  --set watchNamespace=ai-telemetry-cbca60 \\
+  --set crd.create=false') }}
+          <p>
+            Wait patiently for a few minutes for the <kbd>zookeeper-operator</kbd> Helm chart to be installed. 
+          </p>
+          <p class="wa-heading-m ">
+            Install the zookeeper Helm Chart
+          </p>
+          <p>
+            Install the <kbd>zookeeper</kbd> helm chart to deploy Zookeeper to your project in OpenShift. 
+          </p>
+          {{ code('helm install zookeeper pravega/zookeeper --version=0.2.14 \\
+  --set persistence.volumeSize=10Gi \\
+  --set replicas=1') }}
+          <p>
+            Wait patiently for a few minutes for the <kbd>zookeeper</kbd> Helm chart to be installed. 
+          </p>
+
+          <p class="wa-heading-l ">
+            Deploy Solr with helm
+          </p>
+          <p>
+            Grant access to the edit role on the <kbd>ai-telemetry-cbca60</kbd> namespace to the Solr Operator service account. 
+          </p>
+          {{ code('oc adm policy add-role-to-user edit -z solr-operator -n ai-telemetry-cbca60') }}
+          <p>
+            Add the <kbd>solr.apache.org</kbd> helm charts to your computer. 
+          </p>
+          {{ code('helm repo add apache-solr https://solr.apache.org/charts') }}
+          <p>
+            Update your helm repos, just in case you have alredy installed Solr helm charts and they are not up-to-date. 
+          </p>
+          {{ code('helm repo update') }}
+          <p class="wa-heading-m ">
+            Install the solr-operator Helm Chart
+          </p>
+          <p>
+            Install the <kbd>solr-operator</kbd> helm chart to deploy Solr to your project in OpenShift. 
+          </p>
+          {{ code('helm install solr-operator apache-solr/solr-operator --version=0.6.0 \\
+  --namespace ai-telemetry-cbca60 \\
+   --set watchNamespaces=true \\
+  --skip-crds \\
+  --set rbac.create=false \\
+  --set zookeeper-operator.install=false \\
+  --set zookeeper-operator.use=false \\
+  --set image.repository=quay.io/computate/solr-operator \\
+  --set image.tag=openshift-v0.6.0') }}
+          <p>
+            Wait patiently for a few minutes for the <kbd>solr-operator</kbd> Helm chart to be installed. 
+          </p>
+          <p class="wa-heading-m ">
+            Install the solr Helm Chart
+          </p>
+          <p>
+            Install the <kbd>solr</kbd> helm chart to deploy Solr to your project in OpenShift. 
+          </p>
+          {{ code('helm install solr apache-solr/solr --version=0.6.0 \\
+  --set solrOptions.logLevel=INFO \\
+  --set zk.address=zookeeper-client:2181 \\
+  --set solrOptions.security.authenticationType=Basic \\
+  --set solrOptions.security.authenticationType=Basic \\
+  --set dataStorage.capacity=50Gi \\
+  --set dataStorage.type=persistent \\
+  --set image.tag=9.9.0 \\
+  --set replicas=1') }}
+          <p>
+            Wait patiently for a few minutes for the <kbd>solr</kbd> Helm chart to be installed. 
+          </p>
+        </div>
+      </wa-card>
+    </div>
+{% endblock %}
