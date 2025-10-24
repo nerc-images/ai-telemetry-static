@@ -95,6 +95,50 @@ Promise.all([
     facetStatsChange('SitePage', 'displayPage', false);
   });
 
+  document.querySelector('#pageSelectSortSitePage_objectTitle')?.addEventListener('change', (event) => {
+    sort('SitePage', 'objectTitle', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_objectTitle')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'objectTitle', true);
+  });
+  document.querySelector('#pageStatsSitePage_objectTitle')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'objectTitle', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_download')?.addEventListener('change', (event) => {
+    sort('SitePage', 'download', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_download')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'download', true);
+  });
+  document.querySelector('#pageStatsSitePage_download')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'download', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_objectSuggest')?.addEventListener('change', (event) => {
+    sort('SitePage', 'objectSuggest', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_objectSuggest')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'objectSuggest', true);
+  });
+  document.querySelector('#pageStatsSitePage_objectSuggest')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'objectSuggest', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_solrId')?.addEventListener('change', (event) => {
+    sort('SitePage', 'solrId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'solrId', true);
+  });
+  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'solrId', false);
+  });
+
   document.querySelector('#pageSelectSortSitePage_classCanonicalName')?.addEventListener('change', (event) => {
     sort('SitePage', 'classCanonicalName', event.currentTarget.value);
   });
@@ -139,17 +183,6 @@ Promise.all([
     facetStatsChange('SitePage', 'saves', false);
   });
 
-  document.querySelector('#pageSelectSortSitePage_objectTitle')?.addEventListener('change', (event) => {
-    sort('SitePage', 'objectTitle', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_objectTitle')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'objectTitle', true);
-  });
-  document.querySelector('#pageStatsSitePage_objectTitle')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'objectTitle', false);
-  });
-
   document.querySelector('#pageSelectSortSitePage_editPage')?.addEventListener('change', (event) => {
     sort('SitePage', 'editPage', event.currentTarget.value);
   });
@@ -172,28 +205,6 @@ Promise.all([
     facetStatsChange('SitePage', 'userPage', false);
   });
 
-  document.querySelector('#pageSelectSortSitePage_download')?.addEventListener('change', (event) => {
-    sort('SitePage', 'download', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_download')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'download', true);
-  });
-  document.querySelector('#pageStatsSitePage_download')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'download', false);
-  });
-
-  document.querySelector('#pageSelectSortSitePage_objectSuggest')?.addEventListener('change', (event) => {
-    sort('SitePage', 'objectSuggest', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_objectSuggest')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'objectSuggest', true);
-  });
-  document.querySelector('#pageStatsSitePage_objectSuggest')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'objectSuggest', false);
-  });
-
   document.querySelector('#pageSelectSortSitePage_objectText')?.addEventListener('change', (event) => {
     sort('SitePage', 'objectText', event.currentTarget.value);
   });
@@ -203,17 +214,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsSitePage_objectText')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('SitePage', 'objectText', false);
-  });
-
-  document.querySelector('#pageSelectSortSitePage_solrId')?.addEventListener('change', (event) => {
-    sort('SitePage', 'solrId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'solrId', true);
-  });
-  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'solrId', false);
   });
 
   document.querySelector('#pageSelectSortSitePage_courseNum')?.addEventListener('change', (event) => {
@@ -315,6 +315,17 @@ Promise.all([
     facetStatsChange('SitePage', 'pageImageType', false);
   });
 
+  document.querySelector('#pageSelectSortSitePage_pageImageAlt')?.addEventListener('change', (event) => {
+    sort('SitePage', 'pageImageAlt', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_pageImageAlt')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'pageImageAlt', true);
+  });
+  document.querySelector('#pageStatsSitePage_pageImageAlt')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'pageImageAlt', false);
+  });
+
   document.querySelector('#pageSelectSortSitePage_prerequisiteArticleIds')?.addEventListener('change', (event) => {
     sort('SitePage', 'prerequisiteArticleIds', event.currentTarget.value);
   });
@@ -337,28 +348,6 @@ Promise.all([
     facetStatsChange('SitePage', 'nextArticleIds', false);
   });
 
-  document.querySelector('#pageSelectSortSitePage_labels')?.addEventListener('change', (event) => {
-    sort('SitePage', 'labels', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_labels')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'labels', true);
-  });
-  document.querySelector('#pageStatsSitePage_labels')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'labels', false);
-  });
-
-  document.querySelector('#pageSelectSortSitePage_pageImageAlt')?.addEventListener('change', (event) => {
-    sort('SitePage', 'pageImageAlt', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_pageImageAlt')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'pageImageAlt', true);
-  });
-  document.querySelector('#pageStatsSitePage_pageImageAlt')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'pageImageAlt', false);
-  });
-
   document.querySelector('#pageSelectSortSitePage_labelsString')?.addEventListener('change', (event) => {
     sort('SitePage', 'labelsString', event.currentTarget.value);
   });
@@ -368,6 +357,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsSitePage_labelsString')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('SitePage', 'labelsString', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_labels')?.addEventListener('change', (event) => {
+    sort('SitePage', 'labels', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_labels')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'labels', true);
+  });
+  document.querySelector('#pageStatsSitePage_labels')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'labels', false);
   });
 
   document.querySelector('#pageSelectSortSitePage_relatedArticleIds')?.addEventListener('change', (event) => {
@@ -393,8 +393,32 @@ Promise.all([
     document.querySelector('#putimportSitePageDialog').open = true;
   });
 
+  document.querySelector('#htmButton_deleteSitePage')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var pageId =  event.currentTarget.getAttribute('data-pageId');
+      deleteSitePage(
+          event.currentTarget
+          , pageId
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
   document.querySelector('#htmButton_searchpageSitePage')?.addEventListener('click', (event) => {
     document.querySelector('#searchpageSitePageDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterSitePage')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterSitePage(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
   });
           document.querySelector('#fqSitePage_created')?.addEventListener('change', (event) => {
             fqChange('SitePage', event.currentTarget);
@@ -468,6 +492,18 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapSitePage_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('SitePage', event.currentTarget);
           });
+          document.querySelector('#fqSitePage_download')?.addEventListener('change', (event) => {
+            fqChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetSitePage_download')?.addEventListener('click', (event) => {
+            facetFieldChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotSitePage_download')?.addEventListener('change', (event) => {
+            facetPivotChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapSitePage_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('SitePage', event.currentTarget);
+          });
           document.querySelector('#fqSitePage_editPage')?.addEventListener('change', (event) => {
             fqChange('SitePage', event.currentTarget);
           });
@@ -490,18 +526,6 @@ Promise.all([
             facetPivotChange('SitePage', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapSitePage_userPage')?.addEventListener('change', (event) => {
-            facetRangeGapChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#fqSitePage_download')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetSitePage_download')?.addEventListener('click', (event) => {
-            facetFieldChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotSitePage_download')?.addEventListener('change', (event) => {
-            facetPivotChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapSitePage_download')?.addEventListener('change', (event) => {
             facetRangeGapChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_courseNum')?.addEventListener('change', (event) => {
