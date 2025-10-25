@@ -52,12 +52,57 @@
           </p>
           {{ code('oc project ai-telemetry-cbca60') }}
 
+          <p class="wa-heading-l ">
+            Add aggregate-to-edit ClusterRoles for operators
+          </p>
+          <p>
+            Some ClusterRoles for 
+            <a href="https://github.com/computate/nerc-ocp-config/blob/bitnami-legacy/cluster-scope/base/rbac.authorization.k8s.io/clusterroles/zookeeper-edit/clusterrole.yaml">zookeeper-edit</a> 
+            and <a href="https://github.com/computate/nerc-ocp-config/blob/bitnami-legacy/cluster-scope/base/rbac.authorization.k8s.io/clusterroles/solr-edit/clusterrole.yaml">solr-edit</a> 
+            were added to the cluster with the <kbd>rbac.authorization.k8s.io/aggregate-to-edit: "true"</kbd> label 
+            to grant access to service accounts and users to create ZookeeperClusters and SolrClusters in their projects. 
+          </p>
+          <p>
+            You can add these ClusterRoles to your own clusters so that the Zookeeper and Solr Operators work with these commands: 
+          </p>
+          {{ code('echo \'kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: zookeeper-edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+rules:
+- apiGroups:
+  - zookeeper.pravega.io
+  resources:
+  - "*"
+  verbs:
+  - "*"
+\' | oc apply -f -') }}
+          <p>
+            And this is the ClusterRole for the Solr Operator. 
+          </p>
+          {{ code('echo \'apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: solr-edit
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+rules:
+- apiGroups:
+  - solr.apache.org
+  resources:
+  - "*"
+  verbs:
+  - "*"
+\' | oc apply -f -') }}
           <p>
             Grant access to the edit role on the <kbd>ai-telemetry-cbca60</kbd> namespace to the Zookeeper service accounts. 
           </p>
           {{ code('oc adm policy add-role-to-user edit -z zookeeper-operator -n ai-telemetry-cbca60
 oc adm policy add-role-to-user edit -z zookeeper-operator-pre-delete -n ai-telemetry-cbca60
-oc adm policy add-role-to-user edit -z zookeeper-operator-post-install-upgrade -n ai-telemetry-cbca60') }}
+oc adm policy add-role-to-user edit -z zookeeper-operator-post-install-upgrade -n ai-telemetry-cbca60
+oc adm policy add-role-to-user edit -z zookeeper-post-install-upgrade -n ai-telemetry-cbca60') }}
           <p class="wa-heading-l ">
             Deploy Zookeeper with helm
           </p>
@@ -137,7 +182,6 @@ oc adm policy add-role-to-user edit -z zookeeper-operator-post-install-upgrade -
           {{ code('helm install solr apache-solr/solr --version=0.6.0 \\
   --set solrOptions.logLevel=INFO \\
   --set zk.address=zookeeper-client:2181 \\
-  --set solrOptions.security.authenticationType=Basic \\
   --set solrOptions.security.authenticationType=Basic \\
   --set dataStorage.capacity=50Gi \\
   --set dataStorage.type=persistent \\
