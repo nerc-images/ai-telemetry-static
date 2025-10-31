@@ -394,6 +394,42 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapHub_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('Hub', event.currentTarget);
           });
+          document.querySelector('#fqHub_editPage')?.addEventListener('change', (event) => {
+            fqChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetHub_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotHub_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapHub_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#fqHub_userPage')?.addEventListener('change', (event) => {
+            fqChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetHub_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotHub_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapHub_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#fqHub_download')?.addEventListener('change', (event) => {
+            fqChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetHub_download')?.addEventListener('click', (event) => {
+            facetFieldChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotHub_download')?.addEventListener('change', (event) => {
+            facetPivotChange('Hub', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapHub_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Hub', event.currentTarget);
+          });
           document.querySelector('#fqHub_hubResource')?.addEventListener('change', (event) => {
             fqChange('Hub', event.currentTarget);
           });

@@ -372,4 +372,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapClusterTemplate_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('ClusterTemplate', event.currentTarget);
           });
+          document.querySelector('#fqClusterTemplate_editPage')?.addEventListener('change', (event) => {
+            fqChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterTemplate_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterTemplate_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterTemplate_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#fqClusterTemplate_userPage')?.addEventListener('change', (event) => {
+            fqChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterTemplate_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterTemplate_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterTemplate_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#fqClusterTemplate_download')?.addEventListener('change', (event) => {
+            fqChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterTemplate_download')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterTemplate_download')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterTemplate', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterTemplate_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterTemplate', event.currentTarget);
+          });
 });

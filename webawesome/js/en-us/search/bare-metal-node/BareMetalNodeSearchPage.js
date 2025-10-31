@@ -487,4 +487,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNode_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNode', event.currentTarget);
           });
+          document.querySelector('#fqBareMetalNode_editPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalNode_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalNode_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalNode_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalNode_userPage')?.addEventListener('change', (event) => {
+            fqChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalNode_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalNode_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalNode_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#fqBareMetalNode_download')?.addEventListener('change', (event) => {
+            fqChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetBareMetalNode_download')?.addEventListener('click', (event) => {
+            facetFieldChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotBareMetalNode_download')?.addEventListener('change', (event) => {
+            facetPivotChange('BareMetalNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapBareMetalNode_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('BareMetalNode', event.currentTarget);
+          });
 });

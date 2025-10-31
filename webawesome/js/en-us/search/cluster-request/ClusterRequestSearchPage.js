@@ -325,4 +325,40 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapClusterRequest_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('ClusterRequest', event.currentTarget);
           });
+          document.querySelector('#fqClusterRequest_editPage')?.addEventListener('change', (event) => {
+            fqChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterRequest_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterRequest_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterRequest_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#fqClusterRequest_userPage')?.addEventListener('change', (event) => {
+            fqChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterRequest_userPage')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterRequest_userPage')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterRequest_userPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#fqClusterRequest_download')?.addEventListener('change', (event) => {
+            fqChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetClusterRequest_download')?.addEventListener('click', (event) => {
+            facetFieldChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotClusterRequest_download')?.addEventListener('change', (event) => {
+            facetPivotChange('ClusterRequest', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapClusterRequest_download')?.addEventListener('change', (event) => {
+            facetRangeGapChange('ClusterRequest', event.currentTarget);
+          });
 });

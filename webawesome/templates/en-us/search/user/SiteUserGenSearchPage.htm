@@ -59,7 +59,6 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
-        , customElements.whenDefined('wa-select')
       ]).then(() => {
 
         var userId = {% if result.userId is defined %}{{ result.userId | tojson }}{% else %}null{% endif %};
@@ -166,7 +165,7 @@
           <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-regular fa-user-gear"></i>
+              <i class="fa-duotone fa-solidfa-user-gear"></i>
               all site users
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -175,7 +174,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-regular fa-user-gear"></i>
+              <i class="fa-duotone fa-solidfa-user-gear"></i>
             </div>
             <span class="wa-heading-m ">no site user found</span>
             <p class="wa-caption-l ">A user record for each site user</p>
@@ -198,7 +197,7 @@
               <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-user-gear"></i>
+                  <i class="fa-duotone fa-solidfa-user-gear"></i>
                   all site users
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -248,7 +247,7 @@
                   {% for item in listSiteUser%}
                   <div>
               <a href="{{ item.displayPage }}">
-                <i class="fa-regular fa-user-gear"></i>
+                <i class="fa-duotone fa-solidfa-user-gear"></i>
               <span>{{ item.userFullName | e }}
 </span>              </a>
               <a href="{{ item.displayPage }}">

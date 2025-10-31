@@ -10,7 +10,7 @@
     <meta name="result.pageImageUri" content="/png/openshift-local-console.png" />
     <meta name="result.pageImageAlt" content="Screenshot of the OpenShift Local Console" />
     <meta name="result.prerequisiteArticleIds" content="become-a-red-hat-developer, computer-requirements-for-ai-telemetry-development" />
-    <meta name="result.nextArticleIds" content="deploying-ai-telemetry-on-openshift-local" />
+    <meta name="result.nextArticleIds" content="deploy-ai-telemetry-on-openshift-local" />
 {% endblock htmMetaPageLayout %}
 {% block htmBodyMiddleArticle %}
 {{ articleImage(result) }}
@@ -177,7 +177,26 @@ crc config set memory %SET_MEMORY%0') }}
             Now configure the disk-size of OpenShift Local with the <kbd>crc</kbd> command. 
           </p>
           {{ code('crc config set disk-size 400') }}
-        </div>
+
+          <div class="wa-heading-m ">
+            Optionally set your own <kbd>kubeadmin</kbd> password
+          </div>
+          <p>
+            By default, OpenShift Local will generate a random password for the <kbd>kubeadmin</kbd> user. 
+            If you have a password in mind you would like to use instead of a random password, 
+            or you use OpenShift Local on multiple computers and save the password in the browser, 
+            you might want to set the default kubeadmin password. 
+          </p>
+          {{ code('crc config set kubeadmin-password ') }}
+          <div class="wa-heading-m ">
+            Enable Cluster Monitoring for AI Telemetry
+          </div>
+          <p>
+            Because you are installing the AI Telemetry platform, 
+            you will need to enable Cluster Monitoring for collecting and querying metrics. 
+            By default, it is disabled in OpenShift Local. 
+          </p>
+          {{ code('crc config set enable-cluster-monitoring true') }}        </div>
       </wa-details>
 
       </wa-details>
@@ -260,7 +279,28 @@ echo "$(nproc) logical processors"') }}
             Now configure the disk-size of OpenShift Local with the <kbd>crc</kbd> command. 
           </p>
           {{ code('crc config set disk-size 400') }}
-        </div>
+
+          <div class="wa-heading-m ">
+            Optionally set your own <kbd>kubeadmin</kbd> password
+          </div>
+          <p>
+            By default, OpenShift Local will generate a random password for the <kbd>kubeadmin</kbd> user. 
+            If you have a password in mind you would like to use instead of a random password, 
+            or you use OpenShift Local on multiple computers and save the password in the browser, 
+            you might want to set the default kubeadmin password. 
+          </p>
+          {{ code('crc config set kubeadmin-password ') }}
+          
+          <div class="wa-heading-m ">
+            Enable Cluster Monitoring for AI Telemetry
+          </div>
+          <p>
+            Because you are installing the AI Telemetry platform, 
+            you will need to enable Cluster Monitoring for collecting and querying metrics. 
+            By default, it is disabled in OpenShift Local. 
+          </p>
+          {{ code('crc config set enable-cluster-monitoring true') }}
+                  </div>
       </wa-details>
 
       <wa-callout variant="brand">
