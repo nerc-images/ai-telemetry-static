@@ -220,7 +220,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestAiNodeHubResource(filters, $list, nodeResource, hubResource, relate, target);
+                  suggestAiNodeHubResource(filters, $list, nodeResource, o['hubResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -269,7 +269,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestAiNodeClusterResource(filters, $list, nodeResource, clusterResource, relate, target);
+                  suggestAiNodeClusterResource(filters, $list, nodeResource, o['clusterResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

@@ -159,7 +159,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterOrderTemplateId(filters, $list, id, templateId, relate, target);
+                  suggestClusterOrderTemplateId(filters, $list, id, o['id'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

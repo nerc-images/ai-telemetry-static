@@ -176,7 +176,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestProjectHubResource(filters, $list, projectResource, hubResource, relate, target);
+                  suggestProjectHubResource(filters, $list, projectResource, o['hubResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -225,7 +225,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestProjectClusterResource(filters, $list, projectResource, clusterResource, relate, target);
+                  suggestProjectClusterResource(filters, $list, projectResource, o['clusterResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

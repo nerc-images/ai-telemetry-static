@@ -228,7 +228,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterHubResource(filters, $list, clusterResource, hubResource, relate, target);
+                  suggestClusterHubResource(filters, $list, clusterResource, o['hubResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

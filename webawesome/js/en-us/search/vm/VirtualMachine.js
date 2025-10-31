@@ -228,7 +228,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestVirtualMachineHubResource(filters, $list, vmResource, hubResource, relate, target);
+                  suggestVirtualMachineHubResource(filters, $list, vmResource, o['hubResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -277,7 +277,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestVirtualMachineClusterResource(filters, $list, vmResource, clusterResource, relate, target);
+                  suggestVirtualMachineClusterResource(filters, $list, vmResource, o['clusterResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

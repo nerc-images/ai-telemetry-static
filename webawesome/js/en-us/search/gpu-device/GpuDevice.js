@@ -232,7 +232,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource, hubResource, relate, target);
+                  suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource, o['hubResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -281,7 +281,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource, clusterResource, relate, target);
+                  suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource, o['clusterResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -330,7 +330,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource, nodeResource, relate, target);
+                  suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource, o['nodeResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

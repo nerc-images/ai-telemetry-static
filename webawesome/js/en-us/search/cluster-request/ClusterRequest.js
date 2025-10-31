@@ -155,7 +155,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterRequestClusterTemplateTitle(filters, $list, name, clusterTemplateTitle, relate, target);
+                  suggestClusterRequestClusterTemplateTitle(filters, $list, name, o['title'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -181,7 +181,7 @@ function suggestClusterRequestUserId(filters, $list, name = null, userId = null,
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
         var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-user-gear"></i>';
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-user-gear"></i>';
         var $i = iTemplate.content;
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
@@ -204,7 +204,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterRequestUserId(filters, $list, name, userId, relate, target);
+                  suggestClusterRequestUserId(filters, $list, name, o['userId'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
