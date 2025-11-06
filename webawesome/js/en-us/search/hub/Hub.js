@@ -162,7 +162,7 @@ function suggestHubObjectSuggest($formFilters, $list, target) {
 
 async function getHub(pk) {
   fetch(
-    '/en-us/api/hub/' + hubResource
+    '/en-us/api/hub/' + hubId
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -179,7 +179,7 @@ async function getHub(pk) {
 
 // PATCH //
 
-async function patchHub($formFilters, $formValues, target, hubResource, success, error) {
+async function patchHub($formFilters, $formValues, target, hubId, success, error) {
   var filters = patchHubFilters($formFilters);
 
   var vals = {};
@@ -395,7 +395,7 @@ async function patchHub($formFilters, $formValues, target, hubResource, success,
   if(removeLocalClusterName != null && removeLocalClusterName !== '')
     vals['removeLocalClusterName'] = removeLocalClusterName;
 
-  patchHubVals(hubResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hubResource:' + hubResource}], vals, target, success, error);
+  patchHubVals(hubId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hubId:' + hubId}], vals, target, success, error);
 }
 
 function patchHubFilters($formFilters) {
@@ -658,7 +658,7 @@ function postHubVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteHub(target, hubResource, success, error) {
+async function deleteHub(target, hubId, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -674,7 +674,7 @@ async function deleteHub(target, hubResource, success, error) {
   }
 
   fetch(
-    '/en-us/api/hub/' + encodeURIComponent(hubResource)
+    '/en-us/api/hub/' + encodeURIComponent(hubId)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -690,7 +690,7 @@ async function deleteHub(target, hubResource, success, error) {
 
 // PUTImport //
 
-async function putimportHub($formValues, target, hubResource, success, error) {
+async function putimportHub($formValues, target, hubId, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
     putimportHubVals(JSON.parse(json), target, success, error);
@@ -752,25 +752,25 @@ async function websocketHub(success) {
 
     window.eventBus.registerHandler('websocketHub', function (error, message) {
       var json = JSON.parse(message['body']);
-      var hubResource = json['id'];
+      var hubId = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + hubResource + ' ');
-      $box.setAttribute('id', 'box-' + hubResource);
+      $box.setAttribute('class', 'w3-quarter box-' + hubId + ' ');
+      $box.setAttribute('id', 'box-' + hubId);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + hubResource);
+      $margin.setAttribute('id', 'margin-' + hubId);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + hubResource);
+      $card.setAttribute('id', 'card-' + hubId);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + hubResource);
+      $header.setAttribute('id', 'header-' + hubId);
       var iTemplate = document.createElement('template');
       iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
       var $i = iTemplate.content;
@@ -779,19 +779,19 @@ async function websocketHub(success) {
       $headerSpan.innerText = 'modify hubs in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + hubResource + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + hubId + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + hubResource);
+      $x.setAttribute('id', 'x-' + hubId);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + hubResource);
+      $body.setAttribute('id', 'text-' + hubId);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + hubResource);
+      $bar.setAttribute('id', 'bar-' + hubId);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + hubResource);
+      $progress.setAttribute('id', 'progress-' + hubId);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -803,11 +803,11 @@ async function websocketHub(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + hubResource);
+        var $old_box = document.querySelector('.box-' + hubId);
       } else {
-        document.querySelector('.box-' + hubResource)?.remove();
+        document.querySelector('.box-' + hubId)?.remove();
       }
-      if(hubResource) {
+      if(hubId) {
         if(success)
           success(json);
       }
@@ -815,12 +815,12 @@ async function websocketHub(success) {
   }
 }
 async function websocketHubInner(apiRequest) {
-  var hubResource = apiRequest['id'];
+  var hubId = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(hubResource != null && vars.length > 0) {
+  if(hubId != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -900,7 +900,7 @@ async function websocketHubInner(apiRequest) {
         if(vars.includes('localClusterName'))
           inputLocalClusterName = $response.querySelector('.Page_localClusterName');
 
-        jsWebsocketHub(hubResource, vars, $response);
+        jsWebsocketHub(hubId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHub = JSON.parse($response.querySelector('.pageForm .listHub')?.value);
 

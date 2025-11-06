@@ -1948,7 +1948,7 @@ function pageGraphCluster(apiRequest) {
           contextmenuItems.push({
             text: 'Set location of ' + result.objectTitle
             , callback: function(event2) {
-              patchLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
+              patchClusterLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
             }
           });
         }
@@ -1960,7 +1960,7 @@ function pageGraphCluster(apiRequest) {
     }
   }
 }
-function patchLocation(target, location) {
+function patchClusterLocation(target, location) {
   patchClusterVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'clusterResource:' + result.clusterResource }]
       , 'setLocation', location
       , target

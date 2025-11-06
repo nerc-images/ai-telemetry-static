@@ -184,7 +184,7 @@ function suggestSitePageObjectSuggest($formFilters, $list, target) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-newspaper"></i>');
+        var $i = document.querySelector('<i class="fa-duotone fa-solid fa-newspaper"></i>');
         var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
         var $li = document.createElement('li');
         var $a = document.createElement('a').setAttribute('href', o['editPage']);
@@ -981,7 +981,7 @@ async function websocketSitePage(success) {
       $header.setAttribute('class', 'w3-container fa- ');
       $header.setAttribute('id', 'header-' + pageId);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-newspaper"></i>';
+      iTemplate.innerHTML = '<i class="fa-duotone fa-solid fa-newspaper"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
@@ -1069,9 +1069,9 @@ async function websocketSitePageInner(apiRequest) {
         var inputNextArticleIds = null;
         var inputNextArticles = null;
         var inputLabelsString = null;
+        var inputRelatedArticles = null;
         var inputLabels = null;
         var inputRelatedArticleIds = null;
-        var inputRelatedArticles = null;
 
         if(vars.includes('created'))
           inputCreated = $response.querySelector('.Page_created');
@@ -1141,12 +1141,12 @@ async function websocketSitePageInner(apiRequest) {
           inputNextArticles = $response.querySelector('.Page_nextArticles');
         if(vars.includes('labelsString'))
           inputLabelsString = $response.querySelector('.Page_labelsString');
+        if(vars.includes('relatedArticles'))
+          inputRelatedArticles = $response.querySelector('.Page_relatedArticles');
         if(vars.includes('labels'))
           inputLabels = $response.querySelector('.Page_labels');
         if(vars.includes('relatedArticleIds'))
           inputRelatedArticleIds = $response.querySelector('.Page_relatedArticleIds');
-        if(vars.includes('relatedArticles'))
-          inputRelatedArticles = $response.querySelector('.Page_relatedArticles');
 
         jsWebsocketSitePage(pageId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -1493,6 +1493,16 @@ async function websocketSitePageInner(apiRequest) {
           addGlow(document.querySelector('.Page_labelsString'));
         }
 
+        if(inputRelatedArticles) {
+          document.querySelectorAll('.Page_relatedArticles').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputRelatedArticles.getAttribute('value');
+            else
+              item.textContent = inputRelatedArticles.textContent;
+          });
+          addGlow(document.querySelector('.Page_relatedArticles'));
+        }
+
         if(inputLabels) {
           document.querySelectorAll('.Page_labels').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1511,16 +1521,6 @@ async function websocketSitePageInner(apiRequest) {
               item.textContent = inputRelatedArticleIds.textContent;
           });
           addGlow(document.querySelector('.Page_relatedArticleIds'));
-        }
-
-        if(inputRelatedArticles) {
-          document.querySelectorAll('.Page_relatedArticles').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputRelatedArticles.getAttribute('value');
-            else
-              item.textContent = inputRelatedArticles.textContent;
-          });
-          addGlow(document.querySelector('.Page_relatedArticles'));
         }
 
           pageGraphSitePage();

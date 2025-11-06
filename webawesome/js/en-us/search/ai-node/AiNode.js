@@ -1890,7 +1890,7 @@ function pageGraphAiNode(apiRequest) {
           contextmenuItems.push({
             text: 'Set location of ' + result.objectTitle
             , callback: function(event2) {
-              patchLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
+              patchAiNodeLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
             }
           });
         }
@@ -1902,7 +1902,7 @@ function pageGraphAiNode(apiRequest) {
     }
   }
 }
-function patchLocation(target, location) {
+function patchAiNodeLocation(target, location) {
   patchAiNodeVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'nodeResource:' + result.nodeResource }]
       , 'setLocation', location
       , target

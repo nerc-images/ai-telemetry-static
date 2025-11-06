@@ -16,7 +16,7 @@ Promise.all([
               var t = moment(t3);
               if(t) {
                 var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']';
-                patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+                patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                     , 'setCreated', s
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -40,7 +40,7 @@ Promise.all([
             if(valid) {
               var confirmResponse = confirm('Are you sure you want to archive that?'); 
               if(confirmResponse) { 
-                patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+                patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                     , 'setArchived', !(event.currentTarget.getAttribute('data-val') === 'true')
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -62,7 +62,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_hubName');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setHubName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -83,7 +83,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_hubId');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setHubId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -104,7 +104,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_description');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -125,7 +125,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_pageId');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setPageId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -146,7 +146,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setSessionId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -167,7 +167,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setUserKey', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -188,7 +188,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setObjectTitle', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -209,7 +209,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setDisplayPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -230,7 +230,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setEditPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -251,7 +251,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setUserPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -272,7 +272,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setDownload', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -293,7 +293,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_hubResource');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setHubResource', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -314,7 +314,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_localClusterName');
             const valid = form.checkValidity();
             if(valid) {
-              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubResource:' + event.currentTarget.getAttribute('data-hubResource') }]
+              patchHubVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hubId:' + event.currentTarget.getAttribute('data-hubId') }]
                   , 'setLocalClusterName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }

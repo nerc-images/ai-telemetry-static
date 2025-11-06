@@ -89,6 +89,38 @@ function searchVirtualMachineFilters($formFilters) {
     if(filterLocation != null && filterLocation !== '')
       filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
+    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
+    if(filterLocationColors != null && filterLocationColors !== '')
+      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
+
+    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
+    if(filterEntityShortId != null && filterEntityShortId !== '')
+      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
+
+    var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
+    if(filterVmResource != null && filterVmResource !== '')
+      filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
+
+    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
+    if(filterLocationTitles != null && filterLocationTitles !== '')
+      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
+
+    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
+    if(filterLocationLinks != null && filterLocationLinks !== '')
+      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -144,38 +176,6 @@ function searchVirtualMachineFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
-    var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
-    if(filterVmResource != null && filterVmResource !== '')
-      filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
-
-    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
-    if(filterVmDisplayName != null && filterVmDisplayName !== '')
-      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
-
-    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
-    if(filterLocationColors != null && filterLocationColors !== '')
-      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
-
-    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
-    if(filterLocationTitles != null && filterLocationTitles !== '')
-      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
-
-    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
-    if(filterLocationLinks != null && filterLocationLinks !== '')
-      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
-
-    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
-    if(filterEntityShortId != null && filterEntityShortId !== '')
-      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
   }
   return filters;
 }
@@ -554,6 +554,26 @@ async function patchVirtualMachine($formFilters, $formValues, target, vmResource
   if(removeLocation != null && removeLocation !== '')
     vals['removeLocation'] = removeLocation;
 
+  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['setHubResource'] = valueHubResource;
+
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['setClusterResource'] = valueClusterResource;
+
+  var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
+  var removeVmResource = $formValues.querySelector('.removeVmResource')?.value === 'true';
+  var setVmResource = removeVmResource ? null : $formValues.querySelector('.setVmResource')?.value;
+  var addVmResource = $formValues.querySelector('.addVmResource')?.value;
+  if(removeVmResource || setVmResource != null && setVmResource !== '')
+    vals['setVmResource'] = setVmResource;
+  if(addVmResource != null && addVmResource !== '')
+    vals['addVmResource'] = addVmResource;
+  var removeVmResource = $formValues.querySelector('.removeVmResource')?.value;
+  if(removeVmResource != null && removeVmResource !== '')
+    vals['removeVmResource'] = removeVmResource;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -638,26 +658,6 @@ async function patchVirtualMachine($formFilters, $formValues, target, vmResource
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['setHubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['setClusterResource'] = valueClusterResource;
-
-  var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
-  var removeVmResource = $formValues.querySelector('.removeVmResource')?.value === 'true';
-  var setVmResource = removeVmResource ? null : $formValues.querySelector('.setVmResource')?.value;
-  var addVmResource = $formValues.querySelector('.addVmResource')?.value;
-  if(removeVmResource || setVmResource != null && setVmResource !== '')
-    vals['setVmResource'] = setVmResource;
-  if(addVmResource != null && addVmResource !== '')
-    vals['addVmResource'] = addVmResource;
-  var removeVmResource = $formValues.querySelector('.removeVmResource')?.value;
-  if(removeVmResource != null && removeVmResource !== '')
-    vals['removeVmResource'] = removeVmResource;
-
   patchVirtualMachineVals(vmResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'vmResource:' + vmResource}], vals, target, success, error);
 }
 
@@ -740,6 +740,38 @@ function patchVirtualMachineFilters($formFilters) {
     if(filterLocation != null && filterLocation !== '')
       filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
+    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
+    if(filterLocationColors != null && filterLocationColors !== '')
+      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
+
+    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
+    if(filterEntityShortId != null && filterEntityShortId !== '')
+      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
+
+    var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
+    if(filterVmResource != null && filterVmResource !== '')
+      filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
+
+    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
+    if(filterLocationTitles != null && filterLocationTitles !== '')
+      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
+
+    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
+    if(filterLocationLinks != null && filterLocationLinks !== '')
+      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -795,38 +827,6 @@ function patchVirtualMachineFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
-    var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
-    if(filterVmResource != null && filterVmResource !== '')
-      filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
-
-    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
-    if(filterVmDisplayName != null && filterVmDisplayName !== '')
-      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
-
-    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
-    if(filterLocationColors != null && filterLocationColors !== '')
-      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
-
-    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
-    if(filterLocationTitles != null && filterLocationTitles !== '')
-      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
-
-    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
-    if(filterLocationLinks != null && filterLocationLinks !== '')
-      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
-
-    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
-    if(filterEntityShortId != null && filterEntityShortId !== '')
-      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
   }
   return filters;
 }
@@ -942,6 +942,18 @@ async function postVirtualMachine($formValues, target, success, error) {
   if(valueLocation != null && valueLocation !== '')
     vals['location'] = JSON.parse(valueLocation);
 
+  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['hubResource'] = valueHubResource;
+
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['clusterResource'] = valueClusterResource;
+
+  var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
+  if(valueVmResource != null && valueVmResource !== '')
+    vals['vmResource'] = valueVmResource;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
     vals['sessionId'] = valueSessionId;
@@ -969,18 +981,6 @@ async function postVirtualMachine($formValues, target, success, error) {
   var valueDownload = $formValues.querySelector('.valueDownload')?.value;
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
-
-  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['hubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['clusterResource'] = valueClusterResource;
-
-  var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
-  if(valueVmResource != null && valueVmResource !== '')
-    vals['vmResource'] = valueVmResource;
 
   fetch(
     '/en-us/api/vm'
@@ -1220,6 +1220,14 @@ async function websocketVirtualMachineInner(apiRequest) {
         var inputNgsildContext = null;
         var inputNgsildData = null;
         var inputLocation = null;
+        var inputHubResource = null;
+        var inputClusterResource = null;
+        var inputVmDisplayName = null;
+        var inputLocationColors = null;
+        var inputEntityShortId = null;
+        var inputVmResource = null;
+        var inputLocationTitles = null;
+        var inputLocationLinks = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1234,14 +1242,6 @@ async function websocketVirtualMachineInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputHubResource = null;
-        var inputClusterResource = null;
-        var inputVmResource = null;
-        var inputVmDisplayName = null;
-        var inputLocationColors = null;
-        var inputLocationTitles = null;
-        var inputLocationLinks = null;
-        var inputEntityShortId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -1277,6 +1277,22 @@ async function websocketVirtualMachineInner(apiRequest) {
           inputNgsildData = $response.querySelector('.Page_ngsildData');
         if(vars.includes('location'))
           inputLocation = $response.querySelector('.Page_location');
+        if(vars.includes('hubResource'))
+          inputHubResource = $response.querySelector('.Page_hubResource');
+        if(vars.includes('clusterResource'))
+          inputClusterResource = $response.querySelector('.Page_clusterResource');
+        if(vars.includes('vmDisplayName'))
+          inputVmDisplayName = $response.querySelector('.Page_vmDisplayName');
+        if(vars.includes('locationColors'))
+          inputLocationColors = $response.querySelector('.Page_locationColors');
+        if(vars.includes('entityShortId'))
+          inputEntityShortId = $response.querySelector('.Page_entityShortId');
+        if(vars.includes('vmResource'))
+          inputVmResource = $response.querySelector('.Page_vmResource');
+        if(vars.includes('locationTitles'))
+          inputLocationTitles = $response.querySelector('.Page_locationTitles');
+        if(vars.includes('locationLinks'))
+          inputLocationLinks = $response.querySelector('.Page_locationLinks');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1305,22 +1321,6 @@ async function websocketVirtualMachineInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
-        if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
-        if(vars.includes('vmResource'))
-          inputVmResource = $response.querySelector('.Page_vmResource');
-        if(vars.includes('vmDisplayName'))
-          inputVmDisplayName = $response.querySelector('.Page_vmDisplayName');
-        if(vars.includes('locationColors'))
-          inputLocationColors = $response.querySelector('.Page_locationColors');
-        if(vars.includes('locationTitles'))
-          inputLocationTitles = $response.querySelector('.Page_locationTitles');
-        if(vars.includes('locationLinks'))
-          inputLocationLinks = $response.querySelector('.Page_locationLinks');
-        if(vars.includes('entityShortId'))
-          inputEntityShortId = $response.querySelector('.Page_entityShortId');
 
         jsWebsocketVirtualMachine(vmResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -1497,6 +1497,86 @@ async function websocketVirtualMachineInner(apiRequest) {
           addGlow(document.querySelector('.Page_location'));
         }
 
+        if(inputHubResource) {
+          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubResource.getAttribute('value');
+            else
+              item.textContent = inputHubResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_hubResource'));
+        }
+
+        if(inputClusterResource) {
+          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterResource.getAttribute('value');
+            else
+              item.textContent = inputClusterResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterResource'));
+        }
+
+        if(inputVmDisplayName) {
+          document.querySelectorAll('.Page_vmDisplayName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVmDisplayName.getAttribute('value');
+            else
+              item.textContent = inputVmDisplayName.textContent;
+          });
+          addGlow(document.querySelector('.Page_vmDisplayName'));
+        }
+
+        if(inputLocationColors) {
+          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationColors.getAttribute('value');
+            else
+              item.textContent = inputLocationColors.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationColors'));
+        }
+
+        if(inputEntityShortId) {
+          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEntityShortId.getAttribute('value');
+            else
+              item.textContent = inputEntityShortId.textContent;
+          });
+          addGlow(document.querySelector('.Page_entityShortId'));
+        }
+
+        if(inputVmResource) {
+          document.querySelectorAll('.Page_vmResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVmResource.getAttribute('value');
+            else
+              item.textContent = inputVmResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_vmResource'));
+        }
+
+        if(inputLocationTitles) {
+          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationTitles.getAttribute('value');
+            else
+              item.textContent = inputLocationTitles.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationTitles'));
+        }
+
+        if(inputLocationLinks) {
+          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationLinks.getAttribute('value');
+            else
+              item.textContent = inputLocationLinks.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationLinks'));
+        }
+
         if(inputClassCanonicalName) {
           document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1635,86 +1715,6 @@ async function websocketVirtualMachineInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
-        }
-
-        if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHubResource.getAttribute('value');
-            else
-              item.textContent = inputHubResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_hubResource'));
-        }
-
-        if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClusterResource.getAttribute('value');
-            else
-              item.textContent = inputClusterResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_clusterResource'));
-        }
-
-        if(inputVmResource) {
-          document.querySelectorAll('.Page_vmResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputVmResource.getAttribute('value');
-            else
-              item.textContent = inputVmResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_vmResource'));
-        }
-
-        if(inputVmDisplayName) {
-          document.querySelectorAll('.Page_vmDisplayName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputVmDisplayName.getAttribute('value');
-            else
-              item.textContent = inputVmDisplayName.textContent;
-          });
-          addGlow(document.querySelector('.Page_vmDisplayName'));
-        }
-
-        if(inputLocationColors) {
-          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocationColors.getAttribute('value');
-            else
-              item.textContent = inputLocationColors.textContent;
-          });
-          addGlow(document.querySelector('.Page_locationColors'));
-        }
-
-        if(inputLocationTitles) {
-          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocationTitles.getAttribute('value');
-            else
-              item.textContent = inputLocationTitles.textContent;
-          });
-          addGlow(document.querySelector('.Page_locationTitles'));
-        }
-
-        if(inputLocationLinks) {
-          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocationLinks.getAttribute('value');
-            else
-              item.textContent = inputLocationLinks.textContent;
-          });
-          addGlow(document.querySelector('.Page_locationLinks'));
-        }
-
-        if(inputEntityShortId) {
-          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputEntityShortId.getAttribute('value');
-            else
-              item.textContent = inputEntityShortId.textContent;
-          });
-          addGlow(document.querySelector('.Page_entityShortId'));
         }
 
           pageGraphVirtualMachine();
@@ -1964,7 +1964,7 @@ function pageGraphVirtualMachine(apiRequest) {
           contextmenuItems.push({
             text: 'Set location of ' + result.objectTitle
             , callback: function(event2) {
-              patchLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
+              patchVirtualMachineLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
             }
           });
         }
@@ -1976,7 +1976,7 @@ function pageGraphVirtualMachine(apiRequest) {
     }
   }
 }
-function patchLocation(target, location) {
+function patchVirtualMachineLocation(target, location) {
   patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + result.vmResource }]
       , 'setLocation', location
       , target

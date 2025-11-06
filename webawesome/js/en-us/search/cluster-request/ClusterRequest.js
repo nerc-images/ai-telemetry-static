@@ -181,7 +181,7 @@ function suggestClusterRequestUserId(filters, $list, name = null, userId = null,
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
         var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-user-gear"></i>';
+        iTemplate.innerHTML = '<i class="fa-duotone fa-solid fa-user-gear"></i>';
         var $i = iTemplate.content;
         var $span = document.createElement('span');
         $span.setAttribute('class', '');

@@ -2049,7 +2049,7 @@ function pageGraphGpuDevice(apiRequest) {
           contextmenuItems.push({
             text: 'Set location of ' + result.objectTitle
             , callback: function(event2) {
-              patchLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
+              patchGpuDeviceLocation(event.layer, { coordinates: [event.layer.getLatLng()['lng'], event.layer.getLatLng()['lat']], type: "Point" });
             }
           });
         }
@@ -2061,7 +2061,7 @@ function pageGraphGpuDevice(apiRequest) {
     }
   }
 }
-function patchLocation(target, location) {
+function patchGpuDeviceLocation(target, location) {
   patchGpuDeviceVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'gpuDeviceResource:' + result.gpuDeviceResource }]
       , 'setLocation', location
       , target

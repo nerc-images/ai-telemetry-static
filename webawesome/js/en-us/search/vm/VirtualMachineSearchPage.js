@@ -194,6 +194,94 @@ Promise.all([
     facetStatsChange('VirtualMachine', 'location', false);
   });
 
+  document.querySelector('#pageSelectSortVirtualMachine_hubResource')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'hubResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_hubResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'hubResource', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_hubResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'hubResource', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_clusterResource')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'clusterResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'clusterResource', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'clusterResource', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_vmDisplayName')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'vmDisplayName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'vmDisplayName', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'vmDisplayName', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_locationColors')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'locationColors', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_locationColors')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'locationColors', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_locationColors')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'locationColors', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_entityShortId')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'entityShortId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_entityShortId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'entityShortId', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_entityShortId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'entityShortId', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_vmResource')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'vmResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_vmResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'vmResource', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_vmResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'vmResource', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_locationTitles')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'locationTitles', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_locationTitles')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'locationTitles', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_locationTitles')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'locationTitles', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_locationLinks')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'locationLinks', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_locationLinks')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'locationLinks', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_locationLinks')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'locationLinks', false);
+  });
+
   document.querySelector('#pageSelectSortVirtualMachine_classCanonicalName')?.addEventListener('change', (event) => {
     sort('VirtualMachine', 'classCanonicalName', event.currentTarget.value);
   });
@@ -346,94 +434,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsVirtualMachine_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('VirtualMachine', 'solrId', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_hubResource')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'hubResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_hubResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'hubResource', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_hubResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'hubResource', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_clusterResource')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'clusterResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'clusterResource', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'clusterResource', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_vmResource')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'vmResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_vmResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'vmResource', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_vmResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'vmResource', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_vmDisplayName')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'vmDisplayName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'vmDisplayName', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'vmDisplayName', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_locationColors')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'locationColors', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_locationColors')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'locationColors', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_locationColors')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'locationColors', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_locationTitles')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'locationTitles', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_locationTitles')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'locationTitles', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_locationTitles')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'locationTitles', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_locationLinks')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'locationLinks', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_locationLinks')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'locationLinks', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_locationLinks')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'locationLinks', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_entityShortId')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'entityShortId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_entityShortId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'entityShortId', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_entityShortId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'entityShortId', false);
   });
 
   document.querySelector('#htmButton_patchVirtualMachine')?.addEventListener('click', (event) => {
@@ -643,6 +643,18 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_location')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#fqVirtualMachine_vmResource')?.addEventListener('change', (event) => {
+            fqChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetVirtualMachine_vmResource')?.addEventListener('click', (event) => {
+            facetFieldChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotVirtualMachine_vmResource')?.addEventListener('change', (event) => {
+            facetPivotChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapVirtualMachine_vmResource')?.addEventListener('change', (event) => {
+            facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_displayPage')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -689,18 +701,6 @@ Promise.all([
             facetPivotChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_download')?.addEventListener('change', (event) => {
-            facetRangeGapChange('VirtualMachine', event.currentTarget);
-          });
-          document.querySelector('#fqVirtualMachine_vmResource')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetVirtualMachine_vmResource')?.addEventListener('click', (event) => {
-            facetFieldChange('VirtualMachine', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotVirtualMachine_vmResource')?.addEventListener('change', (event) => {
-            facetPivotChange('VirtualMachine', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapVirtualMachine_vmResource')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
 });

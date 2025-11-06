@@ -282,10 +282,10 @@ Promise.all([
   document.querySelector('#htmButton_deleteHub')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
-      var hubResource =  event.currentTarget.getAttribute('data-hubResource');
+      var hubId =  event.currentTarget.getAttribute('data-hubId');
       deleteHub(
           event.currentTarget
-          , hubResource
+          , hubId
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );
