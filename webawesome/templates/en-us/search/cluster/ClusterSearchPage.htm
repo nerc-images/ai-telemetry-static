@@ -98,7 +98,7 @@
           step = "1m";
           break;
         default:
-          dayType = "Weekend";
+          step = "7d";
       }
 
       var timeQuery = {
@@ -129,7 +129,11 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+              {% if varsFq.hubId.facetField.counts | length == 1 && varsFq.hubId.facetField.counts['openshift-local'] is defined -%}
+              query: 'cluster:memory_usage_bytes:sum / on (prometheus) cluster:capacity_memory_bytes:sum' 
+              {%- else -%}
               query: 'cluster:memory_usage_bytes:sum{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %} / on(cluster) cluster:capacity_memory_bytes:sum{ {% if filteredScope %}cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}", {% endif %}label_node_role_kubernetes_io!="master" }' 
+              {%- endif %}
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -182,7 +186,11 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+              {% if varsFq.hubId.facetField.counts | length == 1 && varsFq.hubId.facetField.counts['openshift-local'] is defined -%}
+              query: 'cluster:cpu_usage_cores:sum / on (prometheus) cluster:capacity_cpu_cores:sum' 
+              {%- else -%}
               query: 'cluster:cpu_usage_cores:sum{% if filteredScope %}{cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName | e }}{% endfor %}"}{% endif %} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"{% if filteredScope %},cluster=~"{% for cluster in listCluster%}{% if loop.index0 > 0 %}|{% endif %}{{cluster.clusterName}}{% endfor %}"{% endif %}})' 
+              {%- endif %}
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));

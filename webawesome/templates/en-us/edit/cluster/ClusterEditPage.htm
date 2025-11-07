@@ -3,14 +3,6 @@
 {{ super() }}
 {% if result is defined %}
 <wa-details open class="HtmRow" id="observability-dashboard">
-  {% if result.clusterName == 'local-cluster' %}
-  <h1>Hello OpenShift Local user!</h1>
-  {% else %}
-  <h1>something else</h1>
-  {% endif %}
-  {% if result.cpuCoresTotal is defined and result.cpuCoresTotal > 8 %}
-  <h1>Wow, you have a lot of cores</h1>
-  {% endif %}
   <div slot="summary">
     Observability dashboard for cluster {{ result.clusterName }}
   </div>
@@ -126,7 +118,7 @@
           step = "1m";
           break;
         default:
-          dayType = "Weekend";
+          step = "7d";
       }
 
       var timeQuery = {
@@ -157,7 +149,11 @@
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            {% if result.hubId == 'openshift-local' -%}
+            query: 'cluster:memory_usage_bytes:sum / on (prometheus) cluster:capacity_memory_bytes:sum' 
+            {%- else -%}
             query: 'cluster:memory_usage_bytes:sum / cluster:capacity_memory_bytes:sum{cluster="{{ result.clusterName }}", label_node_role_kubernetes_io!="master"}' 
+            {%- endif %}
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -203,7 +199,11 @@
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            {% if result.hubId == 'openshift-local' -%}
+            query: 'cluster:cpu_usage_cores:sum / on (prometheus) cluster:capacity_cpu_cores:sum' 
+            {%- else -%}
             query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterName }}"} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"})' 
+            {%- endif %}
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));

@@ -11,8 +11,8 @@ footer > a > wa-card {
   width: 100%;
   text-align: center;
 }
-wa-dropdown {
-  z-index: 1;
+#siteSearchDropdownMenu {
+  background-color: var(--wa-color-surface-default);
 }
 .display-flex-center {
   display: flex;
@@ -534,8 +534,4 @@ main, footer {
 
     padding: var(--wa-space-xs) var(--wa-space-s);
   }
-}
-
-.SearchButtons_Pivot {
-  display: none;
 }

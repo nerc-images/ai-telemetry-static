@@ -26,9 +26,6 @@
 {%- endblock htmTitlePageLayout %}
 {%- block htmStylesPageLayout %}
     <link rel="icon" href="{{ STATIC_BASE_URL }}/favicon.svg" />
-    {{ WEB_COMPONENTS_CSS }}
-    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/webawesome.css" />
-    <link rel="stylesheet" href="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/styles/themes/{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }}.css" />
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.draw.css" />
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.contextmenu.css"/>
@@ -94,7 +91,9 @@
         });
       });
     </script>
-    <script type="module" src="https://early.webawesome.com/webawesome@3.0.0-beta.4/dist/webawesome.loader.js"></script>
+{%- if WEB_COMPONENTS_KIT is defined %}
+    {{ WEB_COMPONENTS_KIT }}
+{%- endif %}
     <script src="{{ STATIC_BASE_URL }}/js/site.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/sockjs.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/vertx-eventbus.js"></script>
@@ -122,11 +121,21 @@
             </a>
           </div>
           <div class="wa-cluster " style="justify-content: center;">
-            <wa-button href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank">
-              <i label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
+            <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank">
+              GitHub
+              <i slot="start" label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
             </wa-button>
-            <wa-button href="mailto:{{ MAILING_LIST_EMAIL }}" target="_blank">
-              <i label="Share with email" class="{{ FONTAWESOME_STYLE }} fa-envelope-open fa-2xl"></i>
+            <wa-button variant="brand" href="https://www.youtube.com/watch?v=5_y5PFtsTYk&list=PLcVjtgfCeLvQu8KDUjmwHzbFqbg5K70zN" target="_blank">
+              Youtube
+              <i slot="start" label="Follow us on Youtube" class="fa-brands fa-youtube fa-2xl"></i>
+            </wa-button>
+            <wa-button variant="brand" href="https://www.linkedin.com/company/computate/" target="_blank">
+              LinkedIn
+              <i slot="start" label="Share on LinkedIn" class="fa-brands fa-linkedin fa-2xl"></i>
+            </wa-button>
+            <wa-button variant="brand" href="mailto:{{ MAILING_LIST_EMAIL }}" target="_blank">
+              Email
+              <i slot="start" label="Share with email" class="{{ FONTAWESOME_STYLE }} fa-envelope-open fa-2xl"></i>
             </wa-button>
           </div>
           <div class="wa-stack ">
@@ -180,53 +189,45 @@
 {%- endif %}
             </div>
             <div>
-              <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-Hub" href="{{ SITE_BASE_URL }}/en-us/search/hub">
-                <i slot="start" class="fa-regular fa-sitemap"></i>
-                hubs
-              </wa-button>
-              <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/article">
-                <i slot="start" class="fa-duotone fa-regular fa-newspaper"></i>
-                articles
-              </wa-button>
 
-              <wa-details summary="virtual machines" open="true">
+              <wa-details summary="info" open="true">
                 <div class="wa-stack ">
-                  <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-VirtualMachine" href="{{ SITE_BASE_URL }}/en-us/search/vm">
-                    <i slot="start" class="fa-regular fa-sidebar"></i>
-                    view virtual machines
+                  <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/article">
+                    <i slot="start" class="fa-duotone fa-regular fa-newspaper"></i>
+                    articles
                   </wa-button>
                 </div>
               </wa-details>
 {% if ENABLE_FEATURE_OBSERVABILITY %}
-{% if userGroups is defined and ("/HUB" in userGroups or "/Admin" in userGroups or "/SuperAdmin" in userGroups) %}
-            <wa-details summary="ACM Hubs" open="true" class="wa-stack ">
-              <div class="wa-stack ">
-                <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub?facet.field=hubId">
-                  <i class="fa-regular fa-sitemap"></i>
-                  ACM hubs
-                </wa-button>
-              </div>
-            </wa-details>
-{% endif %}
 
             <wa-details summary="OpenShift clusters" open="true" class="wa-stack ">
               <div class="wa-stack ">
-                <wa-button variant="brand" id="site-aside-left-model-button-Cluster" href="{{ SITE_BASE_URL }}/en-us/search/cluster?facet.field=hubId">
-                <i class="fa-regular fa-server"></i>
-                clusters
-              </wa-button>
-                  <wa-button variant="brand" id="site-aside-left-model-button-AiNode" href="{{ SITE_BASE_URL }}/en-us/search/ai-node?facet.field=hubId">
-                <i class="fa-regular fa-computer"></i>
-                AI nodes
-              </wa-button>
-                  <wa-button variant="brand" id="site-aside-left-model-button-GpuDevice" href="{{ SITE_BASE_URL }}/en-us/search/gpu-device?facet.field=hubId">
-                <i class="fa-regular fa-memory"></i>
-                GPU devices
-              </wa-button>
-                <wa-button variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project?facet.field=hubId&facet.field=clusterName">
-                <i class="fa-regular fa-school"></i>
-                projects
-              </wa-button>
+                {% if userGroups is defined and ("/HUB" in userGroups or "/Admin" in userGroups or "/SuperAdmin" in userGroups) %}
+                <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub">
+                  <i class="fa-regular fa-sitemap"></i>
+                  ACM hubs
+                </wa-button>
+                {% endif %}
+                <wa-button variant="brand" id="site-aside-left-model-button-Cluster" href="{{ SITE_BASE_URL }}/en-us/search/cluster">
+                  <i class="fa-regular fa-server"></i>
+                  clusters
+                </wa-button>
+                    <wa-button variant="brand" id="site-aside-left-model-button-AiNode" href="{{ SITE_BASE_URL }}/en-us/search/ai-node">
+                  <i class="fa-regular fa-computer"></i>
+                  AI nodes
+                </wa-button>
+                    <wa-button variant="brand" id="site-aside-left-model-button-GpuDevice" href="{{ SITE_BASE_URL }}/en-us/search/gpu-device">
+                  <i class="fa-regular fa-memory"></i>
+                  GPU devices
+                </wa-button>
+                  <wa-button variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project">
+                  <i class="fa-regular fa-school"></i>
+                  projects
+                </wa-button>
+                <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-VirtualMachine" href="{{ SITE_BASE_URL }}/en-us/search/vm">
+                  <i slot="start" class="fa-regular fa-sidebar"></i>
+                  view virtual machines
+                </wa-button>
               </div>
             </wa-details>
 {% endif %}
@@ -315,9 +316,9 @@
         </div>
 {%- endblock htmBodyMiddlePageLayout %}
 {%- block htmBodyEndPageLayout %}
-        <footer class="no-gradient text-center">
+        <footer class="no-gradient wa-cluster wa-align-items-center " slot="main-footer">
           {% if GITHUB_ORG is defined %}
-          <wa-button href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank" appearance="filled outlined" class="tile">
+          <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>This site is</span>
               <i class="fa-brands fa-github fa-xl"></i>
@@ -325,14 +326,14 @@
             </div>
           </wa-button>
           {% endif %}
-          <wa-button href="https://www.computate.org/" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
+          <wa-button variant="brand" href="https://computate.org/" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>Generated with </span>
               <img class="footer-img" style="font-weight: var(--wa-font-weight-bold);" src="{{ STATIC_BASE_URL }}/svg/computate-keys.svg" alt="Computate"/>
             </div>
           </wa-button>
           {% if SITE_POWERED_BY_URL is defined %}
-          <wa-button href="{{ SITE_POWERED_BY_URL }}" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
+          <wa-button variant="brand" href="{{ SITE_POWERED_BY_URL }}" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>Powered by </span>
               <i class="fa-brands fa-redhat fa-xl" style="color: #ff0000;"></i>

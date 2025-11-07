@@ -4,7 +4,7 @@
 {% endblock %}
 {% block htmBodyMiddlePageLayout %}
 <div class="wa-stack">
-  <h3>Current activity at the {{ SITE_POWERED_BY_NAME }}</h3>
+  <h3>Current activity in {% if SITE_POWERED_BY_NAME == 'OpenShift Local' %}{% else %}the {% endif %}{{ SITE_POWERED_BY_NAME }}</h3>
   <div class="wa-grid">
     <wa-callout variant="neutral" appearance="filled">
       <wa-icon slot="icon" class="fa-regular fa-book fa-2xl "></wa-icon>
