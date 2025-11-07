@@ -34,7 +34,7 @@
 {%- block htmScriptHubPage %}
     <script>
 
-      function jsWebsocketHub(hubResource, vars, $response) {
+      function jsWebsocketHub(hubId, vars, $response) {
 {%- block jsWebsocketHubPage %}{%- endblock %}
       }
 
@@ -61,9 +61,9 @@
         , customElements.whenDefined('wa-input')
       ]).then(() => {
 
-        var hubResource = {% if result.hubResource is defined %}{{ result.hubResource | tojson }}{% else %}null{% endif %};
+        var hubId = {% if result.hubId is defined %}{{ result.hubId | tojson }}{% else %}null{% endif %};
 
-        if(hubResource == null) {
+        if(hubId == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -80,7 +80,7 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.hubResource is defined %}
+        {% if result.hubId is defined %}
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listHub')?.value;
@@ -112,7 +112,7 @@
         });
         document.querySelector('#htmFormButton_patchHub')?.addEventListener('click', event => {
           event.preventDefault();
-          patchHub(null, document.querySelector('#htmForm_patchHub'), document.querySelector('#htmFormButton_patchHub'), event.target.getAttribute('data-hubResource'));
+          patchHub(null, document.querySelector('#htmForm_patchHub'), document.querySelector('#htmFormButton_patchHub'), event.target.getAttribute('data-hubId'));
           return false;
         });
 
@@ -136,7 +136,7 @@
         });
         document.querySelector('#htmFormButton_deleteHub')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteHub(event.target, event.target.getAttribute('data-hubResource'));
+          deleteHub(event.target, event.target.getAttribute('data-hubId'));
           return false;
         });
 
@@ -238,8 +238,8 @@
 {% endif %}
 {%- block htmFormHubPage %}
           <form action="/en-us/api/hub" id="HubForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
-{% if result.hubResource is defined %}
-            <input name="hubResource" class="valueHubResource" type="hidden" value="{{ result.hubResource }}"/>
+{% if result.hubId is defined %}
+            <input name="hubId" class="valueHubId" type="hidden" value="{{ result.hubId }}"/>
             {% endif %}
             <input name="focusId" type="hidden"/>
             <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>

@@ -197,7 +197,7 @@ o['objectTitle'];
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestBareMetalOrderNetworkId(filters, $list, pk, networkId, relate, target);
+                  suggestBareMetalOrderNetworkId(filters, $list, pk, o['id'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );

@@ -40,7 +40,7 @@
           step = "1m";
           break;
         default:
-          dayType = "Weekend";
+          step = "7d";
       }
 
       var timeQuery = {
@@ -63,7 +63,11 @@
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         hubIds.forEach((hubId, i) => {
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+              {% if varsFq.hubId.facetField.counts | length == 1 && varsFq.hubId.facetField.counts['openshift-local'] is defined -%}
+              query: 'sum(cluster:memory_usage_bytes:sum) / on (prometheus) sum(cluster:capacity_memory_bytes:sum)' 
+              {%- else -%}
               query: 'sum(cluster:memory_usage_bytes:sum) / sum(cluster:capacity_memory_bytes:sum{label_node_role_kubernetes_io!="master"})' 
+              {%- endif %}
               }, timeQuery)).toString());
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));

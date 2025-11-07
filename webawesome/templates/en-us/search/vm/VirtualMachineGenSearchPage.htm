@@ -1,61 +1,60 @@
 {% extends "en-us/PageLayout.htm" %}
 
 {%- block htmTitlePageLayout %}
-{%- block htmTitleGpuDevicePage %}
-    <title>{% if resultCount == 0 %}no GPU device found{% else %}GPU devices{% endif %}</title>
-{%- endblock htmTitleGpuDevicePage %}
+{%- block htmTitleVirtualMachinePage %}
+    <title>{% if resultCount == 0 %}no virtual machine found{% else %}virtual machines{% endif %}</title>
+{%- endblock htmTitleVirtualMachinePage %}
 {%- endblock htmTitlePageLayout %}
 
 {%- block htmStylesPageLayout %}
 {{ super() }}
-    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/gpu-device/GpuDevice.css"/>
-{%- block htmStylesGpuDevicePage %}
-{%- endblock htmStylesGpuDevicePage %}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/vm/VirtualMachine.css"/>
+{%- block htmStylesVirtualMachinePage %}
+{%- endblock htmStylesVirtualMachinePage %}
 {%- endblock htmStylesPageLayout %}
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 4;
+        --site-results-number-of-columns: 5;
       }
 {{ super() }}
-{%- block htmStyleGpuDevicePage %}
-{%- endblock htmStyleGpuDevicePage %}
+{%- block htmStyleVirtualMachinePage %}
+{%- endblock htmStyleVirtualMachinePage %}
 {%- endblock htmStylePageLayout %}
 
 {%- block htmScriptsPageLayout %}
 {{ super() }}
-{%- block htmScriptsGpuDevicePage %}
-    <script src="{{staticBaseUrl}}/js/en-us/search/gpu-device/GpuDevice.js"></script>
-    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/gpu-device/GpuDeviceSearchPage.js"></script>
+{%- block htmScriptsVirtualMachinePage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/vm/VirtualMachine.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/vm/VirtualMachineSearchPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/hub/Hub.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/cluster/Cluster.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/ai-node/AiNode.js"></script>
-{%- endblock htmScriptsGpuDevicePage %}
+{%- endblock htmScriptsVirtualMachinePage %}
 {%- endblock htmScriptsPageLayout %}
 
 {%- block htmScriptPageLayout %}
-{%- block htmScriptGpuDevicePage %}
+{%- block htmScriptVirtualMachinePage %}
     <script>
 
-      function jsWebsocketGpuDevice(gpuDeviceResource, vars, $response) {
-{%- block jsWebsocketGpuDevicePage %}{%- endblock %}
+      function jsWebsocketVirtualMachine(vmResource, vars, $response) {
+{%- block jsWebsocketVirtualMachinePage %}{%- endblock %}
       }
 
-      function jsTooltipGpuDevice(e, feature) {
-{%- block jsTooltipGpuDevicePage %}{%- endblock %}
+      function jsTooltipVirtualMachine(e, feature) {
+{%- block jsTooltipVirtualMachinePage %}{%- endblock %}
       }
 
-      function htmTooltipGpuDevice(feature, layer) {
-        return `{%- block htmTooltipGpuDevicePage %}
+      function htmTooltipVirtualMachine(feature, layer) {
+        return `{%- block htmTooltipVirtualMachinePage %}
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
-{%- endblock htmTooltipGpuDevicePage %}`;
+{%- endblock htmTooltipVirtualMachinePage %}`;
       }
 
-      function jsLegendGpuDevice(map) {
-{%- block jsLegendGpuDevicePage %}
+      function jsLegendVirtualMachine(map) {
+{%- block jsLegendVirtualMachinePage %}
         var div = L.DomUtil.create('div', 'info legend');
         var htm = '';
-        window.listGpuDevice.forEach((result, index) => {
+        window.listVirtualMachine.forEach((result, index) => {
           if(result.location) {
             var shapes = [];
             if(Array.isArray(result.location))
@@ -63,23 +62,23 @@
             else
               shapes.push(result.location);
             shapes.forEach(function(shape, index) {
-              htm += htmLegendGpuDevice(map, shape, result, index, shapes.length);
+              htm += htmLegendVirtualMachine(map, shape, result, index, shapes.length);
             });
           }
         });
         div.innerHTML = htm;
         return div;
-{%- endblock jsLegendGpuDevicePage %}
+{%- endblock jsLegendVirtualMachinePage %}
       }
 
-      function htmLegendGpuDevice(map, shape, result, index, count) {
+      function htmLegendVirtualMachine(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
         var url = result.locationLinks[index];
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
-        htm += `{%- block htmLegendGpuDevicePage %}
+        htm += `{%- block htmLegendVirtualMachinePage %}
     <div title="${quoteattr(title)}">
     <div style="width: 20px; ">
       <i class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></i>
@@ -88,15 +87,15 @@
       <span class="" data-solrId="${result.solrId}" onclick="window.mapLayers[this.getAttribute('data-solrId')].openPopup(); return false;" href="">${title}</span>
     </div>
     </div>
-{%- endblock htmLegendGpuDevicePage %}`;
+{%- endblock htmLegendVirtualMachinePage %}`;
         htm += `
 </div>
 `;
         return htm;
       }
 
-      function jsStyleGpuDevice(feature) {
-{%- block jsStyleGpuDevicePage %}
+      function jsStyleVirtualMachine(feature) {
+{%- block jsStyleVirtualMachinePage %}
         if(feature.geometry.type == 'Point') {
           return {
             radius: 8
@@ -130,7 +129,7 @@
             , fillOpacity: 0.7
           };
         }
-{%- endblock jsStyleGpuDevicePage %}
+{%- endblock jsStyleVirtualMachinePage %}
       }
     </script>
     <script type="module">
@@ -146,10 +145,10 @@
         , customElements.whenDefined('wa-input')
       ]).then(() => {
 
-        var gpuDeviceResource = {% if result.gpuDeviceResource is defined %}{{ result.gpuDeviceResource | tojson }}{% else %}null{% endif %};
+        var vmResource = {% if result.vmResource is defined %}{{ result.vmResource | tojson }}{% else %}null{% endif %};
 
           function relate_hubResource(event) {
-            suggestGpuDeviceHubResource(
+            suggestVirtualMachineHubResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
@@ -165,7 +164,7 @@
           document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
           document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
           function relate_clusterResource(event) {
-            suggestGpuDeviceClusterResource(
+            suggestVirtualMachineClusterResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
@@ -180,23 +179,7 @@
           document.querySelector('#POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
           document.querySelector('#PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
           document.querySelector('#PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
-          function relate_nodeResource(event) {
-            suggestGpuDeviceNodeResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,nodeResource,pk,editPage,objectTitle' } ] : [{%- if result.nodeResource is defined %}{'name':'fq','value':'nodeResource:{{ result.nodeResource }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , null
-                , null
-                , true
-                , this
-                );
-          }
-          document.querySelector('#POST_nodeResource')?.addEventListener('input', relate_nodeResource);
-          document.querySelector('#POST_nodeResource')?.addEventListener('focus', relate_nodeResource);
-          document.querySelector('#PATCH_nodeResource')?.addEventListener('input', relate_nodeResource);
-          document.querySelector('#PATCH_nodeResource')?.addEventListener('focus', relate_nodeResource);
-        if(gpuDeviceResource == null) {
+        if(vmResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -213,181 +196,181 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.gpuDeviceResource is defined %}
+        {% if result.vmResource is defined %}
         {% endif %}
         }
-        var l = document.querySelector('.pageForm .listGpuDevice')?.value;
+        var l = document.querySelector('.pageForm .listVirtualMachine')?.value;
         if(l)
-          window.listGpuDevice = JSON.parse(l);
+          window.listVirtualMachine = JSON.parse(l);
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
-        pageGraphGpuDevice();
+        pageGraphVirtualMachine();
         {% for key, value in varsQ.items() %}
 
-        document.querySelector('#qGpuDevice_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
-          qChange('GpuDevice', event.target, document.querySelector('#qGpuDeviceDiv_{{ key }}'));
+        document.querySelector('#qVirtualMachine_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('VirtualMachine', event.target, document.querySelector('#qVirtualMachineDiv_{{ key }}'));
         });
         {% endfor %}
 
-        document.querySelector('#qGpuDevice_rows')?.addEventListener('change', event => {
-          paramChange('GpuDevice', event.target, document.querySelector('#qGpuDeviceDiv_rows'));
+        document.querySelector('#qVirtualMachine_rows')?.addEventListener('change', event => {
+          paramChange('VirtualMachine', event.target, document.querySelector('#qVirtualMachineDiv_rows'));
         });
 
-        document.querySelector('#qGpuDevice_start')?.addEventListener('change', event => {
-          paramChange('GpuDevice', event.target, document.querySelector('#qGpuDeviceDiv_start'));
+        document.querySelector('#qVirtualMachine_start')?.addEventListener('change', event => {
+          paramChange('VirtualMachine', event.target, document.querySelector('#qVirtualMachineDiv_start'));
         });
 
 
-        var submitForm_patchGpuDevice = document.querySelector('#htmForm_patchGpuDevice')?.addEventListener('submit', event => {
+        var submitForm_patchVirtualMachine = document.querySelector('#htmForm_patchVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_patchGpuDevice')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_patchVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          patchGpuDevice(null, document.querySelector('#htmForm_patchGpuDevice'), document.querySelector('#htmFormButton_patchGpuDevice'), event.target.getAttribute('data-gpuDeviceResource'));
+          patchVirtualMachine(null, document.querySelector('#htmForm_patchVirtualMachine'), document.querySelector('#htmFormButton_patchVirtualMachine'), event.target.getAttribute('data-vmResource'));
           return false;
         });
 
-        var submitForm_postGpuDevice = document.querySelector('#htmForm_postGpuDevice')?.addEventListener('submit', event => {
+        var submitForm_postVirtualMachine = document.querySelector('#htmForm_postVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_postGpuDevice')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          postGpuDevice(document.querySelector('#htmForm_postGpuDevice')
-          , document.querySelector('#htmFormButton_postGpuDevice')
+          postVirtualMachine(document.querySelector('#htmForm_postVirtualMachine')
+          , document.querySelector('#htmFormButton_postVirtualMachine')
           , (json, target) => {
             window.location.href = json.editPage;
           });
           return false;
         });
 
-        var submitForm_deleteGpuDevice = document.querySelector('#htmForm_deleteGpuDevice')?.addEventListener('submit', event => {
+        var submitForm_deleteVirtualMachine = document.querySelector('#htmForm_deleteVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_deleteGpuDevice')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_deleteVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteGpuDevice(event.target, event.target.getAttribute('data-gpuDeviceResource'));
-          return false;
-        });
-
-        var submitForm_putimportGpuDevice = document.querySelector('#htmForm_putimportGpuDevice')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportGpuDevice')?.addEventListener('click', event => {
-          event.preventDefault();
-          putimportGpuDevice(document.querySelector('#htmForm_putimportGpuDevice'), document.querySelector('#htmFormButton_putimportGpuDevice'));
+          deleteVirtualMachine(event.target, event.target.getAttribute('data-vmResource'));
           return false;
         });
 
-        var submitForm_searchpageGpuDevice = document.querySelector('#htmForm_searchpageGpuDevice')?.addEventListener('submit', event => {
+        var submitForm_putimportVirtualMachine = document.querySelector('#htmForm_putimportVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_searchpageGpuDevice')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_putimportVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          searchpageGpuDevice();
+          putimportVirtualMachine(document.querySelector('#htmForm_putimportVirtualMachine'), document.querySelector('#htmFormButton_putimportVirtualMachine'));
           return false;
         });
 
-        var submitForm_deletefilterGpuDevice = document.querySelector('#htmForm_deletefilterGpuDevice')?.addEventListener('submit', event => {
+        var submitForm_searchpageVirtualMachine = document.querySelector('#htmForm_searchpageVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_deletefilterGpuDevice')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_searchpageVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          deletefilterGpuDevice(event.target);
+          searchpageVirtualMachine();
           return false;
         });
-{%- block htmScriptInitGpuDevicePage %}{%- endblock htmScriptInitGpuDevicePage %}
+
+        var submitForm_deletefilterVirtualMachine = document.querySelector('#htmForm_deletefilterVirtualMachine')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterVirtualMachine')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterVirtualMachine(event.target);
+          return false;
+        });
+{%- block htmScriptInitVirtualMachinePage %}{%- endblock htmScriptInitVirtualMachinePage %}
       });
     </script>
-{%- endblock htmScriptGpuDevicePage %}
+{%- endblock htmScriptVirtualMachinePage %}
 {%- endblock htmScriptPageLayout %}
 
 {%- block websocketPageLayout %}
-{%- block websocketGpuDevicePage %}
+{%- block websocketVirtualMachinePage %}
 {% if resultCount > 0 %}
         window.eventBus = new EventBus('/eventbus');
         window.eventBus.enableReconnect(true);
-        websocketGpuDevice(websocketGpuDeviceInner);
+        websocketVirtualMachine(websocketVirtualMachineInner);
 {% endif %}
-{%- endblock websocketGpuDevicePage %}
+{%- endblock websocketVirtualMachinePage %}
 {%- endblock websocketPageLayout %}
 
-{%- block htmUrlGpuDevicePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlGpuDevicePage %}
+{%- block htmUrlVirtualMachinePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlVirtualMachinePage %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
-{%- block htmBodyStartGpuDevicePage %}
+{%- block htmBodyStartVirtualMachinePage %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-GpuDevice">back to all GPU devices</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-VirtualMachine">back to all virtual machines</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
-            <wa-breadcrumb-item id="return-to-GpuDevice" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-regular fa-memory"></i>
-              all GPU devices
+            <wa-breadcrumb-item id="return-to-VirtualMachine" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-regular fa-sidebar"></i>
+              all virtual machines
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
-              no GPU device found
+              no virtual machine found
             </wa-breadcrumb-item>
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-regular fa-memory"></i>
+              <i class="fa-regular fa-sidebar"></i>
             </div>
-            <span class="wa-heading-m ">no GPU device found</span>
-            <p class="wa-caption-l ">A Red Hat OpenShift GPU device containing GPUs</p>
-{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
+            <span class="wa-heading-m ">no virtual machine found</span>
+            <p class="wa-caption-l ">A Red Hat OpenShift virtual machine</p>
+{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
           </div>
         </div>
 {% else %}
-{%- include en-us/search/gpu-device/GpuDeviceSidebar.htm %}
-{%- include en-us/search/gpu-device/GpuDeviceSuggestedSearch.htm %}
+{%- include en-us/search/vm/VirtualMachineSidebar.htm %}
+{%- include en-us/search/vm/VirtualMachineSuggestedSearch.htm %}
           <div class="pageContent ">
-            <form action="/en-us/api/gpu-device" id="GpuDeviceForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <form action="/en-us/api/vm" id="VirtualMachineForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
-              <input name="listGpuDevice" id="listGpuDevice" class="listGpuDevice"  value='{{ toJsonArrayStringInApostrophes(listGpuDevice) }}' type="hidden"/>
+              <input name="listVirtualMachine" id="listVirtualMachine" class="listVirtualMachine"  value='{{ toJsonArrayStringInApostrophes(listVirtualMachine) }}' type="hidden"/>
             </form>
             <div id="site-calendar-box">
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-GpuDevice">back to all GPU devices</wa-tooltip>
+              <wa-tooltip for="return-to-VirtualMachine">back to all virtual machines</wa-tooltip>
               <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-GpuDevice" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-memory"></i>
-                  all GPU devices
+                <wa-breadcrumb-item id="return-to-VirtualMachine" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-sidebar"></i>
+                  all virtual machines
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
-                  search GPU devices
+                  search virtual machines
                 </wa-breadcrumb-item>
               </wa-breadcrumb>
-{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
-{% include en-us/search/gpu-device/GpuDeviceSearchButtons.htm %}
+{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
+{% include en-us/search/vm/VirtualMachineSearchButtons.htm %}
 {% endif %}
-{%- endblock htmBodyStartGpuDevicePage %}
+{%- endblock htmBodyStartVirtualMachinePage %}
 {%- endblock htmBodyStartPageLayout %}
 
 {%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleGpuDevicePage %}
+{%- block htmBodyMiddleVirtualMachinePage %}
 {% if resultCount > 0 %}
               <div class="wa-stack wa-gap-0 ">
-{% include en-us/search/gpu-device/GpuDevicePaginationButtons.htm %}
+{% include en-us/search/vm/VirtualMachinePaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
               <wa-dropdown id="htmDropdown-hubId">
                 <wa-button variant="brand" slot="trigger" caret>ACM Hub</wa-button>
                 <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by ACM Hub ascending
                   </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by ACM Hub descending
                   </wa-menu-item>
@@ -396,57 +379,73 @@
               <wa-dropdown id="htmDropdown-clusterName">
                 <wa-button variant="brand" slot="trigger" caret>cluster name</wa-button>
                 <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterName-asc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterName-asc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                     sort by cluster name ascending
                   </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterName-desc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterName-desc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                     sort by cluster name descending
                   </wa-menu-item>
                 </wa-menu>
               </wa-dropdown>
-              <wa-dropdown id="htmDropdown-nodeName">
-                <wa-button variant="brand" slot="trigger" caret>node name</wa-button>
+              <wa-dropdown id="htmDropdown-vmProject">
+                <wa-button variant="brand" slot="trigger" caret>VM project</wa-button>
                 <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_nodeName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-nodeName-asc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmProject'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-vmProject-asc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by node name ascending
+                    sort by VM project ascending
                   </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_nodeName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-nodeName-desc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmProject'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-vmProject-desc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by node name descending
+                    sort by VM project descending
                   </wa-menu-item>
                 </wa-menu>
               </wa-dropdown>
-              <wa-dropdown id="htmDropdown-gpuDeviceNumber">
-                <wa-button variant="brand" slot="trigger" caret>GPU device number</wa-button>
+              <wa-dropdown id="htmDropdown-vmName">
+                <wa-button variant="brand" slot="trigger" caret>VM name</wa-button>
                 <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_gpuDeviceNumber'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-gpuDeviceNumber-asc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-vmName-asc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by GPU device number ascending
+                    sort by VM name ascending
                   </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortGpuDevice_gpuDeviceNumber'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-GpuDevice').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-gpuDeviceNumber-desc">
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-vmName-desc">
                     <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by GPU device number descending
+                    sort by VM name descending
+                  </wa-menu-item>
+                </wa-menu>
+              </wa-dropdown>
+              <wa-dropdown id="htmDropdown-os">
+                <wa-button variant="brand" slot="trigger" caret>OS</wa-button>
+                <wa-menu>
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_os'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-os-asc">
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                    sort by OS ascending
+                  </wa-menu-item>
+                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_os'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-os-desc">
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                    sort by OS descending
                   </wa-menu-item>
                 </wa-menu>
               </wa-dropdown>
                   </div>
-                  {% for item in listGpuDevice%}
+                  {% for item in listVirtualMachine%}
                   <div>
               <a href="{{ item.displayPage }}">
-                <i class="fa-regular fa-memory"></i>
+                <i class="fa-regular fa-sidebar"></i>
               <span>{{ item.hubId | e }}
 </span>              </a>
               <a href="{{ item.displayPage }}">
               <span>{{ item.clusterName | e }}
 </span>              </a>
               <a href="{{ item.displayPage }}">
-              <span>{{ item.nodeName | e }}
+              <span>{{ item.vmProject | e }}
 </span>              </a>
               <a href="{{ item.displayPage }}">
-              <span>{{ item.gpuDeviceNumber | e }}
+              <span>{{ item.vmName | e }}
+</span>              </a>
+              <a href="{{ item.displayPage }}">
+              <span>{{ item.os | e }}
 </span>              </a>
                   </div>
                   {% endfor %}
@@ -458,26 +457,30 @@
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnNodeName is defined %}
+              {% if getColumnVmProject is defined %}
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnGpuDeviceNumber is defined %}
+              {% if getColumnVmName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnOs is defined %}
                 <div>
                 </div>
               {% endif %}
                 </div>
-{% include en-us/search/gpu-device/GpuDevicePaginationButtons.htm %}
+{% include en-us/search/vm/VirtualMachinePaginationButtons.htm %}
               </div>
             </div>
           </div>
 {% endif %}
-{%- endblock htmBodyMiddleGpuDevicePage %}
+{%- endblock htmBodyMiddleVirtualMachinePage %}
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-{%- block htmBodyEndGpuDevicePage %}
-{%- include en-us/search/gpu-device/GpuDeviceLocation.htm %}
-{%- endblock htmBodyEndGpuDevicePage %}
+{%- block htmBodyEndVirtualMachinePage %}
+{%- include en-us/search/vm/VirtualMachineLocation.htm %}
+{%- endblock htmBodyEndVirtualMachinePage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

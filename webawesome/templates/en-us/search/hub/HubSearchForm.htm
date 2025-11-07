@@ -11,15 +11,15 @@
 The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hubResource={{ result.hubResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubResource }}Pk "
+                      data-hubId={{ result.hubId | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubId }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubResource }}Pk "
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubId }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHub inputHub{{ result.hubResource }}Pk "
+                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHub inputHub{{ result.hubId }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -45,14 +45,14 @@ The primary key of this object in the database"
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHub inputHub{{ result.hubResource }}Created "
+                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHub inputHub{{ result.hubId }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="{{classApiMethodMethod}}_created"
                       value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {%- if 'Page' == classApiMethodMethod %}
   {%- endif %}
-                      data-hubResource={{ result.hubResource | tojson }}
+                      data-hubId={{ result.hubId | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -73,14 +73,14 @@ The primary key of this object in the database"
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHub inputHub{{ result.hubResource }}Modified "
+                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHub inputHub{{ result.hubId }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="{{classApiMethodMethod}}_modified"
                       value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {%- if 'Page' == classApiMethodMethod %}
   {%- endif %}
-                      data-hubResource={{ result.hubResource | tojson }}
+                      data-hubId={{ result.hubId | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -102,9 +102,9 @@ The primary key of this object in the database"
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{classApiMethodMethod}}_archived classHub inputHub{{ result.hubResource }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
-                      data-hubResource={{ result.hubResource | tojson }}
+                      data-hubId={{ result.hubId | tojson }}
                       data-val="{{ result.archived | e }}"
                       >archive</wa-button>
   {%- else %}
@@ -121,14 +121,14 @@ The primary key of this object in the database"
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_archived classHub inputHub{{ result.hubResource }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_archived classHub inputHub{{ result.hubResource }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHub inputHub{{ result.hubResource }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -136,7 +136,7 @@ The primary key of this object in the database"
     {%- if result.archived == true %}
                       checked
     {%- endif %}
-                      data-hubResource={{ result.hubResource | tojson }}
+                      data-hubId={{ result.hubId | tojson }}
                       >archive</wa-checkbox>
   {%- else %}
                       >
@@ -166,15 +166,15 @@ The primary key of this object in the database"
 The name of this hub"
                       id="{{classApiMethodMethod}}_hubName"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hubResource={{ result.hubResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubResource }}HubName "
+                      data-hubId={{ result.hubId | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubId }}HubName "
                       name="setHubName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubResource }}HubName "
+                      class="label-on-left {{classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubId }}HubName "
                       name="setHubName"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_hubName valueHubName classHub inputHub{{ result.hubResource }}HubName "
+                      class="label-on-left {{classApiMethodMethod}}_hubName valueHubName classHub inputHub{{ result.hubId }}HubName "
                       name="hubName"
     {%- endif %}
   {%- endif %}
@@ -203,15 +203,15 @@ The name of this hub"
 The ID of this hub"
                       id="{{classApiMethodMethod}}_hubId"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hubResource={{ result.hubResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubResource }}HubId "
+                      data-hubId={{ result.hubId | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubId }}HubId "
                       name="setHubId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubResource }}HubId "
+                      class="label-on-left {{classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubId }}HubId "
                       name="setHubId"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_hubId valueHubId classHub inputHub{{ result.hubResource }}HubId "
+                      class="label-on-left {{classApiMethodMethod}}_hubId valueHubId classHub inputHub{{ result.hubId }}HubId "
                       name="hubId"
     {%- endif %}
   {%- endif %}
@@ -240,15 +240,15 @@ The ID of this hub"
 A description of this hub"
                       id="{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hubResource={{ result.hubResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubResource }}Description "
+                      data-hubId={{ result.hubId | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubId }}Description "
                       name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubResource }}Description "
+                      class="label-on-left {{classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubId }}Description "
                       name="setDescription"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_description valueDescription classHub inputHub{{ result.hubResource }}Description "
+                      class="label-on-left {{classApiMethodMethod}}_description valueDescription classHub inputHub{{ result.hubId }}Description "
                       name="description"
     {%- endif %}
   {%- endif %}
@@ -277,15 +277,15 @@ A description of this hub"
 The ID for this page. "
                       id="{{classApiMethodMethod}}_pageId"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hubResource={{ result.hubResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubResource }}PageId "
+                      data-hubId={{ result.hubId | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubId }}PageId "
                       name="setPageId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubResource }}PageId "
+                      class="label-on-left {{classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubId }}PageId "
                       name="setPageId"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_pageId valuePageId classHub inputHub{{ result.hubResource }}PageId "
+                      class="label-on-left {{classApiMethodMethod}}_pageId valuePageId classHub inputHub{{ result.hubId }}PageId "
                       name="pageId"
     {%- endif %}
   {%- endif %}
@@ -303,7 +303,7 @@ The ID for this page. "
                             {{ inputPageIdHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchHub() %}<wa-button variant="brand" id="htmButton_patchHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchHub() %}<wa-button variant="brand" id="htmButton_patchHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_patchHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchHub" duration="5000" closable class="wa-header-l ">
@@ -376,7 +376,7 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_postHub() %}<wa-button variant="brand" id="htmButton_postHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postHub() %}<wa-button variant="brand" id="htmButton_postHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postHub" duration="5000" closable class="wa-header-l ">
@@ -450,7 +450,7 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteHub() %}<wa-button variant="brand" id="htmButton_deleteHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteHub() %}<wa-button variant="brand" id="htmButton_deleteHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deleteHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteHub" duration="5000" closable class="wa-header-l ">
@@ -469,7 +469,7 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_putimportHub() %}<wa-button variant="brand" id="htmButton_putimportHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportHub() %}<wa-button variant="brand" id="htmButton_putimportHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHub" duration="5000" closable class="wa-header-l ">
@@ -487,7 +487,7 @@ The ID for this page. "
               <wa-textarea
                   class="PUTImport_searchList "
                   style="height: 300px; "
-                  placeholder="{ 'searchList': [ { 'hubResource': ... , 'saves': [ ... ] }, ... ] }"
+                  placeholder="{ 'searchList': [ { 'hubId': ... , 'saves': [ ... ] }, ... ] }"
                   >
               </wa-textarea>
             </div>
@@ -617,7 +617,7 @@ The ID for this page. "
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterHub() %}<wa-button variant="brand" id="htmButton_deletefilterHub" data-hubResource={{ result.hubResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterHub() %}<wa-button variant="brand" id="htmButton_deletefilterHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_deletefilterHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterHub" duration="5000" closable class="wa-header-l ">
@@ -642,14 +642,14 @@ The ID for this page. "
   {% if "PATCH" in scopes %}
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisHubGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'hubResource:{{ result.hubResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHubGenPage')); }, function() { addError(document.querySelector('#refreshThisHubGenPage')); }); return false; ">
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'hubId:{{ result.hubId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHubGenPage')); }, function() { addError(document.querySelector('#refreshThisHubGenPage')); }); return false; ">
                   <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
                   refresh
                 </wa-button>
     {% endif %}
     {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllHubGenPage{{ result.hubResource | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHubGenPage{{ result.hubResource | e }}')); }, function() { addError(document.querySelector('#refreshAllHubGenPage{{ result.hubResource | e }}')); }); "
+                <wa-button variant="brand" id="refreshAllHubGenPage{{ result.hubId | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHubGenPage{{ result.hubId | e }}')); }, function() { addError(document.querySelector('#refreshAllHubGenPage{{ result.hubId | e }}')); }); "
                     >
                   <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
                   refresh all 

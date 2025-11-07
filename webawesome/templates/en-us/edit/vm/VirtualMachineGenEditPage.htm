@@ -1,60 +1,60 @@
 {% extends "en-us/PageLayout.htm" %}
 {%- block htmTitlePageLayout %}
-{%- block htmTitleAiNodePage %}
+{%- block htmTitleVirtualMachinePage %}
     <title>{{ result.objectTitle }}</title>
-{%- endblock htmTitleAiNodePage %}
+{%- endblock htmTitleVirtualMachinePage %}
 {%- endblock htmTitlePageLayout %}
 
 {%- block htmStylesPageLayout %}
 {{ super() }}
-    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/ai-node/AiNode.css"/>
-{%- block htmStylesAiNodePage %}
-{%- endblock htmStylesAiNodePage %}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/vm/VirtualMachine.css"/>
+{%- block htmStylesVirtualMachinePage %}
+{%- endblock htmStylesVirtualMachinePage %}
 {%- endblock htmStylesPageLayout %}
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 3;
+        --site-results-number-of-columns: 5;
       }
 {{ super() }}
-{%- block htmStyleAiNodePage %}
-{%- endblock htmStyleAiNodePage %}
+{%- block htmStyleVirtualMachinePage %}
+{%- endblock htmStyleVirtualMachinePage %}
 {%- endblock htmStylePageLayout %}
 
 {%- block htmScriptsPageLayout %}
 {{ super() }}
-{%- block htmScriptsAiNodePage %}
-    <script src="{{staticBaseUrl}}/js/en-us/search/ai-node/AiNode.js"></script>
-    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ai-node/AiNodeSearchPage.js"></script>
-    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ai-node/AiNodeEditPage.js"></script>
+{%- block htmScriptsVirtualMachinePage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/vm/VirtualMachine.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/vm/VirtualMachineSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/vm/VirtualMachineEditPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/hub/Hub.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/cluster/Cluster.js"></script>
-{%- endblock htmScriptsAiNodePage %}
+{%- endblock htmScriptsVirtualMachinePage %}
 {%- endblock htmScriptsPageLayout %}
 
 {%- block htmScriptPageLayout %}
-{%- block htmScriptAiNodePage %}
+{%- block htmScriptVirtualMachinePage %}
     <script>
 
-      function jsWebsocketAiNode(nodeResource, vars, $response) {
-{%- block jsWebsocketAiNodePage %}{%- endblock %}
+      function jsWebsocketVirtualMachine(vmResource, vars, $response) {
+{%- block jsWebsocketVirtualMachinePage %}{%- endblock %}
       }
 
-      function jsTooltipAiNode(e, feature) {
-{%- block jsTooltipAiNodePage %}{%- endblock %}
+      function jsTooltipVirtualMachine(e, feature) {
+{%- block jsTooltipVirtualMachinePage %}{%- endblock %}
       }
 
-      function htmTooltipAiNode(feature, layer) {
-        return `{%- block htmTooltipAiNodePage %}
+      function htmTooltipVirtualMachine(feature, layer) {
+        return `{%- block htmTooltipVirtualMachinePage %}
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
-{%- endblock htmTooltipAiNodePage %}`;
+{%- endblock htmTooltipVirtualMachinePage %}`;
       }
 
-      function jsLegendAiNode(map) {
-{%- block jsLegendAiNodePage %}
+      function jsLegendVirtualMachine(map) {
+{%- block jsLegendVirtualMachinePage %}
         var div = L.DomUtil.create('div', 'info legend');
         var htm = '';
-        window.listAiNode.forEach((result, index) => {
+        window.listVirtualMachine.forEach((result, index) => {
           if(result.location) {
             var shapes = [];
             if(Array.isArray(result.location))
@@ -62,23 +62,23 @@
             else
               shapes.push(result.location);
             shapes.forEach(function(shape, index) {
-              htm += htmLegendAiNode(map, shape, result, index, shapes.length);
+              htm += htmLegendVirtualMachine(map, shape, result, index, shapes.length);
             });
           }
         });
         div.innerHTML = htm;
         return div;
-{%- endblock jsLegendAiNodePage %}
+{%- endblock jsLegendVirtualMachinePage %}
       }
 
-      function htmLegendAiNode(map, shape, result, index, count) {
+      function htmLegendVirtualMachine(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
         var url = result.locationLinks[index];
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
-        htm += `{%- block htmLegendAiNodePage %}
+        htm += `{%- block htmLegendVirtualMachinePage %}
     <div title="${quoteattr(title)}">
     <div style="width: 20px; ">
       <i class="{{ FONTAWESOME_STYLE }} fa-circle" style="color: ${color}; "></i>
@@ -87,15 +87,15 @@
       <span class="" data-solrId="${result.solrId}" onclick="window.mapLayers[this.getAttribute('data-solrId')].openPopup(); return false;" href="">${title}</span>
     </div>
     </div>
-{%- endblock htmLegendAiNodePage %}`;
+{%- endblock htmLegendVirtualMachinePage %}`;
         htm += `
 </div>
 `;
         return htm;
       }
 
-      function jsStyleAiNode(feature) {
-{%- block jsStyleAiNodePage %}
+      function jsStyleVirtualMachine(feature) {
+{%- block jsStyleVirtualMachinePage %}
         if(feature.geometry.type == 'Point') {
           return {
             radius: 8
@@ -129,7 +129,7 @@
             , fillOpacity: 0.7
           };
         }
-{%- endblock jsStyleAiNodePage %}
+{%- endblock jsStyleVirtualMachinePage %}
       }
     </script>
     <script type="module">
@@ -145,9 +145,9 @@
         , customElements.whenDefined('wa-input')
       ]).then(() => {
 
-        var nodeResource = {% if result.nodeResource is defined %}{{ result.nodeResource | tojson }}{% else %}null{% endif %};
+        var vmResource = {% if result.vmResource is defined %}{{ result.vmResource | tojson }}{% else %}null{% endif %};
 
-        if(nodeResource == null) {
+        if(vmResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -164,14 +164,14 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.nodeResource is defined %}
+        {% if result.vmResource is defined %}
           function relate_hubResource(event) {
-            suggestAiNodeHubResource(
+            suggestVirtualMachineHubResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.nodeResource
+                , window.result.vmResource
                 , window.result.hubResource
                 , true
                 );
@@ -183,21 +183,21 @@
           document.querySelector('#Page_hubResource')?.addEventListener('input', relate_hubResource);
           document.querySelector('#Page_hubResource')?.addEventListener('focus', relate_hubResource);
           {% if "PATCH" in scopes %}
-          suggestAiNodeHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listAiNodeHubResource_Page'), window.result.nodeResource, window.result.hubResource, true);
+          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, true);
           {% else %}
           {% if "GET" in scopes %}
-          suggestAiNodeHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listAiNodeHubResource_Page'), window.result.nodeResource, window.result.hubResource, true);
+          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, true);
           {% else %}
-          suggestAiNodeHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listAiNodeHubResource_Page'), window.result.nodeResource, window.result.hubResource, false);
+          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, false);
           {% endif %}
           {% endif %}
           function relate_clusterResource(event) {
-            suggestAiNodeClusterResource(
+            suggestVirtualMachineClusterResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.nodeResource
+                , window.result.vmResource
                 , window.result.clusterResource
                 , true
                 );
@@ -209,191 +209,191 @@
           document.querySelector('#Page_clusterResource')?.addEventListener('input', relate_clusterResource);
           document.querySelector('#Page_clusterResource')?.addEventListener('focus', relate_clusterResource);
           {% if "PATCH" in scopes %}
-          suggestAiNodeClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listAiNodeClusterResource_Page'), window.result.nodeResource, window.result.clusterResource, true);
+          suggestVirtualMachineClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listVirtualMachineClusterResource_Page'), window.result.vmResource, window.result.clusterResource, true);
           {% else %}
           {% if "GET" in scopes %}
-          suggestAiNodeClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listAiNodeClusterResource_Page'), window.result.nodeResource, window.result.clusterResource, true);
+          suggestVirtualMachineClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listVirtualMachineClusterResource_Page'), window.result.vmResource, window.result.clusterResource, true);
           {% else %}
-          suggestAiNodeClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listAiNodeClusterResource_Page'), window.result.nodeResource, window.result.clusterResource, false);
+          suggestVirtualMachineClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listVirtualMachineClusterResource_Page'), window.result.vmResource, window.result.clusterResource, false);
           {% endif %}
           {% endif %}
         {% endif %}
         }
-        var l = document.querySelector('.pageForm .listAiNode')?.value;
+        var l = document.querySelector('.pageForm .listVirtualMachine')?.value;
         if(l)
-          window.listAiNode = JSON.parse(l);
+          window.listVirtualMachine = JSON.parse(l);
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
-        pageGraphAiNode();
+        pageGraphVirtualMachine();
         {% for key, value in varsQ.items() %}
 
-        document.querySelector('#qAiNode_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
-          qChange('AiNode', event.target, document.querySelector('#qAiNodeDiv_{{ key }}'));
+        document.querySelector('#qVirtualMachine_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('VirtualMachine', event.target, document.querySelector('#qVirtualMachineDiv_{{ key }}'));
         });
         {% endfor %}
 
-        document.querySelector('#qAiNode_rows')?.addEventListener('change', event => {
-          paramChange('AiNode', event.target, document.querySelector('#qAiNodeDiv_rows'));
+        document.querySelector('#qVirtualMachine_rows')?.addEventListener('change', event => {
+          paramChange('VirtualMachine', event.target, document.querySelector('#qVirtualMachineDiv_rows'));
         });
 
-        document.querySelector('#qAiNode_start')?.addEventListener('change', event => {
-          paramChange('AiNode', event.target, document.querySelector('#qAiNodeDiv_start'));
+        document.querySelector('#qVirtualMachine_start')?.addEventListener('change', event => {
+          paramChange('VirtualMachine', event.target, document.querySelector('#qVirtualMachineDiv_start'));
         });
 
 
-        var submitForm_patchAiNode = document.querySelector('#htmForm_patchAiNode')?.addEventListener('submit', event => {
+        var submitForm_patchVirtualMachine = document.querySelector('#htmForm_patchVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_patchAiNode')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_patchVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          patchAiNode(null, document.querySelector('#htmForm_patchAiNode'), document.querySelector('#htmFormButton_patchAiNode'), event.target.getAttribute('data-nodeResource'));
+          patchVirtualMachine(null, document.querySelector('#htmForm_patchVirtualMachine'), document.querySelector('#htmFormButton_patchVirtualMachine'), event.target.getAttribute('data-vmResource'));
           return false;
         });
 
-        var submitForm_postAiNode = document.querySelector('#htmForm_postAiNode')?.addEventListener('submit', event => {
+        var submitForm_postVirtualMachine = document.querySelector('#htmForm_postVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_postAiNode')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          postAiNode(document.querySelector('#htmForm_postAiNode')
-          , document.querySelector('#htmFormButton_postAiNode')
+          postVirtualMachine(document.querySelector('#htmForm_postVirtualMachine')
+          , document.querySelector('#htmFormButton_postVirtualMachine')
           , (json, target) => {
             window.location.href = json.editPage;
           });
           return false;
         });
 
-        var submitForm_deleteAiNode = document.querySelector('#htmForm_deleteAiNode')?.addEventListener('submit', event => {
+        var submitForm_deleteVirtualMachine = document.querySelector('#htmForm_deleteVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_deleteAiNode')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_deleteVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteAiNode(event.target, event.target.getAttribute('data-nodeResource'));
-          return false;
-        });
-
-        var submitForm_putimportAiNode = document.querySelector('#htmForm_putimportAiNode')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportAiNode')?.addEventListener('click', event => {
-          event.preventDefault();
-          putimportAiNode(document.querySelector('#htmForm_putimportAiNode'), document.querySelector('#htmFormButton_putimportAiNode'));
+          deleteVirtualMachine(event.target, event.target.getAttribute('data-vmResource'));
           return false;
         });
 
-        var submitForm_searchpageAiNode = document.querySelector('#htmForm_searchpageAiNode')?.addEventListener('submit', event => {
+        var submitForm_putimportVirtualMachine = document.querySelector('#htmForm_putimportVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_searchpageAiNode')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_putimportVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          searchpageAiNode();
+          putimportVirtualMachine(document.querySelector('#htmForm_putimportVirtualMachine'), document.querySelector('#htmFormButton_putimportVirtualMachine'));
           return false;
         });
 
-        var submitForm_deletefilterAiNode = document.querySelector('#htmForm_deletefilterAiNode')?.addEventListener('submit', event => {
+        var submitForm_searchpageVirtualMachine = document.querySelector('#htmForm_searchpageVirtualMachine')?.addEventListener('submit', event => {
           event.preventDefault();
           return false;
         });
-        document.querySelector('#htmFormButton_deletefilterAiNode')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_searchpageVirtualMachine')?.addEventListener('click', event => {
           event.preventDefault();
-          deletefilterAiNode(event.target);
+          searchpageVirtualMachine();
           return false;
         });
-{%- block htmScriptInitAiNodePage %}{%- endblock htmScriptInitAiNodePage %}
+
+        var submitForm_deletefilterVirtualMachine = document.querySelector('#htmForm_deletefilterVirtualMachine')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterVirtualMachine')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterVirtualMachine(event.target);
+          return false;
+        });
+{%- block htmScriptInitVirtualMachinePage %}{%- endblock htmScriptInitVirtualMachinePage %}
       });
     </script>
-{%- endblock htmScriptAiNodePage %}
+{%- endblock htmScriptVirtualMachinePage %}
 {%- endblock htmScriptPageLayout %}
 
 {%- block websocketPageLayout %}
-{%- block websocketAiNodePage %}
+{%- block websocketVirtualMachinePage %}
 {% if resultCount > 0 %}
         window.eventBus = new EventBus('/eventbus');
         window.eventBus.enableReconnect(true);
-        websocketAiNode(websocketAiNodeInner);
+        websocketVirtualMachine(websocketVirtualMachineInner);
 {% endif %}
-{%- endblock websocketAiNodePage %}
+{%- endblock websocketVirtualMachinePage %}
 {%- endblock websocketPageLayout %}
 
-{%- block htmUrlAiNodePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlAiNodePage %}
+{%- block htmUrlVirtualMachinePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlVirtualMachinePage %}
 
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
-{%- block htmBodyStartAiNodePage %}
+{%- block htmBodyStartVirtualMachinePage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip>
-            <wa-button id="return-to-AiNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+            <wa-tooltip for="return-to-VirtualMachine">back to all virtual machines</wa-tooltip>
+            <wa-button id="return-to-VirtualMachine" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
               <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all AI nodes
+              all virtual machines
             </wa-button>
-            <h1 class="Page_objectTitle"><i class="fa-regular fa-computer"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="fa-regular fa-sidebar"></i> {{ result.objectTitle | e }}</h1>
           </div>
           <div class="margin-block">
           </div>
-{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
+{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
           <wa-divider></wa-divider>
-{% include en-us/search/ai-node/AiNodeSearchButtons.htm %}
+{% include en-us/search/vm/VirtualMachineSearchButtons.htm %}
 {% endif %}
-{%- endblock htmBodyStartAiNodePage %}
+{%- endblock htmBodyStartVirtualMachinePage %}
 {%- endblock htmBodyStartPageLayout %}
 
 {%- block htmBodyMiddlePageLayout %}
-{%- block htmBodyMiddleAiNodePage %}
+{%- block htmBodyMiddleVirtualMachinePage %}
         <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-VirtualMachine">back to all virtual machines</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
-            <wa-breadcrumb-item id="return-to-AiNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-regular fa-computer"></i>
-              all AI nodes
+            <wa-breadcrumb-item id="return-to-VirtualMachine" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-regular fa-sidebar"></i>
+              all virtual machines
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
-              no AI node found
+              no virtual machine found
             </wa-breadcrumb-item>
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-regular fa-computer"></i>
+              <i class="fa-regular fa-sidebar"></i>
             </div>
-            <span class="wa-heading-m ">no AI node found</span>
-            <p class="wa-caption-l ">A Red Hat OpenShift node containing GPUs</p>
-{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
+            <span class="wa-heading-m ">no virtual machine found</span>
+            <p class="wa-caption-l ">A Red Hat OpenShift virtual machine</p>
+{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
           </div>
         </div>
 {% else %}
-{%- include en-us/search/ai-node/AiNodeSidebar.htm %}
-{%- include en-us/search/ai-node/AiNodeSuggestedSearch.htm %}
+{%- include en-us/search/vm/VirtualMachineSidebar.htm %}
+{%- include en-us/search/vm/VirtualMachineSuggestedSearch.htm %}
 {% endif %}
-{%- block htmFormAiNodePage %}
-          <form action="/en-us/api/ai-node" id="AiNodeForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
-{% if result.nodeResource is defined %}
-            <input name="nodeResource" class="valueNodeResource" type="hidden" value="{{ result.nodeResource }}"/>
+{%- block htmFormVirtualMachinePage %}
+          <form action="/en-us/api/vm" id="VirtualMachineForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+{% if result.vmResource is defined %}
+            <input name="vmResource" class="valueVmResource" type="hidden" value="{{ result.vmResource }}"/>
             {% endif %}
             <input name="focusId" type="hidden"/>
             <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
-            <input name="listAiNode" id="listAiNode" class="listAiNode"  value='{{ toJsonArrayStringInApostrophes(listAiNode) }}' type="hidden"/>
+            <input name="listVirtualMachine" id="listVirtualMachine" class="listVirtualMachine"  value='{{ toJsonArrayStringInApostrophes(listVirtualMachine) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageAiNode() }}
-          {{ htmForm_searchpageAiNode() }}
+          {{ htmButton_searchpageVirtualMachine() }}
+          {{ htmForm_searchpageVirtualMachine() }}
   {% endif %}
-{%- endblock htmFormAiNodePage %}
+{%- endblock htmFormVirtualMachinePage %}
         </div>
-{%- endblock htmBodyMiddleAiNodePage %}
+{%- endblock htmBodyMiddleVirtualMachinePage %}
 {%- endblock htmBodyMiddlePageLayout %}
 
 {%- block htmBodyEndPageLayout %}
-{%- block htmBodyEndAiNodePage %}
-{%- include en-us/search/ai-node/AiNodeLocation.htm %}
-{%- endblock htmBodyEndAiNodePage %}
+{%- block htmBodyEndVirtualMachinePage %}
+{%- include en-us/search/vm/VirtualMachineLocation.htm %}
+{%- endblock htmBodyEndVirtualMachinePage %}
       {{ super() }}
 {%- endblock htmBodyEndPageLayout %}
