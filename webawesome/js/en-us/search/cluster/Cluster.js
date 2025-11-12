@@ -45,17 +45,31 @@ function searchClusterFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
+    var $filterHubClusterCheckbox = $formFilters.querySelector('input.valueHubCluster[type = "checkbox"]');
+    var $filterHubClusterSelect = $formFilters.querySelector('select.valueHubCluster');
+    var filterHubCluster = $filterHubClusterSelect.length ? $filterHubClusterSelect.value : $filterHubClusterCheckbox.checked;
+    var filterHubClusterSelectVal = $formFilters.querySelector('select.filterHubCluster')?.value;
+    var filterHubCluster = null;
+    if(filterHubClusterSelectVal !== '')
+      filterHubCluster = filterHubClusterSelectVal == 'true';
+    if(filterHubCluster != null && filterHubCluster === true)
+      filters.push({ name: 'fq', value: 'hubCluster:' + filterHubCluster });
+
+    var filterClusterNameMetrics = $formFilters.querySelector('.valueClusterNameMetrics')?.value;
+    if(filterClusterNameMetrics != null && filterClusterNameMetrics !== '')
+      filters.push({ name: 'fq', value: 'clusterNameMetrics:' + filterClusterNameMetrics });
+
     var filterUniqueName = $formFilters.querySelector('.valueUniqueName')?.value;
     if(filterUniqueName != null && filterUniqueName !== '')
       filters.push({ name: 'fq', value: 'uniqueName:' + filterUniqueName });
 
-    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
-    if(filterLocation != null && filterLocation !== '')
-      filters.push({ name: 'fq', value: 'location:' + filterLocation });
-
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
+    if(filterLocation != null && filterLocation !== '')
+      filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
     var filterAiNodesTotal = $formFilters.querySelector('.valueAiNodesTotal')?.value;
     if(filterAiNodesTotal != null && filterAiNodesTotal !== '')
@@ -101,26 +115,6 @@ function searchClusterFilters($formFilters) {
     if(filterNgsildData != null && filterNgsildData !== '')
       filters.push({ name: 'fq', value: 'ngsildData:' + filterNgsildData });
 
-    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
-    if(filterUserPage != null && filterUserPage !== '')
-      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
-
-    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
-    if(filterDownload != null && filterDownload !== '')
-      filters.push({ name: 'fq', value: 'download:' + filterDownload });
-
-    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
-    if(filterObjectSuggest != null && filterObjectSuggest !== '')
-      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
-
-    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
-    if(filterObjectText != null && filterObjectText !== '')
-      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
-
-    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
-    if(filterSolrId != null && filterSolrId !== '')
-      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -149,13 +143,33 @@ function searchClusterFilters($formFilters) {
     if(filterObjectTitle != null && filterObjectTitle !== '')
       filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
 
+    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
+    if(filterDisplayPage != null && filterDisplayPage !== '')
+      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+
     var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
     if(filterEditPage != null && filterEditPage !== '')
       filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
 
-    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
-    if(filterDisplayPage != null && filterDisplayPage !== '')
-      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
+    if(filterUserPage != null && filterUserPage !== '')
+      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
+
+    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
+    if(filterDownload != null && filterDownload !== '')
+      filters.push({ name: 'fq', value: 'download:' + filterDownload });
+
+    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
+    if(filterObjectSuggest != null && filterObjectSuggest !== '')
+      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
@@ -373,6 +387,37 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
 
+  var valueHubCluster = $formValues.querySelector('.valueHubCluster')?.value;
+  var removeHubCluster = $formValues.querySelector('.removeHubCluster')?.value === 'true';
+  if(valueHubCluster != null)
+    valueHubCluster = valueHubCluster === 'true';
+  var valueHubClusterSelectVal = $formValues.querySelector('select.setHubCluster')?.value;
+  if(valueHubClusterSelectVal != null)
+    valueHubClusterSelectVal = valueHubClusterSelectVal === 'true';
+  if(valueHubClusterSelectVal != null && valueHubClusterSelectVal !== '')
+    valueHubCluster = valueHubClusterSelectVal == 'true';
+  var setHubCluster = removeHubCluster ? null : valueHubCluster;
+  var addHubCluster = $formValues.querySelector('.addHubCluster')?.checked;
+  if(removeHubCluster || setHubCluster != null && setHubCluster !== '')
+    vals['setHubCluster'] = setHubCluster;
+  if(addHubCluster != null && addHubCluster !== '')
+    vals['addHubCluster'] = addHubCluster;
+  var removeHubCluster = $formValues.querySelector('.removeHubCluster')?.checked;
+  if(removeHubCluster != null && removeHubCluster !== '')
+    vals['removeHubCluster'] = removeHubCluster;
+
+  var valueClusterNameMetrics = $formValues.querySelector('.valueClusterNameMetrics')?.value;
+  var removeClusterNameMetrics = $formValues.querySelector('.removeClusterNameMetrics')?.value === 'true';
+  var setClusterNameMetrics = removeClusterNameMetrics ? null : $formValues.querySelector('.setClusterNameMetrics')?.value;
+  var addClusterNameMetrics = $formValues.querySelector('.addClusterNameMetrics')?.value;
+  if(removeClusterNameMetrics || setClusterNameMetrics != null && setClusterNameMetrics !== '')
+    vals['setClusterNameMetrics'] = setClusterNameMetrics;
+  if(addClusterNameMetrics != null && addClusterNameMetrics !== '')
+    vals['addClusterNameMetrics'] = addClusterNameMetrics;
+  var removeClusterNameMetrics = $formValues.querySelector('.removeClusterNameMetrics')?.value;
+  if(removeClusterNameMetrics != null && removeClusterNameMetrics !== '')
+    vals['removeClusterNameMetrics'] = removeClusterNameMetrics;
+
   var valueUniqueName = $formValues.querySelector('.valueUniqueName')?.value;
   var removeUniqueName = $formValues.querySelector('.removeUniqueName')?.value === 'true';
   var setUniqueName = removeUniqueName ? null : $formValues.querySelector('.setUniqueName')?.value;
@@ -385,18 +430,6 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeUniqueName != null && removeUniqueName !== '')
     vals['removeUniqueName'] = removeUniqueName;
 
-  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
-  var removeLocation = $formValues.querySelector('.removeLocation')?.value === 'true';
-  var setLocation = removeLocation ? null : $formValues.querySelector('.setLocation')?.value;
-  var addLocation = $formValues.querySelector('.addLocation')?.value;
-  if(removeLocation || setLocation != null && setLocation !== '')
-    vals['setLocation'] = JSON.parse(setLocation);
-  if(addLocation != null && addLocation !== '')
-    vals['addLocation'] = addLocation;
-  var removeLocation = $formValues.querySelector('.removeLocation')?.value;
-  if(removeLocation != null && removeLocation !== '')
-    vals['removeLocation'] = removeLocation;
-
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
   var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
@@ -408,6 +441,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeDescription = $formValues.querySelector('.removeDescription')?.value;
   if(removeDescription != null && removeDescription !== '')
     vals['removeDescription'] = removeDescription;
+
+  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
+  var removeLocation = $formValues.querySelector('.removeLocation')?.value === 'true';
+  var setLocation = removeLocation ? null : $formValues.querySelector('.setLocation')?.value;
+  var addLocation = $formValues.querySelector('.addLocation')?.value;
+  if(removeLocation || setLocation != null && setLocation !== '')
+    vals['setLocation'] = JSON.parse(setLocation);
+  if(addLocation != null && addLocation !== '')
+    vals['addLocation'] = addLocation;
+  var removeLocation = $formValues.querySelector('.removeLocation')?.value;
+  if(removeLocation != null && removeLocation !== '')
+    vals['removeLocation'] = removeLocation;
 
   var valueAiNodesTotal = $formValues.querySelector('.valueAiNodesTotal')?.value;
   var removeAiNodesTotal = $formValues.querySelector('.removeAiNodesTotal')?.value === 'true';
@@ -541,30 +586,6 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeNgsildData != null && removeNgsildData !== '')
     vals['removeNgsildData'] = removeNgsildData;
 
-  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
-  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value === 'true';
-  var setUserPage = removeUserPage ? null : $formValues.querySelector('.setUserPage')?.value;
-  var addUserPage = $formValues.querySelector('.addUserPage')?.value;
-  if(removeUserPage || setUserPage != null && setUserPage !== '')
-    vals['setUserPage'] = setUserPage;
-  if(addUserPage != null && addUserPage !== '')
-    vals['addUserPage'] = addUserPage;
-  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value;
-  if(removeUserPage != null && removeUserPage !== '')
-    vals['removeUserPage'] = removeUserPage;
-
-  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
-  var removeDownload = $formValues.querySelector('.removeDownload')?.value === 'true';
-  var setDownload = removeDownload ? null : $formValues.querySelector('.setDownload')?.value;
-  var addDownload = $formValues.querySelector('.addDownload')?.value;
-  if(removeDownload || setDownload != null && setDownload !== '')
-    vals['setDownload'] = setDownload;
-  if(addDownload != null && addDownload !== '')
-    vals['addDownload'] = addDownload;
-  var removeDownload = $formValues.querySelector('.removeDownload')?.value;
-  if(removeDownload != null && removeDownload !== '')
-    vals['removeDownload'] = removeDownload;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -601,6 +622,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeObjectTitle != null && removeObjectTitle !== '')
     vals['removeObjectTitle'] = removeObjectTitle;
 
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
+  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
+  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
+  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
+    vals['setDisplayPage'] = setDisplayPage;
+  if(addDisplayPage != null && addDisplayPage !== '')
+    vals['addDisplayPage'] = addDisplayPage;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
+  if(removeDisplayPage != null && removeDisplayPage !== '')
+    vals['removeDisplayPage'] = removeDisplayPage;
+
   var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
   var removeEditPage = $formValues.querySelector('.removeEditPage')?.value === 'true';
   var setEditPage = removeEditPage ? null : $formValues.querySelector('.setEditPage')?.value;
@@ -613,17 +646,29 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeEditPage != null && removeEditPage !== '')
     vals['removeEditPage'] = removeEditPage;
 
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
-  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
-  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
-  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
-    vals['setDisplayPage'] = setDisplayPage;
-  if(addDisplayPage != null && addDisplayPage !== '')
-    vals['addDisplayPage'] = addDisplayPage;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
-  if(removeDisplayPage != null && removeDisplayPage !== '')
-    vals['removeDisplayPage'] = removeDisplayPage;
+  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
+  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value === 'true';
+  var setUserPage = removeUserPage ? null : $formValues.querySelector('.setUserPage')?.value;
+  var addUserPage = $formValues.querySelector('.addUserPage')?.value;
+  if(removeUserPage || setUserPage != null && setUserPage !== '')
+    vals['setUserPage'] = setUserPage;
+  if(addUserPage != null && addUserPage !== '')
+    vals['addUserPage'] = addUserPage;
+  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value;
+  if(removeUserPage != null && removeUserPage !== '')
+    vals['removeUserPage'] = removeUserPage;
+
+  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
+  var removeDownload = $formValues.querySelector('.removeDownload')?.value === 'true';
+  var setDownload = removeDownload ? null : $formValues.querySelector('.setDownload')?.value;
+  var addDownload = $formValues.querySelector('.addDownload')?.value;
+  if(removeDownload || setDownload != null && setDownload !== '')
+    vals['setDownload'] = setDownload;
+  if(addDownload != null && addDownload !== '')
+    vals['addDownload'] = addDownload;
+  var removeDownload = $formValues.querySelector('.removeDownload')?.value;
+  if(removeDownload != null && removeDownload !== '')
+    vals['removeDownload'] = removeDownload;
 
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
@@ -679,17 +724,31 @@ function patchClusterFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
+    var $filterHubClusterCheckbox = $formFilters.querySelector('input.valueHubCluster[type = "checkbox"]');
+    var $filterHubClusterSelect = $formFilters.querySelector('select.valueHubCluster');
+    var filterHubCluster = $filterHubClusterSelect.length ? $filterHubClusterSelect.value : $filterHubClusterCheckbox.checked;
+    var filterHubClusterSelectVal = $formFilters.querySelector('select.filterHubCluster')?.value;
+    var filterHubCluster = null;
+    if(filterHubClusterSelectVal !== '')
+      filterHubCluster = filterHubClusterSelectVal == 'true';
+    if(filterHubCluster != null && filterHubCluster === true)
+      filters.push({ name: 'fq', value: 'hubCluster:' + filterHubCluster });
+
+    var filterClusterNameMetrics = $formFilters.querySelector('.valueClusterNameMetrics')?.value;
+    if(filterClusterNameMetrics != null && filterClusterNameMetrics !== '')
+      filters.push({ name: 'fq', value: 'clusterNameMetrics:' + filterClusterNameMetrics });
+
     var filterUniqueName = $formFilters.querySelector('.valueUniqueName')?.value;
     if(filterUniqueName != null && filterUniqueName !== '')
       filters.push({ name: 'fq', value: 'uniqueName:' + filterUniqueName });
 
-    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
-    if(filterLocation != null && filterLocation !== '')
-      filters.push({ name: 'fq', value: 'location:' + filterLocation });
-
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
+    if(filterLocation != null && filterLocation !== '')
+      filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
     var filterAiNodesTotal = $formFilters.querySelector('.valueAiNodesTotal')?.value;
     if(filterAiNodesTotal != null && filterAiNodesTotal !== '')
@@ -735,26 +794,6 @@ function patchClusterFilters($formFilters) {
     if(filterNgsildData != null && filterNgsildData !== '')
       filters.push({ name: 'fq', value: 'ngsildData:' + filterNgsildData });
 
-    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
-    if(filterUserPage != null && filterUserPage !== '')
-      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
-
-    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
-    if(filterDownload != null && filterDownload !== '')
-      filters.push({ name: 'fq', value: 'download:' + filterDownload });
-
-    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
-    if(filterObjectSuggest != null && filterObjectSuggest !== '')
-      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
-
-    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
-    if(filterObjectText != null && filterObjectText !== '')
-      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
-
-    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
-    if(filterSolrId != null && filterSolrId !== '')
-      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -783,13 +822,33 @@ function patchClusterFilters($formFilters) {
     if(filterObjectTitle != null && filterObjectTitle !== '')
       filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
 
+    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
+    if(filterDisplayPage != null && filterDisplayPage !== '')
+      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+
     var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
     if(filterEditPage != null && filterEditPage !== '')
       filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
 
-    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
-    if(filterDisplayPage != null && filterDisplayPage !== '')
-      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
+    if(filterUserPage != null && filterUserPage !== '')
+      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
+
+    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
+    if(filterDownload != null && filterDownload !== '')
+      filters.push({ name: 'fq', value: 'download:' + filterDownload });
+
+    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
+    if(filterObjectSuggest != null && filterObjectSuggest !== '')
+      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
@@ -881,17 +940,25 @@ async function postCluster($formValues, target, success, error) {
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
 
+  var valueHubCluster = $formValues.querySelector('.valueHubCluster')?.value;
+  if(valueHubCluster != null && valueHubCluster !== '')
+    vals['hubCluster'] = valueHubCluster == 'true';
+
+  var valueClusterNameMetrics = $formValues.querySelector('.valueClusterNameMetrics')?.value;
+  if(valueClusterNameMetrics != null && valueClusterNameMetrics !== '')
+    vals['clusterNameMetrics'] = valueClusterNameMetrics;
+
   var valueUniqueName = $formValues.querySelector('.valueUniqueName')?.value;
   if(valueUniqueName != null && valueUniqueName !== '')
     vals['uniqueName'] = valueUniqueName;
 
-  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
-  if(valueLocation != null && valueLocation !== '')
-    vals['location'] = JSON.parse(valueLocation);
-
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
+
+  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
+  if(valueLocation != null && valueLocation !== '')
+    vals['location'] = JSON.parse(valueLocation);
 
   var valueAiNodesTotal = $formValues.querySelector('.valueAiNodesTotal')?.value;
   if(valueAiNodesTotal != null && valueAiNodesTotal !== '')
@@ -937,14 +1004,6 @@ async function postCluster($formValues, target, success, error) {
   if(valueNgsildData != null && valueNgsildData !== '')
     vals['ngsildData'] = JSON.parse(valueNgsildData);
 
-  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
-  if(valueUserPage != null && valueUserPage !== '')
-    vals['userPage'] = valueUserPage;
-
-  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
-  if(valueDownload != null && valueDownload !== '')
-    vals['download'] = valueDownload;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
     vals['sessionId'] = valueSessionId;
@@ -957,13 +1016,21 @@ async function postCluster($formValues, target, success, error) {
   if(valueObjectTitle != null && valueObjectTitle !== '')
     vals['objectTitle'] = valueObjectTitle;
 
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  if(valueDisplayPage != null && valueDisplayPage !== '')
+    vals['displayPage'] = valueDisplayPage;
+
   var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
   if(valueEditPage != null && valueEditPage !== '')
     vals['editPage'] = valueEditPage;
 
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  if(valueDisplayPage != null && valueDisplayPage !== '')
-    vals['displayPage'] = valueDisplayPage;
+  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
+  if(valueUserPage != null && valueUserPage !== '')
+    vals['userPage'] = valueUserPage;
+
+  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
+  if(valueDownload != null && valueDownload !== '')
+    vals['download'] = valueDownload;
 
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
@@ -1193,9 +1260,11 @@ async function websocketClusterInner(apiRequest) {
         var inputArchived = null;
         var inputHubId = null;
         var inputClusterName = null;
+        var inputHubCluster = null;
+        var inputClusterNameMetrics = null;
         var inputUniqueName = null;
-        var inputLocation = null;
         var inputDescription = null;
+        var inputLocation = null;
         var inputAiNodesTotal = null;
         var inputGpuDevicesTotal = null;
         var inputVmsTotal = null;
@@ -1207,11 +1276,6 @@ async function websocketClusterInner(apiRequest) {
         var inputNgsildPath = null;
         var inputNgsildContext = null;
         var inputNgsildData = null;
-        var inputUserPage = null;
-        var inputDownload = null;
-        var inputObjectSuggest = null;
-        var inputObjectText = null;
-        var inputSolrId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1219,8 +1283,13 @@ async function websocketClusterInner(apiRequest) {
         var inputUserKey = null;
         var inputSaves = null;
         var inputObjectTitle = null;
-        var inputEditPage = null;
         var inputDisplayPage = null;
+        var inputEditPage = null;
+        var inputUserPage = null;
+        var inputDownload = null;
+        var inputObjectSuggest = null;
+        var inputObjectText = null;
+        var inputSolrId = null;
         var inputHubResource = null;
         var inputClusterResource = null;
         var inputLocationColors = null;
@@ -1239,12 +1308,16 @@ async function websocketClusterInner(apiRequest) {
           inputHubId = $response.querySelector('.Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Page_clusterName');
+        if(vars.includes('hubCluster'))
+          inputHubCluster = $response.querySelector('.Page_hubCluster');
+        if(vars.includes('clusterNameMetrics'))
+          inputClusterNameMetrics = $response.querySelector('.Page_clusterNameMetrics');
         if(vars.includes('uniqueName'))
           inputUniqueName = $response.querySelector('.Page_uniqueName');
-        if(vars.includes('location'))
-          inputLocation = $response.querySelector('.Page_location');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('location'))
+          inputLocation = $response.querySelector('.Page_location');
         if(vars.includes('aiNodesTotal'))
           inputAiNodesTotal = $response.querySelector('.Page_aiNodesTotal');
         if(vars.includes('gpuDevicesTotal'))
@@ -1267,16 +1340,6 @@ async function websocketClusterInner(apiRequest) {
           inputNgsildContext = $response.querySelector('.Page_ngsildContext');
         if(vars.includes('ngsildData'))
           inputNgsildData = $response.querySelector('.Page_ngsildData');
-        if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
-        if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
-        if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
-        if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
-        if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1291,10 +1354,20 @@ async function websocketClusterInner(apiRequest) {
           inputSaves = $response.querySelector('.Page_saves');
         if(vars.includes('objectTitle'))
           inputObjectTitle = $response.querySelector('.Page_objectTitle');
-        if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
         if(vars.includes('displayPage'))
           inputDisplayPage = $response.querySelector('.Page_displayPage');
+        if(vars.includes('editPage'))
+          inputEditPage = $response.querySelector('.Page_editPage');
+        if(vars.includes('userPage'))
+          inputUserPage = $response.querySelector('.Page_userPage');
+        if(vars.includes('download'))
+          inputDownload = $response.querySelector('.Page_download');
+        if(vars.includes('objectSuggest'))
+          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+        if(vars.includes('objectText'))
+          inputObjectText = $response.querySelector('.Page_objectText');
+        if(vars.includes('solrId'))
+          inputSolrId = $response.querySelector('.Page_solrId');
         if(vars.includes('hubResource'))
           inputHubResource = $response.querySelector('.Page_hubResource');
         if(vars.includes('clusterResource'))
@@ -1371,6 +1444,26 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_clusterName'));
         }
 
+        if(inputHubCluster) {
+          document.querySelectorAll('.Page_hubCluster').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubCluster.getAttribute('value');
+            else
+              item.textContent = inputHubCluster.textContent;
+          });
+          addGlow(document.querySelector('.Page_hubCluster'));
+        }
+
+        if(inputClusterNameMetrics) {
+          document.querySelectorAll('.Page_clusterNameMetrics').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterNameMetrics.getAttribute('value');
+            else
+              item.textContent = inputClusterNameMetrics.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterNameMetrics'));
+        }
+
         if(inputUniqueName) {
           document.querySelectorAll('.Page_uniqueName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1381,16 +1474,6 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_uniqueName'));
         }
 
-        if(inputLocation) {
-          document.querySelectorAll('.Page_location').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocation.getAttribute('value');
-            else
-              item.textContent = inputLocation.textContent;
-          });
-          addGlow(document.querySelector('.Page_location'));
-        }
-
         if(inputDescription) {
           document.querySelectorAll('.Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1399,6 +1482,16 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputDescription.textContent;
           });
           addGlow(document.querySelector('.Page_description'));
+        }
+
+        if(inputLocation) {
+          document.querySelectorAll('.Page_location').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocation.getAttribute('value');
+            else
+              item.textContent = inputLocation.textContent;
+          });
+          addGlow(document.querySelector('.Page_location'));
         }
 
         if(inputAiNodesTotal) {
@@ -1511,56 +1604,6 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_ngsildData'));
         }
 
-        if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserPage.getAttribute('value');
-            else
-              item.textContent = inputUserPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_userPage'));
-        }
-
-        if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputDownload.getAttribute('value');
-            else
-              item.textContent = inputDownload.textContent;
-          });
-          addGlow(document.querySelector('.Page_download'));
-        }
-
-        if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectSuggest.getAttribute('value');
-            else
-              item.textContent = inputObjectSuggest.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectSuggest'));
-        }
-
-        if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectText.getAttribute('value');
-            else
-              item.textContent = inputObjectText.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectText'));
-        }
-
-        if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSolrId.getAttribute('value');
-            else
-              item.textContent = inputSolrId.textContent;
-          });
-          addGlow(document.querySelector('.Page_solrId'));
-        }
-
         if(inputClassCanonicalName) {
           document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1631,6 +1674,16 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_objectTitle'));
         }
 
+        if(inputDisplayPage) {
+          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDisplayPage.getAttribute('value');
+            else
+              item.textContent = inputDisplayPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_displayPage'));
+        }
+
         if(inputEditPage) {
           document.querySelectorAll('.Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1641,14 +1694,54 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_editPage'));
         }
 
-        if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+        if(inputUserPage) {
+          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputDisplayPage.getAttribute('value');
+              item.value = inputUserPage.getAttribute('value');
             else
-              item.textContent = inputDisplayPage.textContent;
+              item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.Page_userPage'));
+        }
+
+        if(inputDownload) {
+          document.querySelectorAll('.Page_download').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDownload.getAttribute('value');
+            else
+              item.textContent = inputDownload.textContent;
+          });
+          addGlow(document.querySelector('.Page_download'));
+        }
+
+        if(inputObjectSuggest) {
+          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectSuggest.getAttribute('value');
+            else
+              item.textContent = inputObjectSuggest.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectSuggest'));
+        }
+
+        if(inputObjectText) {
+          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectText.getAttribute('value');
+            else
+              item.textContent = inputObjectText.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectText'));
+        }
+
+        if(inputSolrId) {
+          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSolrId.getAttribute('value');
+            else
+              item.textContent = inputSolrId.textContent;
+          });
+          addGlow(document.querySelector('.Page_solrId'));
         }
 
         if(inputHubResource) {
