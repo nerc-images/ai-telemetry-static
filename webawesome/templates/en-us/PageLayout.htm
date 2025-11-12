@@ -1,3 +1,258 @@
+
+{% macro jsFunctionName(divId) -%}
+{%- set divIdWords = divId.split('-') -%}
+{%- set divIdCamelCaseWords = [] -%}
+{%- for word in divIdWords -%}
+    {%- if loop.first -%}
+        {%- set _ = divIdCamelCaseWords.append(word) -%}
+    {%- else -%}
+        {%- set _ = divIdCamelCaseWords.append(word|capitalize) -%}
+    {%- endif -%}
+{%- endfor -%}
+{%- set jsFunctionName = divIdCamelCaseWords|join('') -%}
+{{ jsFunctionName }}
+{%- endmacro %}
+
+{% macro dashboardPromise(divId) -%}
+{{ jsFunctionName(divId) }}(timeQuery)
+{%- endmacro %}
+
+{% macro dashboardCard(divId, cardTitle) %}
+      <wa-card with-header>
+        <header slot="header" class="wa-heading-m ">{{ cardTitle | e}}</header>
+        <wa-tab-group>
+          <wa-tab panel="chart">Chart</wa-tab>
+          <wa-tab panel="data">Data</wa-tab>
+          <wa-tab-panel name="chart">
+            <div id="{{ divId | e }}"></div>
+          </wa-tab-panel>
+          <wa-tab-panel name="data">
+            <wa-scrollable>
+              <table class="wa-zebra-rows wa-hover-rows">
+                <thead>
+                  <tr>
+                    <th>
+                      hub
+                    </th>
+                    <th>
+                      cluster
+                    </th>
+                    <th>
+                      project
+                    </th>
+                    <th>
+                      VM
+                    </th>
+                    <th>
+                      {{ cardTitle | e }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="{{ divId | e }}-data-tbody">
+                </tbody>
+              </table>
+            </wa-scrollable>
+          </wa-tab-panel>
+        </wa-tab-group>
+      </wa-card>
+{% endmacro %}
+
+{% macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null) %}
+
+    function {{ jsFunctionName(divId) }}Popover(event) {
+      var buttonId = event.target.getAttribute('id');
+      var dataValues = JSON.parse(event.target.getAttribute('data-values'));
+      var dataMetric = JSON.parse(event.target.getAttribute('data-metric'));
+
+      var $statsPopoverButton = event.target;
+      var $statsPopover = document.getElementById($statsPopoverButton.getAttribute('data-popover'));
+      $statsPopover.innerHTML = '';
+
+      var $popoverStack = document.createElement('div');
+      $popoverStack.setAttribute('class', 'wa-stack ');
+      $statsPopover.append($popoverStack);
+
+      var $header = document.createElement('div');
+      $header.setAttribute('class', 'wa-heading-m ');
+      $header.innerText = dataMetric.{{ resultLabel }};
+      $popoverStack.append($header);
+      $popoverStack.append(document.createElement('wa-divider'));
+
+      var $stack = document.createElement('div');
+      $stack.setAttribute('class', 'wa-stack ');
+      $popoverStack.append($stack);
+
+      var dates = dataValues.map(values => new Date(values[0] * 1000));
+      var vals = dataValues.map(values => parseFloat(values[1]));
+      var formatterFixed = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+
+      var minVal = Math.min(...vals);
+      var $minSplit = document.createElement('div');
+      $minSplit.setAttribute('class', 'wa-split ');
+      $stack.append($minSplit);
+      var $minSpan = document.createElement('span');
+      $minSpan.setAttribute('class', 'wa-caption-m ');
+      $minSpan.innerText = 'min';
+      $minSplit.append($minSpan);
+      var $minStrong = document.createElement('strong');
+      $minStrong.innerText = formatterFixed.format(minVal);
+      $minSplit.append($minStrong);
+      $minStrong.setAttribute('id', buttonId + '-min');
+      var $minTooltip = document.createElement('wa-tooltip');
+      $minTooltip.setAttribute('for', buttonId + '-min');
+      //$statsPopover.append($minTooltip);
+      $stack.append(document.createElement('wa-divider'));
+
+      var sumVals = vals.reduce((sum, val) => sum + val, 0);
+      var avgVal = sumVals / vals.length;
+      var $avgSplit = document.createElement('div');
+      $avgSplit.setAttribute('class', 'wa-split ');
+      $stack.append($avgSplit);
+      var $avgSpan = document.createElement('span');
+      $avgSpan.setAttribute('class', 'wa-caption-m ');
+      $avgSpan.innerText = 'avg';
+      $avgSplit.append($avgSpan);
+      var $avgStrong = document.createElement('strong');
+      $avgStrong.innerText = formatterFixed.format(avgVal);
+      $avgStrong.setAttribute('id', buttonId + '-avg');
+      var $avgTooltip = document.createElement('wa-tooltip');
+      $avgTooltip.setAttribute('for', buttonId + '-avg');
+      //$statsPopover.append($avgTooltip);
+      $avgSplit.append($avgStrong);
+      $stack.append(document.createElement('wa-divider'));
+
+      var maxVal = Math.max(...vals);
+      var $maxSplit = document.createElement('div');
+      $maxSplit.setAttribute('class', 'wa-split ');
+      $stack.append($maxSplit);
+      var $maxSpan = document.createElement('span');
+      $maxSpan.setAttribute('class', 'wa-caption-m ');
+      $maxSpan.innerText = 'max';
+      $maxSplit.append($maxSpan);
+      var $maxStrong = document.createElement('strong');
+      $maxStrong.innerText = formatterFixed.format(maxVal);
+      $maxStrong.setAttribute('id', buttonId + '-max');
+      var $maxTooltip = document.createElement('wa-tooltip');
+      $maxTooltip.setAttribute('for', buttonId + '-max');
+      //$statsPopover.append($maxTooltip);
+      $maxSplit.append($maxStrong);
+
+      var $statsCloseButton = document.createElement('wa-button');
+      $statsCloseButton.setAttribute('data-popover', 'close');
+      $statsCloseButton.setAttribute('variant', 'brand');
+      $statsCloseButton.innerText = 'close';
+      $popoverStack.append($statsCloseButton);
+    }
+
+    async function {{ jsFunctionName(divId) }}(timeQuery) {
+      const urls = [];
+      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
+      var requestHubIds = [];
+      hubIds.forEach((hubId, i) => {
+        var projects = list{{ classSimpleName }}.filter(o => o.hubId === hubId);
+        var uniqueClusterNames = [...new Set(projects.map(item => item.{{ clusterVar }}))];
+        uniqueClusterNames.forEach(({{ clusterVar }}, i) => {
+          var uniqueProjectNames = [...new Set(projects.filter(project => project.{{ clusterVar }} === {{ clusterVar }}).map(project => project.{{ projectVar }}))];
+          var projectNamesFilter = 'cluster="' + {{ clusterVar }} + '", {{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
+          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+              query: '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}'
+              }, timeQuery)).toString());
+          requestHubIds.push(hubId);
+        });
+      });
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+      var end = new Date();
+      var start = new Date(new Date().setHours(end.getHours() - 1));
+
+      var $tbody = document.getElementById('{{ divId | e }}-data-tbody');
+      var panelId = '{{ divId | e }}';
+      var traces = [];
+      responseJsons.forEach((responseJson, i) => {
+        var hubId = requestHubIds[i];
+        responseJson.data.result.forEach((result, j) => {
+          traces.push({
+            x: result.values.map(values => new Date(values[0] * 1000))
+            , y: result.values.map(values => parseFloat(values[1]))
+            , mode: 'scatter'
+            , name: (result.metric.{{ resultLabel }} + ' in ' + result.metric.{{ projectLabel }} + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
+            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.{{ projectLabel }} + '</a>')
+          });
+
+          var $tr = document.createElement('tr');
+
+          var $hub = document.createElement('td');
+          $hub.innerText = hubId;
+          $tr.append($hub);
+
+          var $cluster = document.createElement('td');
+          $cluster.innerText = result.metric.cluster;
+          $tr.append($cluster);
+
+          var ${{ projectLabel }} = document.createElement('td');
+          ${{ projectLabel }}.innerText = result.metric.{{ projectLabel }};
+          $tr.append(${{ projectLabel }});
+
+          var ${{ resultLabel }} = document.createElement('td');
+          ${{ resultLabel }}.innerText = result.metric.{{ resultLabel }};
+          $tr.append(${{ resultLabel }});
+
+          var $val = document.createElement('td');
+          $tr.append($val);
+
+          var $statsPopover = document.createElement('wa-popover');
+          $statsPopover.setAttribute('id', '{{ divId | e }}-data-stats-button-' + j + '-popover');
+          $statsPopover.setAttribute('for', '{{ divId | e }}-data-stats-button-' + j);
+          $val.append($statsPopover);
+
+          var $statsButton = document.createElement('wa-button');
+          $statsButton.setAttribute('id', '{{ divId | e }}-data-stats-button-' + j);
+          $statsButton.setAttribute('data-popover', '{{ divId | e }}-data-stats-button-' + j + '-popover');
+          $statsButton.setAttribute('data-metric', JSON.stringify(result.metric));
+          $statsButton.setAttribute('data-values', JSON.stringify(result.values));
+          $statsButton.setAttribute('onclick', "{{ jsFunctionName(divId) }}Popover(event);");
+          $statsButton.innerText = 'stats';
+          $val.append($statsButton);
+
+          $tbody.append($tr);
+        });
+      });
+
+      var layout = {
+        xaxis: {
+          title: 'Time in {{ defaultZoneId }}'
+        }
+        , yaxis: {
+          title: '{{ yaxisTitle | e }}'
+          {% if tickformat is defined -%}
+          , tickformat: '{{ tickformat }}'
+          {%- endif %}
+        }
+        , legend: {
+          title: {
+            text: '{{ legendTitle | e }}'
+          }
+          , xanchor: 'center'
+          , x: 0.4
+          , yanchor: 'top'
+          , y: -0.2
+          , orientation: 'v'
+        }
+        , height: 600
+        , margin: {
+          l: 50
+          , r: 0
+          , b: 0
+          , t: 0
+          , pad: 1
+        }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
+
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="{{ SITE_LOCALE }}" class="wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
   <head>
@@ -91,9 +346,9 @@
         });
       });
     </script>
-{%- if WEB_COMPONENTS_KIT is defined %}
+    {%- if WEB_COMPONENTS_KIT is defined %}
     {{ WEB_COMPONENTS_KIT }}
-{%- endif %}
+    {%- endif %}
     <script src="{{ STATIC_BASE_URL }}/js/site.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/sockjs.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/vertx-eventbus.js"></script>

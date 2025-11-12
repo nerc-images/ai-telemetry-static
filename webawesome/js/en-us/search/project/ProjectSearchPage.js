@@ -95,61 +95,6 @@ Promise.all([
     facetStatsChange('Project', 'description', false);
   });
 
-  document.querySelector('#pageSelectSortProject_userPage')?.addEventListener('change', (event) => {
-    sort('Project', 'userPage', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsProject_userPage')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'userPage', true);
-  });
-  document.querySelector('#pageStatsProject_userPage')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'userPage', false);
-  });
-
-  document.querySelector('#pageSelectSortProject_download')?.addEventListener('change', (event) => {
-    sort('Project', 'download', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsProject_download')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'download', true);
-  });
-  document.querySelector('#pageStatsProject_download')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'download', false);
-  });
-
-  document.querySelector('#pageSelectSortProject_objectSuggest')?.addEventListener('change', (event) => {
-    sort('Project', 'objectSuggest', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsProject_objectSuggest')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'objectSuggest', true);
-  });
-  document.querySelector('#pageStatsProject_objectSuggest')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'objectSuggest', false);
-  });
-
-  document.querySelector('#pageSelectSortProject_objectText')?.addEventListener('change', (event) => {
-    sort('Project', 'objectText', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsProject_objectText')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'objectText', true);
-  });
-  document.querySelector('#pageStatsProject_objectText')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'objectText', false);
-  });
-
-  document.querySelector('#pageSelectSortProject_solrId')?.addEventListener('change', (event) => {
-    sort('Project', 'solrId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsProject_solrId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'solrId', true);
-  });
-  document.querySelector('#pageStatsProject_solrId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'solrId', false);
-  });
-
   document.querySelector('#pageSelectSortProject_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Project', 'classCanonicalName', event.currentTarget.value);
   });
@@ -227,6 +172,17 @@ Promise.all([
     facetStatsChange('Project', 'objectTitle', false);
   });
 
+  document.querySelector('#pageSelectSortProject_displayPage')?.addEventListener('change', (event) => {
+    sort('Project', 'displayPage', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_displayPage')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'displayPage', true);
+  });
+  document.querySelector('#pageStatsProject_displayPage')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'displayPage', false);
+  });
+
   document.querySelector('#pageSelectSortProject_editPage')?.addEventListener('change', (event) => {
     sort('Project', 'editPage', event.currentTarget.value);
   });
@@ -238,15 +194,59 @@ Promise.all([
     facetStatsChange('Project', 'editPage', false);
   });
 
-  document.querySelector('#pageSelectSortProject_displayPage')?.addEventListener('change', (event) => {
-    sort('Project', 'displayPage', event.currentTarget.value);
+  document.querySelector('#pageSelectSortProject_userPage')?.addEventListener('change', (event) => {
+    sort('Project', 'userPage', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsProject_displayPage')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'displayPage', true);
+  document.querySelector('#pageStatsProject_userPage')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'userPage', true);
   });
-  document.querySelector('#pageStatsProject_displayPage')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'displayPage', false);
+  document.querySelector('#pageStatsProject_userPage')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'userPage', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_download')?.addEventListener('change', (event) => {
+    sort('Project', 'download', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_download')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'download', true);
+  });
+  document.querySelector('#pageStatsProject_download')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'download', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_objectSuggest')?.addEventListener('change', (event) => {
+    sort('Project', 'objectSuggest', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_objectSuggest')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'objectSuggest', true);
+  });
+  document.querySelector('#pageStatsProject_objectSuggest')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'objectSuggest', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_objectText')?.addEventListener('change', (event) => {
+    sort('Project', 'objectText', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_objectText')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'objectText', true);
+  });
+  document.querySelector('#pageStatsProject_objectText')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'objectText', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_solrId')?.addEventListener('change', (event) => {
+    sort('Project', 'solrId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_solrId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'solrId', true);
+  });
+  document.querySelector('#pageStatsProject_solrId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'solrId', false);
   });
 
   document.querySelector('#pageSelectSortProject_hubResource')?.addEventListener('change', (event) => {
@@ -404,6 +404,30 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapProject_description')?.addEventListener('change', (event) => {
             facetRangeGapChange('Project', event.currentTarget);
           });
+          document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_displayPage')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_displayPage')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_displayPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_editPage')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
           document.querySelector('#fqProject_userPage')?.addEventListener('change', (event) => {
             fqChange('Project', event.currentTarget);
           });
@@ -426,30 +450,6 @@ Promise.all([
             facetPivotChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapProject_download')?.addEventListener('change', (event) => {
-            facetRangeGapChange('Project', event.currentTarget);
-          });
-          document.querySelector('#fqProject_editPage')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetProject_editPage')?.addEventListener('click', (event) => {
-            facetFieldChange('Project', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotProject_editPage')?.addEventListener('change', (event) => {
-            facetPivotChange('Project', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapProject_editPage')?.addEventListener('change', (event) => {
-            facetRangeGapChange('Project', event.currentTarget);
-          });
-          document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetProject_displayPage')?.addEventListener('click', (event) => {
-            facetFieldChange('Project', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotProject_displayPage')?.addEventListener('change', (event) => {
-            facetPivotChange('Project', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapProject_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_projectResource')?.addEventListener('change', (event) => {

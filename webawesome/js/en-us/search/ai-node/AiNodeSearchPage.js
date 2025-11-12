@@ -172,61 +172,6 @@ Promise.all([
     facetStatsChange('AiNode', 'location', false);
   });
 
-  document.querySelector('#pageSelectSortAiNode_userPage')?.addEventListener('change', (event) => {
-    sort('AiNode', 'userPage', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAiNode_userPage')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AiNode', 'userPage', true);
-  });
-  document.querySelector('#pageStatsAiNode_userPage')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AiNode', 'userPage', false);
-  });
-
-  document.querySelector('#pageSelectSortAiNode_download')?.addEventListener('change', (event) => {
-    sort('AiNode', 'download', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAiNode_download')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AiNode', 'download', true);
-  });
-  document.querySelector('#pageStatsAiNode_download')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AiNode', 'download', false);
-  });
-
-  document.querySelector('#pageSelectSortAiNode_objectSuggest')?.addEventListener('change', (event) => {
-    sort('AiNode', 'objectSuggest', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAiNode_objectSuggest')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AiNode', 'objectSuggest', true);
-  });
-  document.querySelector('#pageStatsAiNode_objectSuggest')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AiNode', 'objectSuggest', false);
-  });
-
-  document.querySelector('#pageSelectSortAiNode_objectText')?.addEventListener('change', (event) => {
-    sort('AiNode', 'objectText', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAiNode_objectText')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AiNode', 'objectText', true);
-  });
-  document.querySelector('#pageStatsAiNode_objectText')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AiNode', 'objectText', false);
-  });
-
-  document.querySelector('#pageSelectSortAiNode_solrId')?.addEventListener('change', (event) => {
-    sort('AiNode', 'solrId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAiNode_solrId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AiNode', 'solrId', true);
-  });
-  document.querySelector('#pageStatsAiNode_solrId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AiNode', 'solrId', false);
-  });
-
   document.querySelector('#pageSelectSortAiNode_classCanonicalName')?.addEventListener('change', (event) => {
     sort('AiNode', 'classCanonicalName', event.currentTarget.value);
   });
@@ -304,6 +249,17 @@ Promise.all([
     facetStatsChange('AiNode', 'objectTitle', false);
   });
 
+  document.querySelector('#pageSelectSortAiNode_displayPage')?.addEventListener('change', (event) => {
+    sort('AiNode', 'displayPage', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAiNode_displayPage')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AiNode', 'displayPage', true);
+  });
+  document.querySelector('#pageStatsAiNode_displayPage')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AiNode', 'displayPage', false);
+  });
+
   document.querySelector('#pageSelectSortAiNode_editPage')?.addEventListener('change', (event) => {
     sort('AiNode', 'editPage', event.currentTarget.value);
   });
@@ -315,15 +271,59 @@ Promise.all([
     facetStatsChange('AiNode', 'editPage', false);
   });
 
-  document.querySelector('#pageSelectSortAiNode_displayPage')?.addEventListener('change', (event) => {
-    sort('AiNode', 'displayPage', event.currentTarget.value);
+  document.querySelector('#pageSelectSortAiNode_userPage')?.addEventListener('change', (event) => {
+    sort('AiNode', 'userPage', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsAiNode_displayPage')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AiNode', 'displayPage', true);
+  document.querySelector('#pageStatsAiNode_userPage')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AiNode', 'userPage', true);
   });
-  document.querySelector('#pageStatsAiNode_displayPage')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AiNode', 'displayPage', false);
+  document.querySelector('#pageStatsAiNode_userPage')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AiNode', 'userPage', false);
+  });
+
+  document.querySelector('#pageSelectSortAiNode_download')?.addEventListener('change', (event) => {
+    sort('AiNode', 'download', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAiNode_download')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AiNode', 'download', true);
+  });
+  document.querySelector('#pageStatsAiNode_download')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AiNode', 'download', false);
+  });
+
+  document.querySelector('#pageSelectSortAiNode_objectSuggest')?.addEventListener('change', (event) => {
+    sort('AiNode', 'objectSuggest', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAiNode_objectSuggest')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AiNode', 'objectSuggest', true);
+  });
+  document.querySelector('#pageStatsAiNode_objectSuggest')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AiNode', 'objectSuggest', false);
+  });
+
+  document.querySelector('#pageSelectSortAiNode_objectText')?.addEventListener('change', (event) => {
+    sort('AiNode', 'objectText', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAiNode_objectText')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AiNode', 'objectText', true);
+  });
+  document.querySelector('#pageStatsAiNode_objectText')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AiNode', 'objectText', false);
+  });
+
+  document.querySelector('#pageSelectSortAiNode_solrId')?.addEventListener('change', (event) => {
+    sort('AiNode', 'solrId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAiNode_solrId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AiNode', 'solrId', true);
+  });
+  document.querySelector('#pageStatsAiNode_solrId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AiNode', 'solrId', false);
   });
 
   document.querySelector('#pageSelectSortAiNode_hubResource')?.addEventListener('change', (event) => {
@@ -597,6 +597,30 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_location')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#fqAiNode_displayPage')?.addEventListener('change', (event) => {
+            fqChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetAiNode_displayPage')?.addEventListener('click', (event) => {
+            facetFieldChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotAiNode_displayPage')?.addEventListener('change', (event) => {
+            facetPivotChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapAiNode_displayPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#fqAiNode_editPage')?.addEventListener('change', (event) => {
+            fqChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetAiNode_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotAiNode_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapAiNode_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_userPage')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -619,30 +643,6 @@ Promise.all([
             facetPivotChange('AiNode', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapAiNode_download')?.addEventListener('change', (event) => {
-            facetRangeGapChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#fqAiNode_editPage')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetAiNode_editPage')?.addEventListener('click', (event) => {
-            facetFieldChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotAiNode_editPage')?.addEventListener('change', (event) => {
-            facetPivotChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapAiNode_editPage')?.addEventListener('change', (event) => {
-            facetRangeGapChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#fqAiNode_displayPage')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetAiNode_displayPage')?.addEventListener('click', (event) => {
-            facetFieldChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotAiNode_displayPage')?.addEventListener('change', (event) => {
-            facetPivotChange('AiNode', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapAiNode_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_nodeResource')?.addEventListener('change', (event) => {

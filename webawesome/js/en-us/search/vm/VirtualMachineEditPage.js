@@ -204,27 +204,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH gpuDevicesTotal
-          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_gpuDevicesTotal');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
-                  , 'setGpuDevicesTotal', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_gpuDevicesTotal')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_gpuDevicesTotal');
-            const valid = form.reportValidity();
-          });
-
           // PATCH ngsildTenant
           document.querySelector('#Page_ngsildTenant')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_ngsildTenant');
@@ -327,27 +306,6 @@ Promise.all([
           });
           document.querySelector('#Page_location')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_location');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH vmResource
-          document.querySelector('#Page_vmResource')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_vmResource');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
-                  , 'setVmResource', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_vmResource')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_vmResource')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_vmResource');
             const valid = form.reportValidity();
           });
 
@@ -495,6 +453,27 @@ Promise.all([
           });
           document.querySelector('#Page_download')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_download');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH vmResource
+          document.querySelector('#Page_vmResource')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_vmResource');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchVirtualMachineVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'vmResource:' + event.currentTarget.getAttribute('data-vmResource') }]
+                  , 'setVmResource', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_vmResource')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_vmResource')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_vmResource');
             const valid = form.reportValidity();
           });
 });

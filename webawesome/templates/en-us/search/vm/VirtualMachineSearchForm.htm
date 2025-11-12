@@ -413,44 +413,6 @@ A unique ID for this Smart Data Model"
 {%- macro htmIdVirtualMachinePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputIdVirtualMachinePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputGpuDevicesTotalVirtualMachinePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_gpuDevicesTotal">
-  {%- endif %}
-                  <wa-input
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[Integer] GPU devices total"
-                      label="GPU devices total"
-                      type="number"
-                      hint="
-The total number of GPU devices on this cluster. "
-                      id="{{classApiMethodMethod}}_gpuDevicesTotal"
-  {%- if "Page" == classApiMethodMethod %}
-                      data-vmResource={{ result.vmResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_gpuDevicesTotal setGpuDevicesTotal classVirtualMachine inputVirtualMachine{{ result.vmResource }}GpuDevicesTotal "
-                      name="setGpuDevicesTotal"
-  {%- else %}
-    {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_gpuDevicesTotal setGpuDevicesTotal classVirtualMachine inputVirtualMachine{{ result.vmResource }}GpuDevicesTotal "
-                      name="setGpuDevicesTotal"
-    {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_gpuDevicesTotal valueGpuDevicesTotal classVirtualMachine inputVirtualMachine{{ result.vmResource }}GpuDevicesTotal "
-                      name="gpuDevicesTotal"
-    {%- endif %}
-  {%- endif %}
-  {%- if "Page" == classApiMethodMethod %}
-                      value="{{result.gpuDevicesTotal | e }}"
-  {%- endif %}
-                      ></wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputGpuDevicesTotalVirtualMachinePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
 {%- macro inputNgsildTenantVirtualMachinePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ngsildTenant">
@@ -726,16 +688,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmIdVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
-
-              {%- if "PATCH" in scopes %}
-                {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-              {%- endif %}
               </div>
               <div class="grid-with-subgrid-2col ">
 
@@ -885,16 +837,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmIdVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmIdVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-              {%- endif %}
-
-              {%- if "POST" in scopes %}
-                {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -1140,16 +1082,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmIdVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmIdVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-              {%- endif %}
-
-              {%- if "PATCH" in scopes %}
-                {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmGpuDevicesTotalVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
