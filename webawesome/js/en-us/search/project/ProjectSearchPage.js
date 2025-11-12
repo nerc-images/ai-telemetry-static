@@ -95,6 +95,17 @@ Promise.all([
     facetStatsChange('Project', 'description', false);
   });
 
+  document.querySelector('#pageSelectSortProject_gpuEnabled')?.addEventListener('change', (event) => {
+    sort('Project', 'gpuEnabled', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_gpuEnabled')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'gpuEnabled', true);
+  });
+  document.querySelector('#pageStatsProject_gpuEnabled')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'gpuEnabled', false);
+  });
+
   document.querySelector('#pageSelectSortProject_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Project', 'classCanonicalName', event.currentTarget.value);
   });
@@ -402,6 +413,18 @@ Promise.all([
             facetPivotChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapProject_description')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_gpuEnabled')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_gpuEnabled')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_gpuEnabled')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_gpuEnabled')?.addEventListener('change', (event) => {
             facetRangeGapChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {

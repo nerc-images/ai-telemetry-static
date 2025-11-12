@@ -53,6 +53,16 @@ function searchProjectFilters($formFilters) {
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
+    var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
+    var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
+    var filterGpuEnabled = $filterGpuEnabledSelect.length ? $filterGpuEnabledSelect.value : $filterGpuEnabledCheckbox.checked;
+    var filterGpuEnabledSelectVal = $formFilters.querySelector('select.filterGpuEnabled')?.value;
+    var filterGpuEnabled = null;
+    if(filterGpuEnabledSelectVal !== '')
+      filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
+    if(filterGpuEnabled != null && filterGpuEnabled === true)
+      filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -394,6 +404,25 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeDescription != null && removeDescription !== '')
     vals['removeDescription'] = removeDescription;
 
+  var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
+  var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.value === 'true';
+  if(valueGpuEnabled != null)
+    valueGpuEnabled = valueGpuEnabled === 'true';
+  var valueGpuEnabledSelectVal = $formValues.querySelector('select.setGpuEnabled')?.value;
+  if(valueGpuEnabledSelectVal != null)
+    valueGpuEnabledSelectVal = valueGpuEnabledSelectVal === 'true';
+  if(valueGpuEnabledSelectVal != null && valueGpuEnabledSelectVal !== '')
+    valueGpuEnabled = valueGpuEnabledSelectVal == 'true';
+  var setGpuEnabled = removeGpuEnabled ? null : valueGpuEnabled;
+  var addGpuEnabled = $formValues.querySelector('.addGpuEnabled')?.checked;
+  if(removeGpuEnabled || setGpuEnabled != null && setGpuEnabled !== '')
+    vals['setGpuEnabled'] = setGpuEnabled;
+  if(addGpuEnabled != null && addGpuEnabled !== '')
+    vals['addGpuEnabled'] = addGpuEnabled;
+  var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.checked;
+  if(removeGpuEnabled != null && removeGpuEnabled !== '')
+    vals['removeGpuEnabled'] = removeGpuEnabled;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -544,6 +573,16 @@ function patchProjectFilters($formFilters) {
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
+    var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
+    var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
+    var filterGpuEnabled = $filterGpuEnabledSelect.length ? $filterGpuEnabledSelect.value : $filterGpuEnabledCheckbox.checked;
+    var filterGpuEnabledSelectVal = $formFilters.querySelector('select.filterGpuEnabled')?.value;
+    var filterGpuEnabled = null;
+    if(filterGpuEnabledSelectVal !== '')
+      filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
+    if(filterGpuEnabled != null && filterGpuEnabled === true)
+      filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -693,6 +732,10 @@ async function postProject($formValues, target, success, error) {
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
+
+  var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
+  if(valueGpuEnabled != null && valueGpuEnabled !== '')
+    vals['gpuEnabled'] = valueGpuEnabled == 'true';
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -963,6 +1006,7 @@ async function websocketProjectInner(apiRequest) {
         var inputClusterName = null;
         var inputProjectName = null;
         var inputDescription = null;
+        var inputGpuEnabled = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -998,6 +1042,8 @@ async function websocketProjectInner(apiRequest) {
           inputProjectName = $response.querySelector('.Page_projectName');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('gpuEnabled'))
+          inputGpuEnabled = $response.querySelector('.Page_gpuEnabled');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1118,6 +1164,16 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputDescription.textContent;
           });
           addGlow(document.querySelector('.Page_description'));
+        }
+
+        if(inputGpuEnabled) {
+          document.querySelectorAll('.Page_gpuEnabled').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputGpuEnabled.getAttribute('value');
+            else
+              item.textContent = inputGpuEnabled.textContent;
+          });
+          addGlow(document.querySelector('.Page_gpuEnabled'));
         }
 
         if(inputClassCanonicalName) {
