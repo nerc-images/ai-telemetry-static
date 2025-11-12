@@ -73,6 +73,17 @@ Promise.all([
     facetStatsChange('VirtualMachine', 'clusterName', false);
   });
 
+  document.querySelector('#pageSelectSortVirtualMachine_clusterResource')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'clusterResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'clusterResource', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'clusterResource', false);
+  });
+
   document.querySelector('#pageSelectSortVirtualMachine_vmProject')?.addEventListener('change', (event) => {
     sort('VirtualMachine', 'vmProject', event.currentTarget.value);
   });
@@ -346,17 +357,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsVirtualMachine_hubResource')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('VirtualMachine', 'hubResource', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_clusterResource')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'clusterResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'clusterResource', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_clusterResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'clusterResource', false);
   });
 
   document.querySelector('#pageSelectSortVirtualMachine_vmResource')?.addEventListener('change', (event) => {

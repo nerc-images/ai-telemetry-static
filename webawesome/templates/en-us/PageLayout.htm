@@ -61,6 +61,7 @@
 
     function {{ jsFunctionName(divId) }}Popover(event) {
       var buttonId = event.target.getAttribute('id');
+      var hubId = event.target.getAttribute('data-hubId');
       var dataValues = JSON.parse(event.target.getAttribute('data-values'));
       var dataMetric = JSON.parse(event.target.getAttribute('data-metric'));
 
@@ -72,10 +73,26 @@
       $popoverStack.setAttribute('class', 'wa-stack ');
       $statsPopover.append($popoverStack);
 
-      var $header = document.createElement('div');
-      $header.setAttribute('class', 'wa-heading-m ');
-      $header.innerText = dataMetric.{{ resultLabel }};
-      $popoverStack.append($header);
+      var $headerHub = document.createElement('div');
+      $headerHub.setAttribute('class', 'wa-heading-m ');
+      $headerHub.innerText = 'hub: ' + hubId;
+      $popoverStack.append($headerHub);
+
+      var $headerCluster = document.createElement('div');
+      $headerCluster.setAttribute('class', 'wa-heading-m ');
+      $headerCluster.innerText = 'cluster: ' + dataMetric.cluster;
+      $popoverStack.append($headerCluster);
+
+      var $headerProject = document.createElement('div');
+      $headerProject.setAttribute('class', 'wa-heading-m ');
+      $headerProject.innerText = 'project: ' + dataMetric.{{ projectLabel }};
+      $popoverStack.append($headerProject);
+
+      var $headerVar = document.createElement('div');
+      $headerVar.setAttribute('class', 'wa-heading-m ');
+      $headerVar.innerText = '{{ resultLabel }}: ' + dataMetric.{{ resultLabel }};
+      $popoverStack.append($headerVar);
+
       $popoverStack.append(document.createElement('wa-divider'));
 
       var $stack = document.createElement('div');
@@ -211,6 +228,7 @@
           $statsButton.setAttribute('data-popover', '{{ divId | e }}-data-stats-button-' + j + '-popover');
           $statsButton.setAttribute('data-metric', JSON.stringify(result.metric));
           $statsButton.setAttribute('data-values', JSON.stringify(result.values));
+          $statsButton.setAttribute('data-hubId', hubId);
           $statsButton.setAttribute('onclick', "{{ jsFunctionName(divId) }}Popover(event);");
           $statsButton.innerText = 'stats';
           $val.append($statsButton);

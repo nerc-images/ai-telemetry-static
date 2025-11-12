@@ -228,6 +228,59 @@ The name of this cluster"
 {%- macro htmClusterNameVirtualMachinePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputClusterNameVirtualMachinePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputClusterResourceVirtualMachinePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_clusterResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{classApiMethodMethod}}_clusterResource_clear"
+                        class="label-on-left classApiMethodMethod}}_clusterResource_clear clusterResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="cluster auth resource"
+                      label="cluster auth resource"
+                      hint="The unique authorization resource for the cluster for multi-tenancy"
+                      class="label-on-left {{classApiMethodMethod}}_clusterResource valueObjectSuggest suggestClusterResource "
+                      name="setClusterResource"
+                      id="{{classApiMethodMethod}}_clusterResource"
+                      data-list="listVirtualMachineClusterResource_{{classApiMethodMethod}}"
+                      autocomplete="off"
+                      value="{{result.clusterResource | e }}"
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmClusterResourceVirtualMachinePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputClusterResourceVirtualMachinePage(authForWrite=authForWrite, authForRead=authForRead) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate an OpenShift cluster to this virtual machine
+                </div>
+                <ul class="label-on-left-ul " id="listVirtualMachineClusterResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  <button
+                       id="{{classApiMethodMethod}}_clusterResource_add"
+                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postClusterVals({ clusterResource: '{{ result.vmResource }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_clusterResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_clusterResource_add').innerHTML = 'add an OpenShift cluster'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}clusterResource')); });"
+                      >add an OpenShift cluster</button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
 {%- macro inputVmProjectVirtualMachinePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_vmProject">
@@ -640,6 +693,16 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
+                {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmVmProjectVirtualMachinePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -787,6 +850,16 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmClusterNameVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmClusterNameVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -1032,6 +1105,16 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                   {{ htmClusterNameVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmClusterNameVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmClusterResourceVirtualMachinePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 

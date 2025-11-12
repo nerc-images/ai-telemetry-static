@@ -165,32 +165,6 @@
           if(o)
             window.result = JSON.parse(o);
         {% if result.vmResource is defined %}
-          function relate_hubResource(event) {
-            suggestVirtualMachineHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.vmResource
-                , window.result.hubResource
-                , true
-                );
-          }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#Page_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#Page_hubResource')?.addEventListener('focus', relate_hubResource);
-          {% if "PATCH" in scopes %}
-          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, true);
-          {% else %}
-          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, false);
-          {% endif %}
-          {% endif %}
           function relate_clusterResource(event) {
             suggestVirtualMachineClusterResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
@@ -215,6 +189,32 @@
           suggestVirtualMachineClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listVirtualMachineClusterResource_Page'), window.result.vmResource, window.result.clusterResource, true);
           {% else %}
           suggestVirtualMachineClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listVirtualMachineClusterResource_Page'), window.result.vmResource, window.result.clusterResource, false);
+          {% endif %}
+          {% endif %}
+          function relate_hubResource(event) {
+            suggestVirtualMachineHubResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , window.result.vmResource
+                , window.result.hubResource
+                , true
+                );
+          }
+          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#Page_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#Page_hubResource')?.addEventListener('focus', relate_hubResource);
+          {% if "PATCH" in scopes %}
+          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, true);
+          {% else %}
+          {% if "GET" in scopes %}
+          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, true);
+          {% else %}
+          suggestVirtualMachineHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listVirtualMachineHubResource_Page'), window.result.vmResource, window.result.hubResource, false);
           {% endif %}
           {% endif %}
         {% endif %}

@@ -45,6 +45,10 @@ function searchVirtualMachineFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
     var filterVmProject = $formFilters.querySelector('.valueVmProject')?.value;
     if(filterVmProject != null && filterVmProject !== '')
       filters.push({ name: 'fq', value: 'vmProject:' + filterVmProject });
@@ -144,10 +148,6 @@ function searchVirtualMachineFilters($formFilters) {
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
 
     var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
     if(filterVmResource != null && filterVmResource !== '')
@@ -418,6 +418,10 @@ async function patchVirtualMachine($formFilters, $formValues, target, vmResource
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
 
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['setClusterResource'] = valueClusterResource;
+
   var valueVmProject = $formValues.querySelector('.valueVmProject')?.value;
   var removeVmProject = $formValues.querySelector('.removeVmProject')?.value === 'true';
   var setVmProject = removeVmProject ? null : $formValues.querySelector('.setVmProject')?.value;
@@ -626,10 +630,6 @@ async function patchVirtualMachine($formFilters, $formValues, target, vmResource
   if(valueHubResource != null && valueHubResource !== '')
     vals['setHubResource'] = valueHubResource;
 
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['setClusterResource'] = valueClusterResource;
-
   var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
   var removeVmResource = $formValues.querySelector('.removeVmResource')?.value === 'true';
   var setVmResource = removeVmResource ? null : $formValues.querySelector('.setVmResource')?.value;
@@ -679,6 +679,10 @@ function patchVirtualMachineFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
 
     var filterVmProject = $formFilters.querySelector('.valueVmProject')?.value;
     if(filterVmProject != null && filterVmProject !== '')
@@ -780,10 +784,6 @@ function patchVirtualMachineFilters($formFilters) {
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
 
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
     var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
     if(filterVmResource != null && filterVmResource !== '')
       filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
@@ -878,6 +878,10 @@ async function postVirtualMachine($formValues, target, success, error) {
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
 
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['clusterResource'] = valueClusterResource;
+
   var valueVmProject = $formValues.querySelector('.valueVmProject')?.value;
   if(valueVmProject != null && valueVmProject !== '')
     vals['vmProject'] = valueVmProject;
@@ -949,10 +953,6 @@ async function postVirtualMachine($formValues, target, success, error) {
   var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHubResource != null && valueHubResource !== '')
     vals['hubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['clusterResource'] = valueClusterResource;
 
   var valueVmResource = $formValues.querySelector('.valueVmResource')?.value;
   if(valueVmResource != null && valueVmResource !== '')
@@ -1185,6 +1185,7 @@ async function websocketVirtualMachineInner(apiRequest) {
         var inputArchived = null;
         var inputHubId = null;
         var inputClusterName = null;
+        var inputClusterResource = null;
         var inputVmProject = null;
         var inputDescription = null;
         var inputVmName = null;
@@ -1210,7 +1211,6 @@ async function websocketVirtualMachineInner(apiRequest) {
         var inputObjectText = null;
         var inputSolrId = null;
         var inputHubResource = null;
-        var inputClusterResource = null;
         var inputVmResource = null;
         var inputVmDisplayName = null;
         var inputLocationColors = null;
@@ -1230,6 +1230,8 @@ async function websocketVirtualMachineInner(apiRequest) {
           inputHubId = $response.querySelector('.Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Page_clusterName');
+        if(vars.includes('clusterResource'))
+          inputClusterResource = $response.querySelector('.Page_clusterResource');
         if(vars.includes('vmProject'))
           inputVmProject = $response.querySelector('.Page_vmProject');
         if(vars.includes('description'))
@@ -1280,8 +1282,6 @@ async function websocketVirtualMachineInner(apiRequest) {
           inputSolrId = $response.querySelector('.Page_solrId');
         if(vars.includes('hubResource'))
           inputHubResource = $response.querySelector('.Page_hubResource');
-        if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
         if(vars.includes('vmResource'))
           inputVmResource = $response.querySelector('.Page_vmResource');
         if(vars.includes('vmDisplayName'))
@@ -1358,6 +1358,16 @@ async function websocketVirtualMachineInner(apiRequest) {
               item.textContent = inputClusterName.textContent;
           });
           addGlow(document.querySelector('.Page_clusterName'));
+        }
+
+        if(inputClusterResource) {
+          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterResource.getAttribute('value');
+            else
+              item.textContent = inputClusterResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterResource'));
         }
 
         if(inputVmProject) {
@@ -1608,16 +1618,6 @@ async function websocketVirtualMachineInner(apiRequest) {
               item.textContent = inputHubResource.textContent;
           });
           addGlow(document.querySelector('.Page_hubResource'));
-        }
-
-        if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClusterResource.getAttribute('value');
-            else
-              item.textContent = inputClusterResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_clusterResource'));
         }
 
         if(inputVmResource) {

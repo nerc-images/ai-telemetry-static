@@ -147,22 +147,6 @@
 
         var vmResource = {% if result.vmResource is defined %}{{ result.vmResource | tojson }}{% else %}null{% endif %};
 
-          function relate_hubResource(event) {
-            suggestVirtualMachineHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , null
-                , null
-                , true
-                , this
-                );
-          }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
           function relate_clusterResource(event) {
             suggestVirtualMachineClusterResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
@@ -179,6 +163,22 @@
           document.querySelector('#POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
           document.querySelector('#PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
           document.querySelector('#PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          function relate_hubResource(event) {
+            suggestVirtualMachineHubResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
         if(vmResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
