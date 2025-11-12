@@ -475,12 +475,10 @@
 
             <wa-details summary="OpenShift clusters" open="true" class="wa-stack ">
               <div class="wa-stack ">
-                {% if userGroups is defined and ("/HUB" in userGroups or "/Admin" in userGroups or "/SuperAdmin" in userGroups) %}
                 <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub">
                   <i class="fa-regular fa-sitemap"></i>
                   ACM hubs
                 </wa-button>
-                {% endif %}
                 <wa-button variant="brand" id="site-aside-left-model-button-Cluster" href="{{ SITE_BASE_URL }}/en-us/search/cluster">
                   <i class="fa-regular fa-server"></i>
                   clusters

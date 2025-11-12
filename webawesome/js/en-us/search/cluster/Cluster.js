@@ -45,17 +45,31 @@ function searchClusterFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
+    var $filterHubClusterCheckbox = $formFilters.querySelector('input.valueHubCluster[type = "checkbox"]');
+    var $filterHubClusterSelect = $formFilters.querySelector('select.valueHubCluster');
+    var filterHubCluster = $filterHubClusterSelect.length ? $filterHubClusterSelect.value : $filterHubClusterCheckbox.checked;
+    var filterHubClusterSelectVal = $formFilters.querySelector('select.filterHubCluster')?.value;
+    var filterHubCluster = null;
+    if(filterHubClusterSelectVal !== '')
+      filterHubCluster = filterHubClusterSelectVal == 'true';
+    if(filterHubCluster != null && filterHubCluster === true)
+      filters.push({ name: 'fq', value: 'hubCluster:' + filterHubCluster });
+
+    var filterClusterNameMetrics = $formFilters.querySelector('.valueClusterNameMetrics')?.value;
+    if(filterClusterNameMetrics != null && filterClusterNameMetrics !== '')
+      filters.push({ name: 'fq', value: 'clusterNameMetrics:' + filterClusterNameMetrics });
+
     var filterUniqueName = $formFilters.querySelector('.valueUniqueName')?.value;
     if(filterUniqueName != null && filterUniqueName !== '')
       filters.push({ name: 'fq', value: 'uniqueName:' + filterUniqueName });
 
-    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
-    if(filterLocation != null && filterLocation !== '')
-      filters.push({ name: 'fq', value: 'location:' + filterLocation });
-
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
+    if(filterLocation != null && filterLocation !== '')
+      filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
     var filterAiNodesTotal = $formFilters.querySelector('.valueAiNodesTotal')?.value;
     if(filterAiNodesTotal != null && filterAiNodesTotal !== '')
@@ -373,6 +387,37 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
 
+  var valueHubCluster = $formValues.querySelector('.valueHubCluster')?.value;
+  var removeHubCluster = $formValues.querySelector('.removeHubCluster')?.value === 'true';
+  if(valueHubCluster != null)
+    valueHubCluster = valueHubCluster === 'true';
+  var valueHubClusterSelectVal = $formValues.querySelector('select.setHubCluster')?.value;
+  if(valueHubClusterSelectVal != null)
+    valueHubClusterSelectVal = valueHubClusterSelectVal === 'true';
+  if(valueHubClusterSelectVal != null && valueHubClusterSelectVal !== '')
+    valueHubCluster = valueHubClusterSelectVal == 'true';
+  var setHubCluster = removeHubCluster ? null : valueHubCluster;
+  var addHubCluster = $formValues.querySelector('.addHubCluster')?.checked;
+  if(removeHubCluster || setHubCluster != null && setHubCluster !== '')
+    vals['setHubCluster'] = setHubCluster;
+  if(addHubCluster != null && addHubCluster !== '')
+    vals['addHubCluster'] = addHubCluster;
+  var removeHubCluster = $formValues.querySelector('.removeHubCluster')?.checked;
+  if(removeHubCluster != null && removeHubCluster !== '')
+    vals['removeHubCluster'] = removeHubCluster;
+
+  var valueClusterNameMetrics = $formValues.querySelector('.valueClusterNameMetrics')?.value;
+  var removeClusterNameMetrics = $formValues.querySelector('.removeClusterNameMetrics')?.value === 'true';
+  var setClusterNameMetrics = removeClusterNameMetrics ? null : $formValues.querySelector('.setClusterNameMetrics')?.value;
+  var addClusterNameMetrics = $formValues.querySelector('.addClusterNameMetrics')?.value;
+  if(removeClusterNameMetrics || setClusterNameMetrics != null && setClusterNameMetrics !== '')
+    vals['setClusterNameMetrics'] = setClusterNameMetrics;
+  if(addClusterNameMetrics != null && addClusterNameMetrics !== '')
+    vals['addClusterNameMetrics'] = addClusterNameMetrics;
+  var removeClusterNameMetrics = $formValues.querySelector('.removeClusterNameMetrics')?.value;
+  if(removeClusterNameMetrics != null && removeClusterNameMetrics !== '')
+    vals['removeClusterNameMetrics'] = removeClusterNameMetrics;
+
   var valueUniqueName = $formValues.querySelector('.valueUniqueName')?.value;
   var removeUniqueName = $formValues.querySelector('.removeUniqueName')?.value === 'true';
   var setUniqueName = removeUniqueName ? null : $formValues.querySelector('.setUniqueName')?.value;
@@ -385,18 +430,6 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeUniqueName != null && removeUniqueName !== '')
     vals['removeUniqueName'] = removeUniqueName;
 
-  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
-  var removeLocation = $formValues.querySelector('.removeLocation')?.value === 'true';
-  var setLocation = removeLocation ? null : $formValues.querySelector('.setLocation')?.value;
-  var addLocation = $formValues.querySelector('.addLocation')?.value;
-  if(removeLocation || setLocation != null && setLocation !== '')
-    vals['setLocation'] = JSON.parse(setLocation);
-  if(addLocation != null && addLocation !== '')
-    vals['addLocation'] = addLocation;
-  var removeLocation = $formValues.querySelector('.removeLocation')?.value;
-  if(removeLocation != null && removeLocation !== '')
-    vals['removeLocation'] = removeLocation;
-
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
   var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
@@ -408,6 +441,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeDescription = $formValues.querySelector('.removeDescription')?.value;
   if(removeDescription != null && removeDescription !== '')
     vals['removeDescription'] = removeDescription;
+
+  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
+  var removeLocation = $formValues.querySelector('.removeLocation')?.value === 'true';
+  var setLocation = removeLocation ? null : $formValues.querySelector('.setLocation')?.value;
+  var addLocation = $formValues.querySelector('.addLocation')?.value;
+  if(removeLocation || setLocation != null && setLocation !== '')
+    vals['setLocation'] = JSON.parse(setLocation);
+  if(addLocation != null && addLocation !== '')
+    vals['addLocation'] = addLocation;
+  var removeLocation = $formValues.querySelector('.removeLocation')?.value;
+  if(removeLocation != null && removeLocation !== '')
+    vals['removeLocation'] = removeLocation;
 
   var valueAiNodesTotal = $formValues.querySelector('.valueAiNodesTotal')?.value;
   var removeAiNodesTotal = $formValues.querySelector('.removeAiNodesTotal')?.value === 'true';
@@ -679,17 +724,31 @@ function patchClusterFilters($formFilters) {
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
 
+    var $filterHubClusterCheckbox = $formFilters.querySelector('input.valueHubCluster[type = "checkbox"]');
+    var $filterHubClusterSelect = $formFilters.querySelector('select.valueHubCluster');
+    var filterHubCluster = $filterHubClusterSelect.length ? $filterHubClusterSelect.value : $filterHubClusterCheckbox.checked;
+    var filterHubClusterSelectVal = $formFilters.querySelector('select.filterHubCluster')?.value;
+    var filterHubCluster = null;
+    if(filterHubClusterSelectVal !== '')
+      filterHubCluster = filterHubClusterSelectVal == 'true';
+    if(filterHubCluster != null && filterHubCluster === true)
+      filters.push({ name: 'fq', value: 'hubCluster:' + filterHubCluster });
+
+    var filterClusterNameMetrics = $formFilters.querySelector('.valueClusterNameMetrics')?.value;
+    if(filterClusterNameMetrics != null && filterClusterNameMetrics !== '')
+      filters.push({ name: 'fq', value: 'clusterNameMetrics:' + filterClusterNameMetrics });
+
     var filterUniqueName = $formFilters.querySelector('.valueUniqueName')?.value;
     if(filterUniqueName != null && filterUniqueName !== '')
       filters.push({ name: 'fq', value: 'uniqueName:' + filterUniqueName });
 
-    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
-    if(filterLocation != null && filterLocation !== '')
-      filters.push({ name: 'fq', value: 'location:' + filterLocation });
-
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var filterLocation = $formFilters.querySelector('.valueLocation')?.value;
+    if(filterLocation != null && filterLocation !== '')
+      filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
     var filterAiNodesTotal = $formFilters.querySelector('.valueAiNodesTotal')?.value;
     if(filterAiNodesTotal != null && filterAiNodesTotal !== '')
@@ -881,17 +940,25 @@ async function postCluster($formValues, target, success, error) {
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
 
+  var valueHubCluster = $formValues.querySelector('.valueHubCluster')?.value;
+  if(valueHubCluster != null && valueHubCluster !== '')
+    vals['hubCluster'] = valueHubCluster == 'true';
+
+  var valueClusterNameMetrics = $formValues.querySelector('.valueClusterNameMetrics')?.value;
+  if(valueClusterNameMetrics != null && valueClusterNameMetrics !== '')
+    vals['clusterNameMetrics'] = valueClusterNameMetrics;
+
   var valueUniqueName = $formValues.querySelector('.valueUniqueName')?.value;
   if(valueUniqueName != null && valueUniqueName !== '')
     vals['uniqueName'] = valueUniqueName;
 
-  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
-  if(valueLocation != null && valueLocation !== '')
-    vals['location'] = JSON.parse(valueLocation);
-
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
+
+  var valueLocation = $formValues.querySelector('.valueLocation')?.value;
+  if(valueLocation != null && valueLocation !== '')
+    vals['location'] = JSON.parse(valueLocation);
 
   var valueAiNodesTotal = $formValues.querySelector('.valueAiNodesTotal')?.value;
   if(valueAiNodesTotal != null && valueAiNodesTotal !== '')
@@ -1193,9 +1260,11 @@ async function websocketClusterInner(apiRequest) {
         var inputArchived = null;
         var inputHubId = null;
         var inputClusterName = null;
+        var inputHubCluster = null;
+        var inputClusterNameMetrics = null;
         var inputUniqueName = null;
-        var inputLocation = null;
         var inputDescription = null;
+        var inputLocation = null;
         var inputAiNodesTotal = null;
         var inputGpuDevicesTotal = null;
         var inputVmsTotal = null;
@@ -1239,12 +1308,16 @@ async function websocketClusterInner(apiRequest) {
           inputHubId = $response.querySelector('.Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Page_clusterName');
+        if(vars.includes('hubCluster'))
+          inputHubCluster = $response.querySelector('.Page_hubCluster');
+        if(vars.includes('clusterNameMetrics'))
+          inputClusterNameMetrics = $response.querySelector('.Page_clusterNameMetrics');
         if(vars.includes('uniqueName'))
           inputUniqueName = $response.querySelector('.Page_uniqueName');
-        if(vars.includes('location'))
-          inputLocation = $response.querySelector('.Page_location');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('location'))
+          inputLocation = $response.querySelector('.Page_location');
         if(vars.includes('aiNodesTotal'))
           inputAiNodesTotal = $response.querySelector('.Page_aiNodesTotal');
         if(vars.includes('gpuDevicesTotal'))
@@ -1371,6 +1444,26 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_clusterName'));
         }
 
+        if(inputHubCluster) {
+          document.querySelectorAll('.Page_hubCluster').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubCluster.getAttribute('value');
+            else
+              item.textContent = inputHubCluster.textContent;
+          });
+          addGlow(document.querySelector('.Page_hubCluster'));
+        }
+
+        if(inputClusterNameMetrics) {
+          document.querySelectorAll('.Page_clusterNameMetrics').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterNameMetrics.getAttribute('value');
+            else
+              item.textContent = inputClusterNameMetrics.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterNameMetrics'));
+        }
+
         if(inputUniqueName) {
           document.querySelectorAll('.Page_uniqueName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1381,16 +1474,6 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_uniqueName'));
         }
 
-        if(inputLocation) {
-          document.querySelectorAll('.Page_location').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocation.getAttribute('value');
-            else
-              item.textContent = inputLocation.textContent;
-          });
-          addGlow(document.querySelector('.Page_location'));
-        }
-
         if(inputDescription) {
           document.querySelectorAll('.Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1399,6 +1482,16 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputDescription.textContent;
           });
           addGlow(document.querySelector('.Page_description'));
+        }
+
+        if(inputLocation) {
+          document.querySelectorAll('.Page_location').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocation.getAttribute('value');
+            else
+              item.textContent = inputLocation.textContent;
+          });
+          addGlow(document.querySelector('.Page_location'));
         }
 
         if(inputAiNodesTotal) {

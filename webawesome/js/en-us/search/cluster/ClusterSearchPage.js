@@ -73,6 +73,28 @@ Promise.all([
     facetStatsChange('Cluster', 'clusterName', false);
   });
 
+  document.querySelector('#pageSelectSortCluster_hubCluster')?.addEventListener('change', (event) => {
+    sort('Cluster', 'hubCluster', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_hubCluster')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'hubCluster', true);
+  });
+  document.querySelector('#pageStatsCluster_hubCluster')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'hubCluster', false);
+  });
+
+  document.querySelector('#pageSelectSortCluster_clusterNameMetrics')?.addEventListener('change', (event) => {
+    sort('Cluster', 'clusterNameMetrics', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_clusterNameMetrics')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'clusterNameMetrics', true);
+  });
+  document.querySelector('#pageStatsCluster_clusterNameMetrics')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'clusterNameMetrics', false);
+  });
+
   document.querySelector('#pageSelectSortCluster_uniqueName')?.addEventListener('change', (event) => {
     sort('Cluster', 'uniqueName', event.currentTarget.value);
   });
@@ -84,17 +106,6 @@ Promise.all([
     facetStatsChange('Cluster', 'uniqueName', false);
   });
 
-  document.querySelector('#pageSelectSortCluster_location')?.addEventListener('change', (event) => {
-    sort('Cluster', 'location', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsCluster_location')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Cluster', 'location', true);
-  });
-  document.querySelector('#pageStatsCluster_location')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Cluster', 'location', false);
-  });
-
   document.querySelector('#pageSelectSortCluster_description')?.addEventListener('change', (event) => {
     sort('Cluster', 'description', event.currentTarget.value);
   });
@@ -104,6 +115,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsCluster_description')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Cluster', 'description', false);
+  });
+
+  document.querySelector('#pageSelectSortCluster_location')?.addEventListener('change', (event) => {
+    sort('Cluster', 'location', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_location')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'location', true);
+  });
+  document.querySelector('#pageStatsCluster_location')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'location', false);
   });
 
   document.querySelector('#pageSelectSortCluster_aiNodesTotal')?.addEventListener('change', (event) => {
@@ -521,6 +543,18 @@ Promise.all([
             facetPivotChange('Cluster', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapCluster_clusterName')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#fqCluster_hubCluster')?.addEventListener('change', (event) => {
+            fqChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetCluster_hubCluster')?.addEventListener('click', (event) => {
+            facetFieldChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotCluster_hubCluster')?.addEventListener('change', (event) => {
+            facetPivotChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapCluster_hubCluster')?.addEventListener('change', (event) => {
             facetRangeGapChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_location')?.addEventListener('change', (event) => {

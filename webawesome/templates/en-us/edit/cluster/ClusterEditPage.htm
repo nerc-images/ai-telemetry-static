@@ -152,7 +152,7 @@
             {% if result.hubId == 'openshift-local' -%}
             query: 'cluster:memory_usage_bytes:sum / on (prometheus) cluster:capacity_memory_bytes:sum' 
             {%- else -%}
-            query: 'cluster:memory_usage_bytes:sum / cluster:capacity_memory_bytes:sum{cluster="{{ result.clusterName }}", label_node_role_kubernetes_io!="master"}' 
+            query: 'cluster:memory_usage_bytes:sum / cluster:capacity_memory_bytes:sum{cluster="{{ result.clusterNameMetrics }}", label_node_role_kubernetes_io!="master"}' 
             {%- endif %}
             }, timeQuery)).toString());
       });
@@ -202,7 +202,7 @@
             {% if result.hubId == 'openshift-local' -%}
             query: 'cluster:cpu_usage_cores:sum / on (prometheus) cluster:capacity_cpu_cores:sum' 
             {%- else -%}
-            query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterName }}"} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"})' 
+            query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterNameMetrics }}"} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"})' 
             {%- endif %}
             }, timeQuery)).toString());
       });
@@ -245,7 +245,7 @@
     }
 
     async function queryGpuNodesTotal() {
-      var query = Object.assign({ query: 'sum(gpu_operator_gpu_nodes_total{cluster="{{ result.clusterName }}"})' });
+      var query = Object.assign({ query: 'sum(gpu_operator_gpu_nodes_total{cluster="{{ result.clusterNameMetrics }}"})' });
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -264,7 +264,7 @@
     }
 
     async function queryGpuDevicesByNode() {
-      var query = Object.assign({ query: 'sum(gpu_operator_node_device_plugin_devices_total{cluster="{{ result.clusterName }}"}) by (cluster, node)' });
+      var query = Object.assign({ query: 'sum(gpu_operator_node_device_plugin_devices_total{cluster="{{ result.clusterNameMetrics }}"}) by (cluster, node)' });
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -308,7 +308,7 @@
     }
 
     async function queryGpuDevicesTotal() {
-      var query = Object.assign({ query: 'sum(gpu_operator_node_device_plugin_devices_total{cluster="{{ result.clusterName }}"})' });
+      var query = Object.assign({ query: 'sum(gpu_operator_node_device_plugin_devices_total{cluster="{{ result.clusterNameMetrics }}"})' });
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -327,7 +327,7 @@
     }
 
     async function queryGpuNodesNotReady() {
-      var query = Object.assign({ query: 'kube_node_status_condition{cluster="{{ result.clusterName }}", status="unknown", condition="Ready"} * on (cluster, node) group_left(label_nvidia_com_gpu_present) (sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{label_nvidia_com_gpu_present="true"})) == 1' });
+      var query = Object.assign({ query: 'kube_node_status_condition{cluster="{{ result.clusterNameMetrics }}", status="unknown", condition="Ready"} * on (cluster, node) group_left(label_nvidia_com_gpu_present) (sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{label_nvidia_com_gpu_present="true"})) == 1' });
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -371,7 +371,7 @@
     }
 
     async function queryGpuNodesWithoutTaint() {
-      var query = Object.assign({ query: '(sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{cluster="{{ result.clusterName }}", label_nvidia_com_gpu_present="true"})) > 0 unless on(cluster, node) kube_node_spec_taint{key="nvidia.com/gpu.product"}' });
+      var query = Object.assign({ query: '(sum by (cluster, node, label_nvidia_com_gpu_present) (kube_node_labels{cluster="{{ result.clusterNameMetrics }}", label_nvidia_com_gpu_present="true"})) > 0 unless on(cluster, node) kube_node_spec_taint{key="nvidia.com/gpu.product"}' });
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -422,7 +422,7 @@
         , end: end.toISOString()
         , step: '100'
       };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_MEMORY_TEMP{cluster="{{ result.clusterName }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
+      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_MEMORY_TEMP{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -459,7 +459,7 @@
         , end: end.toISOString()
         , step: '100'
       };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
+      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -496,7 +496,7 @@
         , end: end.toISOString()
         , step: '100'
       };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}"}) by (cluster,exported_namespace)' }, timeQuery));
+      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,exported_namespace)' }, timeQuery));
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
@@ -533,7 +533,7 @@
         , end: end.toISOString()
         , step: '100'
       };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}"}) by (cluster,exported_namespace)' }, timeQuery));
+      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,exported_namespace)' }, timeQuery));
       var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
       if(response.ok) {
         response.json().then(function(responseJson) {
