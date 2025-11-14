@@ -2,7 +2,85 @@
 {%- block htmBodyStartClusterPage %}
 {{ super() }}
 {% if result is defined %}
-<wa-details open class="HtmRow" id="observability-dashboard">
+<wa-details>
+  <div slot="summary">
+    <i class="fa-regular fa-people-line"></i>
+    Projects in the {{ result.clusterName | e }} cluster
+  </div>
+  <div class="wa-stack">
+    {% for project in clusterProjects %}
+    <article>
+      <wa-divider></wa-divider>
+      <div class="wa-stack ">
+        <div class="wa-cluster ">
+          <i class="fa-regular fa-people-line fa-2xl "></i>
+          <a href="{{ project.editPage }}">
+            <strong>
+              {{ project.projectName }}
+            </strong> 
+            project in
+            <strong>
+              {{ project.clusterName }}
+            </strong> 
+            cluster in
+            <strong>
+              {{ project.hubId }}
+            </strong> 
+            hub
+          </a>
+        </div>
+        <div class="wa-cluster ">
+
+          {% if project.podRestartCount > 0 %}
+          <wa-tooltip for="clusterProject-{{ project.projectName }}-pod-restarts">
+            <ul>
+              {% for pod in project.podsRestarting %}
+              <li>
+                {{ pod | e }}
+              </li>
+              {% endfor %}
+            </ul>
+          </wa-tooltip>
+          {% endif %}
+          <wa-button id="clusterProject-{{ project.projectName }}-pod-restarts">
+            pod restarts
+            <wa-badge{% if project.podRestartCount > 0 %} variant="danger" attention="pulse"{% else %} variant="success"{% endif %}" pill>
+              {{ project.podRestartCount }}
+            </wa-badge>
+          </wa-button>
+
+          {% if project.fullPvcsCount > 0 %}
+          <wa-tooltip for="clusterProject-{{ project.projectName }}-full-pvcs">
+            <ul>
+              {% for pod in project.fullPvcs %}
+              <li>
+                {{ pod | e }}
+              </li>
+              {% endfor %}
+            </ul>
+          </wa-tooltip>
+          {% endif %}
+          <wa-button id="clusterProject-{{ project.projectName }}-full-pvcs">
+            full PVCs
+            <wa-badge{% if project.fullPvcsCount > 0 %} variant="warning" attention="pulse"{% else %} variant="success"{% endif %}" pill>
+              {{ project.fullPvcsCount }}
+            </wa-badge>
+          </wa-button>
+
+          <wa-tooltip for="clusterProject-{{ project.projectName }}-last-updated">
+            <wa-format-date weekday="short" month="short" day="numeric" year="numeric" hour="numeric" minute="numeric" second="numeric" time-zone-name="short" date="{{ formatZonedDateTime(project.modified, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, "UTC") }}"></wa-format-date>
+          </wa-tooltip>
+          <span class="wa-caption-s" id="clusterProject-{{ project.projectName }}-last-updated">
+            Updated
+            <wa-relative-time class="wa-caption-s" date="{{ formatZonedDateTime(project.modified, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, "UTC") }}"></wa-relative-time>
+          </span>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</wa-details>
+<wa-details>
   <div slot="summary">
     Observability dashboard for cluster {{ result.clusterName }}
   </div>
@@ -10,7 +88,7 @@
     <div class="wa-stack ">
       <div>
         <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/project?fq={{ 'hubId:' + result.hubId | urlencode() }}&fq={{ 'clusterName:' + result.clusterName | urlencode() }}&facet.field=hubId&facet.field=clusterName">
-          <i slot="start" class="fa-regular fa-school"></i>
+          <i slot="start" class="fa-regular fa-people-line"></i>
           View all projects in the {{ result.clusterName | e }} cluster in the {{ result.hubId }} hub
         </wa-button>
       </div>
