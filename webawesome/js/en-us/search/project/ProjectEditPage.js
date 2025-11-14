@@ -204,6 +204,48 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH fullPvcsCount
+          document.querySelector('#Page_fullPvcsCount')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_fullPvcsCount');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setFullPvcsCount', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_fullPvcsCount')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_fullPvcsCount')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_fullPvcsCount');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH fullPvcs
+          document.querySelector('#Page_fullPvcs')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_fullPvcs');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setFullPvcs', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , event.currentTarget
+                  , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_fullPvcs')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_fullPvcs')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_fullPvcs');
+            const valid = form.reportValidity();
+          });
+
           // PATCH sessionId
           document.querySelector('#Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');

@@ -128,6 +128,28 @@ Promise.all([
     facetStatsChange('Project', 'podsRestarting', false);
   });
 
+  document.querySelector('#pageSelectSortProject_fullPvcsCount')?.addEventListener('change', (event) => {
+    sort('Project', 'fullPvcsCount', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_fullPvcsCount')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'fullPvcsCount', true);
+  });
+  document.querySelector('#pageStatsProject_fullPvcsCount')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'fullPvcsCount', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_fullPvcs')?.addEventListener('change', (event) => {
+    sort('Project', 'fullPvcs', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_fullPvcs')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'fullPvcs', true);
+  });
+  document.querySelector('#pageStatsProject_fullPvcs')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'fullPvcs', false);
+  });
+
   document.querySelector('#pageSelectSortProject_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Project', 'classCanonicalName', event.currentTarget.value);
   });
@@ -471,6 +493,30 @@ Promise.all([
             facetPivotChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapProject_podsRestarting')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_fullPvcsCount')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_fullPvcsCount')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_fullPvcsCount')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_fullPvcsCount')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_fullPvcs')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_fullPvcs')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_fullPvcs')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_fullPvcs')?.addEventListener('change', (event) => {
             facetRangeGapChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {

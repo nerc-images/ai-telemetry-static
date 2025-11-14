@@ -71,6 +71,14 @@ function searchProjectFilters($formFilters) {
     if(filterPodsRestarting != null && filterPodsRestarting !== '')
       filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
 
+    var filterFullPvcsCount = $formFilters.querySelector('.valueFullPvcsCount')?.value;
+    if(filterFullPvcsCount != null && filterFullPvcsCount !== '')
+      filters.push({ name: 'fq', value: 'fullPvcsCount:' + filterFullPvcsCount });
+
+    var filterFullPvcs = $formFilters.querySelector('.valueFullPvcs')?.value;
+    if(filterFullPvcs != null && filterFullPvcs !== '')
+      filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -455,6 +463,30 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removePodsRestarting != null && removePodsRestarting !== '')
     vals['removePodsRestarting'] = removePodsRestarting;
 
+  var valueFullPvcsCount = $formValues.querySelector('.valueFullPvcsCount')?.value;
+  var removeFullPvcsCount = $formValues.querySelector('.removeFullPvcsCount')?.value === 'true';
+  var setFullPvcsCount = removeFullPvcsCount ? null : $formValues.querySelector('.setFullPvcsCount')?.value;
+  var addFullPvcsCount = $formValues.querySelector('.addFullPvcsCount')?.value;
+  if(removeFullPvcsCount || setFullPvcsCount != null && setFullPvcsCount !== '')
+    vals['setFullPvcsCount'] = setFullPvcsCount;
+  if(addFullPvcsCount != null && addFullPvcsCount !== '')
+    vals['addFullPvcsCount'] = addFullPvcsCount;
+  var removeFullPvcsCount = $formValues.querySelector('.removeFullPvcsCount')?.value;
+  if(removeFullPvcsCount != null && removeFullPvcsCount !== '')
+    vals['removeFullPvcsCount'] = removeFullPvcsCount;
+
+  var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
+  var removeFullPvcs = $formValues.querySelector('.removeFullPvcs')?.value === 'true';
+  var setFullPvcs = removeFullPvcs ? null : $formValues.querySelector('.setFullPvcs')?.value;
+  var addFullPvcs = $formValues.querySelector('.addFullPvcs')?.value;
+  if(removeFullPvcs || setFullPvcs != null && setFullPvcs !== '')
+    vals['setFullPvcs'] = JSON.parse(setFullPvcs);
+  if(addFullPvcs != null && addFullPvcs !== '')
+    vals['addFullPvcs'] = addFullPvcs;
+  var removeFullPvcs = $formValues.querySelector('.removeFullPvcs')?.value;
+  if(removeFullPvcs != null && removeFullPvcs !== '')
+    vals['removeFullPvcs'] = removeFullPvcs;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -623,6 +655,14 @@ function patchProjectFilters($formFilters) {
     if(filterPodsRestarting != null && filterPodsRestarting !== '')
       filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
 
+    var filterFullPvcsCount = $formFilters.querySelector('.valueFullPvcsCount')?.value;
+    if(filterFullPvcsCount != null && filterFullPvcsCount !== '')
+      filters.push({ name: 'fq', value: 'fullPvcsCount:' + filterFullPvcsCount });
+
+    var filterFullPvcs = $formFilters.querySelector('.valueFullPvcs')?.value;
+    if(filterFullPvcs != null && filterFullPvcs !== '')
+      filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -784,6 +824,14 @@ async function postProject($formValues, target, success, error) {
   var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
   if(valuePodsRestarting != null && valuePodsRestarting !== '')
     vals['podsRestarting'] = JSON.parse(valuePodsRestarting);
+
+  var valueFullPvcsCount = $formValues.querySelector('.valueFullPvcsCount')?.value;
+  if(valueFullPvcsCount != null && valueFullPvcsCount !== '')
+    vals['fullPvcsCount'] = valueFullPvcsCount;
+
+  var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
+  if(valueFullPvcs != null && valueFullPvcs !== '')
+    vals['fullPvcs'] = JSON.parse(valueFullPvcs);
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -1057,6 +1105,8 @@ async function websocketProjectInner(apiRequest) {
         var inputGpuEnabled = null;
         var inputPodRestartCount = null;
         var inputPodsRestarting = null;
+        var inputFullPvcsCount = null;
+        var inputFullPvcs = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1098,6 +1148,10 @@ async function websocketProjectInner(apiRequest) {
           inputPodRestartCount = $response.querySelector('.Page_podRestartCount');
         if(vars.includes('podsRestarting'))
           inputPodsRestarting = $response.querySelector('.Page_podsRestarting');
+        if(vars.includes('fullPvcsCount'))
+          inputFullPvcsCount = $response.querySelector('.Page_fullPvcsCount');
+        if(vars.includes('fullPvcs'))
+          inputFullPvcs = $response.querySelector('.Page_fullPvcs');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1248,6 +1302,26 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputPodsRestarting.textContent;
           });
           addGlow(document.querySelector('.Page_podsRestarting'));
+        }
+
+        if(inputFullPvcsCount) {
+          document.querySelectorAll('.Page_fullPvcsCount').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputFullPvcsCount.getAttribute('value');
+            else
+              item.textContent = inputFullPvcsCount.textContent;
+          });
+          addGlow(document.querySelector('.Page_fullPvcsCount'));
+        }
+
+        if(inputFullPvcs) {
+          document.querySelectorAll('.Page_fullPvcs').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputFullPvcs.getAttribute('value');
+            else
+              item.textContent = inputFullPvcs.textContent;
+          });
+          addGlow(document.querySelector('.Page_fullPvcs'));
         }
 
         if(inputClassCanonicalName) {
