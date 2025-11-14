@@ -63,6 +63,14 @@ function searchProjectFilters($formFilters) {
     if(filterGpuEnabled != null && filterGpuEnabled === true)
       filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
 
+    var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
+    if(filterPodRestartCount != null && filterPodRestartCount !== '')
+      filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
+
+    var filterPodsRestarting = $formFilters.querySelector('.valuePodsRestarting')?.value;
+    if(filterPodsRestarting != null && filterPodsRestarting !== '')
+      filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -260,7 +268,7 @@ function suggestProjectObjectSuggest($formFilters, $list, target) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-regular fa-school"></i>');
+        var $i = document.querySelector('<i class="fa-regular fa-people-line"></i>');
         var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
         var $li = document.createElement('li');
         var $a = document.createElement('a').setAttribute('href', o['editPage']);
@@ -423,6 +431,30 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeGpuEnabled != null && removeGpuEnabled !== '')
     vals['removeGpuEnabled'] = removeGpuEnabled;
 
+  var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
+  var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value === 'true';
+  var setPodRestartCount = removePodRestartCount ? null : $formValues.querySelector('.setPodRestartCount')?.value;
+  var addPodRestartCount = $formValues.querySelector('.addPodRestartCount')?.value;
+  if(removePodRestartCount || setPodRestartCount != null && setPodRestartCount !== '')
+    vals['setPodRestartCount'] = setPodRestartCount;
+  if(addPodRestartCount != null && addPodRestartCount !== '')
+    vals['addPodRestartCount'] = addPodRestartCount;
+  var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value;
+  if(removePodRestartCount != null && removePodRestartCount !== '')
+    vals['removePodRestartCount'] = removePodRestartCount;
+
+  var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
+  var removePodsRestarting = $formValues.querySelector('.removePodsRestarting')?.value === 'true';
+  var setPodsRestarting = removePodsRestarting ? null : $formValues.querySelector('.setPodsRestarting')?.value;
+  var addPodsRestarting = $formValues.querySelector('.addPodsRestarting')?.value;
+  if(removePodsRestarting || setPodsRestarting != null && setPodsRestarting !== '')
+    vals['setPodsRestarting'] = JSON.parse(setPodsRestarting);
+  if(addPodsRestarting != null && addPodsRestarting !== '')
+    vals['addPodsRestarting'] = addPodsRestarting;
+  var removePodsRestarting = $formValues.querySelector('.removePodsRestarting')?.value;
+  if(removePodsRestarting != null && removePodsRestarting !== '')
+    vals['removePodsRestarting'] = removePodsRestarting;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -583,6 +615,14 @@ function patchProjectFilters($formFilters) {
     if(filterGpuEnabled != null && filterGpuEnabled === true)
       filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
 
+    var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
+    if(filterPodRestartCount != null && filterPodRestartCount !== '')
+      filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
+
+    var filterPodsRestarting = $formFilters.querySelector('.valuePodsRestarting')?.value;
+    if(filterPodsRestarting != null && filterPodsRestarting !== '')
+      filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -736,6 +776,14 @@ async function postProject($formValues, target, success, error) {
   var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
   if(valueGpuEnabled != null && valueGpuEnabled !== '')
     vals['gpuEnabled'] = valueGpuEnabled == 'true';
+
+  var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
+  if(valuePodRestartCount != null && valuePodRestartCount !== '')
+    vals['podRestartCount'] = valuePodRestartCount;
+
+  var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
+  if(valuePodsRestarting != null && valuePodsRestarting !== '')
+    vals['podsRestarting'] = JSON.parse(valuePodsRestarting);
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -930,7 +978,7 @@ async function websocketProject(success) {
       $header.setAttribute('class', 'w3-container fa- ');
       $header.setAttribute('id', 'header-' + projectResource);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-school"></i>';
+      iTemplate.innerHTML = '<i class="fa-regular fa-people-line"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
@@ -1007,6 +1055,8 @@ async function websocketProjectInner(apiRequest) {
         var inputProjectName = null;
         var inputDescription = null;
         var inputGpuEnabled = null;
+        var inputPodRestartCount = null;
+        var inputPodsRestarting = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1044,6 +1094,10 @@ async function websocketProjectInner(apiRequest) {
           inputDescription = $response.querySelector('.Page_description');
         if(vars.includes('gpuEnabled'))
           inputGpuEnabled = $response.querySelector('.Page_gpuEnabled');
+        if(vars.includes('podRestartCount'))
+          inputPodRestartCount = $response.querySelector('.Page_podRestartCount');
+        if(vars.includes('podsRestarting'))
+          inputPodsRestarting = $response.querySelector('.Page_podsRestarting');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1174,6 +1228,26 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputGpuEnabled.textContent;
           });
           addGlow(document.querySelector('.Page_gpuEnabled'));
+        }
+
+        if(inputPodRestartCount) {
+          document.querySelectorAll('.Page_podRestartCount').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPodRestartCount.getAttribute('value');
+            else
+              item.textContent = inputPodRestartCount.textContent;
+          });
+          addGlow(document.querySelector('.Page_podRestartCount'));
+        }
+
+        if(inputPodsRestarting) {
+          document.querySelectorAll('.Page_podsRestarting').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPodsRestarting.getAttribute('value');
+            else
+              item.textContent = inputPodsRestarting.textContent;
+          });
+          addGlow(document.querySelector('.Page_podsRestarting'));
         }
 
         if(inputClassCanonicalName) {

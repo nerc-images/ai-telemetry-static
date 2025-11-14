@@ -106,6 +106,28 @@ Promise.all([
     facetStatsChange('Project', 'gpuEnabled', false);
   });
 
+  document.querySelector('#pageSelectSortProject_podRestartCount')?.addEventListener('change', (event) => {
+    sort('Project', 'podRestartCount', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_podRestartCount')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'podRestartCount', true);
+  });
+  document.querySelector('#pageStatsProject_podRestartCount')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'podRestartCount', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_podsRestarting')?.addEventListener('change', (event) => {
+    sort('Project', 'podsRestarting', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_podsRestarting')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'podsRestarting', true);
+  });
+  document.querySelector('#pageStatsProject_podsRestarting')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'podsRestarting', false);
+  });
+
   document.querySelector('#pageSelectSortProject_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Project', 'classCanonicalName', event.currentTarget.value);
   });
@@ -425,6 +447,30 @@ Promise.all([
             facetPivotChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapProject_gpuEnabled')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_podRestartCount')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_podRestartCount')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_podRestartCount')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_podRestartCount')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_podsRestarting')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetProject_podsRestarting')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_podsRestarting')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_podsRestarting')?.addEventListener('change', (event) => {
             facetRangeGapChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {
