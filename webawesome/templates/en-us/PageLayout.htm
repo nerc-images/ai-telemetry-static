@@ -384,10 +384,20 @@
     </script>
    </head>
   <body class="wa-body-{{ userFontSize }} wa-size-{{ userFontSize }} wa-cloak ">
+    {% if WEB_COMPONENTS_PRO == 'true' -%}
     <wa-page disable-sticky="header">
+    {%- else -%}
+    <div id="site-grid">
+    {%- endif %}
 {%- block htmBodyPageLayout %}
 {%- block htmBodyStartPageLayout %}
-      <nav slot="navigation">
+    {% if WEB_COMPONENTS_PRO == 'false' -%}
+      <wa-drawer placement="start" id="site-aside-left" class="hide-mobile margin-block-end-1rem ">
+        <{{ WEB_COMPONENTS_PREFIX }}button id="site-aside-left-close-button" label="Close" data-drawer="close" class="hide-desktop">
+          <i slot="start" class="\{\{ FONTAWESOME_STYLE \}\} fa-xmark"></i>
+        </{{ WEB_COMPONENTS_PREFIX }}button>
+    {%- endif %}
+      <nav{% if WEB_COMPONENTS_PRO == 'true' -%} slot="navigation"{% endif %}>
           <div class="display-flex-center ">
             <a href="/">
               <img id="site-aside-left-img-logo" src="{{ STATIC_BASE_URL }}/svg/logo-{{ userSiteTheme | default(SITE_THEME) }}.svg"/>
@@ -563,13 +573,16 @@
             </div>
           </div>
       </nav>
+      {% if WEB_COMPONENTS_PRO == 'false' -%}
+      </wa-drawer>
+      {%- endif %}
       <main class="wa-stack ">
         <wa-drawer id="warnings-drawer" label="Warnings">
           <div id="warnings-drawer-stack" class="wa-stack ">
           </div>
         </wa-drawer>
         <header slot="header" class="wa-flank margin-block ">
-          <wa-button data-toggle-nav variant="brand" label="open menu">
+          <wa-button data-toggle-nav variant="brand" label="open menu"{% if WEB_COMPONENTS_PRO == 'false' %} onclick="document.querySelector('#site-aside-left').open = true;"{% endif %}>
             <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-bars"></i>
           </wa-button>
           <wa-popup  placement="bottom-start" id="siteSearchDropdown">
@@ -614,7 +627,11 @@
           {% endif %}
         </footer>
       </main>
+    {% if WEB_COMPONENTS_PRO == 'true' -%}
     </wa-page>
+    {%- else -%}
+    </div>
+    {%- endif %}
 {%- endblock htmBodyEndPageLayout %}
 {%- endblock htmBodyPageLayout %}
   </body>
