@@ -79,21 +79,21 @@ function searchClusterFilters($formFilters) {
     if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
       filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
 
-    var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
-    if(filterVmsTotal != null && filterVmsTotal !== '')
-      filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
-
     var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
     if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
       filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
 
-    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
-    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
-      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
+    var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
+    if(filterVmsTotal != null && filterVmsTotal !== '')
+      filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
 
     var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
     if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
       filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+
+    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
+    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
+      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
@@ -478,18 +478,6 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeGpuDevicesTotal != null && removeGpuDevicesTotal !== '')
     vals['removeGpuDevicesTotal'] = removeGpuDevicesTotal;
 
-  var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
-  var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value === 'true';
-  var setVmsTotal = removeVmsTotal ? null : $formValues.querySelector('.setVmsTotal')?.value;
-  var addVmsTotal = $formValues.querySelector('.addVmsTotal')?.value;
-  if(removeVmsTotal || setVmsTotal != null && setVmsTotal !== '')
-    vals['setVmsTotal'] = setVmsTotal;
-  if(addVmsTotal != null && addVmsTotal !== '')
-    vals['addVmsTotal'] = addVmsTotal;
-  var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value;
-  if(removeVmsTotal != null && removeVmsTotal !== '')
-    vals['removeVmsTotal'] = removeVmsTotal;
-
   var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
   var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value === 'true';
   var setGrafanaUrl = removeGrafanaUrl ? null : $formValues.querySelector('.setGrafanaUrl')?.value;
@@ -502,17 +490,17 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeGrafanaUrl != null && removeGrafanaUrl !== '')
     vals['removeGrafanaUrl'] = removeGrafanaUrl;
 
-  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
-  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value === 'true';
-  var setCpuCoresTotal = removeCpuCoresTotal ? null : $formValues.querySelector('.setCpuCoresTotal')?.value;
-  var addCpuCoresTotal = $formValues.querySelector('.addCpuCoresTotal')?.value;
-  if(removeCpuCoresTotal || setCpuCoresTotal != null && setCpuCoresTotal !== '')
-    vals['setCpuCoresTotal'] = setCpuCoresTotal;
-  if(addCpuCoresTotal != null && addCpuCoresTotal !== '')
-    vals['addCpuCoresTotal'] = addCpuCoresTotal;
-  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value;
-  if(removeCpuCoresTotal != null && removeCpuCoresTotal !== '')
-    vals['removeCpuCoresTotal'] = removeCpuCoresTotal;
+  var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
+  var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value === 'true';
+  var setVmsTotal = removeVmsTotal ? null : $formValues.querySelector('.setVmsTotal')?.value;
+  var addVmsTotal = $formValues.querySelector('.addVmsTotal')?.value;
+  if(removeVmsTotal || setVmsTotal != null && setVmsTotal !== '')
+    vals['setVmsTotal'] = setVmsTotal;
+  if(addVmsTotal != null && addVmsTotal !== '')
+    vals['addVmsTotal'] = addVmsTotal;
+  var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value;
+  if(removeVmsTotal != null && removeVmsTotal !== '')
+    vals['removeVmsTotal'] = removeVmsTotal;
 
   var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
   var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value === 'true';
@@ -525,6 +513,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value;
   if(removeMemoryBytesTotal != null && removeMemoryBytesTotal !== '')
     vals['removeMemoryBytesTotal'] = removeMemoryBytesTotal;
+
+  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
+  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value === 'true';
+  var setCpuCoresTotal = removeCpuCoresTotal ? null : $formValues.querySelector('.setCpuCoresTotal')?.value;
+  var addCpuCoresTotal = $formValues.querySelector('.addCpuCoresTotal')?.value;
+  if(removeCpuCoresTotal || setCpuCoresTotal != null && setCpuCoresTotal !== '')
+    vals['setCpuCoresTotal'] = setCpuCoresTotal;
+  if(addCpuCoresTotal != null && addCpuCoresTotal !== '')
+    vals['addCpuCoresTotal'] = addCpuCoresTotal;
+  var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value;
+  if(removeCpuCoresTotal != null && removeCpuCoresTotal !== '')
+    vals['removeCpuCoresTotal'] = removeCpuCoresTotal;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   var removeId = $formValues.querySelector('.removeId')?.value === 'true';
@@ -758,21 +758,21 @@ function patchClusterFilters($formFilters) {
     if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
       filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
 
-    var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
-    if(filterVmsTotal != null && filterVmsTotal !== '')
-      filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
-
     var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
     if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
       filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
 
-    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
-    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
-      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
+    var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
+    if(filterVmsTotal != null && filterVmsTotal !== '')
+      filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
 
     var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
     if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
       filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+
+    var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
+    if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
+      filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
@@ -968,21 +968,21 @@ async function postCluster($formValues, target, success, error) {
   if(valueGpuDevicesTotal != null && valueGpuDevicesTotal !== '')
     vals['gpuDevicesTotal'] = valueGpuDevicesTotal;
 
-  var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
-  if(valueVmsTotal != null && valueVmsTotal !== '')
-    vals['vmsTotal'] = valueVmsTotal;
-
   var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
   if(valueGrafanaUrl != null && valueGrafanaUrl !== '')
     vals['grafanaUrl'] = valueGrafanaUrl;
 
-  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
-  if(valueCpuCoresTotal != null && valueCpuCoresTotal !== '')
-    vals['cpuCoresTotal'] = valueCpuCoresTotal;
+  var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
+  if(valueVmsTotal != null && valueVmsTotal !== '')
+    vals['vmsTotal'] = valueVmsTotal;
 
   var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
   if(valueMemoryBytesTotal != null && valueMemoryBytesTotal !== '')
     vals['memoryBytesTotal'] = valueMemoryBytesTotal;
+
+  var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
+  if(valueCpuCoresTotal != null && valueCpuCoresTotal !== '')
+    vals['cpuCoresTotal'] = valueCpuCoresTotal;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   if(valueId != null && valueId !== '')
@@ -1267,10 +1267,10 @@ async function websocketClusterInner(apiRequest) {
         var inputLocation = null;
         var inputAiNodesTotal = null;
         var inputGpuDevicesTotal = null;
-        var inputVmsTotal = null;
         var inputGrafanaUrl = null;
-        var inputCpuCoresTotal = null;
+        var inputVmsTotal = null;
         var inputMemoryBytesTotal = null;
+        var inputCpuCoresTotal = null;
         var inputId = null;
         var inputNgsildTenant = null;
         var inputNgsildPath = null;
@@ -1322,14 +1322,14 @@ async function websocketClusterInner(apiRequest) {
           inputAiNodesTotal = $response.querySelector('.Page_aiNodesTotal');
         if(vars.includes('gpuDevicesTotal'))
           inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
-        if(vars.includes('vmsTotal'))
-          inputVmsTotal = $response.querySelector('.Page_vmsTotal');
         if(vars.includes('grafanaUrl'))
           inputGrafanaUrl = $response.querySelector('.Page_grafanaUrl');
-        if(vars.includes('cpuCoresTotal'))
-          inputCpuCoresTotal = $response.querySelector('.Page_cpuCoresTotal');
+        if(vars.includes('vmsTotal'))
+          inputVmsTotal = $response.querySelector('.Page_vmsTotal');
         if(vars.includes('memoryBytesTotal'))
           inputMemoryBytesTotal = $response.querySelector('.Page_memoryBytesTotal');
+        if(vars.includes('cpuCoresTotal'))
+          inputCpuCoresTotal = $response.querySelector('.Page_cpuCoresTotal');
         if(vars.includes('id'))
           inputId = $response.querySelector('.Page_id');
         if(vars.includes('ngsildTenant'))
@@ -1514,16 +1514,6 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_gpuDevicesTotal'));
         }
 
-        if(inputVmsTotal) {
-          document.querySelectorAll('.Page_vmsTotal').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputVmsTotal.getAttribute('value');
-            else
-              item.textContent = inputVmsTotal.textContent;
-          });
-          addGlow(document.querySelector('.Page_vmsTotal'));
-        }
-
         if(inputGrafanaUrl) {
           document.querySelectorAll('.Page_grafanaUrl').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1534,14 +1524,14 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_grafanaUrl'));
         }
 
-        if(inputCpuCoresTotal) {
-          document.querySelectorAll('.Page_cpuCoresTotal').forEach((item, index) => {
+        if(inputVmsTotal) {
+          document.querySelectorAll('.Page_vmsTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputCpuCoresTotal.getAttribute('value');
+              item.value = inputVmsTotal.getAttribute('value');
             else
-              item.textContent = inputCpuCoresTotal.textContent;
+              item.textContent = inputVmsTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_cpuCoresTotal'));
+          addGlow(document.querySelector('.Page_vmsTotal'));
         }
 
         if(inputMemoryBytesTotal) {
@@ -1552,6 +1542,16 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputMemoryBytesTotal.textContent;
           });
           addGlow(document.querySelector('.Page_memoryBytesTotal'));
+        }
+
+        if(inputCpuCoresTotal) {
+          document.querySelectorAll('.Page_cpuCoresTotal').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCpuCoresTotal.getAttribute('value');
+            else
+              item.textContent = inputCpuCoresTotal.textContent;
+          });
+          addGlow(document.querySelector('.Page_cpuCoresTotal'));
         }
 
         if(inputId) {

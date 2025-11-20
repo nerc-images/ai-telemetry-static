@@ -81,6 +81,38 @@ function searchAiNodeFilters($formFilters) {
     if(filterLocation != null && filterLocation !== '')
       filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
+    var filterNodeResource = $formFilters.querySelector('.valueNodeResource')?.value;
+    if(filterNodeResource != null && filterNodeResource !== '')
+      filters.push({ name: 'fq', value: 'nodeResource:' + filterNodeResource });
+
+    var filterNodeDisplayName = $formFilters.querySelector('.valueNodeDisplayName')?.value;
+    if(filterNodeDisplayName != null && filterNodeDisplayName !== '')
+      filters.push({ name: 'fq', value: 'nodeDisplayName:' + filterNodeDisplayName });
+
+    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
+    if(filterLocationColors != null && filterLocationColors !== '')
+      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
+
+    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
+    if(filterLocationTitles != null && filterLocationTitles !== '')
+      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
+
+    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
+    if(filterLocationLinks != null && filterLocationLinks !== '')
+      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
+
+    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
+    if(filterEntityShortId != null && filterEntityShortId !== '')
+      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -136,38 +168,6 @@ function searchAiNodeFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
-    var filterNodeResource = $formFilters.querySelector('.valueNodeResource')?.value;
-    if(filterNodeResource != null && filterNodeResource !== '')
-      filters.push({ name: 'fq', value: 'nodeResource:' + filterNodeResource });
-
-    var filterNodeDisplayName = $formFilters.querySelector('.valueNodeDisplayName')?.value;
-    if(filterNodeDisplayName != null && filterNodeDisplayName !== '')
-      filters.push({ name: 'fq', value: 'nodeDisplayName:' + filterNodeDisplayName });
-
-    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
-    if(filterLocationColors != null && filterLocationColors !== '')
-      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
-
-    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
-    if(filterLocationTitles != null && filterLocationTitles !== '')
-      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
-
-    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
-    if(filterLocationLinks != null && filterLocationLinks !== '')
-      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
-
-    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
-    if(filterEntityShortId != null && filterEntityShortId !== '')
-      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
   }
   return filters;
 }
@@ -522,6 +522,26 @@ async function patchAiNode($formFilters, $formValues, target, nodeResource, succ
   if(removeLocation != null && removeLocation !== '')
     vals['removeLocation'] = removeLocation;
 
+  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['setHubResource'] = valueHubResource;
+
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['setClusterResource'] = valueClusterResource;
+
+  var valueNodeResource = $formValues.querySelector('.valueNodeResource')?.value;
+  var removeNodeResource = $formValues.querySelector('.removeNodeResource')?.value === 'true';
+  var setNodeResource = removeNodeResource ? null : $formValues.querySelector('.setNodeResource')?.value;
+  var addNodeResource = $formValues.querySelector('.addNodeResource')?.value;
+  if(removeNodeResource || setNodeResource != null && setNodeResource !== '')
+    vals['setNodeResource'] = setNodeResource;
+  if(addNodeResource != null && addNodeResource !== '')
+    vals['addNodeResource'] = addNodeResource;
+  var removeNodeResource = $formValues.querySelector('.removeNodeResource')?.value;
+  if(removeNodeResource != null && removeNodeResource !== '')
+    vals['removeNodeResource'] = removeNodeResource;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -606,26 +626,6 @@ async function patchAiNode($formFilters, $formValues, target, nodeResource, succ
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['setHubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['setClusterResource'] = valueClusterResource;
-
-  var valueNodeResource = $formValues.querySelector('.valueNodeResource')?.value;
-  var removeNodeResource = $formValues.querySelector('.removeNodeResource')?.value === 'true';
-  var setNodeResource = removeNodeResource ? null : $formValues.querySelector('.setNodeResource')?.value;
-  var addNodeResource = $formValues.querySelector('.addNodeResource')?.value;
-  if(removeNodeResource || setNodeResource != null && setNodeResource !== '')
-    vals['setNodeResource'] = setNodeResource;
-  if(addNodeResource != null && addNodeResource !== '')
-    vals['addNodeResource'] = addNodeResource;
-  var removeNodeResource = $formValues.querySelector('.removeNodeResource')?.value;
-  if(removeNodeResource != null && removeNodeResource !== '')
-    vals['removeNodeResource'] = removeNodeResource;
-
   patchAiNodeVals(nodeResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'nodeResource:' + nodeResource}], vals, target, success, error);
 }
 
@@ -700,6 +700,38 @@ function patchAiNodeFilters($formFilters) {
     if(filterLocation != null && filterLocation !== '')
       filters.push({ name: 'fq', value: 'location:' + filterLocation });
 
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
+    var filterNodeResource = $formFilters.querySelector('.valueNodeResource')?.value;
+    if(filterNodeResource != null && filterNodeResource !== '')
+      filters.push({ name: 'fq', value: 'nodeResource:' + filterNodeResource });
+
+    var filterNodeDisplayName = $formFilters.querySelector('.valueNodeDisplayName')?.value;
+    if(filterNodeDisplayName != null && filterNodeDisplayName !== '')
+      filters.push({ name: 'fq', value: 'nodeDisplayName:' + filterNodeDisplayName });
+
+    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
+    if(filterLocationColors != null && filterLocationColors !== '')
+      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
+
+    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
+    if(filterLocationTitles != null && filterLocationTitles !== '')
+      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
+
+    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
+    if(filterLocationLinks != null && filterLocationLinks !== '')
+      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
+
+    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
+    if(filterEntityShortId != null && filterEntityShortId !== '')
+      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -755,38 +787,6 @@ function patchAiNodeFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
-    var filterNodeResource = $formFilters.querySelector('.valueNodeResource')?.value;
-    if(filterNodeResource != null && filterNodeResource !== '')
-      filters.push({ name: 'fq', value: 'nodeResource:' + filterNodeResource });
-
-    var filterNodeDisplayName = $formFilters.querySelector('.valueNodeDisplayName')?.value;
-    if(filterNodeDisplayName != null && filterNodeDisplayName !== '')
-      filters.push({ name: 'fq', value: 'nodeDisplayName:' + filterNodeDisplayName });
-
-    var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
-    if(filterLocationColors != null && filterLocationColors !== '')
-      filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
-
-    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
-    if(filterLocationTitles != null && filterLocationTitles !== '')
-      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
-
-    var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
-    if(filterLocationLinks != null && filterLocationLinks !== '')
-      filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
-
-    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
-    if(filterEntityShortId != null && filterEntityShortId !== '')
-      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
   }
   return filters;
 }
@@ -894,6 +894,18 @@ async function postAiNode($formValues, target, success, error) {
   if(valueLocation != null && valueLocation !== '')
     vals['location'] = JSON.parse(valueLocation);
 
+  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['hubResource'] = valueHubResource;
+
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['clusterResource'] = valueClusterResource;
+
+  var valueNodeResource = $formValues.querySelector('.valueNodeResource')?.value;
+  if(valueNodeResource != null && valueNodeResource !== '')
+    vals['nodeResource'] = valueNodeResource;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
     vals['sessionId'] = valueSessionId;
@@ -921,18 +933,6 @@ async function postAiNode($formValues, target, success, error) {
   var valueDownload = $formValues.querySelector('.valueDownload')?.value;
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
-
-  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['hubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['clusterResource'] = valueClusterResource;
-
-  var valueNodeResource = $formValues.querySelector('.valueNodeResource')?.value;
-  if(valueNodeResource != null && valueNodeResource !== '')
-    vals['nodeResource'] = valueNodeResource;
 
   fetch(
     '/en-us/api/ai-node'
@@ -1170,6 +1170,14 @@ async function websocketAiNodeInner(apiRequest) {
         var inputNgsildContext = null;
         var inputNgsildData = null;
         var inputLocation = null;
+        var inputHubResource = null;
+        var inputClusterResource = null;
+        var inputNodeResource = null;
+        var inputNodeDisplayName = null;
+        var inputLocationColors = null;
+        var inputLocationTitles = null;
+        var inputLocationLinks = null;
+        var inputEntityShortId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1184,14 +1192,6 @@ async function websocketAiNodeInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputHubResource = null;
-        var inputClusterResource = null;
-        var inputNodeResource = null;
-        var inputNodeDisplayName = null;
-        var inputLocationColors = null;
-        var inputLocationTitles = null;
-        var inputLocationLinks = null;
-        var inputEntityShortId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -1223,6 +1223,22 @@ async function websocketAiNodeInner(apiRequest) {
           inputNgsildData = $response.querySelector('.Page_ngsildData');
         if(vars.includes('location'))
           inputLocation = $response.querySelector('.Page_location');
+        if(vars.includes('hubResource'))
+          inputHubResource = $response.querySelector('.Page_hubResource');
+        if(vars.includes('clusterResource'))
+          inputClusterResource = $response.querySelector('.Page_clusterResource');
+        if(vars.includes('nodeResource'))
+          inputNodeResource = $response.querySelector('.Page_nodeResource');
+        if(vars.includes('nodeDisplayName'))
+          inputNodeDisplayName = $response.querySelector('.Page_nodeDisplayName');
+        if(vars.includes('locationColors'))
+          inputLocationColors = $response.querySelector('.Page_locationColors');
+        if(vars.includes('locationTitles'))
+          inputLocationTitles = $response.querySelector('.Page_locationTitles');
+        if(vars.includes('locationLinks'))
+          inputLocationLinks = $response.querySelector('.Page_locationLinks');
+        if(vars.includes('entityShortId'))
+          inputEntityShortId = $response.querySelector('.Page_entityShortId');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1251,22 +1267,6 @@ async function websocketAiNodeInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
-        if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
-        if(vars.includes('nodeResource'))
-          inputNodeResource = $response.querySelector('.Page_nodeResource');
-        if(vars.includes('nodeDisplayName'))
-          inputNodeDisplayName = $response.querySelector('.Page_nodeDisplayName');
-        if(vars.includes('locationColors'))
-          inputLocationColors = $response.querySelector('.Page_locationColors');
-        if(vars.includes('locationTitles'))
-          inputLocationTitles = $response.querySelector('.Page_locationTitles');
-        if(vars.includes('locationLinks'))
-          inputLocationLinks = $response.querySelector('.Page_locationLinks');
-        if(vars.includes('entityShortId'))
-          inputEntityShortId = $response.querySelector('.Page_entityShortId');
 
         jsWebsocketAiNode(nodeResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -1423,6 +1423,86 @@ async function websocketAiNodeInner(apiRequest) {
           addGlow(document.querySelector('.Page_location'));
         }
 
+        if(inputHubResource) {
+          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubResource.getAttribute('value');
+            else
+              item.textContent = inputHubResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_hubResource'));
+        }
+
+        if(inputClusterResource) {
+          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterResource.getAttribute('value');
+            else
+              item.textContent = inputClusterResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterResource'));
+        }
+
+        if(inputNodeResource) {
+          document.querySelectorAll('.Page_nodeResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeResource.getAttribute('value');
+            else
+              item.textContent = inputNodeResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeResource'));
+        }
+
+        if(inputNodeDisplayName) {
+          document.querySelectorAll('.Page_nodeDisplayName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeDisplayName.getAttribute('value');
+            else
+              item.textContent = inputNodeDisplayName.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeDisplayName'));
+        }
+
+        if(inputLocationColors) {
+          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationColors.getAttribute('value');
+            else
+              item.textContent = inputLocationColors.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationColors'));
+        }
+
+        if(inputLocationTitles) {
+          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationTitles.getAttribute('value');
+            else
+              item.textContent = inputLocationTitles.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationTitles'));
+        }
+
+        if(inputLocationLinks) {
+          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationLinks.getAttribute('value');
+            else
+              item.textContent = inputLocationLinks.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationLinks'));
+        }
+
+        if(inputEntityShortId) {
+          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEntityShortId.getAttribute('value');
+            else
+              item.textContent = inputEntityShortId.textContent;
+          });
+          addGlow(document.querySelector('.Page_entityShortId'));
+        }
+
         if(inputClassCanonicalName) {
           document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1561,86 +1641,6 @@ async function websocketAiNodeInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
-        }
-
-        if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHubResource.getAttribute('value');
-            else
-              item.textContent = inputHubResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_hubResource'));
-        }
-
-        if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClusterResource.getAttribute('value');
-            else
-              item.textContent = inputClusterResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_clusterResource'));
-        }
-
-        if(inputNodeResource) {
-          document.querySelectorAll('.Page_nodeResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeResource.getAttribute('value');
-            else
-              item.textContent = inputNodeResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeResource'));
-        }
-
-        if(inputNodeDisplayName) {
-          document.querySelectorAll('.Page_nodeDisplayName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeDisplayName.getAttribute('value');
-            else
-              item.textContent = inputNodeDisplayName.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeDisplayName'));
-        }
-
-        if(inputLocationColors) {
-          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocationColors.getAttribute('value');
-            else
-              item.textContent = inputLocationColors.textContent;
-          });
-          addGlow(document.querySelector('.Page_locationColors'));
-        }
-
-        if(inputLocationTitles) {
-          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocationTitles.getAttribute('value');
-            else
-              item.textContent = inputLocationTitles.textContent;
-          });
-          addGlow(document.querySelector('.Page_locationTitles'));
-        }
-
-        if(inputLocationLinks) {
-          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocationLinks.getAttribute('value');
-            else
-              item.textContent = inputLocationLinks.textContent;
-          });
-          addGlow(document.querySelector('.Page_locationLinks'));
-        }
-
-        if(inputEntityShortId) {
-          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputEntityShortId.getAttribute('value');
-            else
-              item.textContent = inputEntityShortId.textContent;
-          });
-          addGlow(document.querySelector('.Page_entityShortId'));
         }
 
           pageGraphAiNode();
