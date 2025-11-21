@@ -142,6 +142,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var clusterResource = {% if result.clusterResource is defined %}{{ result.clusterResource | tojson }}{% else %}null{% endif %};
@@ -289,6 +292,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterPage %}
+{% include en-us/search/cluster/ClusterSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Cluster">back to all OpenShift clusters</wa-tooltip></wa-tooltip>
@@ -311,8 +315,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/cluster/ClusterSidebar.htm %}
-{%- include en-us/search/cluster/ClusterSuggestedSearch.htm %}
+{% include en-us/search/cluster/ClusterSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/cluster" id="ClusterForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

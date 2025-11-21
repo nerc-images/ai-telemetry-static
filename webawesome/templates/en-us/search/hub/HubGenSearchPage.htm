@@ -59,6 +59,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var hubId = {% if result.hubId is defined %}{{ result.hubId | tojson }}{% else %}null{% endif %};
@@ -190,6 +193,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartHubPage %}
+{% include en-us/search/hub/HubSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip></wa-tooltip>
@@ -212,8 +216,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/hub/HubSidebar.htm %}
-{%- include en-us/search/hub/HubSuggestedSearch.htm %}
+{% include en-us/search/hub/HubSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/hub" id="HubForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

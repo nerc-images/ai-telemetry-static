@@ -1,5 +1,4 @@
-
-{% macro jsFunctionName(divId) -%}
+{%- macro jsFunctionName(divId) %}
 {%- set divIdWords = divId.split('-') -%}
 {%- set divIdCamelCaseWords = [] -%}
 {%- for word in divIdWords -%}
@@ -11,13 +10,13 @@
 {%- endfor -%}
 {%- set jsFunctionName = divIdCamelCaseWords|join('') -%}
 {{ jsFunctionName }}
-{%- endmacro %}
+{% endmacro -%}
 
-{% macro dashboardPromise(divId) -%}
+{%- macro dashboardPromise(divId) %}
 {{ jsFunctionName(divId) }}(timeQuery)
-{%- endmacro %}
+{% endmacro -%}
 
-{% macro dashboardCard(divId, cardTitle) %}
+{%- macro dashboardCard(divId, cardTitle) %}
       <wa-card with-header>
         <header slot="header" class="wa-heading-m ">{{ cardTitle | e}}</header>
         <wa-tab-group>
@@ -55,9 +54,9 @@
           </wa-tab-panel>
         </wa-tab-group>
       </wa-card>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null) %}
+{%- macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null) %}
 
     function {{ jsFunctionName(divId) }}Popover(event) {
       var buttonId = event.target.getAttribute('id');
@@ -269,7 +268,7 @@
       Plotly.newPlot(panelId, traces, layout);
     }
 
-{% endmacro %}
+{% endmacro -%}
 
 <!DOCTYPE html>
 <html lang="{{ SITE_LOCALE }}" class="wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
@@ -382,7 +381,7 @@
     <script>
 {%- block websocketPageLayout %}{%- endblock websocketPageLayout %}
     </script>
-   </head>
+  </head>
   <body class="wa-body-{{ userFontSize }} wa-size-{{ userFontSize }} wa-cloak ">
     {% if WEB_COMPONENTS_PRO == 'true' -%}
     <wa-page disable-sticky="header">
@@ -391,32 +390,29 @@
     {%- endif %}
 {%- block htmBodyPageLayout %}
 {%- block htmBodyStartPageLayout %}
-    {% if WEB_COMPONENTS_PRO == 'false' -%}
-      <wa-drawer placement="start" id="site-aside-left" class="hide-mobile margin-block-end-1rem ">
-        <{{ WEB_COMPONENTS_PREFIX }}button id="site-aside-left-close-button" label="Close" data-drawer="close" class="hide-desktop">
-          <i slot="start" class="\{\{ FONTAWESOME_STYLE \}\} fa-xmark"></i>
-        </{{ WEB_COMPONENTS_PREFIX }}button>
-    {%- endif %}
-      <nav{% if WEB_COMPONENTS_PRO == 'true' -%} slot="navigation"{% endif %}>
+      {% if WEB_COMPONENTS_PRO == 'false' -%}
+      <wa-drawer placement="start" id="site-aside-left" class="margin-block-end-1rem ">
+        {%- endif %}
+        <nav{% if WEB_COMPONENTS_PRO == 'true' %} slot="navigation"{% endif %}>
           <div class="display-flex-center ">
             <a href="/">
               <img id="site-aside-left-img-logo" src="{{ STATIC_BASE_URL }}/svg/logo-{{ userSiteTheme | default(SITE_THEME) }}.svg"/>
             </a>
           </div>
-          <div class="wa-cluster " style="justify-content: center;">
-            <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank">
-              GitHub
-              <i slot="start" label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
-            </wa-button>
-            <wa-button variant="brand" href="https://www.youtube.com/watch?v=5_y5PFtsTYk&list=PLcVjtgfCeLvQu8KDUjmwHzbFqbg5K70zN" target="_blank">
+          <div class="wa-grid " style="--min-column-size: 15ch; ">
+            <wa-button variant="brand" href="https://www.youtube.com/watch?v=5_y5PFtsTYk&list=PLcVjtgfCeLvQu8KDUjmwHzbFqbg5K70zN" variant="brand" target="_blank">
               Youtube
               <i slot="start" label="Follow us on Youtube" class="fa-brands fa-youtube fa-2xl"></i>
             </wa-button>
-            <wa-button variant="brand" href="https://www.linkedin.com/company/computate/" target="_blank">
+            <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" variant="brand" target="_blank">
+              GitHub
+              <i slot="start" label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
+            </wa-button>
+            <wa-button variant="brand" href="https://www.linkedin.com/in/computate/" variant="brand" target="_blank">
               LinkedIn
               <i slot="start" label="Share on LinkedIn" class="fa-brands fa-linkedin fa-2xl"></i>
             </wa-button>
-            <wa-button variant="brand" href="mailto:{{ MAILING_LIST_EMAIL }}" target="_blank">
+            <wa-button variant="brand" href="mailto:{{ MAILING_LIST_EMAIL }}" variant="brand" target="_blank">
               Email
               <i slot="start" label="Share with email" class="{{ FONTAWESOME_STYLE }} fa-envelope-open fa-2xl"></i>
             </wa-button>
@@ -425,45 +421,68 @@
             <div>
 {%- if userName is defined %}
               <wa-details>
-                <div slot="summary">
-                  <wa-avatar label="user"></wa-avatar>
-                  user: {{userName}}
-                </div>
-                <div>{{ userFullName }}</div>
-                <div>{{ userEmail }}</div>
-                <wa-tooltip for="site-button-user-page">see or change your user profile</wa-tooltip>
-                <wa-tooltip for="site-button-logout" placement="right">sign out</wa-tooltip>
-                <div>
-                  <wa-button id="site-button-user-page" variant="brand" href="{{ SITE_BASE_URL }}{% if userId is defined %}/en-us/edit/user/{{ userId }}{% else %}/en-us/search/user{% endif %}" label="see or change your user profile">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-house-user"></i>
-                    <span>my user page</span>
-                  </wa-button>
-                  <wa-button id="site-button-logout" variant="brand" href="{{ logoutUrl }}" label="sign out">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-from-portal"></i>
-                    <span>sign out</span>
-                  </wa-button>
-                </div>
-                <wa-details summary="User groups" open="true">
-                  <div class="wa-stack ">
+                <div slot="summary" class="wa-stack ">
+                  <wa-tooltip for="siteUserSummary">
+                    <div class="wa-stack ">
+                      <div>
+                        {{ userFullName }}{% if userEmail is defined %} &lt;{{ userEmail | e }}&gt;{% endif %}
+                      </div>
+                    </div>
+                  </wa-tooltip>
+                  <div id="siteUserSummary" class="wa-cluster ">
+                    <wa-avatar label="user"></wa-avatar>
                     <div>
-                      {% for group in userGroups %}
-                      <wa-badge variant="success">{{ group }}</wa-badge>
-                      {% endfor %}
+                      user: {{ userName | e }}
                     </div>
                   </div>
-                </wa-details>
-                <wa-details summary="Current scopes" open="true">
-                  <div class="wa-stack ">
-                    <div>
-                      <wa-tag variant="neutral">{{ pageUri }}</wa-tag>
-                    </div>
-                    <div>
-                      {% for scope in scopes %}
-                      <wa-badge variant="success">{{ scope }}</wa-badge>
-                      {% endfor %}
-                    </div>
+                </div>
+                <div class="wa-stack ">
+                  <wa-tooltip for="site-button-user-page">see or change your user profile</wa-tooltip>
+                  <wa-tooltip for="site-button-logout" placement="right">sign out</wa-tooltip>
+                  <div>
+                    <wa-button id="site-button-user-page" variant="brand" href="{{ SITE_BASE_URL }}{% if userId is defined %}/en-us/edit/user/{{ userId }}{% else %}/en-us/search/user{% endif %}" label="see or change your user profile">
+                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-house-user"></i>
+                      <span>my user page</span>
+                    </wa-button>
+                    <wa-button id="site-button-logout" variant="brand" href="{{ logoutUrl }}" label="sign out">
+                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-from-portal"></i>
+                      <span>sign out</span>
+                    </wa-button>
                   </div>
-                </wa-details>
+                  <wa-details summary="User groups" open="true">
+                    <div class="wa-stack ">
+                      <wa-scroller>
+                          {% for group in userGroups %}
+                          <div>
+                            <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/policy/{{ AUTH_REALM | urlencode() }}-group-{{ group | regex_replace('/?(.*)', '$1') | urlencode() }}/group">
+                              <wa-badge variant="success">
+                                {{ group | e }}
+                              </wa-badge>
+                            </a>
+                          </div>
+                          {% endfor %}
+                      </wa-scroller>
+                    </div>
+                  </wa-details>
+                  <wa-details summary="Current scopes" open="true">
+                    <div class="wa-stack ">
+                      <wa-scroller>
+                        <div>
+                          <wa-tag variant="neutral">{{ pageUri }}</wa-tag>
+                        </div>
+                        <div>
+                          {% for scope in scopes %}
+                          <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/scope/{{ AUTH_REALM | urlencode() }}-{{ scope | urlencode() }}">
+                            <wa-badge variant="success">
+                              {{ scope }}
+                            </wa-badge>
+                          </a>
+                          {% endfor %}
+                        </div>
+                      </wa-scroller>
+                    </div>
+                  </wa-details>
+                </div>
               </wa-details>
 {%- else %}
               <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/user">
@@ -478,6 +497,10 @@
                   <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/article">
                     <i slot="start" class="fa-duotone fa-regular fa-newspaper"></i>
                     articles
+                  </wa-button>
+                  <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/ai-telemetry-developer">
+                    <i slot="start" class="fa-duotone fa-regular fa-chart-fft"></i>
+                    AI Telemetry Developers
                   </wa-button>
                 </div>
               </wa-details>
@@ -572,10 +595,10 @@
 {% endif %}
             </div>
           </div>
-      </nav>
+        </nav>
       {% if WEB_COMPONENTS_PRO == 'false' -%}
       </wa-drawer>
-      {%- endif %}
+      {% endif %}
       <main class="wa-stack ">
         <wa-drawer id="warnings-drawer" label="Warnings">
           <div id="warnings-drawer-stack" class="wa-stack ">
@@ -595,14 +618,14 @@
         </header>
 {%- endblock htmBodyStartPageLayout %}
 {% block htmBodyMiddlePageLayout %}
-        <div class="pageContent wa-stack wa-gap-3xl ">
+        <main slot="main" class="pageContent wa-stack wa-gap-3xl ">
           put stuff here
-        </div>
+        </main>
 {%- endblock htmBodyMiddlePageLayout %}
 {%- block htmBodyEndPageLayout %}
         <footer class="no-gradient wa-cluster wa-align-items-center " slot="main-footer">
           {% if GITHUB_ORG is defined %}
-          <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank" appearance="filled outlined" class="tile">
+          <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" variant="brand" target="_blank" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>This site is</span>
               <i class="fa-brands fa-github fa-xl"></i>
@@ -610,14 +633,14 @@
             </div>
           </wa-button>
           {% endif %}
-          <wa-button variant="brand" href="https://computate.org/" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
+          <wa-button variant="brand" href="https://computate.org/" variant="brand" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>Generated with </span>
               <img class="footer-img" style="font-weight: var(--wa-font-weight-bold);" src="{{ STATIC_BASE_URL }}/svg/computate-keys.svg" alt="Computate"/>
             </div>
           </wa-button>
           {% if SITE_POWERED_BY_URL is defined %}
-          <wa-button variant="brand" href="{{ SITE_POWERED_BY_URL }}" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
+          <wa-button variant="brand" href="{{ SITE_POWERED_BY_URL }}" variant="brand" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>Powered by </span>
               <i class="fa-brands fa-redhat fa-xl" style="color: #ff0000;"></i>
@@ -627,11 +650,11 @@
           {% endif %}
         </footer>
       </main>
-    {% if WEB_COMPONENTS_PRO == 'true' -%}
+    {% if WEB_COMPONENTS_PREFIX == 'wa-' -%}
     </wa-page>
     {%- else -%}
     </div>
-    {%- endif %}
+    {% endif %}
 {%- endblock htmBodyEndPageLayout %}
 {%- endblock htmBodyPageLayout %}
   </body>

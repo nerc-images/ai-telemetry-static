@@ -143,6 +143,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var nodeResource = {% if result.nodeResource is defined %}{{ result.nodeResource | tojson }}{% else %}null{% endif %};
@@ -347,6 +350,7 @@
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleAiNodePage %}
         <div class="pageContent ">
+{%- include en-us/search/ai-node/AiNodeSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip></wa-tooltip>
@@ -369,7 +373,6 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/ai-node/AiNodeSidebar.htm %}
 {%- include en-us/search/ai-node/AiNodeSuggestedSearch.htm %}
 {% endif %}
 {%- block htmFormAiNodePage %}

@@ -143,6 +143,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var vmResource = {% if result.vmResource is defined %}{{ result.vmResource | tojson }}{% else %}null{% endif %};
@@ -306,6 +309,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartVirtualMachinePage %}
+{% include en-us/search/vm/VirtualMachineSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-VirtualMachine">back to all virtual machines</wa-tooltip></wa-tooltip>
@@ -328,8 +332,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/vm/VirtualMachineSidebar.htm %}
-{%- include en-us/search/vm/VirtualMachineSuggestedSearch.htm %}
+{% include en-us/search/vm/VirtualMachineSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/vm" id="VirtualMachineForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

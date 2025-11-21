@@ -59,6 +59,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -190,6 +193,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterTemplatePage %}
+{% include en-us/search/cluster-template/ClusterTemplateSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip></wa-tooltip>
@@ -212,8 +216,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/cluster-template/ClusterTemplateSidebar.htm %}
-{%- include en-us/search/cluster-template/ClusterTemplateSuggestedSearch.htm %}
+{% include en-us/search/cluster-template/ClusterTemplateSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/cluster-template" id="ClusterTemplateForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

@@ -61,6 +61,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var projectResource = {% if result.projectResource is defined %}{{ result.projectResource | tojson }}{% else %}null{% endif %};
@@ -224,6 +227,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartProjectPage %}
+{% include en-us/search/project/ProjectSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip></wa-tooltip>
@@ -246,8 +250,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/project/ProjectSidebar.htm %}
-{%- include en-us/search/project/ProjectSuggestedSearch.htm %}
+{% include en-us/search/project/ProjectSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/project" id="ProjectForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
