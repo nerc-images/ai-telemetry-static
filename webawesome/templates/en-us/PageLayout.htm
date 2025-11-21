@@ -1,5 +1,4 @@
-
-{% macro jsFunctionName(divId) -%}
+{%- macro jsFunctionName(divId) %}
 {%- set divIdWords = divId.split('-') -%}
 {%- set divIdCamelCaseWords = [] -%}
 {%- for word in divIdWords -%}
@@ -11,13 +10,13 @@
 {%- endfor -%}
 {%- set jsFunctionName = divIdCamelCaseWords|join('') -%}
 {{ jsFunctionName }}
-{%- endmacro %}
+{% endmacro -%}
 
-{% macro dashboardPromise(divId) -%}
+{%- macro dashboardPromise(divId) %}
 {{ jsFunctionName(divId) }}(timeQuery)
-{%- endmacro %}
+{% endmacro -%}
 
-{% macro dashboardCard(divId, cardTitle) %}
+{%- macro dashboardCard(divId, cardTitle) %}
       <wa-card with-header>
         <header slot="header" class="wa-heading-m ">{{ cardTitle | e}}</header>
         <wa-tab-group>
@@ -55,9 +54,9 @@
           </wa-tab-panel>
         </wa-tab-group>
       </wa-card>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null) %}
+{%- macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null) %}
 
     function {{ jsFunctionName(divId) }}Popover(event) {
       var buttonId = event.target.getAttribute('id');
@@ -269,7 +268,7 @@
       Plotly.newPlot(panelId, traces, layout);
     }
 
-{% endmacro %}
+{% endmacro -%}
 
 <!DOCTYPE html>
 <html lang="{{ SITE_LOCALE }}" class="wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
@@ -382,7 +381,7 @@
     <script>
 {%- block websocketPageLayout %}{%- endblock websocketPageLayout %}
     </script>
-   </head>
+  </head>
   <body class="wa-body-{{ userFontSize }} wa-size-{{ userFontSize }} wa-cloak ">
     {% if WEB_COMPONENTS_PRO == 'true' -%}
     <wa-page disable-sticky="header">

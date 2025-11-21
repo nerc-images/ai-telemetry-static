@@ -79,21 +79,21 @@ function searchClusterFilters($formFilters) {
     if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
       filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
 
-    var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
-    if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
-      filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
-
     var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
     if(filterVmsTotal != null && filterVmsTotal !== '')
       filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
 
-    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
-    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
-      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+    var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
+    if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
+      filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
 
     var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
     if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
       filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
+
+    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
+    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
+      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
@@ -478,18 +478,6 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeGpuDevicesTotal != null && removeGpuDevicesTotal !== '')
     vals['removeGpuDevicesTotal'] = removeGpuDevicesTotal;
 
-  var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
-  var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value === 'true';
-  var setGrafanaUrl = removeGrafanaUrl ? null : $formValues.querySelector('.setGrafanaUrl')?.value;
-  var addGrafanaUrl = $formValues.querySelector('.addGrafanaUrl')?.value;
-  if(removeGrafanaUrl || setGrafanaUrl != null && setGrafanaUrl !== '')
-    vals['setGrafanaUrl'] = setGrafanaUrl;
-  if(addGrafanaUrl != null && addGrafanaUrl !== '')
-    vals['addGrafanaUrl'] = addGrafanaUrl;
-  var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value;
-  if(removeGrafanaUrl != null && removeGrafanaUrl !== '')
-    vals['removeGrafanaUrl'] = removeGrafanaUrl;
-
   var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
   var removeVmsTotal = $formValues.querySelector('.removeVmsTotal')?.value === 'true';
   var setVmsTotal = removeVmsTotal ? null : $formValues.querySelector('.setVmsTotal')?.value;
@@ -502,17 +490,17 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   if(removeVmsTotal != null && removeVmsTotal !== '')
     vals['removeVmsTotal'] = removeVmsTotal;
 
-  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
-  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value === 'true';
-  var setMemoryBytesTotal = removeMemoryBytesTotal ? null : $formValues.querySelector('.setMemoryBytesTotal')?.value;
-  var addMemoryBytesTotal = $formValues.querySelector('.addMemoryBytesTotal')?.value;
-  if(removeMemoryBytesTotal || setMemoryBytesTotal != null && setMemoryBytesTotal !== '')
-    vals['setMemoryBytesTotal'] = setMemoryBytesTotal;
-  if(addMemoryBytesTotal != null && addMemoryBytesTotal !== '')
-    vals['addMemoryBytesTotal'] = addMemoryBytesTotal;
-  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value;
-  if(removeMemoryBytesTotal != null && removeMemoryBytesTotal !== '')
-    vals['removeMemoryBytesTotal'] = removeMemoryBytesTotal;
+  var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
+  var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value === 'true';
+  var setGrafanaUrl = removeGrafanaUrl ? null : $formValues.querySelector('.setGrafanaUrl')?.value;
+  var addGrafanaUrl = $formValues.querySelector('.addGrafanaUrl')?.value;
+  if(removeGrafanaUrl || setGrafanaUrl != null && setGrafanaUrl !== '')
+    vals['setGrafanaUrl'] = setGrafanaUrl;
+  if(addGrafanaUrl != null && addGrafanaUrl !== '')
+    vals['addGrafanaUrl'] = addGrafanaUrl;
+  var removeGrafanaUrl = $formValues.querySelector('.removeGrafanaUrl')?.value;
+  if(removeGrafanaUrl != null && removeGrafanaUrl !== '')
+    vals['removeGrafanaUrl'] = removeGrafanaUrl;
 
   var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
   var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value === 'true';
@@ -525,6 +513,18 @@ async function patchCluster($formFilters, $formValues, target, clusterResource, 
   var removeCpuCoresTotal = $formValues.querySelector('.removeCpuCoresTotal')?.value;
   if(removeCpuCoresTotal != null && removeCpuCoresTotal !== '')
     vals['removeCpuCoresTotal'] = removeCpuCoresTotal;
+
+  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
+  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value === 'true';
+  var setMemoryBytesTotal = removeMemoryBytesTotal ? null : $formValues.querySelector('.setMemoryBytesTotal')?.value;
+  var addMemoryBytesTotal = $formValues.querySelector('.addMemoryBytesTotal')?.value;
+  if(removeMemoryBytesTotal || setMemoryBytesTotal != null && setMemoryBytesTotal !== '')
+    vals['setMemoryBytesTotal'] = setMemoryBytesTotal;
+  if(addMemoryBytesTotal != null && addMemoryBytesTotal !== '')
+    vals['addMemoryBytesTotal'] = addMemoryBytesTotal;
+  var removeMemoryBytesTotal = $formValues.querySelector('.removeMemoryBytesTotal')?.value;
+  if(removeMemoryBytesTotal != null && removeMemoryBytesTotal !== '')
+    vals['removeMemoryBytesTotal'] = removeMemoryBytesTotal;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   var removeId = $formValues.querySelector('.removeId')?.value === 'true';
@@ -758,21 +758,21 @@ function patchClusterFilters($formFilters) {
     if(filterGpuDevicesTotal != null && filterGpuDevicesTotal !== '')
       filters.push({ name: 'fq', value: 'gpuDevicesTotal:' + filterGpuDevicesTotal });
 
-    var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
-    if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
-      filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
-
     var filterVmsTotal = $formFilters.querySelector('.valueVmsTotal')?.value;
     if(filterVmsTotal != null && filterVmsTotal !== '')
       filters.push({ name: 'fq', value: 'vmsTotal:' + filterVmsTotal });
 
-    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
-    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
-      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
+    var filterGrafanaUrl = $formFilters.querySelector('.valueGrafanaUrl')?.value;
+    if(filterGrafanaUrl != null && filterGrafanaUrl !== '')
+      filters.push({ name: 'fq', value: 'grafanaUrl:' + filterGrafanaUrl });
 
     var filterCpuCoresTotal = $formFilters.querySelector('.valueCpuCoresTotal')?.value;
     if(filterCpuCoresTotal != null && filterCpuCoresTotal !== '')
       filters.push({ name: 'fq', value: 'cpuCoresTotal:' + filterCpuCoresTotal });
+
+    var filterMemoryBytesTotal = $formFilters.querySelector('.valueMemoryBytesTotal')?.value;
+    if(filterMemoryBytesTotal != null && filterMemoryBytesTotal !== '')
+      filters.push({ name: 'fq', value: 'memoryBytesTotal:' + filterMemoryBytesTotal });
 
     var filterId = $formFilters.querySelector('.valueId')?.value;
     if(filterId != null && filterId !== '')
@@ -968,21 +968,21 @@ async function postCluster($formValues, target, success, error) {
   if(valueGpuDevicesTotal != null && valueGpuDevicesTotal !== '')
     vals['gpuDevicesTotal'] = valueGpuDevicesTotal;
 
-  var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
-  if(valueGrafanaUrl != null && valueGrafanaUrl !== '')
-    vals['grafanaUrl'] = valueGrafanaUrl;
-
   var valueVmsTotal = $formValues.querySelector('.valueVmsTotal')?.value;
   if(valueVmsTotal != null && valueVmsTotal !== '')
     vals['vmsTotal'] = valueVmsTotal;
 
-  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
-  if(valueMemoryBytesTotal != null && valueMemoryBytesTotal !== '')
-    vals['memoryBytesTotal'] = valueMemoryBytesTotal;
+  var valueGrafanaUrl = $formValues.querySelector('.valueGrafanaUrl')?.value;
+  if(valueGrafanaUrl != null && valueGrafanaUrl !== '')
+    vals['grafanaUrl'] = valueGrafanaUrl;
 
   var valueCpuCoresTotal = $formValues.querySelector('.valueCpuCoresTotal')?.value;
   if(valueCpuCoresTotal != null && valueCpuCoresTotal !== '')
     vals['cpuCoresTotal'] = valueCpuCoresTotal;
+
+  var valueMemoryBytesTotal = $formValues.querySelector('.valueMemoryBytesTotal')?.value;
+  if(valueMemoryBytesTotal != null && valueMemoryBytesTotal !== '')
+    vals['memoryBytesTotal'] = valueMemoryBytesTotal;
 
   var valueId = $formValues.querySelector('.valueId')?.value;
   if(valueId != null && valueId !== '')
@@ -1267,10 +1267,10 @@ async function websocketClusterInner(apiRequest) {
         var inputLocation = null;
         var inputAiNodesTotal = null;
         var inputGpuDevicesTotal = null;
-        var inputGrafanaUrl = null;
         var inputVmsTotal = null;
-        var inputMemoryBytesTotal = null;
+        var inputGrafanaUrl = null;
         var inputCpuCoresTotal = null;
+        var inputMemoryBytesTotal = null;
         var inputId = null;
         var inputNgsildTenant = null;
         var inputNgsildPath = null;
@@ -1322,14 +1322,14 @@ async function websocketClusterInner(apiRequest) {
           inputAiNodesTotal = $response.querySelector('.Page_aiNodesTotal');
         if(vars.includes('gpuDevicesTotal'))
           inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
-        if(vars.includes('grafanaUrl'))
-          inputGrafanaUrl = $response.querySelector('.Page_grafanaUrl');
         if(vars.includes('vmsTotal'))
           inputVmsTotal = $response.querySelector('.Page_vmsTotal');
-        if(vars.includes('memoryBytesTotal'))
-          inputMemoryBytesTotal = $response.querySelector('.Page_memoryBytesTotal');
+        if(vars.includes('grafanaUrl'))
+          inputGrafanaUrl = $response.querySelector('.Page_grafanaUrl');
         if(vars.includes('cpuCoresTotal'))
           inputCpuCoresTotal = $response.querySelector('.Page_cpuCoresTotal');
+        if(vars.includes('memoryBytesTotal'))
+          inputMemoryBytesTotal = $response.querySelector('.Page_memoryBytesTotal');
         if(vars.includes('id'))
           inputId = $response.querySelector('.Page_id');
         if(vars.includes('ngsildTenant'))
@@ -1514,16 +1514,6 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_gpuDevicesTotal'));
         }
 
-        if(inputGrafanaUrl) {
-          document.querySelectorAll('.Page_grafanaUrl').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputGrafanaUrl.getAttribute('value');
-            else
-              item.textContent = inputGrafanaUrl.textContent;
-          });
-          addGlow(document.querySelector('.Page_grafanaUrl'));
-        }
-
         if(inputVmsTotal) {
           document.querySelectorAll('.Page_vmsTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -1534,14 +1524,14 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_vmsTotal'));
         }
 
-        if(inputMemoryBytesTotal) {
-          document.querySelectorAll('.Page_memoryBytesTotal').forEach((item, index) => {
+        if(inputGrafanaUrl) {
+          document.querySelectorAll('.Page_grafanaUrl').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputMemoryBytesTotal.getAttribute('value');
+              item.value = inputGrafanaUrl.getAttribute('value');
             else
-              item.textContent = inputMemoryBytesTotal.textContent;
+              item.textContent = inputGrafanaUrl.textContent;
           });
-          addGlow(document.querySelector('.Page_memoryBytesTotal'));
+          addGlow(document.querySelector('.Page_grafanaUrl'));
         }
 
         if(inputCpuCoresTotal) {
@@ -1552,6 +1542,16 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputCpuCoresTotal.textContent;
           });
           addGlow(document.querySelector('.Page_cpuCoresTotal'));
+        }
+
+        if(inputMemoryBytesTotal) {
+          document.querySelectorAll('.Page_memoryBytesTotal').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputMemoryBytesTotal.getAttribute('value');
+            else
+              item.textContent = inputMemoryBytesTotal.textContent;
+          });
+          addGlow(document.querySelector('.Page_memoryBytesTotal'));
         }
 
         if(inputId) {

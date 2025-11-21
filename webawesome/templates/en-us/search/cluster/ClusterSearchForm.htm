@@ -501,6 +501,44 @@ The total number of GPU devices on this cluster. "
 {%- macro htmGpuDevicesTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputGpuDevicesTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputVmsTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_vmsTotal">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] VMs total"
+                      label="VMs total"
+                      type="number"
+                      hint="
+The total number of VMs on this cluster. "
+                      id="{{classApiMethodMethod}}_vmsTotal"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-clusterResource={{ result.clusterResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_vmsTotal setVmsTotal classCluster inputCluster{{ result.clusterResource }}VmsTotal "
+                      name="setVmsTotal"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_vmsTotal setVmsTotal classCluster inputCluster{{ result.clusterResource }}VmsTotal "
+                      name="setVmsTotal"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_vmsTotal valueVmsTotal classCluster inputCluster{{ result.clusterResource }}VmsTotal "
+                      name="vmsTotal"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.vmsTotal | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmVmsTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputVmsTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputGrafanaUrlClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_grafanaUrl">
@@ -555,33 +593,33 @@ Explore this cluster's GPU utilization in Grafana. "
 {%- macro htmGrafanaUrlClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputGrafanaUrlClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputVmsTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCpuCoresTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_vmsTotal">
+                <form class="subgrid-2col " id="PageForm_cpuCoresTotal">
   {%- endif %}
                   <wa-input
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[Integer] VMs total"
-                      label="VMs total"
+                      placeholder="[Integer] CPU cores total"
+                      label="CPU cores total"
                       type="number"
                       hint="
-The total number of VMs on this cluster. "
-                      id="{{classApiMethodMethod}}_vmsTotal"
+The total number of CPU cores on this cluster. "
+                      id="{{classApiMethodMethod}}_cpuCoresTotal"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_vmsTotal setVmsTotal classCluster inputCluster{{ result.clusterResource }}VmsTotal "
-                      name="setVmsTotal"
+                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal setCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
+                      name="setCpuCoresTotal"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_vmsTotal setVmsTotal classCluster inputCluster{{ result.clusterResource }}VmsTotal "
-                      name="setVmsTotal"
+                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal setCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
+                      name="setCpuCoresTotal"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_vmsTotal valueVmsTotal classCluster inputCluster{{ result.clusterResource }}VmsTotal "
-                      name="vmsTotal"
+                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal valueCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
+                      name="cpuCoresTotal"
     {%- endif %}
   {%- endif %}
   {%- if "Page" == classApiMethodMethod %}
-                      value="{{result.vmsTotal | e }}"
+                      value="{{result.cpuCoresTotal | e }}"
   {%- endif %}
                       ></wa-input>
 
@@ -590,8 +628,8 @@ The total number of VMs on this cluster. "
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmVmsTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputVmsTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmCpuCoresTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCpuCoresTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputMemoryBytesTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -630,44 +668,6 @@ The total number of memory bytes on this cluster. "
 
 {%- macro htmMemoryBytesTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputMemoryBytesTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
-{%- macro inputCpuCoresTotalClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_cpuCoresTotal">
-  {%- endif %}
-                  <wa-input
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[Integer] CPU cores total"
-                      label="CPU cores total"
-                      type="number"
-                      hint="
-The total number of CPU cores on this cluster. "
-                      id="{{classApiMethodMethod}}_cpuCoresTotal"
-  {%- if "Page" == classApiMethodMethod %}
-                      data-clusterResource={{ result.clusterResource | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal setCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
-                      name="setCpuCoresTotal"
-  {%- else %}
-    {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal setCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
-                      name="setCpuCoresTotal"
-    {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_cpuCoresTotal valueCpuCoresTotal classCluster inputCluster{{ result.clusterResource }}CpuCoresTotal "
-                      name="cpuCoresTotal"
-    {%- endif %}
-  {%- endif %}
-  {%- if "Page" == classApiMethodMethod %}
-                      value="{{result.cpuCoresTotal | e }}"
-  {%- endif %}
-                      ></wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmCpuCoresTotalClusterPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputCpuCoresTotalClusterPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputIdClusterPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -973,16 +973,6 @@ The NGSILD data with @context from the context broker"
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-              {%- endif %}
-
-              {%- if "PATCH" in scopes %}
                 {{ htmVmsTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -993,12 +983,12 @@ The NGSILD data with @context from the context broker"
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -1009,6 +999,16 @@ The NGSILD data with @context from the context broker"
                   {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -1194,16 +1194,6 @@ The NGSILD data with @context from the context broker"
               {%- endif %}
 
               {%- if "POST" in scopes %}
-                {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-              {%- endif %}
-
-              {%- if "POST" in scopes %}
                 {{ htmVmsTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -1214,12 +1204,12 @@ The NGSILD data with @context from the context broker"
               {%- endif %}
 
               {%- if "POST" in scopes %}
-                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -1230,6 +1220,16 @@ The NGSILD data with @context from the context broker"
                   {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -1509,16 +1509,6 @@ The NGSILD data with @context from the context broker"
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-              {%- endif %}
-
-              {%- if "PATCH" in scopes %}
                 {{ htmVmsTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -1529,12 +1519,12 @@ The NGSILD data with @context from the context broker"
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmGrafanaUrlClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -1545,6 +1535,16 @@ The NGSILD data with @context from the context broker"
                   {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmCpuCoresTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmMemoryBytesTotalClusterPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>

@@ -143,6 +143,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var nodeResource = {% if result.nodeResource is defined %}{{ result.nodeResource | tojson }}{% else %}null{% endif %};
@@ -306,6 +309,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartAiNodePage %}
+{% include en-us/search/ai-node/AiNodeSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip></wa-tooltip>
@@ -328,8 +332,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/ai-node/AiNodeSidebar.htm %}
-{%- include en-us/search/ai-node/AiNodeSuggestedSearch.htm %}
+{% include en-us/search/ai-node/AiNodeSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/ai-node" id="AiNodeForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

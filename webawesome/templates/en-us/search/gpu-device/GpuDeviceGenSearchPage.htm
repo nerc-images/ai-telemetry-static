@@ -144,6 +144,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var gpuDeviceResource = {% if result.gpuDeviceResource is defined %}{{ result.gpuDeviceResource | tojson }}{% else %}null{% endif %};
@@ -323,6 +326,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartGpuDevicePage %}
+{% include en-us/search/gpu-device/GpuDeviceSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-GpuDevice">back to all GPU devices</wa-tooltip></wa-tooltip>
@@ -345,8 +349,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/gpu-device/GpuDeviceSidebar.htm %}
-{%- include en-us/search/gpu-device/GpuDeviceSuggestedSearch.htm %}
+{% include en-us/search/gpu-device/GpuDeviceSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/gpu-device" id="GpuDeviceForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

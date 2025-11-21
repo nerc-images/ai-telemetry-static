@@ -60,6 +60,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -238,6 +241,7 @@
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterOrderPage %}
         <div class="pageContent ">
+{%- include en-us/search/cluster-order/ClusterOrderSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterOrder">back to all OpenShift cluster orders</wa-tooltip></wa-tooltip>
@@ -260,7 +264,6 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/cluster-order/ClusterOrderSidebar.htm %}
 {%- include en-us/search/cluster-order/ClusterOrderSuggestedSearch.htm %}
 {% endif %}
 {%- block htmFormClusterOrderPage %}

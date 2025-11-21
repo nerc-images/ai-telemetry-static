@@ -60,6 +60,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var pk = {% if result.pk is defined %}{{ result.pk | tojson }}{% else %}null{% endif %};
@@ -228,6 +231,7 @@
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalOrderPage %}
         <div class="pageContent ">
+{%- include en-us/search/bare-metal-order/BareMetalOrderSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalOrder">back to all bare metal orders</wa-tooltip></wa-tooltip>
@@ -250,7 +254,6 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/bare-metal-order/BareMetalOrderSidebar.htm %}
 {%- include en-us/search/bare-metal-order/BareMetalOrderSuggestedSearch.htm %}
 {% endif %}
 {%- block htmFormBareMetalOrderPage %}

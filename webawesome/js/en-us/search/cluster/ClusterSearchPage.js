@@ -1,6 +1,9 @@
 Promise.all([
     customElements.whenDefined('wa-button')
     , customElements.whenDefined('wa-input')
+    , customElements.whenDefined('wa-select')
+    , customElements.whenDefined('wa-radio')
+    , customElements.whenDefined('wa-checkbox')
     ]).then(() => {
 
   document.querySelector('#pageFacetRangeCluster')?.addEventListener('change', (event) => {
@@ -150,17 +153,6 @@ Promise.all([
     facetStatsChange('Cluster', 'gpuDevicesTotal', false);
   });
 
-  document.querySelector('#pageSelectSortCluster_grafanaUrl')?.addEventListener('change', (event) => {
-    sort('Cluster', 'grafanaUrl', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsCluster_grafanaUrl')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Cluster', 'grafanaUrl', true);
-  });
-  document.querySelector('#pageStatsCluster_grafanaUrl')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Cluster', 'grafanaUrl', false);
-  });
-
   document.querySelector('#pageSelectSortCluster_vmsTotal')?.addEventListener('change', (event) => {
     sort('Cluster', 'vmsTotal', event.currentTarget.value);
   });
@@ -172,15 +164,15 @@ Promise.all([
     facetStatsChange('Cluster', 'vmsTotal', false);
   });
 
-  document.querySelector('#pageSelectSortCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
-    sort('Cluster', 'memoryBytesTotal', event.currentTarget.value);
+  document.querySelector('#pageSelectSortCluster_grafanaUrl')?.addEventListener('change', (event) => {
+    sort('Cluster', 'grafanaUrl', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsCluster_memoryBytesTotal')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Cluster', 'memoryBytesTotal', true);
+  document.querySelector('#pageStatsCluster_grafanaUrl')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'grafanaUrl', true);
   });
-  document.querySelector('#pageStatsCluster_memoryBytesTotal')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Cluster', 'memoryBytesTotal', false);
+  document.querySelector('#pageStatsCluster_grafanaUrl')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'grafanaUrl', false);
   });
 
   document.querySelector('#pageSelectSortCluster_cpuCoresTotal')?.addEventListener('change', (event) => {
@@ -192,6 +184,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsCluster_cpuCoresTotal')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Cluster', 'cpuCoresTotal', false);
+  });
+
+  document.querySelector('#pageSelectSortCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
+    sort('Cluster', 'memoryBytesTotal', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_memoryBytesTotal')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'memoryBytesTotal', true);
+  });
+  document.querySelector('#pageStatsCluster_memoryBytesTotal')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'memoryBytesTotal', false);
   });
 
   document.querySelector('#pageSelectSortCluster_id')?.addEventListener('change', (event) => {
@@ -605,18 +608,6 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapCluster_vmsTotal')?.addEventListener('change', (event) => {
             facetRangeGapChange('Cluster', event.currentTarget);
           });
-          document.querySelector('#fqCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
-          });
-          document.querySelector('#buttonFacetCluster_memoryBytesTotal')?.addEventListener('click', (event) => {
-            facetFieldChange('Cluster', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
-            facetPivotChange('Cluster', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
-            facetRangeGapChange('Cluster', event.currentTarget);
-          });
           document.querySelector('#fqCluster_cpuCoresTotal')?.addEventListener('change', (event) => {
             fqChange('Cluster', event.currentTarget);
           });
@@ -627,6 +618,18 @@ Promise.all([
             facetPivotChange('Cluster', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeGapCluster_cpuCoresTotal')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#fqCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
+            fqChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#buttonFacetCluster_memoryBytesTotal')?.addEventListener('click', (event) => {
+            facetFieldChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
+            facetPivotChange('Cluster', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
             facetRangeGapChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_id')?.addEventListener('change', (event) => {

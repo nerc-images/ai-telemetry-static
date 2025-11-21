@@ -60,6 +60,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -207,6 +210,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartClusterOrderPage %}
+{% include en-us/search/cluster-order/ClusterOrderSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterOrder">back to all OpenShift cluster orders</wa-tooltip></wa-tooltip>
@@ -229,8 +233,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/cluster-order/ClusterOrderSidebar.htm %}
-{%- include en-us/search/cluster-order/ClusterOrderSuggestedSearch.htm %}
+{% include en-us/search/cluster-order/ClusterOrderSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/cluster-order" id="ClusterOrderForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>

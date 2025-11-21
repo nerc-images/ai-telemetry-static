@@ -59,6 +59,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var userId = {% if result.userId is defined %}{{ result.userId | tojson }}{% else %}null{% endif %};
@@ -181,6 +184,7 @@
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleSiteUserPage %}
         <div class="pageContent ">
+{%- include en-us/search/user/SiteUserSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip></wa-tooltip>
@@ -203,7 +207,6 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/user/SiteUserSidebar.htm %}
 {%- include en-us/search/user/SiteUserSuggestedSearch.htm %}
 {% endif %}
 {%- block htmFormSiteUserPage %}

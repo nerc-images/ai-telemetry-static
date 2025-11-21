@@ -59,6 +59,9 @@
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
       ]).then(() => {
 
         var name = {% if result.name is defined %}{{ result.name | tojson }}{% else %}null{% endif %};
@@ -190,6 +193,7 @@
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
 {%- block htmBodyStartBareMetalResourceClassPage %}
+{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalResourceClass">back to all bare metal resource classes</wa-tooltip></wa-tooltip>
@@ -212,8 +216,7 @@
           </div>
         </div>
 {% else %}
-{%- include en-us/search/bare-metal-resource-class/BareMetalResourceClassSidebar.htm %}
-{%- include en-us/search/bare-metal-resource-class/BareMetalResourceClassSuggestedSearch.htm %}
+{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/bare-metal-resource-class" id="BareMetalResourceClassForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
               <input name="focusId" type="hidden"/>
