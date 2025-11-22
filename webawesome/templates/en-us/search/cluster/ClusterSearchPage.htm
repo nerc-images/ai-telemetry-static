@@ -75,6 +75,9 @@
         }
       }
 {%- endblock htmStyleClusterPage %}
+{% block facetRangeGapChangeClusterSuccess -%}
+      alert('stuff');
+{%- endblock facetRangeGapChangeClusterSuccess %}
 {%- block htmScriptInitClusterPage %}
 
       var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;

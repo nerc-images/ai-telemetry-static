@@ -130,6 +130,16 @@
         }
 {%- endblock jsStyleClusterPage %}
       }
+
+      function facetRangeGapChangeClusterSuccess(pageContent) {
+{% block facetRangeGapChangeClusterSuccess %}{%- endblock facetRangeGapChangeClusterSuccess %}
+      }
+      function facetRangeGapChangeClusterError(pageContent) {
+{% block facetRangeGapChangeClusterError %}{%- endblock facetRangeGapChangeClusterError %}
+      }
+      function facetRangeGapChangeCluster(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterSuccess, facetRangeGapChangeClusterError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}

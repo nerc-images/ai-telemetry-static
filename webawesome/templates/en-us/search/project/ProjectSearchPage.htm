@@ -174,7 +174,7 @@
           var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
           var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum' + projectNamesFilter
+              query: (clusterName === undefined ? 'namespace:container_cpu_usage:sum' : 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum') + projectNamesFilter
               }, timeQuery)).toString());
           requestHubIds.push(hubId);
         });

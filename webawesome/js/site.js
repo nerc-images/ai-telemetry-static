@@ -93,7 +93,7 @@ function sort(classSimpleName, sortVar, sortOrder) {
 	searchPage(classSimpleName);
 }
 
-function facetRangeGapChange(classSimpleName, elem) {
+function facetRangeGapChange(classSimpleName, elem, success, error) {
 	var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value;
 	if(facetRangeGapVal) {
 		var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -101,7 +101,7 @@ function facetRangeGapChange(classSimpleName, elem) {
 	} else {
 		document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "";
 	}
-	searchPage(classSimpleName);
+	searchPage(classSimpleName, success, error);
 }
 
 function facetRangeStartChange(classSimpleName, elem) {
