@@ -164,7 +164,7 @@
                 </tr>
                 <tr class="">
                   <td class="" colspan="2">
-                    <span><wa-input type="datetime-local" name="facetRangeStart" id="pageSearchVal-pageFacetRangeStart-Cluster-input" value="{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChange('Cluster', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                    <span><wa-input type="datetime-local" name="facetRangeStart" id="pageSearchVal-pageFacetRangeStart-Cluster-input" value="{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeCluster('Cluster', this, '{{ defaultZoneId }}'); "></wa-input></span>
                   </td>
                 </tr>
                 <tr class="">
@@ -174,7 +174,7 @@
                 </tr>
                 <tr class="">
                   <td class="" colspan="2">
-                    <span><wa-input type="datetime-local" name="facetRangeEnd" id="pageSearchVal-pageFacetRangeEnd-Cluster-input" value="{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeEndChange('Cluster', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                    <span><wa-input type="datetime-local" name="facetRangeEnd" id="pageSearchVal-pageFacetRangeEnd-Cluster-input" value="{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeCluster('Cluster', this, '{{ defaultZoneId }}'); " onchange="facetRangeEndChange('Cluster', this, '{{ defaultZoneId }}'); "></wa-input></span>
                   </td>
                 </tr>
               </table>

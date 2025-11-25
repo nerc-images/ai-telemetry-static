@@ -75,56 +75,72 @@
         }
       }
 {%- endblock htmStyleClusterPage %}
-{% block facetRangeGapChangeClusterSuccess -%}
-      alert('stuff');
-{%- endblock facetRangeGapChangeClusterSuccess %}
+
+{%- block facetRangeGapChangeClusterSuccess %}
+      updateDashboards();
+{% endblock facetRangeGapChangeClusterSuccess -%}
+
+{%- block facetRangeStartChangeClusterSuccess %}
+      updateDashboards();
+{% endblock facetRangeStartChangeClusterSuccess -%}
+
+{-% block facetRangeEndChangeClusterSuccess %}
+      updateDashboards();
+{% endblock facetRangeEndChangeClusterSuccess -%}
+
 {%- block htmScriptInitClusterPage %}
 
-      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
-      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var step;
-      switch (facetRangeGapVal) {
-        case "+1YEAR":
-          step = "1y";
-          break;
-        case "+1MONTH":
-          step = "1M";
-          break;
-        case "+1DAY":
-          step = "1d";
-          break;
-        case "+1HOUR":
-          step = "1h";
-          break;
-        case "+1MINUTE":
-          step = "1m";
-          break;
-        default:
-          step = "7d";
-      }
-
-      var timeQuery = {
-        start: start
-        , end: end
-        , step: step
-      };
-
-      Promise.all([
-          queryMemoryBytesTotal(timeQuery)
-          , queryCpuBytesTotal(timeQuery)
-          , queryGpuNodesTotal(timeQuery)
-          , queryGpuDevicesTotal(timeQuery)
-          , queryGpuDevicesByCluster(timeQuery)
-          , queryGpuDevicesByNode(timeQuery)
-          , queryGpuNodesNotReady(timeQuery)
-          , queryGpuNodesWithoutTaint(timeQuery)
-          , queryGpuUtilization(timeQuery)
-          ]);
+      updateDashboards();
 {%- endblock htmScriptInitClusterPage %}
 {%- block htmScriptsClusterPage %}
 {{ super() }}
     <script>
+
+      function updateDashboards() {
+        var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
+        var start = document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value;
+        var end = document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value;
+        start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+        end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+        var step;
+        switch (facetRangeGapVal) {
+          case "+1YEAR":
+            step = "1y";
+            break;
+          case "+1MONTH":
+            step = "1M";
+            break;
+          case "+1DAY":
+            step = "1d";
+            break;
+          case "+1HOUR":
+            step = "1h";
+            break;
+          case "+1MINUTE":
+            step = "1m";
+            break;
+          default:
+            step = "7d";
+        }
+
+        var timeQuery = {
+          start: start
+          , end: end
+          , step: step
+        };
+
+        Promise.all([
+            queryMemoryBytesTotal(timeQuery)
+            , queryCpuBytesTotal(timeQuery)
+            , queryGpuNodesTotal(timeQuery)
+            , queryGpuDevicesTotal(timeQuery)
+            , queryGpuDevicesByCluster(timeQuery)
+            , queryGpuDevicesByNode(timeQuery)
+            , queryGpuNodesNotReady(timeQuery)
+            , queryGpuNodesWithoutTaint(timeQuery)
+            , queryGpuUtilization(timeQuery)
+            ]);
+      }
 
       async function queryMemoryBytesTotal(timeQuery) {
         const urls = [];

@@ -104,26 +104,28 @@ function facetRangeGapChange(classSimpleName, elem, success, error) {
 	searchPage(classSimpleName, success, error);
 }
 
-function facetRangeStartChange(classSimpleName, elem) {
-	var facetRangeStartVal = document.querySelector("input[name='pageFacetRange']:checked").value;
+function facetRangeStartChange(classSimpleName, elem, success, error) {
+	var $facetRangeStart = document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input");
+	var facetRangeStartVal = $facetRangeStart.value;
 	if(facetRangeStartVal) {
 		var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(document.querySelector("#pageFacetRangeStart-" + classSimpleName).value + ":00.000[" + timeZone + "]");
+		document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
 	} else {
 		document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "";
 	}
-	searchPage(classSimpleName);
+	searchPage(classSimpleName, success, error);
 }
 
-function facetRangeEndChange(classSimpleName, elem) {
-	var facetRangeEndVal = document.querySelector("input[name='pageFacetRange']:checked").value;
+function facetRangeEndChange(classSimpleName, elem, success, error) {
+	var $facetRangeEnd = document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input");
+	var facetRangeEndVal = $facetRangeEnd.value;
 	if(facetRangeEndVal) {
 		var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(document.querySelector("#pageFacetRangeEnd-" + classSimpleName).value + ":00.000[" + timeZone + "]");
+		document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
 	} else {
 		document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "";
 	}
-	searchPage(classSimpleName);
+	searchPage(classSimpleName, success, error);
 }
 
 function facetRangeChange(classSimpleName, facetRangeVal) {
