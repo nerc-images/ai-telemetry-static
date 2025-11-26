@@ -106,7 +106,7 @@
         var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
         uniqueClusterNames.forEach((clusterName, i) => {
           var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ cluster="' + clusterName + '", namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
               query: 'namespace:container_memory_usage_bytes:sum' + projectNamesFilter
               }, timeQuery)).toString());
@@ -172,9 +172,9 @@
         var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
         uniqueClusterNames.forEach((clusterName, i) => {
           var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ cluster="' + clusterName + '", namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum' + projectNamesFilter
+              query: (clusterName === undefined ? 'namespace:container_cpu_usage:sum' : 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum') + projectNamesFilter
               }, timeQuery)).toString());
           requestHubIds.push(hubId);
         });
@@ -238,8 +238,8 @@
         var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
         uniqueClusterNames.forEach((clusterName, i) => {
           var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ cluster="' + clusterName + '", namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          var projectNamesQuotaFilter = '{ resource="limits.memory", type="hard", cluster="' + clusterName + '", namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesQuotaFilter = '{ resource="limits.memory", type="hard", ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
               query: 'namespace:container_memory_usage_bytes:sum' + projectNamesFilter + ' / on(cluster, namespace) kube_resourcequota' + projectNamesQuotaFilter
               }, timeQuery)).toString());
@@ -309,8 +309,8 @@
         var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
         uniqueClusterNames.forEach((clusterName, i) => {
           var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ cluster="' + clusterName + '", namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          var projectNamesQuotaFilter = '{ resource="limits.cpu", type="hard", cluster="' + clusterName + '", namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesQuotaFilter = '{ resource="limits.cpu", type="hard", ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
               query: 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum' + projectNamesFilter + ' / on(cluster, namespace) kube_resourcequota' + projectNamesQuotaFilter
               }, timeQuery)).toString());
@@ -380,7 +380,7 @@
         var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
         uniqueClusterNames.forEach((clusterName, i) => {
           var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ cluster="' + clusterName + '", exported_namespace=~"' + uniqueProjectNames.join('|') + '" }';
+          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'exported_namespace=~"' + uniqueProjectNames.join('|') + '" }';
           urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
               query: 'sum by (cluster, exported_namespace) (DCGM_FI_DEV_GPU_UTIL' + projectNamesFilter + ' / 100)'
               }, timeQuery)).toString());

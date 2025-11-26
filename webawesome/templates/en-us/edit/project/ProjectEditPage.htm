@@ -143,8 +143,9 @@
       const urls = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var projectNamesFilter = '{% if result.clusterName is defined %}cluster="{{ result.clusterName | e }}, {% else %}{% endif %}namespace="{{ result.projectName }}"';
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"} / on(cluster) namespace_cpu:kube_pod_container_resource_requests:sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}",label_node_role_kubernetes_io!="master"}' 
+            query: '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '{% if result.clusterName is defined %}, label_node_role_kubernetes_io!="master"{% endif %} }'
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));

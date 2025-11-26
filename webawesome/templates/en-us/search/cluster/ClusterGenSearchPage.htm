@@ -130,6 +130,36 @@
         }
 {%- endblock jsStyleClusterPage %}
       }
+
+      function facetRangeGapChangeClusterSuccess(pageContent) {
+{% block facetRangeGapChangeClusterSuccess %}{%- endblock facetRangeGapChangeClusterSuccess %}
+      }
+      function facetRangeGapChangeClusterError(pageContent) {
+{% block facetRangeGapChangeClusterError %}{%- endblock facetRangeGapChangeClusterError %}
+      }
+      function facetRangeGapChangeCluster(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterSuccess, facetRangeGapChangeClusterError);
+      }
+
+      function facetRangeStartChangeClusterSuccess(pageContent) {
+{% block facetRangeStartChangeClusterSuccess %}{%- endblock facetRangeStartChangeClusterSuccess %}
+      }
+      function facetRangeStartChangeClusterError(pageContent) {
+{% block facetRangeStartChangeClusterError %}{%- endblock facetRangeStartChangeClusterError %}
+      }
+      function facetRangeStartChangeCluster(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterSuccess, facetRangeStartChangeClusterError);
+      }
+
+      function facetRangeEndChangeClusterSuccess(pageContent) {
+{% block facetRangeEndChangeClusterSuccess %}{%- endblock facetRangeEndChangeClusterSuccess %}
+      }
+      function facetRangeEndChangeClusterError(pageContent) {
+{% block facetRangeEndChangeClusterError %}{%- endblock facetRangeEndChangeClusterError %}
+      }
+      function facetRangeEndChangeCluster(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterSuccess, facetRangeEndChangeClusterError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}

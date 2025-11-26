@@ -1,50 +1,50 @@
-        <div class="htmBodySidebarClusterPage ">
-{%- block htmBodySidebarClusterPage %}
+        <div class="htmBodySidebarTimeZonePage ">
+{%- block htmBodySidebarTimeZonePage %}
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSearch">
             <div slot="label">
               <i class="{{ FONTAWESOME_STYLE }} fa-magnifying-glass "></i>
               search
             </div>
             <div>
-              {%- block htmBodySearchClusterPage %}
+              {%- block htmBodySearchTimeZonePage %}
               <div>
                 {% for key, value in varsQ.items() %}
                 <div>
                   <div>
-                    <label for="qCluster_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
+                    <label for="qTimeZone_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <wa-input id="qCluster_{{ key }}" placeholder="{{ displayName }}" data-var="{{ key }}" autocomplete="off="></wa-input>
-                    <div id="qClusterDiv_{{ key }}" class="pageSearchVal "></div>
+                    <wa-input id="qTimeZone_{{ key }}" placeholder="{{ displayName }}" data-var="{{ key }}" autocomplete="off="></wa-input>
+                    <div id="qTimeZoneDiv_{{ key }}" class="pageSearchVal "></div>
                   </div>
                 </div>
                 {% endfor %}
                 <div>
                   <div>
-                    <label for="qCluster_Start">start<sup> (Long)</sup></label>
+                    <label for="qTimeZone_Start">start<sup> (Long)</sup></label>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <wa-input id="qCluster_start" placeholder="{{ displayName }}" class="" data-var="start" autocomplete="off=" value="{{ start }}"></wa-input>
-                    <div id="qClusterDiv_start" class="pageSearchVal ">start={{ start }}</div>
+                    <wa-input id="qTimeZone_start" placeholder="{{ displayName }}" class="" data-var="start" autocomplete="off=" value="{{ start }}"></wa-input>
+                    <div id="qTimeZoneDiv_start" class="pageSearchVal ">start={{ start }}</div>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label for="qCluster_Rows">rows<sup> (Long)</sup></label>
+                    <label for="qTimeZone_Rows">rows<sup> (Long)</sup></label>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <wa-input id="qCluster_rows" placeholder="{{ displayName }}" class="" data-var="rows" autocomplete="off" value="{{ rows }}"></wa-input>
-                    <div id="qClusterDiv_rows" class="pageSearchVal ">rows={{ rows }}</div>
+                    <wa-input id="qTimeZone_rows" placeholder="{{ displayName }}" class="" data-var="rows" autocomplete="off" value="{{ rows }}"></wa-input>
+                    <div id="qTimeZoneDiv_rows" class="pageSearchVal ">rows={{ rows }}</div>
                   </div>
                 </div>
               </div>
-              {%- endblock htmBodySearchClusterPage %}
+              {%- endblock htmBodySearchTimeZonePage %}
             </div>
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFilters">
@@ -53,26 +53,26 @@
               <i class="{{ FONTAWESOME_STYLE }} fa-filters "></i> filters</span>
             </div>
             <div>
-              {%- block htmBodyFiltersClusterPage %}
+              {%- block htmBodyFiltersTimeZonePage %}
               <div class="flex flex-column gap-l ">
                 {% for key, value in varsFq.items() %}
                 <div>
                   <div>
-                    <label for="fqCluster_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
-                    <wa-tooltip for="buttonFacetCluster_{{ key }}">see values</wa-tooltip>
+                    <label for="fqTimeZone_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
+                    <wa-tooltip for="buttonFacetTimeZone_{{ key }}">see values</wa-tooltip>
                     <div class="flex round-column pill-smart-border-radius ">
-                      <wa-button variant="brand" id="buttonFacetCluster_{{ key }}" data-var="{{ value.var }}" data-clear="{% if value.facetField is defined %}true{% else %}false{% endif %}"><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-list "></i></wa-button>
-                      <wa-input id="fqCluster_{{ key }}" placeholder="{{ value.displayName }}" class="" onchange="fqChange('Cluster', this); " data-var="{{ value.var }}" autocomplete="off=" value="{{ value.val }}"></wa-input>
+                      <wa-button variant="brand" id="buttonFacetTimeZone_{{ key }}" data-var="{{ value.var }}" data-clear="{% if value.facetField is defined %}true{% else %}false{% endif %}"><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-list "></i></wa-button>
+                      <wa-input id="fqTimeZone_{{ key }}" placeholder="{{ value.displayName }}" class="" onchange="fqChange('TimeZone', this); " data-var="{{ value.var }}" autocomplete="off=" value="{{ value.val }}"></wa-input>
                     </div>
-                    <div class="pageSearchVal " id="pageSearchVal-fqCluster_{{ key }}">{% if value.val is defined %}fq={{ value.var }}:{{ value.val | urlencode() }}{% endif %}</div>
-                    <div class="pageSearchVal " id="pageSearchVal-buttonFacetCluster_{{ key }}">{% if value.facetField.var is defined %}facet.field={{ value.facetField.var }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-fqTimeZone_{{ key }}">{% if value.val is defined %}fq={{ value.var }}:{{ value.val | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-buttonFacetTimeZone_{{ key }}">{% if value.facetField.var is defined %}facet.field={{ value.facetField.var }}{% endif %}</div>
                   </div>
                   <div>
-                    <div class="pageFacetField pageFacetFieldCluster_{{ key }} " id="pageFacetFieldCluster_{{ key }}">
+                    <div class="pageFacetField pageFacetFieldTimeZone_{{ key }} " id="pageFacetFieldTimeZone_{{ key }}">
                       {% for facetFieldKey, facetFieldValue in value.facetField.counts.items() %}
                       <div>
-                        <wa-tooltip content="{{ facetFieldValue | e }} OpenShift cluster total with {{ value.facetField.var | e }} &quot;{{ facetFieldKey | e }}&quot;"></wa-tooltip>
-                        <div class="cursor-pointer raised-item " data-class="Cluster" data-var="{{ value.facetField.var }}" data-val="{{ facetFieldKey }}" onclick="if(document.querySelector('#fqCluster_{{ key }}')?.value === '{{ facetFieldKey }}') this.setAttribute('data-val', ''); fqReplace('Cluster', this); ">{{ facetFieldValue }}: {{ facetFieldKey }}</div>
+                        <wa-tooltip content="{{ facetFieldValue | e }} time zone total with {{ value.facetField.var | e }} &quot;{{ facetFieldKey | e }}&quot;"></wa-tooltip>
+                        <div class="cursor-pointer raised-item " data-class="TimeZone" data-var="{{ value.facetField.var }}" data-val="{{ facetFieldKey }}" onclick="if(document.querySelector('#fqTimeZone_{{ key }}')?.value === '{{ facetFieldKey }}') this.setAttribute('data-val', ''); fqReplace('TimeZone', this); ">{{ facetFieldValue }}: {{ facetFieldKey }}</div>
                       </div>
                       {% endfor %}
                     </div>
@@ -80,7 +80,7 @@
                 </div>
                 {% endfor %}
               </div>
-              {%- endblock htmBodyFiltersClusterPage %}
+              {%- endblock htmBodyFiltersTimeZonePage %}
             </div>
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSort">
@@ -89,11 +89,11 @@
               sort
             </div>
             <div>
-              {%- block htmBodySortClusterPage %}
-              <div id="pageSearchVal-pageSort-Cluster">
+              {%- block htmBodySortTimeZonePage %}
+              <div id="pageSearchVal-pageSort-TimeZone">
               {% for key, value in varsFq.items() %}
               {% if defaultSortVars is defined and ((key + ' asc') in defaultSortVars or (key + ' desc') in defaultSortVars) %}
-                  <div class="pageSearchVal pageSearchVal-pageSort-Cluster pageSearchVal-pageSort-Cluster-{{ key }} " id="pageSearchVal-pageSort-Cluster-{{ key }}">{% if defaultSortVars is defined and (key + ' asc') in defaultSortVars %}sort={{ key }} asc{% else %}{% if defaultSortVars is defined and (key + ' desc') in defaultSortVars %}sort={{ key }} desc{% endif %}{% endif %}</div>
+                  <div class="pageSearchVal pageSearchVal-pageSort-TimeZone pageSearchVal-pageSort-TimeZone-{{ key }} " id="pageSearchVal-pageSort-TimeZone-{{ key }}">{% if defaultSortVars is defined and (key + ' asc') in defaultSortVars %}sort={{ key }} asc{% else %}{% if defaultSortVars is defined and (key + ' desc') in defaultSortVars %}sort={{ key }} desc{% endif %}{% endif %}</div>
               {% endif %}
               {% endfor %}
               </div>
@@ -102,14 +102,14 @@
                 <wa-details
                     summary="{{ value.displayName | e }}"
                     class="pageDetailsSort "
-                    id="pageDetailsSortCluster_{{ key }}"
+                    id="pageDetailsSortTimeZone_{{ key }}"
                         data-value="{{ value.var | e }}"
                         {% if value.sort is defined %}open{% endif %}
                     >
                   <wa-select with-clear
                       orientation="horizontal"
                       class="pageSelectSort "
-                      id="pageSelectSortCluster_{{ key }}"
+                      id="pageSelectSortTimeZone_{{ key }}"
                       {% if value.sort is defined %}value="{{ value.sort | e }}"{% endif %}
                       label={{ value.displayName | tojson }}
                       size="small"
@@ -120,7 +120,7 @@
                 </wa-details>
                 {% endfor %}
               </div>
-              {%- endblock htmBodySortClusterPage %}
+              {%- endblock htmBodySortTimeZonePage %}
             </div>
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleRange">
@@ -129,14 +129,14 @@
               <i class="{{ FONTAWESOME_STYLE }} fa-calendar-range "></i> range</span>
             </div>
             <div>
-              {%- block htmBodyRangeClusterPage %}
+              {%- block htmBodyRangeTimeZonePage %}
               <table>
                 <tr>
                   <td colspan="2">
-                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-Cluster">{% if rangeGap is defined %}facet.range.gap={{ rangeGap | urlencode() }}{% endif %}</div>
-                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-Cluster">{% if rangeStart is defined %}facet.range.start={{ rangeStart | urlencode() }}{% endif %}</div>
-                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-Cluster">{% if rangeEnd is defined %}facet.range.end={{ rangeEnd | urlencode() }}{% endif %}</div>
-                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-Cluster">{% if defaultRangeVar is defined %}facet.range={!tag=r1}{{ defaultRangeVar | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-TimeZone">{% if rangeGap is defined %}facet.range.gap={{ rangeGap | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-TimeZone">{% if rangeStart is defined %}facet.range.start={{ rangeStart | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-TimeZone">{% if rangeEnd is defined %}facet.range.end={{ rangeEnd | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-TimeZone">{% if defaultRangeVar is defined %}facet.range={!tag=r1}{{ defaultRangeVar | urlencode() }}{% endif %}</div>
                   </td>
                 </tr>
               </table>
@@ -146,7 +146,7 @@
                     <span>Range Gap</span>
                   </td>
                   <td class="">
-                    <wa-select name="facet.range.gap" id="pageSearchVal-pageFacetRangeGap-Cluster-input" onchange="facetRangeGapChangeCluster('Cluster', this); ">
+                    <wa-select name="facet.range.gap" id="pageSearchVal-pageFacetRangeGap-TimeZone-input" onchange="facetRangeGapChangeTimeZone('TimeZone', this); ">
                       <wa-option value="+1YEAR"{% if defaultRangeGap == '+1YEAR' %} selected="selected"{% else %}{% endif %}>Year</wa-option>
                       <wa-option value="+1MONTH"{% if defaultRangeGap == '+1MONTH' %} selected="selected"{% else %}{% endif %}>Month</wa-option>
                       <wa-option value="+1WEEK"{% if defaultRangeGap == '+1WEEK' %} selected="selected"{% else %}{% endif %}>Week</wa-option>
@@ -164,7 +164,7 @@
                 </tr>
                 <tr class="">
                   <td class="" colspan="2">
-                    <span><wa-input type="datetime-local" name="facetRangeStart" id="pageSearchVal-pageFacetRangeStart-Cluster-input" value="{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeCluster('Cluster', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                    <span><wa-input type="datetime-local" name="facetRangeStart" id="pageSearchVal-pageFacetRangeStart-TimeZone-input" value="{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeTimeZone('TimeZone', this, '{{ defaultZoneId }}'); "></wa-input></span>
                   </td>
                 </tr>
                 <tr class="">
@@ -174,15 +174,15 @@
                 </tr>
                 <tr class="">
                   <td class="" colspan="2">
-                    <span><wa-input type="datetime-local" name="facetRangeEnd" id="pageSearchVal-pageFacetRangeEnd-Cluster-input" value="{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeCluster('Cluster', this, '{{ defaultZoneId }}'); " onchange="facetRangeEndChange('Cluster', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                    <span><wa-input type="datetime-local" name="facetRangeEnd" id="pageSearchVal-pageFacetRangeEnd-TimeZone-input" value="{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeEndChangeTimeZone('TimeZone', this, '{{ defaultZoneId }}'); "></wa-input></span>
                   </td>
                 </tr>
               </table>
-              <wa-radio-group id="pageFacetRangeCluster">                {% for key, value in varsRange.items() %}
-                <wa-radio name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeCluster_{{ key }}" value="{{ value.var }}"{% if defaultRangeVar == var %} checked="checked"{% endif %}>{{ value.displayName }}</wa-radio>
+              <wa-radio-group id="pageFacetRangeTimeZone">                {% for key, value in varsRange.items() %}
+                <wa-radio name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeTimeZone_{{ key }}" value="{{ value.var }}"{% if defaultRangeVar == var %} checked="checked"{% endif %}>{{ value.displayName }}</wa-radio>
                 {% endfor %}
               </wa-radio-group>
-              {%- endblock htmBodyRangeClusterPage %}
+              {%- endblock htmBodyRangeTimeZonePage %}
             </div>
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarTogglePivot">
@@ -191,23 +191,23 @@
               <i class="{{ FONTAWESOME_STYLE }} fa-table-pivot "></i> pivot</span>
             </div>
             <div>
-              {%- block htmBodyPivotClusterPage %}
-              <div style="display: none; " id="pageSearchVal-PivotClusterHidden">
+              {%- block htmBodyPivotTimeZonePage %}
+              <div style="display: none; " id="pageSearchVal-PivotTimeZoneHidden">
                 {% for item in defaultPivotVars %}
-                  <div class="pageSearchVal-PivotClusterHidden " id="pageSearchVal-PivotClusterHidden_{{ item }}">{{ item }}</div>
+                  <div class="pageSearchVal-PivotTimeZoneHidden " id="pageSearchVal-PivotTimeZoneHidden_{{ item }}">{{ item }}</div>
                 {% endfor %}
               </div>
-              <div id="pageSearchVal-PivotCluster">
+              <div id="pageSearchVal-PivotTimeZone">
                 {% if defaultPivotVars is defined and defaultPivotVars.length > 0 %}
-                  <div class="pageSearchVal pageSearchVal-PivotCluster " id="pageSearchVal-PivotCluster_1">facet.pivot={!range=r1}{% for item in defaultPivotVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
+                  <div class="pageSearchVal pageSearchVal-PivotTimeZone " id="pageSearchVal-PivotTimeZone_1">facet.pivot={!range=r1}{% for item in defaultPivotVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
                 {% endif %}
               </div>
               {% for key, value in varsFq.items() %}
               <div>
-                <wa-checkbox name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotCluster_{{ key }}" value="{{ value.var }}"{% if pivot is defined %} checked="checked"{% endif %}>{{ value.displayName }}</wa-checkbox>
+                <wa-checkbox name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotTimeZone_{{ key }}" value="{{ value.var }}"{% if pivot is defined %} checked="checked"{% endif %}>{{ value.displayName }}</wa-checkbox>
               </div>
               {% endfor %}
-              {%- endblock htmBodyPivotClusterPage %}
+              {%- endblock htmBodyPivotTimeZonePage %}
             </div>
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFieldList">
@@ -216,25 +216,25 @@
               <i class="{{ FONTAWESOME_STYLE }} fa-list-ul "></i> field list</span>
             </div>
             <div>
-{%- block htmBodyFieldListClusterPage %}
-              <div style="display: none; " id="pageSearchVal-FieldListClusterHidden">
+{%- block htmBodyFieldListTimeZonePage %}
+              <div style="display: none; " id="pageSearchVal-FieldListTimeZoneHidden">
                 {% for item in defaultFieldListVars %}
-                  <div class="pageSearchVal-FieldListClusterHidden " id="pageSearchVal-FieldListClusterHidden_{{ item }}">{{ item }}</div>
+                  <div class="pageSearchVal-FieldListTimeZoneHidden " id="pageSearchVal-FieldListTimeZoneHidden_{{ item }}">{{ item }}</div>
                 {% endfor %}
               </div>
               {% if defaultFieldListVars is defined and defaultFieldListVars.length > 0 %}
-              <div id="pageSearchVal-FieldListCluster">
+              <div id="pageSearchVal-FieldListTimeZone">
                 {% if defaultFieldListVars is defined %}
-                  <div class="pageSearchVal pageSearchVal-FieldListCluster " id="pageSearchVal-FieldListCluster_1">fl={% for item in defaultFieldListVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
+                  <div class="pageSearchVal pageSearchVal-FieldListTimeZone " id="pageSearchVal-FieldListTimeZone_1">fl={% for item in defaultFieldListVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
                 {% endif %}
               </div>
               {% endif %}
               {% for key, value in varsFq.items() %}
               <div>
-                <wa-checkbox name="pageFieldList" class="pageFieldList " id="pageFieldListCluster_{{ key }}" value="{{ value.var }}"{% if fieldList is defined %} checked="checked"{% endif %} onclick="facetFieldListChange('Cluster', value); ">{{ value.displayName }}</wa-checkbox>
+                <wa-checkbox name="pageFieldList" class="pageFieldList " id="pageFieldListTimeZone_{{ key }}" value="{{ value.var }}"{% if fieldList is defined %} checked="checked"{% endif %} onclick="facetFieldListChange('TimeZone', value); ">{{ value.displayName }}</wa-checkbox>
               </div>
                 {% endfor %}
-{%- endblock htmBodyFieldListClusterPage %}
+{%- endblock htmBodyFieldListTimeZonePage %}
             </div>
           </wa-drawer>
           <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleStats">
@@ -243,16 +243,16 @@
               stats
             </div>
             <div>
-{%- block htmBodyStatsClusterPage %}
-              <div style="display: none; " id="pageSearchVal-StatsClusterHidden">
+{%- block htmBodyStatsTimeZonePage %}
+              <div style="display: none; " id="pageSearchVal-StatsTimeZoneHidden">
                 {% for item in defaultStatsVars %}
-                  <div class="pageSearchVal-StatsClusterHidden " id="pageSearchVal-StatsClusterHidden_{{ item }}">{{ item }}</div>
+                  <div class="pageSearchVal-StatsTimeZoneHidden " id="pageSearchVal-StatsTimeZoneHidden_{{ item }}">{{ item }}</div>
                 {% endfor %}
               </div>
-              <div id="pageSearchVal-StatsCluster">
+              <div id="pageSearchVal-StatsTimeZone">
                 {% if defaultStatsVars is defined %}
                   {% for item in defaultStatsVars %}
-                    <div class="pageSearchVal pageSearchVal-StatsCluster_{{ item }} " id="pageSearchVal-StatsCluster_{{ item }}">stats.field={{ item }}                    </div>
+                    <div class="pageSearchVal pageSearchVal-StatsTimeZone_{{ item }} " id="pageSearchVal-StatsTimeZone_{{ item }}">stats.field={{ item }}                    </div>
                   {% endfor %}
                 {% endif %}
               </div>
@@ -262,17 +262,17 @@
                     <wa-details
                         summary="{{ value.displayName | e }}"
                         class="pageStats "
-                        id="pageStatsCluster_{{ key }}"
+                        id="pageStatsTimeZone_{{ key }}"
                         data-value="{{ value.var | e }}"
                         {% if value.stats is defined %}open{% endif %}
                         >
-                      <div class="wa-stack pageStatsField pageStatsFieldCluster_{{ key }} " id="pageStatsFieldCluster_{{ key }}">
+                      <div class="wa-stack pageStatsField pageStatsFieldTimeZone_{{ key }} " id="pageStatsFieldTimeZone_{{ key }}">
                         {% if value.stats is defined %}
                           {% for itemKey, itemValue in value.stats.items() %}
                             {% if itemKey == 'name' %}{% else %}
                               <div
                                    class="wa-split "
-                                   data-class="Cluster"
+                                   data-class="TimeZone"
                                    data-var="{{ itemKey }}"
                                    data-val="{{ itemValue }}"
                                   >
@@ -287,8 +287,8 @@
                   {% endif %}
                 {% endfor %}
               </div>
-{%- endblock htmBodyStatsClusterPage %}
+{%- endblock htmBodyStatsTimeZonePage %}
             </div>
           </wa-drawer>
-{%- endblock htmBodySidebarClusterPage %}
+{%- endblock htmBodySidebarTimeZonePage %}
         </div>
