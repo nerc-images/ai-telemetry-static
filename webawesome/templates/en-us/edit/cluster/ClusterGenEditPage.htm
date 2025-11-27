@@ -131,6 +131,26 @@
 {%- endblock jsStyleClusterPage %}
       }
 
+      function facetSimpleRangeClusterSuccess(pageContent) {
+{% block facetSimpleRangeClusterSuccess %}{%- endblock facetSimpleRangeClusterSuccess %}
+      }
+      function facetSimpleRangeClusterError(pageContent) {
+{% block facetSimpleRangeClusterError %}{%- endblock facetSimpleRangeClusterError %}
+      }
+      function facetSimpleRangeCluster(e) {
+        facetSimpleRange(e, facetSimpleRangeClusterSuccess, facetSimpleRangeClusterError);
+      }
+
+      function facetRangeTimeZoneClusterSuccess(pageContent) {
+{% block facetRangeTimeZoneClusterSuccess %}{%- endblock facetRangeTimeZoneClusterSuccess %}
+      }
+      function facetRangeTimeZoneClusterError(pageContent) {
+{% block facetRangeTimeZoneClusterError %}{%- endblock facetRangeTimeZoneClusterError %}
+      }
+      function facetRangeTimeZoneCluster(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneClusterSuccess, facetRangeTimeZoneClusterError);
+      }
+
       function facetRangeGapChangeClusterSuccess(pageContent) {
 {% block facetRangeGapChangeClusterSuccess %}{%- endblock facetRangeGapChangeClusterSuccess %}
       }
@@ -231,6 +251,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneCluster);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneCluster);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneCluster);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeCluster);
         pageGraphCluster();
         {% for key, value in varsQ.items() %}
 

@@ -11,7 +11,7 @@ footer > a > wa-card {
   width: 100%;
   text-align: center;
 }
-#siteSearchDropdownMenu {
+#siteSearchDropdownMenu, #pageFacetRangeTimeZoneList {
   background-color: var(--wa-color-surface-default);
 }
 .display-flex-center {
