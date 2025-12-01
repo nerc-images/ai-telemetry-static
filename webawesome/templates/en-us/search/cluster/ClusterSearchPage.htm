@@ -76,6 +76,14 @@
       }
 {%- endblock htmStyleClusterPage %}
 
+{%- block facetSimpleRangeClusterSuccess %}
+      updateDashboards();
+{% endblock facetSimpleRangeClusterSuccess -%}
+
+{%- block facetRangeTimeZoneClusterSuccess %}
+      updateDashboards();
+{% endblock facetRangeTimeZoneClusterSuccess -%}
+
 {%- block facetRangeGapChangeClusterSuccess %}
       updateDashboards();
 {% endblock facetRangeGapChangeClusterSuccess -%}
@@ -98,10 +106,11 @@
 
       function updateDashboards() {
         var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
-        var start = document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value;
-        var end = document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value;
-        start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-        end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+        var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value;
+        var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value;
+        var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+        var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+        var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
         var step;
         switch (facetRangeGapVal) {
           case "+1YEAR":
