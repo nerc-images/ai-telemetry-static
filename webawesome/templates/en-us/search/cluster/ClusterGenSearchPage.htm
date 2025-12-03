@@ -343,6 +343,20 @@
 {%- endblock websocketPageLayout %}
 
 {%- block htmUrlClusterPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlClusterPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-Cluster">back to all OpenShift clusters</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-Cluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-server"></i>
+                  all OpenShift clusters
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search OpenShift clusters
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
@@ -381,21 +395,19 @@
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-Cluster">back to all OpenShift clusters</wa-tooltip>
-              <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-Cluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-server"></i>
-                  all OpenShift clusters
-                </wa-breadcrumb-item>
-                <wa-breadcrumb-item>
-                  search OpenShift clusters
-                </wa-breadcrumb-item>
-              </wa-breadcrumb>
-{% include en-us/search/cluster/ClusterSearchForm.htm %}
-{% include en-us/search/cluster/ClusterSearchButtons.htm %}
 {% endif %}
 {%- endblock htmBodyStartClusterPage %}
 {%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/cluster/ClusterSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchForm is not defined %}
+{%- set pageSearchForm %}
+{% include en-us/search/cluster/ClusterSearchForm.htm %}
+{%- endset pageSearchForm %}
+{%- endif %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterPage %}

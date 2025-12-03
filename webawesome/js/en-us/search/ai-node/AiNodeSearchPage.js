@@ -468,6 +468,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_created')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_created')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_created')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_archived')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -479,6 +485,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_archived')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_archived')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_archived')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_hubId')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -492,6 +504,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_hubId')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_hubId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_hubId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_clusterName')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -503,6 +521,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_clusterName')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_clusterName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_clusterName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_nodeName')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -516,6 +540,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_nodeName')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_nodeName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_nodeName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_id')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -527,6 +557,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_id')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_id')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_id')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_gpuDevicesTotal')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -540,6 +576,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_gpuDevicesTotal')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_gpuDevicesTotal')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_gpuDevicesTotal')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_ngsildTenant')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -551,6 +593,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_ngsildTenant')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_ngsildTenant')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_ngsildTenant')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_ngsildPath')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -564,6 +612,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_ngsildPath')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_ngsildPath')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_ngsildPath')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_ngsildContext')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -575,6 +629,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_ngsildContext')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_ngsildContext')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_ngsildContext')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_ngsildData')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -588,6 +648,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_ngsildData')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_ngsildData')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_ngsildData')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_location')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -599,6 +665,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_location')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_location')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_location')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_displayPage')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -612,6 +684,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_displayPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_displayPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_editPage')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -623,6 +701,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_editPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_editPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_editPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_userPage')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
@@ -636,6 +720,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_userPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_userPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_userPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_download')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -648,6 +738,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapAiNode_download')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartAiNode_download')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
+          });
           document.querySelector('#fqAiNode_nodeResource')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget);
           });
@@ -659,5 +755,11 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapAiNode_nodeResource')?.addEventListener('change', (event) => {
             facetRangeGapChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAiNode_nodeResource')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AiNode', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAiNode_nodeResource')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AiNode', event.currentTarget);
           });
 });

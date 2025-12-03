@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipTimeZonePage %}`;
       }
+
+      function facetSimpleRangeTimeZoneSuccess(pageContent) {
+{% block facetSimpleRangeTimeZoneSuccess %}{%- endblock facetSimpleRangeTimeZoneSuccess %}
+      }
+      function facetSimpleRangeTimeZoneError(pageContent) {
+{% block facetSimpleRangeTimeZoneError %}{%- endblock facetSimpleRangeTimeZoneError %}
+      }
+      function facetSimpleRangeTimeZone(e) {
+        facetSimpleRange(e, facetSimpleRangeTimeZoneSuccess, facetSimpleRangeTimeZoneError);
+      }
+
+      function facetRangeTimeZoneTimeZoneSuccess(pageContent) {
+{% block facetRangeTimeZoneTimeZoneSuccess %}{%- endblock facetRangeTimeZoneTimeZoneSuccess %}
+      }
+      function facetRangeTimeZoneTimeZoneError(pageContent) {
+{% block facetRangeTimeZoneTimeZoneError %}{%- endblock facetRangeTimeZoneTimeZoneError %}
+      }
+      function facetRangeTimeZoneTimeZone(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneTimeZoneSuccess, facetRangeTimeZoneTimeZoneError);
+      }
+
+      function facetRangeGapChangeTimeZoneSuccess(pageContent) {
+{% block facetRangeGapChangeTimeZoneSuccess %}{%- endblock facetRangeGapChangeTimeZoneSuccess %}
+      }
+      function facetRangeGapChangeTimeZoneError(pageContent) {
+{% block facetRangeGapChangeTimeZoneError %}{%- endblock facetRangeGapChangeTimeZoneError %}
+      }
+      function facetRangeGapChangeTimeZone(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTimeZoneSuccess, facetRangeGapChangeTimeZoneError);
+      }
+
+      function facetRangeStartChangeTimeZoneSuccess(pageContent) {
+{% block facetRangeStartChangeTimeZoneSuccess %}{%- endblock facetRangeStartChangeTimeZoneSuccess %}
+      }
+      function facetRangeStartChangeTimeZoneError(pageContent) {
+{% block facetRangeStartChangeTimeZoneError %}{%- endblock facetRangeStartChangeTimeZoneError %}
+      }
+      function facetRangeStartChangeTimeZone(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTimeZoneSuccess, facetRangeStartChangeTimeZoneError);
+      }
+
+      function facetRangeEndChangeTimeZoneSuccess(pageContent) {
+{% block facetRangeEndChangeTimeZoneSuccess %}{%- endblock facetRangeEndChangeTimeZoneSuccess %}
+      }
+      function facetRangeEndChangeTimeZoneError(pageContent) {
+{% block facetRangeEndChangeTimeZoneError %}{%- endblock facetRangeEndChangeTimeZoneError %}
+      }
+      function facetRangeEndChangeTimeZone(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTimeZoneSuccess, facetRangeEndChangeTimeZoneError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTimeZone);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTimeZone);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneTimeZone);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeTimeZone);
         pageGraphTimeZone();
         {% for key, value in varsQ.items() %}
 

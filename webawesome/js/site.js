@@ -95,18 +95,18 @@ function sort(classSimpleName, sortVar, sortOrder) {
 
 function facetSimpleRange(e, success, error) {
   var simpleRangeId = e.detail.item.value;
-  var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
-  var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
   var classSimpleName = e.target.getAttribute('data-classSimpleName');
+  var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value;
+  var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
   if(simpleRangeId.startsWith('last-minutes-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
     var amount = parseInt(match[1]);
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value = start.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value = '+1MINUTE';
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1MINUTE';
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-hours-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -114,9 +114,9 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value = start.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value = '+1HOUR';
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1HOUR';
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-days-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -124,9 +124,9 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value = start.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value = '+1DAY';
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1DAY';
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-weeks-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -134,9 +134,9 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value = start.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value = '+1WEEK';
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1WEEK';
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-month-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -144,9 +144,9 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value = start.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value = '+1MONTH';
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1MONTH';
     searchPage(classSimpleName, success, error);
   }
 }
@@ -154,26 +154,30 @@ function facetSimpleRange(e, success, error) {
 function facetRangeTimeZone(e, success, error) {
   var $list = document.querySelector('#' + e.target.getAttribute('data-list'));
   var $popup = document.querySelector('#' + e.target.getAttribute('data-popup'));
+  var classSimpleName = e.target.getAttribute('data-classSimpleName');
   var timeZone = e.target.value;
   var filters = [ { 'name': 'q', 'value': 'objectSuggest:' + e.target.value }
       , { 'name': 'rows', 'value': '10' }
       , { 'name': 'fl', 'value': 'id,abbreviation,location,name,displayPage,objectTitle' } ];
-  success = function( data, textStatus, jQxhr ) {
+  var success2 = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var dropdownItem = document.createElement('wa-dropdown-item');
-        dropdownItem.innerText = o.objectTitle;
-        dropdownItem.setAttribute('data-href', o.displayPage);
-        $list.appendChild(dropdownItem);
-        dropdownItem.addEventListener('click', (event) => {
-          e.target.value = o.location;
-          $list.innerHTML = '';
-          $popup.active = false;
-          searchPage(classSimpleName, success, error);
+      if(data.list) {
+        data.list.forEach((o, i) => {
+          var dropdownItem = document.createElement('wa-dropdown-item');
+          dropdownItem.innerText = o.objectTitle;
+          dropdownItem.setAttribute('data-href', o.displayPage);
+          $list.appendChild(dropdownItem);
+          dropdownItem.addEventListener('click', (event) => {
+            e.target.value = o.location;
+            $list.innerHTML = '';
+            $popup.active = false;
+            document.querySelector("#pageSearchVal-pageFacetRangeTimeZone-" + classSimpleName).innerText = "var=defaultZoneId:" + encodeURIComponent(document.querySelector("#pageFacetRangeTimeZoneInput").value);
+            searchPage(classSimpleName, success, error);
+          });
         });
-      });
-      $popup.active = true;
+        $popup.active = true;
+      }
     }
   };
   error = function( jqXhr, target2 ) {};
@@ -184,7 +188,7 @@ function facetRangeTimeZone(e, success, error) {
     }).then(response => {
       if(response.ok) {
         response.json().then((json) => {
-          success(json, e.target);
+          success2(json, e.target);
         })
       } else {
         error(response, e.target);
@@ -196,7 +200,6 @@ function facetRangeTimeZone(e, success, error) {
 function facetRangeGapChange(classSimpleName, elem, success, error) {
   var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value;
   if(facetRangeGapVal) {
-    var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "facet.range.gap=" + encodeURIComponent(document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value);
   } else {
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "";

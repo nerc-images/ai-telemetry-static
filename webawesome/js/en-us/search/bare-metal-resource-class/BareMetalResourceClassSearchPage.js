@@ -281,6 +281,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_created')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_created')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_created')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalResourceClass_archived')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
           });
@@ -292,6 +298,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_archived')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_archived')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_archived')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_name')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
@@ -305,6 +317,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_name')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_name')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_name')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalResourceClass_count')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
           });
@@ -316,6 +334,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_count')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_count')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_count')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_displayPage')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
@@ -329,6 +353,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_displayPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_displayPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
           });
@@ -340,6 +370,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
@@ -353,6 +389,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalResourceClass_download')?.addEventListener('change', (event) => {
             fqChange('BareMetalResourceClass', event.currentTarget);
           });
@@ -364,5 +406,11 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalResourceClass_download')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalResourceClass_download')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalResourceClass', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalResourceClass_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
 });

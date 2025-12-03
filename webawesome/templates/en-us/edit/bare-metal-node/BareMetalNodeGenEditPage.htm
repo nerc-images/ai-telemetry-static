@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNodePage %}`;
       }
+
+      function facetSimpleRangeBareMetalNodeSuccess(pageContent) {
+{% block facetSimpleRangeBareMetalNodeSuccess %}{%- endblock facetSimpleRangeBareMetalNodeSuccess %}
+      }
+      function facetSimpleRangeBareMetalNodeError(pageContent) {
+{% block facetSimpleRangeBareMetalNodeError %}{%- endblock facetSimpleRangeBareMetalNodeError %}
+      }
+      function facetSimpleRangeBareMetalNode(e) {
+        facetSimpleRange(e, facetSimpleRangeBareMetalNodeSuccess, facetSimpleRangeBareMetalNodeError);
+      }
+
+      function facetRangeTimeZoneBareMetalNodeSuccess(pageContent) {
+{% block facetRangeTimeZoneBareMetalNodeSuccess %}{%- endblock facetRangeTimeZoneBareMetalNodeSuccess %}
+      }
+      function facetRangeTimeZoneBareMetalNodeError(pageContent) {
+{% block facetRangeTimeZoneBareMetalNodeError %}{%- endblock facetRangeTimeZoneBareMetalNodeError %}
+      }
+      function facetRangeTimeZoneBareMetalNode(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneBareMetalNodeSuccess, facetRangeTimeZoneBareMetalNodeError);
+      }
+
+      function facetRangeGapChangeBareMetalNodeSuccess(pageContent) {
+{% block facetRangeGapChangeBareMetalNodeSuccess %}{%- endblock facetRangeGapChangeBareMetalNodeSuccess %}
+      }
+      function facetRangeGapChangeBareMetalNodeError(pageContent) {
+{% block facetRangeGapChangeBareMetalNodeError %}{%- endblock facetRangeGapChangeBareMetalNodeError %}
+      }
+      function facetRangeGapChangeBareMetalNode(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalNodeSuccess, facetRangeGapChangeBareMetalNodeError);
+      }
+
+      function facetRangeStartChangeBareMetalNodeSuccess(pageContent) {
+{% block facetRangeStartChangeBareMetalNodeSuccess %}{%- endblock facetRangeStartChangeBareMetalNodeSuccess %}
+      }
+      function facetRangeStartChangeBareMetalNodeError(pageContent) {
+{% block facetRangeStartChangeBareMetalNodeError %}{%- endblock facetRangeStartChangeBareMetalNodeError %}
+      }
+      function facetRangeStartChangeBareMetalNode(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalNodeSuccess, facetRangeStartChangeBareMetalNodeError);
+      }
+
+      function facetRangeEndChangeBareMetalNodeSuccess(pageContent) {
+{% block facetRangeEndChangeBareMetalNodeSuccess %}{%- endblock facetRangeEndChangeBareMetalNodeSuccess %}
+      }
+      function facetRangeEndChangeBareMetalNodeError(pageContent) {
+{% block facetRangeEndChangeBareMetalNodeError %}{%- endblock facetRangeEndChangeBareMetalNodeError %}
+      }
+      function facetRangeEndChangeBareMetalNode(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalNodeSuccess, facetRangeEndChangeBareMetalNodeError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNode);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNode);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneBareMetalNode);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeBareMetalNode);
         pageGraphBareMetalNode();
         {% for key, value in varsQ.items() %}
 

@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipManagedClusterPage %}`;
       }
+
+      function facetSimpleRangeManagedClusterSuccess(pageContent) {
+{% block facetSimpleRangeManagedClusterSuccess %}{%- endblock facetSimpleRangeManagedClusterSuccess %}
+      }
+      function facetSimpleRangeManagedClusterError(pageContent) {
+{% block facetSimpleRangeManagedClusterError %}{%- endblock facetSimpleRangeManagedClusterError %}
+      }
+      function facetSimpleRangeManagedCluster(e) {
+        facetSimpleRange(e, facetSimpleRangeManagedClusterSuccess, facetSimpleRangeManagedClusterError);
+      }
+
+      function facetRangeTimeZoneManagedClusterSuccess(pageContent) {
+{% block facetRangeTimeZoneManagedClusterSuccess %}{%- endblock facetRangeTimeZoneManagedClusterSuccess %}
+      }
+      function facetRangeTimeZoneManagedClusterError(pageContent) {
+{% block facetRangeTimeZoneManagedClusterError %}{%- endblock facetRangeTimeZoneManagedClusterError %}
+      }
+      function facetRangeTimeZoneManagedCluster(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneManagedClusterSuccess, facetRangeTimeZoneManagedClusterError);
+      }
+
+      function facetRangeGapChangeManagedClusterSuccess(pageContent) {
+{% block facetRangeGapChangeManagedClusterSuccess %}{%- endblock facetRangeGapChangeManagedClusterSuccess %}
+      }
+      function facetRangeGapChangeManagedClusterError(pageContent) {
+{% block facetRangeGapChangeManagedClusterError %}{%- endblock facetRangeGapChangeManagedClusterError %}
+      }
+      function facetRangeGapChangeManagedCluster(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeManagedClusterSuccess, facetRangeGapChangeManagedClusterError);
+      }
+
+      function facetRangeStartChangeManagedClusterSuccess(pageContent) {
+{% block facetRangeStartChangeManagedClusterSuccess %}{%- endblock facetRangeStartChangeManagedClusterSuccess %}
+      }
+      function facetRangeStartChangeManagedClusterError(pageContent) {
+{% block facetRangeStartChangeManagedClusterError %}{%- endblock facetRangeStartChangeManagedClusterError %}
+      }
+      function facetRangeStartChangeManagedCluster(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeManagedClusterSuccess, facetRangeStartChangeManagedClusterError);
+      }
+
+      function facetRangeEndChangeManagedClusterSuccess(pageContent) {
+{% block facetRangeEndChangeManagedClusterSuccess %}{%- endblock facetRangeEndChangeManagedClusterSuccess %}
+      }
+      function facetRangeEndChangeManagedClusterError(pageContent) {
+{% block facetRangeEndChangeManagedClusterError %}{%- endblock facetRangeEndChangeManagedClusterError %}
+      }
+      function facetRangeEndChangeManagedCluster(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeManagedClusterSuccess, facetRangeEndChangeManagedClusterError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneManagedCluster);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneManagedCluster);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneManagedCluster);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeManagedCluster);
         pageGraphManagedCluster();
         {% for key, value in varsQ.items() %}
 
@@ -189,6 +244,20 @@
 {%- endblock websocketPageLayout %}
 
 {%- block htmUrlManagedClusterPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlManagedClusterPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ManagedCluster">back to all tenant clusters</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ManagedCluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-server"></i>
+                  all tenant clusters
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search tenant clusters
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
@@ -227,21 +296,19 @@
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-ManagedCluster">back to all tenant clusters</wa-tooltip>
-              <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-ManagedCluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-server"></i>
-                  all tenant clusters
-                </wa-breadcrumb-item>
-                <wa-breadcrumb-item>
-                  search tenant clusters
-                </wa-breadcrumb-item>
-              </wa-breadcrumb>
-{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
-{% include en-us/search/managed-cluster/ManagedClusterSearchButtons.htm %}
 {% endif %}
 {%- endblock htmBodyStartManagedClusterPage %}
 {%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/managed-cluster/ManagedClusterSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchForm is not defined %}
+{%- set pageSearchForm %}
+{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
+{%- endset pageSearchForm %}
+{%- endif %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleManagedClusterPage %}

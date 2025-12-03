@@ -23,9 +23,12 @@
 {%- endblock htmStyleVirtualMachinePage %}
 {%- block htmScriptInitVirtualMachinePage %}
 
-      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-VirtualMachine-input").value;
-      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-{{ classSimpleName }}-input").value;
+      var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value;
+      var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
+      var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+      var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+      var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
       var step;
       switch (facetRangeGapVal) {
         case "+1YEAR":
@@ -67,7 +70,7 @@
       divId='visualization-total-memory-utilization'
       , yaxisTitle='Total VM memory'
       , classSimpleName='VirtualMachine'
-      , legentTitle='virtual machines'
+      , legendTitle='virtual machines'
       , resultLabel='name'
       , metricPrefix='irate(kubevirt_vmi_memory_used_bytes{'
       , metricSuffix='}[10m])'
@@ -77,7 +80,7 @@
       divId='visualization-total-cpu-utilization'
       , yaxisTitle='Total VM memory'
       , classSimpleName='VirtualMachine'
-      , legentTitle='virtual machines'
+      , legendTitle='virtual machines'
       , resultLabel='name'
       , metricPrefix='irate(kubevirt_vmi_cpu_usage_seconds_total{'
       , metricSuffix='}[10m])'
@@ -87,7 +90,7 @@
       divId='visualization-quota-memory-utilization'
       , yaxisTitle='Percent of VM memory usage'
       , classSimpleName='VirtualMachine'
-      , legentTitle='virtual machines'
+      , legendTitle='virtual machines'
       , resultLabel='name'
       , metricPrefix='irate(kubevirt_vmi_memory_used_bytes{'
       , metricMiddle='}[10m]) / on(cluster, namespace, name) kubevirt_vm_resource_requests{ resource="memory", unit="bytes", '
@@ -99,7 +102,7 @@
       divId='visualization-quota-cpu-utilization'
       , yaxisTitle='Percent of VM CPU usage'
       , classSimpleName='VirtualMachine'
-      , legentTitle='virtual machines'
+      , legendTitle='virtual machines'
       , resultLabel='name'
       , metricPrefix='irate(kubevirt_vmi_cpu_usage_seconds_total{'
       , metricMiddle='}[10m]) / on(cluster, namespace, name) kubevirt_vm_resource_requests{ resource="cpu", unit="sockets", '

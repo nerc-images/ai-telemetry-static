@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNetworkPage %}`;
       }
+
+      function facetSimpleRangeBareMetalNetworkSuccess(pageContent) {
+{% block facetSimpleRangeBareMetalNetworkSuccess %}{%- endblock facetSimpleRangeBareMetalNetworkSuccess %}
+      }
+      function facetSimpleRangeBareMetalNetworkError(pageContent) {
+{% block facetSimpleRangeBareMetalNetworkError %}{%- endblock facetSimpleRangeBareMetalNetworkError %}
+      }
+      function facetSimpleRangeBareMetalNetwork(e) {
+        facetSimpleRange(e, facetSimpleRangeBareMetalNetworkSuccess, facetSimpleRangeBareMetalNetworkError);
+      }
+
+      function facetRangeTimeZoneBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeTimeZoneBareMetalNetworkSuccess %}{%- endblock facetRangeTimeZoneBareMetalNetworkSuccess %}
+      }
+      function facetRangeTimeZoneBareMetalNetworkError(pageContent) {
+{% block facetRangeTimeZoneBareMetalNetworkError %}{%- endblock facetRangeTimeZoneBareMetalNetworkError %}
+      }
+      function facetRangeTimeZoneBareMetalNetwork(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneBareMetalNetworkSuccess, facetRangeTimeZoneBareMetalNetworkError);
+      }
+
+      function facetRangeGapChangeBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeGapChangeBareMetalNetworkSuccess %}{%- endblock facetRangeGapChangeBareMetalNetworkSuccess %}
+      }
+      function facetRangeGapChangeBareMetalNetworkError(pageContent) {
+{% block facetRangeGapChangeBareMetalNetworkError %}{%- endblock facetRangeGapChangeBareMetalNetworkError %}
+      }
+      function facetRangeGapChangeBareMetalNetwork(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalNetworkSuccess, facetRangeGapChangeBareMetalNetworkError);
+      }
+
+      function facetRangeStartChangeBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeStartChangeBareMetalNetworkSuccess %}{%- endblock facetRangeStartChangeBareMetalNetworkSuccess %}
+      }
+      function facetRangeStartChangeBareMetalNetworkError(pageContent) {
+{% block facetRangeStartChangeBareMetalNetworkError %}{%- endblock facetRangeStartChangeBareMetalNetworkError %}
+      }
+      function facetRangeStartChangeBareMetalNetwork(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalNetworkSuccess, facetRangeStartChangeBareMetalNetworkError);
+      }
+
+      function facetRangeEndChangeBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeEndChangeBareMetalNetworkSuccess %}{%- endblock facetRangeEndChangeBareMetalNetworkSuccess %}
+      }
+      function facetRangeEndChangeBareMetalNetworkError(pageContent) {
+{% block facetRangeEndChangeBareMetalNetworkError %}{%- endblock facetRangeEndChangeBareMetalNetworkError %}
+      }
+      function facetRangeEndChangeBareMetalNetwork(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalNetworkSuccess, facetRangeEndChangeBareMetalNetworkError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNetwork);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNetwork);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneBareMetalNetwork);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeBareMetalNetwork);
         pageGraphBareMetalNetwork();
         {% for key, value in varsQ.items() %}
 

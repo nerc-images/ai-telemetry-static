@@ -132,6 +132,56 @@
         }
 {%- endblock jsStyleGpuDevicePage %}
       }
+
+      function facetSimpleRangeGpuDeviceSuccess(pageContent) {
+{% block facetSimpleRangeGpuDeviceSuccess %}{%- endblock facetSimpleRangeGpuDeviceSuccess %}
+      }
+      function facetSimpleRangeGpuDeviceError(pageContent) {
+{% block facetSimpleRangeGpuDeviceError %}{%- endblock facetSimpleRangeGpuDeviceError %}
+      }
+      function facetSimpleRangeGpuDevice(e) {
+        facetSimpleRange(e, facetSimpleRangeGpuDeviceSuccess, facetSimpleRangeGpuDeviceError);
+      }
+
+      function facetRangeTimeZoneGpuDeviceSuccess(pageContent) {
+{% block facetRangeTimeZoneGpuDeviceSuccess %}{%- endblock facetRangeTimeZoneGpuDeviceSuccess %}
+      }
+      function facetRangeTimeZoneGpuDeviceError(pageContent) {
+{% block facetRangeTimeZoneGpuDeviceError %}{%- endblock facetRangeTimeZoneGpuDeviceError %}
+      }
+      function facetRangeTimeZoneGpuDevice(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneGpuDeviceSuccess, facetRangeTimeZoneGpuDeviceError);
+      }
+
+      function facetRangeGapChangeGpuDeviceSuccess(pageContent) {
+{% block facetRangeGapChangeGpuDeviceSuccess %}{%- endblock facetRangeGapChangeGpuDeviceSuccess %}
+      }
+      function facetRangeGapChangeGpuDeviceError(pageContent) {
+{% block facetRangeGapChangeGpuDeviceError %}{%- endblock facetRangeGapChangeGpuDeviceError %}
+      }
+      function facetRangeGapChangeGpuDevice(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeGpuDeviceSuccess, facetRangeGapChangeGpuDeviceError);
+      }
+
+      function facetRangeStartChangeGpuDeviceSuccess(pageContent) {
+{% block facetRangeStartChangeGpuDeviceSuccess %}{%- endblock facetRangeStartChangeGpuDeviceSuccess %}
+      }
+      function facetRangeStartChangeGpuDeviceError(pageContent) {
+{% block facetRangeStartChangeGpuDeviceError %}{%- endblock facetRangeStartChangeGpuDeviceError %}
+      }
+      function facetRangeStartChangeGpuDevice(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeGpuDeviceSuccess, facetRangeStartChangeGpuDeviceError);
+      }
+
+      function facetRangeEndChangeGpuDeviceSuccess(pageContent) {
+{% block facetRangeEndChangeGpuDeviceSuccess %}{%- endblock facetRangeEndChangeGpuDeviceSuccess %}
+      }
+      function facetRangeEndChangeGpuDeviceError(pageContent) {
+{% block facetRangeEndChangeGpuDeviceError %}{%- endblock facetRangeEndChangeGpuDeviceError %}
+      }
+      function facetRangeEndChangeGpuDevice(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeGpuDeviceSuccess, facetRangeEndChangeGpuDeviceError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -255,6 +305,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneGpuDevice);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneGpuDevice);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneGpuDevice);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeGpuDevice);
         pageGraphGpuDevice();
         {% for key, value in varsQ.items() %}
 
