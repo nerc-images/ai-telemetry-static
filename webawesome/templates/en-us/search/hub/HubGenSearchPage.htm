@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipHubPage %}`;
       }
+
+      function facetSimpleRangeHubSuccess(pageContent) {
+{% block facetSimpleRangeHubSuccess %}{%- endblock facetSimpleRangeHubSuccess %}
+      }
+      function facetSimpleRangeHubError(pageContent) {
+{% block facetSimpleRangeHubError %}{%- endblock facetSimpleRangeHubError %}
+      }
+      function facetSimpleRangeHub(e) {
+        facetSimpleRange(e, facetSimpleRangeHubSuccess, facetSimpleRangeHubError);
+      }
+
+      function facetRangeTimeZoneHubSuccess(pageContent) {
+{% block facetRangeTimeZoneHubSuccess %}{%- endblock facetRangeTimeZoneHubSuccess %}
+      }
+      function facetRangeTimeZoneHubError(pageContent) {
+{% block facetRangeTimeZoneHubError %}{%- endblock facetRangeTimeZoneHubError %}
+      }
+      function facetRangeTimeZoneHub(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneHubSuccess, facetRangeTimeZoneHubError);
+      }
+
+      function facetRangeGapChangeHubSuccess(pageContent) {
+{% block facetRangeGapChangeHubSuccess %}{%- endblock facetRangeGapChangeHubSuccess %}
+      }
+      function facetRangeGapChangeHubError(pageContent) {
+{% block facetRangeGapChangeHubError %}{%- endblock facetRangeGapChangeHubError %}
+      }
+      function facetRangeGapChangeHub(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeHubSuccess, facetRangeGapChangeHubError);
+      }
+
+      function facetRangeStartChangeHubSuccess(pageContent) {
+{% block facetRangeStartChangeHubSuccess %}{%- endblock facetRangeStartChangeHubSuccess %}
+      }
+      function facetRangeStartChangeHubError(pageContent) {
+{% block facetRangeStartChangeHubError %}{%- endblock facetRangeStartChangeHubError %}
+      }
+      function facetRangeStartChangeHub(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeHubSuccess, facetRangeStartChangeHubError);
+      }
+
+      function facetRangeEndChangeHubSuccess(pageContent) {
+{% block facetRangeEndChangeHubSuccess %}{%- endblock facetRangeEndChangeHubSuccess %}
+      }
+      function facetRangeEndChangeHubError(pageContent) {
+{% block facetRangeEndChangeHubError %}{%- endblock facetRangeEndChangeHubError %}
+      }
+      function facetRangeEndChangeHub(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeHubSuccess, facetRangeEndChangeHubError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneHub);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneHub);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneHub);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeHub);
         pageGraphHub();
         {% for key, value in varsQ.items() %}
 
@@ -189,6 +244,20 @@
 {%- endblock websocketPageLayout %}
 
 {%- block htmUrlHubPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlHubPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-sitemap"></i>
+                  all hubs
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search hubs
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
@@ -227,21 +296,19 @@
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip>
-              <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-sitemap"></i>
-                  all hubs
-                </wa-breadcrumb-item>
-                <wa-breadcrumb-item>
-                  search hubs
-                </wa-breadcrumb-item>
-              </wa-breadcrumb>
-{% include en-us/search/hub/HubSearchForm.htm %}
-{% include en-us/search/hub/HubSearchButtons.htm %}
 {% endif %}
 {%- endblock htmBodyStartHubPage %}
 {%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/hub/HubSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchForm is not defined %}
+{%- set pageSearchForm %}
+{% include en-us/search/hub/HubSearchForm.htm %}
+{%- endset pageSearchForm %}
+{%- endif %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleHubPage %}

@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNodePage %}`;
       }
+
+      function facetSimpleRangeBareMetalNodeSuccess(pageContent) {
+{% block facetSimpleRangeBareMetalNodeSuccess %}{%- endblock facetSimpleRangeBareMetalNodeSuccess %}
+      }
+      function facetSimpleRangeBareMetalNodeError(pageContent) {
+{% block facetSimpleRangeBareMetalNodeError %}{%- endblock facetSimpleRangeBareMetalNodeError %}
+      }
+      function facetSimpleRangeBareMetalNode(e) {
+        facetSimpleRange(e, facetSimpleRangeBareMetalNodeSuccess, facetSimpleRangeBareMetalNodeError);
+      }
+
+      function facetRangeTimeZoneBareMetalNodeSuccess(pageContent) {
+{% block facetRangeTimeZoneBareMetalNodeSuccess %}{%- endblock facetRangeTimeZoneBareMetalNodeSuccess %}
+      }
+      function facetRangeTimeZoneBareMetalNodeError(pageContent) {
+{% block facetRangeTimeZoneBareMetalNodeError %}{%- endblock facetRangeTimeZoneBareMetalNodeError %}
+      }
+      function facetRangeTimeZoneBareMetalNode(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneBareMetalNodeSuccess, facetRangeTimeZoneBareMetalNodeError);
+      }
+
+      function facetRangeGapChangeBareMetalNodeSuccess(pageContent) {
+{% block facetRangeGapChangeBareMetalNodeSuccess %}{%- endblock facetRangeGapChangeBareMetalNodeSuccess %}
+      }
+      function facetRangeGapChangeBareMetalNodeError(pageContent) {
+{% block facetRangeGapChangeBareMetalNodeError %}{%- endblock facetRangeGapChangeBareMetalNodeError %}
+      }
+      function facetRangeGapChangeBareMetalNode(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalNodeSuccess, facetRangeGapChangeBareMetalNodeError);
+      }
+
+      function facetRangeStartChangeBareMetalNodeSuccess(pageContent) {
+{% block facetRangeStartChangeBareMetalNodeSuccess %}{%- endblock facetRangeStartChangeBareMetalNodeSuccess %}
+      }
+      function facetRangeStartChangeBareMetalNodeError(pageContent) {
+{% block facetRangeStartChangeBareMetalNodeError %}{%- endblock facetRangeStartChangeBareMetalNodeError %}
+      }
+      function facetRangeStartChangeBareMetalNode(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalNodeSuccess, facetRangeStartChangeBareMetalNodeError);
+      }
+
+      function facetRangeEndChangeBareMetalNodeSuccess(pageContent) {
+{% block facetRangeEndChangeBareMetalNodeSuccess %}{%- endblock facetRangeEndChangeBareMetalNodeSuccess %}
+      }
+      function facetRangeEndChangeBareMetalNodeError(pageContent) {
+{% block facetRangeEndChangeBareMetalNodeError %}{%- endblock facetRangeEndChangeBareMetalNodeError %}
+      }
+      function facetRangeEndChangeBareMetalNode(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalNodeSuccess, facetRangeEndChangeBareMetalNodeError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNode);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNode);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneBareMetalNode);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeBareMetalNode);
         pageGraphBareMetalNode();
         {% for key, value in varsQ.items() %}
 
@@ -189,6 +244,20 @@
 {%- endblock websocketPageLayout %}
 
 {%- block htmUrlBareMetalNodePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlBareMetalNodePage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-BareMetalNode">back to all bare metal nodes</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-BareMetalNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-hexagon-nodes"></i>
+                  all bare metal nodes
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search bare metal nodes
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
@@ -227,21 +296,19 @@
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-BareMetalNode">back to all bare metal nodes</wa-tooltip>
-              <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-BareMetalNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-hexagon-nodes"></i>
-                  all bare metal nodes
-                </wa-breadcrumb-item>
-                <wa-breadcrumb-item>
-                  search bare metal nodes
-                </wa-breadcrumb-item>
-              </wa-breadcrumb>
-{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
-{% include en-us/search/bare-metal-node/BareMetalNodeSearchButtons.htm %}
 {% endif %}
 {%- endblock htmBodyStartBareMetalNodePage %}
 {%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/bare-metal-node/BareMetalNodeSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchForm is not defined %}
+{%- set pageSearchForm %}
+{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
+{%- endset pageSearchForm %}
+{%- endif %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNodePage %}

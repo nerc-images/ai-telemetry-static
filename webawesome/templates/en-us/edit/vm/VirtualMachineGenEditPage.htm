@@ -131,6 +131,56 @@
         }
 {%- endblock jsStyleVirtualMachinePage %}
       }
+
+      function facetSimpleRangeVirtualMachineSuccess(pageContent) {
+{% block facetSimpleRangeVirtualMachineSuccess %}{%- endblock facetSimpleRangeVirtualMachineSuccess %}
+      }
+      function facetSimpleRangeVirtualMachineError(pageContent) {
+{% block facetSimpleRangeVirtualMachineError %}{%- endblock facetSimpleRangeVirtualMachineError %}
+      }
+      function facetSimpleRangeVirtualMachine(e) {
+        facetSimpleRange(e, facetSimpleRangeVirtualMachineSuccess, facetSimpleRangeVirtualMachineError);
+      }
+
+      function facetRangeTimeZoneVirtualMachineSuccess(pageContent) {
+{% block facetRangeTimeZoneVirtualMachineSuccess %}{%- endblock facetRangeTimeZoneVirtualMachineSuccess %}
+      }
+      function facetRangeTimeZoneVirtualMachineError(pageContent) {
+{% block facetRangeTimeZoneVirtualMachineError %}{%- endblock facetRangeTimeZoneVirtualMachineError %}
+      }
+      function facetRangeTimeZoneVirtualMachine(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneVirtualMachineSuccess, facetRangeTimeZoneVirtualMachineError);
+      }
+
+      function facetRangeGapChangeVirtualMachineSuccess(pageContent) {
+{% block facetRangeGapChangeVirtualMachineSuccess %}{%- endblock facetRangeGapChangeVirtualMachineSuccess %}
+      }
+      function facetRangeGapChangeVirtualMachineError(pageContent) {
+{% block facetRangeGapChangeVirtualMachineError %}{%- endblock facetRangeGapChangeVirtualMachineError %}
+      }
+      function facetRangeGapChangeVirtualMachine(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeVirtualMachineSuccess, facetRangeGapChangeVirtualMachineError);
+      }
+
+      function facetRangeStartChangeVirtualMachineSuccess(pageContent) {
+{% block facetRangeStartChangeVirtualMachineSuccess %}{%- endblock facetRangeStartChangeVirtualMachineSuccess %}
+      }
+      function facetRangeStartChangeVirtualMachineError(pageContent) {
+{% block facetRangeStartChangeVirtualMachineError %}{%- endblock facetRangeStartChangeVirtualMachineError %}
+      }
+      function facetRangeStartChangeVirtualMachine(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeVirtualMachineSuccess, facetRangeStartChangeVirtualMachineError);
+      }
+
+      function facetRangeEndChangeVirtualMachineSuccess(pageContent) {
+{% block facetRangeEndChangeVirtualMachineSuccess %}{%- endblock facetRangeEndChangeVirtualMachineSuccess %}
+      }
+      function facetRangeEndChangeVirtualMachineError(pageContent) {
+{% block facetRangeEndChangeVirtualMachineError %}{%- endblock facetRangeEndChangeVirtualMachineError %}
+      }
+      function facetRangeEndChangeVirtualMachine(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeVirtualMachineSuccess, facetRangeEndChangeVirtualMachineError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -228,6 +278,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneVirtualMachine);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneVirtualMachine);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneVirtualMachine);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeVirtualMachine);
         pageGraphVirtualMachine();
         {% for key, value in varsQ.items() %}
 

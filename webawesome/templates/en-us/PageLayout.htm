@@ -10,53 +10,32 @@
 {%- endfor -%}
 {%- set jsFunctionName = divIdCamelCaseWords|join('') -%}
 {{ jsFunctionName }}
-{% endmacro -%}
+{%- endmacro -%}
 
-{%- macro dashboardPromise(divId) %}
+{%- macro dashboardPromise(divId) -%}
 {{ jsFunctionName(divId) }}(timeQuery)
-{% endmacro -%}
+{%- endmacro -%}
 
 {%- macro dashboardCard(divId, cardTitle) %}
       <wa-card with-header>
         <header slot="header" class="wa-heading-m ">{{ cardTitle | e}}</header>
-        <wa-tab-group>
-          <wa-tab panel="chart">Chart</wa-tab>
-          <wa-tab panel="data">Data</wa-tab>
-          <wa-tab-panel name="chart">
-            <div id="{{ divId | e }}"></div>
-          </wa-tab-panel>
-          <wa-tab-panel name="data">
-            <wa-scrollable>
-              <table class="wa-zebra-rows wa-hover-rows">
-                <thead>
-                  <tr>
-                    <th>
-                      hub
-                    </th>
-                    <th>
-                      cluster
-                    </th>
-                    <th>
-                      project
-                    </th>
-                    <th>
-                      VM
-                    </th>
-                    <th>
-                      {{ cardTitle | e }}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody id="{{ divId | e }}-data-tbody">
-                </tbody>
-              </table>
-            </wa-scrollable>
-          </wa-tab-panel>
-        </wa-tab-group>
+        <div id="{{ divId | e }}"></div>
+        <wa-details summary="Data">
+          <wa-scrollable>
+            <table class="wa-zebra-rows wa-hover-rows">
+              <thead>
+                <tr id="{{ divId | e }}-data-thead-tr">
+                </tr>
+              </thead>
+              <tbody id="{{ divId | e }}-data-tbody">
+              </tbody>
+            </table>
+          </wa-scrollable>
+        </wa-details>
       </wa-card>
 {% endmacro -%}
 
-{%- macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null) %}
+{%- macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectLabel='namespace', projectVar='projectName', tickformat=null, timeZone=null, emptyClusterReplace=null, emptyClusterReplaceWith=null) %}
 
     function {{ jsFunctionName(divId) }}Popover(event) {
       var buttonId = event.target.getAttribute('id');
@@ -77,20 +56,24 @@
       $headerHub.innerText = 'hub: ' + hubId;
       $popoverStack.append($headerHub);
 
-      var $headerCluster = document.createElement('div');
-      $headerCluster.setAttribute('class', 'wa-heading-m ');
-      $headerCluster.innerText = 'cluster: ' + dataMetric.cluster;
-      $popoverStack.append($headerCluster);
+      if(dataMetric.cluster) {
+        var $headerCluster = document.createElement('div');
+        $headerCluster.setAttribute('class', 'wa-heading-m ');
+        $headerCluster.innerText = 'cluster: ' + dataMetric.cluster;
+        $popoverStack.append($headerCluster);
+      }
 
       var $headerProject = document.createElement('div');
       $headerProject.setAttribute('class', 'wa-heading-m ');
       $headerProject.innerText = 'project: ' + dataMetric.{{ projectLabel }};
       $popoverStack.append($headerProject);
+      {% if resultLabel is defined -%}
 
       var $headerVar = document.createElement('div');
       $headerVar.setAttribute('class', 'wa-heading-m ');
       $headerVar.innerText = '{{ resultLabel }}: ' + dataMetric.{{ resultLabel }};
       $popoverStack.append($headerVar);
+      {%- endif %}
 
       $popoverStack.append(document.createElement('wa-divider'));
 
@@ -161,117 +144,159 @@
     }
 
     async function {{ jsFunctionName(divId) }}(timeQuery) {
-      const urls = [];
-      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-      var requestHubIds = [];
-      hubIds.forEach((hubId, i) => {
-        var projects = list{{ classSimpleName }}.filter(o => o.hubId === hubId);
-        var uniqueClusterNames = [...new Set(projects.map(item => item.{{ clusterVar }}))];
-        uniqueClusterNames.forEach(({{ clusterVar }}, i) => {
-          var uniqueProjectNames = [...new Set(projects.filter(project => project.{{ clusterVar }} === {{ clusterVar }}).map(project => project.{{ projectVar }}))];
-          var projectNamesFilter = 'cluster="' + {{ clusterVar }} + '", {{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
-          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}'
-              }, timeQuery)).toString());
-          requestHubIds.push(hubId);
-        });
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
-      var $tbody = document.getElementById('{{ divId | e }}-data-tbody');
-      var panelId = '{{ divId | e }}';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        var hubId = requestHubIds[i];
-        responseJson.data.result.forEach((result, j) => {
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: (result.metric.{{ resultLabel }} + ' in ' + result.metric.{{ projectLabel }} + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.{{ projectLabel }} + '</a>')
+      if(window.varsFq.hubId.facetField) {
+        var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+        const urls = [];
+        const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
+        const clusterNames = Object.keys(window.varsFq.clusterName.facetField.counts);
+        var requestHubIds = [];
+        hubIds.forEach((hubId, i) => {
+          var projects = list{{ classSimpleName }}.filter(o => o.hubId === hubId);
+          var uniqueClusterNames = [...new Set(projects.map(item => item.{{ clusterVar }}))];
+          uniqueClusterNames.forEach(({{ clusterVar }}, i) => {
+            var uniqueProjectNames = [...new Set(projects.filter(project => project.{{ clusterVar }} === {{ clusterVar }}).map(project => project.{{ projectVar }}))];
+            var projectNamesFilter = clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '' + '{{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
+            urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+{%- set divIdWords = divId.split('-') -%}
+                {% if emptyClusterReplace is defined -%}
+                query: '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + projectNamesFilter + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}'
+                {%- else -%}
+                query: '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}'
+                {%- endif %}
+                }, timeQuery)).toString());
+            requestHubIds.push(hubId);
           });
-
-          var $tr = document.createElement('tr');
-
-          var $hub = document.createElement('td');
-          $hub.innerText = hubId;
-          $tr.append($hub);
-
-          var $cluster = document.createElement('td');
-          $cluster.innerText = result.metric.cluster;
-          $tr.append($cluster);
-
-          var ${{ projectLabel }} = document.createElement('td');
-          ${{ projectLabel }}.innerText = result.metric.{{ projectLabel }};
-          $tr.append(${{ projectLabel }});
-
-          var ${{ resultLabel }} = document.createElement('td');
-          ${{ resultLabel }}.innerText = result.metric.{{ resultLabel }};
-          $tr.append(${{ resultLabel }});
-
-          var $val = document.createElement('td');
-          $tr.append($val);
-
-          var $statsPopover = document.createElement('wa-popover');
-          $statsPopover.setAttribute('id', '{{ divId | e }}-data-stats-button-' + j + '-popover');
-          $statsPopover.setAttribute('for', '{{ divId | e }}-data-stats-button-' + j);
-          $val.append($statsPopover);
-
-          var $statsButton = document.createElement('wa-button');
-          $statsButton.setAttribute('id', '{{ divId | e }}-data-stats-button-' + j);
-          $statsButton.setAttribute('data-popover', '{{ divId | e }}-data-stats-button-' + j + '-popover');
-          $statsButton.setAttribute('data-metric', JSON.stringify(result.metric));
-          $statsButton.setAttribute('data-values', JSON.stringify(result.values));
-          $statsButton.setAttribute('data-hubId', hubId);
-          $statsButton.setAttribute('onclick', "{{ jsFunctionName(divId) }}Popover(event);");
-          $statsButton.innerText = 'stats';
-          $val.append($statsButton);
-
-          $tbody.append($tr);
         });
-      });
+        const responses = await Promise.all(urls.map(url => fetch(url)));
+        const dataPromises = responses.map(response => response.json());
+        const responseJsons = await Promise.all(dataPromises);
 
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
+        var $theadTr = document.getElementById('{{ divId | e }}-data-thead-tr');
+        $theadTr.innerHTML = '';
+
+        var $theadTrTd = document.createElement('td');
+        $theadTrTd.innerText = 'hub';
+        $theadTr.append($theadTrTd);
+
+        if(clusterNames.length > 0) {
+          $theadTrTd = document.createElement('td');
+          $theadTrTd.innerText = 'cluster';
+          $theadTr.append($theadTrTd);
         }
-        , yaxis: {
-          title: '{{ yaxisTitle | e }}'
-          {% if tickformat is defined -%}
-          , tickformat: '{{ tickformat }}'
-          {%- endif %}
+
+        $theadTrTd = document.createElement('td');
+        $theadTrTd.innerText = 'project';
+        $theadTr.append($theadTrTd);
+        {% if resultLabel is defined -%}
+
+        $theadTrTd = document.createElement('td');
+        $theadTrTd.innerText = '{{ resultLabel | e }}';
+        $theadTr.append($theadTrTd);
+        {%- endif %}
+
+        $theadTrTd = document.createElement('td');
+        $theadTrTd.innerText = '{{ cardTitle | e }}';
+        $theadTr.append($theadTrTd);
+
+        var $tbody = document.getElementById('{{ divId | e }}-data-tbody');
+        var panelId = '{{ divId | e }}';
+        var traces = [];
+        responseJsons.forEach((responseJson, i) => {
+          var hubId = requestHubIds[i];
+          responseJson.data.result.forEach((result, j) => {
+            traces.push({
+              x: result.values.map(values => new Date(values[0] * 1000))
+              , y: result.values.map(values => parseFloat(values[1]))
+              , mode: 'scatter'
+              , name: ({% if resultLabel is defined %}result.metric.{{ resultLabel }} + ' in ' + {% endif %}result.metric.{{ projectLabel }} + ' in ' + (result.metric.cluster ? (result.metric.cluster + ' in ') : '') + hubId).substring(0, 90)
+              , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.{{ projectLabel }} + '</a>')
+            });
+
+            var $tr = document.createElement('tr');
+
+            var $hub = document.createElement('td');
+            $hub.innerText = hubId;
+            $tr.append($hub);
+
+            if(result.metric.cluster) {
+              var $cluster = document.createElement('td');
+              $cluster.innerText = result.metric.cluster;
+              $tr.append($cluster);
+            }
+
+            var ${{ projectLabel }} = document.createElement('td');
+            ${{ projectLabel }}.innerText = result.metric.{{ projectLabel }};
+            $tr.append(${{ projectLabel }});
+            {% if resultLabel is defined -%}
+
+            var ${{ resultLabel }} = document.createElement('td');
+            ${{ resultLabel }}.innerText = result.metric.{{ resultLabel }};
+            $tr.append(${{ resultLabel }});
+            {%- endif %}
+
+            var $val = document.createElement('td');
+            $tr.append($val);
+
+            var $statsPopover = document.createElement('wa-popover');
+            $statsPopover.setAttribute('id', '{{ divId | e }}-data-stats-button-' + j + '-popover');
+            $statsPopover.setAttribute('for', '{{ divId | e }}-data-stats-button-' + j);
+            $val.append($statsPopover);
+
+            var $statsButton = document.createElement('wa-button');
+            $statsButton.setAttribute('id', '{{ divId | e }}-data-stats-button-' + j);
+            $statsButton.setAttribute('data-popover', '{{ divId | e }}-data-stats-button-' + j + '-popover');
+            $statsButton.setAttribute('data-metric', JSON.stringify(result.metric));
+            $statsButton.setAttribute('data-values', JSON.stringify(result.values));
+            $statsButton.setAttribute('data-hubId', hubId);
+            $statsButton.setAttribute('onclick', "{{ jsFunctionName(divId) }}Popover(event);");
+            $statsButton.innerText = 'stats';
+            $val.append($statsButton);
+
+            $tbody.append($tr);
+          });
+        });
+
+        var config = {
+          responsive: true
         }
-        , legend: {
-          title: {
-            text: '{{ legendTitle | e }}'
+        var layout = {
+          xaxis: {
+            title: (timeZone ? 'Time in ' + timeZone : '')
           }
-          , xanchor: 'center'
-          , x: 0.4
-          , yanchor: 'top'
-          , y: -0.2
-          , orientation: 'v'
-        }
-        , height: 600
-        , margin: {
-          l: 50
-          , r: 0
-          , b: 0
-          , t: 0
-          , pad: 1
-        }
-      };
-      Plotly.newPlot(panelId, traces, layout);
+          , yaxis: {
+            title: '{{ yaxisTitle | e }}'
+            {% if tickformat is defined -%}
+            , tickformat: '{{ tickformat }}'
+            {%- endif %}
+          }
+          , legend: {
+            title: {
+              text: '{{ legendTitle | e }}'
+            }
+            , xanchor: 'center'
+            , x: 0.4
+            , yanchor: 'top'
+            , y: -0.2
+            , orientation: 'v'
+          }
+          , autosize: true
+          , height: 600
+          , margin: {
+            l: 50
+            , r: 0
+            , b: 0
+            , t: 0
+            , pad: 1
+          }
+        };
+        Plotly.react(panelId, traces, layout, config);
+      }
     }
 
 {% endmacro -%}
 
 <!DOCTYPE html>
-<html lang="{{ SITE_LOCALE }}" class="wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
+<html lang="{{ SITE_LOCALE }}" class="wa-cloak wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
   <head>
 {%- block htmHeadPageLayout %}
     <meta charset="UTF-8" />
@@ -382,12 +407,41 @@
 {%- block websocketPageLayout %}{%- endblock websocketPageLayout %}
     </script>
   </head>
-  <body class="wa-body-{{ userFontSize }} wa-size-{{ userFontSize }} wa-cloak ">
+  <body class="wa-body-{{ userFontSize }} wa-size-{{ userFontSize }} ">
     {% if WEB_COMPONENTS_PRO == 'true' -%}
     <wa-page disable-sticky="header">
     {%- else -%}
     <div id="site-grid">
     {%- endif %}
+      <header slot="header">
+        <div class="wa-cluster ">
+          <wa-button size="small" data-toggle-nav variant="brand" label="open menu"{% if WEB_COMPONENTS_PRO == 'false' %} onclick="document.querySelector('#site-aside-left').open = true;"{% endif %}>
+            <i class="{{ FONTAWESOME_STYLE }} fa-bars"></i>
+          </wa-button>
+          <wa-popup placement="bottom-start" id="siteSearchDropdown">
+            <wa-input size="small" slot="anchor" placeholder="search" id="siteSearchInput">
+              <i slot="start" class="{{ FONTAWESOME_STYLE }}  fa-magnifying-glass"></i>
+            </wa-input>
+            <div id="siteSearchDropdownMenu">
+            </div>
+          </wa-popup>
+          {% if pageSearchForm is defined -%}
+          {{ pageSearchForm | default('') }}
+          {%- endif %}
+        </div>
+      </header>
+      {% if pageSearchButtons is defined or pageBreadcrumb is defined -%}
+      <header slot="subheader">
+        <div class="wa-cluster ">
+          <div>
+            {{ pageBreadcrumb | default('') }}
+          </div>
+          <div>
+            {{ pageSearchButtons }}
+          </div>
+        </div>
+      </header>
+      {%- endif %}
 {%- block htmBodyPageLayout %}
 {%- block htmBodyStartPageLayout %}
       {% if WEB_COMPONENTS_PRO == 'false' -%}
@@ -604,18 +658,6 @@
           <div id="warnings-drawer-stack" class="wa-stack ">
           </div>
         </wa-drawer>
-        <header slot="header" class="wa-flank margin-block ">
-          <wa-button data-toggle-nav variant="brand" label="open menu"{% if WEB_COMPONENTS_PRO == 'false' %} onclick="document.querySelector('#site-aside-left').open = true;"{% endif %}>
-            <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-bars"></i>
-          </wa-button>
-          <wa-popup  placement="bottom-start" id="siteSearchDropdown">
-            <wa-input slot="anchor" placeholder="search" id="siteSearchInput">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }}  fa-magnifying-glass"></i>
-            </wa-input>
-            <div id="siteSearchDropdownMenu">
-            </div>
-          </wa-popup>
-        </header>
 {%- endblock htmBodyStartPageLayout %}
 {% block htmBodyMiddlePageLayout %}
         <main slot="main" class="pageContent wa-stack wa-gap-3xl ">

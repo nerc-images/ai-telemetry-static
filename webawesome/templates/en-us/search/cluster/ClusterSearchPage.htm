@@ -97,17 +97,17 @@
 {% endblock facetRangeEndChangeClusterSuccess -%}
 
 {%- block htmScriptInitClusterPage %}
-
       updateDashboards();
 {%- endblock htmScriptInitClusterPage %}
+
 {%- block htmScriptsClusterPage %}
 {{ super() }}
     <script>
 
       function updateDashboards() {
-        var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
-        var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-Cluster-input").value;
-        var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-Cluster-input").value;
+        var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-{{ classSimpleName }}-input").value;
+        var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value;
+        var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
         var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
         var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
         var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();

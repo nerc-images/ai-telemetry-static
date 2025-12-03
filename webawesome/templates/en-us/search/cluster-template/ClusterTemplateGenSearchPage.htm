@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
+
+      function facetSimpleRangeClusterTemplateSuccess(pageContent) {
+{% block facetSimpleRangeClusterTemplateSuccess %}{%- endblock facetSimpleRangeClusterTemplateSuccess %}
+      }
+      function facetSimpleRangeClusterTemplateError(pageContent) {
+{% block facetSimpleRangeClusterTemplateError %}{%- endblock facetSimpleRangeClusterTemplateError %}
+      }
+      function facetSimpleRangeClusterTemplate(e) {
+        facetSimpleRange(e, facetSimpleRangeClusterTemplateSuccess, facetSimpleRangeClusterTemplateError);
+      }
+
+      function facetRangeTimeZoneClusterTemplateSuccess(pageContent) {
+{% block facetRangeTimeZoneClusterTemplateSuccess %}{%- endblock facetRangeTimeZoneClusterTemplateSuccess %}
+      }
+      function facetRangeTimeZoneClusterTemplateError(pageContent) {
+{% block facetRangeTimeZoneClusterTemplateError %}{%- endblock facetRangeTimeZoneClusterTemplateError %}
+      }
+      function facetRangeTimeZoneClusterTemplate(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneClusterTemplateSuccess, facetRangeTimeZoneClusterTemplateError);
+      }
+
+      function facetRangeGapChangeClusterTemplateSuccess(pageContent) {
+{% block facetRangeGapChangeClusterTemplateSuccess %}{%- endblock facetRangeGapChangeClusterTemplateSuccess %}
+      }
+      function facetRangeGapChangeClusterTemplateError(pageContent) {
+{% block facetRangeGapChangeClusterTemplateError %}{%- endblock facetRangeGapChangeClusterTemplateError %}
+      }
+      function facetRangeGapChangeClusterTemplate(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterTemplateSuccess, facetRangeGapChangeClusterTemplateError);
+      }
+
+      function facetRangeStartChangeClusterTemplateSuccess(pageContent) {
+{% block facetRangeStartChangeClusterTemplateSuccess %}{%- endblock facetRangeStartChangeClusterTemplateSuccess %}
+      }
+      function facetRangeStartChangeClusterTemplateError(pageContent) {
+{% block facetRangeStartChangeClusterTemplateError %}{%- endblock facetRangeStartChangeClusterTemplateError %}
+      }
+      function facetRangeStartChangeClusterTemplate(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterTemplateSuccess, facetRangeStartChangeClusterTemplateError);
+      }
+
+      function facetRangeEndChangeClusterTemplateSuccess(pageContent) {
+{% block facetRangeEndChangeClusterTemplateSuccess %}{%- endblock facetRangeEndChangeClusterTemplateSuccess %}
+      }
+      function facetRangeEndChangeClusterTemplateError(pageContent) {
+{% block facetRangeEndChangeClusterTemplateError %}{%- endblock facetRangeEndChangeClusterTemplateError %}
+      }
+      function facetRangeEndChangeClusterTemplate(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterTemplateSuccess, facetRangeEndChangeClusterTemplateError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneClusterTemplate);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneClusterTemplate);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneClusterTemplate);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeClusterTemplate);
         pageGraphClusterTemplate();
         {% for key, value in varsQ.items() %}
 
@@ -189,6 +244,20 @@
 {%- endblock websocketPageLayout %}
 
 {%- block htmUrlClusterTemplatePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlClusterTemplatePage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ClusterTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-server"></i>
+                  all OpenShift cluster templates
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search OpenShift cluster templates
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
@@ -227,21 +296,19 @@
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip>
-              <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-ClusterTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-server"></i>
-                  all OpenShift cluster templates
-                </wa-breadcrumb-item>
-                <wa-breadcrumb-item>
-                  search OpenShift cluster templates
-                </wa-breadcrumb-item>
-              </wa-breadcrumb>
-{% include en-us/search/cluster-template/ClusterTemplateSearchForm.htm %}
-{% include en-us/search/cluster-template/ClusterTemplateSearchButtons.htm %}
 {% endif %}
 {%- endblock htmBodyStartClusterTemplatePage %}
 {%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/cluster-template/ClusterTemplateSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchForm is not defined %}
+{%- set pageSearchForm %}
+{% include en-us/search/cluster-template/ClusterTemplateSearchForm.htm %}
+{%- endset pageSearchForm %}
+{%- endif %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterTemplatePage %}

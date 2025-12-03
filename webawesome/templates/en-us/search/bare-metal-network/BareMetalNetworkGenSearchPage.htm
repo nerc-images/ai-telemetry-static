@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalNetworkPage %}`;
       }
+
+      function facetSimpleRangeBareMetalNetworkSuccess(pageContent) {
+{% block facetSimpleRangeBareMetalNetworkSuccess %}{%- endblock facetSimpleRangeBareMetalNetworkSuccess %}
+      }
+      function facetSimpleRangeBareMetalNetworkError(pageContent) {
+{% block facetSimpleRangeBareMetalNetworkError %}{%- endblock facetSimpleRangeBareMetalNetworkError %}
+      }
+      function facetSimpleRangeBareMetalNetwork(e) {
+        facetSimpleRange(e, facetSimpleRangeBareMetalNetworkSuccess, facetSimpleRangeBareMetalNetworkError);
+      }
+
+      function facetRangeTimeZoneBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeTimeZoneBareMetalNetworkSuccess %}{%- endblock facetRangeTimeZoneBareMetalNetworkSuccess %}
+      }
+      function facetRangeTimeZoneBareMetalNetworkError(pageContent) {
+{% block facetRangeTimeZoneBareMetalNetworkError %}{%- endblock facetRangeTimeZoneBareMetalNetworkError %}
+      }
+      function facetRangeTimeZoneBareMetalNetwork(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneBareMetalNetworkSuccess, facetRangeTimeZoneBareMetalNetworkError);
+      }
+
+      function facetRangeGapChangeBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeGapChangeBareMetalNetworkSuccess %}{%- endblock facetRangeGapChangeBareMetalNetworkSuccess %}
+      }
+      function facetRangeGapChangeBareMetalNetworkError(pageContent) {
+{% block facetRangeGapChangeBareMetalNetworkError %}{%- endblock facetRangeGapChangeBareMetalNetworkError %}
+      }
+      function facetRangeGapChangeBareMetalNetwork(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalNetworkSuccess, facetRangeGapChangeBareMetalNetworkError);
+      }
+
+      function facetRangeStartChangeBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeStartChangeBareMetalNetworkSuccess %}{%- endblock facetRangeStartChangeBareMetalNetworkSuccess %}
+      }
+      function facetRangeStartChangeBareMetalNetworkError(pageContent) {
+{% block facetRangeStartChangeBareMetalNetworkError %}{%- endblock facetRangeStartChangeBareMetalNetworkError %}
+      }
+      function facetRangeStartChangeBareMetalNetwork(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalNetworkSuccess, facetRangeStartChangeBareMetalNetworkError);
+      }
+
+      function facetRangeEndChangeBareMetalNetworkSuccess(pageContent) {
+{% block facetRangeEndChangeBareMetalNetworkSuccess %}{%- endblock facetRangeEndChangeBareMetalNetworkSuccess %}
+      }
+      function facetRangeEndChangeBareMetalNetworkError(pageContent) {
+{% block facetRangeEndChangeBareMetalNetworkError %}{%- endblock facetRangeEndChangeBareMetalNetworkError %}
+      }
+      function facetRangeEndChangeBareMetalNetwork(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalNetworkSuccess, facetRangeEndChangeBareMetalNetworkError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNetwork);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalNetwork);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneBareMetalNetwork);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeBareMetalNetwork);
         pageGraphBareMetalNetwork();
         {% for key, value in varsQ.items() %}
 
@@ -189,6 +244,20 @@
 {%- endblock websocketPageLayout %}
 
 {%- block htmUrlBareMetalNetworkPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlBareMetalNetworkPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-BareMetalNetwork">back to all bare metal networks</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-BareMetalNetwork" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-network-wired"></i>
+                  all bare metal networks
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search bare metal networks
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
 
 {%- block htmBodyStartPageLayout %}
 {{ super() }}
@@ -227,21 +296,19 @@
               <div id="site-calendar"><!-- // --></div>
             </div>
             <div class="wa-stack wa-gap-m ">
-              <wa-tooltip for="return-to-BareMetalNetwork">back to all bare metal networks</wa-tooltip>
-              <wa-breadcrumb>
-                <wa-breadcrumb-item id="return-to-BareMetalNetwork" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-network-wired"></i>
-                  all bare metal networks
-                </wa-breadcrumb-item>
-                <wa-breadcrumb-item>
-                  search bare metal networks
-                </wa-breadcrumb-item>
-              </wa-breadcrumb>
-{% include en-us/search/bare-metal-network/BareMetalNetworkSearchForm.htm %}
-{% include en-us/search/bare-metal-network/BareMetalNetworkSearchButtons.htm %}
 {% endif %}
 {%- endblock htmBodyStartBareMetalNetworkPage %}
 {%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/bare-metal-network/BareMetalNetworkSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchForm is not defined %}
+{%- set pageSearchForm %}
+{% include en-us/search/bare-metal-network/BareMetalNetworkSearchForm.htm %}
+{%- endset pageSearchForm %}
+{%- endif %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNetworkPage %}

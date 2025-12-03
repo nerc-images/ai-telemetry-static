@@ -145,6 +145,11 @@ wa-button.tile {
     /* Layout */
     /**********/
 
+    [slot='header'] {
+      gap: var(--wa-space-xs);
+      padding: var(--wa-space-xs);
+    }
+
     .white-space-pre-wrap {
       white-space: pre-wrap;
     }

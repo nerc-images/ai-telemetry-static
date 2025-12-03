@@ -131,6 +131,56 @@
         }
 {%- endblock jsStyleAiNodePage %}
       }
+
+      function facetSimpleRangeAiNodeSuccess(pageContent) {
+{% block facetSimpleRangeAiNodeSuccess %}{%- endblock facetSimpleRangeAiNodeSuccess %}
+      }
+      function facetSimpleRangeAiNodeError(pageContent) {
+{% block facetSimpleRangeAiNodeError %}{%- endblock facetSimpleRangeAiNodeError %}
+      }
+      function facetSimpleRangeAiNode(e) {
+        facetSimpleRange(e, facetSimpleRangeAiNodeSuccess, facetSimpleRangeAiNodeError);
+      }
+
+      function facetRangeTimeZoneAiNodeSuccess(pageContent) {
+{% block facetRangeTimeZoneAiNodeSuccess %}{%- endblock facetRangeTimeZoneAiNodeSuccess %}
+      }
+      function facetRangeTimeZoneAiNodeError(pageContent) {
+{% block facetRangeTimeZoneAiNodeError %}{%- endblock facetRangeTimeZoneAiNodeError %}
+      }
+      function facetRangeTimeZoneAiNode(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneAiNodeSuccess, facetRangeTimeZoneAiNodeError);
+      }
+
+      function facetRangeGapChangeAiNodeSuccess(pageContent) {
+{% block facetRangeGapChangeAiNodeSuccess %}{%- endblock facetRangeGapChangeAiNodeSuccess %}
+      }
+      function facetRangeGapChangeAiNodeError(pageContent) {
+{% block facetRangeGapChangeAiNodeError %}{%- endblock facetRangeGapChangeAiNodeError %}
+      }
+      function facetRangeGapChangeAiNode(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeAiNodeSuccess, facetRangeGapChangeAiNodeError);
+      }
+
+      function facetRangeStartChangeAiNodeSuccess(pageContent) {
+{% block facetRangeStartChangeAiNodeSuccess %}{%- endblock facetRangeStartChangeAiNodeSuccess %}
+      }
+      function facetRangeStartChangeAiNodeError(pageContent) {
+{% block facetRangeStartChangeAiNodeError %}{%- endblock facetRangeStartChangeAiNodeError %}
+      }
+      function facetRangeStartChangeAiNode(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeAiNodeSuccess, facetRangeStartChangeAiNodeError);
+      }
+
+      function facetRangeEndChangeAiNodeSuccess(pageContent) {
+{% block facetRangeEndChangeAiNodeSuccess %}{%- endblock facetRangeEndChangeAiNodeSuccess %}
+      }
+      function facetRangeEndChangeAiNodeError(pageContent) {
+{% block facetRangeEndChangeAiNodeError %}{%- endblock facetRangeEndChangeAiNodeError %}
+      }
+      function facetRangeEndChangeAiNode(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeAiNodeSuccess, facetRangeEndChangeAiNodeError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -228,6 +278,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneAiNode);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneAiNode);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneAiNode);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeAiNode);
         pageGraphAiNode();
         {% for key, value in varsQ.items() %}
 

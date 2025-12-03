@@ -479,6 +479,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_created')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_created')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_created')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_archived')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -490,6 +496,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_archived')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_archived')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_archived')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_hubId')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -503,6 +515,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_hubId')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_hubId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_hubId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_clusterName')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -514,6 +532,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_clusterName')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_clusterName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_clusterName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_vmProject')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -527,6 +551,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_vmProject')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_vmProject')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_vmProject')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_vmName')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -538,6 +568,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_vmName')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_vmName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_vmName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_os')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -551,6 +587,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_os')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_os')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_os')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_id')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -562,6 +604,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_id')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_id')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_id')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_ngsildTenant')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -575,6 +623,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_ngsildTenant')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_ngsildTenant')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_ngsildTenant')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_ngsildPath')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -586,6 +640,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_ngsildPath')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_ngsildPath')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_ngsildPath')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_ngsildContext')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -599,6 +659,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_ngsildContext')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_ngsildContext')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_ngsildContext')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_ngsildData')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -610,6 +676,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_ngsildData')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_ngsildData')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_ngsildData')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_location')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -623,6 +695,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_location')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_location')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_location')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_displayPage')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -634,6 +712,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_displayPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_displayPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_editPage')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -647,6 +731,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_editPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_editPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_editPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_userPage')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -658,6 +748,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_userPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_userPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_userPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_download')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
@@ -671,6 +767,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapVirtualMachine_download')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_download')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
+          });
           document.querySelector('#fqVirtualMachine_vmResource')?.addEventListener('change', (event) => {
             fqChange('VirtualMachine', event.currentTarget);
           });
@@ -682,5 +784,11 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapVirtualMachine_vmResource')?.addEventListener('change', (event) => {
             facetRangeGapChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartVirtualMachine_vmResource')?.addEventListener('change', (event) => {
+            facetRangeStartChange('VirtualMachine', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndVirtualMachine_vmResource')?.addEventListener('change', (event) => {
+            facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
 });

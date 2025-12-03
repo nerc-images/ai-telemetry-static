@@ -633,6 +633,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_created')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_created')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_created')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_archived')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -644,6 +650,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_archived')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_archived')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_archived')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_id')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -657,6 +669,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_id')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_id')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_id')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_name')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -668,6 +686,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_name')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_name')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_name')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_description')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -681,6 +705,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_description')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_description')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_description')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_availabilityZoneHints')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -692,6 +722,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_availabilityZoneHints')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_availabilityZoneHints')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_availabilityZoneHints')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_availabilityZones')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -705,6 +741,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_availabilityZones')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_availabilityZones')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_availabilityZones')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_createdAt')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -716,6 +758,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_createdAt')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_createdAt')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_createdAt')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_dnsDomain')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -729,6 +777,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_dnsDomain')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_dnsDomain')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_dnsDomain')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_mtu')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -740,6 +794,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_mtu')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_mtu')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_mtu')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_projectId')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -753,6 +813,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_projectId')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_projectId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_projectId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_providerNetworkType')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -764,6 +830,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_providerNetworkType')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_providerNetworkType')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_providerNetworkType')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_providerPhysicalNetwork')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -777,6 +849,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_providerPhysicalNetwork')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_providerPhysicalNetwork')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_providerPhysicalNetwork')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_providerSegmentationId')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -788,6 +866,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_providerSegmentationId')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_providerSegmentationId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_providerSegmentationId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_qosPolicyId')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -801,6 +885,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_qosPolicyId')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_qosPolicyId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_qosPolicyId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_revisionNumber')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -812,6 +902,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_revisionNumber')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_revisionNumber')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_revisionNumber')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_status')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -825,6 +921,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_status')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_status')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_status')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_subnetIds')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -836,6 +938,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_subnetIds')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_subnetIds')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_subnetIds')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_tags')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -849,6 +957,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_tags')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_tags')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_tags')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_tenantId')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -860,6 +974,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_tenantId')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_tenantId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_tenantId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_updatedAt')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -873,6 +993,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_updatedAt')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_updatedAt')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_updatedAt')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_isAdminStateUp')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -884,6 +1010,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isAdminStateUp')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isAdminStateUp')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isAdminStateUp')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_isDefault')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -897,6 +1029,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isDefault')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isDefault')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isDefault')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_isPortSecurityEnabled')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -908,6 +1046,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isPortSecurityEnabled')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isPortSecurityEnabled')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isPortSecurityEnabled')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_isRouterExternal')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -921,6 +1065,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isRouterExternal')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isRouterExternal')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isRouterExternal')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_isShared')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -932,6 +1082,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isShared')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isShared')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isShared')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_isVlanQueing')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -945,6 +1101,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isVlanQueing')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isVlanQueing')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isVlanQueing')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_isVlanTransparent')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -956,6 +1118,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_isVlanTransparent')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_isVlanTransparent')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_isVlanTransparent')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_l2Adjacency')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -969,6 +1137,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_l2Adjacency')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_l2Adjacency')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_l2Adjacency')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_locationCloud')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -980,6 +1154,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationCloud')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationCloud')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationCloud')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_locationProjectDomainId')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -993,6 +1173,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationProjectDomainId')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationProjectDomainId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationProjectDomainId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_locationProjectDomainName')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -1004,6 +1190,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationProjectDomainName')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationProjectDomainName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationProjectDomainName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_locationProjectId')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -1017,6 +1209,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationProjectId')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationProjectId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationProjectId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_locationProjectName')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -1028,6 +1226,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationProjectName')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationProjectName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationProjectName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_locationRegionName')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -1041,6 +1245,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationRegionName')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationRegionName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationRegionName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_locationZone')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -1052,6 +1262,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_locationZone')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_locationZone')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_locationZone')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_displayPage')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -1065,6 +1281,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_displayPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_displayPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_displayPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -1076,6 +1298,12 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_editPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
@@ -1089,6 +1317,12 @@ Promise.all([
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
           });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_userPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
+          });
           document.querySelector('#fqBareMetalNetwork_download')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget);
           });
@@ -1100,5 +1334,11 @@ Promise.all([
           });
           document.querySelector('#pageFacetRangeGapBareMetalNetwork_download')?.addEventListener('change', (event) => {
             facetRangeGapChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartBareMetalNetwork_download')?.addEventListener('change', (event) => {
+            facetRangeStartChange('BareMetalNetwork', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndBareMetalNetwork_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
 });

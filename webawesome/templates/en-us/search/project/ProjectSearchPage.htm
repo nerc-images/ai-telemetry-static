@@ -7,29 +7,14 @@
   </div>
   <div class="wa-stack ">
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Total project memory usage</header>
-        <div id="visualization-total-memory-bytes" class=""></div>
-      </wa-card>
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Total project CPU usage</header>
-        <div id="visualization-total-cpu-bytes" class=""></div>
-      </wa-card>
+      {{ dashboardCard('visualization-total-memory-bytes', 'Total project memory usage') }}
+      {{ dashboardCard('visualization-total-cpu-bytes', 'Total project CPU usage') }}
     </div>
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Project quota memory usage</header>
-        <div id="visualization-quota-memory-bytes" class=""></div>
-      </wa-card>
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Project quota CPU usage</header>
-        <div id="visualization-quota-cpu-bytes" class=""></div>
-      </wa-card>
+      {{ dashboardCard('visualization-quota-memory-bytes', 'Project quota memory usage') }}
+      {{ dashboardCard('visualization-quota-cpu-bytes', 'Project quota CPU usage') }}
     </div>
-    <wa-card with-header>
-      <header slot="header" class="wa-heading-l ">Project GPU utilization</header>
-      <div id="visualization-cluster-gpu-utilization" class="wa-grid "></div>
-    </wa-card>
+    {{ dashboardCard('visualization-cluster-gpu-utilization', 'Project GPU utilization') }}
   </div>
 </wa-details>
 {% endif %}
@@ -53,11 +38,48 @@
   }
 }
 {%- endblock htmStyleProjectPage %}
-{%- block htmScriptInitProjectPage %}
 
-      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Project-input").value;
-      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
+{%- block facetSimpleRangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetSimpleRangeProjectSuccess -%}
+
+{%- block facetRangeTimeZoneProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeTimeZoneProjectSuccess -%}
+
+{%- block facetRangeGapChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeGapChangeProjectSuccess -%}
+
+{%- block facetRangeStartChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeStartChangeProjectSuccess -%}
+
+{-% block facetRangeEndChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeEndChangeProjectSuccess -%}
+
+{%- block htmScriptInitProjectPage %}
+        Promise.all([
+          customElements.whenDefined('wa-page')
+          , customElements.whenDefined('wa-card')
+          , customElements.whenDefined('wa-details')
+        ]).then(() => {
+          updateDashboards();
+        });
+{%- endblock htmScriptInitProjectPage %}
+
+{%- block htmScriptsProjectPage %}
+{{ super() }}
+  <script>
+
+    function updateDashboards() {
+      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-{{ classSimpleName }}-input").value;
+      var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value;
+      var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
+      var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+      var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+      var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
       var step;
       switch (facetRangeGapVal) {
         case "+1YEAR":
@@ -86,359 +108,71 @@
       };
 
       Promise.all([
-          queryTotalMemoryBytes(timeQuery)
-          , queryTotalCpuBytes(timeQuery)
-          , queryQuotaMemoryBytes(timeQuery)
-          , queryQuotaCpuBytes(timeQuery)
-          , queryGpuUtilization(timeQuery)
+          {{ dashboardPromise('visualization-total-memory-bytes') }}
+          , {{ dashboardPromise('visualization-total-cpu-bytes') }}
+          , {{ dashboardPromise('visualization-quota-memory-bytes') }}
+          , {{ dashboardPromise('visualization-quota-cpu-bytes') }}
+          , {{ dashboardPromise('visualization-cluster-gpu-utilization') }}
           ]);
-{%- endblock htmScriptInitProjectPage %}
-{%- block htmScriptsProjectPage %}
-{{ super() }}
-  <script>
-
-    async function queryTotalMemoryBytes(timeQuery) {
-      const urls = [];
-      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-      var requestHubIds = [];
-      hubIds.forEach((hubId, i) => {
-        var projects = listProject.filter(project => project.hubId === hubId);
-        var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
-        uniqueClusterNames.forEach((clusterName, i) => {
-          var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'namespace:container_memory_usage_bytes:sum' + projectNamesFilter
-              }, timeQuery)).toString());
-          requestHubIds.push(hubId);
-        });
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
-      var panelId = 'visualization-total-memory-bytes';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        var hubId = requestHubIds[i];
-        responseJson.data.result.forEach((result, j) => {
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: (result.metric.namespace + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.namespace + '</a>')
-          });
-        });
-      });
-
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Total memory usage'
-        }
-        , legend: {
-          title: {
-            text: 'Projects'
-          }
-          , xanchor: 'center'
-          , x: 0.4
-          , yanchor: 'top'
-          , y: -0.2
-          , orientation: 'v'
-        }
-        , height: 600
-        , margin: {
-          l: 50
-          , r: 0
-          , b: 0
-          , t: 0
-          , pad: 1
-        }
-      };
-      Plotly.newPlot(panelId, traces, layout);
     }
-
-    async function queryTotalCpuBytes(timeQuery) {
-      const urls = [];
-      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-      var requestHubIds = [];
-      hubIds.forEach((hubId, i) => {
-        var projects = listProject.filter(project => project.hubId === hubId);
-        var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
-        uniqueClusterNames.forEach((clusterName, i) => {
-          var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: (clusterName === undefined ? 'namespace:container_cpu_usage:sum' : 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum') + projectNamesFilter
-              }, timeQuery)).toString());
-          requestHubIds.push(hubId);
-        });
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
-      var panelId = 'visualization-total-cpu-bytes';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        var hubId = requestHubIds[i];
-        responseJson.data.result.forEach((result, j) => {
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: (result.metric.namespace + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.namespace + '</a>')
-          });
-        });
-      });
-
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Total CPU usage'
-        }
-        , legend: {
-          title: {
-            text: 'Projects'
-          }
-          , xanchor: 'center'
-          , x: 0.4
-          , yanchor: 'top'
-          , y: -0.2
-          , orientation: 'v'
-        }
-        , height: 600
-        , margin: {
-          l: 50
-          , r: 0
-          , b: 0
-          , t: 0
-          , pad: 1
-        }
-      };
-      Plotly.newPlot(panelId, traces, layout);
-    }
-
-    async function queryQuotaMemoryBytes(timeQuery) {
-      const urls = [];
-      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-      var requestHubIds = [];
-      hubIds.forEach((hubId, i) => {
-        var projects = listProject.filter(project => project.hubId === hubId);
-        var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
-        uniqueClusterNames.forEach((clusterName, i) => {
-          var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          var projectNamesQuotaFilter = '{ resource="limits.memory", type="hard", ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'namespace:container_memory_usage_bytes:sum' + projectNamesFilter + ' / on(cluster, namespace) kube_resourcequota' + projectNamesQuotaFilter
-              }, timeQuery)).toString());
-          requestHubIds.push(hubId);
-        });
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
-      var panelId = 'visualization-quota-memory-bytes';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        var hubId = requestHubIds[i];
-        responseJson.data.result.forEach((result, j) => {
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: (result.metric.namespace + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.namespace + '</a>')
-          });
-        });
-      });
-
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Percent of total memory usage'
-          , tickformat: '.0%'
-        }
-        , legend: {
-          title: {
-            text: 'Projects'
-          }
-          , xanchor: 'center'
-          , x: 0.4
-          , yanchor: 'top'
-          , y: -0.2
-          , orientation: 'v'
-        }
-        , height: 600
-        , margin: {
-          l: 50
-          , r: 0
-          , b: 0
-          , t: 0
-          , pad: 1
-        }
-      };
-      if(traces.length > 0)
-        Plotly.newPlot(panelId, traces, layout);
-      else
-        document.querySelector('#' + panelId).parentElement.remove();
-    }
-
-    async function queryQuotaCpuBytes(timeQuery) {
-      const urls = [];
-      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-      var requestHubIds = [];
-      hubIds.forEach((hubId, i) => {
-        var projects = listProject.filter(project => project.hubId === hubId);
-        var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
-        uniqueClusterNames.forEach((clusterName, i) => {
-          var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          var projectNamesQuotaFilter = '{ resource="limits.cpu", type="hard", ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum' + projectNamesFilter + ' / on(cluster, namespace) kube_resourcequota' + projectNamesQuotaFilter
-              }, timeQuery)).toString());
-          requestHubIds.push(hubId);
-        });
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
-      var panelId = 'visualization-quota-cpu-bytes';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        var hubId = requestHubIds[i];
-        responseJson.data.result.forEach((result, j) => {
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: (result.metric.namespace + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.namespace + '</a>')
-          });
-        });
-      });
-
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Percent of total CPU usage'
-          , tickformat: '.0%'
-        }
-        , legend: {
-          title: {
-            text: 'Projects'
-          }
-          , xanchor: 'center'
-          , x: 0.4
-          , yanchor: 'top'
-          , y: -0.2
-          , orientation: 'v'
-        }
-        , height: 600
-        , margin: {
-          l: 50
-          , r: 0
-          , b: 0
-          , t: 0
-          , pad: 1
-        }
-      };
-      if(traces.length > 0)
-        Plotly.newPlot(panelId, traces, layout);
-      else
-        document.querySelector('#' + panelId).parentElement.remove();
-    }
-
-    async function queryGpuUtilization(timeQuery) {
-      const urls = [];
-      const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-      var requestHubIds = [];
-      hubIds.forEach((hubId, i) => {
-        var projects = listProject.filter(project => project.hubId === hubId);
-        var uniqueClusterNames = [...new Set(projects.map(item => item.clusterName))];
-        uniqueClusterNames.forEach((clusterName, i) => {
-          var uniqueProjectNames = projects.filter(project => project.clusterName === clusterName).map(project => project.projectName);
-          var projectNamesFilter = '{ ' + (clusterName === undefined ? '' : 'cluster="' + clusterName + '", ') + 'exported_namespace=~"' + uniqueProjectNames.join('|') + '" }';
-          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-              query: 'sum by (cluster, exported_namespace) (DCGM_FI_DEV_GPU_UTIL' + projectNamesFilter + ' / 100)'
-              }, timeQuery)).toString());
-          requestHubIds.push(hubId);
-        });
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
-      var panelId = 'visualization-cluster-gpu-utilization';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        if(responseJson.data) {
-          var hubId = requestHubIds[i];
-          responseJson.data.result.forEach((result, j) => {
-            traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
-              , y: result.values.map(values => parseFloat(values[1]))
-              , mode: 'lines+markers'
-              , name: (result.metric.exported_namespace + ' in ' + result.metric.cluster + ' in ' + hubId).substring(0, 90)
-              , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + ' ' + result.metric.exported_namespace + '</a>')
-            });
-          });
-        }
-      });
-
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Percent of total GPU usage'
-          , tickformat: '.0%'
-        }
-        , legend: {
-          title: {
-            text: 'Projects'
-          }
-          , xanchor: 'center'
-          , x: 0.4
-          , yanchor: 'top'
-          , y: -0.2
-          , orientation: 'v'
-        }
-        , height: 600
-        , margin: {
-          l: 50
-          , r: 0
-          , b: 0
-          , t: 0
-          , pad: 1
-        }
-      };
-      Plotly.newPlot(panelId, traces, layout);
-    }
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-total-memory-bytes'
+      , yaxisTitle='Total memory usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='namespace:container_memory_usage_bytes:sum{'
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-total-cpu-bytes'
+      , yaxisTitle='Total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , emptyClusterReplace='node_namespace_pod_container:container_cpu_usage_seconds_total:sum'
+      , emptyClusterReplaceWith='namespace:container_cpu_usage:sum'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-quota-memory-bytes'
+      , yaxisTitle='Percent of total memory usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='namespace:container_memory_usage_bytes:sum{'
+      , metricMiddle='} / on(cluster, namespace) kube_resourcequota{'
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , tickFormat='.0%'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-quota-cpu-bytes'
+      , yaxisTitle='Percent of total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
+      , metricMiddle='} / on(cluster, namespace) kube_resourcequota{'
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , tickFormat='.0%'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-cluster-gpu-utilization'
+      , yaxisTitle='Percent of total GPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='sum by (cluster, exported_namespace) (DCGM_FI_DEV_GPU_UTIL{'
+      , metricSuffix='} / 100)'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , tickFormat='.0%'
+      , projectLabel='exported_namespace'
+    ) }}
   </script>
 {%- endblock htmScriptsProjectPage %}
 

@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
+
+      function facetSimpleRangeClusterTemplateSuccess(pageContent) {
+{% block facetSimpleRangeClusterTemplateSuccess %}{%- endblock facetSimpleRangeClusterTemplateSuccess %}
+      }
+      function facetSimpleRangeClusterTemplateError(pageContent) {
+{% block facetSimpleRangeClusterTemplateError %}{%- endblock facetSimpleRangeClusterTemplateError %}
+      }
+      function facetSimpleRangeClusterTemplate(e) {
+        facetSimpleRange(e, facetSimpleRangeClusterTemplateSuccess, facetSimpleRangeClusterTemplateError);
+      }
+
+      function facetRangeTimeZoneClusterTemplateSuccess(pageContent) {
+{% block facetRangeTimeZoneClusterTemplateSuccess %}{%- endblock facetRangeTimeZoneClusterTemplateSuccess %}
+      }
+      function facetRangeTimeZoneClusterTemplateError(pageContent) {
+{% block facetRangeTimeZoneClusterTemplateError %}{%- endblock facetRangeTimeZoneClusterTemplateError %}
+      }
+      function facetRangeTimeZoneClusterTemplate(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneClusterTemplateSuccess, facetRangeTimeZoneClusterTemplateError);
+      }
+
+      function facetRangeGapChangeClusterTemplateSuccess(pageContent) {
+{% block facetRangeGapChangeClusterTemplateSuccess %}{%- endblock facetRangeGapChangeClusterTemplateSuccess %}
+      }
+      function facetRangeGapChangeClusterTemplateError(pageContent) {
+{% block facetRangeGapChangeClusterTemplateError %}{%- endblock facetRangeGapChangeClusterTemplateError %}
+      }
+      function facetRangeGapChangeClusterTemplate(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterTemplateSuccess, facetRangeGapChangeClusterTemplateError);
+      }
+
+      function facetRangeStartChangeClusterTemplateSuccess(pageContent) {
+{% block facetRangeStartChangeClusterTemplateSuccess %}{%- endblock facetRangeStartChangeClusterTemplateSuccess %}
+      }
+      function facetRangeStartChangeClusterTemplateError(pageContent) {
+{% block facetRangeStartChangeClusterTemplateError %}{%- endblock facetRangeStartChangeClusterTemplateError %}
+      }
+      function facetRangeStartChangeClusterTemplate(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterTemplateSuccess, facetRangeStartChangeClusterTemplateError);
+      }
+
+      function facetRangeEndChangeClusterTemplateSuccess(pageContent) {
+{% block facetRangeEndChangeClusterTemplateSuccess %}{%- endblock facetRangeEndChangeClusterTemplateSuccess %}
+      }
+      function facetRangeEndChangeClusterTemplateError(pageContent) {
+{% block facetRangeEndChangeClusterTemplateError %}{%- endblock facetRangeEndChangeClusterTemplateError %}
+      }
+      function facetRangeEndChangeClusterTemplate(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterTemplateSuccess, facetRangeEndChangeClusterTemplateError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneClusterTemplate);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneClusterTemplate);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneClusterTemplate);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeClusterTemplate);
         pageGraphClusterTemplate();
         {% for key, value in varsQ.items() %}
 

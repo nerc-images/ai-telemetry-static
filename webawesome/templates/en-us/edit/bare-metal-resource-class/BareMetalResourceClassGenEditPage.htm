@@ -47,6 +47,56 @@
 <h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipBareMetalResourceClassPage %}`;
       }
+
+      function facetSimpleRangeBareMetalResourceClassSuccess(pageContent) {
+{% block facetSimpleRangeBareMetalResourceClassSuccess %}{%- endblock facetSimpleRangeBareMetalResourceClassSuccess %}
+      }
+      function facetSimpleRangeBareMetalResourceClassError(pageContent) {
+{% block facetSimpleRangeBareMetalResourceClassError %}{%- endblock facetSimpleRangeBareMetalResourceClassError %}
+      }
+      function facetSimpleRangeBareMetalResourceClass(e) {
+        facetSimpleRange(e, facetSimpleRangeBareMetalResourceClassSuccess, facetSimpleRangeBareMetalResourceClassError);
+      }
+
+      function facetRangeTimeZoneBareMetalResourceClassSuccess(pageContent) {
+{% block facetRangeTimeZoneBareMetalResourceClassSuccess %}{%- endblock facetRangeTimeZoneBareMetalResourceClassSuccess %}
+      }
+      function facetRangeTimeZoneBareMetalResourceClassError(pageContent) {
+{% block facetRangeTimeZoneBareMetalResourceClassError %}{%- endblock facetRangeTimeZoneBareMetalResourceClassError %}
+      }
+      function facetRangeTimeZoneBareMetalResourceClass(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneBareMetalResourceClassSuccess, facetRangeTimeZoneBareMetalResourceClassError);
+      }
+
+      function facetRangeGapChangeBareMetalResourceClassSuccess(pageContent) {
+{% block facetRangeGapChangeBareMetalResourceClassSuccess %}{%- endblock facetRangeGapChangeBareMetalResourceClassSuccess %}
+      }
+      function facetRangeGapChangeBareMetalResourceClassError(pageContent) {
+{% block facetRangeGapChangeBareMetalResourceClassError %}{%- endblock facetRangeGapChangeBareMetalResourceClassError %}
+      }
+      function facetRangeGapChangeBareMetalResourceClass(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalResourceClassSuccess, facetRangeGapChangeBareMetalResourceClassError);
+      }
+
+      function facetRangeStartChangeBareMetalResourceClassSuccess(pageContent) {
+{% block facetRangeStartChangeBareMetalResourceClassSuccess %}{%- endblock facetRangeStartChangeBareMetalResourceClassSuccess %}
+      }
+      function facetRangeStartChangeBareMetalResourceClassError(pageContent) {
+{% block facetRangeStartChangeBareMetalResourceClassError %}{%- endblock facetRangeStartChangeBareMetalResourceClassError %}
+      }
+      function facetRangeStartChangeBareMetalResourceClass(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalResourceClassSuccess, facetRangeStartChangeBareMetalResourceClassError);
+      }
+
+      function facetRangeEndChangeBareMetalResourceClassSuccess(pageContent) {
+{% block facetRangeEndChangeBareMetalResourceClassSuccess %}{%- endblock facetRangeEndChangeBareMetalResourceClassSuccess %}
+      }
+      function facetRangeEndChangeBareMetalResourceClassError(pageContent) {
+{% block facetRangeEndChangeBareMetalResourceClassError %}{%- endblock facetRangeEndChangeBareMetalResourceClassError %}
+      }
+      function facetRangeEndChangeBareMetalResourceClass(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalResourceClassSuccess, facetRangeEndChangeBareMetalResourceClassError);
+      }
     </script>
     <script type="module">
 {% if DEFAULT_MAP_LOCATION is defined %}
@@ -92,6 +142,11 @@
         window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
         window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
         window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalResourceClass);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneBareMetalResourceClass);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneBareMetalResourceClass);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeBareMetalResourceClass);
         pageGraphBareMetalResourceClass();
         {% for key, value in varsQ.items() %}
 
