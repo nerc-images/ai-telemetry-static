@@ -155,14 +155,15 @@
           var uniqueClusterNames = [...new Set(projects.map(item => item.{{ clusterVar }}))];
           uniqueClusterNames.forEach(({{ clusterVar }}, i) => {
             var uniqueProjectNames = [...new Set(projects.filter(project => project.{{ clusterVar }} === {{ clusterVar }}).map(project => project.{{ projectVar }}))];
-            var projectNamesFilter = clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '' + '{{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
+            var projectNamesFilter = (clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '') + '{{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
+            var query = '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}';
+            {% if emptyClusterReplace is defined -%}
+            if(clusterNames.length == 0)
+              query = '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + projectNamesFilter + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}';
+            {%- endif -%}
             urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
 {%- set divIdWords = divId.split('-') -%}
-                {% if emptyClusterReplace is defined -%}
-                query: '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + projectNamesFilter + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}'
-                {%- else -%}
-                query: '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}'
-                {%- endif %}
+                query: query
                 }, timeQuery)).toString());
             requestHubIds.push(hubId);
           });
