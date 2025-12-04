@@ -21,7 +21,17 @@
         <header slot="header" class="wa-heading-m ">{{ cardTitle | e}}</header>
         <div id="{{ divId | e }}"></div>
         <wa-details summary="Data">
-          <wa-scrollable>
+          <strong class="wa-heading-l">
+            Prometheus Keycloak Proxy queries
+          </strong>
+          <wa-scroller>
+            <ul id="{{ divId | e }}-data-links-ul">
+            </ul>
+          </wa-scroller>
+          <strong class="wa-heading-l">
+            {{ cardTitle }} stats
+          </strong>
+          <wa-scroller>
             <table class="wa-zebra-rows wa-hover-rows">
               <thead>
                 <tr id="{{ divId | e }}-data-thead-tr">
@@ -30,7 +40,7 @@
               <tbody id="{{ divId | e }}-data-tbody">
               </tbody>
             </table>
-          </wa-scrollable>
+          </wa-scroller>
         </wa-details>
       </wa-card>
 {% endmacro -%}
@@ -147,6 +157,7 @@
       if(window.varsFq.hubId.facetField) {
         var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
         const urls = [];
+        const queries = [];
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
         const clusterNames = Object.keys(window.varsFq.clusterName.facetField.counts);
         var requestHubIds = [];
@@ -155,14 +166,16 @@
           var uniqueClusterNames = [...new Set(projects.map(item => item.{{ clusterVar }}))];
           uniqueClusterNames.forEach(({{ clusterVar }}, i) => {
             var uniqueProjectNames = [...new Set(projects.filter(project => project.{{ clusterVar }} === {{ clusterVar }}).map(project => project.{{ projectVar }}))];
-            var projectNamesFilter = clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '' + '{{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
+            var projectNamesFilter = (clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '') + '{{ projectLabel }}=~"' + uniqueProjectNames.join('|') + '"';
+            var query = '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}';
+            {% if emptyClusterReplace is defined -%}
+            if(clusterNames.length == 0)
+              query = '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + projectNamesFilter + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}';
+            {%- endif -%}
+            queries.push(query);
             urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
 {%- set divIdWords = divId.split('-') -%}
-                {% if emptyClusterReplace is defined -%}
-                query: '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + projectNamesFilter + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}'
-                {%- else -%}
-                query: '{{ metricPrefix }}' + projectNamesFilter + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectNamesFilter + {% endif %}'{{ metricSuffix }}'
-                {%- endif %}
+                query: query
                 }, timeQuery)).toString());
             requestHubIds.push(hubId);
           });
@@ -170,6 +183,21 @@
         const responses = await Promise.all(urls.map(url => fetch(url)));
         const dataPromises = responses.map(response => response.json());
         const responseJsons = await Promise.all(dataPromises);
+
+        var $linksUl = document.getElementById('{{ divId | e }}-data-links-ul');
+        $linksUl.innerHTML = '';
+        urls.forEach((url, i) => {
+          var query = queries[i];
+
+          var $linkLi = document.createElement('li');
+          $linksUl.append($linkLi);
+
+          var $linkA = document.createElement('a');
+          $linkA.setAttribute('href', url);
+          $linkA.setAttribute('target', '_blank');
+          $linkA.innerText = query;
+          $linkLi.append($linkA);
+        });
 
         var $theadTr = document.getElementById('{{ divId | e }}-data-thead-tr');
         $theadTr.innerHTML = '';
