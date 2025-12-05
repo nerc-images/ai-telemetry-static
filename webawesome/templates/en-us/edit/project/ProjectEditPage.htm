@@ -131,10 +131,13 @@
 
     async function queryMemoryBytesTotal(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var query = 'namespace:container_memory_usage_bytes:sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'namespace:container_memory_usage_bytes:sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -143,6 +146,8 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-memory-bytes';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         responseJson.data.result.forEach((result, j) => {
@@ -174,11 +179,14 @@
 
     async function queryCpuBytesTotal(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
         var projectNamesFilter = '{% if result.clusterName is defined %}cluster="{{ result.clusterName | e }}", {% else %}{% endif %}namespace="{{ result.projectName }}"';
+        var query = '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '}'
+            query: query
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -187,6 +195,8 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-cpu-bytes';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         responseJson.data.result.forEach((result, j) => {
@@ -219,16 +229,21 @@
 
     async function queryGpuTemperature(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var query = 'DCGM_FI_DEV_GPU_TEMP{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'DCGM_FI_DEV_GPU_TEMP{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
       const dataPromises = responses.map(response => response.json());
       const responseJsons = await Promise.all(dataPromises);
       var panelId = 'visualization-cluster-gpu-temperature';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data) {
@@ -254,10 +269,13 @@
 
     async function queryGpuUtilization(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var query = 'DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -266,6 +284,8 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-gpu-utilization';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data) {
@@ -288,11 +308,14 @@
 
     async function queryLLME2ELatency(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       var rateInterval = timeQuery.step;
       hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:e2e_request_latency_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:e2e_request_latency_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'rate(vllm:e2e_request_latency_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:e2e_request_latency_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])' 
+            query: query 
             }, timeQuery)).toString());
       });
       
@@ -301,6 +324,8 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-e2e-latency';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data && responseJson.data.result) {
@@ -328,20 +353,25 @@
 
     async function queryLLMTokenThroughput(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       var rateInterval = timeQuery.step;
       
       // Query for prompt tokens
       hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:prompt_tokens_total{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'rate(vllm:prompt_tokens_total{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])' 
+            query: query 
             }, timeQuery)).toString());
       });
       
       // Query for generation tokens
       hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:generation_tokens_total{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'rate(vllm:generation_tokens_total{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])' 
+            query: query 
             }, timeQuery)).toString());
       });
       
@@ -350,6 +380,8 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-token-throughput';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       var halfLength = responseJsons.length / 2;
       
@@ -399,11 +431,14 @@
 
     async function queryLLMTTFTLatency(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       var rateInterval = timeQuery.step;
       hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:time_to_first_token_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:time_to_first_token_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'rate(vllm:time_to_first_token_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:time_to_first_token_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -411,6 +446,8 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-ttft-latency';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data && responseJson.data.result) {
@@ -437,11 +474,14 @@
 
     async function queryLLMTPOTLatency(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       var rateInterval = timeQuery.step;
       hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:time_per_output_token_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:time_per_output_token_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'rate(vllm:time_per_output_token_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:time_per_output_token_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -449,6 +489,8 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-tpot-latency';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data && responseJson.data.result) {
