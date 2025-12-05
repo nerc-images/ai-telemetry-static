@@ -490,7 +490,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqGpuDevice_created')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_created')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -508,7 +508,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_archived')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_archived')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -526,7 +526,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_hubId')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_hubId')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -544,7 +544,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_clusterName')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_clusterName')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -562,7 +562,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_nodeName')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_nodeName')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -580,7 +580,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_gpuDeviceNumber')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_gpuDeviceNumber')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -598,7 +598,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_modelName')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_modelName')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -616,7 +616,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_description')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_description')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -634,7 +634,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_gpuDeviceUtilization')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_gpuDeviceUtilization')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -652,7 +652,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_id')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_id')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -670,7 +670,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_ngsildTenant')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_ngsildTenant')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -688,7 +688,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_ngsildPath')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_ngsildPath')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -706,7 +706,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_ngsildContext')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_ngsildContext')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -724,7 +724,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_ngsildData')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_ngsildData')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -742,7 +742,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_location')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_location')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -760,7 +760,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_displayPage')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -778,7 +778,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_editPage')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -796,7 +796,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_userPage')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -814,7 +814,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_download')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_download')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);
@@ -832,7 +832,7 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
           document.querySelector('#fqGpuDevice_gpuDeviceResource')?.addEventListener('change', (event) => {
-            fqChange('GpuDevice', event.currentTarget);
+            fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
           document.querySelector('#buttonFacetGpuDevice_gpuDeviceResource')?.addEventListener('click', (event) => {
             facetFieldChange('GpuDevice', event.currentTarget);

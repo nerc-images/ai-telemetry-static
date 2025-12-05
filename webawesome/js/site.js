@@ -49,18 +49,18 @@ function qChange(classSimpleName, input, div) {
   searchPage(classSimpleName);
 }
 
-function fqChange(classSimpleName, elem) {
+function fqChange(classSimpleName, elem, success, error) {
   if(elem.value)
     document.querySelector("#pageSearchVal-" + elem.getAttribute("id")).innerText = "fq=" + elem.getAttribute('data-var') + ":" + encodeURIComponent(elem.value);
   else
     document.querySelector("#pageSearchVal-" + elem.getAttribute("id")).innerText = "";
-  searchPage(classSimpleName);
+  searchPage(classSimpleName, success, error);
 }
 
-function fqReplace(classSimpleName, elem) {
+function fqReplace(classSimpleName, elem, success, error) {
   var $fq = document.querySelector('#fq' + elem.getAttribute('data-class') + '_' + elem.getAttribute('data-var'));
   $fq.value = elem.getAttribute('data-val');
-  fqChange(classSimpleName, $fq);
+  fqChange(classSimpleName, $fq, success, error);
 }
 
 function facetFieldChange(classSimpleName, elem) {

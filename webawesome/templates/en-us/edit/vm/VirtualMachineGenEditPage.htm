@@ -132,51 +132,61 @@
 {%- endblock jsStyleVirtualMachinePage %}
       }
 
-      function facetSimpleRangeVirtualMachineSuccess(pageContent) {
-{% block facetSimpleRangeVirtualMachineSuccess %}{%- endblock facetSimpleRangeVirtualMachineSuccess %}
+      function facetChangeVirtualMachineSuccess(e) {
+        var l = e.querySelector('.pageForm .listVirtualMachine')?.value;
+        if(l)
+          window.listVirtualMachine = JSON.parse(l);
+{% block facetChangeVirtualMachineSuccess %}{%- endblock facetVirtualMachineSuccess %}
       }
-      function facetSimpleRangeVirtualMachineError(pageContent) {
-{% block facetSimpleRangeVirtualMachineError %}{%- endblock facetSimpleRangeVirtualMachineError %}
+      function facetChangeVirtualMachineError(e) {
+{% block facetChangeVirtualMachineError %}{%- endblock facetVirtualMachineError %}
+      }
+
+      function facetSimpleRangeVirtualMachineSuccess(e) {
+{% block facetSimpleRangeVirtualMachineSuccess %}      facetChangeVirtualMachineSuccess(e);{% endblock facetSimpleRangeVirtualMachineSuccess %}
+      }
+      function facetSimpleRangeVirtualMachineError(e) {
+{% block facetSimpleRangeVirtualMachineError %}      facetChangeVirtualMachineError(e);{% endblock facetSimpleRangeVirtualMachineError %}
       }
       function facetSimpleRangeVirtualMachine(e) {
         facetSimpleRange(e, facetSimpleRangeVirtualMachineSuccess, facetSimpleRangeVirtualMachineError);
       }
 
-      function facetRangeTimeZoneVirtualMachineSuccess(pageContent) {
-{% block facetRangeTimeZoneVirtualMachineSuccess %}{%- endblock facetRangeTimeZoneVirtualMachineSuccess %}
+      function facetRangeTimeZoneVirtualMachineSuccess(e) {
+{% block facetRangeTimeZoneVirtualMachineSuccess %}      facetChangeVirtualMachineSuccess(e);{% endblock facetRangeTimeZoneVirtualMachineSuccess %}
       }
-      function facetRangeTimeZoneVirtualMachineError(pageContent) {
-{% block facetRangeTimeZoneVirtualMachineError %}{%- endblock facetRangeTimeZoneVirtualMachineError %}
+      function facetRangeTimeZoneVirtualMachineError(e) {
+{% block facetRangeTimeZoneVirtualMachineError %}      facetChangeVirtualMachineError(e);{%- endblock facetRangeTimeZoneVirtualMachineError %}
       }
       function facetRangeTimeZoneVirtualMachine(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneVirtualMachineSuccess, facetRangeTimeZoneVirtualMachineError);
       }
 
-      function facetRangeGapChangeVirtualMachineSuccess(pageContent) {
-{% block facetRangeGapChangeVirtualMachineSuccess %}{%- endblock facetRangeGapChangeVirtualMachineSuccess %}
+      function facetRangeGapChangeVirtualMachineSuccess(e) {
+{% block facetRangeGapChangeVirtualMachineSuccess %}      facetChangeVirtualMachineSuccess(e);{% endblock facetRangeGapChangeVirtualMachineSuccess %}
       }
-      function facetRangeGapChangeVirtualMachineError(pageContent) {
-{% block facetRangeGapChangeVirtualMachineError %}{%- endblock facetRangeGapChangeVirtualMachineError %}
+      function facetRangeGapChangeVirtualMachineError(e) {
+{% block facetRangeGapChangeVirtualMachineError %}      facetChangeVirtualMachineError(e);{%- endblock facetRangeGapChangeVirtualMachineError %}
       }
       function facetRangeGapChangeVirtualMachine(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeVirtualMachineSuccess, facetRangeGapChangeVirtualMachineError);
       }
 
-      function facetRangeStartChangeVirtualMachineSuccess(pageContent) {
-{% block facetRangeStartChangeVirtualMachineSuccess %}{%- endblock facetRangeStartChangeVirtualMachineSuccess %}
+      function facetRangeStartChangeVirtualMachineSuccess(e) {
+{% block facetRangeStartChangeVirtualMachineSuccess %}      facetChangeVirtualMachineSuccess(e);{% endblock facetRangeStartChangeVirtualMachineSuccess %}
       }
-      function facetRangeStartChangeVirtualMachineError(pageContent) {
-{% block facetRangeStartChangeVirtualMachineError %}{%- endblock facetRangeStartChangeVirtualMachineError %}
+      function facetRangeStartChangeVirtualMachineError(e) {
+{% block facetRangeStartChangeVirtualMachineError %}      facetChangeVirtualMachineError(e);{%- endblock facetRangeStartChangeVirtualMachineError %}
       }
       function facetRangeStartChangeVirtualMachine(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeVirtualMachineSuccess, facetRangeStartChangeVirtualMachineError);
       }
 
-      function facetRangeEndChangeVirtualMachineSuccess(pageContent) {
-{% block facetRangeEndChangeVirtualMachineSuccess %}{%- endblock facetRangeEndChangeVirtualMachineSuccess %}
+      function facetRangeEndChangeVirtualMachineSuccess(e) {
+{% block facetRangeEndChangeVirtualMachineSuccess %}      facetChangeVirtualMachineSuccess(e);{% endblock facetRangeEndChangeVirtualMachineSuccess %}
       }
-      function facetRangeEndChangeVirtualMachineError(pageContent) {
-{% block facetRangeEndChangeVirtualMachineError %}{%- endblock facetRangeEndChangeVirtualMachineError %}
+      function facetRangeEndChangeVirtualMachineError(e) {
+{% block facetRangeEndChangeVirtualMachineError %}      facetChangeVirtualMachineError(e);{%- endblock facetRangeEndChangeVirtualMachineError %}
       }
       function facetRangeEndChangeVirtualMachine(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeVirtualMachineSuccess, facetRangeEndChangeVirtualMachineError);

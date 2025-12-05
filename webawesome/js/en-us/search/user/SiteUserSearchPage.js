@@ -363,7 +363,7 @@ Promise.all([
     document.querySelector('#searchpageSiteUserDialog').open = true;
   });
           document.querySelector('#fqSiteUser_created')?.addEventListener('change', (event) => {
-            fqChange('SiteUser', event.currentTarget);
+            fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
           document.querySelector('#buttonFacetSiteUser_created')?.addEventListener('click', (event) => {
             facetFieldChange('SiteUser', event.currentTarget);
@@ -381,7 +381,7 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
           document.querySelector('#fqSiteUser_archived')?.addEventListener('change', (event) => {
-            fqChange('SiteUser', event.currentTarget);
+            fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
           document.querySelector('#buttonFacetSiteUser_archived')?.addEventListener('click', (event) => {
             facetFieldChange('SiteUser', event.currentTarget);
@@ -399,7 +399,7 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
           document.querySelector('#fqSiteUser_displayPage')?.addEventListener('change', (event) => {
-            fqChange('SiteUser', event.currentTarget);
+            fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
           document.querySelector('#buttonFacetSiteUser_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('SiteUser', event.currentTarget);
@@ -417,7 +417,7 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
           document.querySelector('#fqSiteUser_editPage')?.addEventListener('change', (event) => {
-            fqChange('SiteUser', event.currentTarget);
+            fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
           document.querySelector('#buttonFacetSiteUser_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('SiteUser', event.currentTarget);
@@ -435,7 +435,7 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
           document.querySelector('#fqSiteUser_userPage')?.addEventListener('change', (event) => {
-            fqChange('SiteUser', event.currentTarget);
+            fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
           document.querySelector('#buttonFacetSiteUser_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('SiteUser', event.currentTarget);
@@ -453,7 +453,7 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
           document.querySelector('#fqSiteUser_download')?.addEventListener('change', (event) => {
-            fqChange('SiteUser', event.currentTarget);
+            fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
           document.querySelector('#buttonFacetSiteUser_download')?.addEventListener('click', (event) => {
             facetFieldChange('SiteUser', event.currentTarget);

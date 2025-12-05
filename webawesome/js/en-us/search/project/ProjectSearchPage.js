@@ -391,7 +391,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqProject_created')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_created')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -409,7 +409,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_archived')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_archived')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -427,7 +427,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_hubId')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_hubId')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -445,7 +445,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_clusterName')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_clusterName')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -463,7 +463,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_projectName')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_projectName')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -481,7 +481,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_description')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_description')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -499,7 +499,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_gpuEnabled')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_gpuEnabled')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -517,7 +517,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_podRestartCount')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_podRestartCount')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -535,7 +535,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_podsRestarting')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_podsRestarting')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -553,7 +553,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_fullPvcsCount')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_fullPvcsCount')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -571,7 +571,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_fullPvcs')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_fullPvcs')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -589,7 +589,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -607,7 +607,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_editPage')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -625,7 +625,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_userPage')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -643,7 +643,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_download')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_download')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);
@@ -661,7 +661,7 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_projectResource')?.addEventListener('change', (event) => {
-            fqChange('Project', event.currentTarget);
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
           document.querySelector('#buttonFacetProject_projectResource')?.addEventListener('click', (event) => {
             facetFieldChange('Project', event.currentTarget);

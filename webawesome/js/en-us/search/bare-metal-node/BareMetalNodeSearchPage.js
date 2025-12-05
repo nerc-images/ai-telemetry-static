@@ -347,7 +347,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqBareMetalNode_created')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_created')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -365,7 +365,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_archived')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_archived')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -383,7 +383,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_leaseInfo')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_leaseInfo')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -401,7 +401,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_networkInfo')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_networkInfo')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -419,7 +419,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodeId')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodeId')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -437,7 +437,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodeIsMaintenance')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodeIsMaintenance')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -455,7 +455,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodeLinks')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodeLinks')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -473,7 +473,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodeName')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodeName')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -491,7 +491,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodePowerState')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodePowerState')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -509,7 +509,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodeProvisionState')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodeProvisionState')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -527,7 +527,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_nodeResourceClass')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_nodeResourceClass')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -545,7 +545,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_displayPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -563,7 +563,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_editPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -581,7 +581,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_userPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);
@@ -599,7 +599,7 @@ Promise.all([
             facetRangeEndChange('BareMetalNode', event.currentTarget);
           });
           document.querySelector('#fqBareMetalNode_download')?.addEventListener('change', (event) => {
-            fqChange('BareMetalNode', event.currentTarget);
+            fqChange('BareMetalNode', event.currentTarget, facetChangeBareMetalNodeSuccess, facetChangeBareMetalNodeError);
           });
           document.querySelector('#buttonFacetBareMetalNode_download')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalNode', event.currentTarget);

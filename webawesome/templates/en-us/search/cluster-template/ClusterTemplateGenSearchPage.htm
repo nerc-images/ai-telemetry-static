@@ -48,51 +48,61 @@
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
 
-      function facetSimpleRangeClusterTemplateSuccess(pageContent) {
-{% block facetSimpleRangeClusterTemplateSuccess %}{%- endblock facetSimpleRangeClusterTemplateSuccess %}
+      function facetChangeClusterTemplateSuccess(e) {
+        var l = e.querySelector('.pageForm .listClusterTemplate')?.value;
+        if(l)
+          window.listClusterTemplate = JSON.parse(l);
+{% block facetChangeClusterTemplateSuccess %}{%- endblock facetClusterTemplateSuccess %}
       }
-      function facetSimpleRangeClusterTemplateError(pageContent) {
-{% block facetSimpleRangeClusterTemplateError %}{%- endblock facetSimpleRangeClusterTemplateError %}
+      function facetChangeClusterTemplateError(e) {
+{% block facetChangeClusterTemplateError %}{%- endblock facetClusterTemplateError %}
+      }
+
+      function facetSimpleRangeClusterTemplateSuccess(e) {
+{% block facetSimpleRangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetSimpleRangeClusterTemplateSuccess %}
+      }
+      function facetSimpleRangeClusterTemplateError(e) {
+{% block facetSimpleRangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{% endblock facetSimpleRangeClusterTemplateError %}
       }
       function facetSimpleRangeClusterTemplate(e) {
         facetSimpleRange(e, facetSimpleRangeClusterTemplateSuccess, facetSimpleRangeClusterTemplateError);
       }
 
-      function facetRangeTimeZoneClusterTemplateSuccess(pageContent) {
-{% block facetRangeTimeZoneClusterTemplateSuccess %}{%- endblock facetRangeTimeZoneClusterTemplateSuccess %}
+      function facetRangeTimeZoneClusterTemplateSuccess(e) {
+{% block facetRangeTimeZoneClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeTimeZoneClusterTemplateSuccess %}
       }
-      function facetRangeTimeZoneClusterTemplateError(pageContent) {
-{% block facetRangeTimeZoneClusterTemplateError %}{%- endblock facetRangeTimeZoneClusterTemplateError %}
+      function facetRangeTimeZoneClusterTemplateError(e) {
+{% block facetRangeTimeZoneClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeTimeZoneClusterTemplateError %}
       }
       function facetRangeTimeZoneClusterTemplate(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneClusterTemplateSuccess, facetRangeTimeZoneClusterTemplateError);
       }
 
-      function facetRangeGapChangeClusterTemplateSuccess(pageContent) {
-{% block facetRangeGapChangeClusterTemplateSuccess %}{%- endblock facetRangeGapChangeClusterTemplateSuccess %}
+      function facetRangeGapChangeClusterTemplateSuccess(e) {
+{% block facetRangeGapChangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeGapChangeClusterTemplateSuccess %}
       }
-      function facetRangeGapChangeClusterTemplateError(pageContent) {
-{% block facetRangeGapChangeClusterTemplateError %}{%- endblock facetRangeGapChangeClusterTemplateError %}
+      function facetRangeGapChangeClusterTemplateError(e) {
+{% block facetRangeGapChangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeGapChangeClusterTemplateError %}
       }
       function facetRangeGapChangeClusterTemplate(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterTemplateSuccess, facetRangeGapChangeClusterTemplateError);
       }
 
-      function facetRangeStartChangeClusterTemplateSuccess(pageContent) {
-{% block facetRangeStartChangeClusterTemplateSuccess %}{%- endblock facetRangeStartChangeClusterTemplateSuccess %}
+      function facetRangeStartChangeClusterTemplateSuccess(e) {
+{% block facetRangeStartChangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeStartChangeClusterTemplateSuccess %}
       }
-      function facetRangeStartChangeClusterTemplateError(pageContent) {
-{% block facetRangeStartChangeClusterTemplateError %}{%- endblock facetRangeStartChangeClusterTemplateError %}
+      function facetRangeStartChangeClusterTemplateError(e) {
+{% block facetRangeStartChangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeStartChangeClusterTemplateError %}
       }
       function facetRangeStartChangeClusterTemplate(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterTemplateSuccess, facetRangeStartChangeClusterTemplateError);
       }
 
-      function facetRangeEndChangeClusterTemplateSuccess(pageContent) {
-{% block facetRangeEndChangeClusterTemplateSuccess %}{%- endblock facetRangeEndChangeClusterTemplateSuccess %}
+      function facetRangeEndChangeClusterTemplateSuccess(e) {
+{% block facetRangeEndChangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeEndChangeClusterTemplateSuccess %}
       }
-      function facetRangeEndChangeClusterTemplateError(pageContent) {
-{% block facetRangeEndChangeClusterTemplateError %}{%- endblock facetRangeEndChangeClusterTemplateError %}
+      function facetRangeEndChangeClusterTemplateError(e) {
+{% block facetRangeEndChangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeEndChangeClusterTemplateError %}
       }
       function facetRangeEndChangeClusterTemplate(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterTemplateSuccess, facetRangeEndChangeClusterTemplateError);
