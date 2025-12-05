@@ -47,57 +47,88 @@
   }
 }
 {%- endblock htmStyleProjectPage %}
+
+{%- block facetSimpleRangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetSimpleRangeProjectSuccess -%}
+
+{%- block facetRangeTimeZoneProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeTimeZoneProjectSuccess -%}
+
+{%- block facetRangeGapChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeGapChangeProjectSuccess -%}
+
+{%- block facetRangeStartChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeStartChangeProjectSuccess -%}
+
+{%- block facetRangeEndChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeEndChangeProjectSuccess -%}
+
 {%- block htmScriptInitProjectPage %}
-      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Project-input").value;
-      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var step;
-      switch (facetRangeGapVal) {
-        case "+1YEAR":
-          step = "1y";
-          break;
-        case "+1MONTH":
-          step = "1M";
-          break;
-        case "+1DAY":
-          step = "1d";
-          break;
-        case "+1HOUR":
-          step = "1h";
-          break;
-        case "+1MINUTE":
-          step = "1m";
-          break;
-        default:
-          step = "7d";
-      }
-      var timeQuery = {
-        start: start
-        , end: end
-        , step: step
-      };
-      
-      // Time step for LLM metrics
-      var llmTimeQuery = {
-        start: start
-        , end: end
-        , step: "10m"
-      };
-      
-      Promise.all([
-          queryMemoryBytesTotal(timeQuery)
-          , queryCpuBytesTotal(timeQuery)
-          , queryGpuTemperature(timeQuery)
-          , queryGpuUtilization(timeQuery)
-          , queryLLME2ELatency(llmTimeQuery)
-          , queryLLMTokenThroughput(llmTimeQuery)
-          , queryLLMTTFTLatency(llmTimeQuery)
-          , queryLLMTPOTLatency(llmTimeQuery)
-          ]);
+      updateDashboards();
 {%- endblock htmScriptInitProjectPage %}
+
 {%- block htmScriptsProjectPage %}
 {{ super() }}
   <script>
+
+      function updateDashboards() {
+        var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-{{ classSimpleName }}-input").value;
+        var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value;
+        var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
+        var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+        var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+        var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+        var step;
+        switch (facetRangeGapVal) {
+          case "+1YEAR":
+            step = "1y";
+            break;
+          case "+1MONTH":
+            step = "1M";
+            break;
+          case "+1DAY":
+            step = "1d";
+            break;
+          case "+1HOUR":
+            step = "1h";
+            break;
+          case "+1MINUTE":
+            step = "1m";
+            break;
+          default:
+            step = "7d";
+        }
+
+        var timeQuery = {
+          start: start
+          , end: end
+          , step: step
+        };
+
+        // Time step for LLM metrics
+        var llmTimeQuery = {
+          start: start
+          , end: end
+          , step: "10m"
+        };
+
+        Promise.all([
+            queryMemoryBytesTotal(timeQuery)
+            , queryCpuBytesTotal(timeQuery)
+            , queryGpuTemperature(timeQuery)
+            , queryGpuUtilization(timeQuery)
+            , queryLLME2ELatency(llmTimeQuery)
+            , queryLLMTokenThroughput(llmTimeQuery)
+            , queryLLMTTFTLatency(llmTimeQuery)
+            , queryLLMTPOTLatency(llmTimeQuery)
+            ]);
+      }
+
     async function queryMemoryBytesTotal(timeQuery) {
       const urls = [];
       const hubIds = ['{{ result.hubId }}'];
@@ -145,9 +176,9 @@
       const urls = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
-        var projectNamesFilter = '{% if result.clusterName is defined %}cluster="{{ result.clusterName | e }}, {% else %}{% endif %}namespace="{{ result.projectName }}"';
+        var projectNamesFilter = '{% if result.clusterName is defined %}cluster="{{ result.clusterName | e }}", {% else %}{% endif %}namespace="{{ result.projectName }}"';
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '{% if result.clusterName is defined %}, label_node_role_kubernetes_io!="master"{% endif %} }'
+            query: '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '}'
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -191,14 +222,12 @@
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'DCGM_FI_DEV_MEMORY_TEMP{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}' 
+            query: 'DCGM_FI_DEV_GPU_TEMP{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}' 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
       const dataPromises = responses.map(response => response.json());
       const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-gpu-temperature';
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -216,6 +245,9 @@
         }
       });
       var layout = {
+        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        , yaxis: { title: 'Temperature (°F)' }
+        , legend: { title: { text: 'GPU Devices' } }
       };
       Plotly.newPlot(panelId, traces, layout);
     }
