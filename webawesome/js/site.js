@@ -444,3 +444,22 @@ function imgToDialog(target) {
   });
   target.after(dialog);
 }
+
+function populateDashboardDataQuery(panelId, urls, queries) {
+  var $linksUl = document.getElementById(panelId + '-data-links-ul');
+  if ($linksUl) {
+    $linksUl.innerHTML = '';
+    urls.forEach((url, i) => {
+      var query = queries[i];
+
+      var $linkLi = document.createElement('li');
+      $linksUl.append($linkLi);
+
+      var $linkA = document.createElement('a');
+      $linkA.setAttribute('href', url);
+      $linkA.setAttribute('target', '_blank');
+      $linkA.innerText = query;
+      $linkLi.append($linkA);
+    });
+  }
+}

@@ -8,26 +8,29 @@
   </div>
   <div class="wa-stack ">
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Percent of total memory usage for {{ result.clusterName }} cluster</header>
-        <div id="visualization-cluster-memory-bytes" class=""></div>
-      </wa-card>
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Percent of total CPU usage for {{ result.clusterName }} cluster</header>
-        <div id="visualization-cluster-cpu-bytes" class=""></div>
-      </wa-card>
+      {{ dashboardCard('visualization-cluster-memory-bytes', 'Percent of total memory usage for ' ~ result.clusterName ~ ' cluster') }}
+      {{ dashboardCard('visualization-cluster-cpu-bytes', 'Percent of total CPU usage for ' ~ result.clusterName ~ ' cluster') }}
     </div>
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-l ">GPU temperature per GPU device in cluster {{ result.clusterName }} project {{ result.projectName }}</header>
-        <div id="visualization-cluster-gpu-temperature" class="wa-grid "></div>
-      </wa-card>
+      {{ dashboardCard('visualization-cluster-gpu-temperature', 'GPU temperature per GPU device in cluster ' ~ result.clusterName ~ ' project ' ~ result.projectName) }}
     </div>
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-l ">GPU utilization per GPU device in cluster {{ result.clusterName }} project {{ result.projectName }}</header>
-        <div id="visualization-cluster-gpu-utilization" class="wa-grid "></div>
-      </wa-card>
+      {{ dashboardCard('visualization-cluster-gpu-utilization', 'GPU utilization per GPU device in cluster ' ~ result.clusterName ~ ' project ' ~ result.projectName) }}
+    </div>
+  </div>
+</wa-details>
+<wa-details open class="HtmRow" id="llm-performance-dashboard">
+  <div slot="summary">
+    LLM Performance Metrics
+  </div>
+  <div class="wa-stack ">
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-llm-e2e-latency', 'LLM E2E Request Latency in ' ~ result.projectName) }}
+      {{ dashboardCard('visualization-llm-token-throughput', 'LLM Token Throughput in ' ~ result.projectName) }}
+    </div>
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-llm-ttft-latency', 'LLM Time To First Token in ' ~ result.projectName) }}
+      {{ dashboardCard('visualization-llm-tpot-latency', 'LLM Time Per Output Token in ' ~ result.projectName) }}
     </div>
   </div>
 </wa-details>
@@ -51,55 +54,97 @@
   }
 }
 {%- endblock htmStyleProjectPage %}
+
+{%- block facetSimpleRangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetSimpleRangeProjectSuccess -%}
+
+{%- block facetRangeTimeZoneProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeTimeZoneProjectSuccess -%}
+
+{%- block facetRangeGapChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeGapChangeProjectSuccess -%}
+
+{%- block facetRangeStartChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeStartChangeProjectSuccess -%}
+
+{%- block facetRangeEndChangeProjectSuccess %}
+      updateDashboards();
+{% endblock facetRangeEndChangeProjectSuccess -%}
+
 {%- block htmScriptInitProjectPage %}
-
-      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Project-input").value;
-      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var step;
-      switch (facetRangeGapVal) {
-        case "+1YEAR":
-          step = "1y";
-          break;
-        case "+1MONTH":
-          step = "1M";
-          break;
-        case "+1DAY":
-          step = "1d";
-          break;
-        case "+1HOUR":
-          step = "1h";
-          break;
-        case "+1MINUTE":
-          step = "1m";
-          break;
-        default:
-          step = "7d";
-      }
-
-      var timeQuery = {
-        start: start
-        , end: end
-        , step: step
-      };
-
-      Promise.all([
-          queryMemoryBytesTotal(timeQuery)
-          , queryCpuBytesTotal(timeQuery)
-          , queryGpuTemperature(timeQuery)
-          , queryGpuUtilization(timeQuery)
-          ]);
+      updateDashboards();
 {%- endblock htmScriptInitProjectPage %}
+
 {%- block htmScriptsProjectPage %}
 {{ super() }}
   <script>
 
+      function updateDashboards() {
+        var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-{{ classSimpleName }}-input").value;
+        var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value;
+        var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
+        var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+        var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+        var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+        var step;
+        switch (facetRangeGapVal) {
+          case "+1YEAR":
+            step = "1y";
+            break;
+          case "+1MONTH":
+            step = "1M";
+            break;
+          case "+1DAY":
+            step = "1d";
+            break;
+          case "+1HOUR":
+            step = "1h";
+            break;
+          case "+1MINUTE":
+            step = "1m";
+            break;
+          default:
+            step = "7d";
+        }
+
+        var timeQuery = {
+          start: start
+          , end: end
+          , step: step
+        };
+
+        // Time step for LLM metrics
+        var llmTimeQuery = {
+          start: start
+          , end: end
+          , step: "10m"
+        };
+
+        Promise.all([
+            queryMemoryBytesTotal(timeQuery)
+            , queryCpuBytesTotal(timeQuery)
+            , queryGpuTemperature(timeQuery)
+            , queryGpuUtilization(timeQuery)
+            , queryLLME2ELatency(llmTimeQuery)
+            , queryLLMTokenThroughput(llmTimeQuery)
+            , queryLLMTTFTLatency(llmTimeQuery)
+            , queryLLMTPOTLatency(llmTimeQuery)
+            ]);
+      }
+
     async function queryMemoryBytesTotal(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var query = 'namespace:container_memory_usage_bytes:sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'namespace:container_memory_usage_bytes:sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -107,8 +152,9 @@
       const responseJsons = await Promise.all(dataPromises);
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
-
       var panelId = 'visualization-cluster-memory-bytes';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         responseJson.data.result.forEach((result, j) => {
@@ -122,7 +168,6 @@
           });
         });
       });
-
       var layout = {
         xaxis: {
           title: 'Time in {{ defaultZoneId }}'
@@ -141,11 +186,14 @@
 
     async function queryCpuBytesTotal(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
-        var projectNamesFilter = '{% if result.clusterName is defined %}cluster="{{ result.clusterName | e }}, {% else %}{% endif %}namespace="{{ result.projectName }}"';
+        var projectNamesFilter = '{% if result.clusterName is defined %}cluster="{{ result.clusterName | e }}", {% else %}{% endif %}namespace="{{ result.projectName }}"';
+        var query = '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: '{% if result.clusterName is defined %}node_namespace_pod_container:container_cpu_usage_seconds_total:sum{% else %}namespace:container_cpu_usage:sum{% endif %}{' + projectNamesFilter + '} / on({% if result.clusterName is defined %}cluster, {% endif %}namespace) namespace_cpu:kube_pod_container_resource_requests:sum{' + projectNamesFilter + '{% if result.clusterName is defined %}, label_node_role_kubernetes_io!="master"{% endif %} }'
+            query: query
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -153,8 +201,9 @@
       const responseJsons = await Promise.all(dataPromises);
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
-
       var panelId = 'visualization-cluster-cpu-bytes';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         responseJson.data.result.forEach((result, j) => {
@@ -168,7 +217,6 @@
           });
         });
       });
-
       var layout = {
         xaxis: {
           title: 'Time in {{ defaultZoneId }}'
@@ -188,19 +236,21 @@
 
     async function queryGpuTemperature(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var query = 'DCGM_FI_DEV_GPU_TEMP{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'DCGM_FI_DEV_MEMORY_TEMP{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
       const dataPromises = responses.map(response => response.json());
       const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
-
       var panelId = 'visualization-cluster-gpu-temperature';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data) {
@@ -216,18 +266,23 @@
           });
         }
       });
-
       var layout = {
+        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        , yaxis: { title: 'Temperature (°F)' }
+        , legend: { title: { text: 'GPU Devices' } }
       };
       Plotly.newPlot(panelId, traces, layout);
     }
 
     async function queryGpuUtilization(timeQuery) {
       const urls = [];
+      const queries = [];
       const hubIds = ['{{ result.hubId }}'];
       hubIds.forEach((hubId, i) => {
+        var query = 'DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}';
+        queries.push(query);
         urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            query: 'DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterName }}",exported_namespace="{{ result.projectName }}"}' 
+            query: query 
             }, timeQuery)).toString());
       });
       const responses = await Promise.all(urls.map(url => fetch(url)));
@@ -235,8 +290,9 @@
       const responseJsons = await Promise.all(dataPromises);
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
-
       var panelId = 'visualization-cluster-gpu-utilization';
+      populateDashboardDataQuery(panelId, urls, queries);
+
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         if(responseJson.data) {
@@ -252,10 +308,219 @@
           });
         }
       });
-
       var layout = {
       };
       Plotly.newPlot(panelId, traces, layout);
     }
+
+    async function queryLLME2ELatency(timeQuery) {
+      const urls = [];
+      const queries = [];
+      const hubIds = ['{{ result.hubId }}'];
+      var rateInterval = timeQuery.step;
+      hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:e2e_request_latency_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:e2e_request_latency_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: query 
+            }, timeQuery)).toString());
+      });
+      
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+
+      var panelId = 'visualization-llm-e2e-latency';
+      populateDashboardDataQuery(panelId, urls, queries);
+
+      var traces = [];
+      responseJsons.forEach((responseJson, i) => {
+        if(responseJson.data && responseJson.data.result) {
+          responseJson.data.result.forEach((result, j) => {
+            // Try to filter out responses that don't contain values
+            if(result.values && result.values.length > 0) {
+              var modelName = result.metric.model_name || 'unknown';
+              traces.push({
+                x: result.values.map(values => new Date(values[0] * 1000))
+                , y: result.values.map(values => parseFloat(values[1]) * 1000)
+                , mode: 'lines+markers'
+                , name: 'Average (' + modelName + ')'
+              });
+            }
+          });
+        }
+      });
+      var layout = {
+        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        , yaxis: { title: 'Latency (ms)' }
+        , legend: { title: { text: 'E2E Latency' } }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
+
+    async function queryLLMTokenThroughput(timeQuery) {
+      const urls = [];
+      const queries = [];
+      const hubIds = ['{{ result.hubId }}'];
+      var rateInterval = timeQuery.step;
+      
+      // Query for prompt tokens
+      hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:prompt_tokens_total{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: query 
+            }, timeQuery)).toString());
+      });
+      
+      // Query for generation tokens
+      hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:generation_tokens_total{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: query 
+            }, timeQuery)).toString());
+      });
+      
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+
+      var panelId = 'visualization-llm-token-throughput';
+      populateDashboardDataQuery(panelId, urls, queries);
+
+      var traces = [];
+      var halfLength = responseJsons.length / 2;
+      
+      // Process prompt tokens 
+      for(var i = 0; i < halfLength; i++) {
+        var responseJson = responseJsons[i];
+        if(responseJson.data && responseJson.data.result) {
+          responseJson.data.result.forEach((result, j) => {
+            if(result.values && result.values.length > 0) {
+              var modelName = result.metric.model_name || 'unknown';
+              traces.push({
+                x: result.values.map(values => new Date(values[0] * 1000))
+                , y: result.values.map(values => parseFloat(values[1]))
+                , mode: 'lines+markers'
+                , name: 'Prompt Tokens/Sec (' + modelName + ')'
+              });
+            }
+          });
+        }
+      }
+      
+      // Process generation tokens 
+      for(var i = halfLength; i < responseJsons.length; i++) {
+        var responseJson = responseJsons[i];
+        if(responseJson.data && responseJson.data.result) {
+          responseJson.data.result.forEach((result, j) => {
+            if(result.values && result.values.length > 0) {
+              var modelName = result.metric.model_name || 'unknown';
+              traces.push({
+                x: result.values.map(values => new Date(values[0] * 1000))
+                , y: result.values.map(values => parseFloat(values[1]))
+                , mode: 'lines+markers'
+                , name: 'Generation Tokens/Sec (' + modelName + ')'
+              });
+            }
+          });
+        }
+      }
+      
+      var layout = {
+        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        , yaxis: { title: 'Tokens per Second' }
+        , legend: { title: { text: 'Token Throughput' } }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
+
+    async function queryLLMTTFTLatency(timeQuery) {
+      const urls = [];
+      const queries = [];
+      const hubIds = ['{{ result.hubId }}'];
+      var rateInterval = timeQuery.step;
+      hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:time_to_first_token_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:time_to_first_token_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: query 
+            }, timeQuery)).toString());
+      });
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+
+      var panelId = 'visualization-llm-ttft-latency';
+      populateDashboardDataQuery(panelId, urls, queries);
+
+      var traces = [];
+      responseJsons.forEach((responseJson, i) => {
+        if(responseJson.data && responseJson.data.result) {
+          responseJson.data.result.forEach((result, j) => {
+            if(result.values && result.values.length > 0) {
+              var modelName = result.metric.model_name || 'unknown';
+              traces.push({
+                x: result.values.map(values => new Date(values[0] * 1000))
+                , y: result.values.map(values => parseFloat(values[1]) * 1000)
+                , mode: 'lines+markers'
+                , name: 'Average TTFT (' + modelName + ')'
+              });
+            }
+          });
+        }
+      });
+      var layout = {
+        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        , yaxis: { title: 'Latency (ms)' }
+        , legend: { title: { text: 'TTFT Latency' } }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
+
+    async function queryLLMTPOTLatency(timeQuery) {
+      const urls = [];
+      const queries = [];
+      const hubIds = ['{{ result.hubId }}'];
+      var rateInterval = timeQuery.step;
+      hubIds.forEach((hubId, i) => {
+        var query = 'rate(vllm:time_per_output_token_seconds_sum{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + ']) / rate(vllm:time_per_output_token_seconds_count{cluster="{{ result.clusterName }}",namespace="{{ result.projectName }}"}[' + rateInterval + '])';
+        queries.push(query);
+        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+            query: query 
+            }, timeQuery)).toString());
+      });
+      const responses = await Promise.all(urls.map(url => fetch(url)));
+      const dataPromises = responses.map(response => response.json());
+      const responseJsons = await Promise.all(dataPromises);
+
+      var panelId = 'visualization-llm-tpot-latency';
+      populateDashboardDataQuery(panelId, urls, queries);
+
+      var traces = [];
+      responseJsons.forEach((responseJson, i) => {
+        if(responseJson.data && responseJson.data.result) {
+          responseJson.data.result.forEach((result, j) => {
+            if(result.values && result.values.length > 0) {
+              var modelName = result.metric.model_name || 'unknown';
+              traces.push({
+                x: result.values.map(values => new Date(values[0] * 1000))
+                , y: result.values.map(values => parseFloat(values[1]) * 1000)
+                , mode: 'lines+markers'
+                , name: 'Mean TPOT (' + modelName + ')'
+              });
+            }
+          });
+        }
+      });
+      var layout = {
+        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        , yaxis: { title: 'Latency (ms)' }
+        , legend: { title: { text: 'Time Per Output Token' } }
+      };
+      Plotly.newPlot(panelId, traces, layout);
+    }
+
   </script>
 {%- endblock htmScriptsProjectPage %}
