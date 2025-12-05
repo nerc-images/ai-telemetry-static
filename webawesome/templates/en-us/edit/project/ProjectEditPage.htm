@@ -17,6 +17,13 @@
     <div class="wa-grid ">
       {{ dashboardCard('visualization-cluster-gpu-utilization', 'GPU utilization per GPU device in cluster ' ~ result.clusterName ~ ' project ' ~ result.projectName) }}
     </div>
+  </div>
+</wa-details>
+<wa-details open class="HtmRow" id="llm-performance-dashboard">
+  <div slot="summary">
+    LLM Performance Metrics
+  </div>
+  <div class="wa-stack ">
     <div class="wa-grid ">
       {{ dashboardCard('visualization-llm-e2e-latency', 'LLM E2E Request Latency in ' ~ result.projectName) }}
       {{ dashboardCard('visualization-llm-token-throughput', 'LLM Token Throughput in ' ~ result.projectName) }}
