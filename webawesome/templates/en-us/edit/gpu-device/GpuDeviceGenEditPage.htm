@@ -418,24 +418,40 @@
 
 {%- block htmUrlGpuDevicePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlGpuDevicePage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/gpu-device/GpuDeviceSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/gpu-device/GpuDeviceSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-GpuDevice">back to all GPU devices</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-GpuDevice" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-memory"></i>
+                  all GPU devices
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a GPU device
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartGpuDevicePage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-GpuDevice">back to all GPU devices</wa-tooltip>
-            <wa-button id="return-to-GpuDevice" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all GPU devices
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-memory"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/gpu-device/GpuDeviceSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
 {%- endblock htmBodyStartGpuDevicePage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -478,7 +494,6 @@
             <input name="listGpuDevice" id="listGpuDevice" class="listGpuDevice"  value='{{ toJsonArrayStringInApostrophes(listGpuDevice) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageGpuDevice() }}
           {{ htmForm_searchpageGpuDevice() }}
   {% endif %}
 {%- endblock htmFormGpuDevicePage %}

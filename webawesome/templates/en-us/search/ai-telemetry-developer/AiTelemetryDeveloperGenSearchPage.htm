@@ -314,11 +314,12 @@
 {% include en-us/search/ai-telemetry-developer/AiTelemetryDeveloperSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/ai-telemetry-developer/AiTelemetryDeveloperSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/ai-telemetry-developer/AiTelemetryDeveloperSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/ai-telemetry-developer/AiTelemetryDeveloperSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleAiTelemetryDeveloperPage %}

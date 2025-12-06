@@ -225,24 +225,40 @@
 
 {%- block htmUrlSiteUserPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlSiteUserPage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/user/SiteUserSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/user/SiteUserSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-solid fa-user-gear"></i>
+                  all site users
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a site user
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartSiteUserPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip>
-            <wa-button id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all site users
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-duotone fa-solid fa-user-gear"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/user/SiteUserSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/user/SiteUserSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/user/SiteUserSearchForm.htm %}
 {%- endblock htmBodyStartSiteUserPage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -285,7 +301,6 @@
             <input name="listSiteUser" id="listSiteUser" class="listSiteUser"  value='{{ toJsonArrayStringInApostrophes(listSiteUser) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageSiteUser() }}
           {{ htmForm_searchpageSiteUser() }}
   {% endif %}
 {%- endblock htmFormSiteUserPage %}

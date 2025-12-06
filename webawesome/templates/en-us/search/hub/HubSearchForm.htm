@@ -303,8 +303,6 @@ The ID for this page. "
                             {{ inputPageIdHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchHub() %}<wa-button variant="brand" id="htmButton_patchHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_patchHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -375,8 +373,6 @@ The ID for this page. "
           {{ htmFormButton_patchHub() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_postHub() %}<wa-button variant="brand" id="htmButton_postHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postHub" duration="5000" closable class="wa-header-l ">
@@ -450,8 +446,6 @@ The ID for this page. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteHub() %}<wa-button variant="brand" id="htmButton_deleteHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deleteHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -468,8 +462,6 @@ The ID for this page. "
           {{ htmFormButton_deleteHub() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_putimportHub() %}<wa-button variant="brand" id="htmButton_putimportHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHub" duration="5000" closable class="wa-header-l ">
@@ -494,17 +486,6 @@ The ID for this page. "
           </form>
           {{ htmFormButton_putimportHub() }}
         </wa-dialog>
-{%- endmacro %}
-
-{%- macro htmButton_searchpageHub() %}{%- endmacro %}
-
-{%- macro htmFormButton_searchpageHub() %}
-          <wa-popup  auto-size="both" placement="top" id="alertButton_searchpageHub" duration="5000" closable class="wa-header-l ">
-            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
-                 id="htmFormButton_searchpageHub"
-                >Search hubs</wa-button>
-            <wa-badge class="alertPopup" id="alertPopupButton_searchpageHub"></wa-badge>
-          </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHub() %}
@@ -617,8 +598,6 @@ The ID for this page. "
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterHub() %}<wa-button variant="brand" id="htmButton_deletefilterHub" data-hubId={{ result.hubId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deletefilterHub() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -635,61 +614,6 @@ The ID for this page. "
           {{ htmFormButton_deletefilterHub() }}
         </wa-dialog>
 {%- endmacro %}
-          <div id="htmSearchForm">
-            <wa-scroller>
-              <wa-button-group>
-{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {% if "PATCH" in scopes %}
-    {% if resultCount >= 1 %}
-                <wa-button variant="brand" id="refreshThisHubGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'hubId:{{ result.hubId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHubGenPage')); }, function() { addError(document.querySelector('#refreshThisHubGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
-                  refresh
-                </wa-button>
-    {% endif %}
-    {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllHubGenPage{{ result.hubId | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHubGenPage{{ result.hubId | e }}')); }, function() { addError(document.querySelector('#refreshAllHubGenPage{{ result.hubId | e }}')); }); "
-                    >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
-                  refresh all 
-                </wa-button>
-    {% endif %}
-  {% endif %}
-{% endif %}
-{%- if 'PATCH' in scopes %}
-  {%- if resultCount > 0 %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_patchHub() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-{%- if 'POST' in scopes %}
-  {%- if resultCount >= 1 %}
-    {{ htmButton_postHub() }}
-  {%- else %}
-    {{ htmButton_postHub() }}
-  {%- endif %}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is defined %}
-    {{ htmButton_deleteHub() }}
-  {%- endif %}
-{%- endif %}
-{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {{ htmButton_putimportHub() }}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is not defined %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_deletefilterHub() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-
-              </wa-button-group>
-            </wa-scroller>
-          </div>
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchHub() }}
   {%- endif %}

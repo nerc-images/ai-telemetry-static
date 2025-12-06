@@ -314,11 +314,12 @@
 {% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalResourceClassPage %}
