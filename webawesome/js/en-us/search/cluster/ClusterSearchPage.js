@@ -501,7 +501,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqCluster_created')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_created')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -519,7 +519,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_archived')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_archived')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -537,7 +537,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_hubId')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_hubId')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -555,7 +555,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_clusterName')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_clusterName')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -573,7 +573,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_hubCluster')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_hubCluster')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -591,7 +591,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_location')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_location')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -609,7 +609,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_aiNodesTotal')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_aiNodesTotal')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -627,7 +627,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_gpuDevicesTotal')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_gpuDevicesTotal')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -645,7 +645,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_vmsTotal')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_vmsTotal')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -663,7 +663,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_cpuCoresTotal')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_cpuCoresTotal')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -681,7 +681,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_memoryBytesTotal')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_memoryBytesTotal')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -699,7 +699,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_id')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_id')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -717,7 +717,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_ngsildTenant')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_ngsildTenant')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -735,7 +735,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_ngsildPath')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_ngsildPath')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -753,7 +753,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_ngsildContext')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_ngsildContext')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -771,7 +771,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_ngsildData')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_ngsildData')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -789,7 +789,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_displayPage')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -807,7 +807,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_editPage')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -825,7 +825,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_userPage')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -843,7 +843,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_download')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_download')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);
@@ -861,7 +861,7 @@ Promise.all([
             facetRangeEndChange('Cluster', event.currentTarget);
           });
           document.querySelector('#fqCluster_clusterResource')?.addEventListener('change', (event) => {
-            fqChange('Cluster', event.currentTarget);
+            fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
           });
           document.querySelector('#buttonFacetCluster_clusterResource')?.addEventListener('click', (event) => {
             facetFieldChange('Cluster', event.currentTarget);

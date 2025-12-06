@@ -424,7 +424,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqSitePage_created')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_created')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -442,7 +442,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_authorName')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_authorName')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -460,7 +460,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_authorUrl')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_authorUrl')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -478,7 +478,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_pageImageUri')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_pageImageUri')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -496,7 +496,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_pageId')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_pageId')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -514,7 +514,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_displayPage')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -532,7 +532,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_editPage')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -550,7 +550,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_userPage')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -568,7 +568,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_download')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_download')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -586,7 +586,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_courseNum')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_courseNum')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);
@@ -604,7 +604,7 @@ Promise.all([
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_lessonNum')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget);
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
           document.querySelector('#buttonFacetSitePage_lessonNum')?.addEventListener('click', (event) => {
             facetFieldChange('SitePage', event.currentTarget);

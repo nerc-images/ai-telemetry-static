@@ -376,7 +376,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqBareMetalOrder_created')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_created')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -394,7 +394,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_archived')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_archived')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -412,7 +412,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_description')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_description')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -430,7 +430,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_numberOfFc430')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_numberOfFc430')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -448,7 +448,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_numberOfFc830')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_numberOfFc830')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -466,7 +466,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_numberOfR730xd')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_numberOfR730xd')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -484,7 +484,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_numberOfWhiteboxFlax1')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_numberOfWhiteboxFlax1')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -502,7 +502,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_numberOfLenovoSd650nv2A100')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_numberOfLenovoSd650nv2A100')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -520,7 +520,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_numberOfLenovoSd665nv3H100')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_numberOfLenovoSd665nv3H100')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -538,7 +538,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_image')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_image')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -556,7 +556,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_sshPublicKey')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_sshPublicKey')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -574,7 +574,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_floatingIp')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_floatingIp')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -592,7 +592,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_status')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_status')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -610,7 +610,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_displayPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -628,7 +628,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_editPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -646,7 +646,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_userPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);
@@ -664,7 +664,7 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
           document.querySelector('#fqBareMetalOrder_download')?.addEventListener('change', (event) => {
-            fqChange('BareMetalOrder', event.currentTarget);
+            fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
           document.querySelector('#buttonFacetBareMetalOrder_download')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalOrder', event.currentTarget);

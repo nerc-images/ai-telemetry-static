@@ -48,51 +48,61 @@
 {%- endblock htmTooltipClusterTemplatePage %}`;
       }
 
-      function facetSimpleRangeClusterTemplateSuccess(pageContent) {
-{% block facetSimpleRangeClusterTemplateSuccess %}{%- endblock facetSimpleRangeClusterTemplateSuccess %}
+      function facetChangeClusterTemplateSuccess(e) {
+        var l = e.querySelector('.pageForm .listClusterTemplate')?.value;
+        if(l)
+          window.listClusterTemplate = JSON.parse(l);
+{% block facetChangeClusterTemplateSuccess %}{%- endblock facetClusterTemplateSuccess %}
       }
-      function facetSimpleRangeClusterTemplateError(pageContent) {
-{% block facetSimpleRangeClusterTemplateError %}{%- endblock facetSimpleRangeClusterTemplateError %}
+      function facetChangeClusterTemplateError(e) {
+{% block facetChangeClusterTemplateError %}{%- endblock facetClusterTemplateError %}
+      }
+
+      function facetSimpleRangeClusterTemplateSuccess(e) {
+{% block facetSimpleRangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetSimpleRangeClusterTemplateSuccess %}
+      }
+      function facetSimpleRangeClusterTemplateError(e) {
+{% block facetSimpleRangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{% endblock facetSimpleRangeClusterTemplateError %}
       }
       function facetSimpleRangeClusterTemplate(e) {
         facetSimpleRange(e, facetSimpleRangeClusterTemplateSuccess, facetSimpleRangeClusterTemplateError);
       }
 
-      function facetRangeTimeZoneClusterTemplateSuccess(pageContent) {
-{% block facetRangeTimeZoneClusterTemplateSuccess %}{%- endblock facetRangeTimeZoneClusterTemplateSuccess %}
+      function facetRangeTimeZoneClusterTemplateSuccess(e) {
+{% block facetRangeTimeZoneClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeTimeZoneClusterTemplateSuccess %}
       }
-      function facetRangeTimeZoneClusterTemplateError(pageContent) {
-{% block facetRangeTimeZoneClusterTemplateError %}{%- endblock facetRangeTimeZoneClusterTemplateError %}
+      function facetRangeTimeZoneClusterTemplateError(e) {
+{% block facetRangeTimeZoneClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeTimeZoneClusterTemplateError %}
       }
       function facetRangeTimeZoneClusterTemplate(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneClusterTemplateSuccess, facetRangeTimeZoneClusterTemplateError);
       }
 
-      function facetRangeGapChangeClusterTemplateSuccess(pageContent) {
-{% block facetRangeGapChangeClusterTemplateSuccess %}{%- endblock facetRangeGapChangeClusterTemplateSuccess %}
+      function facetRangeGapChangeClusterTemplateSuccess(e) {
+{% block facetRangeGapChangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeGapChangeClusterTemplateSuccess %}
       }
-      function facetRangeGapChangeClusterTemplateError(pageContent) {
-{% block facetRangeGapChangeClusterTemplateError %}{%- endblock facetRangeGapChangeClusterTemplateError %}
+      function facetRangeGapChangeClusterTemplateError(e) {
+{% block facetRangeGapChangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeGapChangeClusterTemplateError %}
       }
       function facetRangeGapChangeClusterTemplate(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterTemplateSuccess, facetRangeGapChangeClusterTemplateError);
       }
 
-      function facetRangeStartChangeClusterTemplateSuccess(pageContent) {
-{% block facetRangeStartChangeClusterTemplateSuccess %}{%- endblock facetRangeStartChangeClusterTemplateSuccess %}
+      function facetRangeStartChangeClusterTemplateSuccess(e) {
+{% block facetRangeStartChangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeStartChangeClusterTemplateSuccess %}
       }
-      function facetRangeStartChangeClusterTemplateError(pageContent) {
-{% block facetRangeStartChangeClusterTemplateError %}{%- endblock facetRangeStartChangeClusterTemplateError %}
+      function facetRangeStartChangeClusterTemplateError(e) {
+{% block facetRangeStartChangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeStartChangeClusterTemplateError %}
       }
       function facetRangeStartChangeClusterTemplate(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterTemplateSuccess, facetRangeStartChangeClusterTemplateError);
       }
 
-      function facetRangeEndChangeClusterTemplateSuccess(pageContent) {
-{% block facetRangeEndChangeClusterTemplateSuccess %}{%- endblock facetRangeEndChangeClusterTemplateSuccess %}
+      function facetRangeEndChangeClusterTemplateSuccess(e) {
+{% block facetRangeEndChangeClusterTemplateSuccess %}      facetChangeClusterTemplateSuccess(e);{% endblock facetRangeEndChangeClusterTemplateSuccess %}
       }
-      function facetRangeEndChangeClusterTemplateError(pageContent) {
-{% block facetRangeEndChangeClusterTemplateError %}{%- endblock facetRangeEndChangeClusterTemplateError %}
+      function facetRangeEndChangeClusterTemplateError(e) {
+{% block facetRangeEndChangeClusterTemplateError %}      facetChangeClusterTemplateError(e);{%- endblock facetRangeEndChangeClusterTemplateError %}
       }
       function facetRangeEndChangeClusterTemplate(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterTemplateSuccess, facetRangeEndChangeClusterTemplateError);
@@ -245,24 +255,40 @@
 
 {%- block htmUrlClusterTemplatePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlClusterTemplatePage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/cluster-template/ClusterTemplateSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/cluster-template/ClusterTemplateSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ClusterTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-server"></i>
+                  all OpenShift cluster templates
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  an OpenShift cluster template
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartClusterTemplatePage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-ClusterTemplate">back to all OpenShift cluster templates</wa-tooltip>
-            <wa-button id="return-to-ClusterTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all OpenShift cluster templates
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/cluster-template/ClusterTemplateSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/cluster-template/ClusterTemplateSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/cluster-template/ClusterTemplateSearchForm.htm %}
 {%- endblock htmBodyStartClusterTemplatePage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -305,7 +331,6 @@
             <input name="listClusterTemplate" id="listClusterTemplate" class="listClusterTemplate"  value='{{ toJsonArrayStringInApostrophes(listClusterTemplate) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageClusterTemplate() }}
           {{ htmForm_searchpageClusterTemplate() }}
   {% endif %}
 {%- endblock htmFormClusterTemplatePage %}

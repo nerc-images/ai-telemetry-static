@@ -131,51 +131,61 @@
 {%- endblock jsStyleClusterPage %}
       }
 
-      function facetSimpleRangeClusterSuccess(pageContent) {
-{% block facetSimpleRangeClusterSuccess %}{%- endblock facetSimpleRangeClusterSuccess %}
+      function facetChangeClusterSuccess(e) {
+        var l = e.querySelector('.pageForm .listCluster')?.value;
+        if(l)
+          window.listCluster = JSON.parse(l);
+{% block facetChangeClusterSuccess %}{%- endblock facetClusterSuccess %}
       }
-      function facetSimpleRangeClusterError(pageContent) {
-{% block facetSimpleRangeClusterError %}{%- endblock facetSimpleRangeClusterError %}
+      function facetChangeClusterError(e) {
+{% block facetChangeClusterError %}{%- endblock facetClusterError %}
+      }
+
+      function facetSimpleRangeClusterSuccess(e) {
+{% block facetSimpleRangeClusterSuccess %}      facetChangeClusterSuccess(e);{% endblock facetSimpleRangeClusterSuccess %}
+      }
+      function facetSimpleRangeClusterError(e) {
+{% block facetSimpleRangeClusterError %}      facetChangeClusterError(e);{% endblock facetSimpleRangeClusterError %}
       }
       function facetSimpleRangeCluster(e) {
         facetSimpleRange(e, facetSimpleRangeClusterSuccess, facetSimpleRangeClusterError);
       }
 
-      function facetRangeTimeZoneClusterSuccess(pageContent) {
-{% block facetRangeTimeZoneClusterSuccess %}{%- endblock facetRangeTimeZoneClusterSuccess %}
+      function facetRangeTimeZoneClusterSuccess(e) {
+{% block facetRangeTimeZoneClusterSuccess %}      facetChangeClusterSuccess(e);{% endblock facetRangeTimeZoneClusterSuccess %}
       }
-      function facetRangeTimeZoneClusterError(pageContent) {
-{% block facetRangeTimeZoneClusterError %}{%- endblock facetRangeTimeZoneClusterError %}
+      function facetRangeTimeZoneClusterError(e) {
+{% block facetRangeTimeZoneClusterError %}      facetChangeClusterError(e);{%- endblock facetRangeTimeZoneClusterError %}
       }
       function facetRangeTimeZoneCluster(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneClusterSuccess, facetRangeTimeZoneClusterError);
       }
 
-      function facetRangeGapChangeClusterSuccess(pageContent) {
-{% block facetRangeGapChangeClusterSuccess %}{%- endblock facetRangeGapChangeClusterSuccess %}
+      function facetRangeGapChangeClusterSuccess(e) {
+{% block facetRangeGapChangeClusterSuccess %}      facetChangeClusterSuccess(e);{% endblock facetRangeGapChangeClusterSuccess %}
       }
-      function facetRangeGapChangeClusterError(pageContent) {
-{% block facetRangeGapChangeClusterError %}{%- endblock facetRangeGapChangeClusterError %}
+      function facetRangeGapChangeClusterError(e) {
+{% block facetRangeGapChangeClusterError %}      facetChangeClusterError(e);{%- endblock facetRangeGapChangeClusterError %}
       }
       function facetRangeGapChangeCluster(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterSuccess, facetRangeGapChangeClusterError);
       }
 
-      function facetRangeStartChangeClusterSuccess(pageContent) {
-{% block facetRangeStartChangeClusterSuccess %}{%- endblock facetRangeStartChangeClusterSuccess %}
+      function facetRangeStartChangeClusterSuccess(e) {
+{% block facetRangeStartChangeClusterSuccess %}      facetChangeClusterSuccess(e);{% endblock facetRangeStartChangeClusterSuccess %}
       }
-      function facetRangeStartChangeClusterError(pageContent) {
-{% block facetRangeStartChangeClusterError %}{%- endblock facetRangeStartChangeClusterError %}
+      function facetRangeStartChangeClusterError(e) {
+{% block facetRangeStartChangeClusterError %}      facetChangeClusterError(e);{%- endblock facetRangeStartChangeClusterError %}
       }
       function facetRangeStartChangeCluster(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterSuccess, facetRangeStartChangeClusterError);
       }
 
-      function facetRangeEndChangeClusterSuccess(pageContent) {
-{% block facetRangeEndChangeClusterSuccess %}{%- endblock facetRangeEndChangeClusterSuccess %}
+      function facetRangeEndChangeClusterSuccess(e) {
+{% block facetRangeEndChangeClusterSuccess %}      facetChangeClusterSuccess(e);{% endblock facetRangeEndChangeClusterSuccess %}
       }
-      function facetRangeEndChangeClusterError(pageContent) {
-{% block facetRangeEndChangeClusterError %}{%- endblock facetRangeEndChangeClusterError %}
+      function facetRangeEndChangeClusterError(e) {
+{% block facetRangeEndChangeClusterError %}      facetChangeClusterError(e);{%- endblock facetRangeEndChangeClusterError %}
       }
       function facetRangeEndChangeCluster(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterSuccess, facetRangeEndChangeClusterError);
@@ -403,11 +413,12 @@
 {% include en-us/search/cluster/ClusterSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/cluster/ClusterSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/cluster/ClusterSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/cluster/ClusterSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterPage %}

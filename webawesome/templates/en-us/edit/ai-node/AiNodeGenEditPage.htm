@@ -132,51 +132,61 @@
 {%- endblock jsStyleAiNodePage %}
       }
 
-      function facetSimpleRangeAiNodeSuccess(pageContent) {
-{% block facetSimpleRangeAiNodeSuccess %}{%- endblock facetSimpleRangeAiNodeSuccess %}
+      function facetChangeAiNodeSuccess(e) {
+        var l = e.querySelector('.pageForm .listAiNode')?.value;
+        if(l)
+          window.listAiNode = JSON.parse(l);
+{% block facetChangeAiNodeSuccess %}{%- endblock facetAiNodeSuccess %}
       }
-      function facetSimpleRangeAiNodeError(pageContent) {
-{% block facetSimpleRangeAiNodeError %}{%- endblock facetSimpleRangeAiNodeError %}
+      function facetChangeAiNodeError(e) {
+{% block facetChangeAiNodeError %}{%- endblock facetAiNodeError %}
+      }
+
+      function facetSimpleRangeAiNodeSuccess(e) {
+{% block facetSimpleRangeAiNodeSuccess %}      facetChangeAiNodeSuccess(e);{% endblock facetSimpleRangeAiNodeSuccess %}
+      }
+      function facetSimpleRangeAiNodeError(e) {
+{% block facetSimpleRangeAiNodeError %}      facetChangeAiNodeError(e);{% endblock facetSimpleRangeAiNodeError %}
       }
       function facetSimpleRangeAiNode(e) {
         facetSimpleRange(e, facetSimpleRangeAiNodeSuccess, facetSimpleRangeAiNodeError);
       }
 
-      function facetRangeTimeZoneAiNodeSuccess(pageContent) {
-{% block facetRangeTimeZoneAiNodeSuccess %}{%- endblock facetRangeTimeZoneAiNodeSuccess %}
+      function facetRangeTimeZoneAiNodeSuccess(e) {
+{% block facetRangeTimeZoneAiNodeSuccess %}      facetChangeAiNodeSuccess(e);{% endblock facetRangeTimeZoneAiNodeSuccess %}
       }
-      function facetRangeTimeZoneAiNodeError(pageContent) {
-{% block facetRangeTimeZoneAiNodeError %}{%- endblock facetRangeTimeZoneAiNodeError %}
+      function facetRangeTimeZoneAiNodeError(e) {
+{% block facetRangeTimeZoneAiNodeError %}      facetChangeAiNodeError(e);{%- endblock facetRangeTimeZoneAiNodeError %}
       }
       function facetRangeTimeZoneAiNode(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneAiNodeSuccess, facetRangeTimeZoneAiNodeError);
       }
 
-      function facetRangeGapChangeAiNodeSuccess(pageContent) {
-{% block facetRangeGapChangeAiNodeSuccess %}{%- endblock facetRangeGapChangeAiNodeSuccess %}
+      function facetRangeGapChangeAiNodeSuccess(e) {
+{% block facetRangeGapChangeAiNodeSuccess %}      facetChangeAiNodeSuccess(e);{% endblock facetRangeGapChangeAiNodeSuccess %}
       }
-      function facetRangeGapChangeAiNodeError(pageContent) {
-{% block facetRangeGapChangeAiNodeError %}{%- endblock facetRangeGapChangeAiNodeError %}
+      function facetRangeGapChangeAiNodeError(e) {
+{% block facetRangeGapChangeAiNodeError %}      facetChangeAiNodeError(e);{%- endblock facetRangeGapChangeAiNodeError %}
       }
       function facetRangeGapChangeAiNode(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeAiNodeSuccess, facetRangeGapChangeAiNodeError);
       }
 
-      function facetRangeStartChangeAiNodeSuccess(pageContent) {
-{% block facetRangeStartChangeAiNodeSuccess %}{%- endblock facetRangeStartChangeAiNodeSuccess %}
+      function facetRangeStartChangeAiNodeSuccess(e) {
+{% block facetRangeStartChangeAiNodeSuccess %}      facetChangeAiNodeSuccess(e);{% endblock facetRangeStartChangeAiNodeSuccess %}
       }
-      function facetRangeStartChangeAiNodeError(pageContent) {
-{% block facetRangeStartChangeAiNodeError %}{%- endblock facetRangeStartChangeAiNodeError %}
+      function facetRangeStartChangeAiNodeError(e) {
+{% block facetRangeStartChangeAiNodeError %}      facetChangeAiNodeError(e);{%- endblock facetRangeStartChangeAiNodeError %}
       }
       function facetRangeStartChangeAiNode(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeAiNodeSuccess, facetRangeStartChangeAiNodeError);
       }
 
-      function facetRangeEndChangeAiNodeSuccess(pageContent) {
-{% block facetRangeEndChangeAiNodeSuccess %}{%- endblock facetRangeEndChangeAiNodeSuccess %}
+      function facetRangeEndChangeAiNodeSuccess(e) {
+{% block facetRangeEndChangeAiNodeSuccess %}      facetChangeAiNodeSuccess(e);{% endblock facetRangeEndChangeAiNodeSuccess %}
       }
-      function facetRangeEndChangeAiNodeError(pageContent) {
-{% block facetRangeEndChangeAiNodeError %}{%- endblock facetRangeEndChangeAiNodeError %}
+      function facetRangeEndChangeAiNodeError(e) {
+{% block facetRangeEndChangeAiNodeError %}      facetChangeAiNodeError(e);{%- endblock facetRangeEndChangeAiNodeError %}
       }
       function facetRangeEndChangeAiNode(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeAiNodeSuccess, facetRangeEndChangeAiNodeError);
@@ -381,24 +391,40 @@
 
 {%- block htmUrlAiNodePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlAiNodePage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/ai-node/AiNodeSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/ai-node/AiNodeSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-AiNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-computer"></i>
+                  all AI nodes
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  an AI node
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartAiNodePage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip>
-            <wa-button id="return-to-AiNode" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all AI nodes
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-computer"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/ai-node/AiNodeSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
 {%- endblock htmBodyStartAiNodePage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -441,7 +467,6 @@
             <input name="listAiNode" id="listAiNode" class="listAiNode"  value='{{ toJsonArrayStringInApostrophes(listAiNode) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageAiNode() }}
           {{ htmForm_searchpageAiNode() }}
   {% endif %}
 {%- endblock htmFormAiNodePage %}

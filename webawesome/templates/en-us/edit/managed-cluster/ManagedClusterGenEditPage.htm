@@ -48,51 +48,61 @@
 {%- endblock htmTooltipManagedClusterPage %}`;
       }
 
-      function facetSimpleRangeManagedClusterSuccess(pageContent) {
-{% block facetSimpleRangeManagedClusterSuccess %}{%- endblock facetSimpleRangeManagedClusterSuccess %}
+      function facetChangeManagedClusterSuccess(e) {
+        var l = e.querySelector('.pageForm .listManagedCluster')?.value;
+        if(l)
+          window.listManagedCluster = JSON.parse(l);
+{% block facetChangeManagedClusterSuccess %}{%- endblock facetManagedClusterSuccess %}
       }
-      function facetSimpleRangeManagedClusterError(pageContent) {
-{% block facetSimpleRangeManagedClusterError %}{%- endblock facetSimpleRangeManagedClusterError %}
+      function facetChangeManagedClusterError(e) {
+{% block facetChangeManagedClusterError %}{%- endblock facetManagedClusterError %}
+      }
+
+      function facetSimpleRangeManagedClusterSuccess(e) {
+{% block facetSimpleRangeManagedClusterSuccess %}      facetChangeManagedClusterSuccess(e);{% endblock facetSimpleRangeManagedClusterSuccess %}
+      }
+      function facetSimpleRangeManagedClusterError(e) {
+{% block facetSimpleRangeManagedClusterError %}      facetChangeManagedClusterError(e);{% endblock facetSimpleRangeManagedClusterError %}
       }
       function facetSimpleRangeManagedCluster(e) {
         facetSimpleRange(e, facetSimpleRangeManagedClusterSuccess, facetSimpleRangeManagedClusterError);
       }
 
-      function facetRangeTimeZoneManagedClusterSuccess(pageContent) {
-{% block facetRangeTimeZoneManagedClusterSuccess %}{%- endblock facetRangeTimeZoneManagedClusterSuccess %}
+      function facetRangeTimeZoneManagedClusterSuccess(e) {
+{% block facetRangeTimeZoneManagedClusterSuccess %}      facetChangeManagedClusterSuccess(e);{% endblock facetRangeTimeZoneManagedClusterSuccess %}
       }
-      function facetRangeTimeZoneManagedClusterError(pageContent) {
-{% block facetRangeTimeZoneManagedClusterError %}{%- endblock facetRangeTimeZoneManagedClusterError %}
+      function facetRangeTimeZoneManagedClusterError(e) {
+{% block facetRangeTimeZoneManagedClusterError %}      facetChangeManagedClusterError(e);{%- endblock facetRangeTimeZoneManagedClusterError %}
       }
       function facetRangeTimeZoneManagedCluster(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneManagedClusterSuccess, facetRangeTimeZoneManagedClusterError);
       }
 
-      function facetRangeGapChangeManagedClusterSuccess(pageContent) {
-{% block facetRangeGapChangeManagedClusterSuccess %}{%- endblock facetRangeGapChangeManagedClusterSuccess %}
+      function facetRangeGapChangeManagedClusterSuccess(e) {
+{% block facetRangeGapChangeManagedClusterSuccess %}      facetChangeManagedClusterSuccess(e);{% endblock facetRangeGapChangeManagedClusterSuccess %}
       }
-      function facetRangeGapChangeManagedClusterError(pageContent) {
-{% block facetRangeGapChangeManagedClusterError %}{%- endblock facetRangeGapChangeManagedClusterError %}
+      function facetRangeGapChangeManagedClusterError(e) {
+{% block facetRangeGapChangeManagedClusterError %}      facetChangeManagedClusterError(e);{%- endblock facetRangeGapChangeManagedClusterError %}
       }
       function facetRangeGapChangeManagedCluster(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeManagedClusterSuccess, facetRangeGapChangeManagedClusterError);
       }
 
-      function facetRangeStartChangeManagedClusterSuccess(pageContent) {
-{% block facetRangeStartChangeManagedClusterSuccess %}{%- endblock facetRangeStartChangeManagedClusterSuccess %}
+      function facetRangeStartChangeManagedClusterSuccess(e) {
+{% block facetRangeStartChangeManagedClusterSuccess %}      facetChangeManagedClusterSuccess(e);{% endblock facetRangeStartChangeManagedClusterSuccess %}
       }
-      function facetRangeStartChangeManagedClusterError(pageContent) {
-{% block facetRangeStartChangeManagedClusterError %}{%- endblock facetRangeStartChangeManagedClusterError %}
+      function facetRangeStartChangeManagedClusterError(e) {
+{% block facetRangeStartChangeManagedClusterError %}      facetChangeManagedClusterError(e);{%- endblock facetRangeStartChangeManagedClusterError %}
       }
       function facetRangeStartChangeManagedCluster(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeManagedClusterSuccess, facetRangeStartChangeManagedClusterError);
       }
 
-      function facetRangeEndChangeManagedClusterSuccess(pageContent) {
-{% block facetRangeEndChangeManagedClusterSuccess %}{%- endblock facetRangeEndChangeManagedClusterSuccess %}
+      function facetRangeEndChangeManagedClusterSuccess(e) {
+{% block facetRangeEndChangeManagedClusterSuccess %}      facetChangeManagedClusterSuccess(e);{% endblock facetRangeEndChangeManagedClusterSuccess %}
       }
-      function facetRangeEndChangeManagedClusterError(pageContent) {
-{% block facetRangeEndChangeManagedClusterError %}{%- endblock facetRangeEndChangeManagedClusterError %}
+      function facetRangeEndChangeManagedClusterError(e) {
+{% block facetRangeEndChangeManagedClusterError %}      facetChangeManagedClusterError(e);{%- endblock facetRangeEndChangeManagedClusterError %}
       }
       function facetRangeEndChangeManagedCluster(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeManagedClusterSuccess, facetRangeEndChangeManagedClusterError);
@@ -245,24 +255,40 @@
 
 {%- block htmUrlManagedClusterPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlManagedClusterPage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/managed-cluster/ManagedClusterSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/managed-cluster/ManagedClusterSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ManagedCluster">back to all tenant clusters</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ManagedCluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-server"></i>
+                  all tenant clusters
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a tenant cluster
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartManagedClusterPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-ManagedCluster">back to all tenant clusters</wa-tooltip>
-            <wa-button id="return-to-ManagedCluster" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all tenant clusters
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/managed-cluster/ManagedClusterSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
 {%- endblock htmBodyStartManagedClusterPage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -305,7 +331,6 @@
             <input name="listManagedCluster" id="listManagedCluster" class="listManagedCluster"  value='{{ toJsonArrayStringInApostrophes(listManagedCluster) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageManagedCluster() }}
           {{ htmForm_searchpageManagedCluster() }}
   {% endif %}
 {%- endblock htmFormManagedClusterPage %}

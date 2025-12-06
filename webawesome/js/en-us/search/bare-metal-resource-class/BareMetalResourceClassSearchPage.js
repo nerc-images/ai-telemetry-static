@@ -270,7 +270,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqBareMetalResourceClass_created')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_created')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -288,7 +288,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_archived')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_archived')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -306,7 +306,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_name')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_name')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -324,7 +324,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_count')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_count')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -342,7 +342,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_displayPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -360,7 +360,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_editPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -378,7 +378,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_userPage')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);
@@ -396,7 +396,7 @@ Promise.all([
             facetRangeEndChange('BareMetalResourceClass', event.currentTarget);
           });
           document.querySelector('#fqBareMetalResourceClass_download')?.addEventListener('change', (event) => {
-            fqChange('BareMetalResourceClass', event.currentTarget);
+            fqChange('BareMetalResourceClass', event.currentTarget, facetChangeBareMetalResourceClassSuccess, facetChangeBareMetalResourceClassError);
           });
           document.querySelector('#buttonFacetBareMetalResourceClass_download')?.addEventListener('click', (event) => {
             facetFieldChange('BareMetalResourceClass', event.currentTarget);

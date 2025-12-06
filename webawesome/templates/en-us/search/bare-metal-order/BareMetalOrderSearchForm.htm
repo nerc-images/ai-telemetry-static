@@ -649,8 +649,6 @@ The order status of a bare metal fulfillment"
                             {{ inputStatusBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchBareMetalOrder() %}<wa-button variant="brand" id="htmButton_patchBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_patchBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchBareMetalOrder" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -824,8 +822,6 @@ The order status of a bare metal fulfillment"
           {{ htmFormButton_patchBareMetalOrder() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_postBareMetalOrder() %}<wa-button variant="brand" id="htmButton_postBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postBareMetalOrder" duration="5000" closable class="wa-header-l ">
@@ -1002,8 +998,6 @@ The order status of a bare metal fulfillment"
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deleteBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deleteBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteBareMetalOrder" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -1019,17 +1013,6 @@ The order status of a bare metal fulfillment"
           </form>
           {{ htmFormButton_deleteBareMetalOrder() }}
         </wa-dialog>
-{%- endmacro %}
-
-{%- macro htmButton_searchpageBareMetalOrder() %}{%- endmacro %}
-
-{%- macro htmFormButton_searchpageBareMetalOrder() %}
-          <wa-popup  auto-size="both" placement="top" id="alertButton_searchpageBareMetalOrder" duration="5000" closable class="wa-header-l ">
-            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
-                 id="htmFormButton_searchpageBareMetalOrder"
-                >Search bare metal orders</wa-button>
-            <wa-badge class="alertPopup" id="alertPopupButton_searchpageBareMetalOrder"></wa-badge>
-          </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageBareMetalOrder() %}
@@ -1262,8 +1245,6 @@ The order status of a bare metal fulfillment"
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deletefilterBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deletefilterBareMetalOrder() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterBareMetalOrder" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -1280,58 +1261,6 @@ The order status of a bare metal fulfillment"
           {{ htmFormButton_deletefilterBareMetalOrder() }}
         </wa-dialog>
 {%- endmacro %}
-          <div id="htmSearchForm">
-            <wa-scroller>
-              <wa-button-group>
-{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {% if "PATCH" in scopes %}
-    {% if resultCount >= 1 %}
-                <wa-button variant="brand" id="refreshThisBareMetalOrderGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'pk:{{ result.pk }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisBareMetalOrderGenPage')); }, function() { addError(document.querySelector('#refreshThisBareMetalOrderGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
-                  refresh
-                </wa-button>
-    {% endif %}
-    {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllBareMetalOrderGenPage{{ result.pk | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllBareMetalOrderGenPage{{ result.pk | e }}')); }, function() { addError(document.querySelector('#refreshAllBareMetalOrderGenPage{{ result.pk | e }}')); }); "
-                    >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
-                  refresh all 
-                </wa-button>
-    {% endif %}
-  {% endif %}
-{% endif %}
-{%- if 'PATCH' in scopes %}
-  {%- if resultCount > 0 %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_patchBareMetalOrder() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-{%- if 'POST' in scopes %}
-  {%- if resultCount >= 1 %}
-    {{ htmButton_postBareMetalOrder() }}
-  {%- else %}
-    {{ htmButton_postBareMetalOrder() }}
-  {%- endif %}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is defined %}
-    {{ htmButton_deleteBareMetalOrder() }}
-  {%- endif %}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is not defined %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_deletefilterBareMetalOrder() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-
-              </wa-button-group>
-            </wa-scroller>
-          </div>
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchBareMetalOrder() }}
   {%- endif %}

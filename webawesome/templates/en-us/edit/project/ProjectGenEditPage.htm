@@ -50,51 +50,61 @@
 {%- endblock htmTooltipProjectPage %}`;
       }
 
-      function facetSimpleRangeProjectSuccess(pageContent) {
-{% block facetSimpleRangeProjectSuccess %}{%- endblock facetSimpleRangeProjectSuccess %}
+      function facetChangeProjectSuccess(e) {
+        var l = e.querySelector('.pageForm .listProject')?.value;
+        if(l)
+          window.listProject = JSON.parse(l);
+{% block facetChangeProjectSuccess %}{%- endblock facetProjectSuccess %}
       }
-      function facetSimpleRangeProjectError(pageContent) {
-{% block facetSimpleRangeProjectError %}{%- endblock facetSimpleRangeProjectError %}
+      function facetChangeProjectError(e) {
+{% block facetChangeProjectError %}{%- endblock facetProjectError %}
+      }
+
+      function facetSimpleRangeProjectSuccess(e) {
+{% block facetSimpleRangeProjectSuccess %}      facetChangeProjectSuccess(e);{% endblock facetSimpleRangeProjectSuccess %}
+      }
+      function facetSimpleRangeProjectError(e) {
+{% block facetSimpleRangeProjectError %}      facetChangeProjectError(e);{% endblock facetSimpleRangeProjectError %}
       }
       function facetSimpleRangeProject(e) {
         facetSimpleRange(e, facetSimpleRangeProjectSuccess, facetSimpleRangeProjectError);
       }
 
-      function facetRangeTimeZoneProjectSuccess(pageContent) {
-{% block facetRangeTimeZoneProjectSuccess %}{%- endblock facetRangeTimeZoneProjectSuccess %}
+      function facetRangeTimeZoneProjectSuccess(e) {
+{% block facetRangeTimeZoneProjectSuccess %}      facetChangeProjectSuccess(e);{% endblock facetRangeTimeZoneProjectSuccess %}
       }
-      function facetRangeTimeZoneProjectError(pageContent) {
-{% block facetRangeTimeZoneProjectError %}{%- endblock facetRangeTimeZoneProjectError %}
+      function facetRangeTimeZoneProjectError(e) {
+{% block facetRangeTimeZoneProjectError %}      facetChangeProjectError(e);{%- endblock facetRangeTimeZoneProjectError %}
       }
       function facetRangeTimeZoneProject(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneProjectSuccess, facetRangeTimeZoneProjectError);
       }
 
-      function facetRangeGapChangeProjectSuccess(pageContent) {
-{% block facetRangeGapChangeProjectSuccess %}{%- endblock facetRangeGapChangeProjectSuccess %}
+      function facetRangeGapChangeProjectSuccess(e) {
+{% block facetRangeGapChangeProjectSuccess %}      facetChangeProjectSuccess(e);{% endblock facetRangeGapChangeProjectSuccess %}
       }
-      function facetRangeGapChangeProjectError(pageContent) {
-{% block facetRangeGapChangeProjectError %}{%- endblock facetRangeGapChangeProjectError %}
+      function facetRangeGapChangeProjectError(e) {
+{% block facetRangeGapChangeProjectError %}      facetChangeProjectError(e);{%- endblock facetRangeGapChangeProjectError %}
       }
       function facetRangeGapChangeProject(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeProjectSuccess, facetRangeGapChangeProjectError);
       }
 
-      function facetRangeStartChangeProjectSuccess(pageContent) {
-{% block facetRangeStartChangeProjectSuccess %}{%- endblock facetRangeStartChangeProjectSuccess %}
+      function facetRangeStartChangeProjectSuccess(e) {
+{% block facetRangeStartChangeProjectSuccess %}      facetChangeProjectSuccess(e);{% endblock facetRangeStartChangeProjectSuccess %}
       }
-      function facetRangeStartChangeProjectError(pageContent) {
-{% block facetRangeStartChangeProjectError %}{%- endblock facetRangeStartChangeProjectError %}
+      function facetRangeStartChangeProjectError(e) {
+{% block facetRangeStartChangeProjectError %}      facetChangeProjectError(e);{%- endblock facetRangeStartChangeProjectError %}
       }
       function facetRangeStartChangeProject(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeProjectSuccess, facetRangeStartChangeProjectError);
       }
 
-      function facetRangeEndChangeProjectSuccess(pageContent) {
-{% block facetRangeEndChangeProjectSuccess %}{%- endblock facetRangeEndChangeProjectSuccess %}
+      function facetRangeEndChangeProjectSuccess(e) {
+{% block facetRangeEndChangeProjectSuccess %}      facetChangeProjectSuccess(e);{% endblock facetRangeEndChangeProjectSuccess %}
       }
-      function facetRangeEndChangeProjectError(pageContent) {
-{% block facetRangeEndChangeProjectError %}{%- endblock facetRangeEndChangeProjectError %}
+      function facetRangeEndChangeProjectError(e) {
+{% block facetRangeEndChangeProjectError %}      facetChangeProjectError(e);{%- endblock facetRangeEndChangeProjectError %}
       }
       function facetRangeEndChangeProject(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeProjectSuccess, facetRangeEndChangeProjectError);
@@ -299,24 +309,40 @@
 
 {%- block htmUrlProjectPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlProjectPage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/project/ProjectSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/project/ProjectSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-people-line"></i>
+                  all projects
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  an project
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartProjectPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip>
-            <wa-button id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all projects
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-people-line"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/project/ProjectSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/project/ProjectSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/project/ProjectSearchForm.htm %}
 {%- endblock htmBodyStartProjectPage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -359,7 +385,6 @@
             <input name="listProject" id="listProject" class="listProject"  value='{{ toJsonArrayStringInApostrophes(listProject) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageProject() }}
           {{ htmForm_searchpageProject() }}
   {% endif %}
 {%- endblock htmFormProjectPage %}

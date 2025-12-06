@@ -652,8 +652,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                             {{ inputLocationVirtualMachinePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchVirtualMachine() %}<wa-button variant="brand" id="htmButton_patchVirtualMachine" data-vmResource={{ result.vmResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_patchVirtualMachine() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchVirtualMachine" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -811,8 +809,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
           {{ htmFormButton_patchVirtualMachine() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_postVirtualMachine() %}<wa-button variant="brand" id="htmButton_postVirtualMachine" data-vmResource={{ result.vmResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postVirtualMachine() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postVirtualMachine" duration="5000" closable class="wa-header-l ">
@@ -973,8 +969,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteVirtualMachine() %}<wa-button variant="brand" id="htmButton_deleteVirtualMachine" data-vmResource={{ result.vmResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deleteVirtualMachine() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteVirtualMachine" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -991,8 +985,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
           {{ htmFormButton_deleteVirtualMachine() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_putimportVirtualMachine() %}<wa-button variant="brand" id="htmButton_putimportVirtualMachine" data-vmResource={{ result.vmResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportVirtualMachine() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportVirtualMachine" duration="5000" closable class="wa-header-l ">
@@ -1017,17 +1009,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
           </form>
           {{ htmFormButton_putimportVirtualMachine() }}
         </wa-dialog>
-{%- endmacro %}
-
-{%- macro htmButton_searchpageVirtualMachine() %}{%- endmacro %}
-
-{%- macro htmFormButton_searchpageVirtualMachine() %}
-          <wa-popup  auto-size="both" placement="top" id="alertButton_searchpageVirtualMachine" duration="5000" closable class="wa-header-l ">
-            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
-                 id="htmFormButton_searchpageVirtualMachine"
-                >Search virtual machines</wa-button>
-            <wa-badge class="alertPopup" id="alertPopupButton_searchpageVirtualMachine"></wa-badge>
-          </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageVirtualMachine() %}
@@ -1227,8 +1208,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterVirtualMachine() %}<wa-button variant="brand" id="htmButton_deletefilterVirtualMachine" data-vmResource={{ result.vmResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deletefilterVirtualMachine() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterVirtualMachine" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -1245,61 +1224,6 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
           {{ htmFormButton_deletefilterVirtualMachine() }}
         </wa-dialog>
 {%- endmacro %}
-          <div id="htmSearchForm">
-            <wa-scroller>
-              <wa-button-group>
-{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {% if "PATCH" in scopes %}
-    {% if resultCount >= 1 %}
-                <wa-button variant="brand" id="refreshThisVirtualMachineGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'vmResource:{{ result.vmResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisVirtualMachineGenPage')); }, function() { addError(document.querySelector('#refreshThisVirtualMachineGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
-                  refresh
-                </wa-button>
-    {% endif %}
-    {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllVirtualMachineGenPage{{ result.vmResource | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllVirtualMachineGenPage{{ result.vmResource | e }}')); }, function() { addError(document.querySelector('#refreshAllVirtualMachineGenPage{{ result.vmResource | e }}')); }); "
-                    >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
-                  refresh all 
-                </wa-button>
-    {% endif %}
-  {% endif %}
-{% endif %}
-{%- if 'PATCH' in scopes %}
-  {%- if resultCount > 0 %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_patchVirtualMachine() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-{%- if 'POST' in scopes %}
-  {%- if resultCount >= 1 %}
-    {{ htmButton_postVirtualMachine() }}
-  {%- else %}
-    {{ htmButton_postVirtualMachine() }}
-  {%- endif %}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is defined %}
-    {{ htmButton_deleteVirtualMachine() }}
-  {%- endif %}
-{%- endif %}
-{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {{ htmButton_putimportVirtualMachine() }}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is not defined %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_deletefilterVirtualMachine() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-
-              </wa-button-group>
-            </wa-scroller>
-          </div>
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchVirtualMachine() }}
   {%- endif %}

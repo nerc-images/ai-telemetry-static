@@ -48,51 +48,61 @@
 {%- endblock htmTooltipHubPage %}`;
       }
 
-      function facetSimpleRangeHubSuccess(pageContent) {
-{% block facetSimpleRangeHubSuccess %}{%- endblock facetSimpleRangeHubSuccess %}
+      function facetChangeHubSuccess(e) {
+        var l = e.querySelector('.pageForm .listHub')?.value;
+        if(l)
+          window.listHub = JSON.parse(l);
+{% block facetChangeHubSuccess %}{%- endblock facetHubSuccess %}
       }
-      function facetSimpleRangeHubError(pageContent) {
-{% block facetSimpleRangeHubError %}{%- endblock facetSimpleRangeHubError %}
+      function facetChangeHubError(e) {
+{% block facetChangeHubError %}{%- endblock facetHubError %}
+      }
+
+      function facetSimpleRangeHubSuccess(e) {
+{% block facetSimpleRangeHubSuccess %}      facetChangeHubSuccess(e);{% endblock facetSimpleRangeHubSuccess %}
+      }
+      function facetSimpleRangeHubError(e) {
+{% block facetSimpleRangeHubError %}      facetChangeHubError(e);{% endblock facetSimpleRangeHubError %}
       }
       function facetSimpleRangeHub(e) {
         facetSimpleRange(e, facetSimpleRangeHubSuccess, facetSimpleRangeHubError);
       }
 
-      function facetRangeTimeZoneHubSuccess(pageContent) {
-{% block facetRangeTimeZoneHubSuccess %}{%- endblock facetRangeTimeZoneHubSuccess %}
+      function facetRangeTimeZoneHubSuccess(e) {
+{% block facetRangeTimeZoneHubSuccess %}      facetChangeHubSuccess(e);{% endblock facetRangeTimeZoneHubSuccess %}
       }
-      function facetRangeTimeZoneHubError(pageContent) {
-{% block facetRangeTimeZoneHubError %}{%- endblock facetRangeTimeZoneHubError %}
+      function facetRangeTimeZoneHubError(e) {
+{% block facetRangeTimeZoneHubError %}      facetChangeHubError(e);{%- endblock facetRangeTimeZoneHubError %}
       }
       function facetRangeTimeZoneHub(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneHubSuccess, facetRangeTimeZoneHubError);
       }
 
-      function facetRangeGapChangeHubSuccess(pageContent) {
-{% block facetRangeGapChangeHubSuccess %}{%- endblock facetRangeGapChangeHubSuccess %}
+      function facetRangeGapChangeHubSuccess(e) {
+{% block facetRangeGapChangeHubSuccess %}      facetChangeHubSuccess(e);{% endblock facetRangeGapChangeHubSuccess %}
       }
-      function facetRangeGapChangeHubError(pageContent) {
-{% block facetRangeGapChangeHubError %}{%- endblock facetRangeGapChangeHubError %}
+      function facetRangeGapChangeHubError(e) {
+{% block facetRangeGapChangeHubError %}      facetChangeHubError(e);{%- endblock facetRangeGapChangeHubError %}
       }
       function facetRangeGapChangeHub(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeHubSuccess, facetRangeGapChangeHubError);
       }
 
-      function facetRangeStartChangeHubSuccess(pageContent) {
-{% block facetRangeStartChangeHubSuccess %}{%- endblock facetRangeStartChangeHubSuccess %}
+      function facetRangeStartChangeHubSuccess(e) {
+{% block facetRangeStartChangeHubSuccess %}      facetChangeHubSuccess(e);{% endblock facetRangeStartChangeHubSuccess %}
       }
-      function facetRangeStartChangeHubError(pageContent) {
-{% block facetRangeStartChangeHubError %}{%- endblock facetRangeStartChangeHubError %}
+      function facetRangeStartChangeHubError(e) {
+{% block facetRangeStartChangeHubError %}      facetChangeHubError(e);{%- endblock facetRangeStartChangeHubError %}
       }
       function facetRangeStartChangeHub(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeHubSuccess, facetRangeStartChangeHubError);
       }
 
-      function facetRangeEndChangeHubSuccess(pageContent) {
-{% block facetRangeEndChangeHubSuccess %}{%- endblock facetRangeEndChangeHubSuccess %}
+      function facetRangeEndChangeHubSuccess(e) {
+{% block facetRangeEndChangeHubSuccess %}      facetChangeHubSuccess(e);{% endblock facetRangeEndChangeHubSuccess %}
       }
-      function facetRangeEndChangeHubError(pageContent) {
-{% block facetRangeEndChangeHubError %}{%- endblock facetRangeEndChangeHubError %}
+      function facetRangeEndChangeHubError(e) {
+{% block facetRangeEndChangeHubError %}      facetChangeHubError(e);{%- endblock facetRangeEndChangeHubError %}
       }
       function facetRangeEndChangeHub(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeHubSuccess, facetRangeEndChangeHubError);
@@ -304,11 +314,12 @@
 {% include en-us/search/hub/HubSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/hub/HubSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/hub/HubSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/hub/HubSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleHubPage %}

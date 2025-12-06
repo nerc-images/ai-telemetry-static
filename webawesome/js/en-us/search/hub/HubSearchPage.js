@@ -314,7 +314,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqHub_created')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_created')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -332,7 +332,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_archived')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_archived')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -350,7 +350,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_hubName')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_hubName')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -368,7 +368,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_hubId')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_hubId')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -386,7 +386,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_description')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_description')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -404,7 +404,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_pageId')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_pageId')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -422,7 +422,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_displayPage')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -440,7 +440,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_editPage')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -458,7 +458,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_userPage')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -476,7 +476,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_download')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_download')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -494,7 +494,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_hubResource')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_hubResource')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);
@@ -512,7 +512,7 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
           document.querySelector('#fqHub_localClusterName')?.addEventListener('change', (event) => {
-            fqChange('Hub', event.currentTarget);
+            fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
           document.querySelector('#buttonFacetHub_localClusterName')?.addEventListener('click', (event) => {
             facetFieldChange('Hub', event.currentTarget);

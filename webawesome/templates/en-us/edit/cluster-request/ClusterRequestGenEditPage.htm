@@ -50,51 +50,61 @@
 {%- endblock htmTooltipClusterRequestPage %}`;
       }
 
-      function facetSimpleRangeClusterRequestSuccess(pageContent) {
-{% block facetSimpleRangeClusterRequestSuccess %}{%- endblock facetSimpleRangeClusterRequestSuccess %}
+      function facetChangeClusterRequestSuccess(e) {
+        var l = e.querySelector('.pageForm .listClusterRequest')?.value;
+        if(l)
+          window.listClusterRequest = JSON.parse(l);
+{% block facetChangeClusterRequestSuccess %}{%- endblock facetClusterRequestSuccess %}
       }
-      function facetSimpleRangeClusterRequestError(pageContent) {
-{% block facetSimpleRangeClusterRequestError %}{%- endblock facetSimpleRangeClusterRequestError %}
+      function facetChangeClusterRequestError(e) {
+{% block facetChangeClusterRequestError %}{%- endblock facetClusterRequestError %}
+      }
+
+      function facetSimpleRangeClusterRequestSuccess(e) {
+{% block facetSimpleRangeClusterRequestSuccess %}      facetChangeClusterRequestSuccess(e);{% endblock facetSimpleRangeClusterRequestSuccess %}
+      }
+      function facetSimpleRangeClusterRequestError(e) {
+{% block facetSimpleRangeClusterRequestError %}      facetChangeClusterRequestError(e);{% endblock facetSimpleRangeClusterRequestError %}
       }
       function facetSimpleRangeClusterRequest(e) {
         facetSimpleRange(e, facetSimpleRangeClusterRequestSuccess, facetSimpleRangeClusterRequestError);
       }
 
-      function facetRangeTimeZoneClusterRequestSuccess(pageContent) {
-{% block facetRangeTimeZoneClusterRequestSuccess %}{%- endblock facetRangeTimeZoneClusterRequestSuccess %}
+      function facetRangeTimeZoneClusterRequestSuccess(e) {
+{% block facetRangeTimeZoneClusterRequestSuccess %}      facetChangeClusterRequestSuccess(e);{% endblock facetRangeTimeZoneClusterRequestSuccess %}
       }
-      function facetRangeTimeZoneClusterRequestError(pageContent) {
-{% block facetRangeTimeZoneClusterRequestError %}{%- endblock facetRangeTimeZoneClusterRequestError %}
+      function facetRangeTimeZoneClusterRequestError(e) {
+{% block facetRangeTimeZoneClusterRequestError %}      facetChangeClusterRequestError(e);{%- endblock facetRangeTimeZoneClusterRequestError %}
       }
       function facetRangeTimeZoneClusterRequest(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneClusterRequestSuccess, facetRangeTimeZoneClusterRequestError);
       }
 
-      function facetRangeGapChangeClusterRequestSuccess(pageContent) {
-{% block facetRangeGapChangeClusterRequestSuccess %}{%- endblock facetRangeGapChangeClusterRequestSuccess %}
+      function facetRangeGapChangeClusterRequestSuccess(e) {
+{% block facetRangeGapChangeClusterRequestSuccess %}      facetChangeClusterRequestSuccess(e);{% endblock facetRangeGapChangeClusterRequestSuccess %}
       }
-      function facetRangeGapChangeClusterRequestError(pageContent) {
-{% block facetRangeGapChangeClusterRequestError %}{%- endblock facetRangeGapChangeClusterRequestError %}
+      function facetRangeGapChangeClusterRequestError(e) {
+{% block facetRangeGapChangeClusterRequestError %}      facetChangeClusterRequestError(e);{%- endblock facetRangeGapChangeClusterRequestError %}
       }
       function facetRangeGapChangeClusterRequest(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeClusterRequestSuccess, facetRangeGapChangeClusterRequestError);
       }
 
-      function facetRangeStartChangeClusterRequestSuccess(pageContent) {
-{% block facetRangeStartChangeClusterRequestSuccess %}{%- endblock facetRangeStartChangeClusterRequestSuccess %}
+      function facetRangeStartChangeClusterRequestSuccess(e) {
+{% block facetRangeStartChangeClusterRequestSuccess %}      facetChangeClusterRequestSuccess(e);{% endblock facetRangeStartChangeClusterRequestSuccess %}
       }
-      function facetRangeStartChangeClusterRequestError(pageContent) {
-{% block facetRangeStartChangeClusterRequestError %}{%- endblock facetRangeStartChangeClusterRequestError %}
+      function facetRangeStartChangeClusterRequestError(e) {
+{% block facetRangeStartChangeClusterRequestError %}      facetChangeClusterRequestError(e);{%- endblock facetRangeStartChangeClusterRequestError %}
       }
       function facetRangeStartChangeClusterRequest(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeClusterRequestSuccess, facetRangeStartChangeClusterRequestError);
       }
 
-      function facetRangeEndChangeClusterRequestSuccess(pageContent) {
-{% block facetRangeEndChangeClusterRequestSuccess %}{%- endblock facetRangeEndChangeClusterRequestSuccess %}
+      function facetRangeEndChangeClusterRequestSuccess(e) {
+{% block facetRangeEndChangeClusterRequestSuccess %}      facetChangeClusterRequestSuccess(e);{% endblock facetRangeEndChangeClusterRequestSuccess %}
       }
-      function facetRangeEndChangeClusterRequestError(pageContent) {
-{% block facetRangeEndChangeClusterRequestError %}{%- endblock facetRangeEndChangeClusterRequestError %}
+      function facetRangeEndChangeClusterRequestError(e) {
+{% block facetRangeEndChangeClusterRequestError %}      facetChangeClusterRequestError(e);{%- endblock facetRangeEndChangeClusterRequestError %}
       }
       function facetRangeEndChangeClusterRequest(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeClusterRequestSuccess, facetRangeEndChangeClusterRequestError);
@@ -299,24 +309,40 @@
 
 {%- block htmUrlClusterRequestPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlClusterRequestPage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/cluster-request/ClusterRequestSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/cluster-request/ClusterRequestSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ClusterRequest">back to all OpenShift cluster requests</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ClusterRequest" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-server"></i>
+                  all OpenShift cluster requests
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  an OpenShift cluster request
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartClusterRequestPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-ClusterRequest">back to all OpenShift cluster requests</wa-tooltip>
-            <wa-button id="return-to-ClusterRequest" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all OpenShift cluster requests
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/cluster-request/ClusterRequestSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
 {%- endblock htmBodyStartClusterRequestPage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -359,7 +385,6 @@
             <input name="listClusterRequest" id="listClusterRequest" class="listClusterRequest"  value='{{ toJsonArrayStringInApostrophes(listClusterRequest) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageClusterRequest() }}
           {{ htmForm_searchpageClusterRequest() }}
   {% endif %}
 {%- endblock htmFormClusterRequestPage %}

@@ -48,51 +48,61 @@
 {%- endblock htmTooltipTimeZonePage %}`;
       }
 
-      function facetSimpleRangeTimeZoneSuccess(pageContent) {
-{% block facetSimpleRangeTimeZoneSuccess %}{%- endblock facetSimpleRangeTimeZoneSuccess %}
+      function facetChangeTimeZoneSuccess(e) {
+        var l = e.querySelector('.pageForm .listTimeZone')?.value;
+        if(l)
+          window.listTimeZone = JSON.parse(l);
+{% block facetChangeTimeZoneSuccess %}{%- endblock facetTimeZoneSuccess %}
       }
-      function facetSimpleRangeTimeZoneError(pageContent) {
-{% block facetSimpleRangeTimeZoneError %}{%- endblock facetSimpleRangeTimeZoneError %}
+      function facetChangeTimeZoneError(e) {
+{% block facetChangeTimeZoneError %}{%- endblock facetTimeZoneError %}
+      }
+
+      function facetSimpleRangeTimeZoneSuccess(e) {
+{% block facetSimpleRangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetSimpleRangeTimeZoneSuccess %}
+      }
+      function facetSimpleRangeTimeZoneError(e) {
+{% block facetSimpleRangeTimeZoneError %}      facetChangeTimeZoneError(e);{% endblock facetSimpleRangeTimeZoneError %}
       }
       function facetSimpleRangeTimeZone(e) {
         facetSimpleRange(e, facetSimpleRangeTimeZoneSuccess, facetSimpleRangeTimeZoneError);
       }
 
-      function facetRangeTimeZoneTimeZoneSuccess(pageContent) {
-{% block facetRangeTimeZoneTimeZoneSuccess %}{%- endblock facetRangeTimeZoneTimeZoneSuccess %}
+      function facetRangeTimeZoneTimeZoneSuccess(e) {
+{% block facetRangeTimeZoneTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeTimeZoneTimeZoneSuccess %}
       }
-      function facetRangeTimeZoneTimeZoneError(pageContent) {
-{% block facetRangeTimeZoneTimeZoneError %}{%- endblock facetRangeTimeZoneTimeZoneError %}
+      function facetRangeTimeZoneTimeZoneError(e) {
+{% block facetRangeTimeZoneTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeTimeZoneTimeZoneError %}
       }
       function facetRangeTimeZoneTimeZone(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneTimeZoneSuccess, facetRangeTimeZoneTimeZoneError);
       }
 
-      function facetRangeGapChangeTimeZoneSuccess(pageContent) {
-{% block facetRangeGapChangeTimeZoneSuccess %}{%- endblock facetRangeGapChangeTimeZoneSuccess %}
+      function facetRangeGapChangeTimeZoneSuccess(e) {
+{% block facetRangeGapChangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeGapChangeTimeZoneSuccess %}
       }
-      function facetRangeGapChangeTimeZoneError(pageContent) {
-{% block facetRangeGapChangeTimeZoneError %}{%- endblock facetRangeGapChangeTimeZoneError %}
+      function facetRangeGapChangeTimeZoneError(e) {
+{% block facetRangeGapChangeTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeGapChangeTimeZoneError %}
       }
       function facetRangeGapChangeTimeZone(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTimeZoneSuccess, facetRangeGapChangeTimeZoneError);
       }
 
-      function facetRangeStartChangeTimeZoneSuccess(pageContent) {
-{% block facetRangeStartChangeTimeZoneSuccess %}{%- endblock facetRangeStartChangeTimeZoneSuccess %}
+      function facetRangeStartChangeTimeZoneSuccess(e) {
+{% block facetRangeStartChangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeStartChangeTimeZoneSuccess %}
       }
-      function facetRangeStartChangeTimeZoneError(pageContent) {
-{% block facetRangeStartChangeTimeZoneError %}{%- endblock facetRangeStartChangeTimeZoneError %}
+      function facetRangeStartChangeTimeZoneError(e) {
+{% block facetRangeStartChangeTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeStartChangeTimeZoneError %}
       }
       function facetRangeStartChangeTimeZone(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTimeZoneSuccess, facetRangeStartChangeTimeZoneError);
       }
 
-      function facetRangeEndChangeTimeZoneSuccess(pageContent) {
-{% block facetRangeEndChangeTimeZoneSuccess %}{%- endblock facetRangeEndChangeTimeZoneSuccess %}
+      function facetRangeEndChangeTimeZoneSuccess(e) {
+{% block facetRangeEndChangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeEndChangeTimeZoneSuccess %}
       }
-      function facetRangeEndChangeTimeZoneError(pageContent) {
-{% block facetRangeEndChangeTimeZoneError %}{%- endblock facetRangeEndChangeTimeZoneError %}
+      function facetRangeEndChangeTimeZoneError(e) {
+{% block facetRangeEndChangeTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeEndChangeTimeZoneError %}
       }
       function facetRangeEndChangeTimeZone(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTimeZoneSuccess, facetRangeEndChangeTimeZoneError);
@@ -245,24 +255,40 @@
 
 {%- block htmUrlTimeZonePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTimeZonePage %}
 
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/time-zone/TimeZoneSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/time-zone/TimeZoneSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-TimeZone" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-globe"></i>
+                  all time zones
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a time zone
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
 {%- block htmBodyStartPageLayout %}
     {{ super() }}
 {%- block htmBodyStartTimeZonePage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip>
-            <wa-button id="return-to-TimeZone" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-angle-left"></i>
-              all time zones
-            </wa-button>
             <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-globe"></i> {{ result.objectTitle | e }}</h1>
           </div>
-          <div class="margin-block">
-          </div>
-{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
-          <wa-divider></wa-divider>
-{% include en-us/search/time-zone/TimeZoneSearchButtons.htm %}
 {% endif %}
+{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
 {%- endblock htmBodyStartTimeZonePage %}
 {%- endblock htmBodyStartPageLayout %}
 
@@ -305,7 +331,6 @@
             <input name="listTimeZone" id="listTimeZone" class="listTimeZone"  value='{{ toJsonArrayStringInApostrophes(listTimeZone) }}' type="hidden"/>
           </form>
   {% if solrId is defined %}
-          {{ htmButton_searchpageTimeZone() }}
           {{ htmForm_searchpageTimeZone() }}
   {% endif %}
 {%- endblock htmFormTimeZonePage %}

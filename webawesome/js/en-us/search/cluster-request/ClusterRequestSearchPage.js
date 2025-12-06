@@ -281,7 +281,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqClusterRequest_created')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_created')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);
@@ -299,7 +299,7 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
           document.querySelector('#fqClusterRequest_archived')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_archived')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);
@@ -317,7 +317,7 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
           document.querySelector('#fqClusterRequest_name')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_name')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);
@@ -335,7 +335,7 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
           document.querySelector('#fqClusterRequest_displayPage')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);
@@ -353,7 +353,7 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
           document.querySelector('#fqClusterRequest_editPage')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);
@@ -371,7 +371,7 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
           document.querySelector('#fqClusterRequest_userPage')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);
@@ -389,7 +389,7 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
           document.querySelector('#fqClusterRequest_download')?.addEventListener('change', (event) => {
-            fqChange('ClusterRequest', event.currentTarget);
+            fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
           document.querySelector('#buttonFacetClusterRequest_download')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterRequest', event.currentTarget);

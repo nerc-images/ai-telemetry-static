@@ -468,7 +468,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqVirtualMachine_created')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_created')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -486,7 +486,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_archived')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_archived')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -504,7 +504,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_hubId')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_hubId')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -522,7 +522,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_clusterName')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_clusterName')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -540,7 +540,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_vmProject')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_vmProject')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -558,7 +558,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_vmName')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_vmName')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -576,7 +576,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_os')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_os')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -594,7 +594,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_id')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_id')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -612,7 +612,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_ngsildTenant')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_ngsildTenant')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -630,7 +630,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_ngsildPath')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_ngsildPath')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -648,7 +648,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_ngsildContext')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_ngsildContext')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -666,7 +666,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_ngsildData')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_ngsildData')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -684,7 +684,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_location')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_location')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -702,7 +702,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_displayPage')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -720,7 +720,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_editPage')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -738,7 +738,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_userPage')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -756,7 +756,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_download')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_download')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);
@@ -774,7 +774,7 @@ Promise.all([
             facetRangeEndChange('VirtualMachine', event.currentTarget);
           });
           document.querySelector('#fqVirtualMachine_vmResource')?.addEventListener('change', (event) => {
-            fqChange('VirtualMachine', event.currentTarget);
+            fqChange('VirtualMachine', event.currentTarget, facetChangeVirtualMachineSuccess, facetChangeVirtualMachineError);
           });
           document.querySelector('#buttonFacetVirtualMachine_vmResource')?.addEventListener('click', (event) => {
             facetFieldChange('VirtualMachine', event.currentTarget);

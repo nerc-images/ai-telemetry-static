@@ -48,51 +48,61 @@
 {%- endblock htmTooltipBareMetalResourceClassPage %}`;
       }
 
-      function facetSimpleRangeBareMetalResourceClassSuccess(pageContent) {
-{% block facetSimpleRangeBareMetalResourceClassSuccess %}{%- endblock facetSimpleRangeBareMetalResourceClassSuccess %}
+      function facetChangeBareMetalResourceClassSuccess(e) {
+        var l = e.querySelector('.pageForm .listBareMetalResourceClass')?.value;
+        if(l)
+          window.listBareMetalResourceClass = JSON.parse(l);
+{% block facetChangeBareMetalResourceClassSuccess %}{%- endblock facetBareMetalResourceClassSuccess %}
       }
-      function facetSimpleRangeBareMetalResourceClassError(pageContent) {
-{% block facetSimpleRangeBareMetalResourceClassError %}{%- endblock facetSimpleRangeBareMetalResourceClassError %}
+      function facetChangeBareMetalResourceClassError(e) {
+{% block facetChangeBareMetalResourceClassError %}{%- endblock facetBareMetalResourceClassError %}
+      }
+
+      function facetSimpleRangeBareMetalResourceClassSuccess(e) {
+{% block facetSimpleRangeBareMetalResourceClassSuccess %}      facetChangeBareMetalResourceClassSuccess(e);{% endblock facetSimpleRangeBareMetalResourceClassSuccess %}
+      }
+      function facetSimpleRangeBareMetalResourceClassError(e) {
+{% block facetSimpleRangeBareMetalResourceClassError %}      facetChangeBareMetalResourceClassError(e);{% endblock facetSimpleRangeBareMetalResourceClassError %}
       }
       function facetSimpleRangeBareMetalResourceClass(e) {
         facetSimpleRange(e, facetSimpleRangeBareMetalResourceClassSuccess, facetSimpleRangeBareMetalResourceClassError);
       }
 
-      function facetRangeTimeZoneBareMetalResourceClassSuccess(pageContent) {
-{% block facetRangeTimeZoneBareMetalResourceClassSuccess %}{%- endblock facetRangeTimeZoneBareMetalResourceClassSuccess %}
+      function facetRangeTimeZoneBareMetalResourceClassSuccess(e) {
+{% block facetRangeTimeZoneBareMetalResourceClassSuccess %}      facetChangeBareMetalResourceClassSuccess(e);{% endblock facetRangeTimeZoneBareMetalResourceClassSuccess %}
       }
-      function facetRangeTimeZoneBareMetalResourceClassError(pageContent) {
-{% block facetRangeTimeZoneBareMetalResourceClassError %}{%- endblock facetRangeTimeZoneBareMetalResourceClassError %}
+      function facetRangeTimeZoneBareMetalResourceClassError(e) {
+{% block facetRangeTimeZoneBareMetalResourceClassError %}      facetChangeBareMetalResourceClassError(e);{%- endblock facetRangeTimeZoneBareMetalResourceClassError %}
       }
       function facetRangeTimeZoneBareMetalResourceClass(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneBareMetalResourceClassSuccess, facetRangeTimeZoneBareMetalResourceClassError);
       }
 
-      function facetRangeGapChangeBareMetalResourceClassSuccess(pageContent) {
-{% block facetRangeGapChangeBareMetalResourceClassSuccess %}{%- endblock facetRangeGapChangeBareMetalResourceClassSuccess %}
+      function facetRangeGapChangeBareMetalResourceClassSuccess(e) {
+{% block facetRangeGapChangeBareMetalResourceClassSuccess %}      facetChangeBareMetalResourceClassSuccess(e);{% endblock facetRangeGapChangeBareMetalResourceClassSuccess %}
       }
-      function facetRangeGapChangeBareMetalResourceClassError(pageContent) {
-{% block facetRangeGapChangeBareMetalResourceClassError %}{%- endblock facetRangeGapChangeBareMetalResourceClassError %}
+      function facetRangeGapChangeBareMetalResourceClassError(e) {
+{% block facetRangeGapChangeBareMetalResourceClassError %}      facetChangeBareMetalResourceClassError(e);{%- endblock facetRangeGapChangeBareMetalResourceClassError %}
       }
       function facetRangeGapChangeBareMetalResourceClass(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalResourceClassSuccess, facetRangeGapChangeBareMetalResourceClassError);
       }
 
-      function facetRangeStartChangeBareMetalResourceClassSuccess(pageContent) {
-{% block facetRangeStartChangeBareMetalResourceClassSuccess %}{%- endblock facetRangeStartChangeBareMetalResourceClassSuccess %}
+      function facetRangeStartChangeBareMetalResourceClassSuccess(e) {
+{% block facetRangeStartChangeBareMetalResourceClassSuccess %}      facetChangeBareMetalResourceClassSuccess(e);{% endblock facetRangeStartChangeBareMetalResourceClassSuccess %}
       }
-      function facetRangeStartChangeBareMetalResourceClassError(pageContent) {
-{% block facetRangeStartChangeBareMetalResourceClassError %}{%- endblock facetRangeStartChangeBareMetalResourceClassError %}
+      function facetRangeStartChangeBareMetalResourceClassError(e) {
+{% block facetRangeStartChangeBareMetalResourceClassError %}      facetChangeBareMetalResourceClassError(e);{%- endblock facetRangeStartChangeBareMetalResourceClassError %}
       }
       function facetRangeStartChangeBareMetalResourceClass(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalResourceClassSuccess, facetRangeStartChangeBareMetalResourceClassError);
       }
 
-      function facetRangeEndChangeBareMetalResourceClassSuccess(pageContent) {
-{% block facetRangeEndChangeBareMetalResourceClassSuccess %}{%- endblock facetRangeEndChangeBareMetalResourceClassSuccess %}
+      function facetRangeEndChangeBareMetalResourceClassSuccess(e) {
+{% block facetRangeEndChangeBareMetalResourceClassSuccess %}      facetChangeBareMetalResourceClassSuccess(e);{% endblock facetRangeEndChangeBareMetalResourceClassSuccess %}
       }
-      function facetRangeEndChangeBareMetalResourceClassError(pageContent) {
-{% block facetRangeEndChangeBareMetalResourceClassError %}{%- endblock facetRangeEndChangeBareMetalResourceClassError %}
+      function facetRangeEndChangeBareMetalResourceClassError(e) {
+{% block facetRangeEndChangeBareMetalResourceClassError %}      facetChangeBareMetalResourceClassError(e);{%- endblock facetRangeEndChangeBareMetalResourceClassError %}
       }
       function facetRangeEndChangeBareMetalResourceClass(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalResourceClassSuccess, facetRangeEndChangeBareMetalResourceClassError);
@@ -304,11 +314,12 @@
 {% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalResourceClassPage %}

@@ -457,7 +457,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqAiNode_created')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_created')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -475,7 +475,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_archived')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_archived')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -493,7 +493,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_hubId')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_hubId')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -511,7 +511,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_clusterName')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_clusterName')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -529,7 +529,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_nodeName')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_nodeName')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -547,7 +547,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_id')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_id')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -565,7 +565,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_gpuDevicesTotal')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_gpuDevicesTotal')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -583,7 +583,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_ngsildTenant')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_ngsildTenant')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -601,7 +601,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_ngsildPath')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_ngsildPath')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -619,7 +619,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_ngsildContext')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_ngsildContext')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -637,7 +637,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_ngsildData')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_ngsildData')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -655,7 +655,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_location')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_location')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -673,7 +673,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_displayPage')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -691,7 +691,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_editPage')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -709,7 +709,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_userPage')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -727,7 +727,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_download')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_download')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);
@@ -745,7 +745,7 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
           document.querySelector('#fqAiNode_nodeResource')?.addEventListener('change', (event) => {
-            fqChange('AiNode', event.currentTarget);
+            fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
           document.querySelector('#buttonFacetAiNode_nodeResource')?.addEventListener('click', (event) => {
             facetFieldChange('AiNode', event.currentTarget);

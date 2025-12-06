@@ -292,7 +292,7 @@ Promise.all([
     }
   });
           document.querySelector('#fqClusterTemplate_created')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_created')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -310,7 +310,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_archived')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_archived')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -328,7 +328,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_id')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_id')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -346,7 +346,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_title')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_title')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -364,7 +364,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_description')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_description')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -382,7 +382,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_parameters')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_parameters')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -400,7 +400,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_displayPage')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_displayPage')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -418,7 +418,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_editPage')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_editPage')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -436,7 +436,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_userPage')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_userPage')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);
@@ -454,7 +454,7 @@ Promise.all([
             facetRangeEndChange('ClusterTemplate', event.currentTarget);
           });
           document.querySelector('#fqClusterTemplate_download')?.addEventListener('change', (event) => {
-            fqChange('ClusterTemplate', event.currentTarget);
+            fqChange('ClusterTemplate', event.currentTarget, facetChangeClusterTemplateSuccess, facetChangeClusterTemplateError);
           });
           document.querySelector('#buttonFacetClusterTemplate_download')?.addEventListener('click', (event) => {
             facetFieldChange('ClusterTemplate', event.currentTarget);

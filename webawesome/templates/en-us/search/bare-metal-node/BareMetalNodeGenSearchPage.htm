@@ -48,51 +48,61 @@
 {%- endblock htmTooltipBareMetalNodePage %}`;
       }
 
-      function facetSimpleRangeBareMetalNodeSuccess(pageContent) {
-{% block facetSimpleRangeBareMetalNodeSuccess %}{%- endblock facetSimpleRangeBareMetalNodeSuccess %}
+      function facetChangeBareMetalNodeSuccess(e) {
+        var l = e.querySelector('.pageForm .listBareMetalNode')?.value;
+        if(l)
+          window.listBareMetalNode = JSON.parse(l);
+{% block facetChangeBareMetalNodeSuccess %}{%- endblock facetBareMetalNodeSuccess %}
       }
-      function facetSimpleRangeBareMetalNodeError(pageContent) {
-{% block facetSimpleRangeBareMetalNodeError %}{%- endblock facetSimpleRangeBareMetalNodeError %}
+      function facetChangeBareMetalNodeError(e) {
+{% block facetChangeBareMetalNodeError %}{%- endblock facetBareMetalNodeError %}
+      }
+
+      function facetSimpleRangeBareMetalNodeSuccess(e) {
+{% block facetSimpleRangeBareMetalNodeSuccess %}      facetChangeBareMetalNodeSuccess(e);{% endblock facetSimpleRangeBareMetalNodeSuccess %}
+      }
+      function facetSimpleRangeBareMetalNodeError(e) {
+{% block facetSimpleRangeBareMetalNodeError %}      facetChangeBareMetalNodeError(e);{% endblock facetSimpleRangeBareMetalNodeError %}
       }
       function facetSimpleRangeBareMetalNode(e) {
         facetSimpleRange(e, facetSimpleRangeBareMetalNodeSuccess, facetSimpleRangeBareMetalNodeError);
       }
 
-      function facetRangeTimeZoneBareMetalNodeSuccess(pageContent) {
-{% block facetRangeTimeZoneBareMetalNodeSuccess %}{%- endblock facetRangeTimeZoneBareMetalNodeSuccess %}
+      function facetRangeTimeZoneBareMetalNodeSuccess(e) {
+{% block facetRangeTimeZoneBareMetalNodeSuccess %}      facetChangeBareMetalNodeSuccess(e);{% endblock facetRangeTimeZoneBareMetalNodeSuccess %}
       }
-      function facetRangeTimeZoneBareMetalNodeError(pageContent) {
-{% block facetRangeTimeZoneBareMetalNodeError %}{%- endblock facetRangeTimeZoneBareMetalNodeError %}
+      function facetRangeTimeZoneBareMetalNodeError(e) {
+{% block facetRangeTimeZoneBareMetalNodeError %}      facetChangeBareMetalNodeError(e);{%- endblock facetRangeTimeZoneBareMetalNodeError %}
       }
       function facetRangeTimeZoneBareMetalNode(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneBareMetalNodeSuccess, facetRangeTimeZoneBareMetalNodeError);
       }
 
-      function facetRangeGapChangeBareMetalNodeSuccess(pageContent) {
-{% block facetRangeGapChangeBareMetalNodeSuccess %}{%- endblock facetRangeGapChangeBareMetalNodeSuccess %}
+      function facetRangeGapChangeBareMetalNodeSuccess(e) {
+{% block facetRangeGapChangeBareMetalNodeSuccess %}      facetChangeBareMetalNodeSuccess(e);{% endblock facetRangeGapChangeBareMetalNodeSuccess %}
       }
-      function facetRangeGapChangeBareMetalNodeError(pageContent) {
-{% block facetRangeGapChangeBareMetalNodeError %}{%- endblock facetRangeGapChangeBareMetalNodeError %}
+      function facetRangeGapChangeBareMetalNodeError(e) {
+{% block facetRangeGapChangeBareMetalNodeError %}      facetChangeBareMetalNodeError(e);{%- endblock facetRangeGapChangeBareMetalNodeError %}
       }
       function facetRangeGapChangeBareMetalNode(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalNodeSuccess, facetRangeGapChangeBareMetalNodeError);
       }
 
-      function facetRangeStartChangeBareMetalNodeSuccess(pageContent) {
-{% block facetRangeStartChangeBareMetalNodeSuccess %}{%- endblock facetRangeStartChangeBareMetalNodeSuccess %}
+      function facetRangeStartChangeBareMetalNodeSuccess(e) {
+{% block facetRangeStartChangeBareMetalNodeSuccess %}      facetChangeBareMetalNodeSuccess(e);{% endblock facetRangeStartChangeBareMetalNodeSuccess %}
       }
-      function facetRangeStartChangeBareMetalNodeError(pageContent) {
-{% block facetRangeStartChangeBareMetalNodeError %}{%- endblock facetRangeStartChangeBareMetalNodeError %}
+      function facetRangeStartChangeBareMetalNodeError(e) {
+{% block facetRangeStartChangeBareMetalNodeError %}      facetChangeBareMetalNodeError(e);{%- endblock facetRangeStartChangeBareMetalNodeError %}
       }
       function facetRangeStartChangeBareMetalNode(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalNodeSuccess, facetRangeStartChangeBareMetalNodeError);
       }
 
-      function facetRangeEndChangeBareMetalNodeSuccess(pageContent) {
-{% block facetRangeEndChangeBareMetalNodeSuccess %}{%- endblock facetRangeEndChangeBareMetalNodeSuccess %}
+      function facetRangeEndChangeBareMetalNodeSuccess(e) {
+{% block facetRangeEndChangeBareMetalNodeSuccess %}      facetChangeBareMetalNodeSuccess(e);{% endblock facetRangeEndChangeBareMetalNodeSuccess %}
       }
-      function facetRangeEndChangeBareMetalNodeError(pageContent) {
-{% block facetRangeEndChangeBareMetalNodeError %}{%- endblock facetRangeEndChangeBareMetalNodeError %}
+      function facetRangeEndChangeBareMetalNodeError(e) {
+{% block facetRangeEndChangeBareMetalNodeError %}      facetChangeBareMetalNodeError(e);{%- endblock facetRangeEndChangeBareMetalNodeError %}
       }
       function facetRangeEndChangeBareMetalNode(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalNodeSuccess, facetRangeEndChangeBareMetalNodeError);
@@ -304,11 +314,12 @@
 {% include en-us/search/bare-metal-node/BareMetalNodeSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/bare-metal-node/BareMetalNodeSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNodePage %}

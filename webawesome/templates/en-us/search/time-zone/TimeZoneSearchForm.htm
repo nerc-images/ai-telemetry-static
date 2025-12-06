@@ -311,8 +311,6 @@ The id for this time zone. "
                             {{ inputDisplayPageTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
-{%- macro htmButton_patchTimeZone() %}<wa-button variant="brand" id="htmButton_patchTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_patchTimeZone() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchTimeZone" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -388,8 +386,6 @@ The id for this time zone. "
           {{ htmFormButton_patchTimeZone() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_postTimeZone() %}<wa-button variant="brand" id="htmButton_postTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_postTimeZone() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_postTimeZone" duration="5000" closable class="wa-header-l ">
@@ -468,8 +464,6 @@ The id for this time zone. "
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmButton_deleteTimeZone() %}<wa-button variant="brand" id="htmButton_deleteTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deleteTimeZone() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteTimeZone" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -486,8 +480,6 @@ The id for this time zone. "
           {{ htmFormButton_deleteTimeZone() }}
         </wa-dialog>
 {%- endmacro %}
-
-{%- macro htmButton_putimportTimeZone() %}<wa-button variant="brand" id="htmButton_putimportTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmFormButton_putimportTimeZone() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportTimeZone" duration="5000" closable class="wa-header-l ">
@@ -512,17 +504,6 @@ The id for this time zone. "
           </form>
           {{ htmFormButton_putimportTimeZone() }}
         </wa-dialog>
-{%- endmacro %}
-
-{%- macro htmButton_searchpageTimeZone() %}{%- endmacro %}
-
-{%- macro htmFormButton_searchpageTimeZone() %}
-          <wa-popup  auto-size="both" placement="top" id="alertButton_searchpageTimeZone" duration="5000" closable class="wa-header-l ">
-            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
-                 id="htmFormButton_searchpageTimeZone"
-                >Search time zones</wa-button>
-            <wa-badge class="alertPopup" id="alertPopupButton_searchpageTimeZone"></wa-badge>
-          </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageTimeZone() %}
@@ -630,8 +611,6 @@ The id for this time zone. "
         </div>
 {%- endmacro %}
 
-{%- macro htmButton_deletefilterTimeZone() %}<wa-button variant="brand" id="htmButton_deletefilterTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
-
 {%- macro htmFormButton_deletefilterTimeZone() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterTimeZone" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
@@ -648,61 +627,6 @@ The id for this time zone. "
           {{ htmFormButton_deletefilterTimeZone() }}
         </wa-dialog>
 {%- endmacro %}
-          <div id="htmSearchForm">
-            <wa-scroller>
-              <wa-button-group>
-{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {% if "PATCH" in scopes %}
-    {% if resultCount >= 1 %}
-                <wa-button variant="brand" id="refreshThisTimeZoneGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'id:{{ result.id }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisTimeZoneGenPage')); }, function() { addError(document.querySelector('#refreshThisTimeZoneGenPage')); }); return false; ">
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
-                  refresh
-                </wa-button>
-    {% endif %}
-    {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllTimeZoneGenPage{{ result.id | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllTimeZoneGenPage{{ result.id | e }}')); }, function() { addError(document.querySelector('#refreshAllTimeZoneGenPage{{ result.id | e }}')); }); "
-                    >
-                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
-                  refresh all 
-                </wa-button>
-    {% endif %}
-  {% endif %}
-{% endif %}
-{%- if 'PATCH' in scopes %}
-  {%- if resultCount > 0 %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_patchTimeZone() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-{%- if 'POST' in scopes %}
-  {%- if resultCount >= 1 %}
-    {{ htmButton_postTimeZone() }}
-  {%- else %}
-    {{ htmButton_postTimeZone() }}
-  {%- endif %}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is defined %}
-    {{ htmButton_deleteTimeZone() }}
-  {%- endif %}
-{%- endif %}
-{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {{ htmButton_putimportTimeZone() }}
-{%- endif %}
-{%- if 'DELETE' in scopes %}
-  {%- if result is not defined %}
-    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-    {{ htmButton_deletefilterTimeZone() }}
-    {%- endif %}
-  {%- endif %}
-{%- endif %}
-
-              </wa-button-group>
-            </wa-scroller>
-          </div>
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchTimeZone() }}
   {%- endif %}

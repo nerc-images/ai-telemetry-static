@@ -133,51 +133,61 @@
 {%- endblock jsStyleGpuDevicePage %}
       }
 
-      function facetSimpleRangeGpuDeviceSuccess(pageContent) {
-{% block facetSimpleRangeGpuDeviceSuccess %}{%- endblock facetSimpleRangeGpuDeviceSuccess %}
+      function facetChangeGpuDeviceSuccess(e) {
+        var l = e.querySelector('.pageForm .listGpuDevice')?.value;
+        if(l)
+          window.listGpuDevice = JSON.parse(l);
+{% block facetChangeGpuDeviceSuccess %}{%- endblock facetGpuDeviceSuccess %}
       }
-      function facetSimpleRangeGpuDeviceError(pageContent) {
-{% block facetSimpleRangeGpuDeviceError %}{%- endblock facetSimpleRangeGpuDeviceError %}
+      function facetChangeGpuDeviceError(e) {
+{% block facetChangeGpuDeviceError %}{%- endblock facetGpuDeviceError %}
+      }
+
+      function facetSimpleRangeGpuDeviceSuccess(e) {
+{% block facetSimpleRangeGpuDeviceSuccess %}      facetChangeGpuDeviceSuccess(e);{% endblock facetSimpleRangeGpuDeviceSuccess %}
+      }
+      function facetSimpleRangeGpuDeviceError(e) {
+{% block facetSimpleRangeGpuDeviceError %}      facetChangeGpuDeviceError(e);{% endblock facetSimpleRangeGpuDeviceError %}
       }
       function facetSimpleRangeGpuDevice(e) {
         facetSimpleRange(e, facetSimpleRangeGpuDeviceSuccess, facetSimpleRangeGpuDeviceError);
       }
 
-      function facetRangeTimeZoneGpuDeviceSuccess(pageContent) {
-{% block facetRangeTimeZoneGpuDeviceSuccess %}{%- endblock facetRangeTimeZoneGpuDeviceSuccess %}
+      function facetRangeTimeZoneGpuDeviceSuccess(e) {
+{% block facetRangeTimeZoneGpuDeviceSuccess %}      facetChangeGpuDeviceSuccess(e);{% endblock facetRangeTimeZoneGpuDeviceSuccess %}
       }
-      function facetRangeTimeZoneGpuDeviceError(pageContent) {
-{% block facetRangeTimeZoneGpuDeviceError %}{%- endblock facetRangeTimeZoneGpuDeviceError %}
+      function facetRangeTimeZoneGpuDeviceError(e) {
+{% block facetRangeTimeZoneGpuDeviceError %}      facetChangeGpuDeviceError(e);{%- endblock facetRangeTimeZoneGpuDeviceError %}
       }
       function facetRangeTimeZoneGpuDevice(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneGpuDeviceSuccess, facetRangeTimeZoneGpuDeviceError);
       }
 
-      function facetRangeGapChangeGpuDeviceSuccess(pageContent) {
-{% block facetRangeGapChangeGpuDeviceSuccess %}{%- endblock facetRangeGapChangeGpuDeviceSuccess %}
+      function facetRangeGapChangeGpuDeviceSuccess(e) {
+{% block facetRangeGapChangeGpuDeviceSuccess %}      facetChangeGpuDeviceSuccess(e);{% endblock facetRangeGapChangeGpuDeviceSuccess %}
       }
-      function facetRangeGapChangeGpuDeviceError(pageContent) {
-{% block facetRangeGapChangeGpuDeviceError %}{%- endblock facetRangeGapChangeGpuDeviceError %}
+      function facetRangeGapChangeGpuDeviceError(e) {
+{% block facetRangeGapChangeGpuDeviceError %}      facetChangeGpuDeviceError(e);{%- endblock facetRangeGapChangeGpuDeviceError %}
       }
       function facetRangeGapChangeGpuDevice(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeGpuDeviceSuccess, facetRangeGapChangeGpuDeviceError);
       }
 
-      function facetRangeStartChangeGpuDeviceSuccess(pageContent) {
-{% block facetRangeStartChangeGpuDeviceSuccess %}{%- endblock facetRangeStartChangeGpuDeviceSuccess %}
+      function facetRangeStartChangeGpuDeviceSuccess(e) {
+{% block facetRangeStartChangeGpuDeviceSuccess %}      facetChangeGpuDeviceSuccess(e);{% endblock facetRangeStartChangeGpuDeviceSuccess %}
       }
-      function facetRangeStartChangeGpuDeviceError(pageContent) {
-{% block facetRangeStartChangeGpuDeviceError %}{%- endblock facetRangeStartChangeGpuDeviceError %}
+      function facetRangeStartChangeGpuDeviceError(e) {
+{% block facetRangeStartChangeGpuDeviceError %}      facetChangeGpuDeviceError(e);{%- endblock facetRangeStartChangeGpuDeviceError %}
       }
       function facetRangeStartChangeGpuDevice(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeGpuDeviceSuccess, facetRangeStartChangeGpuDeviceError);
       }
 
-      function facetRangeEndChangeGpuDeviceSuccess(pageContent) {
-{% block facetRangeEndChangeGpuDeviceSuccess %}{%- endblock facetRangeEndChangeGpuDeviceSuccess %}
+      function facetRangeEndChangeGpuDeviceSuccess(e) {
+{% block facetRangeEndChangeGpuDeviceSuccess %}      facetChangeGpuDeviceSuccess(e);{% endblock facetRangeEndChangeGpuDeviceSuccess %}
       }
-      function facetRangeEndChangeGpuDeviceError(pageContent) {
-{% block facetRangeEndChangeGpuDeviceError %}{%- endblock facetRangeEndChangeGpuDeviceError %}
+      function facetRangeEndChangeGpuDeviceError(e) {
+{% block facetRangeEndChangeGpuDeviceError %}      facetChangeGpuDeviceError(e);{%- endblock facetRangeEndChangeGpuDeviceError %}
       }
       function facetRangeEndChangeGpuDevice(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeGpuDeviceSuccess, facetRangeEndChangeGpuDeviceError);
@@ -437,11 +447,12 @@
 {% include en-us/search/gpu-device/GpuDeviceSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/gpu-device/GpuDeviceSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleGpuDevicePage %}

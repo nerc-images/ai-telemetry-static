@@ -48,51 +48,61 @@
 {%- endblock htmTooltipBareMetalNetworkPage %}`;
       }
 
-      function facetSimpleRangeBareMetalNetworkSuccess(pageContent) {
-{% block facetSimpleRangeBareMetalNetworkSuccess %}{%- endblock facetSimpleRangeBareMetalNetworkSuccess %}
+      function facetChangeBareMetalNetworkSuccess(e) {
+        var l = e.querySelector('.pageForm .listBareMetalNetwork')?.value;
+        if(l)
+          window.listBareMetalNetwork = JSON.parse(l);
+{% block facetChangeBareMetalNetworkSuccess %}{%- endblock facetBareMetalNetworkSuccess %}
       }
-      function facetSimpleRangeBareMetalNetworkError(pageContent) {
-{% block facetSimpleRangeBareMetalNetworkError %}{%- endblock facetSimpleRangeBareMetalNetworkError %}
+      function facetChangeBareMetalNetworkError(e) {
+{% block facetChangeBareMetalNetworkError %}{%- endblock facetBareMetalNetworkError %}
+      }
+
+      function facetSimpleRangeBareMetalNetworkSuccess(e) {
+{% block facetSimpleRangeBareMetalNetworkSuccess %}      facetChangeBareMetalNetworkSuccess(e);{% endblock facetSimpleRangeBareMetalNetworkSuccess %}
+      }
+      function facetSimpleRangeBareMetalNetworkError(e) {
+{% block facetSimpleRangeBareMetalNetworkError %}      facetChangeBareMetalNetworkError(e);{% endblock facetSimpleRangeBareMetalNetworkError %}
       }
       function facetSimpleRangeBareMetalNetwork(e) {
         facetSimpleRange(e, facetSimpleRangeBareMetalNetworkSuccess, facetSimpleRangeBareMetalNetworkError);
       }
 
-      function facetRangeTimeZoneBareMetalNetworkSuccess(pageContent) {
-{% block facetRangeTimeZoneBareMetalNetworkSuccess %}{%- endblock facetRangeTimeZoneBareMetalNetworkSuccess %}
+      function facetRangeTimeZoneBareMetalNetworkSuccess(e) {
+{% block facetRangeTimeZoneBareMetalNetworkSuccess %}      facetChangeBareMetalNetworkSuccess(e);{% endblock facetRangeTimeZoneBareMetalNetworkSuccess %}
       }
-      function facetRangeTimeZoneBareMetalNetworkError(pageContent) {
-{% block facetRangeTimeZoneBareMetalNetworkError %}{%- endblock facetRangeTimeZoneBareMetalNetworkError %}
+      function facetRangeTimeZoneBareMetalNetworkError(e) {
+{% block facetRangeTimeZoneBareMetalNetworkError %}      facetChangeBareMetalNetworkError(e);{%- endblock facetRangeTimeZoneBareMetalNetworkError %}
       }
       function facetRangeTimeZoneBareMetalNetwork(e) {
         facetRangeTimeZone(e, facetRangeTimeZoneBareMetalNetworkSuccess, facetRangeTimeZoneBareMetalNetworkError);
       }
 
-      function facetRangeGapChangeBareMetalNetworkSuccess(pageContent) {
-{% block facetRangeGapChangeBareMetalNetworkSuccess %}{%- endblock facetRangeGapChangeBareMetalNetworkSuccess %}
+      function facetRangeGapChangeBareMetalNetworkSuccess(e) {
+{% block facetRangeGapChangeBareMetalNetworkSuccess %}      facetChangeBareMetalNetworkSuccess(e);{% endblock facetRangeGapChangeBareMetalNetworkSuccess %}
       }
-      function facetRangeGapChangeBareMetalNetworkError(pageContent) {
-{% block facetRangeGapChangeBareMetalNetworkError %}{%- endblock facetRangeGapChangeBareMetalNetworkError %}
+      function facetRangeGapChangeBareMetalNetworkError(e) {
+{% block facetRangeGapChangeBareMetalNetworkError %}      facetChangeBareMetalNetworkError(e);{%- endblock facetRangeGapChangeBareMetalNetworkError %}
       }
       function facetRangeGapChangeBareMetalNetwork(classSimpleName, event) {
         facetRangeGapChange(classSimpleName, event, facetRangeGapChangeBareMetalNetworkSuccess, facetRangeGapChangeBareMetalNetworkError);
       }
 
-      function facetRangeStartChangeBareMetalNetworkSuccess(pageContent) {
-{% block facetRangeStartChangeBareMetalNetworkSuccess %}{%- endblock facetRangeStartChangeBareMetalNetworkSuccess %}
+      function facetRangeStartChangeBareMetalNetworkSuccess(e) {
+{% block facetRangeStartChangeBareMetalNetworkSuccess %}      facetChangeBareMetalNetworkSuccess(e);{% endblock facetRangeStartChangeBareMetalNetworkSuccess %}
       }
-      function facetRangeStartChangeBareMetalNetworkError(pageContent) {
-{% block facetRangeStartChangeBareMetalNetworkError %}{%- endblock facetRangeStartChangeBareMetalNetworkError %}
+      function facetRangeStartChangeBareMetalNetworkError(e) {
+{% block facetRangeStartChangeBareMetalNetworkError %}      facetChangeBareMetalNetworkError(e);{%- endblock facetRangeStartChangeBareMetalNetworkError %}
       }
       function facetRangeStartChangeBareMetalNetwork(classSimpleName, event) {
         facetRangeStartChange(classSimpleName, event, facetRangeStartChangeBareMetalNetworkSuccess, facetRangeStartChangeBareMetalNetworkError);
       }
 
-      function facetRangeEndChangeBareMetalNetworkSuccess(pageContent) {
-{% block facetRangeEndChangeBareMetalNetworkSuccess %}{%- endblock facetRangeEndChangeBareMetalNetworkSuccess %}
+      function facetRangeEndChangeBareMetalNetworkSuccess(e) {
+{% block facetRangeEndChangeBareMetalNetworkSuccess %}      facetChangeBareMetalNetworkSuccess(e);{% endblock facetRangeEndChangeBareMetalNetworkSuccess %}
       }
-      function facetRangeEndChangeBareMetalNetworkError(pageContent) {
-{% block facetRangeEndChangeBareMetalNetworkError %}{%- endblock facetRangeEndChangeBareMetalNetworkError %}
+      function facetRangeEndChangeBareMetalNetworkError(e) {
+{% block facetRangeEndChangeBareMetalNetworkError %}      facetChangeBareMetalNetworkError(e);{%- endblock facetRangeEndChangeBareMetalNetworkError %}
       }
       function facetRangeEndChangeBareMetalNetwork(classSimpleName, event) {
         facetRangeEndChange(classSimpleName, event, facetRangeEndChangeBareMetalNetworkSuccess, facetRangeEndChangeBareMetalNetworkError);
@@ -304,11 +314,12 @@
 {% include en-us/search/bare-metal-network/BareMetalNetworkSearchButtons.htm %}
 {%- endset pageSearchButtons %}
 {%- endif %}
-{%- if pageSearchForm is not defined %}
-{%- set pageSearchForm %}
-{% include en-us/search/bare-metal-network/BareMetalNetworkSearchForm.htm %}
-{%- endset pageSearchForm %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/bare-metal-network/BareMetalNetworkSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
 {%- endif %}
+{% include en-us/search/bare-metal-network/BareMetalNetworkSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNetworkPage %}
