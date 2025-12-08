@@ -354,6 +354,7 @@
         xaxis: { title: 'Time in {{ defaultZoneId }}' }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'E2E Latency' } }
+        , showlegend: true
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -475,6 +476,7 @@
         xaxis: { title: 'Time in {{ defaultZoneId }}' }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'TTFT Latency' } }
+        , showlegend: true
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -518,6 +520,7 @@
         xaxis: { title: 'Time in {{ defaultZoneId }}' }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'Time Per Output Token' } }
+        , showlegend: true
       };
       Plotly.newPlot(panelId, traces, layout);
     }
