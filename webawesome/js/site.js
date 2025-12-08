@@ -445,7 +445,34 @@ function imgToDialog(target) {
   target.after(dialog);
 }
 
-function populateDashboardDataQuery(panelId, urls, queries) {
+function populateDashboardDataQuery(panelId, urls, queries, timeQuery) {
+  // Populate range information
+  var $rangeTable = document.getElementById(panelId + '-data-range-table');
+  if ($rangeTable && timeQuery) {
+    var $tbody = $rangeTable.querySelector('tbody');
+    $tbody.innerHTML = '';
+    var rangeItems = [
+      { label: 'Start', value: timeQuery.start }
+      , { label: 'End', value: timeQuery.end }
+      , { label: 'Step', value: timeQuery.step }
+    ];
+    rangeItems.forEach((item) => {
+      var $tr = document.createElement('tr');
+      $tbody.append($tr);
+
+      var $th = document.createElement('th');
+      $th.innerText = item.label;
+      $th.style.textAlign = 'left';
+      $th.style.paddingRight = '2rem';
+      $tr.append($th);
+
+      var $td = document.createElement('td');
+      $td.innerText = item.value;
+      $tr.append($td);
+    });
+  }
+
+  // Populate query links
   var $linksUl = document.getElementById(panelId + '-data-links-ul');
   if ($linksUl) {
     $linksUl.innerHTML = '';

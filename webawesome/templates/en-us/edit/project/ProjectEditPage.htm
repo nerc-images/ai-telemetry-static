@@ -153,7 +153,7 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-memory-bytes';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -202,7 +202,7 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-cpu-bytes';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -249,7 +249,7 @@
       const dataPromises = responses.map(response => response.json());
       const responseJsons = await Promise.all(dataPromises);
       var panelId = 'visualization-cluster-gpu-temperature';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -291,7 +291,7 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-gpu-utilization';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -331,7 +331,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-e2e-latency';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -388,7 +388,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-token-throughput';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       var halfLength = responseJsons.length / 2;
@@ -454,7 +454,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-ttft-latency';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -498,7 +498,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-tpot-latency';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
