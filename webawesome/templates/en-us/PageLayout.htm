@@ -318,6 +318,17 @@
           }
         };
         Plotly.react(panelId, traces, layout, config);
+        document.getElementById(panelId).on('plotly_relayout', function(e) {
+          var rangeStartStr = e['xaxis.range[0]'];
+          var rangeEndStr = e['xaxis.range[1]'];
+          if(rangeStartStr && rangeEndStr) {
+            var start = moment.tz(rangeStartStr, 'YYYY-MM-DD HH:mm', timeZone);
+            var end = moment.tz(rangeEndStr, 'YYYY-MM-DD HH:mm', timeZone);
+            document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value = end.format('YYYY-MM-DDTHH:mm');
+            document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value = start.format('YYYY-MM-DDTHH:mm');
+            updateDashboards();
+          }
+        });
       }
     }
 
