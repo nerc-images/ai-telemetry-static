@@ -34,6 +34,45 @@
     </div>
   </div>
 </wa-details>
+<wa-details open class="HtmRow" id="billing-section">
+  <div slot="summary">
+    Billing
+  </div>
+  <div class="wa-stack">
+    <wa-card with-header>
+      <header slot="header" class="wa-heading-m">GPU Hours Used</header>
+      <table id="billing-gpu-hours-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">GPU Model</th>
+            <th style="text-align: left;">Pod</th>
+            <th style="text-align: left;">Node</th>
+            <th style="text-align: right;">GPU Hours</th>
+          </tr>
+        </thead>
+        <tbody id="billing-gpu-hours-tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3" style="text-align: right;">Total GPU Hours:</th>
+            <th id="billing-gpu-hours-total" style="text-align: right;"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="billing-gpu-hours-empty" style="display: none;">
+        No GPU usage data found for the selected time range.
+      </div>
+      <wa-details summary="Query Info" style="margin-top: 1rem;">
+        <table class="wa-zebra-rows">
+          <tbody id="billing-range-info">
+          </tbody>
+        </table>
+        <p style="margin-top: 0.5rem;"><strong>Query:</strong></p>
+        <code id="billing-query-display" style="word-break: break-all;"></code>
+      </wa-details>
+    </wa-card>
+  </div>
+</wa-details>
 {% endif %}
 {%- endblock htmBodyStartProjectPage %}
 {%- block htmStyleProjectPage %}
@@ -133,6 +172,7 @@
             , queryLLMTokenThroughput(llmTimeQuery)
             , queryLLMTTFTLatency(llmTimeQuery)
             , queryLLMTPOTLatency(llmTimeQuery)
+            , queryGpuBillingHours('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}', timeQuery)
             ]);
       }
 
