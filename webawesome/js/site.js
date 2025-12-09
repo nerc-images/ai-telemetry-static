@@ -452,9 +452,10 @@ function populateDashboardDataQuery(panelId, urls, queries, timeQuery) {
     var $tbody = $rangeTable.querySelector('tbody');
     $tbody.innerHTML = '';
     var rangeItems = [
-      { label: 'Start', value: timeQuery.start }
-      , { label: 'End', value: timeQuery.end }
+      { label: 'Start', value: timeQuery.timeZone ? moment.tz(timeQuery.start, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss') : timeQuery.start }
+      , { label: 'End', value: timeQuery.timeZone ? moment.tz(timeQuery.end, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss') : timeQuery.end }
       , { label: 'Step', value: timeQuery.step }
+      , { label: 'Time Zone', value: timeQuery.timeZone || 'UTC' }
     ];
     rangeItems.forEach((item) => {
       var $tr = document.createElement('tr');
@@ -491,25 +492,29 @@ function populateDashboardDataQuery(panelId, urls, queries, timeQuery) {
   }
 }
 
-// Builds the query to get the GPU hours for a specific project and populates it on the 
-// project edit page.
 async function queryGpuBillingHours(hubId, clusterName, projectName, timeQuery) {
+  // Calculate the duration for the subquery
   var startTime = new Date(timeQuery.start).getTime();
   var endTime = new Date(timeQuery.end).getTime();
   var durationSeconds = Math.floor((endTime - startTime) / 1000);
   var durationString = durationSeconds + 's';
   
-  // build the query
+  // Build the query to calculate GPU hours with GPU model info:
+  // 1. Get pods requesting nvidia GPUs (excluding unschedulable)
+  // 2. Join with kube_node_labels to get the GPU product name
+  // 3. sum_over_time adds up all values at 1-minute intervals
+  // 4. Divide by 60 to convert minutes to hours
   var podQuery = '(kube_pod_resource_request{resource=~"nvidia.com.*", node!="", cluster="' + clusterName + '", namespace="' + projectName + '"} unless on(pod, namespace) kube_pod_status_unschedulable{cluster="' + clusterName + '", namespace="' + projectName + '"})';
   var joinQuery = podQuery + ' * on(node) group_left(label_nvidia_com_gpu_product) kube_node_labels{cluster="' + clusterName + '"}';
   var query = 'sum_over_time((' + joinQuery + ')[' + durationString + ':1m]) / 60';
   
-  // build query url
+  // Use instant query API (not query_range) since sum_over_time returns a single value
   var url = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
     query: query
     , time: timeQuery.end
   }).toString();
 
+  // Update UI elements
   var $table = document.getElementById('billing-gpu-hours-table');
   var $tbody = document.getElementById('billing-gpu-hours-tbody');
   var $total = document.getElementById('billing-gpu-hours-total');
@@ -521,17 +526,20 @@ async function queryGpuBillingHours(hubId, clusterName, projectName, timeQuery) 
     return;
   }
 
+  // Reset state
   $table.style.display = 'none';
   $empty.style.display = 'none';
 
+  // Display query info
   if ($queryDisplay) {
     $queryDisplay.innerText = query;
   }
   if ($rangeInfo) {
     $rangeInfo.innerHTML = '';
     var rangeItems = [
-      { label: 'Start', value: timeQuery.start }
-      , { label: 'End', value: timeQuery.end }
+      { label: 'Start', value: moment.tz(timeQuery.start, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss') }
+      , { label: 'End', value: moment.tz(timeQuery.end, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss') }
+      , { label: 'Time Zone', value: timeQuery.timeZone }
     ];
     rangeItems.forEach((item) => {
       var $tr = document.createElement('tr');
@@ -547,7 +555,6 @@ async function queryGpuBillingHours(hubId, clusterName, projectName, timeQuery) 
     });
   }
 
-  // fetch query response, populate table with data from response
   try {
     var response = await fetch(url);
     

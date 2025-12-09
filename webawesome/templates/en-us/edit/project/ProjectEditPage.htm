@@ -154,6 +154,7 @@
           start: start
           , end: end
           , step: step
+          , timeZone: timeZone
         };
 
         // Time step for LLM metrics
@@ -161,6 +162,7 @@
           start: start
           , end: end
           , step: "10m"
+          , timeZone: timeZone
         };
 
         Promise.all([
@@ -200,7 +202,7 @@
         responseJson.data.result.forEach((result, j) => {
           var hubId = hubIds[i];
           traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
+            x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
             , y: result.values.map(values => parseFloat(values[1]))
             , mode: 'scatter'
             , name: result.metric.cluster + ' in ' + hubId
@@ -210,7 +212,7 @@
       });
       var layout = {
         xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
+          title: 'Time in ' + timeQuery.timeZone
         }
         , yaxis: {
           title: 'Total memory usage'
@@ -249,7 +251,7 @@
         responseJson.data.result.forEach((result, j) => {
           var hubId = hubIds[i];
           traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
+            x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
             , y: result.values.map(values => parseFloat(values[1]))
             , mode: 'scatter'
             , name: result.metric.cluster + ' in ' + hubId
@@ -259,7 +261,7 @@
       });
       var layout = {
         xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
+          title: 'Time in ' + timeQuery.timeZone
         }
         , yaxis: {
           title: 'Percent of total CPU usage'
@@ -297,7 +299,7 @@
           responseJson.data.result.forEach((result, j) => {
             var hubId = hubIds[i];
             traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
+              x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: hubId + ' ' + result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName
@@ -307,7 +309,7 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Temperature (°F)' }
         , legend: { title: { text: 'GPU Devices' } }
       };
@@ -339,7 +341,7 @@
           responseJson.data.result.forEach((result, j) => {
             var hubId = hubIds[i];
             traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
+              x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName + ' device ' + result.metric.gpu
@@ -349,6 +351,7 @@
         }
       });
       var layout = {
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -381,7 +384,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]) * 1000)
                 , mode: 'lines+markers'
                 , name: 'Average (' + modelName + ')'
@@ -391,7 +394,7 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'E2E Latency' } }
         , showlegend: true
@@ -441,7 +444,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]))
                 , mode: 'lines+markers'
                 , name: 'Prompt Tokens/Sec (' + modelName + ')'
@@ -459,7 +462,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]))
                 , mode: 'lines+markers'
                 , name: 'Generation Tokens/Sec (' + modelName + ')'
@@ -470,7 +473,7 @@
       }
       
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Tokens per Second' }
         , legend: { title: { text: 'Token Throughput' } }
       };
@@ -503,7 +506,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]) * 1000)
                 , mode: 'lines+markers'
                 , name: 'Average TTFT (' + modelName + ')'
@@ -513,7 +516,7 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'TTFT Latency' } }
         , showlegend: true
@@ -547,7 +550,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]) * 1000)
                 , mode: 'lines+markers'
                 , name: 'Mean TPOT (' + modelName + ')'
@@ -557,7 +560,7 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'Time Per Output Token' } }
         , showlegend: true
