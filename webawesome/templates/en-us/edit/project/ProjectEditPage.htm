@@ -34,6 +34,45 @@
     </div>
   </div>
 </wa-details>
+<wa-details open class="HtmRow" id="billing-section">
+  <div slot="summary">
+    Resource Utilization
+  </div>
+  <div class="wa-stack">
+    <wa-card with-header>
+      <header slot="header" class="wa-heading-m">GPU Hours Used</header>
+      <table id="billing-gpu-hours-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">GPU Model</th>
+            <th style="text-align: left;">Pod</th>
+            <th style="text-align: left;">Node</th>
+            <th style="text-align: right;">GPU Hours</th>
+          </tr>
+        </thead>
+        <tbody id="billing-gpu-hours-tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="3" style="text-align: right;">Total GPU Hours:</th>
+            <th id="billing-gpu-hours-total" style="text-align: right;"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="billing-gpu-hours-empty" style="display: none;">
+        No GPU usage data found for the selected time range.
+      </div>
+      <wa-details summary="Query Info" style="margin-top: 1rem;">
+        <table class="wa-zebra-rows">
+          <tbody id="billing-range-info">
+          </tbody>
+        </table>
+        <p style="margin-top: 0.5rem;"><strong>Query:</strong></p>
+        <code id="billing-query-display" style="word-break: break-all;"></code>
+      </wa-details>
+    </wa-card>
+  </div>
+</wa-details>
 {% endif %}
 {%- endblock htmBodyStartProjectPage %}
 {%- block htmStyleProjectPage %}
@@ -55,25 +94,9 @@
 }
 {%- endblock htmStyleProjectPage %}
 
-{%- block facetSimpleRangeProjectSuccess %}
+{%- block facetChangeProjectSuccess %}
       updateDashboards();
-{% endblock facetSimpleRangeProjectSuccess -%}
-
-{%- block facetRangeTimeZoneProjectSuccess %}
-      updateDashboards();
-{% endblock facetRangeTimeZoneProjectSuccess -%}
-
-{%- block facetRangeGapChangeProjectSuccess %}
-      updateDashboards();
-{% endblock facetRangeGapChangeProjectSuccess -%}
-
-{%- block facetRangeStartChangeProjectSuccess %}
-      updateDashboards();
-{% endblock facetRangeStartChangeProjectSuccess -%}
-
-{%- block facetRangeEndChangeProjectSuccess %}
-      updateDashboards();
-{% endblock facetRangeEndChangeProjectSuccess -%}
+{% endblock facetChangeProjectSuccess -%}
 
 {%- block htmScriptInitProjectPage %}
       updateDashboards();
@@ -115,6 +138,7 @@
           start: start
           , end: end
           , step: step
+          , timeZone: timeZone
         };
 
         // Time step for LLM metrics
@@ -122,6 +146,7 @@
           start: start
           , end: end
           , step: "10m"
+          , timeZone: timeZone
         };
 
         Promise.all([
@@ -133,6 +158,7 @@
             , queryLLMTokenThroughput(llmTimeQuery)
             , queryLLMTTFTLatency(llmTimeQuery)
             , queryLLMTPOTLatency(llmTimeQuery)
+            , queryGpuBillingHours('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}', timeQuery)
             ]);
       }
 
@@ -153,14 +179,14 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-memory-bytes';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         responseJson.data.result.forEach((result, j) => {
           var hubId = hubIds[i];
           traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
+            x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
             , y: result.values.map(values => parseFloat(values[1]))
             , mode: 'scatter'
             , name: result.metric.cluster + ' in ' + hubId
@@ -170,7 +196,7 @@
       });
       var layout = {
         xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
+          title: 'Time in ' + timeQuery.timeZone
         }
         , yaxis: {
           title: 'Total memory usage'
@@ -202,14 +228,14 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-cpu-bytes';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
         responseJson.data.result.forEach((result, j) => {
           var hubId = hubIds[i];
           traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
+            x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
             , y: result.values.map(values => parseFloat(values[1]))
             , mode: 'scatter'
             , name: result.metric.cluster + ' in ' + hubId
@@ -219,7 +245,7 @@
       });
       var layout = {
         xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
+          title: 'Time in ' + timeQuery.timeZone
         }
         , yaxis: {
           title: 'Percent of total CPU usage'
@@ -249,7 +275,7 @@
       const dataPromises = responses.map(response => response.json());
       const responseJsons = await Promise.all(dataPromises);
       var panelId = 'visualization-cluster-gpu-temperature';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -257,7 +283,7 @@
           responseJson.data.result.forEach((result, j) => {
             var hubId = hubIds[i];
             traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
+              x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: hubId + ' ' + result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName
@@ -267,7 +293,7 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Temperature (°F)' }
         , legend: { title: { text: 'GPU Devices' } }
       };
@@ -291,7 +317,7 @@
       var end = new Date();
       var start = new Date(new Date().setHours(end.getHours() - 1));
       var panelId = 'visualization-cluster-gpu-utilization';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -299,7 +325,7 @@
           responseJson.data.result.forEach((result, j) => {
             var hubId = hubIds[i];
             traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
+              x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
               , y: result.values.map(values => parseFloat(values[1]))
               , mode: 'lines+markers'
               , name: result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName + ' device ' + result.metric.gpu
@@ -309,6 +335,7 @@
         }
       });
       var layout = {
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -331,7 +358,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-e2e-latency';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -341,7 +368,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]) * 1000)
                 , mode: 'lines+markers'
                 , name: 'Average (' + modelName + ')'
@@ -351,9 +378,10 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'E2E Latency' } }
+        , showlegend: true
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -387,7 +415,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-token-throughput';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       var halfLength = responseJsons.length / 2;
@@ -400,7 +428,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]))
                 , mode: 'lines+markers'
                 , name: 'Prompt Tokens/Sec (' + modelName + ')'
@@ -418,7 +446,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]))
                 , mode: 'lines+markers'
                 , name: 'Generation Tokens/Sec (' + modelName + ')'
@@ -429,7 +457,7 @@
       }
       
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Tokens per Second' }
         , legend: { title: { text: 'Token Throughput' } }
       };
@@ -453,7 +481,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-ttft-latency';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -462,7 +490,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]) * 1000)
                 , mode: 'lines+markers'
                 , name: 'Average TTFT (' + modelName + ')'
@@ -472,9 +500,10 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'TTFT Latency' } }
+        , showlegend: true
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -496,7 +525,7 @@
       const responseJsons = await Promise.all(dataPromises);
 
       var panelId = 'visualization-llm-tpot-latency';
-      populateDashboardDataQuery(panelId, urls, queries);
+      populateDashboardDataQuery(panelId, urls, queries, timeQuery);
 
       var traces = [];
       responseJsons.forEach((responseJson, i) => {
@@ -505,7 +534,7 @@
             if(result.values && result.values.length > 0) {
               var modelName = result.metric.model_name || 'unknown';
               traces.push({
-                x: result.values.map(values => new Date(values[0] * 1000))
+                x: result.values.map(values => moment.tz(values[0] * 1000, timeQuery.timeZone).format('YYYY-MM-DD HH:mm:ss'))
                 , y: result.values.map(values => parseFloat(values[1]) * 1000)
                 , mode: 'lines+markers'
                 , name: 'Mean TPOT (' + modelName + ')'
@@ -515,9 +544,10 @@
         }
       });
       var layout = {
-        xaxis: { title: 'Time in {{ defaultZoneId }}' }
+        xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Latency (ms)' }
         , legend: { title: { text: 'Time Per Output Token' } }
+        , showlegend: true
       };
       Plotly.newPlot(panelId, traces, layout);
     }

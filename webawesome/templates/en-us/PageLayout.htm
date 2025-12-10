@@ -22,6 +22,13 @@
         <div id="{{ divId | e }}"></div>
         <wa-details summary="Data">
           <strong class="wa-heading-l">
+            Range
+          </strong>
+          <table id="{{ divId | e }}-data-range-table" class="wa-zebra-rows">
+            <tbody>
+            </tbody>
+          </table>
+          <strong class="wa-heading-l">
             Prometheus Keycloak Proxy queries
           </strong>
           <wa-scroller>
