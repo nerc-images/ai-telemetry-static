@@ -123,6 +123,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -321,8 +322,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterOrderPage %}
-        <div class="pageContent ">
 {%- include en-us/search/cluster-order/ClusterOrderSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterOrder">back to all OpenShift cluster orders</wa-tooltip></wa-tooltip>

@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var name = {% if result.name is defined %}{{ result.name | tojson }}{% else %}null{% endif %};

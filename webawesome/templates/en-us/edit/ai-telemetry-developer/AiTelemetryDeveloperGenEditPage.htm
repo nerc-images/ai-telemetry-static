@@ -122,6 +122,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var pageId = {% if result.pageId is defined %}{{ result.pageId | tojson }}{% else %}null{% endif %};
@@ -294,8 +295,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleAiTelemetryDeveloperPage %}
-        <div class="pageContent ">
 {%- include en-us/search/ai-telemetry-developer/AiTelemetryDeveloperSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-AiTelemetryDeveloper">back to all AI Telemetry developers</wa-tooltip></wa-tooltip>
