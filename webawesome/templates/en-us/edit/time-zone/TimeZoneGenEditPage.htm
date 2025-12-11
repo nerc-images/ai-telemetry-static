@@ -122,6 +122,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
@@ -294,8 +295,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleTimeZonePage %}
-        <div class="pageContent ">
 {%- include en-us/search/time-zone/TimeZoneSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip></wa-tooltip>

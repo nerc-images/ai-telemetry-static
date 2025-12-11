@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var name = {% if result.name is defined %}{{ result.name | tojson }}{% else %}null{% endif %};
@@ -348,8 +349,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterRequestPage %}
-        <div class="pageContent ">
 {%- include en-us/search/cluster-request/ClusterRequestSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-ClusterRequest">back to all OpenShift cluster requests</wa-tooltip></wa-tooltip>

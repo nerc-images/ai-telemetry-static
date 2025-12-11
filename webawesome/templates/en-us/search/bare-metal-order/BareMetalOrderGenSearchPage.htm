@@ -123,6 +123,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var pk = {% if result.pk is defined %}{{ result.pk | tojson }}{% else %}null{% endif %};

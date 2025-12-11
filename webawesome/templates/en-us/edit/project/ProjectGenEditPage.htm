@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var projectResource = {% if result.projectResource is defined %}{{ result.projectResource | tojson }}{% else %}null{% endif %};
@@ -348,8 +349,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleProjectPage %}
-        <div class="pageContent ">
 {%- include en-us/search/project/ProjectSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip></wa-tooltip>

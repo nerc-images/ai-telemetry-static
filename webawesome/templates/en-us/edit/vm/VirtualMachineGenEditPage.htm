@@ -206,6 +206,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var vmResource = {% if result.vmResource is defined %}{{ result.vmResource | tojson }}{% else %}null{% endif %};
@@ -430,8 +431,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleVirtualMachinePage %}
-        <div class="pageContent ">
 {%- include en-us/search/vm/VirtualMachineSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-VirtualMachine">back to all virtual machines</wa-tooltip></wa-tooltip>

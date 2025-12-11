@@ -123,6 +123,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var pk = {% if result.pk is defined %}{{ result.pk | tojson }}{% else %}null{% endif %};
@@ -311,8 +312,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalOrderPage %}
-        <div class="pageContent ">
 {%- include en-us/search/bare-metal-order/BareMetalOrderSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalOrder">back to all bare metal orders</wa-tooltip></wa-tooltip>
