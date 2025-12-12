@@ -122,6 +122,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var name = {% if result.name is defined %}{{ result.name | tojson }}{% else %}null{% endif %};
@@ -294,8 +295,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalResourceClassPage %}
-        <div class="pageContent ">
 {%- include en-us/search/bare-metal-resource-class/BareMetalResourceClassSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalResourceClass">back to all bare metal resource classes</wa-tooltip></wa-tooltip>

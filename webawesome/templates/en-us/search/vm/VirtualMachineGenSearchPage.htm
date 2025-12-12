@@ -206,6 +206,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var vmResource = {% if result.vmResource is defined %}{{ result.vmResource | tojson }}{% else %}null{% endif %};

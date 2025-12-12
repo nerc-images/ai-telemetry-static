@@ -122,6 +122,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var nodeId = {% if result.nodeId is defined %}{{ result.nodeId | tojson }}{% else %}null{% endif %};
@@ -294,8 +295,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNodePage %}
-        <div class="pageContent ">
 {%- include en-us/search/bare-metal-node/BareMetalNodeSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-BareMetalNode">back to all bare metal nodes</wa-tooltip></wa-tooltip>

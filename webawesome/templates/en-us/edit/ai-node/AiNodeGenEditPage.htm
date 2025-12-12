@@ -206,6 +206,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var nodeResource = {% if result.nodeResource is defined %}{{ result.nodeResource | tojson }}{% else %}null{% endif %};
@@ -430,8 +431,8 @@
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleAiNodePage %}
-        <div class="pageContent ">
 {%- include en-us/search/ai-node/AiNodeSidebar.htm %}
+        <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
           <wa-tooltip for="return-to-AiNode">back to all AI nodes</wa-tooltip></wa-tooltip>

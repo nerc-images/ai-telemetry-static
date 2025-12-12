@@ -122,6 +122,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var userId = {% if result.userId is defined %}{{ result.userId | tojson }}{% else %}null{% endif %};

@@ -207,6 +207,7 @@
         , customElements.whenDefined('wa-select')
         , customElements.whenDefined('wa-radio')
         , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
         var gpuDeviceResource = {% if result.gpuDeviceResource is defined %}{{ result.gpuDeviceResource | tojson }}{% else %}null{% endif %};
