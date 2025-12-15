@@ -104,9 +104,14 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeStartVal = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeEndVal = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = facetRangeStartVal;
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = facetRangeEndVal;
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1MINUTE';
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeEndVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "facet.range.gap=" + encodeURIComponent(document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value);
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-hours-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -114,9 +119,14 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeStartVal = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeEndVal = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = facetRangeStartVal;
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = facetRangeEndVal;
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1HOUR';
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeEndVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "facet.range.gap=" + encodeURIComponent(document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value);
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-days-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -124,9 +134,14 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeStartVal = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeEndVal = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = facetRangeStartVal;
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = facetRangeEndVal;
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1DAY';
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeEndVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "facet.range.gap=" + encodeURIComponent(document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value);
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-weeks-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -134,9 +149,14 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeStartVal = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeEndVal = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = facetRangeStartVal;
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = facetRangeEndVal;
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1WEEK';
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeEndVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "facet.range.gap=" + encodeURIComponent(document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value);
     searchPage(classSimpleName, success, error);
   } else if(simpleRangeId.startsWith('last-month-')) {
     var match = simpleRangeId.match(/^[^-]+-[^-]+-([^-]+)-([^-]+)$/);
@@ -144,9 +164,14 @@ function facetSimpleRange(e, success, error) {
     var unit = match[2];
     var end = moment().clone().tz(timeZone);
     var start = end.clone().subtract(amount, unit);
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = end.format('YYYY-MM-DDTHH:mm');
-    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeStartVal = start.format('YYYY-MM-DDTHH:mm');
+    var facetRangeEndVal = end.format('YYYY-MM-DDTHH:mm');
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName + "-input").value = facetRangeStartVal;
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName + "-input").value = facetRangeEndVal;
     document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value = '+1MONTH';
+    document.querySelector("#pageSearchVal-pageFacetRangeStart-" + classSimpleName).innerText = "facet.range.start=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeEndVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName).innerText = "facet.range.gap=" + encodeURIComponent(document.querySelector("#pageSearchVal-pageFacetRangeGap-" + classSimpleName + "-input").value);
     searchPage(classSimpleName, success, error);
   }
 }
@@ -224,7 +249,7 @@ function facetRangeEndChange(classSimpleName, elem, success, error) {
   var facetRangeEndVal = $facetRangeEnd.value;
   if(facetRangeEndVal) {
     var timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeStartVal + ":00.000[" + timeZone + "]");
+    document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "facet.range.end=" + encodeURIComponent(facetRangeEndVal + ":00.000[" + timeZone + "]");
   } else {
     document.querySelector("#pageSearchVal-pageFacetRangeEnd-" + classSimpleName).innerText = "";
   }

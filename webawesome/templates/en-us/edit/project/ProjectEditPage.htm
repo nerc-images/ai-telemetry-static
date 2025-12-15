@@ -11,10 +11,27 @@
       {{ dashboardCard('visualization-cluster-memory-bytes', 'Percent of total memory usage for ' ~ result.clusterName ~ ' cluster') }}
       {{ dashboardCard('visualization-cluster-cpu-bytes', 'Percent of total CPU usage for ' ~ result.clusterName ~ ' cluster') }}
     </div>
+  </div>
+</wa-details>
+<wa-details open class="HtmRow" id="network-performance-dashboard">
+  <div slot="summary">
+    Network Performance Metrics
+  </div>
+  <div class="wa-stack ">
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-network-receive', 'Network receive bytes in ' ~ result.projectName) }}
+      {{ dashboardCard('visualization-network-transmit', 'Network transmit bytes in ' ~ result.projectName) }}
+    </div>
+  </div>
+</wa-details>
+{% if result.gpuEnabled %}
+<wa-details open class="HtmRow" id="gpu-performance-dashboard">
+  <div slot="summary">
+    GPU Performance Metrics
+  </div>
+  <div class="wa-stack ">
     <div class="wa-grid ">
       {{ dashboardCard('visualization-cluster-gpu-temperature', 'GPU temperature per GPU device in cluster ' ~ result.clusterName ~ ' project ' ~ result.projectName) }}
-    </div>
-    <div class="wa-grid ">
       {{ dashboardCard('visualization-cluster-gpu-utilization', 'GPU utilization per GPU device in cluster ' ~ result.clusterName ~ ' project ' ~ result.projectName) }}
     </div>
   </div>
@@ -73,6 +90,7 @@
     </wa-card>
   </div>
 </wa-details>
+{% endif %}
 {% endif %}
 {%- endblock htmBodyStartProjectPage %}
 {%- block htmStyleProjectPage %}
@@ -152,6 +170,9 @@
         Promise.all([
             queryMemoryBytesTotal(timeQuery)
             , queryCpuBytesTotal(timeQuery)
+            , {{ dashboardPromise('visualization-network-receive') }}
+            , {{ dashboardPromise('visualization-network-transmit') }}
+            {% if result.gpuEnabled -%}
             , queryGpuTemperature(timeQuery)
             , queryGpuUtilization(timeQuery)
             , queryLLME2ELatency(llmTimeQuery)
@@ -159,6 +180,7 @@
             , queryLLMTTFTLatency(llmTimeQuery)
             , queryLLMTPOTLatency(llmTimeQuery)
             , queryGpuBillingHours('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}', timeQuery)
+            {%- endif %}
             ]);
       }
 
@@ -259,6 +281,27 @@
       };
       Plotly.newPlot(panelId, traces, layout);
     }
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-network-receive'
+      , yaxisTitle='Total network receive bytes'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='sum(irate(container_network_receive_bytes_total{'
+      , metricSuffix='}[10m])) by (namespace)'
+      , projectVar='projectName'
+      , timeZone=timeZone
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-network-transmit'
+      , yaxisTitle='Total network transmit bytes'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='sum(irate(container_network_transmit_bytes_total{'
+      , metricSuffix='}[10m])) by (namespace)'
+      , projectVar='projectName'
+      , timeZone=timeZone
+    ) }}
+    {% if result.gpuEnabled -%}
 
     async function queryGpuTemperature(timeQuery) {
       const urls = [];
@@ -551,6 +594,7 @@
       };
       Plotly.newPlot(panelId, traces, layout);
     }
+    {%- endif %}
 
   </script>
 {%- endblock htmScriptsProjectPage %}
