@@ -67,6 +67,15 @@
             </wa-badge>
           </wa-button>
 
+          {% if project.namespaceTerminating %}
+          <wa-button id="clusterProject-{{ project.projectName }}-namespace-terminating">
+            terminating
+            <wa-badge variant="warning" attention="pulse" pill>
+              <i class="{{ FONTAWESOME_STYLE }} fa-trash-can-xmark fa-spin "></i>
+            </wa-badge>
+          </wa-button>
+          {% endif %}
+
           <wa-tooltip for="clusterProject-{{ project.projectName }}-last-updated">
             <wa-format-date weekday="short" month="short" day="numeric" year="numeric" hour="numeric" minute="numeric" second="numeric" time-zone-name="short" date="{{ formatZonedDateTime(project.modified, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, "UTC") }}"></wa-format-date>
           </wa-tooltip>

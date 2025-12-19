@@ -250,6 +250,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH namespaceTerminating
+          document.querySelector('#Page_namespaceTerminating')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_namespaceTerminating');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setNamespaceTerminating', event.currentTarget.checked
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_namespaceTerminating')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_namespaceTerminating')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_namespaceTerminating');
+            const valid = form.reportValidity();
+          });
+
           // PATCH sessionId
           document.querySelector('#Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');
