@@ -79,6 +79,16 @@ function searchProjectFilters($formFilters) {
     if(filterFullPvcs != null && filterFullPvcs !== '')
       filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
 
+    var $filterNamespaceTerminatingCheckbox = $formFilters.querySelector('input.valueNamespaceTerminating[type = "checkbox"]');
+    var $filterNamespaceTerminatingSelect = $formFilters.querySelector('select.valueNamespaceTerminating');
+    var filterNamespaceTerminating = $filterNamespaceTerminatingSelect.length ? $filterNamespaceTerminatingSelect.value : $filterNamespaceTerminatingCheckbox.checked;
+    var filterNamespaceTerminatingSelectVal = $formFilters.querySelector('select.filterNamespaceTerminating')?.value;
+    var filterNamespaceTerminating = null;
+    if(filterNamespaceTerminatingSelectVal !== '')
+      filterNamespaceTerminating = filterNamespaceTerminatingSelectVal == 'true';
+    if(filterNamespaceTerminating != null && filterNamespaceTerminating === true)
+      filters.push({ name: 'fq', value: 'namespaceTerminating:' + filterNamespaceTerminating });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -487,6 +497,25 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeFullPvcs != null && removeFullPvcs !== '')
     vals['removeFullPvcs'] = removeFullPvcs;
 
+  var valueNamespaceTerminating = $formValues.querySelector('.valueNamespaceTerminating')?.value;
+  var removeNamespaceTerminating = $formValues.querySelector('.removeNamespaceTerminating')?.value === 'true';
+  if(valueNamespaceTerminating != null)
+    valueNamespaceTerminating = valueNamespaceTerminating === 'true';
+  var valueNamespaceTerminatingSelectVal = $formValues.querySelector('select.setNamespaceTerminating')?.value;
+  if(valueNamespaceTerminatingSelectVal != null)
+    valueNamespaceTerminatingSelectVal = valueNamespaceTerminatingSelectVal === 'true';
+  if(valueNamespaceTerminatingSelectVal != null && valueNamespaceTerminatingSelectVal !== '')
+    valueNamespaceTerminating = valueNamespaceTerminatingSelectVal == 'true';
+  var setNamespaceTerminating = removeNamespaceTerminating ? null : valueNamespaceTerminating;
+  var addNamespaceTerminating = $formValues.querySelector('.addNamespaceTerminating')?.checked;
+  if(removeNamespaceTerminating || setNamespaceTerminating != null && setNamespaceTerminating !== '')
+    vals['setNamespaceTerminating'] = setNamespaceTerminating;
+  if(addNamespaceTerminating != null && addNamespaceTerminating !== '')
+    vals['addNamespaceTerminating'] = addNamespaceTerminating;
+  var removeNamespaceTerminating = $formValues.querySelector('.removeNamespaceTerminating')?.checked;
+  if(removeNamespaceTerminating != null && removeNamespaceTerminating !== '')
+    vals['removeNamespaceTerminating'] = removeNamespaceTerminating;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -663,6 +692,16 @@ function patchProjectFilters($formFilters) {
     if(filterFullPvcs != null && filterFullPvcs !== '')
       filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
 
+    var $filterNamespaceTerminatingCheckbox = $formFilters.querySelector('input.valueNamespaceTerminating[type = "checkbox"]');
+    var $filterNamespaceTerminatingSelect = $formFilters.querySelector('select.valueNamespaceTerminating');
+    var filterNamespaceTerminating = $filterNamespaceTerminatingSelect.length ? $filterNamespaceTerminatingSelect.value : $filterNamespaceTerminatingCheckbox.checked;
+    var filterNamespaceTerminatingSelectVal = $formFilters.querySelector('select.filterNamespaceTerminating')?.value;
+    var filterNamespaceTerminating = null;
+    if(filterNamespaceTerminatingSelectVal !== '')
+      filterNamespaceTerminating = filterNamespaceTerminatingSelectVal == 'true';
+    if(filterNamespaceTerminating != null && filterNamespaceTerminating === true)
+      filters.push({ name: 'fq', value: 'namespaceTerminating:' + filterNamespaceTerminating });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -832,6 +871,10 @@ async function postProject($formValues, target, success, error) {
   var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
   if(valueFullPvcs != null && valueFullPvcs !== '')
     vals['fullPvcs'] = JSON.parse(valueFullPvcs);
+
+  var valueNamespaceTerminating = $formValues.querySelector('.valueNamespaceTerminating')?.value;
+  if(valueNamespaceTerminating != null && valueNamespaceTerminating !== '')
+    vals['namespaceTerminating'] = valueNamespaceTerminating == 'true';
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -1107,6 +1150,7 @@ async function websocketProjectInner(apiRequest) {
         var inputPodsRestarting = null;
         var inputFullPvcsCount = null;
         var inputFullPvcs = null;
+        var inputNamespaceTerminating = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -1152,6 +1196,8 @@ async function websocketProjectInner(apiRequest) {
           inputFullPvcsCount = $response.querySelector('.Page_fullPvcsCount');
         if(vars.includes('fullPvcs'))
           inputFullPvcs = $response.querySelector('.Page_fullPvcs');
+        if(vars.includes('namespaceTerminating'))
+          inputNamespaceTerminating = $response.querySelector('.Page_namespaceTerminating');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -1322,6 +1368,16 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputFullPvcs.textContent;
           });
           addGlow(document.querySelector('.Page_fullPvcs'));
+        }
+
+        if(inputNamespaceTerminating) {
+          document.querySelectorAll('.Page_namespaceTerminating').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNamespaceTerminating.getAttribute('value');
+            else
+              item.textContent = inputNamespaceTerminating.textContent;
+          });
+          addGlow(document.querySelector('.Page_namespaceTerminating'));
         }
 
         if(inputClassCanonicalName) {

@@ -501,6 +501,55 @@ The names of the persistent volume claims that are running out of disk space in 
 {%- macro htmFullPvcsProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputFullPvcsProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputNamespaceTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_namespaceTerminating">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-checkbox
+                      id="{{classApiMethodMethod}}_namespaceTerminating"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="{{classApiMethodMethod}}_namespaceTerminating"
+  {%- endif %}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="namespace terminating"
+                      label="namespace terminating"
+                      hint="Whether namespace is stuck in terminating status. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      name="setNamespaceTerminating"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      name="setNamespaceTerminating"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_namespaceTerminating setNamespaceTerminating valueNamespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      name="setNamespaceTerminating"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.namespaceTerminating == true %}
+                      checked
+    {%- endif %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      >namespace terminating</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmNamespaceTerminatingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputNamespaceTerminatingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 
 {%- macro htmFormButton_patchProject() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchProject" duration="5000" closable class="wa-header-l ">
@@ -614,6 +663,16 @@ The names of the persistent volume claims that are running out of disk space in 
                   {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -736,6 +795,16 @@ The names of the persistent volume claims that are running out of disk space in 
                   {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -939,6 +1008,16 @@ The names of the persistent volume claims that are running out of disk space in 
                   {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>

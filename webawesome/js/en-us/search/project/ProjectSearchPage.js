@@ -154,6 +154,17 @@ Promise.all([
     facetStatsChange('Project', 'fullPvcs', false);
   });
 
+  document.querySelector('#pageSelectSortProject_namespaceTerminating')?.addEventListener('change', (event) => {
+    sort('Project', 'namespaceTerminating', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_namespaceTerminating')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'namespaceTerminating', true);
+  });
+  document.querySelector('#pageStatsProject_namespaceTerminating')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'namespaceTerminating', false);
+  });
+
   document.querySelector('#pageSelectSortProject_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Project', 'classCanonicalName', event.currentTarget.value);
   });
@@ -587,6 +598,24 @@ Promise.all([
             facetRangeStartChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndProject_fullPvcs')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_namespaceTerminating')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_namespaceTerminating')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_namespaceTerminating')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_namespaceTerminating')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_namespaceTerminating')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_namespaceTerminating')?.addEventListener('change', (event) => {
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_displayPage')?.addEventListener('change', (event) => {
