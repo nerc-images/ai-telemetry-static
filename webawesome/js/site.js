@@ -530,7 +530,7 @@ async function queryGpuBillingHours(hubId, clusterName, projectName, timeQuery) 
   // 3. sum_over_time adds up all values at 1-minute intervals
   // 4. Divide by 60 to convert minutes to hours
   var podQuery = '(kube_pod_resource_request{resource=~"nvidia.com.*", node!="", cluster="' + clusterName + '", namespace="' + projectName + '"} unless on(pod, namespace) kube_pod_status_unschedulable{cluster="' + clusterName + '", namespace="' + projectName + '"})';
-  var joinQuery = podQuery + ' * on(node) group_left(label_nvidia_com_gpu_product) kube_node_labels{cluster="' + clusterName + '"}';
+  var joinQuery = podQuery + ' * on(node) group_left(label_nvidia_com_gpu_product) (max by (node, label_nvidia_com_gpu_product) (kube_node_labels{cluster="' + clusterName + '"}))';
   var query = 'sum_over_time((' + joinQuery + ')[' + durationString + ':1m]) / 60';
   
   // Use instant query API (not query_range) since sum_over_time returns a single value
