@@ -530,7 +530,7 @@ async function queryGpuBillingHours(hubId, clusterName, projectName, timeQuery) 
   // 3. sum_over_time adds up all values at 1-minute intervals
   // 4. Divide by 60 to convert minutes to hours
   var podQuery = '(kube_pod_resource_request{resource=~"nvidia.com.*", node!="", cluster="' + clusterName + '", namespace="' + projectName + '"} unless on(pod, namespace) kube_pod_status_unschedulable{cluster="' + clusterName + '", namespace="' + projectName + '"})';
-  var joinQuery = podQuery + ' * on(node) group_left(label_nvidia_com_gpu_product) kube_node_labels{cluster="' + clusterName + '"}';
+  var joinQuery = podQuery + ' * on(node) group_left(label_nvidia_com_gpu_product) (max by (node, label_nvidia_com_gpu_product) (kube_node_labels{cluster="' + clusterName + '"}))';
   var query = 'sum_over_time((' + joinQuery + ')[' + durationString + ':1m]) / 60';
   
   // Use instant query API (not query_range) since sum_over_time returns a single value
@@ -643,4 +643,216 @@ async function queryGpuBillingHours(hubId, clusterName, projectName, timeQuery) 
     $empty.style.display = 'block';
     $empty.innerText = 'Error loading GPU usage data: ' + error.message;
   }
+}
+
+async function queryStorageUtilization(hubId, clusterName, projectName) {
+  // Query for all PVCs with their allocated storage (shows all PVCs regardless of mount status)
+  var allocatedQuery = 'kube_persistentvolumeclaim_resource_requests_storage_bytes{namespace="' + projectName + '"}';
+
+  // Query for storage used per mounted PVC
+  var usedQuery = 'kubelet_volume_stats_used_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
+
+  // Query for namespace storage quota (matches any storage-related quota resource)
+  var quotaQuery = 'kube_resourcequota{namespace="' + projectName + '", resource=~".*requests.storage.*"}';
+
+  var allocatedUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+    query: allocatedQuery
+  }).toString();
+
+  var usedUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+    query: usedQuery
+  }).toString();
+
+  var quotaUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+    query: quotaQuery
+  }).toString();
+
+  // Update UI elements
+  var $table = document.getElementById('storage-utilization-table');
+  var $tbody = document.getElementById('storage-utilization-tbody');
+  var $allocatedTotal = document.getElementById('storage-allocated-total');
+  var $usedTotal = document.getElementById('storage-used-total');
+  var $percentTotal = document.getElementById('storage-percent-total');
+  var $empty = document.getElementById('storage-utilization-empty');
+  var $allocatedQueryDisplay = document.getElementById('storage-allocated-query-display');
+  var $usedQueryDisplay = document.getElementById('storage-used-query-display');
+  var $quotaQueryDisplay = document.getElementById('storage-quota-query-display');
+  var $quotaSection = document.getElementById('storage-quota-section');
+  var $usedText = document.getElementById('storage-used-text');
+  var $allocatedText = document.getElementById('storage-allocated-text');
+
+  if (!$table || !$tbody || !$empty) {
+    return;
+  }
+
+  // Reset state
+  $table.style.display = 'none';
+  $empty.style.display = 'none';
+  if ($quotaSection) $quotaSection.style.display = 'none';
+
+  // Display query info
+  if ($quotaQueryDisplay) {
+    $quotaQueryDisplay.innerText = quotaQuery;
+  }
+  if ($allocatedQueryDisplay) {
+    $allocatedQueryDisplay.innerText = allocatedQuery;
+  }
+  if ($usedQueryDisplay) {
+    $usedQueryDisplay.innerText = usedQuery;
+  }
+
+  try {
+    var [allocatedResponse, usedResponse, quotaResponse] = await Promise.all([fetch(allocatedUrl), fetch(usedUrl), fetch(quotaUrl)]);
+
+    if (!allocatedResponse.ok || !usedResponse.ok) {
+      $empty.style.display = 'block';
+      $empty.innerText = 'HTTP Error fetching storage metrics';
+      return;
+    }
+
+    var [allocatedJson, usedJson, quotaJson] = await Promise.all([allocatedResponse.json(), usedResponse.json(), quotaResponse.json()]);
+
+    if (allocatedJson.status === 'error') {
+      $empty.style.display = 'block';
+      $empty.innerText = 'Prometheus error: ' + (allocatedJson.error || 'Unknown error');
+      return;
+    }
+
+    // Build a map of PVC -> used bytes (only for mounted PVCs) and calculate total used
+    var usedMap = {};
+    var totalActualUsed = 0;
+    if (usedJson.data && usedJson.data.result) {
+      usedJson.data.result.forEach((result) => {
+        var pvc = result.metric.persistentvolumeclaim || 'unknown';
+        if (result.value && result.value.length > 1) {
+          var usedBytes = parseFloat(result.value[1]) || 0;
+          usedMap[pvc] = usedBytes;
+          totalActualUsed += usedBytes;
+        }
+      });
+    }
+
+    // Process quota data - show both used and allocated vs quota limit
+    if ($quotaSection) {
+      if (quotaJson.status === 'error') {
+        console.warn('Quota query error:', quotaJson.error);
+      } else if (quotaJson.data && quotaJson.data.result && quotaJson.data.result.length > 0) {
+        var quotaHard = 0;
+        var quotaAllocated = 0;
+        
+        quotaJson.data.result.forEach((result) => {
+          var type = result.metric.type;
+          var value = 0;
+          if (result.value && result.value.length > 1) {
+            value = parseFloat(result.value[1]) || 0;
+          }
+          if (type === 'hard') {
+            quotaHard = value;
+          } else if (type === 'used') {
+            quotaAllocated = value;
+          }
+        });
+
+        if (quotaHard > 0) {
+          // Storage used (actual bytes used)
+          if ($usedText) {
+            var usedPercent = (totalActualUsed / quotaHard) * 100;
+            $usedText.innerText = formatBytes(totalActualUsed) + ' / ' + formatBytes(quotaHard) + ' (' + usedPercent.toFixed(1) + '%)';
+          }
+
+          // Storage allocated (PVC requests)
+          if ($allocatedText) {
+            var allocatedPercent = (quotaAllocated / quotaHard) * 100;
+            $allocatedText.innerText = formatBytes(quotaAllocated) + ' / ' + formatBytes(quotaHard) + ' (' + allocatedPercent.toFixed(1) + '%)';
+          }
+          
+          $quotaSection.style.display = 'block';
+        } else {
+          console.log('Quota query returned data but quotaHard is 0. Results:', quotaJson.data.result);
+        }
+      } else {
+        console.log('Quota query returned no results for:', quotaQuery);
+      }
+    }
+
+    if (allocatedJson.data && allocatedJson.data.result && allocatedJson.data.result.length > 0) {
+      $tbody.innerHTML = '';
+      var totalAllocated = 0;
+      var totalUsed = 0;
+
+      allocatedJson.data.result.forEach((result) => {
+        var pvc = result.metric.persistentvolumeclaim || 'unknown';
+
+        var allocatedBytes = 0;
+        if (result.value && result.value.length > 1) {
+          allocatedBytes = parseFloat(result.value[1]) || 0;
+        }
+
+        var isMounted = usedMap.hasOwnProperty(pvc);
+        var usedBytes = isMounted ? usedMap[pvc] : 0;
+        var usagePercent = allocatedBytes > 0 && isMounted ? (usedBytes / allocatedBytes * 100) : 0;
+
+        totalAllocated += allocatedBytes;
+        totalUsed += usedBytes;
+
+        var $tr = document.createElement('tr');
+        $tbody.append($tr);
+
+        var $tdPvc = document.createElement('td');
+        $tdPvc.innerText = pvc;
+        $tr.append($tdPvc);
+
+        var $tdStatus = document.createElement('td');
+        $tdStatus.style.textAlign = 'center';
+        $tdStatus.innerText = isMounted ? 'Mounted' : 'Unmounted';
+        $tr.append($tdStatus);
+
+        var $tdAllocated = document.createElement('td');
+        $tdAllocated.innerText = formatBytes(allocatedBytes);
+        $tdAllocated.style.textAlign = 'right';
+        $tr.append($tdAllocated);
+
+        var $tdUsed = document.createElement('td');
+        $tdUsed.innerText = isMounted ? formatBytes(usedBytes) : '-';
+        $tdUsed.style.textAlign = 'right';
+        $tr.append($tdUsed);
+
+        var $tdPercent = document.createElement('td');
+        $tdPercent.style.textAlign = 'right';
+        if (isMounted) {
+          $tdPercent.innerText = usagePercent.toFixed(1) + '%';
+          if (usagePercent >= 90) {
+            $tdPercent.style.color = 'var(--wa-color-danger-600)';
+            $tdPercent.style.fontWeight = 'bold';
+          } else if (usagePercent >= 75) {
+            $tdPercent.style.color = 'var(--wa-color-warning-600)';
+          }
+        } else {
+          $tdPercent.innerText = '-';
+        }
+        $tr.append($tdPercent);
+      });
+
+      var totalPercent = totalAllocated > 0 ? (totalUsed / totalAllocated * 100) : 0;
+      if ($allocatedTotal) $allocatedTotal.innerText = formatBytes(totalAllocated);
+      if ($usedTotal) $usedTotal.innerText = formatBytes(totalUsed);
+      if ($percentTotal) $percentTotal.innerText = totalPercent.toFixed(1) + '%';
+
+      $table.style.display = 'table';
+    } else {
+      $empty.style.display = 'block';
+    }
+  } catch (error) {
+    $empty.style.display = 'block';
+    $empty.innerText = 'Error loading storage data: ' + error.message;
+  }
+}
+
+// Convert Bytes to human readable data format
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 B';
+  var k = 1024;
+  var sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
+  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }

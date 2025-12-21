@@ -88,6 +88,51 @@
         <code id="billing-query-display" style="word-break: break-all;"></code>
       </wa-details>
     </wa-card>
+    <wa-card with-header>
+      <header slot="header" class="wa-heading-m">Storage Utilization</header>
+      <div id="storage-quota-section" style="display: none; margin-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <strong>Storage Used:</strong>
+          <span id="storage-used-text"></span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong>Storage Allocated:</strong>
+          <span id="storage-allocated-text"></span>
+        </div>
+      </div>
+      <table id="storage-utilization-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">PVC Name</th>
+            <th style="text-align: center;">Status</th>
+            <th style="text-align: right;">Allocated</th>
+            <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Usage %</th>
+          </tr>
+        </thead>
+        <tbody id="storage-utilization-tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="2" style="text-align: right;">Totals:</th>
+            <th id="storage-allocated-total" style="text-align: right;"></th>
+            <th id="storage-used-total" style="text-align: right;"></th>
+            <th id="storage-percent-total" style="text-align: right;"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="storage-utilization-empty" style="display: none;">
+        No storage usage data found. PVCs must be mounted to running pods to show usage.
+      </div>
+      <wa-details summary="Query Info" style="margin-top: 1rem;">
+        <p><strong>Quota Query:</strong></p>
+        <code id="storage-quota-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>PVC Allocated Query:</strong></p>
+        <code id="storage-allocated-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>Used Query:</strong></p>
+        <code id="storage-used-query-display" style="word-break: break-all;"></code>
+      </wa-details>
+    </wa-card>
   </div>
 </wa-details>
 {% endif %}
@@ -180,6 +225,7 @@
             , queryLLMTTFTLatency(llmTimeQuery)
             , queryLLMTPOTLatency(llmTimeQuery)
             , queryGpuBillingHours('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}', timeQuery)
+            , queryStorageUtilization('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}')
             {%- endif %}
             ]);
       }
