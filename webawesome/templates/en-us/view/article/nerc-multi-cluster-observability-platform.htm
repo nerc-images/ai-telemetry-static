@@ -1,0 +1,428 @@
+{% extends "en-us/Article.htm" %}
+{% block htmMetaPageLayout %}
+{{ super() }}
+    <meta name="result.pageId" content="{{ result.shortFileName }}" />
+    <meta name="result.name" content="NERC Multi Cluster Observability Platform" />
+    <meta name="result.description" content="This project provides a customizable observability infrastructure for the New England Research Cloud (NERC), a multi-tenant OpenShift environment serving universities, researchers, and various projects." />
+    <meta name="result.authorName" content="Thorsten Schwesig" />
+    <meta name="result.authorUrl" content="" />
+    <meta name="result.created" content="2026-01-06T16:30:01.556[America/Denver]" />
+    <meta name="result.pageImageUri" content="/png/openshift-local-console.png" />
+    <meta name="result.pageImageAlt" content="Screenshot of the OpenShift Local Console" />
+    <meta name="result.displayPage" content="http://research.redhat.com/blog/research_project/nerc-multi-cluster-observability-platform/" />
+{% endblock htmMetaPageLayout %}
+{% block htmBodyMiddleArticle %}
+{{ articleImage(result) }}
+<h2 class="wp-block-heading">
+  <strong>Abstract</strong>
+</h2>
+<p>
+  This project provides a customizable observability infrastructure for the New England Research Cloud (NERC), a
+  multi-tenant OpenShift environment serving universities, researchers, and various projects.
+</p>
+<p>
+  The multi-tenant observability patterns developed here are applicable to the 
+  <a href="https://github.com/innabox">Open Sovereign AI Cloud (O-SAC)</a> 
+  initiative, which deploys AI-enabled OpenShift
+  clusters on bare metal with similar multi-tenancy requirements.
+</p>
+<p>
+  While Red Hat Advanced Cluster Management (ACM) offers built-in MultiClusterObservability with Prometheus, Thanos,
+  and Grafana, it operates at an &#8220;admin-has-all-access&#8221; level that doesn&#8217;t meet the fine-grained
+  access requirements of a multi-tenant environment.
+</p>
+<p>
+  The solution introduces a dedicated Observability (OBS) cluster that:
+</p>
+
+<ul class="wp-block-list">
+  <li>
+    Offloads storage and query workloads from the infrastructure cluster
+  </li>
+  <li>
+    Provides access to observability data outside the VPN for non-admin users
+  </li>
+  <li>
+    Implements fine-grained, data-level access control through a custom Prometheus Keycloak Proxy (developed by
+    Christopher Tate)
+  </li>
+  <li>
+    Enables full Grafana capabilities beyond ACM&#8217;s limited default setup
+  </li>
+  <li>
+    Centralizes logs from all managed clusters via Loki with ClusterLogForwarder
+  </li>
+</ul>
+
+<p>
+  This architecture addresses the gap between what ACM provides out-of-the-box and what multi-tenant research
+  environments require: secure, role-based access to metrics, logs, and dashboards across multiple clusters (prod, edu,
+  test, sandbox) without exposing infrastructure access.
+</p>
+
+<h2 class="wp-block-heading">
+  Learn more
+</h2>
+<ul class="wp-block-list">
+  <li>
+    <a href="https://github.com/OCP-on-NERC/nerc-ocp-config#">nerc-ocp-config</a> 
+    — Kubernetes manifests for NERC
+    OpenShift clusters (ACM Observability, Grafana, Loki, Prometheus Keycloak Proxy configurations)
+  </li>
+  <li>
+    <a href="https://github.com/OCP-on-NERC/nerc-ocp-apps#">nerc-ocp-apps</a> 
+    — ArgoCD application definitions for cluster deployments
+  </li>
+  <li>
+    <a href="https://github.com/OCP-on-NERC/docs">OCP-on-NERC/docs</a> 
+    — Documentation/Design
+  </li>
+  <li>
+    <a href="https://github.com/nerc-project/operations/issues">NERC Operations Issues</a> 
+    — Operational tasks and tracking
+  </li>
+  <li>
+    <a href="https://grafana.apps.obs.nerc.mghpcc.org">Grafana Dashboards on OBS</a> 
+    — Production dashboards for running projects and POC dashboards for work-in-progress onboarding and testing
+  </li>
+  <li>
+    <a href="https://aitelemetry.apps.obs.nerc.mghpcc.org/">AI Telemetry</a> 
+    — Fine-grained access control to Observability dashboards at the multi-tenant, hub, cluster, and project level in the Mass Open Cloud
+  </li>
+  <li>
+    <a href="https://github.com/nerc-images/prom-keycloak-proxy">Prometheus Keycloak Proxy</a> 
+    — Fine-grained access control to Prometheus Observability metrics API in the Mass Open Cloud
+  </li>
+  <li>
+    <a href="https://github.com/nerc-images/ai-telemetry-workbench">AI Telemetry Workbench</a> 
+    — An OpenShift AI Image running VSCode for Java and Go development of AI Telemetry and Prometheus Keycloak Proxy software and dependencies.
+  </li>
+</ul>
+
+<h2 class="wp-block-heading">Team &amp; Collaboration</h2>
+<h3 class="wp-block-heading">Core Team</h3>
+<ul class="wp-block-list">
+  <li>
+    <strong>Christopher Tate</strong> &#8211; Lead developer, Prometheus Keycloak Proxy, architecture, operations,
+    security, projects onboarding
+  </li>
+  <li>
+    <strong>Thorsten Schwesig</strong> &#8211; Infrastructure, operations, metrics/statistics/functions, dashboards,
+    coordination, projects onboarding
+  </li>
+  <li>
+    <strong>Isaiah Stapleton</strong> &#8211; Infrastructure, operations, LLM and GPU metrics, dashboards,
+    Open Telemetry
+  </li>
+</ul>
+<h3 class="wp-block-heading">
+  Contributors
+</h3>
+<ul class="wp-block-list">
+  <li>
+    Isaiah Stapleton
+  </li>
+  <li>
+    Meera Malhorta
+  </li>
+</ul>
+
+<h3 class="wp-block-heading">
+  Red Hat Internal Gig Participants
+</h3>
+<figure class="wp-block-table">
+  <table class="has-fixed-layout">
+    <thead>
+      <tr>
+        <th><strong>Name</strong></th>
+        <th><strong>Role</strong></th>
+        <th><strong>Contribution</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Harshil Sabhnani</td>
+        <td>Architect (US)</td>
+        <td>ACM 2.8 upgrade fixes, ACM Observability configuration</td>
+      </tr>
+      <tr>
+        <td>Jeet Basu</td>
+        <td>Architect (US)</td>
+        <td>External Grafana, OBS cluster infrastructure</td>
+      </tr>
+      <tr>
+        <td>Banashri Mandal</td>
+        <td>Senior Engineer (Germany)</td>
+        <td>Loki RBAC, storage, backup strategy, bug fixes</td>
+      </tr>
+      <tr>
+        <td>Cristiano Saggin</td>
+        <td>Support Engineer (Spain)</td>
+        <td>Grafana upgrades, microservices deployment, cluster support</td>
+      </tr>
+      <tr>
+        <td>Dheeraj Jodha</td>
+        <td>Engineer (India)</td>
+        <td>Open Telemetry collectors and authentication in OpenShift</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+
+<div class="wa-grid et_pb_with_border et_pb_row et_pb_row_2_tb_body">
+  <div class="wa-stack et_pb_column et_pb_column_1_3 et_pb_column_4_tb_body  et_pb_css_mix_blend_mode_passthrough">
+    <div class="et_pb_module et_pb_text et_pb_text_1_tb_body  et_pb_text_align_left et_pb_bg_layout_light">
+      <div class="et_pb_text_inner">
+        <h2>Project Team</h2>
+      </div>
+    </div>
+    <div class="et_pb_module et_pb_acf_single_item et_pb_acf_single_item_3_tb_body">
+      <div class="et_pb_module_inner" style="display: grid; grid-template-columns: 1fr; row-gap: 2ch; ">
+
+        <a href="https://research.redhat.com/blog/project_member/christopher-tate/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack ">
+              <h2 style="padding: 0; " class="wa-heading-m">
+                Christopher Tate
+              </h2>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2023/09/christopher-tate-2022.jpg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <div>
+                    Principal Software Engineer
+                  </div>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    May 2023
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://research.redhat.com/blog/project_member/thorsten-schwesig/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack ">
+              <h2 style="padding: 0; " class="wa-heading-m">
+                Thorsten Schwesig
+              </h2>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2024/11/thorsten-schwesig.jpg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <div>
+                    Principal Software Engineer
+                  </div>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    November 2023
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://research.redhat.com/blog/project_member/isaiah-stapleton/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack ">
+              <h2 style="padding: 0; " class="wa-heading-m">
+                Isaiah Stapleton
+              </h2>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2022/09/Isaiah-Stapleton-150x150.png" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <div>
+                    Software Engineer
+                  </div>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    July 2023
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="wa-stack et_pb_column et_pb_column_1_3 et_pb_column_5_tb_body  et_pb_css_mix_blend_mode_passthrough">
+    <div class="et_pb_module et_pb_text et_pb_text_2_tb_body  et_pb_text_align_left et_pb_bg_layout_light">
+      <div class="et_pb_text_inner">
+        <h2>Publications</h2>
+      </div>
+    </div>
+    <div class="et_pb_module et_pb_acf_single_item et_pb_acf_single_item_4_tb_body">
+      <div class="et_pb_module_inner" style="display: grid; grid-template-columns: 1fr; row-gap: 2ch; ">
+
+        <a href="https://research.redhat.com/blog/2023/06/16/cloud-computing-observability-and-security-research-featured-at-systor-2023/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack">
+              <h2 class="wa-heading-l">
+                Cloud computing, observability, and security research featured at SYSTOR 2023
+              </h2>
+              <p class="wa-caption-m">
+                The 16th ACM International System and Storage Conference (SYSTOR), held June 5-7 in Haifa, Israel, 
+                featured five posters highlighting Red Hat-sponsored research projects that target challenges in cloud implementation strategy, 
+                storage performance, network observability, and AI/ML-enhanced cybersecurity analysis. 
+              </p>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2023/09/small-150x150.jpeg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <h2 style="padding: 0; " class="wa-heading-m">
+                    Anastasia Braginsky
+                  </h2>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    June 16, 2023
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="wa-stack et_pb_column et_pb_column_1_3 et_pb_column_6_tb_body  et_pb_css_mix_blend_mode_passthrough et-last-child">
+    <div class="et_pb_module et_pb_text et_pb_text_3_tb_body  et_pb_text_align_left et_pb_bg_layout_light">
+      <div class="et_pb_text_inner">
+        <h2 class="acf_label">Related RHRQ Articles</h2>
+      </div>
+    </div>
+    <div class="et_pb_module et_pb_acf_single_item et_pb_acf_single_item_5_tb_body">
+      <div class="et_pb_module_inner" style="display: grid; grid-template-columns: 1fr; row-gap: 2ch; ">
+
+        <a href="https://research.redhat.com/blog/article/open-education-project-tackles-gpu-scheduling-and-metrics-visibility/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack">
+              <h2 class="wa-heading-l">
+                Open Education Project tackles GPU scheduling and metrics visibility
+              </h2>
+              <p class="wa-caption-m">
+                Enhancements to the education project highlight how research work on OPE drives advancements for many kinds of multitenant environments.
+                The Open Education Project (OPE) continues to develop solutions for optimizing GPU resource usage in a multitenant environment. OPE, a project of Red Hat Collaboratory at Boston University, has long been a pioneer in making high-quality, open source education accessible to all. 
+              </p>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2023/05/Danni-Shi-author-headshot-e1685454509136.jpg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <h2 style="padding: 0; " class="wa-heading-m">
+                    Danni Shi
+                  </h2>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    November 2025
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://research.redhat.com/blog/article/observability-cluster-added-to-the-moc-alliances-new-england-research-cloud/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack">
+              <h2 class="wa-heading-l">
+                Observability cluster added to the MOC Alliance’s New England Research Cloud - Red Hat Research
+              </h2>
+              <p class="wa-caption-m">
+                Observability data provides essential insights for optimizing performance, troubleshooting, and using resources sustainably. 
+                For users of the New England Research Cloud (NERC), part of the Mass Open Cloud (MOC) Alliance, this data also provides critical information for innovative research projects. 
+              </p>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2024/11/thorsten-schwesig.jpg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <h2 style="padding: 0; " class="wa-heading-m">
+                    Thorsten Schwesig
+                  </h2>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    November 2024
+                  </div>
+                </div>
+              </div>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_2_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2023/09/christopher-tate-2022.jpg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <h2 style="padding: 0; " class="wa-heading-m">
+                    Christopher Tate
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href="https://research.redhat.com/blog/article/telemetry-working-group-looks-at-observability/" class="wa-link-plain">
+          <div style="border-radius: 2ch; padding: 2ch; border-style: solid; border-width: 1px; border-color: #666; ">
+            <div class="wa-stack">
+              <h2 class="wa-heading-l">
+                Telemetry Working Group looks at observability
+              </h2>
+              <p class="wa-caption-m">
+                A new working group is tackling observability in production. 
+                Observability has become an increasingly hot topic given the challenges of reliably operating distributed systems such as those in Kubernetes environments. 
+              </p>
+              <div style="--flank-size: 6ch; display: grid; grid-template-columns: 6ch 1fr; gap: 2ch; " class="wa-flank wa-gap-s">
+                <div class="wa-frame wa-border-radius-circle et_pb_module et_pb_image et_pb_image_1_tb_body">
+                  <span class="et_pb_image_wrap ">
+                    <img fetchpriority="high" decoding="async" width="1200" height="1200"
+                      src="https://research.redhat.com/wp-content/uploads/2021/02/gordon-haff.jpg" alt=""
+                      class="wp-image-245556">
+                  </span>
+                </div>
+                <div class="wa-stack wa-gap-2xs">
+                  <h2 style="padding: 0; " class="wa-heading-m">
+                    Gordon Haff
+                  </h2>
+                  <div style="font-size: 0.8rem; " class="wa-caption-xs">
+                    May 2021
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
