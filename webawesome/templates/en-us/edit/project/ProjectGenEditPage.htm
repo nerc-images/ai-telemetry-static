@@ -27,6 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/project/Project.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/project/ProjectSearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/project/ProjectEditPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/hub/Hub.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/cluster/Cluster.js"></script>
 {%- endblock htmScriptsProjectPage %}
@@ -147,6 +148,32 @@
           if(o)
             window.result = JSON.parse(o);
         {% if result.projectResource is defined %}
+          function relate_tenantResource(event) {
+            suggestProjectTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , window.result.projectResource
+                , window.result.tenantResource
+                , true
+                );
+          }
+          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Page_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          {% if "PATCH" in scopes %}
+          suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, true);
+          {% else %}
+          {% if "GET" in scopes %}
+          suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, true);
+          {% else %}
+          suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, false);
+          {% endif %}
+          {% endif %}
           function relate_hubResource(event) {
             suggestProjectHubResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
