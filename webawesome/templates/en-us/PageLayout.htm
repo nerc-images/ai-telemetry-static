@@ -471,8 +471,8 @@
             <div id="siteSearchDropdownMenu">
             </div>
           </wa-popup>
-          {% if pageSearchForm is defined -%}
-          {{ pageSearchForm | default('') }}
+          {% if pageSearchFormButtons is defined -%}
+          {{ pageSearchFormButtons | default('') }}
           {%- endif %}
         </div>
       </header>
@@ -608,6 +608,10 @@
 
             <wa-details summary="OpenShift clusters" open="true" class="wa-stack ">
               <div class="wa-stack ">
+                <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/tenant">
+                  <i slot="start" class="fa-regular fa-buildings"></i>
+                  tenants
+                </wa-button>
                 <wa-button variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/hub">
                   <i class="fa-regular fa-sitemap"></i>
                   ACM hubs

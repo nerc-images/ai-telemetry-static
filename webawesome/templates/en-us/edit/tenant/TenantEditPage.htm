@@ -1,0 +1,280 @@
+{% extends "en-us/edit/tenant/TenantGenEditPage.htm" %}
+{%- block htmBodyStartTenantPage %}
+{{ super() }}
+{% if result is defined %}
+<wa-details open>
+  <div slot="summary">
+    <i class="fa-regular fa-people-line"></i>
+    Projects in the {{ result.tenantName | e }} tenant
+  </div>
+  <div class="wa-stack">
+    <div>
+      <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/project?fq={{ 'tenantResource:' + result.tenantResource | urlencode() }}">
+        <i slot="start" class="fa-regular fa-people-line"></i>
+        Search all projects in the {{ result.tenantName | e }} tenant
+      </wa-button>
+    </div>
+    {% for project in listProject %}
+    <article>
+      <wa-divider></wa-divider>
+      <div class="wa-stack ">
+        <div class="wa-cluster ">
+          <i class="fa-regular fa-people-line fa-2xl "></i>
+          <a href="{{ project.editPage }}">
+            <strong>
+              {{ project.projectName }}
+            </strong> 
+            project in
+            <strong>
+              {{ project.tenantName }}
+            </strong> 
+            tenant in
+            <strong>
+              {{ project.hubId }}
+            </strong> 
+            hub
+          </a>
+        </div>
+        <div class="wa-cluster ">
+
+          {% if project.podRestartCount > 0 %}
+          <wa-tooltip for="tenantProject-{{ project.projectName }}-pod-restarts">
+            <ul>
+              {% for pod in project.podsRestarting %}
+              <li>
+                {{ pod | e }}
+              </li>
+              {% endfor %}
+            </ul>
+          </wa-tooltip>
+          {% endif %}
+          <wa-button id="tenantProject-{{ project.projectName }}-pod-restarts">
+            pod restarts
+            <wa-badge{% if project.podRestartCount > 0 %} variant="danger" attention="pulse"{% else %} variant="success"{% endif %}" pill>
+              {{ project.podRestartCount }}
+            </wa-badge>
+          </wa-button>
+
+          {% if project.fullPvcsCount > 0 %}
+          <wa-tooltip for="tenantProject-{{ project.projectName }}-full-pvcs">
+            <ul>
+              {% for pod in project.fullPvcs %}
+              <li>
+                {{ pod | e }}
+              </li>
+              {% endfor %}
+            </ul>
+          </wa-tooltip>
+          {% endif %}
+          <wa-button id="tenantProject-{{ project.projectName }}-full-pvcs">
+            full PVCs
+            <wa-badge{% if project.fullPvcsCount > 0 %} variant="warning" attention="pulse"{% else %} variant="success"{% endif %}" pill>
+              {{ project.fullPvcsCount }}
+            </wa-badge>
+          </wa-button>
+
+          {% if project.namespaceTerminating %}
+          <wa-button id="tenantProject-{{ project.projectName }}-namespace-terminating">
+            terminating
+            <wa-badge variant="warning" attention="pulse" pill>
+              <i class="{{ FONTAWESOME_STYLE }} fa-trash-can-xmark fa-spin "></i>
+            </wa-badge>
+          </wa-button>
+          {% endif %}
+
+          <wa-tooltip for="tenantProject-{{ project.projectName }}-last-updated">
+            <wa-format-date weekday="short" month="short" day="numeric" year="numeric" hour="numeric" minute="numeric" second="numeric" time-zone-name="short" date="{{ formatZonedDateTime(project.modified, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, "UTC") }}"></wa-format-date>
+          </wa-tooltip>
+          <span class="wa-caption-s" id="tenantProject-{{ project.projectName }}-last-updated">
+            Updated
+            <wa-relative-time class="wa-caption-s" date="{{ formatZonedDateTime(project.modified, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, "UTC") }}"></wa-relative-time>
+          </span>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</wa-details>
+<wa-details open>
+  <div slot="summary">
+    Observability dashboard for tenant {{ result.tenantName }}
+  </div>
+  <div class="wa-stack ">
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-total-memory-bytes', 'Total project memory usage') }}
+      {{ dashboardCard('visualization-total-cpu-bytes', 'Total project CPU usage') }}
+    </div>
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-quota-memory-bytes', 'Project quota memory usage') }}
+      {{ dashboardCard('visualization-quota-cpu-bytes', 'Project quota CPU usage') }}
+    </div>
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-tenant-gpu-utilization', 'GPU utilization per GPU device in tenant {{ result.tenantName }}') }}
+    </div>
+    <wa-card with-header>
+      {{ dashboardCard('visualization-project-gpu-utilization', 'GPU utilization per project in tenant {{ result.tenantName }}') }}
+    </wa-card>
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-tenant-gpu-temperature', 'GPU temperature per GPU device in tenant {{ result.tenantName }}') }}
+    </div>
+  </div>
+</wa-details>
+{% endif %}
+{%- endblock htmBodyStartTenantPage %}
+{%- block htmStyleTenantPage %}
+#visualization-tenant-gpu-nodes, #visualization-tenant-gpu-devices {
+  wa-avatar {
+    --size: 3em;
+  }
+}
+#observability-dashboard {
+  .pill {
+    border-radius: var(--wa-border-radius-pill);
+    box-shadow: var(--wa-theme-glossy-inner-shine), var(--wa-theme-glossy-top-highlight), inset 0 .7rem 0 0 rgba(255, 255, 255, 0.1), var(--wa-theme-glossy-lower-shade), var(--wa-theme-glossy-bottom-shadow);
+    &:hover {
+     background-color: var(--background-color-hover, var(--background-color));
+      border-color: var(--border-color-hover, var(--border-color, var(--background-color-hover)));
+      color: var(--text-color-hover, var(--text-color));
+    }
+  }
+}
+{%- endblock htmStyleTenantPage %}
+
+{%- block facetChangeTenantSuccess %}
+      updateDashboards();
+{% endblock facetChangeTenantSuccess -%}
+
+{%- block htmScriptInitTenantPage %}
+        updateDashboards();
+{%- endblock htmScriptInitTenantPage %}
+
+{%- block htmScriptsTenantPage %}
+{{ super() }}
+  <script>
+
+    function updateDashboards() {
+      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-{{ classSimpleName }}-input").value;
+      var startValue = document.querySelector("#pageSearchVal-pageFacetRangeStart-{{ classSimpleName }}-input").value;
+      var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
+      var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
+      var start = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+      var end = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc().toISOString();
+      var step;
+      switch (facetRangeGapVal) {
+        case "+1YEAR":
+          step = "1y";
+          break;
+        case "+1MONTH":
+          step = "1M";
+          break;
+        case "+1DAY":
+          step = "1d";
+          break;
+        case "+1HOUR":
+          step = "1h";
+          break;
+        case "+1MINUTE":
+          step = "1m";
+          break;
+        default:
+          step = "7d";
+      }
+
+      var timeQuery = {
+        start: start
+        , end: end
+        , step: step
+      };
+      window.listProject = JSON.parse('{{ toJsonArrayStringInApostrophes(listProject) }}');
+
+      Promise.all([
+          {{ dashboardPromise('visualization-total-memory-bytes') }}
+          , {{ dashboardPromise('visualization-total-cpu-bytes') }}
+          , {{ dashboardPromise('visualization-quota-memory-bytes') }}
+          , {{ dashboardPromise('visualization-quota-cpu-bytes') }}
+          , {{ dashboardPromise('visualization-tenant-gpu-utilization') }}
+          , {{ dashboardPromise('visualization-project-gpu-utilization') }}
+          , {{ dashboardPromise('visualization-tenant-gpu-temperature') }}
+          ]);
+    }
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-total-memory-bytes'
+      , yaxisTitle='Total memory usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='namespace:container_memory_usage_bytes:sum{'
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-total-cpu-bytes'
+      , yaxisTitle='Total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , emptyClusterReplace='node_namespace_pod_container:container_cpu_usage_seconds_total:sum'
+      , emptyClusterReplaceWith='namespace:container_cpu_usage:sum'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-quota-memory-bytes'
+      , yaxisTitle='Percent of total memory usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='namespace:container_memory_usage_bytes:sum{'
+      , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard", '
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , tickFormat='.0%'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-quota-cpu-bytes'
+      , yaxisTitle='Percent of total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
+      , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard", '
+      , metricSuffix='}'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , tickFormat='.0%'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-tenant-gpu-utilization'
+      , yaxisTitle='Percent of total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='sum(DCGM_FI_DEV_GPU_UTIL{'
+      , metricSuffix='}) by (cluster,exported_namespace,Hostname,modelName,UUID)'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , projectLabel='exported_namespace'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-project-gpu-utilization'
+      , yaxisTitle='Percent of total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='sum(DCGM_FI_DEV_GPU_UTIL{'
+      , metricSuffix='}) by (cluster,exported_namespace)'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , projectLabel='exported_namespace'
+    ) }}
+    {{ hubClusterProjectDashboardAsyncFunction(
+      divId='visualization-tenant-gpu-temperature'
+      , yaxisTitle='Percent of total CPU usage'
+      , classSimpleName='Project'
+      , legendTitle='Projects'
+      , metricPrefix='sum(DCGM_FI_DEV_MEMORY_TEMP{'
+      , metricSuffix='}) by (cluster,exported_namespace,Hostname,modelName,UUID)'
+      , projectVar='projectName'
+      , timeZone=timeZone
+      , projectLabel='exported_namespace'
+    ) }}
+  </script>
+{%- endblock htmScriptsTenantPage %}

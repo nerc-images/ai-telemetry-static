@@ -27,6 +27,7 @@
 {%- block htmScriptsProjectPage %}
     <script src="{{staticBaseUrl}}/js/en-us/search/project/Project.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/project/ProjectSearchPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/hub/Hub.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/cluster/Cluster.js"></script>
 {%- endblock htmScriptsProjectPage %}
@@ -129,6 +130,22 @@
 
         var projectResource = {% if result.projectResource is defined %}{{ result.projectResource | tojson }}{% else %}null{% endif %};
 
+          function relate_tenantResource(event) {
+            suggestProjectTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           function relate_hubResource(event) {
             suggestProjectHubResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }

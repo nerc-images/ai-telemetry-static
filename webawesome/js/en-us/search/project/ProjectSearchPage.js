@@ -55,6 +55,17 @@ Promise.all([
     facetStatsChange('Project', 'archived', false);
   });
 
+  document.querySelector('#pageSelectSortProject_tenantResource')?.addEventListener('change', (event) => {
+    sort('Project', 'tenantResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_tenantResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'tenantResource', true);
+  });
+  document.querySelector('#pageStatsProject_tenantResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'tenantResource', false);
+  });
+
   document.querySelector('#pageSelectSortProject_hubId')?.addEventListener('change', (event) => {
     sort('Project', 'hubId', event.currentTarget.value);
   });
@@ -317,6 +328,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsProject_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Project', 'solrId', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_localClusterName')?.addEventListener('change', (event) => {
+    sort('Project', 'localClusterName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_localClusterName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'localClusterName', true);
+  });
+  document.querySelector('#pageStatsProject_localClusterName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'localClusterName', false);
   });
 
   document.querySelector('#pageSelectSortProject_hubResource')?.addEventListener('change', (event) => {
@@ -688,6 +710,24 @@ Promise.all([
             facetRangeStartChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndProject_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_localClusterName')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_localClusterName')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_localClusterName')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_localClusterName')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_localClusterName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_localClusterName')?.addEventListener('change', (event) => {
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_projectResource')?.addEventListener('change', (event) => {
