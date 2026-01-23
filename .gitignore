@@ -2,4 +2,5 @@ target/**
 .flattened-pom.xml
 .vscode
 webawesome/templates/en-us/ai-telemetry-developer
+webawesome/templates/en-us/user/project
 

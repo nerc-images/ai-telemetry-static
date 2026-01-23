@@ -143,6 +143,28 @@ Promise.all([
     facetStatsChange('Project', 'podsRestarting', false);
   });
 
+  document.querySelector('#pageSelectSortProject_podTerminatingCount')?.addEventListener('change', (event) => {
+    sort('Project', 'podTerminatingCount', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_podTerminatingCount')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'podTerminatingCount', true);
+  });
+  document.querySelector('#pageStatsProject_podTerminatingCount')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'podTerminatingCount', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_podsTerminating')?.addEventListener('change', (event) => {
+    sort('Project', 'podsTerminating', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_podsTerminating')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'podsTerminating', true);
+  });
+  document.querySelector('#pageStatsProject_podsTerminating')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'podsTerminating', false);
+  });
+
   document.querySelector('#pageSelectSortProject_fullPvcsCount')?.addEventListener('change', (event) => {
     sort('Project', 'fullPvcsCount', event.currentTarget.value);
   });
@@ -584,6 +606,42 @@ Promise.all([
             facetRangeStartChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndProject_podsRestarting')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_podTerminatingCount')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_podTerminatingCount')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_podTerminatingCount')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_podTerminatingCount')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_podTerminatingCount')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_podTerminatingCount')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_podsTerminating')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_podsTerminating')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_podsTerminating')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_podsTerminating')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_podsTerminating')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_podsTerminating')?.addEventListener('change', (event) => {
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_fullPvcsCount')?.addEventListener('change', (event) => {

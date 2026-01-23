@@ -479,6 +479,81 @@ The names of the pods restarting in this project. "
 {%- macro htmPodsRestartingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPodsRestartingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputPodTerminatingCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_podTerminatingCount">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] pods terminating"
+                      label="pods terminating"
+                      type="number"
+                      hint="
+The number of pods terminating in this project. "
+                      id="{{classApiMethodMethod}}_podTerminatingCount"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      name="setPodTerminatingCount"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      name="setPodTerminatingCount"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_podTerminatingCount valuePodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      name="podTerminatingCount"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.podTerminatingCount | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPodTerminatingCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPodTerminatingCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputPodsTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_podsTerminating">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] pods terminating"
+                      label="pods terminating"
+                      hint="
+The names of the pods terminating in this project. "
+                      id="{{classApiMethodMethod}}_podsTerminating"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      name="setPodsTerminating"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      name="setPodsTerminating"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_podsTerminating valuePodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      name="podsTerminating"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{ toJsonArrayString(result.podsTerminating) | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPodsTerminatingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPodsTerminatingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputFullPvcsCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_fullPvcsCount">
@@ -710,6 +785,26 @@ The names of the persistent volume claims that are running out of disk space in 
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -848,6 +943,26 @@ The names of the persistent volume claims that are running out of disk space in 
                   {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -1071,6 +1186,26 @@ The names of the persistent volume claims that are running out of disk space in 
                   {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
