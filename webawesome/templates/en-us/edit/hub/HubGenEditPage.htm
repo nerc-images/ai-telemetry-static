@@ -268,14 +268,14 @@
 {%- endif %}
 {%- if pageBreadcrumb is not defined %}
 {%- set pageBreadcrumb %}
-              <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip>
+              <wa-tooltip for="return-to-Hub">back to all ACM hubs</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
                   <i class="fa-regular fa-sitemap"></i>
-                  all hubs
+                  all ACM hubs
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
-                  a hub
+                  an ACM hub
                 </wa-breadcrumb-item>
               </wa-breadcrumb>
 {%- endset pageBreadcrumb %}
@@ -299,21 +299,21 @@
         <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-Hub">back to all ACM hubs</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
               <i class="fa-regular fa-sitemap"></i>
-              all hubs
+              all ACM hubs
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
-              no hub found
+              no ACM hub found
             </wa-breadcrumb-item>
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
               <i class="fa-regular fa-sitemap"></i>
             </div>
-            <span class="wa-heading-m ">no hub found</span>
+            <span class="wa-heading-m ">no ACM hub found</span>
             <p class="wa-caption-l ">An Red Hat Advanced Cluster Management Hub cluster. </p>
 {% include en-us/search/hub/HubSearchForm.htm %}
           </div>
@@ -331,9 +331,7 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listHub" id="listHub" class="listHub"  value='{{ toJsonArrayStringInApostrophes(listHub) }}' type="hidden"/>
           </form>
-  {% if solrId is defined %}
           {{ htmForm_searchpageHub() }}
-  {% endif %}
 {%- endblock htmFormHubPage %}
         </div>
 {%- endblock htmBodyMiddleHubPage %}

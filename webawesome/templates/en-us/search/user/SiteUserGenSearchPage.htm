@@ -230,7 +230,7 @@
               <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-solid fa-user-gear"></i>
+                  <i class="fa-duotone fa-regular fa-user-gear"></i>
                   all site users
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -249,7 +249,7 @@
           <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-solid fa-user-gear"></i>
+              <i class="fa-duotone fa-regular fa-user-gear"></i>
               all site users
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -258,7 +258,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-solid fa-user-gear"></i>
+              <i class="fa-duotone fa-regular fa-user-gear"></i>
             </div>
             <span class="wa-heading-m ">no site user found</span>
             <p class="wa-caption-l ">A user record for each site user</p>
@@ -299,42 +299,42 @@
 {% include en-us/search/user/SiteUserPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-              <wa-dropdown id="htmDropdown-userFullName">
-                <wa-button variant="brand" slot="trigger" caret></wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userFullName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userFullName-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by null ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userFullName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userFullName-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by null descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-userName">
-                <wa-button variant="brand" slot="trigger" caret></wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userName-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by null ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userName-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by null descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-userFullName">
+                      <wa-button variant="brand" slot="trigger" caret>full name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userFullName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userFullName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by full name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userFullName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userFullName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by full name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-userName">
+                      <wa-button variant="brand" slot="trigger" caret>user name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-userName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by user name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortSiteUser_userName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-SiteUser').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-userName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by user name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listSiteUser%}
                   <div>
-              <a href="{{ item.displayPage }}">
-                <i class="fa-duotone fa-solid fa-user-gear"></i>
-              <span>{{ item.userFullName | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.userName | e }}
-</span>              </a>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-duotone fa-regular fa-user-gear"></i>
+                      <span>{{ item.userFullName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.userName | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
               {% if getColumnUserFullName is defined %}

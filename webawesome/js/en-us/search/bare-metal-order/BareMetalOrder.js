@@ -1,4 +1,609 @@
 
+async function websocketBareMetalOrder(success) {
+  window.eventBus.onopen = function () {
+
+    window.eventBus.registerHandler('websocketBareMetalOrder', function (error, message) {
+      var json = JSON.parse(message['body']);
+      var pk = json['id'];
+      var solrIds = json['solrIds'];
+      var empty = json['empty'];
+      var numFound = parseInt(json['numFound']);
+      var numPATCH = parseInt(json['numPATCH']);
+      var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
+      var $box = document.createElement('div');
+      $box.setAttribute('class', 'w3-quarter box-' + pk + ' ');
+      $box.setAttribute('id', 'box-' + pk);
+      $box.setAttribute('data-numPATCH', numPATCH);
+      var $margin = document.createElement('div');
+      $margin.setAttribute('class', 'w3-margin ');
+      $margin.setAttribute('id', 'margin-' + pk);
+      var $card = document.createElement('div');
+      $card.setAttribute('class', 'w3-card w3-white ');
+      $card.setAttribute('id', 'card-' + pk);
+      var $header = document.createElement('div');
+      $header.setAttribute('class', 'w3-container fa- ');
+      $header.setAttribute('id', 'header-' + pk);
+      var iTemplate = document.createElement('template');
+      iTemplate.innerHTML = '<i class="fa-regular fa-share-nodes"></i>';
+      var $i = iTemplate.content;
+      var $headerSpan = document.createElement('span');
+      $headerSpan.setAttribute('class', '');
+      $headerSpan.innerText = 'modify bare metal orders in ' + json.timeRemaining;
+      var $x = document.createElement('span');
+      $x.setAttribute('class', 'w3-button w3-display-topright ');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + pk + '");');
+      $x.classList.add("display-none");
+      $x.setAttribute('id', 'x-' + pk);
+      var $body = document.createElement('div');
+      $body.setAttribute('class', 'w3-container w3-padding ');
+      $body.setAttribute('id', 'text-' + pk);
+      var $bar = document.createElement('div');
+      $bar.setAttribute('class', 'w3-light-gray ');
+      $bar.setAttribute('id', 'bar-' + pk);
+      var $progress = document.createElement('div');
+      $progress.setAttribute('class', 'w3- ');
+      $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
+      $progress.setAttribute('id', 'progress-' + pk);
+      $progress.innerText = numPATCH + '/' + numFound;
+      $card.append($header);
+      $header.append($i);
+      $header.append($headerSpan);
+      $header.append($x);
+      $body.append($bar);
+      $bar.append($progress);
+      $card.append($body);
+      $box.append($margin);
+      $margin.append($card);
+      if(numPATCH < numFound) {
+        var $old_box = document.querySelector('.box-' + pk);
+      } else {
+        document.querySelector('.box-' + pk)?.remove();
+      }
+      if(pk) {
+        if(success)
+          success(json);
+      }
+    });
+  }
+}
+async function websocketBareMetalOrderInner(apiRequest) {
+  var pk = apiRequest['id'];
+  var classes = apiRequest['classes'];
+  var vars = apiRequest['vars'];
+  var empty = apiRequest['empty'];
+
+  if(pk != null && vars.length > 0) {
+    var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
+    var uri = location.pathname + queryParams;
+    fetch(uri).then(response => {
+      response.text().then(text => {
+        var $response = new DOMParser().parseFromString(text, 'text/html');
+        var inputPk = null;
+        var inputCreated = null;
+        var inputModified = null;
+        var inputArchived = null;
+        var inputDescription = null;
+        var inputNetworkId = null;
+        var inputNumberOfFc430 = null;
+        var inputNumberOfFc830 = null;
+        var inputNumberOfR730xd = null;
+        var inputNumberOfWhiteboxFlax1 = null;
+        var inputNumberOfLenovoSd650nv2A100 = null;
+        var inputNumberOfLenovoSd665nv3H100 = null;
+        var inputImage = null;
+        var inputSshPublicKey = null;
+        var inputFloatingIp = null;
+        var inputStatus = null;
+        var inputClassCanonicalName = null;
+        var inputClassSimpleName = null;
+        var inputClassCanonicalNames = null;
+        var inputSessionId = null;
+        var inputUserKey = null;
+        var inputSaves = null;
+        var inputObjectTitle = null;
+        var inputDisplayPage = null;
+        var inputEditPage = null;
+        var inputUserPage = null;
+        var inputDownload = null;
+        var inputObjectSuggest = null;
+        var inputObjectText = null;
+        var inputSolrId = null;
+
+        if(vars.includes('pk'))
+          inputPk = $response.querySelector('.Page_pk');
+        if(vars.includes('created'))
+          inputCreated = $response.querySelector('.Page_created');
+        if(vars.includes('modified'))
+          inputModified = $response.querySelector('.Page_modified');
+        if(vars.includes('archived'))
+          inputArchived = $response.querySelector('.Page_archived');
+        if(vars.includes('description'))
+          inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('networkId'))
+          inputNetworkId = $response.querySelector('.Page_networkId');
+        if(vars.includes('numberOfFc430'))
+          inputNumberOfFc430 = $response.querySelector('.Page_numberOfFc430');
+        if(vars.includes('numberOfFc830'))
+          inputNumberOfFc830 = $response.querySelector('.Page_numberOfFc830');
+        if(vars.includes('numberOfR730xd'))
+          inputNumberOfR730xd = $response.querySelector('.Page_numberOfR730xd');
+        if(vars.includes('numberOfWhiteboxFlax1'))
+          inputNumberOfWhiteboxFlax1 = $response.querySelector('.Page_numberOfWhiteboxFlax1');
+        if(vars.includes('numberOfLenovoSd650nv2A100'))
+          inputNumberOfLenovoSd650nv2A100 = $response.querySelector('.Page_numberOfLenovoSd650nv2A100');
+        if(vars.includes('numberOfLenovoSd665nv3H100'))
+          inputNumberOfLenovoSd665nv3H100 = $response.querySelector('.Page_numberOfLenovoSd665nv3H100');
+        if(vars.includes('image'))
+          inputImage = $response.querySelector('.Page_image');
+        if(vars.includes('sshPublicKey'))
+          inputSshPublicKey = $response.querySelector('.Page_sshPublicKey');
+        if(vars.includes('floatingIp'))
+          inputFloatingIp = $response.querySelector('.Page_floatingIp');
+        if(vars.includes('status'))
+          inputStatus = $response.querySelector('.Page_status');
+        if(vars.includes('classCanonicalName'))
+          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+        if(vars.includes('classSimpleName'))
+          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+        if(vars.includes('classCanonicalNames'))
+          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+        if(vars.includes('sessionId'))
+          inputSessionId = $response.querySelector('.Page_sessionId');
+        if(vars.includes('userKey'))
+          inputUserKey = $response.querySelector('.Page_userKey');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.Page_saves');
+        if(vars.includes('objectTitle'))
+          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+        if(vars.includes('displayPage'))
+          inputDisplayPage = $response.querySelector('.Page_displayPage');
+        if(vars.includes('editPage'))
+          inputEditPage = $response.querySelector('.Page_editPage');
+        if(vars.includes('userPage'))
+          inputUserPage = $response.querySelector('.Page_userPage');
+        if(vars.includes('download'))
+          inputDownload = $response.querySelector('.Page_download');
+        if(vars.includes('objectSuggest'))
+          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+        if(vars.includes('objectText'))
+          inputObjectText = $response.querySelector('.Page_objectText');
+        if(vars.includes('solrId'))
+          inputSolrId = $response.querySelector('.Page_solrId');
+
+        jsWebsocketBareMetalOrder(pk, vars, $response);
+        window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
+        window.listBareMetalOrder = JSON.parse($response.querySelector('.pageForm .listBareMetalOrder')?.value);
+
+
+        if(inputPk) {
+          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPk.getAttribute('value');
+            else
+              item.textContent = inputPk.textContent;
+          });
+          addGlow(document.querySelector('.Page_pk'));
+        }
+
+        if(inputCreated) {
+          document.querySelectorAll('.Page_created').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCreated.getAttribute('value');
+            else
+              item.textContent = inputCreated.textContent;
+          });
+          addGlow(document.querySelector('.Page_created'));
+        }
+
+        if(inputModified) {
+          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputModified.getAttribute('value');
+            else
+              item.textContent = inputModified.textContent;
+          });
+          addGlow(document.querySelector('.Page_modified'));
+        }
+
+        if(inputArchived) {
+          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputArchived.getAttribute('value');
+            else
+              item.textContent = inputArchived.textContent;
+          });
+          addGlow(document.querySelector('.Page_archived'));
+        }
+
+        if(inputDescription) {
+          document.querySelectorAll('.Page_description').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDescription.getAttribute('value');
+            else
+              item.textContent = inputDescription.textContent;
+          });
+          addGlow(document.querySelector('.Page_description'));
+        }
+
+        if(inputNetworkId) {
+          document.querySelectorAll('.Page_networkId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNetworkId.getAttribute('value');
+            else
+              item.textContent = inputNetworkId.textContent;
+          });
+          addGlow(document.querySelector('.Page_networkId'));
+        }
+
+        if(inputNumberOfFc430) {
+          document.querySelectorAll('.Page_numberOfFc430').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNumberOfFc430.getAttribute('value');
+            else
+              item.textContent = inputNumberOfFc430.textContent;
+          });
+          addGlow(document.querySelector('.Page_numberOfFc430'));
+        }
+
+        if(inputNumberOfFc830) {
+          document.querySelectorAll('.Page_numberOfFc830').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNumberOfFc830.getAttribute('value');
+            else
+              item.textContent = inputNumberOfFc830.textContent;
+          });
+          addGlow(document.querySelector('.Page_numberOfFc830'));
+        }
+
+        if(inputNumberOfR730xd) {
+          document.querySelectorAll('.Page_numberOfR730xd').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNumberOfR730xd.getAttribute('value');
+            else
+              item.textContent = inputNumberOfR730xd.textContent;
+          });
+          addGlow(document.querySelector('.Page_numberOfR730xd'));
+        }
+
+        if(inputNumberOfWhiteboxFlax1) {
+          document.querySelectorAll('.Page_numberOfWhiteboxFlax1').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNumberOfWhiteboxFlax1.getAttribute('value');
+            else
+              item.textContent = inputNumberOfWhiteboxFlax1.textContent;
+          });
+          addGlow(document.querySelector('.Page_numberOfWhiteboxFlax1'));
+        }
+
+        if(inputNumberOfLenovoSd650nv2A100) {
+          document.querySelectorAll('.Page_numberOfLenovoSd650nv2A100').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNumberOfLenovoSd650nv2A100.getAttribute('value');
+            else
+              item.textContent = inputNumberOfLenovoSd650nv2A100.textContent;
+          });
+          addGlow(document.querySelector('.Page_numberOfLenovoSd650nv2A100'));
+        }
+
+        if(inputNumberOfLenovoSd665nv3H100) {
+          document.querySelectorAll('.Page_numberOfLenovoSd665nv3H100').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNumberOfLenovoSd665nv3H100.getAttribute('value');
+            else
+              item.textContent = inputNumberOfLenovoSd665nv3H100.textContent;
+          });
+          addGlow(document.querySelector('.Page_numberOfLenovoSd665nv3H100'));
+        }
+
+        if(inputImage) {
+          document.querySelectorAll('.Page_image').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputImage.getAttribute('value');
+            else
+              item.textContent = inputImage.textContent;
+          });
+          addGlow(document.querySelector('.Page_image'));
+        }
+
+        if(inputSshPublicKey) {
+          document.querySelectorAll('.Page_sshPublicKey').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSshPublicKey.getAttribute('value');
+            else
+              item.textContent = inputSshPublicKey.textContent;
+          });
+          addGlow(document.querySelector('.Page_sshPublicKey'));
+        }
+
+        if(inputFloatingIp) {
+          document.querySelectorAll('.Page_floatingIp').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputFloatingIp.getAttribute('value');
+            else
+              item.textContent = inputFloatingIp.textContent;
+          });
+          addGlow(document.querySelector('.Page_floatingIp'));
+        }
+
+        if(inputStatus) {
+          document.querySelectorAll('.Page_status').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputStatus.getAttribute('value');
+            else
+              item.textContent = inputStatus.textContent;
+          });
+          addGlow(document.querySelector('.Page_status'));
+        }
+
+        if(inputClassCanonicalName) {
+          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalName.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalName'));
+        }
+
+        if(inputClassSimpleName) {
+          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassSimpleName.getAttribute('value');
+            else
+              item.textContent = inputClassSimpleName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classSimpleName'));
+        }
+
+        if(inputClassCanonicalNames) {
+          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalNames.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalNames.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalNames'));
+        }
+
+        if(inputSessionId) {
+          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSessionId.getAttribute('value');
+            else
+              item.textContent = inputSessionId.textContent;
+          });
+          addGlow(document.querySelector('.Page_sessionId'));
+        }
+
+        if(inputUserKey) {
+          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserKey.getAttribute('value');
+            else
+              item.textContent = inputUserKey.textContent;
+          });
+          addGlow(document.querySelector('.Page_userKey'));
+        }
+
+        if(inputSaves) {
+          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.Page_saves'));
+        }
+
+        if(inputObjectTitle) {
+          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectTitle.getAttribute('value');
+            else
+              item.textContent = inputObjectTitle.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectTitle'));
+        }
+
+        if(inputDisplayPage) {
+          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDisplayPage.getAttribute('value');
+            else
+              item.textContent = inputDisplayPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_displayPage'));
+        }
+
+        if(inputEditPage) {
+          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEditPage.getAttribute('value');
+            else
+              item.textContent = inputEditPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_editPage'));
+        }
+
+        if(inputUserPage) {
+          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserPage.getAttribute('value');
+            else
+              item.textContent = inputUserPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_userPage'));
+        }
+
+        if(inputDownload) {
+          document.querySelectorAll('.Page_download').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDownload.getAttribute('value');
+            else
+              item.textContent = inputDownload.textContent;
+          });
+          addGlow(document.querySelector('.Page_download'));
+        }
+
+        if(inputObjectSuggest) {
+          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectSuggest.getAttribute('value');
+            else
+              item.textContent = inputObjectSuggest.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectSuggest'));
+        }
+
+        if(inputObjectText) {
+          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectText.getAttribute('value');
+            else
+              item.textContent = inputObjectText.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectText'));
+        }
+
+        if(inputSolrId) {
+          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSolrId.getAttribute('value');
+            else
+              item.textContent = inputSolrId.textContent;
+          });
+          addGlow(document.querySelector('.Page_solrId'));
+        }
+
+          pageGraphBareMetalOrder();
+      });
+    });
+  }
+}
+
+function pageGraphBareMetalOrder(apiRequest) {
+  var r = document.querySelector('.pageForm .pageResponse')?.value;
+  if(r) {
+    var json = JSON.parse(r);
+    if(json['facetCounts']) {
+      var facetCounts = json.facetCounts;
+      if(facetCounts['facetPivot'] && facetCounts['facetRanges']) {
+        var numPivots = json.responseHeader.params['facet.pivot'].split(',').length;
+        var range = facetCounts.facetRanges.ranges[Object.keys(facetCounts.facetRanges.ranges)[0]];
+        var rangeName;
+        var rangeVar;
+        var rangeVarFq;
+        var rangeCounts;
+        var rangeVals;
+        if(range) {
+          rangeName = range.name;
+          rangeVar = rangeName.substring(0, rangeName.indexOf('_'));
+          rangeVarFq = window.varsFq[rangeVar];
+          rangeCounts = range.counts;
+          rangeVals = Object.keys(rangeCounts).map(key => key);
+        }
+        var pivot1Name = Object.keys(facetCounts.facetPivot.pivotMap)[0];
+        var pivot1VarIndexed = pivot1Name;
+        if(pivot1VarIndexed.includes(','))
+          pivot1VarIndexed = pivot1VarIndexed.substring(0, pivot1VarIndexed.indexOf(','));
+        var pivot1VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot1VarIndexed)[0];
+        var pivot1VarFq = pivot1VarObj ? pivot1VarObj.var : 'classSimpleName';
+        var pivot1Map = facetCounts.facetPivot.pivotMap[pivot1Name].pivotMap;
+        var pivot1Vals = Object.keys(pivot1Map);
+        var data = [];
+        var layout = {};
+        if(range) {
+          layout['title'] = 'bare metal orders';
+          layout['xaxis'] = {
+            title: rangeVarFq.displayName
+          }
+          if(pivot1Vals.length > 0 && pivot1Map[pivot1Vals[0]].pivotMap && Object.keys(pivot1Map[pivot1Vals[0]].pivotMap).length > 0) {
+            var pivot2VarIndexed = pivot1Map[pivot1Vals[0]].pivotMap[Object.keys(pivot1Map[pivot1Vals[0]].pivotMap)[0]].field;
+            var pivot2VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot2VarIndexed)[0];
+            var pivot2VarFq = pivot2VarObj ? pivot2VarObj.var : 'classSimpleName';
+            layout['yaxis'] = {
+              title: pivot2VarObj.displayName
+            }
+            pivot1Vals.forEach((pivot1Val) => {
+              var pivot1 = pivot1Map[pivot1Val];
+              var pivot1Counts = pivot1.ranges[rangeName].counts;
+              var pivot2Map = pivot1.pivotMap;
+              var trace = {};
+              var facetField;
+              trace['showlegend'] = true;
+              trace['mode'] = 'lines+markers';
+              trace['name'] = pivot1Val;
+              trace['x'] = Object.keys(pivot1Counts).map(key => key);
+              if(pivot2Map) {
+                var xs = [];
+                var ys = [];
+                var pivot2Vals = Object.keys(pivot2Map);
+                pivot2Vals.forEach((pivot2Val) => {
+                  var pivot2 = pivot2Map[pivot2Val];
+                  var pivot2Counts = pivot2.ranges[rangeName].counts;
+                  Object.entries(pivot2Counts).forEach(([key, count]) => {
+                    xs.push(key);
+                    ys.push(parseFloat(pivot2Val));
+                  });
+                });
+                trace['y'] = ys;
+                trace['x'] = xs;
+              } else {
+                trace['x'] = Object.keys(pivot1Counts).map(key => key);
+                trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
+              }
+              data.push(trace);
+            });
+          } else {
+            layout['yaxis'] = {
+              title: pivot1VarObj.displayName
+            }
+            pivot1Vals.forEach((pivot1Val) => {
+              var pivot1 = pivot1Map[pivot1Val];
+              var pivot1Counts = pivot1.ranges[rangeName].counts;
+              var pivot2Map = pivot1.pivotMap;
+              var trace = {};
+              var facetField;
+              trace['showlegend'] = true;
+              trace['mode'] = 'lines+markers';
+              trace['name'] = pivot1Val;
+              if(window.varsRange[window.defaultRangeVar].classSimpleName == 'ZonedDateTime') {
+                trace['x'] = Object.keys(pivot1Counts).map(key => moment.tz(key, Intl.DateTimeFormat().resolvedOptions().timeZone).format('YYYY-MM-DDTHH:mm:ss.SSSS'));
+              } else {
+                trace['x'] = Object.keys(pivot1Counts).map(key => key);
+              }
+              trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
+              data.push(trace);
+            });
+          }
+          Plotly.react('htmBodyGraphBareMetalOrderPage', data, layout);
+        }
+      }
+    }
+  }
+}
+
+function animateStats() {
+  document.querySelector('#pageSearchVal-fqBareMetalOrder_time').innerText = '';
+  searchPage('BareMetalOrder', function() {
+    let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
+    let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
+    let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
+    let xMax = parseFloat(document.querySelector('#animateStatsMax')?.value);
+    let x = xMin;
+
+    let animateInterval = window.setInterval(() => {
+      x = x + xStep;
+      if (x > xMax || x < 0) {
+        clearInterval(animateInterval);
+      }
+      document.querySelector('#fqBareMetalOrder_time').value = x;
+      document.querySelector('#fqBareMetalOrder_time').onchange();
+      searchPage('BareMetalOrder');
+    }, speedRate);
+  });
+}
+
 // Search //
 
 async function searchBareMetalOrder($formFilters, success, error) {
@@ -178,8 +783,7 @@ function suggestBareMetalOrderNetworkId(filters, $list, pk = null, networkId = n
         var $i = iTemplate.content;
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
-        $span.innerText = 
-o['objectTitle'];
+        $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
@@ -223,7 +827,9 @@ function suggestBareMetalOrderObjectSuggest($formFilters, $list, target) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
         var $i = document.querySelector('<i class="fa-regular fa-share-nodes"></i>');
-        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
         var $li = document.createElement('li');
         var $a = document.createElement('a').setAttribute('href', o['editPage']);
         $a.append($i);
@@ -922,616 +1528,4 @@ async function deletefilterBareMetalOrder(target, success, error) {
       }
     })
     .catch(response => error(response, target));
-}
-
-async function websocketBareMetalOrder(success) {
-  window.eventBus.onopen = function () {
-
-    window.eventBus.registerHandler('websocketBareMetalOrder', function (error, message) {
-      var json = JSON.parse(message['body']);
-      var pk = json['id'];
-      var solrIds = json['solrIds'];
-      var empty = json['empty'];
-      var numFound = parseInt(json['numFound']);
-      var numPATCH = parseInt(json['numPATCH']);
-      var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
-      var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + pk + ' ');
-      $box.setAttribute('id', 'box-' + pk);
-      $box.setAttribute('data-numPATCH', numPATCH);
-      var $margin = document.createElement('div');
-      $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + pk);
-      var $card = document.createElement('div');
-      $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + pk);
-      var $header = document.createElement('div');
-      $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + pk);
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-share-nodes"></i>';
-      var $i = iTemplate.content;
-      var $headerSpan = document.createElement('span');
-      $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify bare metal orders in ' + json.timeRemaining;
-      var $x = document.createElement('span');
-      $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + pk + '");');
-      $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + pk);
-      var $body = document.createElement('div');
-      $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + pk);
-      var $bar = document.createElement('div');
-      $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + pk);
-      var $progress = document.createElement('div');
-      $progress.setAttribute('class', 'w3- ');
-      $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + pk);
-      $progress.innerText = numPATCH + '/' + numFound;
-      $card.append($header);
-      $header.append($i);
-      $header.append($headerSpan);
-      $header.append($x);
-      $body.append($bar);
-      $bar.append($progress);
-      $card.append($body);
-      $box.append($margin);
-      $margin.append($card);
-      if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + pk);
-      } else {
-        document.querySelector('.box-' + pk)?.remove();
-      }
-      if(pk) {
-        if(success)
-          success(json);
-      }
-    });
-
-    window.eventBus.registerHandler('websocketBareMetalNetwork', function (error, message) {
-      document.querySelector('.Page_networkId').trigger('oninput');
-      document.querySelector('.Page_networkId_add').innerText = 'add a bare metal network';
-      document.querySelector('.Page_networkId_add').classList.remove('w3-disabled');
-      document.querySelector('.Page_networkId_add').setAttribute('disabled', false);
-    });
-  }
-}
-async function websocketBareMetalOrderInner(apiRequest) {
-  var pk = apiRequest['id'];
-  var classes = apiRequest['classes'];
-  var vars = apiRequest['vars'];
-  var empty = apiRequest['empty'];
-
-  if(pk != null && vars.length > 0) {
-    var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
-    var uri = location.pathname + queryParams;
-    fetch(uri).then(response => {
-      response.text().then(text => {
-        var $response = new DOMParser().parseFromString(text, 'text/html');
-        var inputPk = null;
-        var inputCreated = null;
-        var inputModified = null;
-        var inputArchived = null;
-        var inputDescription = null;
-        var inputNetworkId = null;
-        var inputNumberOfFc430 = null;
-        var inputNumberOfFc830 = null;
-        var inputNumberOfR730xd = null;
-        var inputNumberOfWhiteboxFlax1 = null;
-        var inputNumberOfLenovoSd650nv2A100 = null;
-        var inputNumberOfLenovoSd665nv3H100 = null;
-        var inputImage = null;
-        var inputSshPublicKey = null;
-        var inputFloatingIp = null;
-        var inputStatus = null;
-        var inputClassCanonicalName = null;
-        var inputClassSimpleName = null;
-        var inputClassCanonicalNames = null;
-        var inputSessionId = null;
-        var inputUserKey = null;
-        var inputSaves = null;
-        var inputObjectTitle = null;
-        var inputDisplayPage = null;
-        var inputEditPage = null;
-        var inputUserPage = null;
-        var inputDownload = null;
-        var inputObjectSuggest = null;
-        var inputObjectText = null;
-        var inputSolrId = null;
-
-        if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
-        if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
-        if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
-        if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
-        if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
-        if(vars.includes('networkId'))
-          inputNetworkId = $response.querySelector('.Page_networkId');
-        if(vars.includes('numberOfFc430'))
-          inputNumberOfFc430 = $response.querySelector('.Page_numberOfFc430');
-        if(vars.includes('numberOfFc830'))
-          inputNumberOfFc830 = $response.querySelector('.Page_numberOfFc830');
-        if(vars.includes('numberOfR730xd'))
-          inputNumberOfR730xd = $response.querySelector('.Page_numberOfR730xd');
-        if(vars.includes('numberOfWhiteboxFlax1'))
-          inputNumberOfWhiteboxFlax1 = $response.querySelector('.Page_numberOfWhiteboxFlax1');
-        if(vars.includes('numberOfLenovoSd650nv2A100'))
-          inputNumberOfLenovoSd650nv2A100 = $response.querySelector('.Page_numberOfLenovoSd650nv2A100');
-        if(vars.includes('numberOfLenovoSd665nv3H100'))
-          inputNumberOfLenovoSd665nv3H100 = $response.querySelector('.Page_numberOfLenovoSd665nv3H100');
-        if(vars.includes('image'))
-          inputImage = $response.querySelector('.Page_image');
-        if(vars.includes('sshPublicKey'))
-          inputSshPublicKey = $response.querySelector('.Page_sshPublicKey');
-        if(vars.includes('floatingIp'))
-          inputFloatingIp = $response.querySelector('.Page_floatingIp');
-        if(vars.includes('status'))
-          inputStatus = $response.querySelector('.Page_status');
-        if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
-        if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
-        if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
-        if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
-        if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
-        if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
-        if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
-        if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
-        if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
-        if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
-        if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
-        if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
-        if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
-
-        jsWebsocketBareMetalOrder(pk, vars, $response);
-        window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
-        window.listBareMetalOrder = JSON.parse($response.querySelector('.pageForm .listBareMetalOrder')?.value);
-
-
-        if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputPk.getAttribute('value');
-            else
-              item.textContent = inputPk.textContent;
-          });
-          addGlow(document.querySelector('.Page_pk'));
-        }
-
-        if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputCreated.getAttribute('value');
-            else
-              item.textContent = inputCreated.textContent;
-          });
-          addGlow(document.querySelector('.Page_created'));
-        }
-
-        if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputModified.getAttribute('value');
-            else
-              item.textContent = inputModified.textContent;
-          });
-          addGlow(document.querySelector('.Page_modified'));
-        }
-
-        if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputArchived.getAttribute('value');
-            else
-              item.textContent = inputArchived.textContent;
-          });
-          addGlow(document.querySelector('.Page_archived'));
-        }
-
-        if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputDescription.getAttribute('value');
-            else
-              item.textContent = inputDescription.textContent;
-          });
-          addGlow(document.querySelector('.Page_description'));
-        }
-
-        if(inputNetworkId) {
-          document.querySelectorAll('.Page_networkId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNetworkId.getAttribute('value');
-            else
-              item.textContent = inputNetworkId.textContent;
-          });
-          addGlow(document.querySelector('.Page_networkId'));
-        }
-
-        if(inputNumberOfFc430) {
-          document.querySelectorAll('.Page_numberOfFc430').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNumberOfFc430.getAttribute('value');
-            else
-              item.textContent = inputNumberOfFc430.textContent;
-          });
-          addGlow(document.querySelector('.Page_numberOfFc430'));
-        }
-
-        if(inputNumberOfFc830) {
-          document.querySelectorAll('.Page_numberOfFc830').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNumberOfFc830.getAttribute('value');
-            else
-              item.textContent = inputNumberOfFc830.textContent;
-          });
-          addGlow(document.querySelector('.Page_numberOfFc830'));
-        }
-
-        if(inputNumberOfR730xd) {
-          document.querySelectorAll('.Page_numberOfR730xd').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNumberOfR730xd.getAttribute('value');
-            else
-              item.textContent = inputNumberOfR730xd.textContent;
-          });
-          addGlow(document.querySelector('.Page_numberOfR730xd'));
-        }
-
-        if(inputNumberOfWhiteboxFlax1) {
-          document.querySelectorAll('.Page_numberOfWhiteboxFlax1').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNumberOfWhiteboxFlax1.getAttribute('value');
-            else
-              item.textContent = inputNumberOfWhiteboxFlax1.textContent;
-          });
-          addGlow(document.querySelector('.Page_numberOfWhiteboxFlax1'));
-        }
-
-        if(inputNumberOfLenovoSd650nv2A100) {
-          document.querySelectorAll('.Page_numberOfLenovoSd650nv2A100').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNumberOfLenovoSd650nv2A100.getAttribute('value');
-            else
-              item.textContent = inputNumberOfLenovoSd650nv2A100.textContent;
-          });
-          addGlow(document.querySelector('.Page_numberOfLenovoSd650nv2A100'));
-        }
-
-        if(inputNumberOfLenovoSd665nv3H100) {
-          document.querySelectorAll('.Page_numberOfLenovoSd665nv3H100').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNumberOfLenovoSd665nv3H100.getAttribute('value');
-            else
-              item.textContent = inputNumberOfLenovoSd665nv3H100.textContent;
-          });
-          addGlow(document.querySelector('.Page_numberOfLenovoSd665nv3H100'));
-        }
-
-        if(inputImage) {
-          document.querySelectorAll('.Page_image').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputImage.getAttribute('value');
-            else
-              item.textContent = inputImage.textContent;
-          });
-          addGlow(document.querySelector('.Page_image'));
-        }
-
-        if(inputSshPublicKey) {
-          document.querySelectorAll('.Page_sshPublicKey').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSshPublicKey.getAttribute('value');
-            else
-              item.textContent = inputSshPublicKey.textContent;
-          });
-          addGlow(document.querySelector('.Page_sshPublicKey'));
-        }
-
-        if(inputFloatingIp) {
-          document.querySelectorAll('.Page_floatingIp').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputFloatingIp.getAttribute('value');
-            else
-              item.textContent = inputFloatingIp.textContent;
-          });
-          addGlow(document.querySelector('.Page_floatingIp'));
-        }
-
-        if(inputStatus) {
-          document.querySelectorAll('.Page_status').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputStatus.getAttribute('value');
-            else
-              item.textContent = inputStatus.textContent;
-          });
-          addGlow(document.querySelector('.Page_status'));
-        }
-
-        if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalName.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
-        }
-
-        if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassSimpleName.getAttribute('value');
-            else
-              item.textContent = inputClassSimpleName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classSimpleName'));
-        }
-
-        if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalNames.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalNames.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
-        }
-
-        if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSessionId.getAttribute('value');
-            else
-              item.textContent = inputSessionId.textContent;
-          });
-          addGlow(document.querySelector('.Page_sessionId'));
-        }
-
-        if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserKey.getAttribute('value');
-            else
-              item.textContent = inputUserKey.textContent;
-          });
-          addGlow(document.querySelector('.Page_userKey'));
-        }
-
-        if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.Page_saves'));
-        }
-
-        if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectTitle.getAttribute('value');
-            else
-              item.textContent = inputObjectTitle.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectTitle'));
-        }
-
-        if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputDisplayPage.getAttribute('value');
-            else
-              item.textContent = inputDisplayPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_displayPage'));
-        }
-
-        if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputEditPage.getAttribute('value');
-            else
-              item.textContent = inputEditPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_editPage'));
-        }
-
-        if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserPage.getAttribute('value');
-            else
-              item.textContent = inputUserPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_userPage'));
-        }
-
-        if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputDownload.getAttribute('value');
-            else
-              item.textContent = inputDownload.textContent;
-          });
-          addGlow(document.querySelector('.Page_download'));
-        }
-
-        if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectSuggest.getAttribute('value');
-            else
-              item.textContent = inputObjectSuggest.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectSuggest'));
-        }
-
-        if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectText.getAttribute('value');
-            else
-              item.textContent = inputObjectText.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectText'));
-        }
-
-        if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSolrId.getAttribute('value');
-            else
-              item.textContent = inputSolrId.textContent;
-          });
-          addGlow(document.querySelector('.Page_solrId'));
-        }
-
-          pageGraphBareMetalOrder();
-      });
-    });
-  }
-}
-
-function pageGraphBareMetalOrder(apiRequest) {
-  var r = document.querySelector('.pageForm .pageResponse')?.value;
-  if(r) {
-    var json = JSON.parse(r);
-    if(json['facetCounts']) {
-      var facetCounts = json.facetCounts;
-      if(facetCounts['facetPivot'] && facetCounts['facetRanges']) {
-        var numPivots = json.responseHeader.params['facet.pivot'].split(',').length;
-        var range = facetCounts.facetRanges.ranges[Object.keys(facetCounts.facetRanges.ranges)[0]];
-        var rangeName;
-        var rangeVar;
-        var rangeVarFq;
-        var rangeCounts;
-        var rangeVals;
-        if(range) {
-          rangeName = range.name;
-          rangeVar = rangeName.substring(0, rangeName.indexOf('_'));
-          rangeVarFq = window.varsFq[rangeVar];
-          rangeCounts = range.counts;
-          rangeVals = Object.keys(rangeCounts).map(key => key);
-        }
-        var pivot1Name = Object.keys(facetCounts.facetPivot.pivotMap)[0];
-        var pivot1VarIndexed = pivot1Name;
-        if(pivot1VarIndexed.includes(','))
-          pivot1VarIndexed = pivot1VarIndexed.substring(0, pivot1VarIndexed.indexOf(','));
-        var pivot1VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot1VarIndexed)[0];
-        var pivot1VarFq = pivot1VarObj ? pivot1VarObj.var : 'classSimpleName';
-        var pivot1Map = facetCounts.facetPivot.pivotMap[pivot1Name].pivotMap;
-        var pivot1Vals = Object.keys(pivot1Map);
-        var data = [];
-        var layout = {};
-        if(range) {
-          layout['title'] = 'bare metal orders';
-          layout['xaxis'] = {
-            title: rangeVarFq.displayName
-          }
-          if(pivot1Vals.length > 0 && pivot1Map[pivot1Vals[0]].pivotMap && Object.keys(pivot1Map[pivot1Vals[0]].pivotMap).length > 0) {
-            var pivot2VarIndexed = pivot1Map[pivot1Vals[0]].pivotMap[Object.keys(pivot1Map[pivot1Vals[0]].pivotMap)[0]].field;
-            var pivot2VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot2VarIndexed)[0];
-            var pivot2VarFq = pivot2VarObj ? pivot2VarObj.var : 'classSimpleName';
-            layout['yaxis'] = {
-              title: pivot2VarObj.displayName
-            }
-            pivot1Vals.forEach((pivot1Val) => {
-              var pivot1 = pivot1Map[pivot1Val];
-              var pivot1Counts = pivot1.ranges[rangeName].counts;
-              var pivot2Map = pivot1.pivotMap;
-              var trace = {};
-              var facetField;
-              trace['showlegend'] = true;
-              trace['mode'] = 'lines+markers';
-              trace['name'] = pivot1Val;
-              trace['x'] = Object.keys(pivot1Counts).map(key => key);
-              if(pivot2Map) {
-                var xs = [];
-                var ys = [];
-                var pivot2Vals = Object.keys(pivot2Map);
-                pivot2Vals.forEach((pivot2Val) => {
-                  var pivot2 = pivot2Map[pivot2Val];
-                  var pivot2Counts = pivot2.ranges[rangeName].counts;
-                  Object.entries(pivot2Counts).forEach(([key, count]) => {
-                    xs.push(key);
-                    ys.push(parseFloat(pivot2Val));
-                  });
-                });
-                trace['y'] = ys;
-                trace['x'] = xs;
-              } else {
-                trace['x'] = Object.keys(pivot1Counts).map(key => key);
-                trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
-              }
-              data.push(trace);
-            });
-          } else {
-            layout['yaxis'] = {
-              title: pivot1VarObj.displayName
-            }
-            pivot1Vals.forEach((pivot1Val) => {
-              var pivot1 = pivot1Map[pivot1Val];
-              var pivot1Counts = pivot1.ranges[rangeName].counts;
-              var pivot2Map = pivot1.pivotMap;
-              var trace = {};
-              var facetField;
-              trace['showlegend'] = true;
-              trace['mode'] = 'lines+markers';
-              trace['name'] = pivot1Val;
-              if(window.varsRange[window.defaultRangeVar].classSimpleName == 'ZonedDateTime') {
-                trace['x'] = Object.keys(pivot1Counts).map(key => moment.tz(key, Intl.DateTimeFormat().resolvedOptions().timeZone).format('YYYY-MM-DDTHH:mm:ss.SSSS'));
-              } else {
-                trace['x'] = Object.keys(pivot1Counts).map(key => key);
-              }
-              trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
-              data.push(trace);
-            });
-          }
-          Plotly.react('htmBodyGraphBareMetalOrderPage', data, layout);
-        }
-      }
-    }
-  }
-}
-
-function animateStats() {
-  document.querySelector('#pageSearchVal-fqBareMetalOrder_time').innerText = '';
-  searchPage('BareMetalOrder', function() {
-    let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
-    let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
-    let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
-    let xMax = parseFloat(document.querySelector('#animateStatsMax')?.value);
-    let x = xMin;
-
-    let animateInterval = window.setInterval(() => {
-      x = x + xStep;
-      if (x > xMax || x < 0) {
-        clearInterval(animateInterval);
-      }
-      document.querySelector('#fqBareMetalOrder_time').value = x;
-      document.querySelector('#fqBareMetalOrder_time').onchange();
-      searchPage('BareMetalOrder');
-    }, speedRate);
-  });
 }

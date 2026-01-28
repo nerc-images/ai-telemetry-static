@@ -445,90 +445,90 @@
 {% include en-us/search/vm/VirtualMachinePaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-              <wa-dropdown id="htmDropdown-hubId">
-                <wa-button variant="brand" slot="trigger" caret>ACM Hub</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by ACM Hub ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by ACM Hub descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-clusterName">
-                <wa-button variant="brand" slot="trigger" caret>cluster name</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterName-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by cluster name ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterName-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by cluster name descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-vmProject">
-                <wa-button variant="brand" slot="trigger" caret>VM project</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmProject'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-vmProject-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by VM project ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmProject'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-vmProject-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by VM project descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-vmName">
-                <wa-button variant="brand" slot="trigger" caret>VM name</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-vmName-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by VM name ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-vmName-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by VM name descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-os">
-                <wa-button variant="brand" slot="trigger" caret>OS</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_os'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-os-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by OS ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_os'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-os-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by OS descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-hubId">
+                      <wa-button variant="brand" slot="trigger" caret>ACM Hub</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubId-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by ACM Hub ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_hubId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubId-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by ACM Hub descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-clusterName">
+                      <wa-button variant="brand" slot="trigger" caret>cluster name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-clusterName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by cluster name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_clusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-clusterName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by cluster name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-vmProject">
+                      <wa-button variant="brand" slot="trigger" caret>VM project</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmProject'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-vmProject-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by VM project ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmProject'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-vmProject-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by VM project descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-vmName">
+                      <wa-button variant="brand" slot="trigger" caret>VM name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-vmName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by VM name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_vmName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-vmName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by VM name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-os">
+                      <wa-button variant="brand" slot="trigger" caret>OS</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_os'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-os-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by OS ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortVirtualMachine_os'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-VirtualMachine').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-os-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by OS descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listVirtualMachine%}
                   <div>
-              <a href="{{ item.displayPage }}">
-                <i class="fa-regular fa-sidebar"></i>
-              <span>{{ item.hubId | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.clusterName | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.vmProject | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.vmName | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.os | e }}
-</span>              </a>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-regular fa-sidebar"></i>
+                      <span>{{ item.hubId | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.clusterName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.vmProject | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.vmName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.os | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
               {% if getColumnHubId is defined %}

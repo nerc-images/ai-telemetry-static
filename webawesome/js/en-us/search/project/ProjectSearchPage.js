@@ -406,46 +406,6 @@ Promise.all([
   document.querySelector('#pageStatsProject_projectDisplayName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Project', 'projectDisplayName', false);
   });
-
-  document.querySelector('#htmButton_patchProject')?.addEventListener('click', (event) => {
-    document.querySelector('#patchProjectDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postProject')?.addEventListener('click', (event) => {
-    document.querySelector('#postProjectDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteProject')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var projectResource =  event.currentTarget.getAttribute('data-projectResource');
-      deleteProject(
-          event.currentTarget
-          , projectResource
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportProject')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportProjectDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageProject')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageProjectDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterProject')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterProject(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqProject_created')?.addEventListener('change', (event) => {
             fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
@@ -807,3 +767,43 @@ Promise.all([
             facetRangeEndChange('Project', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchProject')?.addEventListener('click', (event) => {
+    document.querySelector('#patchProjectDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postProject')?.addEventListener('click', (event) => {
+    document.querySelector('#postProjectDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteProject')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var projectResource =  event.currentTarget.getAttribute('data-projectResource');
+      deleteProject(
+          event.currentTarget
+          , projectResource
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportProject')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportProjectDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageProject')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageProjectDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterProject')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterProject(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

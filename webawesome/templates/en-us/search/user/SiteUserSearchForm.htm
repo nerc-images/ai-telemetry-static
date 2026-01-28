@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
@@ -211,8 +210,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] font size"
                       label="font size"
-                      hint="
-The default font size for the site"
+                      hint="The default font size for the site"
                       id="{{classApiMethodMethod}}_siteFontSize"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
@@ -231,9 +229,9 @@ The default font size for the site"
                       value="{{result.siteFontSize | e }}"
   {%- endif %}
                       >
-                    <wa-radio value="s">small</wa-radio>
-                    <wa-radio value="m">medium</wa-radio>
-                    <wa-radio value="l">large</wa-radio>
+                    <wa-radio value="small">small</wa-radio>
+                    <wa-radio value="medium">medium</wa-radio>
+                    <wa-radio value="large">large</wa-radio>
                   </wa-radio-group>
 
   {%- if 'Page' == classApiMethodMethod %}
@@ -252,8 +250,7 @@ The default font size for the site"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] site theme"
                       label="site theme"
-                      hint="
-The site theme, either light or dark. "
+                      hint="The site theme, either light or dark. "
                       id="{{classApiMethodMethod}}_siteTheme"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
@@ -284,54 +281,58 @@ The site theme, either light or dark. "
 {%- macro htmSiteThemeSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSiteThemeSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputWebComponentsThemeSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputUserProfileUrlSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_webComponentsTheme">
+                <form class="subgrid-2col " id="PageForm_userProfileUrl">
   {%- endif %}
-                  <wa-radio-group
+  {%- if 'Page' == classApiMethodMethod %}
+                  <div class="button-on-left ">
+                    <wa-button variant="brand"
+                        id="{{classApiMethodMethod}}_userProfileUrl"
+                        placeholder="[String] Keycloak user profile"
+                        label="Keycloak user profile"
+                        hint="View and update your user profile in Keycloak"
+                        class="button-on-left {{classApiMethodMethod}}_userProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                        name="setUserProfileUrl"
+                        href="{{ result.userProfileUrl | e }}"
+                        >
+                      Keycloak user profile
+                    </wa-button>
+                  </div>
+                  <div class="button-description-on-right ">View and update your user profile in Keycloak</div>
+  {%- else %}
+                  <wa-input
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] web components theme"
-                      label="web components theme"
-                      hint="
-The web components theme for the site. "
-                      id="{{classApiMethodMethod}}_webComponentsTheme"
+                      placeholder="[String] Keycloak user profile"
+                      label="Keycloak user profile"
+                      hint="View and update your user profile in Keycloak"
+                      id="{{classApiMethodMethod}}_userProfileUrl"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_webComponentsTheme setWebComponentsTheme classSiteUser inputSiteUser{{ result.userId }}WebComponentsTheme "
-                      name="setWebComponentsTheme"
+                      class="label-on-left {{classApiMethodMethod}}_userProfileUrl setUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                      name="setUserProfileUrl"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_webComponentsTheme setWebComponentsTheme classSiteUser inputSiteUser{{ result.userId }}WebComponentsTheme "
-                      name="setWebComponentsTheme"
+                      class="label-on-left {{classApiMethodMethod}}_userProfileUrl setUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                      name="setUserProfileUrl"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_webComponentsTheme valueWebComponentsTheme classSiteUser inputSiteUser{{ result.userId }}WebComponentsTheme "
-                      name="webComponentsTheme"
+                      class="label-on-left {{classApiMethodMethod}}_userProfileUrl valueUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                      name="userProfileUrl"
     {%- endif %}
   {%- endif %}
   {%- if "Page" == classApiMethodMethod %}
-                      value="{{result.webComponentsTheme | e }}"
+                      value="{{result.userProfileUrl | e }}"
   {%- endif %}
-                      >
-                    <wa-radio value="default">Default &mdash; &quot;Your trusty companion, like a perfectly broken-in pair of jeans.&quot;</wa-radio>
-                    <wa-radio value="classic">Classic &mdash; &quot;Timeless elegance that never goes out of style.&quot;</wa-radio>
-                    <wa-radio value="awesome">Awesome &mdash; &quot;Punchy and vibrant, the rockstar of themes.&quot;</wa-radio>
-                    <wa-radio value="active">Active &mdash; &quot;Energetic and tactile, always in motion.&quot;</wa-radio>
-                    <wa-radio value="brutalist">Brutalist &mdash; &quot;Sharp, square, and unapologetically bold.&quot;</wa-radio>
-                    <wa-radio value="glossy">Glossy &mdash; &quot;Bustling with plenty of luster and shine.&quot;</wa-radio>
-                    <wa-radio value="matter">Matter &mdash; &quot;Digital design inspired by the real world.&quot;</wa-radio>
-                    <wa-radio value="mellow">Mellow &mdash; &quot;Soft and soothing, like a lazy Sunday morning.&quot;</wa-radio>
-                    <wa-radio value="playful">Playful &mdash; &quot;Cheerful and engaging, like a playground on screen.&quot;</wa-radio>
-                    <wa-radio value="premium">Premium &mdash; &quot;The ultimate in sophistication and style.&quot;</wa-radio>
-                    <wa-radio value="tailspin">Tailspin &mdash; &quot;Like a bird in flight, guiding you from there to here.&quot;</wa-radio>
-                  </wa-radio-group>
+                      ></wa-input>
 
+  {%- endif %}
   {%- if 'Page' == classApiMethodMethod %}
                 </form>
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmWebComponentsThemeSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputWebComponentsThemeSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmUserProfileUrlSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputUserProfileUrlSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 
 {%- macro htmFormButton_patchSiteUser() %}
@@ -383,12 +384,12 @@ The web components theme for the site. "
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -448,12 +449,12 @@ The web components theme for the site. "
               {%- endif %}
 
               {%- if "POST" in scopes %}
-                {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -552,12 +553,12 @@ The web components theme for the site. "
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmWebComponentsThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>

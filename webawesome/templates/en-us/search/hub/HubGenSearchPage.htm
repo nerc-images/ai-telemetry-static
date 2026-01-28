@@ -2,7 +2,7 @@
 
 {%- block htmTitlePageLayout %}
 {%- block htmTitleHubPage %}
-    <title>{% if resultCount == 0 %}no hub found{% else %}hubs{% endif %}</title>
+    <title>{% if resultCount == 0 %}no ACM hub found{% else %}ACM hubs{% endif %}</title>
 {%- endblock htmTitleHubPage %}
 {%- endblock htmTitlePageLayout %}
 
@@ -257,14 +257,14 @@
 {%- block htmUrlHubPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlHubPage %}
 {%- if pageBreadcrumb is not defined %}
 {%- set pageBreadcrumb %}
-              <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip>
+              <wa-tooltip for="return-to-Hub">back to all ACM hubs</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
                   <i class="fa-regular fa-sitemap"></i>
-                  all hubs
+                  all ACM hubs
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
-                  search hubs
+                  search ACM hubs
                 </wa-breadcrumb-item>
               </wa-breadcrumb>
 {%- endset pageBreadcrumb %}
@@ -276,21 +276,21 @@
 {% include en-us/search/hub/HubSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-Hub">back to all hubs</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-Hub">back to all ACM hubs</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Hub" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
               <i class="fa-regular fa-sitemap"></i>
-              all hubs
+              all ACM hubs
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
-              no hub found
+              no ACM hub found
             </wa-breadcrumb-item>
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
               <i class="fa-regular fa-sitemap"></i>
             </div>
-            <span class="wa-heading-m ">no hub found</span>
+            <span class="wa-heading-m ">no ACM hub found</span>
             <p class="wa-caption-l ">An Red Hat Advanced Cluster Management Hub cluster. </p>
 {% include en-us/search/hub/HubSearchForm.htm %}
           </div>
@@ -329,58 +329,58 @@
 {% include en-us/search/hub/HubPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-              <wa-dropdown id="htmDropdown-hubName">
-                <wa-button variant="brand" slot="trigger" caret>hub name</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubName-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by hub name ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubName-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by hub name descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-localClusterName">
-                <wa-button variant="brand" slot="trigger" caret>ACM cluster name</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_localClusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-localClusterName-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by ACM cluster name ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_localClusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-localClusterName-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by ACM cluster name descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-description">
-                <wa-button variant="brand" slot="trigger" caret>description</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by description ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by description descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-hubName">
+                      <wa-button variant="brand" slot="trigger" caret>hub name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-hubName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by hub name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_hubName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-hubName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by hub name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-localClusterName">
+                      <wa-button variant="brand" slot="trigger" caret>ACM cluster name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_localClusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-localClusterName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by ACM cluster name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_localClusterName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-localClusterName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by ACM cluster name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-description">
+                      <wa-button variant="brand" slot="trigger" caret>description</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by description ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHub_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Hub').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by description descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listHub%}
                   <div>
-              <a href="{{ item.displayPage }}">
-                <i class="fa-regular fa-sitemap"></i>
-              <span>{{ item.hubName | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.localClusterName | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.description | e }}
-</span>              </a>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-regular fa-sitemap"></i>
+                      <span>{{ item.hubName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.localClusterName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.description | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
               {% if getColumnHubName is defined %}

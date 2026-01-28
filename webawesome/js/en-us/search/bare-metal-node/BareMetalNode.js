@@ -1,4 +1,570 @@
 
+async function websocketBareMetalNode(success) {
+  window.eventBus.onopen = function () {
+
+    window.eventBus.registerHandler('websocketBareMetalNode', function (error, message) {
+      var json = JSON.parse(message['body']);
+      var nodeId = json['id'];
+      var solrIds = json['solrIds'];
+      var empty = json['empty'];
+      var numFound = parseInt(json['numFound']);
+      var numPATCH = parseInt(json['numPATCH']);
+      var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
+      var $box = document.createElement('div');
+      $box.setAttribute('class', 'w3-quarter box-' + nodeId + ' ');
+      $box.setAttribute('id', 'box-' + nodeId);
+      $box.setAttribute('data-numPATCH', numPATCH);
+      var $margin = document.createElement('div');
+      $margin.setAttribute('class', 'w3-margin ');
+      $margin.setAttribute('id', 'margin-' + nodeId);
+      var $card = document.createElement('div');
+      $card.setAttribute('class', 'w3-card w3-white ');
+      $card.setAttribute('id', 'card-' + nodeId);
+      var $header = document.createElement('div');
+      $header.setAttribute('class', 'w3-container fa- ');
+      $header.setAttribute('id', 'header-' + nodeId);
+      var iTemplate = document.createElement('template');
+      iTemplate.innerHTML = '<i class="fa-regular fa-hexagon-nodes"></i>';
+      var $i = iTemplate.content;
+      var $headerSpan = document.createElement('span');
+      $headerSpan.setAttribute('class', '');
+      $headerSpan.innerText = 'modify bare metal nodes in ' + json.timeRemaining;
+      var $x = document.createElement('span');
+      $x.setAttribute('class', 'w3-button w3-display-topright ');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + nodeId + '");');
+      $x.classList.add("display-none");
+      $x.setAttribute('id', 'x-' + nodeId);
+      var $body = document.createElement('div');
+      $body.setAttribute('class', 'w3-container w3-padding ');
+      $body.setAttribute('id', 'text-' + nodeId);
+      var $bar = document.createElement('div');
+      $bar.setAttribute('class', 'w3-light-gray ');
+      $bar.setAttribute('id', 'bar-' + nodeId);
+      var $progress = document.createElement('div');
+      $progress.setAttribute('class', 'w3- ');
+      $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
+      $progress.setAttribute('id', 'progress-' + nodeId);
+      $progress.innerText = numPATCH + '/' + numFound;
+      $card.append($header);
+      $header.append($i);
+      $header.append($headerSpan);
+      $header.append($x);
+      $body.append($bar);
+      $bar.append($progress);
+      $card.append($body);
+      $box.append($margin);
+      $margin.append($card);
+      if(numPATCH < numFound) {
+        var $old_box = document.querySelector('.box-' + nodeId);
+      } else {
+        document.querySelector('.box-' + nodeId)?.remove();
+      }
+      if(nodeId) {
+        if(success)
+          success(json);
+      }
+    });
+  }
+}
+async function websocketBareMetalNodeInner(apiRequest) {
+  var nodeId = apiRequest['id'];
+  var classes = apiRequest['classes'];
+  var vars = apiRequest['vars'];
+  var empty = apiRequest['empty'];
+
+  if(nodeId != null && vars.length > 0) {
+    var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
+    var uri = location.pathname + queryParams;
+    fetch(uri).then(response => {
+      response.text().then(text => {
+        var $response = new DOMParser().parseFromString(text, 'text/html');
+        var inputPk = null;
+        var inputCreated = null;
+        var inputModified = null;
+        var inputArchived = null;
+        var inputLeaseInfo = null;
+        var inputNetworkInfo = null;
+        var inputNodeId = null;
+        var inputNodeIsMaintenance = null;
+        var inputNodeLinks = null;
+        var inputNodeName = null;
+        var inputNodePowerState = null;
+        var inputNodeProvisionState = null;
+        var inputNodeResourceClass = null;
+        var inputClassCanonicalName = null;
+        var inputClassSimpleName = null;
+        var inputClassCanonicalNames = null;
+        var inputSessionId = null;
+        var inputUserKey = null;
+        var inputSaves = null;
+        var inputObjectTitle = null;
+        var inputDisplayPage = null;
+        var inputEditPage = null;
+        var inputUserPage = null;
+        var inputDownload = null;
+        var inputObjectSuggest = null;
+        var inputObjectText = null;
+        var inputSolrId = null;
+
+        if(vars.includes('pk'))
+          inputPk = $response.querySelector('.Page_pk');
+        if(vars.includes('created'))
+          inputCreated = $response.querySelector('.Page_created');
+        if(vars.includes('modified'))
+          inputModified = $response.querySelector('.Page_modified');
+        if(vars.includes('archived'))
+          inputArchived = $response.querySelector('.Page_archived');
+        if(vars.includes('leaseInfo'))
+          inputLeaseInfo = $response.querySelector('.Page_leaseInfo');
+        if(vars.includes('networkInfo'))
+          inputNetworkInfo = $response.querySelector('.Page_networkInfo');
+        if(vars.includes('nodeId'))
+          inputNodeId = $response.querySelector('.Page_nodeId');
+        if(vars.includes('nodeIsMaintenance'))
+          inputNodeIsMaintenance = $response.querySelector('.Page_nodeIsMaintenance');
+        if(vars.includes('nodeLinks'))
+          inputNodeLinks = $response.querySelector('.Page_nodeLinks');
+        if(vars.includes('nodeName'))
+          inputNodeName = $response.querySelector('.Page_nodeName');
+        if(vars.includes('nodePowerState'))
+          inputNodePowerState = $response.querySelector('.Page_nodePowerState');
+        if(vars.includes('nodeProvisionState'))
+          inputNodeProvisionState = $response.querySelector('.Page_nodeProvisionState');
+        if(vars.includes('nodeResourceClass'))
+          inputNodeResourceClass = $response.querySelector('.Page_nodeResourceClass');
+        if(vars.includes('classCanonicalName'))
+          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+        if(vars.includes('classSimpleName'))
+          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+        if(vars.includes('classCanonicalNames'))
+          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+        if(vars.includes('sessionId'))
+          inputSessionId = $response.querySelector('.Page_sessionId');
+        if(vars.includes('userKey'))
+          inputUserKey = $response.querySelector('.Page_userKey');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.Page_saves');
+        if(vars.includes('objectTitle'))
+          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+        if(vars.includes('displayPage'))
+          inputDisplayPage = $response.querySelector('.Page_displayPage');
+        if(vars.includes('editPage'))
+          inputEditPage = $response.querySelector('.Page_editPage');
+        if(vars.includes('userPage'))
+          inputUserPage = $response.querySelector('.Page_userPage');
+        if(vars.includes('download'))
+          inputDownload = $response.querySelector('.Page_download');
+        if(vars.includes('objectSuggest'))
+          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+        if(vars.includes('objectText'))
+          inputObjectText = $response.querySelector('.Page_objectText');
+        if(vars.includes('solrId'))
+          inputSolrId = $response.querySelector('.Page_solrId');
+
+        jsWebsocketBareMetalNode(nodeId, vars, $response);
+        window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
+        window.listBareMetalNode = JSON.parse($response.querySelector('.pageForm .listBareMetalNode')?.value);
+
+
+        if(inputPk) {
+          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPk.getAttribute('value');
+            else
+              item.textContent = inputPk.textContent;
+          });
+          addGlow(document.querySelector('.Page_pk'));
+        }
+
+        if(inputCreated) {
+          document.querySelectorAll('.Page_created').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCreated.getAttribute('value');
+            else
+              item.textContent = inputCreated.textContent;
+          });
+          addGlow(document.querySelector('.Page_created'));
+        }
+
+        if(inputModified) {
+          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputModified.getAttribute('value');
+            else
+              item.textContent = inputModified.textContent;
+          });
+          addGlow(document.querySelector('.Page_modified'));
+        }
+
+        if(inputArchived) {
+          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputArchived.getAttribute('value');
+            else
+              item.textContent = inputArchived.textContent;
+          });
+          addGlow(document.querySelector('.Page_archived'));
+        }
+
+        if(inputLeaseInfo) {
+          document.querySelectorAll('.Page_leaseInfo').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLeaseInfo.getAttribute('value');
+            else
+              item.textContent = inputLeaseInfo.textContent;
+          });
+          addGlow(document.querySelector('.Page_leaseInfo'));
+        }
+
+        if(inputNetworkInfo) {
+          document.querySelectorAll('.Page_networkInfo').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNetworkInfo.getAttribute('value');
+            else
+              item.textContent = inputNetworkInfo.textContent;
+          });
+          addGlow(document.querySelector('.Page_networkInfo'));
+        }
+
+        if(inputNodeId) {
+          document.querySelectorAll('.Page_nodeId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeId.getAttribute('value');
+            else
+              item.textContent = inputNodeId.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeId'));
+        }
+
+        if(inputNodeIsMaintenance) {
+          document.querySelectorAll('.Page_nodeIsMaintenance').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeIsMaintenance.getAttribute('value');
+            else
+              item.textContent = inputNodeIsMaintenance.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeIsMaintenance'));
+        }
+
+        if(inputNodeLinks) {
+          document.querySelectorAll('.Page_nodeLinks').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeLinks.getAttribute('value');
+            else
+              item.textContent = inputNodeLinks.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeLinks'));
+        }
+
+        if(inputNodeName) {
+          document.querySelectorAll('.Page_nodeName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeName.getAttribute('value');
+            else
+              item.textContent = inputNodeName.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeName'));
+        }
+
+        if(inputNodePowerState) {
+          document.querySelectorAll('.Page_nodePowerState').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodePowerState.getAttribute('value');
+            else
+              item.textContent = inputNodePowerState.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodePowerState'));
+        }
+
+        if(inputNodeProvisionState) {
+          document.querySelectorAll('.Page_nodeProvisionState').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeProvisionState.getAttribute('value');
+            else
+              item.textContent = inputNodeProvisionState.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeProvisionState'));
+        }
+
+        if(inputNodeResourceClass) {
+          document.querySelectorAll('.Page_nodeResourceClass').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputNodeResourceClass.getAttribute('value');
+            else
+              item.textContent = inputNodeResourceClass.textContent;
+          });
+          addGlow(document.querySelector('.Page_nodeResourceClass'));
+        }
+
+        if(inputClassCanonicalName) {
+          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalName.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalName'));
+        }
+
+        if(inputClassSimpleName) {
+          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassSimpleName.getAttribute('value');
+            else
+              item.textContent = inputClassSimpleName.textContent;
+          });
+          addGlow(document.querySelector('.Page_classSimpleName'));
+        }
+
+        if(inputClassCanonicalNames) {
+          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalNames.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalNames.textContent;
+          });
+          addGlow(document.querySelector('.Page_classCanonicalNames'));
+        }
+
+        if(inputSessionId) {
+          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSessionId.getAttribute('value');
+            else
+              item.textContent = inputSessionId.textContent;
+          });
+          addGlow(document.querySelector('.Page_sessionId'));
+        }
+
+        if(inputUserKey) {
+          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserKey.getAttribute('value');
+            else
+              item.textContent = inputUserKey.textContent;
+          });
+          addGlow(document.querySelector('.Page_userKey'));
+        }
+
+        if(inputSaves) {
+          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.Page_saves'));
+        }
+
+        if(inputObjectTitle) {
+          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectTitle.getAttribute('value');
+            else
+              item.textContent = inputObjectTitle.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectTitle'));
+        }
+
+        if(inputDisplayPage) {
+          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDisplayPage.getAttribute('value');
+            else
+              item.textContent = inputDisplayPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_displayPage'));
+        }
+
+        if(inputEditPage) {
+          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEditPage.getAttribute('value');
+            else
+              item.textContent = inputEditPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_editPage'));
+        }
+
+        if(inputUserPage) {
+          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserPage.getAttribute('value');
+            else
+              item.textContent = inputUserPage.textContent;
+          });
+          addGlow(document.querySelector('.Page_userPage'));
+        }
+
+        if(inputDownload) {
+          document.querySelectorAll('.Page_download').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputDownload.getAttribute('value');
+            else
+              item.textContent = inputDownload.textContent;
+          });
+          addGlow(document.querySelector('.Page_download'));
+        }
+
+        if(inputObjectSuggest) {
+          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectSuggest.getAttribute('value');
+            else
+              item.textContent = inputObjectSuggest.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectSuggest'));
+        }
+
+        if(inputObjectText) {
+          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectText.getAttribute('value');
+            else
+              item.textContent = inputObjectText.textContent;
+          });
+          addGlow(document.querySelector('.Page_objectText'));
+        }
+
+        if(inputSolrId) {
+          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSolrId.getAttribute('value');
+            else
+              item.textContent = inputSolrId.textContent;
+          });
+          addGlow(document.querySelector('.Page_solrId'));
+        }
+
+          pageGraphBareMetalNode();
+      });
+    });
+  }
+}
+
+function pageGraphBareMetalNode(apiRequest) {
+  var r = document.querySelector('.pageForm .pageResponse')?.value;
+  if(r) {
+    var json = JSON.parse(r);
+    if(json['facetCounts']) {
+      var facetCounts = json.facetCounts;
+      if(facetCounts['facetPivot'] && facetCounts['facetRanges']) {
+        var numPivots = json.responseHeader.params['facet.pivot'].split(',').length;
+        var range = facetCounts.facetRanges.ranges[Object.keys(facetCounts.facetRanges.ranges)[0]];
+        var rangeName;
+        var rangeVar;
+        var rangeVarFq;
+        var rangeCounts;
+        var rangeVals;
+        if(range) {
+          rangeName = range.name;
+          rangeVar = rangeName.substring(0, rangeName.indexOf('_'));
+          rangeVarFq = window.varsFq[rangeVar];
+          rangeCounts = range.counts;
+          rangeVals = Object.keys(rangeCounts).map(key => key);
+        }
+        var pivot1Name = Object.keys(facetCounts.facetPivot.pivotMap)[0];
+        var pivot1VarIndexed = pivot1Name;
+        if(pivot1VarIndexed.includes(','))
+          pivot1VarIndexed = pivot1VarIndexed.substring(0, pivot1VarIndexed.indexOf(','));
+        var pivot1VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot1VarIndexed)[0];
+        var pivot1VarFq = pivot1VarObj ? pivot1VarObj.var : 'classSimpleName';
+        var pivot1Map = facetCounts.facetPivot.pivotMap[pivot1Name].pivotMap;
+        var pivot1Vals = Object.keys(pivot1Map);
+        var data = [];
+        var layout = {};
+        if(range) {
+          layout['title'] = 'bare metal nodes';
+          layout['xaxis'] = {
+            title: rangeVarFq.displayName
+          }
+          if(pivot1Vals.length > 0 && pivot1Map[pivot1Vals[0]].pivotMap && Object.keys(pivot1Map[pivot1Vals[0]].pivotMap).length > 0) {
+            var pivot2VarIndexed = pivot1Map[pivot1Vals[0]].pivotMap[Object.keys(pivot1Map[pivot1Vals[0]].pivotMap)[0]].field;
+            var pivot2VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot2VarIndexed)[0];
+            var pivot2VarFq = pivot2VarObj ? pivot2VarObj.var : 'classSimpleName';
+            layout['yaxis'] = {
+              title: pivot2VarObj.displayName
+            }
+            pivot1Vals.forEach((pivot1Val) => {
+              var pivot1 = pivot1Map[pivot1Val];
+              var pivot1Counts = pivot1.ranges[rangeName].counts;
+              var pivot2Map = pivot1.pivotMap;
+              var trace = {};
+              var facetField;
+              trace['showlegend'] = true;
+              trace['mode'] = 'lines+markers';
+              trace['name'] = pivot1Val;
+              trace['x'] = Object.keys(pivot1Counts).map(key => key);
+              if(pivot2Map) {
+                var xs = [];
+                var ys = [];
+                var pivot2Vals = Object.keys(pivot2Map);
+                pivot2Vals.forEach((pivot2Val) => {
+                  var pivot2 = pivot2Map[pivot2Val];
+                  var pivot2Counts = pivot2.ranges[rangeName].counts;
+                  Object.entries(pivot2Counts).forEach(([key, count]) => {
+                    xs.push(key);
+                    ys.push(parseFloat(pivot2Val));
+                  });
+                });
+                trace['y'] = ys;
+                trace['x'] = xs;
+              } else {
+                trace['x'] = Object.keys(pivot1Counts).map(key => key);
+                trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
+              }
+              data.push(trace);
+            });
+          } else {
+            layout['yaxis'] = {
+              title: pivot1VarObj.displayName
+            }
+            pivot1Vals.forEach((pivot1Val) => {
+              var pivot1 = pivot1Map[pivot1Val];
+              var pivot1Counts = pivot1.ranges[rangeName].counts;
+              var pivot2Map = pivot1.pivotMap;
+              var trace = {};
+              var facetField;
+              trace['showlegend'] = true;
+              trace['mode'] = 'lines+markers';
+              trace['name'] = pivot1Val;
+              if(window.varsRange[window.defaultRangeVar].classSimpleName == 'ZonedDateTime') {
+                trace['x'] = Object.keys(pivot1Counts).map(key => moment.tz(key, Intl.DateTimeFormat().resolvedOptions().timeZone).format('YYYY-MM-DDTHH:mm:ss.SSSS'));
+              } else {
+                trace['x'] = Object.keys(pivot1Counts).map(key => key);
+              }
+              trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
+              data.push(trace);
+            });
+          }
+          Plotly.react('htmBodyGraphBareMetalNodePage', data, layout);
+        }
+      }
+    }
+  }
+}
+
+function animateStats() {
+  document.querySelector('#pageSearchVal-fqBareMetalNode_time').innerText = '';
+  searchPage('BareMetalNode', function() {
+    let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
+    let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
+    let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
+    let xMax = parseFloat(document.querySelector('#animateStatsMax')?.value);
+    let x = xMin;
+
+    let animateInterval = window.setInterval(() => {
+      x = x + xStep;
+      if (x > xMax || x < 0) {
+        clearInterval(animateInterval);
+      }
+      document.querySelector('#fqBareMetalNode_time').value = x;
+      document.querySelector('#fqBareMetalNode_time').onchange();
+      searchPage('BareMetalNode');
+    }, speedRate);
+  });
+}
+
 // Search //
 
 async function searchBareMetalNode($formFilters, success, error) {
@@ -156,7 +722,9 @@ function suggestBareMetalNodeObjectSuggest($formFilters, $list, target) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
         var $i = document.querySelector('<i class="fa-regular fa-hexagon-nodes"></i>');
-        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
         var $li = document.createElement('li');
         var $a = document.createElement('a').setAttribute('href', o['editPage']);
         $a.append($i);
@@ -817,570 +1385,4 @@ async function deletefilterBareMetalNode(target, success, error) {
       }
     })
     .catch(response => error(response, target));
-}
-
-async function websocketBareMetalNode(success) {
-  window.eventBus.onopen = function () {
-
-    window.eventBus.registerHandler('websocketBareMetalNode', function (error, message) {
-      var json = JSON.parse(message['body']);
-      var nodeId = json['id'];
-      var solrIds = json['solrIds'];
-      var empty = json['empty'];
-      var numFound = parseInt(json['numFound']);
-      var numPATCH = parseInt(json['numPATCH']);
-      var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
-      var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + nodeId + ' ');
-      $box.setAttribute('id', 'box-' + nodeId);
-      $box.setAttribute('data-numPATCH', numPATCH);
-      var $margin = document.createElement('div');
-      $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + nodeId);
-      var $card = document.createElement('div');
-      $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + nodeId);
-      var $header = document.createElement('div');
-      $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + nodeId);
-      var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-hexagon-nodes"></i>';
-      var $i = iTemplate.content;
-      var $headerSpan = document.createElement('span');
-      $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify bare metal nodes in ' + json.timeRemaining;
-      var $x = document.createElement('span');
-      $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + nodeId + '");');
-      $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + nodeId);
-      var $body = document.createElement('div');
-      $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + nodeId);
-      var $bar = document.createElement('div');
-      $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + nodeId);
-      var $progress = document.createElement('div');
-      $progress.setAttribute('class', 'w3- ');
-      $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + nodeId);
-      $progress.innerText = numPATCH + '/' + numFound;
-      $card.append($header);
-      $header.append($i);
-      $header.append($headerSpan);
-      $header.append($x);
-      $body.append($bar);
-      $bar.append($progress);
-      $card.append($body);
-      $box.append($margin);
-      $margin.append($card);
-      if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + nodeId);
-      } else {
-        document.querySelector('.box-' + nodeId)?.remove();
-      }
-      if(nodeId) {
-        if(success)
-          success(json);
-      }
-    });
-  }
-}
-async function websocketBareMetalNodeInner(apiRequest) {
-  var nodeId = apiRequest['id'];
-  var classes = apiRequest['classes'];
-  var vars = apiRequest['vars'];
-  var empty = apiRequest['empty'];
-
-  if(nodeId != null && vars.length > 0) {
-    var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
-    var uri = location.pathname + queryParams;
-    fetch(uri).then(response => {
-      response.text().then(text => {
-        var $response = new DOMParser().parseFromString(text, 'text/html');
-        var inputPk = null;
-        var inputCreated = null;
-        var inputModified = null;
-        var inputArchived = null;
-        var inputLeaseInfo = null;
-        var inputNetworkInfo = null;
-        var inputNodeId = null;
-        var inputNodeIsMaintenance = null;
-        var inputNodeLinks = null;
-        var inputNodeName = null;
-        var inputNodePowerState = null;
-        var inputNodeProvisionState = null;
-        var inputNodeResourceClass = null;
-        var inputClassCanonicalName = null;
-        var inputClassSimpleName = null;
-        var inputClassCanonicalNames = null;
-        var inputSessionId = null;
-        var inputUserKey = null;
-        var inputSaves = null;
-        var inputObjectTitle = null;
-        var inputDisplayPage = null;
-        var inputEditPage = null;
-        var inputUserPage = null;
-        var inputDownload = null;
-        var inputObjectSuggest = null;
-        var inputObjectText = null;
-        var inputSolrId = null;
-
-        if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
-        if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
-        if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
-        if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
-        if(vars.includes('leaseInfo'))
-          inputLeaseInfo = $response.querySelector('.Page_leaseInfo');
-        if(vars.includes('networkInfo'))
-          inputNetworkInfo = $response.querySelector('.Page_networkInfo');
-        if(vars.includes('nodeId'))
-          inputNodeId = $response.querySelector('.Page_nodeId');
-        if(vars.includes('nodeIsMaintenance'))
-          inputNodeIsMaintenance = $response.querySelector('.Page_nodeIsMaintenance');
-        if(vars.includes('nodeLinks'))
-          inputNodeLinks = $response.querySelector('.Page_nodeLinks');
-        if(vars.includes('nodeName'))
-          inputNodeName = $response.querySelector('.Page_nodeName');
-        if(vars.includes('nodePowerState'))
-          inputNodePowerState = $response.querySelector('.Page_nodePowerState');
-        if(vars.includes('nodeProvisionState'))
-          inputNodeProvisionState = $response.querySelector('.Page_nodeProvisionState');
-        if(vars.includes('nodeResourceClass'))
-          inputNodeResourceClass = $response.querySelector('.Page_nodeResourceClass');
-        if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
-        if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
-        if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
-        if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
-        if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
-        if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
-        if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
-        if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
-        if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
-        if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
-        if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
-        if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
-        if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
-
-        jsWebsocketBareMetalNode(nodeId, vars, $response);
-        window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
-        window.listBareMetalNode = JSON.parse($response.querySelector('.pageForm .listBareMetalNode')?.value);
-
-
-        if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputPk.getAttribute('value');
-            else
-              item.textContent = inputPk.textContent;
-          });
-          addGlow(document.querySelector('.Page_pk'));
-        }
-
-        if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputCreated.getAttribute('value');
-            else
-              item.textContent = inputCreated.textContent;
-          });
-          addGlow(document.querySelector('.Page_created'));
-        }
-
-        if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputModified.getAttribute('value');
-            else
-              item.textContent = inputModified.textContent;
-          });
-          addGlow(document.querySelector('.Page_modified'));
-        }
-
-        if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputArchived.getAttribute('value');
-            else
-              item.textContent = inputArchived.textContent;
-          });
-          addGlow(document.querySelector('.Page_archived'));
-        }
-
-        if(inputLeaseInfo) {
-          document.querySelectorAll('.Page_leaseInfo').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputLeaseInfo.getAttribute('value');
-            else
-              item.textContent = inputLeaseInfo.textContent;
-          });
-          addGlow(document.querySelector('.Page_leaseInfo'));
-        }
-
-        if(inputNetworkInfo) {
-          document.querySelectorAll('.Page_networkInfo').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNetworkInfo.getAttribute('value');
-            else
-              item.textContent = inputNetworkInfo.textContent;
-          });
-          addGlow(document.querySelector('.Page_networkInfo'));
-        }
-
-        if(inputNodeId) {
-          document.querySelectorAll('.Page_nodeId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeId.getAttribute('value');
-            else
-              item.textContent = inputNodeId.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeId'));
-        }
-
-        if(inputNodeIsMaintenance) {
-          document.querySelectorAll('.Page_nodeIsMaintenance').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeIsMaintenance.getAttribute('value');
-            else
-              item.textContent = inputNodeIsMaintenance.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeIsMaintenance'));
-        }
-
-        if(inputNodeLinks) {
-          document.querySelectorAll('.Page_nodeLinks').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeLinks.getAttribute('value');
-            else
-              item.textContent = inputNodeLinks.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeLinks'));
-        }
-
-        if(inputNodeName) {
-          document.querySelectorAll('.Page_nodeName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeName.getAttribute('value');
-            else
-              item.textContent = inputNodeName.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeName'));
-        }
-
-        if(inputNodePowerState) {
-          document.querySelectorAll('.Page_nodePowerState').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodePowerState.getAttribute('value');
-            else
-              item.textContent = inputNodePowerState.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodePowerState'));
-        }
-
-        if(inputNodeProvisionState) {
-          document.querySelectorAll('.Page_nodeProvisionState').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeProvisionState.getAttribute('value');
-            else
-              item.textContent = inputNodeProvisionState.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeProvisionState'));
-        }
-
-        if(inputNodeResourceClass) {
-          document.querySelectorAll('.Page_nodeResourceClass').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputNodeResourceClass.getAttribute('value');
-            else
-              item.textContent = inputNodeResourceClass.textContent;
-          });
-          addGlow(document.querySelector('.Page_nodeResourceClass'));
-        }
-
-        if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalName.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
-        }
-
-        if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassSimpleName.getAttribute('value');
-            else
-              item.textContent = inputClassSimpleName.textContent;
-          });
-          addGlow(document.querySelector('.Page_classSimpleName'));
-        }
-
-        if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalNames.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalNames.textContent;
-          });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
-        }
-
-        if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSessionId.getAttribute('value');
-            else
-              item.textContent = inputSessionId.textContent;
-          });
-          addGlow(document.querySelector('.Page_sessionId'));
-        }
-
-        if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserKey.getAttribute('value');
-            else
-              item.textContent = inputUserKey.textContent;
-          });
-          addGlow(document.querySelector('.Page_userKey'));
-        }
-
-        if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.Page_saves'));
-        }
-
-        if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectTitle.getAttribute('value');
-            else
-              item.textContent = inputObjectTitle.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectTitle'));
-        }
-
-        if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputDisplayPage.getAttribute('value');
-            else
-              item.textContent = inputDisplayPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_displayPage'));
-        }
-
-        if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputEditPage.getAttribute('value');
-            else
-              item.textContent = inputEditPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_editPage'));
-        }
-
-        if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserPage.getAttribute('value');
-            else
-              item.textContent = inputUserPage.textContent;
-          });
-          addGlow(document.querySelector('.Page_userPage'));
-        }
-
-        if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputDownload.getAttribute('value');
-            else
-              item.textContent = inputDownload.textContent;
-          });
-          addGlow(document.querySelector('.Page_download'));
-        }
-
-        if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectSuggest.getAttribute('value');
-            else
-              item.textContent = inputObjectSuggest.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectSuggest'));
-        }
-
-        if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectText.getAttribute('value');
-            else
-              item.textContent = inputObjectText.textContent;
-          });
-          addGlow(document.querySelector('.Page_objectText'));
-        }
-
-        if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSolrId.getAttribute('value');
-            else
-              item.textContent = inputSolrId.textContent;
-          });
-          addGlow(document.querySelector('.Page_solrId'));
-        }
-
-          pageGraphBareMetalNode();
-      });
-    });
-  }
-}
-
-function pageGraphBareMetalNode(apiRequest) {
-  var r = document.querySelector('.pageForm .pageResponse')?.value;
-  if(r) {
-    var json = JSON.parse(r);
-    if(json['facetCounts']) {
-      var facetCounts = json.facetCounts;
-      if(facetCounts['facetPivot'] && facetCounts['facetRanges']) {
-        var numPivots = json.responseHeader.params['facet.pivot'].split(',').length;
-        var range = facetCounts.facetRanges.ranges[Object.keys(facetCounts.facetRanges.ranges)[0]];
-        var rangeName;
-        var rangeVar;
-        var rangeVarFq;
-        var rangeCounts;
-        var rangeVals;
-        if(range) {
-          rangeName = range.name;
-          rangeVar = rangeName.substring(0, rangeName.indexOf('_'));
-          rangeVarFq = window.varsFq[rangeVar];
-          rangeCounts = range.counts;
-          rangeVals = Object.keys(rangeCounts).map(key => key);
-        }
-        var pivot1Name = Object.keys(facetCounts.facetPivot.pivotMap)[0];
-        var pivot1VarIndexed = pivot1Name;
-        if(pivot1VarIndexed.includes(','))
-          pivot1VarIndexed = pivot1VarIndexed.substring(0, pivot1VarIndexed.indexOf(','));
-        var pivot1VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot1VarIndexed)[0];
-        var pivot1VarFq = pivot1VarObj ? pivot1VarObj.var : 'classSimpleName';
-        var pivot1Map = facetCounts.facetPivot.pivotMap[pivot1Name].pivotMap;
-        var pivot1Vals = Object.keys(pivot1Map);
-        var data = [];
-        var layout = {};
-        if(range) {
-          layout['title'] = 'bare metal nodes';
-          layout['xaxis'] = {
-            title: rangeVarFq.displayName
-          }
-          if(pivot1Vals.length > 0 && pivot1Map[pivot1Vals[0]].pivotMap && Object.keys(pivot1Map[pivot1Vals[0]].pivotMap).length > 0) {
-            var pivot2VarIndexed = pivot1Map[pivot1Vals[0]].pivotMap[Object.keys(pivot1Map[pivot1Vals[0]].pivotMap)[0]].field;
-            var pivot2VarObj = Object.values(window.varsFq).filter(o => o.varIndexed === pivot2VarIndexed)[0];
-            var pivot2VarFq = pivot2VarObj ? pivot2VarObj.var : 'classSimpleName';
-            layout['yaxis'] = {
-              title: pivot2VarObj.displayName
-            }
-            pivot1Vals.forEach((pivot1Val) => {
-              var pivot1 = pivot1Map[pivot1Val];
-              var pivot1Counts = pivot1.ranges[rangeName].counts;
-              var pivot2Map = pivot1.pivotMap;
-              var trace = {};
-              var facetField;
-              trace['showlegend'] = true;
-              trace['mode'] = 'lines+markers';
-              trace['name'] = pivot1Val;
-              trace['x'] = Object.keys(pivot1Counts).map(key => key);
-              if(pivot2Map) {
-                var xs = [];
-                var ys = [];
-                var pivot2Vals = Object.keys(pivot2Map);
-                pivot2Vals.forEach((pivot2Val) => {
-                  var pivot2 = pivot2Map[pivot2Val];
-                  var pivot2Counts = pivot2.ranges[rangeName].counts;
-                  Object.entries(pivot2Counts).forEach(([key, count]) => {
-                    xs.push(key);
-                    ys.push(parseFloat(pivot2Val));
-                  });
-                });
-                trace['y'] = ys;
-                trace['x'] = xs;
-              } else {
-                trace['x'] = Object.keys(pivot1Counts).map(key => key);
-                trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
-              }
-              data.push(trace);
-            });
-          } else {
-            layout['yaxis'] = {
-              title: pivot1VarObj.displayName
-            }
-            pivot1Vals.forEach((pivot1Val) => {
-              var pivot1 = pivot1Map[pivot1Val];
-              var pivot1Counts = pivot1.ranges[rangeName].counts;
-              var pivot2Map = pivot1.pivotMap;
-              var trace = {};
-              var facetField;
-              trace['showlegend'] = true;
-              trace['mode'] = 'lines+markers';
-              trace['name'] = pivot1Val;
-              if(window.varsRange[window.defaultRangeVar].classSimpleName == 'ZonedDateTime') {
-                trace['x'] = Object.keys(pivot1Counts).map(key => moment.tz(key, Intl.DateTimeFormat().resolvedOptions().timeZone).format('YYYY-MM-DDTHH:mm:ss.SSSS'));
-              } else {
-                trace['x'] = Object.keys(pivot1Counts).map(key => key);
-              }
-              trace['y'] = Object.entries(pivot1Counts).map(([key, count]) => count);
-              data.push(trace);
-            });
-          }
-          Plotly.react('htmBodyGraphBareMetalNodePage', data, layout);
-        }
-      }
-    }
-  }
-}
-
-function animateStats() {
-  document.querySelector('#pageSearchVal-fqBareMetalNode_time').innerText = '';
-  searchPage('BareMetalNode', function() {
-    let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
-    let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
-    let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
-    let xMax = parseFloat(document.querySelector('#animateStatsMax')?.value);
-    let x = xMin;
-
-    let animateInterval = window.setInterval(() => {
-      x = x + xStep;
-      if (x > xMax || x < 0) {
-        clearInterval(animateInterval);
-      }
-      document.querySelector('#fqBareMetalNode_time').value = x;
-      document.querySelector('#fqBareMetalNode_time').onchange();
-      searchPage('BareMetalNode');
-    }, speedRate);
-  });
 }

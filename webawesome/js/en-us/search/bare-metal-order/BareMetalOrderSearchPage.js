@@ -340,42 +340,6 @@ Promise.all([
   document.querySelector('#pageStatsBareMetalOrder_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('BareMetalOrder', 'solrId', false);
   });
-
-  document.querySelector('#htmButton_patchBareMetalOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#patchBareMetalOrderDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postBareMetalOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#postBareMetalOrderDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteBareMetalOrder')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var pk =  event.currentTarget.getAttribute('data-pk');
-      deleteBareMetalOrder(
-          event.currentTarget
-          , pk
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_searchpageBareMetalOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageBareMetalOrderDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterBareMetalOrder')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterBareMetalOrder(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqBareMetalOrder_created')?.addEventListener('change', (event) => {
             fqChange('BareMetalOrder', event.currentTarget, facetChangeBareMetalOrderSuccess, facetChangeBareMetalOrderError);
           });
@@ -683,3 +647,39 @@ Promise.all([
             facetRangeEndChange('BareMetalOrder', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchBareMetalOrder')?.addEventListener('click', (event) => {
+    document.querySelector('#patchBareMetalOrderDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postBareMetalOrder')?.addEventListener('click', (event) => {
+    document.querySelector('#postBareMetalOrderDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteBareMetalOrder')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var pk =  event.currentTarget.getAttribute('data-pk');
+      deleteBareMetalOrder(
+          event.currentTarget
+          , pk
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_searchpageBareMetalOrder')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageBareMetalOrderDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterBareMetalOrder')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterBareMetalOrder(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

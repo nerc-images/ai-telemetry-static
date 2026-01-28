@@ -241,46 +241,6 @@ Promise.all([
   document.querySelector('#pageStatsClusterRequest_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('ClusterRequest', 'solrId', false);
   });
-
-  document.querySelector('#htmButton_patchClusterRequest')?.addEventListener('click', (event) => {
-    document.querySelector('#patchClusterRequestDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postClusterRequest')?.addEventListener('click', (event) => {
-    document.querySelector('#postClusterRequestDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteClusterRequest')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var name =  event.currentTarget.getAttribute('data-name');
-      deleteClusterRequest(
-          event.currentTarget
-          , name
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportClusterRequest')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportClusterRequestDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageClusterRequest')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageClusterRequestDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterClusterRequest')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterClusterRequest(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqClusterRequest_created')?.addEventListener('change', (event) => {
             fqChange('ClusterRequest', event.currentTarget, facetChangeClusterRequestSuccess, facetChangeClusterRequestError);
           });
@@ -408,3 +368,43 @@ Promise.all([
             facetRangeEndChange('ClusterRequest', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchClusterRequest')?.addEventListener('click', (event) => {
+    document.querySelector('#patchClusterRequestDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postClusterRequest')?.addEventListener('click', (event) => {
+    document.querySelector('#postClusterRequestDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteClusterRequest')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var name =  event.currentTarget.getAttribute('data-name');
+      deleteClusterRequest(
+          event.currentTarget
+          , name
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportClusterRequest')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportClusterRequestDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageClusterRequest')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageClusterRequestDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterClusterRequest')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterClusterRequest(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

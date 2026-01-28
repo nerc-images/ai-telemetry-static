@@ -450,46 +450,6 @@ Promise.all([
   document.querySelector('#pageStatsGpuDevice_entityShortId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('GpuDevice', 'entityShortId', false);
   });
-
-  document.querySelector('#htmButton_patchGpuDevice')?.addEventListener('click', (event) => {
-    document.querySelector('#patchGpuDeviceDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postGpuDevice')?.addEventListener('click', (event) => {
-    document.querySelector('#postGpuDeviceDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteGpuDevice')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var gpuDeviceResource =  event.currentTarget.getAttribute('data-gpuDeviceResource');
-      deleteGpuDevice(
-          event.currentTarget
-          , gpuDeviceResource
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportGpuDevice')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportGpuDeviceDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageGpuDevice')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageGpuDeviceDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterGpuDevice')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterGpuDevice(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqGpuDevice_created')?.addEventListener('change', (event) => {
             fqChange('GpuDevice', event.currentTarget, facetChangeGpuDeviceSuccess, facetChangeGpuDeviceError);
           });
@@ -851,3 +811,43 @@ Promise.all([
             facetRangeEndChange('GpuDevice', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchGpuDevice')?.addEventListener('click', (event) => {
+    document.querySelector('#patchGpuDeviceDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postGpuDevice')?.addEventListener('click', (event) => {
+    document.querySelector('#postGpuDeviceDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteGpuDevice')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var gpuDeviceResource =  event.currentTarget.getAttribute('data-gpuDeviceResource');
+      deleteGpuDevice(
+          event.currentTarget
+          , gpuDeviceResource
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportGpuDevice')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportGpuDeviceDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageGpuDevice')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageGpuDeviceDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterGpuDevice')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterGpuDevice(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

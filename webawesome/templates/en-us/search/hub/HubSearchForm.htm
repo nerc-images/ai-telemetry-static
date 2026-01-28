@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
@@ -162,8 +161,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] hub name"
                       label="hub name"
-                      hint="
-The name of this hub"
+                      hint="The name of this hub"
                       id="{{classApiMethodMethod}}_hubName"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
@@ -199,8 +197,7 @@ The name of this hub"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] hub ID"
                       label="hub ID"
-                      hint="
-The ID of this hub"
+                      hint="The ID of this hub"
                       id="{{classApiMethodMethod}}_hubId"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
@@ -236,8 +233,7 @@ The ID of this hub"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
-                      hint="
-A description of this hub"
+                      hint="A description of this hub"
                       id="{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
@@ -273,8 +269,7 @@ A description of this hub"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] Page ID"
                       label="Page ID"
-                      hint="
-The ID for this page. "
+                      hint="The ID for this page. "
                       id="{{classApiMethodMethod}}_pageId"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
@@ -307,13 +302,13 @@ The ID for this page. "
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_patchHub"
-                >Modify hub</wa-button>
+                >Modify ACM hub</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_patchHub"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_patchHub() %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHubDialog" label="Modify hub">
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHubDialog" label="Modify ACM hub">
           <form id="htmForm_patchHub" class="round-row primary-smart-border-radius ">
             <wa-details open class="HtmRow" id="hub-details">
               <div slot="summary">
@@ -378,13 +373,13 @@ The ID for this page. "
           <wa-popup  auto-size="both" placement="top" id="alertButton_postHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_postHub"
-                >Create a hub</wa-button>
+                >Create an ACM hub</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_postHub"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_postHub() %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postHubDialog" label="Create a hub">
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="postHubDialog" label="Create an ACM hub">
           <form id="htmForm_postHub" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
             <wa-details open class="HtmRow" id="hub-details">
@@ -450,13 +445,13 @@ The ID for this page. "
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_deleteHub"
-                >Delete hub</wa-button>
+                >Delete ACM hub</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_deleteHub"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_deleteHub() %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHubDialog" label="Delete hub">
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHubDialog" label="Delete ACM hub">
           <form id="htmForm_deleteHub" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteHub() }}
@@ -467,13 +462,13 @@ The ID for this page. "
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_putimportHub"
-                >Import hubs</wa-button>
+                >Import ACM hubs</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_putimportHub"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_putimportHub() %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHubDialog" label="Import hubs">
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHubDialog" label="Import ACM hubs">
           <form id="htmForm_putimportHub" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -489,7 +484,7 @@ The ID for this page. "
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHub() %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageHubDialog" label="Search hubs">
+        <div with-header with-footer style="--width: 50vw; " id="searchpageHubDialog" label="Search ACM hubs">
           <div id="htmForm_searchpageHub" class="round-row primary-smart-border-radius ">
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
@@ -602,13 +597,13 @@ The ID for this page. "
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterHub" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_deletefilterHub"
-                >Delete hub</wa-button>
+                >Delete ACM hub</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_deletefilterHub"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterHub() %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHubDialog" label="Delete hub">
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHubDialog" label="Delete ACM hub">
           <form id="htmForm_deletefilterHub" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterHub() }}

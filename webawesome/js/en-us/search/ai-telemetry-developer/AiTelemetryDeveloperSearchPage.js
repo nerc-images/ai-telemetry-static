@@ -362,46 +362,6 @@ Promise.all([
   document.querySelector('#pageStatsAiTelemetryDeveloper_relatedArticleIds')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('AiTelemetryDeveloper', 'relatedArticleIds', false);
   });
-
-  document.querySelector('#htmButton_patchAiTelemetryDeveloper')?.addEventListener('click', (event) => {
-    document.querySelector('#patchAiTelemetryDeveloperDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postAiTelemetryDeveloper')?.addEventListener('click', (event) => {
-    document.querySelector('#postAiTelemetryDeveloperDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteAiTelemetryDeveloper')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var pageId =  event.currentTarget.getAttribute('data-pageId');
-      deleteAiTelemetryDeveloper(
-          event.currentTarget
-          , pageId
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportAiTelemetryDeveloper')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportAiTelemetryDeveloperDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageAiTelemetryDeveloper')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageAiTelemetryDeveloperDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterAiTelemetryDeveloper')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterAiTelemetryDeveloper(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqAiTelemetryDeveloper_created')?.addEventListener('change', (event) => {
             fqChange('AiTelemetryDeveloper', event.currentTarget, facetChangeAiTelemetryDeveloperSuccess, facetChangeAiTelemetryDeveloperError);
           });
@@ -637,3 +597,43 @@ Promise.all([
             facetRangeEndChange('AiTelemetryDeveloper', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchAiTelemetryDeveloper')?.addEventListener('click', (event) => {
+    document.querySelector('#patchAiTelemetryDeveloperDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postAiTelemetryDeveloper')?.addEventListener('click', (event) => {
+    document.querySelector('#postAiTelemetryDeveloperDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteAiTelemetryDeveloper')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var pageId =  event.currentTarget.getAttribute('data-pageId');
+      deleteAiTelemetryDeveloper(
+          event.currentTarget
+          , pageId
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportAiTelemetryDeveloper')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportAiTelemetryDeveloperDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageAiTelemetryDeveloper')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageAiTelemetryDeveloperDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterAiTelemetryDeveloper')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterAiTelemetryDeveloper(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
