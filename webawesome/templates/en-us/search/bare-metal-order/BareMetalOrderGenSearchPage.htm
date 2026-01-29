@@ -336,58 +336,58 @@
 {% include en-us/search/bare-metal-order/BareMetalOrderPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-              <wa-dropdown id="htmDropdown-pk">
-                <wa-button variant="brand" slot="trigger" caret>primary key</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-pk-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by primary key ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-pk-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by primary key descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-description">
-                <wa-button variant="brand" slot="trigger" caret>bare metal order description</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by bare metal order description ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by bare metal order description descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-status">
-                <wa-button variant="brand" slot="trigger" caret>order status</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_status'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-status-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by order status ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_status'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-status-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by order status descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-pk">
+                      <wa-button variant="brand" slot="trigger" caret>primary key</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-pk-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by primary key ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-pk-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by primary key descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-description">
+                      <wa-button variant="brand" slot="trigger" caret>bare metal order description</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by bare metal order description ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by bare metal order description descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-status">
+                      <wa-button variant="brand" slot="trigger" caret>order status</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_status'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-status-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by order status ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_status'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-status-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by order status descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listBareMetalOrder%}
                   <div>
-              <a href="{{ item.displayPage }}">
-                <i class="fa-regular fa-share-nodes"></i>
-              <span>{{ item.pk | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span class="white-space-pre-wrap ">{{ item.description | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.status | e }}
-</span>              </a>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-regular fa-share-nodes"></i>
+                      <span>{{ item.pk | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span class="white-space-pre-wrap ">{{ item.description | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.status | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
               {% if getColumnPk is defined %}

@@ -331,9 +331,7 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listTenant" id="listTenant" class="listTenant"  value='{{ toJsonArrayStringInApostrophes(listTenant) }}' type="hidden"/>
           </form>
-  {% if solrId is defined %}
           {{ htmForm_searchpageTenant() }}
-  {% endif %}
 {%- endblock htmFormTenantPage %}
         </div>
 {%- endblock htmBodyMiddleTenantPage %}

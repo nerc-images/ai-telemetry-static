@@ -86,12 +86,18 @@ Promise.all([
           document.querySelector('#Page_siteFontSize')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_siteFontSize');
             const valid = form.checkValidity();
-            document.cookie = "SITE_FONT_SIZE=" + escape(event.currentTarget.value) + "; path=/";
             if(valid) {
               patchSiteUserVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'userId:' + event.currentTarget.getAttribute('data-userId') }]
                   , 'setSiteFontSize', event.currentTarget.value
                   , event.currentTarget
-                , function(response, target) { addGlow(target); window.location.reload(); }
+                , function(response, target) {
+                  addGlow(target);
+                  fetch('/refresh').then(response => {
+                    response.text().then(text => {
+                      window.location.reload();
+                    });
+                  });
+                }
                   , function(response, target) { addError(target); }
                   );
             }
@@ -108,12 +114,18 @@ Promise.all([
           document.querySelector('#Page_siteTheme')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_siteTheme');
             const valid = form.checkValidity();
-            document.cookie = "SITE_THEME=" + escape(event.currentTarget.value) + "; path=/";
             if(valid) {
               patchSiteUserVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'userId:' + event.currentTarget.getAttribute('data-userId') }]
                   , 'setSiteTheme', event.currentTarget.value
                   , event.currentTarget
-                , function(response, target) { addGlow(target); window.location.reload(); }
+                , function(response, target) {
+                  addGlow(target);
+                  fetch('/refresh').then(response => {
+                    response.text().then(text => {
+                      window.location.reload();
+                    });
+                  });
+                }
                   , function(response, target) { addError(target); }
                   );
             }
@@ -126,25 +138,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH webComponentsTheme
-          document.querySelector('#Page_webComponentsTheme')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_webComponentsTheme');
+          // PATCH userProfileUrl
+          document.querySelector('#Page_userProfileUrl')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_userProfileUrl');
             const valid = form.checkValidity();
-            document.cookie = "WEB_COMPONENTS_THEME=" + escape(event.currentTarget.value) + "; path=/";
             if(valid) {
               patchSiteUserVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'userId:' + event.currentTarget.getAttribute('data-userId') }]
-                  , 'setWebComponentsTheme', event.currentTarget.value
+                  , 'setUserProfileUrl', event.currentTarget.value
                   , event.currentTarget
-                , function(response, target) { addGlow(target); window.location.reload(); }
+                , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_webComponentsTheme')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_userProfileUrl')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_webComponentsTheme')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_webComponentsTheme');
+          document.querySelector('#Page_userProfileUrl')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_userProfileUrl');
             const valid = form.reportValidity();
           });
 

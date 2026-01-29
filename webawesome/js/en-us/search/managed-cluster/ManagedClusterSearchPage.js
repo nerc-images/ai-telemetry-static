@@ -252,46 +252,6 @@ Promise.all([
   document.querySelector('#pageStatsManagedCluster_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('ManagedCluster', 'solrId', false);
   });
-
-  document.querySelector('#htmButton_patchManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#patchManagedClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#postManagedClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteManagedCluster')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var id =  event.currentTarget.getAttribute('data-id');
-      deleteManagedCluster(
-          event.currentTarget
-          , id
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportManagedClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageManagedClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterManagedCluster')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterManagedCluster(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqManagedCluster_created')?.addEventListener('change', (event) => {
             fqChange('ManagedCluster', event.currentTarget, facetChangeManagedClusterSuccess, facetChangeManagedClusterError);
           });
@@ -473,3 +433,43 @@ Promise.all([
             facetRangeEndChange('ManagedCluster', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchManagedCluster')?.addEventListener('click', (event) => {
+    document.querySelector('#patchManagedClusterDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postManagedCluster')?.addEventListener('click', (event) => {
+    document.querySelector('#postManagedClusterDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteManagedCluster')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var id =  event.currentTarget.getAttribute('data-id');
+      deleteManagedCluster(
+          event.currentTarget
+          , id
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportManagedCluster')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportManagedClusterDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageManagedCluster')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageManagedClusterDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterManagedCluster')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterManagedCluster(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

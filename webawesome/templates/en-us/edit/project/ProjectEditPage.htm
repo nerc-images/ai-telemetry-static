@@ -590,7 +590,25 @@
       var layout = {
         xaxis: { title: 'Time in ' + timeQuery.timeZone }
         , yaxis: { title: 'Temperature (°F)' }
-        , legend: { title: { text: 'GPU Devices' } }
+        , legend: {
+          title: {
+            text: 'GPU Devices'
+          }
+          , xanchor: 'center'
+          , x: 0.4
+          , yanchor: 'top'
+          , y: -0.2
+          , orientation: 'v'
+        }
+        , autosize: true
+        , height: 600
+        , margin: {
+          l: 50
+          , r: 0
+          , b: 0
+          , t: 0
+          , pad: 1
+        }
       };
       Plotly.newPlot(panelId, traces, layout);
     }
@@ -631,6 +649,25 @@
       });
       var layout = {
         xaxis: { title: 'Time in ' + timeQuery.timeZone }
+        , legend: {
+          title: {
+            text: 'GPU Devices'
+          }
+          , xanchor: 'center'
+          , x: 0.4
+          , yanchor: 'top'
+          , y: -0.2
+          , orientation: 'v'
+        }
+        , autosize: true
+        , height: 600
+        , margin: {
+          l: 50
+          , r: 0
+          , b: 0
+          , t: 0
+          , pad: 1
+        }
       };
       Plotly.newPlot(panelId, traces, layout);
     }

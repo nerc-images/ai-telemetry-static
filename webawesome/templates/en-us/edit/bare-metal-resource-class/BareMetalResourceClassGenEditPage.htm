@@ -331,9 +331,7 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listBareMetalResourceClass" id="listBareMetalResourceClass" class="listBareMetalResourceClass"  value='{{ toJsonArrayStringInApostrophes(listBareMetalResourceClass) }}' type="hidden"/>
           </form>
-  {% if solrId is defined %}
           {{ htmForm_searchpageBareMetalResourceClass() }}
-  {% endif %}
 {%- endblock htmFormBareMetalResourceClassPage %}
         </div>
 {%- endblock htmBodyMiddleBareMetalResourceClassPage %}

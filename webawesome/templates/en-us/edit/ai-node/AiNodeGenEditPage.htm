@@ -467,9 +467,7 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listAiNode" id="listAiNode" class="listAiNode"  value='{{ toJsonArrayStringInApostrophes(listAiNode) }}' type="hidden"/>
           </form>
-  {% if solrId is defined %}
           {{ htmForm_searchpageAiNode() }}
-  {% endif %}
 {%- endblock htmFormAiNodePage %}
         </div>
 {%- endblock htmBodyMiddleAiNodePage %}

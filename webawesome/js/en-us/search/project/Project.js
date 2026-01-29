@@ -1,1138 +1,4 @@
 
-// Search //
-
-async function searchProject($formFilters, success, error) {
-  var filters = searchProjectFilters($formFilters);
-  if(success == null)
-    success = function( data, textStatus, jQxhr ) {};
-  if(error == null)
-    error = function( jqXhr, target2 ) {};
-
-  searchProjectVals(filters, target, success, error);
-}
-
-function searchProjectFilters($formFilters) {
-  var filters = [];
-  if($formFilters) {
-
-    var filterPk = $formFilters.querySelector('.valuePk')?.value;
-    if(filterPk != null && filterPk !== '')
-      filters.push({ name: 'fq', value: 'pk:' + filterPk });
-
-    var filterCreated = $formFilters.querySelector('.valueCreated')?.value;
-    if(filterCreated != null && filterCreated !== '')
-      filters.push({ name: 'fq', value: 'created:' + filterCreated });
-
-    var filterModified = $formFilters.querySelector('.valueModified')?.value;
-    if(filterModified != null && filterModified !== '')
-      filters.push({ name: 'fq', value: 'modified:' + filterModified });
-
-    var $filterArchivedCheckbox = $formFilters.querySelector('input.valueArchived[type = "checkbox"]');
-    var $filterArchivedSelect = $formFilters.querySelector('select.valueArchived');
-    var filterArchived = $filterArchivedSelect.length ? $filterArchivedSelect.value : $filterArchivedCheckbox.checked;
-    var filterArchivedSelectVal = $formFilters.querySelector('select.filterArchived')?.value;
-    var filterArchived = null;
-    if(filterArchivedSelectVal !== '')
-      filterArchived = filterArchivedSelectVal == 'true';
-    if(filterArchived != null && filterArchived === true)
-      filters.push({ name: 'fq', value: 'archived:' + filterArchived });
-
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
-
-    var filterHubId = $formFilters.querySelector('.valueHubId')?.value;
-    if(filterHubId != null && filterHubId !== '')
-      filters.push({ name: 'fq', value: 'hubId:' + filterHubId });
-
-    var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
-    if(filterClusterName != null && filterClusterName !== '')
-      filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
-
-    var filterProjectName = $formFilters.querySelector('.valueProjectName')?.value;
-    if(filterProjectName != null && filterProjectName !== '')
-      filters.push({ name: 'fq', value: 'projectName:' + filterProjectName });
-
-    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
-    if(filterDescription != null && filterDescription !== '')
-      filters.push({ name: 'fq', value: 'description:' + filterDescription });
-
-    var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
-    var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
-    var filterGpuEnabled = $filterGpuEnabledSelect.length ? $filterGpuEnabledSelect.value : $filterGpuEnabledCheckbox.checked;
-    var filterGpuEnabledSelectVal = $formFilters.querySelector('select.filterGpuEnabled')?.value;
-    var filterGpuEnabled = null;
-    if(filterGpuEnabledSelectVal !== '')
-      filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
-    if(filterGpuEnabled != null && filterGpuEnabled === true)
-      filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
-
-    var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
-    if(filterPodRestartCount != null && filterPodRestartCount !== '')
-      filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
-
-    var filterPodsRestarting = $formFilters.querySelector('.valuePodsRestarting')?.value;
-    if(filterPodsRestarting != null && filterPodsRestarting !== '')
-      filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
-
-    var filterFullPvcsCount = $formFilters.querySelector('.valueFullPvcsCount')?.value;
-    if(filterFullPvcsCount != null && filterFullPvcsCount !== '')
-      filters.push({ name: 'fq', value: 'fullPvcsCount:' + filterFullPvcsCount });
-
-    var filterFullPvcs = $formFilters.querySelector('.valueFullPvcs')?.value;
-    if(filterFullPvcs != null && filterFullPvcs !== '')
-      filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
-
-    var $filterNamespaceTerminatingCheckbox = $formFilters.querySelector('input.valueNamespaceTerminating[type = "checkbox"]');
-    var $filterNamespaceTerminatingSelect = $formFilters.querySelector('select.valueNamespaceTerminating');
-    var filterNamespaceTerminating = $filterNamespaceTerminatingSelect.length ? $filterNamespaceTerminatingSelect.value : $filterNamespaceTerminatingCheckbox.checked;
-    var filterNamespaceTerminatingSelectVal = $formFilters.querySelector('select.filterNamespaceTerminating')?.value;
-    var filterNamespaceTerminating = null;
-    if(filterNamespaceTerminatingSelectVal !== '')
-      filterNamespaceTerminating = filterNamespaceTerminatingSelectVal == 'true';
-    if(filterNamespaceTerminating != null && filterNamespaceTerminating === true)
-      filters.push({ name: 'fq', value: 'namespaceTerminating:' + filterNamespaceTerminating });
-
-    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
-    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
-
-    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
-    if(filterClassSimpleName != null && filterClassSimpleName !== '')
-      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
-
-    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
-    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
-
-    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
-    if(filterSessionId != null && filterSessionId !== '')
-      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
-
-    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
-    if(filterUserKey != null && filterUserKey !== '')
-      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
-
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
-
-    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
-    if(filterObjectTitle != null && filterObjectTitle !== '')
-      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
-    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
-    if(filterDisplayPage != null && filterDisplayPage !== '')
-      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
-
-    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
-    if(filterEditPage != null && filterEditPage !== '')
-      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
-
-    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
-    if(filterUserPage != null && filterUserPage !== '')
-      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
-
-    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
-    if(filterDownload != null && filterDownload !== '')
-      filters.push({ name: 'fq', value: 'download:' + filterDownload });
-
-    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
-    if(filterObjectSuggest != null && filterObjectSuggest !== '')
-      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
-
-    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
-    if(filterObjectText != null && filterObjectText !== '')
-      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
-
-    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
-    if(filterSolrId != null && filterSolrId !== '')
-      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
-    if(filterLocalClusterName != null && filterLocalClusterName !== '')
-      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
-    var filterProjectResource = $formFilters.querySelector('.valueProjectResource')?.value;
-    if(filterProjectResource != null && filterProjectResource !== '')
-      filters.push({ name: 'fq', value: 'projectResource:' + filterProjectResource });
-
-    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
-    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
-      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
-  }
-  return filters;
-}
-
-function searchProjectVals(filters, target, success, error) {
-
-
-  fetch(
-    '/en-us/api/project?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-    }).then(response => {
-      if(response.ok) {
-        response.json().then((json) => {
-          success(json, target);
-        })
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-function suggestProjectTenantResource(filters, $list, projectResource = null, tenantResource = null, relate=true, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = 
-o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == tenantResource);
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + projectResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
-        $input.setAttribute('class', 'valueTenantResource ');
-        if(projectResource != null) {
-          $input.addEventListener('change', function(event) {
-            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestProjectTenantResource(filters, $list, projectResource, o['tenantResource'], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
-}
-
-function suggestProjectHubResource(filters, $list, projectResource = null, hubResource = null, relate=true, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = 
-o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var val = o['hubResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == hubResource);
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hubResource_' + projectResource + '_hubResource_' + o['hubResource']);
-        $input.setAttribute('name', 'hubResource');
-        $input.setAttribute('value', o['hubResource']);
-        $input.setAttribute('class', 'valueHubResource ');
-        if(projectResource != null) {
-          $input.addEventListener('change', function(event) {
-            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestProjectHubResource(filters, $list, projectResource, o['hubResource'], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  searchHubVals(filters, target, success, error);
-}
-
-function suggestProjectClusterResource(filters, $list, projectResource = null, clusterResource = null, relate=true, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = 
-o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var val = o['clusterResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == clusterResource);
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_clusterResource_' + projectResource + '_clusterResource_' + o['clusterResource']);
-        $input.setAttribute('name', 'clusterResource');
-        $input.setAttribute('value', o['clusterResource']);
-        $input.setAttribute('class', 'valueClusterResource ');
-        if(projectResource != null) {
-          $input.addEventListener('change', function(event) {
-            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestProjectClusterResource(filters, $list, projectResource, o['clusterResource'], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  searchClusterVals(filters, target, success, error);
-}
-
-function suggestProjectObjectSuggest($formFilters, $list, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-regular fa-people-line"></i>');
-        var $span = document.createElement('span');        $span.setAttribute('class', '');        $span.innerText = o['objectTitle'];
-        var $li = document.createElement('li');
-        var $a = document.createElement('a').setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  searchProjectVals($formFilters, target, success, error);
-}
-
-// GET //
-
-async function getProject(pk) {
-  fetch(
-    '/en-us/api/project/' + projectResource
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-    }).then(response => {
-      if(response.ok) {
-        response.json().then((json) => {
-          success(json, target);
-        })
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-// PATCH //
-
-async function patchProject($formFilters, $formValues, target, projectResource, success, error) {
-  var filters = patchProjectFilters($formFilters);
-
-  var vals = {};
-
-  var valuePk = $formValues.querySelector('.valuePk')?.value;
-  var removePk = $formValues.querySelector('.removePk')?.value === 'true';
-  var setPk = removePk ? null : $formValues.querySelector('.setPk')?.value;
-  var addPk = $formValues.querySelector('.addPk')?.value;
-  if(removePk || setPk != null && setPk !== '')
-    vals['setPk'] = setPk;
-  if(addPk != null && addPk !== '')
-    vals['addPk'] = addPk;
-  var removePk = $formValues.querySelector('.removePk')?.value;
-  if(removePk != null && removePk !== '')
-    vals['removePk'] = removePk;
-
-  var valueCreated = $formValues.querySelector('.valueCreated')?.value;
-  var removeCreated = $formValues.querySelector('.removeCreated')?.value === 'true';
-  var setCreated = removeCreated ? null : $formValues.querySelector('.setCreated')?.value;
-  var addCreated = $formValues.querySelector('.addCreated')?.value;
-  if(removeCreated || setCreated != null && setCreated !== '')
-    vals['setCreated'] = setCreated;
-  if(addCreated != null && addCreated !== '')
-    vals['addCreated'] = addCreated;
-  var removeCreated = $formValues.querySelector('.removeCreated')?.value;
-  if(removeCreated != null && removeCreated !== '')
-    vals['removeCreated'] = removeCreated;
-
-  var valueModified = $formValues.querySelector('.valueModified')?.value;
-  var removeModified = $formValues.querySelector('.removeModified')?.value === 'true';
-  var setModified = removeModified ? null : $formValues.querySelector('.setModified')?.value;
-  var addModified = $formValues.querySelector('.addModified')?.value;
-  if(removeModified || setModified != null && setModified !== '')
-    vals['setModified'] = setModified;
-  if(addModified != null && addModified !== '')
-    vals['addModified'] = addModified;
-  var removeModified = $formValues.querySelector('.removeModified')?.value;
-  if(removeModified != null && removeModified !== '')
-    vals['removeModified'] = removeModified;
-
-  var valueArchived = $formValues.querySelector('.valueArchived')?.value;
-  var removeArchived = $formValues.querySelector('.removeArchived')?.value === 'true';
-  if(valueArchived != null)
-    valueArchived = valueArchived === 'true';
-  var valueArchivedSelectVal = $formValues.querySelector('select.setArchived')?.value;
-  if(valueArchivedSelectVal != null)
-    valueArchivedSelectVal = valueArchivedSelectVal === 'true';
-  if(valueArchivedSelectVal != null && valueArchivedSelectVal !== '')
-    valueArchived = valueArchivedSelectVal == 'true';
-  var setArchived = removeArchived ? null : valueArchived;
-  var addArchived = $formValues.querySelector('.addArchived')?.checked;
-  if(removeArchived || setArchived != null && setArchived !== '')
-    vals['setArchived'] = setArchived;
-  if(addArchived != null && addArchived !== '')
-    vals['addArchived'] = addArchived;
-  var removeArchived = $formValues.querySelector('.removeArchived')?.checked;
-  if(removeArchived != null && removeArchived !== '')
-    vals['removeArchived'] = removeArchived;
-
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['setTenantResource'] = valueTenantResource;
-
-  var valueHubId = $formValues.querySelector('.valueHubId')?.value;
-  var removeHubId = $formValues.querySelector('.removeHubId')?.value === 'true';
-  var setHubId = removeHubId ? null : $formValues.querySelector('.setHubId')?.value;
-  var addHubId = $formValues.querySelector('.addHubId')?.value;
-  if(removeHubId || setHubId != null && setHubId !== '')
-    vals['setHubId'] = setHubId;
-  if(addHubId != null && addHubId !== '')
-    vals['addHubId'] = addHubId;
-  var removeHubId = $formValues.querySelector('.removeHubId')?.value;
-  if(removeHubId != null && removeHubId !== '')
-    vals['removeHubId'] = removeHubId;
-
-  var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
-  var removeClusterName = $formValues.querySelector('.removeClusterName')?.value === 'true';
-  var setClusterName = removeClusterName ? null : $formValues.querySelector('.setClusterName')?.value;
-  var addClusterName = $formValues.querySelector('.addClusterName')?.value;
-  if(removeClusterName || setClusterName != null && setClusterName !== '')
-    vals['setClusterName'] = setClusterName;
-  if(addClusterName != null && addClusterName !== '')
-    vals['addClusterName'] = addClusterName;
-  var removeClusterName = $formValues.querySelector('.removeClusterName')?.value;
-  if(removeClusterName != null && removeClusterName !== '')
-    vals['removeClusterName'] = removeClusterName;
-
-  var valueProjectName = $formValues.querySelector('.valueProjectName')?.value;
-  var removeProjectName = $formValues.querySelector('.removeProjectName')?.value === 'true';
-  var setProjectName = removeProjectName ? null : $formValues.querySelector('.setProjectName')?.value;
-  var addProjectName = $formValues.querySelector('.addProjectName')?.value;
-  if(removeProjectName || setProjectName != null && setProjectName !== '')
-    vals['setProjectName'] = setProjectName;
-  if(addProjectName != null && addProjectName !== '')
-    vals['addProjectName'] = addProjectName;
-  var removeProjectName = $formValues.querySelector('.removeProjectName')?.value;
-  if(removeProjectName != null && removeProjectName !== '')
-    vals['removeProjectName'] = removeProjectName;
-
-  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
-  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
-  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
-  var addDescription = $formValues.querySelector('.addDescription')?.value;
-  if(removeDescription || setDescription != null && setDescription !== '')
-    vals['setDescription'] = setDescription;
-  if(addDescription != null && addDescription !== '')
-    vals['addDescription'] = addDescription;
-  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
-  if(removeDescription != null && removeDescription !== '')
-    vals['removeDescription'] = removeDescription;
-
-  var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
-  var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.value === 'true';
-  if(valueGpuEnabled != null)
-    valueGpuEnabled = valueGpuEnabled === 'true';
-  var valueGpuEnabledSelectVal = $formValues.querySelector('select.setGpuEnabled')?.value;
-  if(valueGpuEnabledSelectVal != null)
-    valueGpuEnabledSelectVal = valueGpuEnabledSelectVal === 'true';
-  if(valueGpuEnabledSelectVal != null && valueGpuEnabledSelectVal !== '')
-    valueGpuEnabled = valueGpuEnabledSelectVal == 'true';
-  var setGpuEnabled = removeGpuEnabled ? null : valueGpuEnabled;
-  var addGpuEnabled = $formValues.querySelector('.addGpuEnabled')?.checked;
-  if(removeGpuEnabled || setGpuEnabled != null && setGpuEnabled !== '')
-    vals['setGpuEnabled'] = setGpuEnabled;
-  if(addGpuEnabled != null && addGpuEnabled !== '')
-    vals['addGpuEnabled'] = addGpuEnabled;
-  var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.checked;
-  if(removeGpuEnabled != null && removeGpuEnabled !== '')
-    vals['removeGpuEnabled'] = removeGpuEnabled;
-
-  var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
-  var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value === 'true';
-  var setPodRestartCount = removePodRestartCount ? null : $formValues.querySelector('.setPodRestartCount')?.value;
-  var addPodRestartCount = $formValues.querySelector('.addPodRestartCount')?.value;
-  if(removePodRestartCount || setPodRestartCount != null && setPodRestartCount !== '')
-    vals['setPodRestartCount'] = setPodRestartCount;
-  if(addPodRestartCount != null && addPodRestartCount !== '')
-    vals['addPodRestartCount'] = addPodRestartCount;
-  var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value;
-  if(removePodRestartCount != null && removePodRestartCount !== '')
-    vals['removePodRestartCount'] = removePodRestartCount;
-
-  var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
-  var removePodsRestarting = $formValues.querySelector('.removePodsRestarting')?.value === 'true';
-  var setPodsRestarting = removePodsRestarting ? null : $formValues.querySelector('.setPodsRestarting')?.value;
-  var addPodsRestarting = $formValues.querySelector('.addPodsRestarting')?.value;
-  if(removePodsRestarting || setPodsRestarting != null && setPodsRestarting !== '')
-    vals['setPodsRestarting'] = JSON.parse(setPodsRestarting);
-  if(addPodsRestarting != null && addPodsRestarting !== '')
-    vals['addPodsRestarting'] = addPodsRestarting;
-  var removePodsRestarting = $formValues.querySelector('.removePodsRestarting')?.value;
-  if(removePodsRestarting != null && removePodsRestarting !== '')
-    vals['removePodsRestarting'] = removePodsRestarting;
-
-  var valueFullPvcsCount = $formValues.querySelector('.valueFullPvcsCount')?.value;
-  var removeFullPvcsCount = $formValues.querySelector('.removeFullPvcsCount')?.value === 'true';
-  var setFullPvcsCount = removeFullPvcsCount ? null : $formValues.querySelector('.setFullPvcsCount')?.value;
-  var addFullPvcsCount = $formValues.querySelector('.addFullPvcsCount')?.value;
-  if(removeFullPvcsCount || setFullPvcsCount != null && setFullPvcsCount !== '')
-    vals['setFullPvcsCount'] = setFullPvcsCount;
-  if(addFullPvcsCount != null && addFullPvcsCount !== '')
-    vals['addFullPvcsCount'] = addFullPvcsCount;
-  var removeFullPvcsCount = $formValues.querySelector('.removeFullPvcsCount')?.value;
-  if(removeFullPvcsCount != null && removeFullPvcsCount !== '')
-    vals['removeFullPvcsCount'] = removeFullPvcsCount;
-
-  var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
-  var removeFullPvcs = $formValues.querySelector('.removeFullPvcs')?.value === 'true';
-  var setFullPvcs = removeFullPvcs ? null : $formValues.querySelector('.setFullPvcs')?.value;
-  var addFullPvcs = $formValues.querySelector('.addFullPvcs')?.value;
-  if(removeFullPvcs || setFullPvcs != null && setFullPvcs !== '')
-    vals['setFullPvcs'] = JSON.parse(setFullPvcs);
-  if(addFullPvcs != null && addFullPvcs !== '')
-    vals['addFullPvcs'] = addFullPvcs;
-  var removeFullPvcs = $formValues.querySelector('.removeFullPvcs')?.value;
-  if(removeFullPvcs != null && removeFullPvcs !== '')
-    vals['removeFullPvcs'] = removeFullPvcs;
-
-  var valueNamespaceTerminating = $formValues.querySelector('.valueNamespaceTerminating')?.value;
-  var removeNamespaceTerminating = $formValues.querySelector('.removeNamespaceTerminating')?.value === 'true';
-  if(valueNamespaceTerminating != null)
-    valueNamespaceTerminating = valueNamespaceTerminating === 'true';
-  var valueNamespaceTerminatingSelectVal = $formValues.querySelector('select.setNamespaceTerminating')?.value;
-  if(valueNamespaceTerminatingSelectVal != null)
-    valueNamespaceTerminatingSelectVal = valueNamespaceTerminatingSelectVal === 'true';
-  if(valueNamespaceTerminatingSelectVal != null && valueNamespaceTerminatingSelectVal !== '')
-    valueNamespaceTerminating = valueNamespaceTerminatingSelectVal == 'true';
-  var setNamespaceTerminating = removeNamespaceTerminating ? null : valueNamespaceTerminating;
-  var addNamespaceTerminating = $formValues.querySelector('.addNamespaceTerminating')?.checked;
-  if(removeNamespaceTerminating || setNamespaceTerminating != null && setNamespaceTerminating !== '')
-    vals['setNamespaceTerminating'] = setNamespaceTerminating;
-  if(addNamespaceTerminating != null && addNamespaceTerminating !== '')
-    vals['addNamespaceTerminating'] = addNamespaceTerminating;
-  var removeNamespaceTerminating = $formValues.querySelector('.removeNamespaceTerminating')?.checked;
-  if(removeNamespaceTerminating != null && removeNamespaceTerminating !== '')
-    vals['removeNamespaceTerminating'] = removeNamespaceTerminating;
-
-  var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
-  var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
-  var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
-  var addSessionId = $formValues.querySelector('.addSessionId')?.value;
-  if(removeSessionId || setSessionId != null && setSessionId !== '')
-    vals['setSessionId'] = setSessionId;
-  if(addSessionId != null && addSessionId !== '')
-    vals['addSessionId'] = addSessionId;
-  var removeSessionId = $formValues.querySelector('.removeSessionId')?.value;
-  if(removeSessionId != null && removeSessionId !== '')
-    vals['removeSessionId'] = removeSessionId;
-
-  var valueUserKey = $formValues.querySelector('.valueUserKey')?.value;
-  var removeUserKey = $formValues.querySelector('.removeUserKey')?.value === 'true';
-  var setUserKey = removeUserKey ? null : $formValues.querySelector('.setUserKey')?.value;
-  var addUserKey = $formValues.querySelector('.addUserKey')?.value;
-  if(removeUserKey || setUserKey != null && setUserKey !== '')
-    vals['setUserKey'] = setUserKey;
-  if(addUserKey != null && addUserKey !== '')
-    vals['addUserKey'] = addUserKey;
-  var removeUserKey = $formValues.querySelector('.removeUserKey')?.value;
-  if(removeUserKey != null && removeUserKey !== '')
-    vals['removeUserKey'] = removeUserKey;
-
-  var valueObjectTitle = $formValues.querySelector('.valueObjectTitle')?.value;
-  var removeObjectTitle = $formValues.querySelector('.removeObjectTitle')?.value === 'true';
-  var setObjectTitle = removeObjectTitle ? null : $formValues.querySelector('.setObjectTitle')?.value;
-  var addObjectTitle = $formValues.querySelector('.addObjectTitle')?.value;
-  if(removeObjectTitle || setObjectTitle != null && setObjectTitle !== '')
-    vals['setObjectTitle'] = setObjectTitle;
-  if(addObjectTitle != null && addObjectTitle !== '')
-    vals['addObjectTitle'] = addObjectTitle;
-  var removeObjectTitle = $formValues.querySelector('.removeObjectTitle')?.value;
-  if(removeObjectTitle != null && removeObjectTitle !== '')
-    vals['removeObjectTitle'] = removeObjectTitle;
-
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
-  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
-  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
-  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
-    vals['setDisplayPage'] = setDisplayPage;
-  if(addDisplayPage != null && addDisplayPage !== '')
-    vals['addDisplayPage'] = addDisplayPage;
-  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
-  if(removeDisplayPage != null && removeDisplayPage !== '')
-    vals['removeDisplayPage'] = removeDisplayPage;
-
-  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
-  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value === 'true';
-  var setEditPage = removeEditPage ? null : $formValues.querySelector('.setEditPage')?.value;
-  var addEditPage = $formValues.querySelector('.addEditPage')?.value;
-  if(removeEditPage || setEditPage != null && setEditPage !== '')
-    vals['setEditPage'] = setEditPage;
-  if(addEditPage != null && addEditPage !== '')
-    vals['addEditPage'] = addEditPage;
-  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value;
-  if(removeEditPage != null && removeEditPage !== '')
-    vals['removeEditPage'] = removeEditPage;
-
-  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
-  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value === 'true';
-  var setUserPage = removeUserPage ? null : $formValues.querySelector('.setUserPage')?.value;
-  var addUserPage = $formValues.querySelector('.addUserPage')?.value;
-  if(removeUserPage || setUserPage != null && setUserPage !== '')
-    vals['setUserPage'] = setUserPage;
-  if(addUserPage != null && addUserPage !== '')
-    vals['addUserPage'] = addUserPage;
-  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value;
-  if(removeUserPage != null && removeUserPage !== '')
-    vals['removeUserPage'] = removeUserPage;
-
-  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
-  var removeDownload = $formValues.querySelector('.removeDownload')?.value === 'true';
-  var setDownload = removeDownload ? null : $formValues.querySelector('.setDownload')?.value;
-  var addDownload = $formValues.querySelector('.addDownload')?.value;
-  if(removeDownload || setDownload != null && setDownload !== '')
-    vals['setDownload'] = setDownload;
-  if(addDownload != null && addDownload !== '')
-    vals['addDownload'] = addDownload;
-  var removeDownload = $formValues.querySelector('.removeDownload')?.value;
-  if(removeDownload != null && removeDownload !== '')
-    vals['removeDownload'] = removeDownload;
-
-  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
-  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value === 'true';
-  var setLocalClusterName = removeLocalClusterName ? null : $formValues.querySelector('.setLocalClusterName')?.value;
-  var addLocalClusterName = $formValues.querySelector('.addLocalClusterName')?.value;
-  if(removeLocalClusterName || setLocalClusterName != null && setLocalClusterName !== '')
-    vals['setLocalClusterName'] = setLocalClusterName;
-  if(addLocalClusterName != null && addLocalClusterName !== '')
-    vals['addLocalClusterName'] = addLocalClusterName;
-  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value;
-  if(removeLocalClusterName != null && removeLocalClusterName !== '')
-    vals['removeLocalClusterName'] = removeLocalClusterName;
-
-  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['setHubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['setClusterResource'] = valueClusterResource;
-
-  var valueProjectResource = $formValues.querySelector('.valueProjectResource')?.value;
-  var removeProjectResource = $formValues.querySelector('.removeProjectResource')?.value === 'true';
-  var setProjectResource = removeProjectResource ? null : $formValues.querySelector('.setProjectResource')?.value;
-  var addProjectResource = $formValues.querySelector('.addProjectResource')?.value;
-  if(removeProjectResource || setProjectResource != null && setProjectResource !== '')
-    vals['setProjectResource'] = setProjectResource;
-  if(addProjectResource != null && addProjectResource !== '')
-    vals['addProjectResource'] = addProjectResource;
-  var removeProjectResource = $formValues.querySelector('.removeProjectResource')?.value;
-  if(removeProjectResource != null && removeProjectResource !== '')
-    vals['removeProjectResource'] = removeProjectResource;
-
-  patchProjectVals(projectResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'projectResource:' + projectResource}], vals, target, success, error);
-}
-
-function patchProjectFilters($formFilters) {
-  var filters = [];
-  if($formFilters) {
-    filters.push({ name: 'softCommit', value: 'true' });
-
-    var filterPk = $formFilters.querySelector('.valuePk')?.value;
-    if(filterPk != null && filterPk !== '')
-      filters.push({ name: 'fq', value: 'pk:' + filterPk });
-
-    var filterCreated = $formFilters.querySelector('.valueCreated')?.value;
-    if(filterCreated != null && filterCreated !== '')
-      filters.push({ name: 'fq', value: 'created:' + filterCreated });
-
-    var filterModified = $formFilters.querySelector('.valueModified')?.value;
-    if(filterModified != null && filterModified !== '')
-      filters.push({ name: 'fq', value: 'modified:' + filterModified });
-
-    var $filterArchivedCheckbox = $formFilters.querySelector('input.valueArchived[type = "checkbox"]');
-    var $filterArchivedSelect = $formFilters.querySelector('select.valueArchived');
-    var filterArchived = $filterArchivedSelect.length ? $filterArchivedSelect.value : $filterArchivedCheckbox.checked;
-    var filterArchivedSelectVal = $formFilters.querySelector('select.filterArchived')?.value;
-    var filterArchived = null;
-    if(filterArchivedSelectVal !== '')
-      filterArchived = filterArchivedSelectVal == 'true';
-    if(filterArchived != null && filterArchived === true)
-      filters.push({ name: 'fq', value: 'archived:' + filterArchived });
-
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
-
-    var filterHubId = $formFilters.querySelector('.valueHubId')?.value;
-    if(filterHubId != null && filterHubId !== '')
-      filters.push({ name: 'fq', value: 'hubId:' + filterHubId });
-
-    var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
-    if(filterClusterName != null && filterClusterName !== '')
-      filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
-
-    var filterProjectName = $formFilters.querySelector('.valueProjectName')?.value;
-    if(filterProjectName != null && filterProjectName !== '')
-      filters.push({ name: 'fq', value: 'projectName:' + filterProjectName });
-
-    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
-    if(filterDescription != null && filterDescription !== '')
-      filters.push({ name: 'fq', value: 'description:' + filterDescription });
-
-    var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
-    var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
-    var filterGpuEnabled = $filterGpuEnabledSelect.length ? $filterGpuEnabledSelect.value : $filterGpuEnabledCheckbox.checked;
-    var filterGpuEnabledSelectVal = $formFilters.querySelector('select.filterGpuEnabled')?.value;
-    var filterGpuEnabled = null;
-    if(filterGpuEnabledSelectVal !== '')
-      filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
-    if(filterGpuEnabled != null && filterGpuEnabled === true)
-      filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
-
-    var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
-    if(filterPodRestartCount != null && filterPodRestartCount !== '')
-      filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
-
-    var filterPodsRestarting = $formFilters.querySelector('.valuePodsRestarting')?.value;
-    if(filterPodsRestarting != null && filterPodsRestarting !== '')
-      filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
-
-    var filterFullPvcsCount = $formFilters.querySelector('.valueFullPvcsCount')?.value;
-    if(filterFullPvcsCount != null && filterFullPvcsCount !== '')
-      filters.push({ name: 'fq', value: 'fullPvcsCount:' + filterFullPvcsCount });
-
-    var filterFullPvcs = $formFilters.querySelector('.valueFullPvcs')?.value;
-    if(filterFullPvcs != null && filterFullPvcs !== '')
-      filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
-
-    var $filterNamespaceTerminatingCheckbox = $formFilters.querySelector('input.valueNamespaceTerminating[type = "checkbox"]');
-    var $filterNamespaceTerminatingSelect = $formFilters.querySelector('select.valueNamespaceTerminating');
-    var filterNamespaceTerminating = $filterNamespaceTerminatingSelect.length ? $filterNamespaceTerminatingSelect.value : $filterNamespaceTerminatingCheckbox.checked;
-    var filterNamespaceTerminatingSelectVal = $formFilters.querySelector('select.filterNamespaceTerminating')?.value;
-    var filterNamespaceTerminating = null;
-    if(filterNamespaceTerminatingSelectVal !== '')
-      filterNamespaceTerminating = filterNamespaceTerminatingSelectVal == 'true';
-    if(filterNamespaceTerminating != null && filterNamespaceTerminating === true)
-      filters.push({ name: 'fq', value: 'namespaceTerminating:' + filterNamespaceTerminating });
-
-    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
-    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
-
-    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
-    if(filterClassSimpleName != null && filterClassSimpleName !== '')
-      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
-
-    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
-    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
-      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
-
-    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
-    if(filterSessionId != null && filterSessionId !== '')
-      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
-
-    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
-    if(filterUserKey != null && filterUserKey !== '')
-      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
-
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
-
-    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
-    if(filterObjectTitle != null && filterObjectTitle !== '')
-      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
-    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
-    if(filterDisplayPage != null && filterDisplayPage !== '')
-      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
-
-    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
-    if(filterEditPage != null && filterEditPage !== '')
-      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
-
-    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
-    if(filterUserPage != null && filterUserPage !== '')
-      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
-
-    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
-    if(filterDownload != null && filterDownload !== '')
-      filters.push({ name: 'fq', value: 'download:' + filterDownload });
-
-    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
-    if(filterObjectSuggest != null && filterObjectSuggest !== '')
-      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
-
-    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
-    if(filterObjectText != null && filterObjectText !== '')
-      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
-
-    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
-    if(filterSolrId != null && filterSolrId !== '')
-      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
-    if(filterLocalClusterName != null && filterLocalClusterName !== '')
-      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
-
-    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
-    if(filterHubResource != null && filterHubResource !== '')
-      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
-
-    var filterProjectResource = $formFilters.querySelector('.valueProjectResource')?.value;
-    if(filterProjectResource != null && filterProjectResource !== '')
-      filters.push({ name: 'fq', value: 'projectResource:' + filterProjectResource });
-
-    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
-    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
-      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
-  }
-  return filters;
-}
-
-function patchProjectVal(filters, v, val, target, success, error) {
-  var vals = {};
-  vals[v] = val;
-  patchProjectVals(filters, vals, target, success, error);
-}
-
-function patchProjectVals(filters, vals, target, success, error) {
-  fetch(
-    '/en-us/api/project?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-      , method: 'PATCH'
-      , body: JSON.stringify(vals)
-    }).then(response => {
-      if(response.ok) {
-        response.json().then((json) => {
-          success(json, target);
-        })
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-// POST //
-
-async function postProject($formValues, target, success, error) {
-  var vals = {};
-  if(success == null) {
-    success = function( data, textStatus, jQxhr ) {
-      addGlow(target, jqXhr);
-      var url = data['editPage'];
-      if(url)
-        window.location.href = url;
-    };
-  }
-  if(error == null) {
-    error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
-    };
-  }
-
-  var valuePk = $formValues.querySelector('.valuePk')?.value;
-  if(valuePk != null && valuePk !== '')
-    vals['pk'] = valuePk;
-
-  var valueCreated = $formValues.querySelector('.valueCreated')?.value;
-  if(valueCreated != null && valueCreated !== '')
-    vals['created'] = valueCreated;
-
-  var valueModified = $formValues.querySelector('.valueModified')?.value;
-  if(valueModified != null && valueModified !== '')
-    vals['modified'] = valueModified;
-
-  var valueArchived = $formValues.querySelector('.valueArchived')?.value;
-  if(valueArchived != null && valueArchived !== '')
-    vals['archived'] = valueArchived == 'true';
-
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['tenantResource'] = valueTenantResource;
-
-  var valueHubId = $formValues.querySelector('.valueHubId')?.value;
-  if(valueHubId != null && valueHubId !== '')
-    vals['hubId'] = valueHubId;
-
-  var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
-  if(valueClusterName != null && valueClusterName !== '')
-    vals['clusterName'] = valueClusterName;
-
-  var valueProjectName = $formValues.querySelector('.valueProjectName')?.value;
-  if(valueProjectName != null && valueProjectName !== '')
-    vals['projectName'] = valueProjectName;
-
-  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
-  if(valueDescription != null && valueDescription !== '')
-    vals['description'] = valueDescription;
-
-  var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
-  if(valueGpuEnabled != null && valueGpuEnabled !== '')
-    vals['gpuEnabled'] = valueGpuEnabled == 'true';
-
-  var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
-  if(valuePodRestartCount != null && valuePodRestartCount !== '')
-    vals['podRestartCount'] = valuePodRestartCount;
-
-  var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
-  if(valuePodsRestarting != null && valuePodsRestarting !== '')
-    vals['podsRestarting'] = JSON.parse(valuePodsRestarting);
-
-  var valueFullPvcsCount = $formValues.querySelector('.valueFullPvcsCount')?.value;
-  if(valueFullPvcsCount != null && valueFullPvcsCount !== '')
-    vals['fullPvcsCount'] = valueFullPvcsCount;
-
-  var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
-  if(valueFullPvcs != null && valueFullPvcs !== '')
-    vals['fullPvcs'] = JSON.parse(valueFullPvcs);
-
-  var valueNamespaceTerminating = $formValues.querySelector('.valueNamespaceTerminating')?.value;
-  if(valueNamespaceTerminating != null && valueNamespaceTerminating !== '')
-    vals['namespaceTerminating'] = valueNamespaceTerminating == 'true';
-
-  var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
-  if(valueSessionId != null && valueSessionId !== '')
-    vals['sessionId'] = valueSessionId;
-
-  var valueUserKey = $formValues.querySelector('.valueUserKey')?.value;
-  if(valueUserKey != null && valueUserKey !== '')
-    vals['userKey'] = valueUserKey;
-
-  var valueObjectTitle = $formValues.querySelector('.valueObjectTitle')?.value;
-  if(valueObjectTitle != null && valueObjectTitle !== '')
-    vals['objectTitle'] = valueObjectTitle;
-
-  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
-  if(valueDisplayPage != null && valueDisplayPage !== '')
-    vals['displayPage'] = valueDisplayPage;
-
-  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
-  if(valueEditPage != null && valueEditPage !== '')
-    vals['editPage'] = valueEditPage;
-
-  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
-  if(valueUserPage != null && valueUserPage !== '')
-    vals['userPage'] = valueUserPage;
-
-  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
-  if(valueDownload != null && valueDownload !== '')
-    vals['download'] = valueDownload;
-
-  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
-  if(valueLocalClusterName != null && valueLocalClusterName !== '')
-    vals['localClusterName'] = valueLocalClusterName;
-
-  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHubResource != null && valueHubResource !== '')
-    vals['hubResource'] = valueHubResource;
-
-  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueClusterResource != null && valueClusterResource !== '')
-    vals['clusterResource'] = valueClusterResource;
-
-  var valueProjectResource = $formValues.querySelector('.valueProjectResource')?.value;
-  if(valueProjectResource != null && valueProjectResource !== '')
-    vals['projectResource'] = valueProjectResource;
-
-  fetch(
-    '/en-us/api/project'
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-      , method: 'POST'
-      , body: JSON.stringify(vals)
-    }).then(response => {
-      if(response.ok) {
-        response.json().then((json) => {
-          success(json, target);
-        })
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-function postProjectVals(vals, target, success, error) {
-  fetch(
-    '/en-us/api/project'
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-      , method: 'POST'
-      , body: JSON.stringify(vals)
-    }).then(response => {
-      if(response.ok) {
-        response.json().then((json) => {
-          success(json, target);
-        })
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-// DELETE //
-
-async function deleteProject(target, projectResource, success, error) {
-  if(success == null) {
-    success = function( data, textStatus, jQxhr ) {
-      addGlow(target, jqXhr);
-      var url = data['editPage'];
-      if(url)
-        window.location.href = url;
-    };
-  }
-  if(error == null) {
-    error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
-    };
-  }
-
-  fetch(
-    '/en-us/api/project/' + encodeURIComponent(projectResource)
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-      , method: 'DELETE'
-    }).then(response => {
-      if(response.ok) {
-        success(response, target);
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-// PUTImport //
-
-async function putimportProject($formValues, target, projectResource, success, error) {
-  var json = $formValues.querySelector('.PUTImport_searchList')?.value;
-  if(json != null && json !== '')
-    putimportProjectVals(JSON.parse(json), target, success, error);
-}
-
-function putimportProjectVals(json, target, success, error) {
-  fetch(
-    '/en-us/api/project-import'
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-      , method: 'PUT'
-      , body: JSON.stringify(json)
-    }).then(response => {
-      if(response.ok) {
-        response.json().then((json) => {
-          success(json, target);
-        })
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
-// DELETEFilter //
-
-async function deletefilterProject(target, success, error) {
-  if(success == null) {
-    success = function( data, textStatus, jQxhr ) {
-      addGlow(target, jqXhr);
-      var url = data['editPage'];
-      if(url)
-        window.location.href = url;
-    };
-  }
-  if(error == null) {
-    error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
-    };
-  }
-
-  fetch(
-    '/en-us/api/project'
-    , {
-      headers: {'Content-Type':'application/json; charset=utf-8'}
-      , method: 'DELETE'
-    }).then(response => {
-      if(response.ok) {
-        success(response, target);
-      } else {
-        error(response, target);
-      }
-    })
-    .catch(response => error(response, target));
-}
-
 async function websocketProject(success) {
   window.eventBus.onopen = function () {
 
@@ -1198,27 +64,6 @@ async function websocketProject(success) {
           success(json);
       }
     });
-
-    window.eventBus.registerHandler('websocketTenant', function (error, message) {
-      document.querySelector('.Page_tenantResource').trigger('oninput');
-      document.querySelector('.Page_tenantResource_add').innerText = 'add a tenant';
-      document.querySelector('.Page_tenantResource_add').classList.remove('w3-disabled');
-      document.querySelector('.Page_tenantResource_add').setAttribute('disabled', false);
-    });
-
-    window.eventBus.registerHandler('websocketHub', function (error, message) {
-      document.querySelector('.Page_hubResource').trigger('oninput');
-      document.querySelector('.Page_hubResource_add').innerText = 'add a hub';
-      document.querySelector('.Page_hubResource_add').classList.remove('w3-disabled');
-      document.querySelector('.Page_hubResource_add').setAttribute('disabled', false);
-    });
-
-    window.eventBus.registerHandler('websocketCluster', function (error, message) {
-      document.querySelector('.Page_clusterResource').trigger('oninput');
-      document.querySelector('.Page_clusterResource_add').innerText = 'add an OpenShift cluster';
-      document.querySelector('.Page_clusterResource_add').classList.remove('w3-disabled');
-      document.querySelector('.Page_clusterResource_add').setAttribute('disabled', false);
-    });
   }
 }
 async function websocketProjectInner(apiRequest) {
@@ -1245,6 +90,8 @@ async function websocketProjectInner(apiRequest) {
         var inputGpuEnabled = null;
         var inputPodRestartCount = null;
         var inputPodsRestarting = null;
+        var inputPodTerminatingCount = null;
+        var inputPodsTerminating = null;
         var inputFullPvcsCount = null;
         var inputFullPvcs = null;
         var inputNamespaceTerminating = null;
@@ -1292,6 +139,10 @@ async function websocketProjectInner(apiRequest) {
           inputPodRestartCount = $response.querySelector('.Page_podRestartCount');
         if(vars.includes('podsRestarting'))
           inputPodsRestarting = $response.querySelector('.Page_podsRestarting');
+        if(vars.includes('podTerminatingCount'))
+          inputPodTerminatingCount = $response.querySelector('.Page_podTerminatingCount');
+        if(vars.includes('podsTerminating'))
+          inputPodsTerminating = $response.querySelector('.Page_podsTerminating');
         if(vars.includes('fullPvcsCount'))
           inputFullPvcsCount = $response.querySelector('.Page_fullPvcsCount');
         if(vars.includes('fullPvcs'))
@@ -1460,6 +311,26 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputPodsRestarting.textContent;
           });
           addGlow(document.querySelector('.Page_podsRestarting'));
+        }
+
+        if(inputPodTerminatingCount) {
+          document.querySelectorAll('.Page_podTerminatingCount').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPodTerminatingCount.getAttribute('value');
+            else
+              item.textContent = inputPodTerminatingCount.textContent;
+          });
+          addGlow(document.querySelector('.Page_podTerminatingCount'));
+        }
+
+        if(inputPodsTerminating) {
+          document.querySelectorAll('.Page_podsTerminating').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPodsTerminating.getAttribute('value');
+            else
+              item.textContent = inputPodsTerminating.textContent;
+          });
+          addGlow(document.querySelector('.Page_podsTerminating'));
         }
 
         if(inputFullPvcsCount) {
@@ -1809,4 +680,1185 @@ function animateStats() {
       searchPage('Project');
     }, speedRate);
   });
+}
+
+// Search //
+
+async function searchProject($formFilters, success, error) {
+  var filters = searchProjectFilters($formFilters);
+  if(success == null)
+    success = function( data, textStatus, jQxhr ) {};
+  if(error == null)
+    error = function( jqXhr, target2 ) {};
+
+  searchProjectVals(filters, target, success, error);
+}
+
+function searchProjectFilters($formFilters) {
+  var filters = [];
+  if($formFilters) {
+
+    var filterPk = $formFilters.querySelector('.valuePk')?.value;
+    if(filterPk != null && filterPk !== '')
+      filters.push({ name: 'fq', value: 'pk:' + filterPk });
+
+    var filterCreated = $formFilters.querySelector('.valueCreated')?.value;
+    if(filterCreated != null && filterCreated !== '')
+      filters.push({ name: 'fq', value: 'created:' + filterCreated });
+
+    var filterModified = $formFilters.querySelector('.valueModified')?.value;
+    if(filterModified != null && filterModified !== '')
+      filters.push({ name: 'fq', value: 'modified:' + filterModified });
+
+    var $filterArchivedCheckbox = $formFilters.querySelector('input.valueArchived[type = "checkbox"]');
+    var $filterArchivedSelect = $formFilters.querySelector('select.valueArchived');
+    var filterArchived = $filterArchivedSelect.length ? $filterArchivedSelect.value : $filterArchivedCheckbox.checked;
+    var filterArchivedSelectVal = $formFilters.querySelector('select.filterArchived')?.value;
+    var filterArchived = null;
+    if(filterArchivedSelectVal !== '')
+      filterArchived = filterArchivedSelectVal == 'true';
+    if(filterArchived != null && filterArchived === true)
+      filters.push({ name: 'fq', value: 'archived:' + filterArchived });
+
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
+    var filterHubId = $formFilters.querySelector('.valueHubId')?.value;
+    if(filterHubId != null && filterHubId !== '')
+      filters.push({ name: 'fq', value: 'hubId:' + filterHubId });
+
+    var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
+    if(filterClusterName != null && filterClusterName !== '')
+      filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterProjectName = $formFilters.querySelector('.valueProjectName')?.value;
+    if(filterProjectName != null && filterProjectName !== '')
+      filters.push({ name: 'fq', value: 'projectName:' + filterProjectName });
+
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
+    var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
+    var filterGpuEnabled = $filterGpuEnabledSelect.length ? $filterGpuEnabledSelect.value : $filterGpuEnabledCheckbox.checked;
+    var filterGpuEnabledSelectVal = $formFilters.querySelector('select.filterGpuEnabled')?.value;
+    var filterGpuEnabled = null;
+    if(filterGpuEnabledSelectVal !== '')
+      filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
+    if(filterGpuEnabled != null && filterGpuEnabled === true)
+      filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
+
+    var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
+    if(filterPodRestartCount != null && filterPodRestartCount !== '')
+      filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
+
+    var filterPodsRestarting = $formFilters.querySelector('.valuePodsRestarting')?.value;
+    if(filterPodsRestarting != null && filterPodsRestarting !== '')
+      filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
+
+    var filterPodTerminatingCount = $formFilters.querySelector('.valuePodTerminatingCount')?.value;
+    if(filterPodTerminatingCount != null && filterPodTerminatingCount !== '')
+      filters.push({ name: 'fq', value: 'podTerminatingCount:' + filterPodTerminatingCount });
+
+    var filterPodsTerminating = $formFilters.querySelector('.valuePodsTerminating')?.value;
+    if(filterPodsTerminating != null && filterPodsTerminating !== '')
+      filters.push({ name: 'fq', value: 'podsTerminating:' + filterPodsTerminating });
+
+    var filterFullPvcsCount = $formFilters.querySelector('.valueFullPvcsCount')?.value;
+    if(filterFullPvcsCount != null && filterFullPvcsCount !== '')
+      filters.push({ name: 'fq', value: 'fullPvcsCount:' + filterFullPvcsCount });
+
+    var filterFullPvcs = $formFilters.querySelector('.valueFullPvcs')?.value;
+    if(filterFullPvcs != null && filterFullPvcs !== '')
+      filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
+
+    var $filterNamespaceTerminatingCheckbox = $formFilters.querySelector('input.valueNamespaceTerminating[type = "checkbox"]');
+    var $filterNamespaceTerminatingSelect = $formFilters.querySelector('select.valueNamespaceTerminating');
+    var filterNamespaceTerminating = $filterNamespaceTerminatingSelect.length ? $filterNamespaceTerminatingSelect.value : $filterNamespaceTerminatingCheckbox.checked;
+    var filterNamespaceTerminatingSelectVal = $formFilters.querySelector('select.filterNamespaceTerminating')?.value;
+    var filterNamespaceTerminating = null;
+    if(filterNamespaceTerminatingSelectVal !== '')
+      filterNamespaceTerminating = filterNamespaceTerminatingSelectVal == 'true';
+    if(filterNamespaceTerminating != null && filterNamespaceTerminating === true)
+      filters.push({ name: 'fq', value: 'namespaceTerminating:' + filterNamespaceTerminating });
+
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
+    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
+    if(filterDisplayPage != null && filterDisplayPage !== '')
+      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+
+    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
+    if(filterEditPage != null && filterEditPage !== '')
+      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
+
+    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
+    if(filterUserPage != null && filterUserPage !== '')
+      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
+
+    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
+    if(filterDownload != null && filterDownload !== '')
+      filters.push({ name: 'fq', value: 'download:' + filterDownload });
+
+    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
+    if(filterObjectSuggest != null && filterObjectSuggest !== '')
+      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
+    if(filterLocalClusterName != null && filterLocalClusterName !== '')
+      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
+
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
+    var filterProjectResource = $formFilters.querySelector('.valueProjectResource')?.value;
+    if(filterProjectResource != null && filterProjectResource !== '')
+      filters.push({ name: 'fq', value: 'projectResource:' + filterProjectResource });
+
+    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
+    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
+      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
+  }
+  return filters;
+}
+
+function searchProjectVals(filters, target, success, error) {
+
+
+  fetch(
+    '/en-us/api/project?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+    }).then(response => {
+      if(response.ok) {
+        response.json().then((json) => {
+          success(json, target);
+        })
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+function suggestProjectTenantResource(filters, $list, projectResource = null, tenantResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['tenantResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == tenantResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_tenantResource_' + projectResource + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('name', 'tenantResource');
+        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('class', 'valueTenantResource ');
+        if(projectResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestProjectTenantResource(filters, $list, projectResource, o['tenantResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchTenantVals(filters, target, success, error);
+}
+
+function suggestProjectHubResource(filters, $list, projectResource = null, hubResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-sitemap"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['hubResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == hubResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_hubResource_' + projectResource + '_hubResource_' + o['hubResource']);
+        $input.setAttribute('name', 'hubResource');
+        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('class', 'valueHubResource ');
+        if(projectResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestProjectHubResource(filters, $list, projectResource, o['hubResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchHubVals(filters, target, success, error);
+}
+
+function suggestProjectClusterResource(filters, $list, projectResource = null, clusterResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-regular fa-server"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['clusterResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(projectResource.toString()) : val == clusterResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_clusterResource_' + projectResource + '_clusterResource_' + o['clusterResource']);
+        $input.setAttribute('name', 'clusterResource');
+        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('class', 'valueClusterResource ');
+        if(projectResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestProjectClusterResource(filters, $list, projectResource, o['clusterResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchClusterVals(filters, target, success, error);
+}
+
+function suggestProjectObjectSuggest($formFilters, $list, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var $i = document.querySelector('<i class="fa-regular fa-people-line"></i>');
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $li = document.createElement('li');
+        var $a = document.createElement('a').setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchProjectVals($formFilters, target, success, error);
+}
+
+// GET //
+
+async function getProject(pk) {
+  fetch(
+    '/en-us/api/project/' + projectResource
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+    }).then(response => {
+      if(response.ok) {
+        response.json().then((json) => {
+          success(json, target);
+        })
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+// PATCH //
+
+async function patchProject($formFilters, $formValues, target, projectResource, success, error) {
+  var filters = patchProjectFilters($formFilters);
+
+  var vals = {};
+
+  var valuePk = $formValues.querySelector('.valuePk')?.value;
+  var removePk = $formValues.querySelector('.removePk')?.value === 'true';
+  var setPk = removePk ? null : $formValues.querySelector('.setPk')?.value;
+  var addPk = $formValues.querySelector('.addPk')?.value;
+  if(removePk || setPk != null && setPk !== '')
+    vals['setPk'] = setPk;
+  if(addPk != null && addPk !== '')
+    vals['addPk'] = addPk;
+  var removePk = $formValues.querySelector('.removePk')?.value;
+  if(removePk != null && removePk !== '')
+    vals['removePk'] = removePk;
+
+  var valueCreated = $formValues.querySelector('.valueCreated')?.value;
+  var removeCreated = $formValues.querySelector('.removeCreated')?.value === 'true';
+  var setCreated = removeCreated ? null : $formValues.querySelector('.setCreated')?.value;
+  var addCreated = $formValues.querySelector('.addCreated')?.value;
+  if(removeCreated || setCreated != null && setCreated !== '')
+    vals['setCreated'] = setCreated;
+  if(addCreated != null && addCreated !== '')
+    vals['addCreated'] = addCreated;
+  var removeCreated = $formValues.querySelector('.removeCreated')?.value;
+  if(removeCreated != null && removeCreated !== '')
+    vals['removeCreated'] = removeCreated;
+
+  var valueModified = $formValues.querySelector('.valueModified')?.value;
+  var removeModified = $formValues.querySelector('.removeModified')?.value === 'true';
+  var setModified = removeModified ? null : $formValues.querySelector('.setModified')?.value;
+  var addModified = $formValues.querySelector('.addModified')?.value;
+  if(removeModified || setModified != null && setModified !== '')
+    vals['setModified'] = setModified;
+  if(addModified != null && addModified !== '')
+    vals['addModified'] = addModified;
+  var removeModified = $formValues.querySelector('.removeModified')?.value;
+  if(removeModified != null && removeModified !== '')
+    vals['removeModified'] = removeModified;
+
+  var valueArchived = $formValues.querySelector('.valueArchived')?.value;
+  var removeArchived = $formValues.querySelector('.removeArchived')?.value === 'true';
+  if(valueArchived != null)
+    valueArchived = valueArchived === 'true';
+  var valueArchivedSelectVal = $formValues.querySelector('select.setArchived')?.value;
+  if(valueArchivedSelectVal != null)
+    valueArchivedSelectVal = valueArchivedSelectVal === 'true';
+  if(valueArchivedSelectVal != null && valueArchivedSelectVal !== '')
+    valueArchived = valueArchivedSelectVal == 'true';
+  var setArchived = removeArchived ? null : valueArchived;
+  var addArchived = $formValues.querySelector('.addArchived')?.checked;
+  if(removeArchived || setArchived != null && setArchived !== '')
+    vals['setArchived'] = setArchived;
+  if(addArchived != null && addArchived !== '')
+    vals['addArchived'] = addArchived;
+  var removeArchived = $formValues.querySelector('.removeArchived')?.checked;
+  if(removeArchived != null && removeArchived !== '')
+    vals['removeArchived'] = removeArchived;
+
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['setTenantResource'] = valueTenantResource;
+
+  var valueHubId = $formValues.querySelector('.valueHubId')?.value;
+  var removeHubId = $formValues.querySelector('.removeHubId')?.value === 'true';
+  var setHubId = removeHubId ? null : $formValues.querySelector('.setHubId')?.value;
+  var addHubId = $formValues.querySelector('.addHubId')?.value;
+  if(removeHubId || setHubId != null && setHubId !== '')
+    vals['setHubId'] = setHubId;
+  if(addHubId != null && addHubId !== '')
+    vals['addHubId'] = addHubId;
+  var removeHubId = $formValues.querySelector('.removeHubId')?.value;
+  if(removeHubId != null && removeHubId !== '')
+    vals['removeHubId'] = removeHubId;
+
+  var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
+  var removeClusterName = $formValues.querySelector('.removeClusterName')?.value === 'true';
+  var setClusterName = removeClusterName ? null : $formValues.querySelector('.setClusterName')?.value;
+  var addClusterName = $formValues.querySelector('.addClusterName')?.value;
+  if(removeClusterName || setClusterName != null && setClusterName !== '')
+    vals['setClusterName'] = setClusterName;
+  if(addClusterName != null && addClusterName !== '')
+    vals['addClusterName'] = addClusterName;
+  var removeClusterName = $formValues.querySelector('.removeClusterName')?.value;
+  if(removeClusterName != null && removeClusterName !== '')
+    vals['removeClusterName'] = removeClusterName;
+
+  var valueProjectName = $formValues.querySelector('.valueProjectName')?.value;
+  var removeProjectName = $formValues.querySelector('.removeProjectName')?.value === 'true';
+  var setProjectName = removeProjectName ? null : $formValues.querySelector('.setProjectName')?.value;
+  var addProjectName = $formValues.querySelector('.addProjectName')?.value;
+  if(removeProjectName || setProjectName != null && setProjectName !== '')
+    vals['setProjectName'] = setProjectName;
+  if(addProjectName != null && addProjectName !== '')
+    vals['addProjectName'] = addProjectName;
+  var removeProjectName = $formValues.querySelector('.removeProjectName')?.value;
+  if(removeProjectName != null && removeProjectName !== '')
+    vals['removeProjectName'] = removeProjectName;
+
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
+  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
+  var addDescription = $formValues.querySelector('.addDescription')?.value;
+  if(removeDescription || setDescription != null && setDescription !== '')
+    vals['setDescription'] = setDescription;
+  if(addDescription != null && addDescription !== '')
+    vals['addDescription'] = addDescription;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
+  if(removeDescription != null && removeDescription !== '')
+    vals['removeDescription'] = removeDescription;
+
+  var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
+  var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.value === 'true';
+  if(valueGpuEnabled != null)
+    valueGpuEnabled = valueGpuEnabled === 'true';
+  var valueGpuEnabledSelectVal = $formValues.querySelector('select.setGpuEnabled')?.value;
+  if(valueGpuEnabledSelectVal != null)
+    valueGpuEnabledSelectVal = valueGpuEnabledSelectVal === 'true';
+  if(valueGpuEnabledSelectVal != null && valueGpuEnabledSelectVal !== '')
+    valueGpuEnabled = valueGpuEnabledSelectVal == 'true';
+  var setGpuEnabled = removeGpuEnabled ? null : valueGpuEnabled;
+  var addGpuEnabled = $formValues.querySelector('.addGpuEnabled')?.checked;
+  if(removeGpuEnabled || setGpuEnabled != null && setGpuEnabled !== '')
+    vals['setGpuEnabled'] = setGpuEnabled;
+  if(addGpuEnabled != null && addGpuEnabled !== '')
+    vals['addGpuEnabled'] = addGpuEnabled;
+  var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.checked;
+  if(removeGpuEnabled != null && removeGpuEnabled !== '')
+    vals['removeGpuEnabled'] = removeGpuEnabled;
+
+  var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
+  var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value === 'true';
+  var setPodRestartCount = removePodRestartCount ? null : $formValues.querySelector('.setPodRestartCount')?.value;
+  var addPodRestartCount = $formValues.querySelector('.addPodRestartCount')?.value;
+  if(removePodRestartCount || setPodRestartCount != null && setPodRestartCount !== '')
+    vals['setPodRestartCount'] = setPodRestartCount;
+  if(addPodRestartCount != null && addPodRestartCount !== '')
+    vals['addPodRestartCount'] = addPodRestartCount;
+  var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value;
+  if(removePodRestartCount != null && removePodRestartCount !== '')
+    vals['removePodRestartCount'] = removePodRestartCount;
+
+  var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
+  var removePodsRestarting = $formValues.querySelector('.removePodsRestarting')?.value === 'true';
+  var setPodsRestarting = removePodsRestarting ? null : $formValues.querySelector('.setPodsRestarting')?.value;
+  var addPodsRestarting = $formValues.querySelector('.addPodsRestarting')?.value;
+  if(removePodsRestarting || setPodsRestarting != null && setPodsRestarting !== '')
+    vals['setPodsRestarting'] = JSON.parse(setPodsRestarting);
+  if(addPodsRestarting != null && addPodsRestarting !== '')
+    vals['addPodsRestarting'] = addPodsRestarting;
+  var removePodsRestarting = $formValues.querySelector('.removePodsRestarting')?.value;
+  if(removePodsRestarting != null && removePodsRestarting !== '')
+    vals['removePodsRestarting'] = removePodsRestarting;
+
+  var valuePodTerminatingCount = $formValues.querySelector('.valuePodTerminatingCount')?.value;
+  var removePodTerminatingCount = $formValues.querySelector('.removePodTerminatingCount')?.value === 'true';
+  var setPodTerminatingCount = removePodTerminatingCount ? null : $formValues.querySelector('.setPodTerminatingCount')?.value;
+  var addPodTerminatingCount = $formValues.querySelector('.addPodTerminatingCount')?.value;
+  if(removePodTerminatingCount || setPodTerminatingCount != null && setPodTerminatingCount !== '')
+    vals['setPodTerminatingCount'] = setPodTerminatingCount;
+  if(addPodTerminatingCount != null && addPodTerminatingCount !== '')
+    vals['addPodTerminatingCount'] = addPodTerminatingCount;
+  var removePodTerminatingCount = $formValues.querySelector('.removePodTerminatingCount')?.value;
+  if(removePodTerminatingCount != null && removePodTerminatingCount !== '')
+    vals['removePodTerminatingCount'] = removePodTerminatingCount;
+
+  var valuePodsTerminating = $formValues.querySelector('.valuePodsTerminating')?.value;
+  var removePodsTerminating = $formValues.querySelector('.removePodsTerminating')?.value === 'true';
+  var setPodsTerminating = removePodsTerminating ? null : $formValues.querySelector('.setPodsTerminating')?.value;
+  var addPodsTerminating = $formValues.querySelector('.addPodsTerminating')?.value;
+  if(removePodsTerminating || setPodsTerminating != null && setPodsTerminating !== '')
+    vals['setPodsTerminating'] = JSON.parse(setPodsTerminating);
+  if(addPodsTerminating != null && addPodsTerminating !== '')
+    vals['addPodsTerminating'] = addPodsTerminating;
+  var removePodsTerminating = $formValues.querySelector('.removePodsTerminating')?.value;
+  if(removePodsTerminating != null && removePodsTerminating !== '')
+    vals['removePodsTerminating'] = removePodsTerminating;
+
+  var valueFullPvcsCount = $formValues.querySelector('.valueFullPvcsCount')?.value;
+  var removeFullPvcsCount = $formValues.querySelector('.removeFullPvcsCount')?.value === 'true';
+  var setFullPvcsCount = removeFullPvcsCount ? null : $formValues.querySelector('.setFullPvcsCount')?.value;
+  var addFullPvcsCount = $formValues.querySelector('.addFullPvcsCount')?.value;
+  if(removeFullPvcsCount || setFullPvcsCount != null && setFullPvcsCount !== '')
+    vals['setFullPvcsCount'] = setFullPvcsCount;
+  if(addFullPvcsCount != null && addFullPvcsCount !== '')
+    vals['addFullPvcsCount'] = addFullPvcsCount;
+  var removeFullPvcsCount = $formValues.querySelector('.removeFullPvcsCount')?.value;
+  if(removeFullPvcsCount != null && removeFullPvcsCount !== '')
+    vals['removeFullPvcsCount'] = removeFullPvcsCount;
+
+  var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
+  var removeFullPvcs = $formValues.querySelector('.removeFullPvcs')?.value === 'true';
+  var setFullPvcs = removeFullPvcs ? null : $formValues.querySelector('.setFullPvcs')?.value;
+  var addFullPvcs = $formValues.querySelector('.addFullPvcs')?.value;
+  if(removeFullPvcs || setFullPvcs != null && setFullPvcs !== '')
+    vals['setFullPvcs'] = JSON.parse(setFullPvcs);
+  if(addFullPvcs != null && addFullPvcs !== '')
+    vals['addFullPvcs'] = addFullPvcs;
+  var removeFullPvcs = $formValues.querySelector('.removeFullPvcs')?.value;
+  if(removeFullPvcs != null && removeFullPvcs !== '')
+    vals['removeFullPvcs'] = removeFullPvcs;
+
+  var valueNamespaceTerminating = $formValues.querySelector('.valueNamespaceTerminating')?.value;
+  var removeNamespaceTerminating = $formValues.querySelector('.removeNamespaceTerminating')?.value === 'true';
+  if(valueNamespaceTerminating != null)
+    valueNamespaceTerminating = valueNamespaceTerminating === 'true';
+  var valueNamespaceTerminatingSelectVal = $formValues.querySelector('select.setNamespaceTerminating')?.value;
+  if(valueNamespaceTerminatingSelectVal != null)
+    valueNamespaceTerminatingSelectVal = valueNamespaceTerminatingSelectVal === 'true';
+  if(valueNamespaceTerminatingSelectVal != null && valueNamespaceTerminatingSelectVal !== '')
+    valueNamespaceTerminating = valueNamespaceTerminatingSelectVal == 'true';
+  var setNamespaceTerminating = removeNamespaceTerminating ? null : valueNamespaceTerminating;
+  var addNamespaceTerminating = $formValues.querySelector('.addNamespaceTerminating')?.checked;
+  if(removeNamespaceTerminating || setNamespaceTerminating != null && setNamespaceTerminating !== '')
+    vals['setNamespaceTerminating'] = setNamespaceTerminating;
+  if(addNamespaceTerminating != null && addNamespaceTerminating !== '')
+    vals['addNamespaceTerminating'] = addNamespaceTerminating;
+  var removeNamespaceTerminating = $formValues.querySelector('.removeNamespaceTerminating')?.checked;
+  if(removeNamespaceTerminating != null && removeNamespaceTerminating !== '')
+    vals['removeNamespaceTerminating'] = removeNamespaceTerminating;
+
+  var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
+  var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
+  var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
+  var addSessionId = $formValues.querySelector('.addSessionId')?.value;
+  if(removeSessionId || setSessionId != null && setSessionId !== '')
+    vals['setSessionId'] = setSessionId;
+  if(addSessionId != null && addSessionId !== '')
+    vals['addSessionId'] = addSessionId;
+  var removeSessionId = $formValues.querySelector('.removeSessionId')?.value;
+  if(removeSessionId != null && removeSessionId !== '')
+    vals['removeSessionId'] = removeSessionId;
+
+  var valueUserKey = $formValues.querySelector('.valueUserKey')?.value;
+  var removeUserKey = $formValues.querySelector('.removeUserKey')?.value === 'true';
+  var setUserKey = removeUserKey ? null : $formValues.querySelector('.setUserKey')?.value;
+  var addUserKey = $formValues.querySelector('.addUserKey')?.value;
+  if(removeUserKey || setUserKey != null && setUserKey !== '')
+    vals['setUserKey'] = setUserKey;
+  if(addUserKey != null && addUserKey !== '')
+    vals['addUserKey'] = addUserKey;
+  var removeUserKey = $formValues.querySelector('.removeUserKey')?.value;
+  if(removeUserKey != null && removeUserKey !== '')
+    vals['removeUserKey'] = removeUserKey;
+
+  var valueObjectTitle = $formValues.querySelector('.valueObjectTitle')?.value;
+  var removeObjectTitle = $formValues.querySelector('.removeObjectTitle')?.value === 'true';
+  var setObjectTitle = removeObjectTitle ? null : $formValues.querySelector('.setObjectTitle')?.value;
+  var addObjectTitle = $formValues.querySelector('.addObjectTitle')?.value;
+  if(removeObjectTitle || setObjectTitle != null && setObjectTitle !== '')
+    vals['setObjectTitle'] = setObjectTitle;
+  if(addObjectTitle != null && addObjectTitle !== '')
+    vals['addObjectTitle'] = addObjectTitle;
+  var removeObjectTitle = $formValues.querySelector('.removeObjectTitle')?.value;
+  if(removeObjectTitle != null && removeObjectTitle !== '')
+    vals['removeObjectTitle'] = removeObjectTitle;
+
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value === 'true';
+  var setDisplayPage = removeDisplayPage ? null : $formValues.querySelector('.setDisplayPage')?.value;
+  var addDisplayPage = $formValues.querySelector('.addDisplayPage')?.value;
+  if(removeDisplayPage || setDisplayPage != null && setDisplayPage !== '')
+    vals['setDisplayPage'] = setDisplayPage;
+  if(addDisplayPage != null && addDisplayPage !== '')
+    vals['addDisplayPage'] = addDisplayPage;
+  var removeDisplayPage = $formValues.querySelector('.removeDisplayPage')?.value;
+  if(removeDisplayPage != null && removeDisplayPage !== '')
+    vals['removeDisplayPage'] = removeDisplayPage;
+
+  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
+  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value === 'true';
+  var setEditPage = removeEditPage ? null : $formValues.querySelector('.setEditPage')?.value;
+  var addEditPage = $formValues.querySelector('.addEditPage')?.value;
+  if(removeEditPage || setEditPage != null && setEditPage !== '')
+    vals['setEditPage'] = setEditPage;
+  if(addEditPage != null && addEditPage !== '')
+    vals['addEditPage'] = addEditPage;
+  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value;
+  if(removeEditPage != null && removeEditPage !== '')
+    vals['removeEditPage'] = removeEditPage;
+
+  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
+  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value === 'true';
+  var setUserPage = removeUserPage ? null : $formValues.querySelector('.setUserPage')?.value;
+  var addUserPage = $formValues.querySelector('.addUserPage')?.value;
+  if(removeUserPage || setUserPage != null && setUserPage !== '')
+    vals['setUserPage'] = setUserPage;
+  if(addUserPage != null && addUserPage !== '')
+    vals['addUserPage'] = addUserPage;
+  var removeUserPage = $formValues.querySelector('.removeUserPage')?.value;
+  if(removeUserPage != null && removeUserPage !== '')
+    vals['removeUserPage'] = removeUserPage;
+
+  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
+  var removeDownload = $formValues.querySelector('.removeDownload')?.value === 'true';
+  var setDownload = removeDownload ? null : $formValues.querySelector('.setDownload')?.value;
+  var addDownload = $formValues.querySelector('.addDownload')?.value;
+  if(removeDownload || setDownload != null && setDownload !== '')
+    vals['setDownload'] = setDownload;
+  if(addDownload != null && addDownload !== '')
+    vals['addDownload'] = addDownload;
+  var removeDownload = $formValues.querySelector('.removeDownload')?.value;
+  if(removeDownload != null && removeDownload !== '')
+    vals['removeDownload'] = removeDownload;
+
+  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
+  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value === 'true';
+  var setLocalClusterName = removeLocalClusterName ? null : $formValues.querySelector('.setLocalClusterName')?.value;
+  var addLocalClusterName = $formValues.querySelector('.addLocalClusterName')?.value;
+  if(removeLocalClusterName || setLocalClusterName != null && setLocalClusterName !== '')
+    vals['setLocalClusterName'] = setLocalClusterName;
+  if(addLocalClusterName != null && addLocalClusterName !== '')
+    vals['addLocalClusterName'] = addLocalClusterName;
+  var removeLocalClusterName = $formValues.querySelector('.removeLocalClusterName')?.value;
+  if(removeLocalClusterName != null && removeLocalClusterName !== '')
+    vals['removeLocalClusterName'] = removeLocalClusterName;
+
+  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['setHubResource'] = valueHubResource;
+
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['setClusterResource'] = valueClusterResource;
+
+  var valueProjectResource = $formValues.querySelector('.valueProjectResource')?.value;
+  var removeProjectResource = $formValues.querySelector('.removeProjectResource')?.value === 'true';
+  var setProjectResource = removeProjectResource ? null : $formValues.querySelector('.setProjectResource')?.value;
+  var addProjectResource = $formValues.querySelector('.addProjectResource')?.value;
+  if(removeProjectResource || setProjectResource != null && setProjectResource !== '')
+    vals['setProjectResource'] = setProjectResource;
+  if(addProjectResource != null && addProjectResource !== '')
+    vals['addProjectResource'] = addProjectResource;
+  var removeProjectResource = $formValues.querySelector('.removeProjectResource')?.value;
+  if(removeProjectResource != null && removeProjectResource !== '')
+    vals['removeProjectResource'] = removeProjectResource;
+
+  patchProjectVals(projectResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'projectResource:' + projectResource}], vals, target, success, error);
+}
+
+function patchProjectFilters($formFilters) {
+  var filters = [];
+  if($formFilters) {
+    filters.push({ name: 'softCommit', value: 'true' });
+
+    var filterPk = $formFilters.querySelector('.valuePk')?.value;
+    if(filterPk != null && filterPk !== '')
+      filters.push({ name: 'fq', value: 'pk:' + filterPk });
+
+    var filterCreated = $formFilters.querySelector('.valueCreated')?.value;
+    if(filterCreated != null && filterCreated !== '')
+      filters.push({ name: 'fq', value: 'created:' + filterCreated });
+
+    var filterModified = $formFilters.querySelector('.valueModified')?.value;
+    if(filterModified != null && filterModified !== '')
+      filters.push({ name: 'fq', value: 'modified:' + filterModified });
+
+    var $filterArchivedCheckbox = $formFilters.querySelector('input.valueArchived[type = "checkbox"]');
+    var $filterArchivedSelect = $formFilters.querySelector('select.valueArchived');
+    var filterArchived = $filterArchivedSelect.length ? $filterArchivedSelect.value : $filterArchivedCheckbox.checked;
+    var filterArchivedSelectVal = $formFilters.querySelector('select.filterArchived')?.value;
+    var filterArchived = null;
+    if(filterArchivedSelectVal !== '')
+      filterArchived = filterArchivedSelectVal == 'true';
+    if(filterArchived != null && filterArchived === true)
+      filters.push({ name: 'fq', value: 'archived:' + filterArchived });
+
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
+    var filterHubId = $formFilters.querySelector('.valueHubId')?.value;
+    if(filterHubId != null && filterHubId !== '')
+      filters.push({ name: 'fq', value: 'hubId:' + filterHubId });
+
+    var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
+    if(filterClusterName != null && filterClusterName !== '')
+      filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterProjectName = $formFilters.querySelector('.valueProjectName')?.value;
+    if(filterProjectName != null && filterProjectName !== '')
+      filters.push({ name: 'fq', value: 'projectName:' + filterProjectName });
+
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
+    var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
+    var filterGpuEnabled = $filterGpuEnabledSelect.length ? $filterGpuEnabledSelect.value : $filterGpuEnabledCheckbox.checked;
+    var filterGpuEnabledSelectVal = $formFilters.querySelector('select.filterGpuEnabled')?.value;
+    var filterGpuEnabled = null;
+    if(filterGpuEnabledSelectVal !== '')
+      filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
+    if(filterGpuEnabled != null && filterGpuEnabled === true)
+      filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
+
+    var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
+    if(filterPodRestartCount != null && filterPodRestartCount !== '')
+      filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
+
+    var filterPodsRestarting = $formFilters.querySelector('.valuePodsRestarting')?.value;
+    if(filterPodsRestarting != null && filterPodsRestarting !== '')
+      filters.push({ name: 'fq', value: 'podsRestarting:' + filterPodsRestarting });
+
+    var filterPodTerminatingCount = $formFilters.querySelector('.valuePodTerminatingCount')?.value;
+    if(filterPodTerminatingCount != null && filterPodTerminatingCount !== '')
+      filters.push({ name: 'fq', value: 'podTerminatingCount:' + filterPodTerminatingCount });
+
+    var filterPodsTerminating = $formFilters.querySelector('.valuePodsTerminating')?.value;
+    if(filterPodsTerminating != null && filterPodsTerminating !== '')
+      filters.push({ name: 'fq', value: 'podsTerminating:' + filterPodsTerminating });
+
+    var filterFullPvcsCount = $formFilters.querySelector('.valueFullPvcsCount')?.value;
+    if(filterFullPvcsCount != null && filterFullPvcsCount !== '')
+      filters.push({ name: 'fq', value: 'fullPvcsCount:' + filterFullPvcsCount });
+
+    var filterFullPvcs = $formFilters.querySelector('.valueFullPvcs')?.value;
+    if(filterFullPvcs != null && filterFullPvcs !== '')
+      filters.push({ name: 'fq', value: 'fullPvcs:' + filterFullPvcs });
+
+    var $filterNamespaceTerminatingCheckbox = $formFilters.querySelector('input.valueNamespaceTerminating[type = "checkbox"]');
+    var $filterNamespaceTerminatingSelect = $formFilters.querySelector('select.valueNamespaceTerminating');
+    var filterNamespaceTerminating = $filterNamespaceTerminatingSelect.length ? $filterNamespaceTerminatingSelect.value : $filterNamespaceTerminatingCheckbox.checked;
+    var filterNamespaceTerminatingSelectVal = $formFilters.querySelector('select.filterNamespaceTerminating')?.value;
+    var filterNamespaceTerminating = null;
+    if(filterNamespaceTerminatingSelectVal !== '')
+      filterNamespaceTerminating = filterNamespaceTerminatingSelectVal == 'true';
+    if(filterNamespaceTerminating != null && filterNamespaceTerminating === true)
+      filters.push({ name: 'fq', value: 'namespaceTerminating:' + filterNamespaceTerminating });
+
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
+    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
+    if(filterDisplayPage != null && filterDisplayPage !== '')
+      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+
+    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
+    if(filterEditPage != null && filterEditPage !== '')
+      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
+
+    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
+    if(filterUserPage != null && filterUserPage !== '')
+      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
+
+    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
+    if(filterDownload != null && filterDownload !== '')
+      filters.push({ name: 'fq', value: 'download:' + filterDownload });
+
+    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
+    if(filterObjectSuggest != null && filterObjectSuggest !== '')
+      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterLocalClusterName = $formFilters.querySelector('.valueLocalClusterName')?.value;
+    if(filterLocalClusterName != null && filterLocalClusterName !== '')
+      filters.push({ name: 'fq', value: 'localClusterName:' + filterLocalClusterName });
+
+    var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
+    if(filterHubResource != null && filterHubResource !== '')
+      filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
+
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
+    var filterProjectResource = $formFilters.querySelector('.valueProjectResource')?.value;
+    if(filterProjectResource != null && filterProjectResource !== '')
+      filters.push({ name: 'fq', value: 'projectResource:' + filterProjectResource });
+
+    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
+    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
+      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
+  }
+  return filters;
+}
+
+function patchProjectVal(filters, v, val, target, success, error) {
+  var vals = {};
+  vals[v] = val;
+  patchProjectVals(filters, vals, target, success, error);
+}
+
+function patchProjectVals(filters, vals, target, success, error) {
+  fetch(
+    '/en-us/api/project?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+      , method: 'PATCH'
+      , body: JSON.stringify(vals)
+    }).then(response => {
+      if(response.ok) {
+        response.json().then((json) => {
+          success(json, target);
+        })
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+// POST //
+
+async function postProject($formValues, target, success, error) {
+  var vals = {};
+  if(success == null) {
+    success = function( data, textStatus, jQxhr ) {
+      addGlow(target, jqXhr);
+      var url = data['editPage'];
+      if(url)
+        window.location.href = url;
+    };
+  }
+  if(error == null) {
+    error = function( jqXhr, target2 ) {
+      addError(target, jqXhr);
+    };
+  }
+
+  var valuePk = $formValues.querySelector('.valuePk')?.value;
+  if(valuePk != null && valuePk !== '')
+    vals['pk'] = valuePk;
+
+  var valueCreated = $formValues.querySelector('.valueCreated')?.value;
+  if(valueCreated != null && valueCreated !== '')
+    vals['created'] = valueCreated;
+
+  var valueModified = $formValues.querySelector('.valueModified')?.value;
+  if(valueModified != null && valueModified !== '')
+    vals['modified'] = valueModified;
+
+  var valueArchived = $formValues.querySelector('.valueArchived')?.value;
+  if(valueArchived != null && valueArchived !== '')
+    vals['archived'] = valueArchived == 'true';
+
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['tenantResource'] = valueTenantResource;
+
+  var valueHubId = $formValues.querySelector('.valueHubId')?.value;
+  if(valueHubId != null && valueHubId !== '')
+    vals['hubId'] = valueHubId;
+
+  var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
+  if(valueClusterName != null && valueClusterName !== '')
+    vals['clusterName'] = valueClusterName;
+
+  var valueProjectName = $formValues.querySelector('.valueProjectName')?.value;
+  if(valueProjectName != null && valueProjectName !== '')
+    vals['projectName'] = valueProjectName;
+
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  if(valueDescription != null && valueDescription !== '')
+    vals['description'] = valueDescription;
+
+  var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
+  if(valueGpuEnabled != null && valueGpuEnabled !== '')
+    vals['gpuEnabled'] = valueGpuEnabled == 'true';
+
+  var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
+  if(valuePodRestartCount != null && valuePodRestartCount !== '')
+    vals['podRestartCount'] = valuePodRestartCount;
+
+  var valuePodsRestarting = $formValues.querySelector('.valuePodsRestarting')?.value;
+  if(valuePodsRestarting != null && valuePodsRestarting !== '')
+    vals['podsRestarting'] = JSON.parse(valuePodsRestarting);
+
+  var valuePodTerminatingCount = $formValues.querySelector('.valuePodTerminatingCount')?.value;
+  if(valuePodTerminatingCount != null && valuePodTerminatingCount !== '')
+    vals['podTerminatingCount'] = valuePodTerminatingCount;
+
+  var valuePodsTerminating = $formValues.querySelector('.valuePodsTerminating')?.value;
+  if(valuePodsTerminating != null && valuePodsTerminating !== '')
+    vals['podsTerminating'] = JSON.parse(valuePodsTerminating);
+
+  var valueFullPvcsCount = $formValues.querySelector('.valueFullPvcsCount')?.value;
+  if(valueFullPvcsCount != null && valueFullPvcsCount !== '')
+    vals['fullPvcsCount'] = valueFullPvcsCount;
+
+  var valueFullPvcs = $formValues.querySelector('.valueFullPvcs')?.value;
+  if(valueFullPvcs != null && valueFullPvcs !== '')
+    vals['fullPvcs'] = JSON.parse(valueFullPvcs);
+
+  var valueNamespaceTerminating = $formValues.querySelector('.valueNamespaceTerminating')?.value;
+  if(valueNamespaceTerminating != null && valueNamespaceTerminating !== '')
+    vals['namespaceTerminating'] = valueNamespaceTerminating == 'true';
+
+  var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
+  if(valueSessionId != null && valueSessionId !== '')
+    vals['sessionId'] = valueSessionId;
+
+  var valueUserKey = $formValues.querySelector('.valueUserKey')?.value;
+  if(valueUserKey != null && valueUserKey !== '')
+    vals['userKey'] = valueUserKey;
+
+  var valueObjectTitle = $formValues.querySelector('.valueObjectTitle')?.value;
+  if(valueObjectTitle != null && valueObjectTitle !== '')
+    vals['objectTitle'] = valueObjectTitle;
+
+  var valueDisplayPage = $formValues.querySelector('.valueDisplayPage')?.value;
+  if(valueDisplayPage != null && valueDisplayPage !== '')
+    vals['displayPage'] = valueDisplayPage;
+
+  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
+  if(valueEditPage != null && valueEditPage !== '')
+    vals['editPage'] = valueEditPage;
+
+  var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
+  if(valueUserPage != null && valueUserPage !== '')
+    vals['userPage'] = valueUserPage;
+
+  var valueDownload = $formValues.querySelector('.valueDownload')?.value;
+  if(valueDownload != null && valueDownload !== '')
+    vals['download'] = valueDownload;
+
+  var valueLocalClusterName = $formValues.querySelector('.valueLocalClusterName')?.value;
+  if(valueLocalClusterName != null && valueLocalClusterName !== '')
+    vals['localClusterName'] = valueLocalClusterName;
+
+  var valueHubResource = (Array.from($formValues.querySelectorAll('.valueHubResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHubResource != null && valueHubResource !== '')
+    vals['hubResource'] = valueHubResource;
+
+  var valueClusterResource = (Array.from($formValues.querySelectorAll('.valueClusterResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueClusterResource != null && valueClusterResource !== '')
+    vals['clusterResource'] = valueClusterResource;
+
+  var valueProjectResource = $formValues.querySelector('.valueProjectResource')?.value;
+  if(valueProjectResource != null && valueProjectResource !== '')
+    vals['projectResource'] = valueProjectResource;
+
+  fetch(
+    '/en-us/api/project'
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+      , method: 'POST'
+      , body: JSON.stringify(vals)
+    }).then(response => {
+      if(response.ok) {
+        response.json().then((json) => {
+          success(json, target);
+        })
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+function postProjectVals(vals, target, success, error) {
+  fetch(
+    '/en-us/api/project'
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+      , method: 'POST'
+      , body: JSON.stringify(vals)
+    }).then(response => {
+      if(response.ok) {
+        response.json().then((json) => {
+          success(json, target);
+        })
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+// DELETE //
+
+async function deleteProject(target, projectResource, success, error) {
+  if(success == null) {
+    success = function( data, textStatus, jQxhr ) {
+      addGlow(target, jqXhr);
+      var url = data['editPage'];
+      if(url)
+        window.location.href = url;
+    };
+  }
+  if(error == null) {
+    error = function( jqXhr, target2 ) {
+      addError(target, jqXhr);
+    };
+  }
+
+  fetch(
+    '/en-us/api/project/' + encodeURIComponent(projectResource)
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+      , method: 'DELETE'
+    }).then(response => {
+      if(response.ok) {
+        success(response, target);
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+// PUTImport //
+
+async function putimportProject($formValues, target, projectResource, success, error) {
+  var json = $formValues.querySelector('.PUTImport_searchList')?.value;
+  if(json != null && json !== '')
+    putimportProjectVals(JSON.parse(json), target, success, error);
+}
+
+function putimportProjectVals(json, target, success, error) {
+  fetch(
+    '/en-us/api/project-import'
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+      , method: 'PUT'
+      , body: JSON.stringify(json)
+    }).then(response => {
+      if(response.ok) {
+        response.json().then((json) => {
+          success(json, target);
+        })
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
+}
+
+// DELETEFilter //
+
+async function deletefilterProject(target, success, error) {
+  if(success == null) {
+    success = function( data, textStatus, jQxhr ) {
+      addGlow(target, jqXhr);
+      var url = data['editPage'];
+      if(url)
+        window.location.href = url;
+    };
+  }
+  if(error == null) {
+    error = function( jqXhr, target2 ) {
+      addError(target, jqXhr);
+    };
+  }
+
+  fetch(
+    '/en-us/api/project'
+    , {
+      headers: {'Content-Type':'application/json; charset=utf-8'}
+      , method: 'DELETE'
+    }).then(response => {
+      if(response.ok) {
+        success(response, target);
+      } else {
+        error(response, target);
+      }
+    })
+    .catch(response => error(response, target));
 }

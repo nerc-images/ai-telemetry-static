@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}
@@ -162,8 +161,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] cluster name"
                       label="cluster name"
-                      hint="
-The name of this cluster"
+                      hint="The name of this cluster"
                       id="{{classApiMethodMethod}}_name"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}

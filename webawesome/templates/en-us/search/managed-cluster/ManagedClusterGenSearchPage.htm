@@ -329,74 +329,74 @@
 {% include en-us/search/managed-cluster/ManagedClusterPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-              <wa-dropdown id="htmDropdown-id">
-                <wa-button variant="brand" slot="trigger" caret>cluster ID</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-id-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by cluster ID ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-id-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by cluster ID descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-state">
-                <wa-button variant="brand" slot="trigger" caret>cluster state</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-state-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by cluster state ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-state-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by cluster state descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-apiUrl">
-                <wa-button variant="brand" slot="trigger" caret>cluster API URL</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_apiUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-apiUrl-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by cluster API URL ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_apiUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-apiUrl-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by cluster API URL descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
-              <wa-dropdown id="htmDropdown-consoleUrl">
-                <wa-button variant="brand" slot="trigger" caret>cluster console URL</wa-button>
-                <wa-menu>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_consoleUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-consoleUrl-asc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                    sort by cluster console URL ascending
-                  </wa-menu-item>
-                  <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_consoleUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-consoleUrl-desc">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                    sort by cluster console URL descending
-                  </wa-menu-item>
-                </wa-menu>
-              </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-id">
+                      <wa-button variant="brand" slot="trigger" caret>cluster ID</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-id-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by cluster ID ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-id-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by cluster ID descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-state">
+                      <wa-button variant="brand" slot="trigger" caret>cluster state</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-state-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by cluster state ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_state'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-state-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by cluster state descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-apiUrl">
+                      <wa-button variant="brand" slot="trigger" caret>cluster API URL</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_apiUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-apiUrl-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by cluster API URL ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_apiUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-apiUrl-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by cluster API URL descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-consoleUrl">
+                      <wa-button variant="brand" slot="trigger" caret>cluster console URL</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_consoleUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-consoleUrl-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by cluster console URL ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortManagedCluster_consoleUrl'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ManagedCluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-consoleUrl-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by cluster console URL descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listManagedCluster%}
                   <div>
-              <a href="{{ item.displayPage }}">
-                <i class="fa-regular fa-server"></i>
-              <span>{{ item.id | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.state | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.apiUrl | e }}
-</span>              </a>
-              <a href="{{ item.displayPage }}">
-              <span>{{ item.consoleUrl | e }}
-</span>              </a>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-regular fa-server"></i>
+                      <span>{{ item.id | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.state | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.apiUrl | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.consoleUrl | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
               {% if getColumnId is defined %}

@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -162,8 +161,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] bare metal order description"
                       label="bare metal order description"
-                      hint="
-The description of this bare metal order"
+                      hint="The description of this bare metal order"
                       id="{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -255,8 +253,7 @@ The description of this bare metal order"
                       type="number"
                       min="{{ min }}"
                       max="{{ max }}"
-                      hint="
-The number of fc430 nodes to request for this order. "
+                      hint="The number of fc430 nodes to request for this order. "
                       id="{{classApiMethodMethod}}_numberOfFc430"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -295,8 +292,7 @@ The number of fc430 nodes to request for this order. "
                       type="number"
                       min="{{ min }}"
                       max="{{ max }}"
-                      hint="
-The number of fc830 nodes to request for this order. "
+                      hint="The number of fc830 nodes to request for this order. "
                       id="{{classApiMethodMethod}}_numberOfFc830"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -335,8 +331,7 @@ The number of fc830 nodes to request for this order. "
                       type="number"
                       min="{{ min }}"
                       max="{{ max }}"
-                      hint="
-The number of r730xd nodes to request for this order. "
+                      hint="The number of r730xd nodes to request for this order. "
                       id="{{classApiMethodMethod}}_numberOfR730xd"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -375,8 +370,7 @@ The number of r730xd nodes to request for this order. "
                       type="number"
                       min="{{ min }}"
                       max="{{ max }}"
-                      hint="
-The number of whitebox-flax-1 nodes to request for this order. "
+                      hint="The number of whitebox-flax-1 nodes to request for this order. "
                       id="{{classApiMethodMethod}}_numberOfWhiteboxFlax1"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -415,8 +409,7 @@ The number of whitebox-flax-1 nodes to request for this order. "
                       type="number"
                       min="{{ min }}"
                       max="{{ max }}"
-                      hint="
-The number of lenovo-sd650nv2-a100 nodes to request for this order. "
+                      hint="The number of lenovo-sd650nv2-a100 nodes to request for this order. "
                       id="{{classApiMethodMethod}}_numberOfLenovoSd650nv2A100"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -455,8 +448,7 @@ The number of lenovo-sd650nv2-a100 nodes to request for this order. "
                       type="number"
                       min="{{ min }}"
                       max="{{ max }}"
-                      hint="
-The number of lenovo-sd665nv3-h100 nodes to request for this order. "
+                      hint="The number of lenovo-sd665nv3-h100 nodes to request for this order. "
                       id="{{classApiMethodMethod}}_numberOfLenovoSd665nv3H100"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -492,8 +484,7 @@ The number of lenovo-sd665nv3-h100 nodes to request for this order. "
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] image"
                       label="image"
-                      hint="
-The operating system image of a bare metal fulfillment"
+                      hint="The operating system image of a bare metal fulfillment"
                       id="{{classApiMethodMethod}}_image"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -533,8 +524,7 @@ The operating system image of a bare metal fulfillment"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] SSH public key"
                       label="SSH public key"
-                      hint="
-The SSH public key of the user, not the private SSH key! "
+                      hint="The SSH public key of the user, not the private SSH key! "
                       id="{{classApiMethodMethod}}_sshPublicKey"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
@@ -619,8 +609,7 @@ The SSH public key of the user, not the private SSH key! "
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] order status"
                       label="order status"
-                      hint="
-The order status of a bare metal fulfillment"
+                      hint="The order status of a bare metal fulfillment"
                       id="{{classApiMethodMethod}}_status"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}

@@ -274,46 +274,6 @@ Promise.all([
   document.querySelector('#pageStatsHub_localClusterName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Hub', 'localClusterName', false);
   });
-
-  document.querySelector('#htmButton_patchHub')?.addEventListener('click', (event) => {
-    document.querySelector('#patchHubDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postHub')?.addEventListener('click', (event) => {
-    document.querySelector('#postHubDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteHub')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var hubId =  event.currentTarget.getAttribute('data-hubId');
-      deleteHub(
-          event.currentTarget
-          , hubId
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportHub')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportHubDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageHub')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageHubDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterHub')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterHub(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqHub_created')?.addEventListener('change', (event) => {
             fqChange('Hub', event.currentTarget, facetChangeHubSuccess, facetChangeHubError);
           });
@@ -531,3 +491,43 @@ Promise.all([
             facetRangeEndChange('Hub', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchHub')?.addEventListener('click', (event) => {
+    document.querySelector('#patchHubDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postHub')?.addEventListener('click', (event) => {
+    document.querySelector('#postHubDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteHub')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var hubId =  event.currentTarget.getAttribute('data-hubId');
+      deleteHub(
+          event.currentTarget
+          , hubId
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportHub')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportHubDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageHub')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageHubDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterHub')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterHub(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

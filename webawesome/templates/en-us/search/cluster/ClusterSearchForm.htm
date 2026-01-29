@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -162,8 +161,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] ACM Hub"
                       label="ACM Hub"
-                      hint="
-The name of the ACM Hub for this cluster in Prometheus Keycloak Proxy. "
+                      hint="The name of the ACM Hub for this cluster in Prometheus Keycloak Proxy. "
                       id="{{classApiMethodMethod}}_hubId"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -199,8 +197,7 @@ The name of the ACM Hub for this cluster in Prometheus Keycloak Proxy. "
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] cluster name"
                       label="cluster name"
-                      hint="
-The name of this cluster"
+                      hint="The name of this cluster"
                       id="{{classApiMethodMethod}}_clusterName"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -285,8 +282,7 @@ The name of this cluster"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] cluster name for metrics"
                       label="cluster name for metrics"
-                      hint="
-The name of this cluster in ACM Observability metrics"
+                      hint="The name of this cluster in ACM Observability metrics"
                       id="{{classApiMethodMethod}}_clusterNameMetrics"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -322,8 +318,7 @@ The name of this cluster in ACM Observability metrics"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] unique name"
                       label="unique name"
-                      hint="
-The unique name of this cluster"
+                      hint="The unique name of this cluster"
                       id="{{classApiMethodMethod}}_uniqueName"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -359,8 +354,7 @@ The unique name of this cluster"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
-                      hint="
-A description of this cluster"
+                      hint="A description of this cluster"
                       id="{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -396,8 +390,7 @@ A description of this cluster"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[Point] location"
                       label="location"
-                      hint="
-Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"
+                      hint="Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon"
                       id="{{classApiMethodMethod}}_location"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -434,8 +427,7 @@ Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint,
                       placeholder="[Integer] AI nodes total"
                       label="AI nodes total"
                       type="number"
-                      hint="
-The total number of AI nodes on this cluster. "
+                      hint="The total number of AI nodes on this cluster. "
                       id="{{classApiMethodMethod}}_aiNodesTotal"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -472,8 +464,7 @@ The total number of AI nodes on this cluster. "
                       placeholder="[Integer] GPU devices total"
                       label="GPU devices total"
                       type="number"
-                      hint="
-The total number of GPU devices on this cluster. "
+                      hint="The total number of GPU devices on this cluster. "
                       id="{{classApiMethodMethod}}_gpuDevicesTotal"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -510,8 +501,7 @@ The total number of GPU devices on this cluster. "
                       placeholder="[Integer] VMs total"
                       label="VMs total"
                       type="number"
-                      hint="
-The total number of VMs on this cluster. "
+                      hint="The total number of VMs on this cluster. "
                       id="{{classApiMethodMethod}}_vmsTotal"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -563,8 +553,7 @@ The total number of VMs on this cluster. "
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] Grafana GPU utilization"
                       label="Grafana GPU utilization"
-                      hint="
-Explore this cluster's GPU utilization in Grafana. "
+                      hint="Explore this cluster's GPU utilization in Grafana. "
                       id="{{classApiMethodMethod}}_grafanaUrl"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -602,8 +591,7 @@ Explore this cluster's GPU utilization in Grafana. "
                       placeholder="[Integer] CPU cores total"
                       label="CPU cores total"
                       type="number"
-                      hint="
-The total number of CPU cores on this cluster. "
+                      hint="The total number of CPU cores on this cluster. "
                       id="{{classApiMethodMethod}}_cpuCoresTotal"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -640,8 +628,7 @@ The total number of CPU cores on this cluster. "
                       placeholder="[Long] memory bytes total"
                       label="memory bytes total"
                       type="number"
-                      hint="
-The total number of memory bytes on this cluster. "
+                      hint="The total number of memory bytes on this cluster. "
                       id="{{classApiMethodMethod}}_memoryBytesTotal"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -677,8 +664,7 @@ The total number of memory bytes on this cluster. "
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] entity ID"
                       label="entity ID"
-                      hint="
-A unique ID for this Smart Data Model"
+                      hint="A unique ID for this Smart Data Model"
                       id="{{classApiMethodMethod}}_id"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -714,8 +700,7 @@ A unique ID for this Smart Data Model"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] NGSILD-Tenant"
                       label="NGSILD-Tenant"
-                      hint="
-The NGSILD-Tenant or Fiware-Service"
+                      hint="The NGSILD-Tenant or Fiware-Service"
                       id="{{classApiMethodMethod}}_ngsildTenant"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -751,8 +736,7 @@ The NGSILD-Tenant or Fiware-Service"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] NGSILD-Path"
                       label="NGSILD-Path"
-                      hint="
-The NGSILD-Path or Fiware-ServicePath"
+                      hint="The NGSILD-Path or Fiware-ServicePath"
                       id="{{classApiMethodMethod}}_ngsildPath"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -788,8 +772,7 @@ The NGSILD-Path or Fiware-ServicePath"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] NGSILD context"
                       label="NGSILD context"
-                      hint="
-The NGSILD context URL for @context data"
+                      hint="The NGSILD context URL for @context data"
                       id="{{classApiMethodMethod}}_ngsildContext"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}
@@ -825,8 +808,7 @@ The NGSILD context URL for @context data"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[JsonObject] NGSILD data"
                       label="NGSILD data"
-                      hint="
-The NGSILD data with @context from the context broker"
+                      hint="The NGSILD data with @context from the context broker"
                       id="{{classApiMethodMethod}}_ngsildData"
   {%- if "Page" == classApiMethodMethod %}
                       data-clusterResource={{ result.clusterResource | tojson }}

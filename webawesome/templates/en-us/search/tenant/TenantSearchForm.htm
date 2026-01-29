@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}
@@ -162,8 +161,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] tenant name"
                       label="tenant name"
-                      hint="
-The name of this tenant"
+                      hint="The name of this tenant"
                       id="{{classApiMethodMethod}}_tenantName"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}
@@ -199,8 +197,7 @@ The name of this tenant"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] tenant ID"
                       label="tenant ID"
-                      hint="
-The ID of this tenant"
+                      hint="The ID of this tenant"
                       id="{{classApiMethodMethod}}_tenantId"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}
@@ -236,8 +233,7 @@ The ID of this tenant"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
-                      hint="
-A description of this tenant"
+                      hint="A description of this tenant"
                       id="{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}
@@ -273,8 +269,7 @@ A description of this tenant"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] Page ID"
                       label="Page ID"
-                      hint="
-The ID for this page. "
+                      hint="The ID for this page. "
                       id="{{classApiMethodMethod}}_pageId"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}

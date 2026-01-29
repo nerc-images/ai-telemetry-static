@@ -88,15 +88,15 @@ Promise.all([
     facetStatsChange('SiteUser', 'siteTheme', false);
   });
 
-  document.querySelector('#pageSelectSortSiteUser_webComponentsTheme')?.addEventListener('change', (event) => {
-    sort('SiteUser', 'webComponentsTheme', event.currentTarget.value);
+  document.querySelector('#pageSelectSortSiteUser_userProfileUrl')?.addEventListener('change', (event) => {
+    sort('SiteUser', 'userProfileUrl', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsSiteUser_webComponentsTheme')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SiteUser', 'webComponentsTheme', true);
+  document.querySelector('#pageStatsSiteUser_userProfileUrl')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SiteUser', 'userProfileUrl', true);
   });
-  document.querySelector('#pageStatsSiteUser_webComponentsTheme')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SiteUser', 'webComponentsTheme', false);
+  document.querySelector('#pageStatsSiteUser_userProfileUrl')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SiteUser', 'userProfileUrl', false);
   });
 
   document.querySelector('#pageSelectSortSiteUser_classCanonicalName')?.addEventListener('change', (event) => {
@@ -351,18 +351,6 @@ Promise.all([
   document.querySelector('#pageStatsSiteUser_customerProfileId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('SiteUser', 'customerProfileId', false);
   });
-
-  document.querySelector('#htmButton_patchSiteUser')?.addEventListener('click', (event) => {
-    document.querySelector('#patchSiteUserDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postSiteUser')?.addEventListener('click', (event) => {
-    document.querySelector('#postSiteUserDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageSiteUser')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageSiteUserDialog').open = true;
-  });
           document.querySelector('#fqSiteUser_created')?.addEventListener('change', (event) => {
             fqChange('SiteUser', event.currentTarget, facetChangeSiteUserSuccess, facetChangeSiteUserError);
           });
@@ -472,3 +460,15 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchSiteUser')?.addEventListener('click', (event) => {
+    document.querySelector('#patchSiteUserDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postSiteUser')?.addEventListener('click', (event) => {
+    document.querySelector('#postSiteUserDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageSiteUser')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageSiteUserDialog').open = true;
+  });

@@ -55,6 +55,24 @@
             </wa-badge>
           </wa-button>
 
+          {% if project.podTerminatingCount > 0 %}
+          <wa-tooltip for="tenantProject-{{ project.projectName }}-pod-restarts">
+            <ul>
+              {% for pod in project.podsTerminating %}
+              <li>
+                {{ pod | e }}
+              </li>
+              {% endfor %}
+            </ul>
+          </wa-tooltip>
+          {% endif %}
+          <wa-button id="tenantProject-{{ project.projectName }}-pod-terminating">
+            pods terminating
+            <wa-badge{% if project.podTerminatingCount > 0 %} variant="danger" attention="pulse"{% else %} variant="success"{% endif %}" pill>
+              {{ project.podTerminatingCount }}
+            </wa-badge>
+          </wa-button>
+
           {% if project.fullPvcsCount > 0 %}
           <wa-tooltip for="tenantProject-{{ project.projectName }}-full-pvcs">
             <ul>

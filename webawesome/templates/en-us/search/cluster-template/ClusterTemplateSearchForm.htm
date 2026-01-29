@@ -7,8 +7,7 @@
                       placeholder="[Long] primary key"
                       label="primary key"
                       type="number"
-                      hint="
-The primary key of this object in the database"
+                      hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
@@ -162,8 +161,7 @@ The primary key of this object in the database"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] template ID"
                       label="template ID"
-                      hint="
-The ID of this template"
+                      hint="The ID of this template"
                       id="{{classApiMethodMethod}}_id"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
@@ -199,8 +197,7 @@ The ID of this template"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] template title"
                       label="template title"
-                      hint="
-The title of this template"
+                      hint="The title of this template"
                       id="{{classApiMethodMethod}}_title"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
@@ -236,8 +233,7 @@ The title of this template"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] template description"
                       label="template description"
-                      hint="
-The description of this template"
+                      hint="The description of this template"
                       id="{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
@@ -273,8 +269,7 @@ The description of this template"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[JsonArray] template parameters"
                       label="template parameters"
-                      hint="
-The parameters of this template"
+                      hint="The parameters of this template"
                       id="{{classApiMethodMethod}}_parameters"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}

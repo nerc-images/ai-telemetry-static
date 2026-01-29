@@ -358,9 +358,7 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listClusterOrder" id="listClusterOrder" class="listClusterOrder"  value='{{ toJsonArrayStringInApostrophes(listClusterOrder) }}' type="hidden"/>
           </form>
-  {% if solrId is defined %}
           {{ htmForm_searchpageClusterOrder() }}
-  {% endif %}
 {%- endblock htmFormClusterOrderPage %}
         </div>
 {%- endblock htmBodyMiddleClusterOrderPage %}

@@ -417,46 +417,6 @@ Promise.all([
   document.querySelector('#pageStatsAiNode_entityShortId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('AiNode', 'entityShortId', false);
   });
-
-  document.querySelector('#htmButton_patchAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#patchAiNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#postAiNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteAiNode')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var nodeResource =  event.currentTarget.getAttribute('data-nodeResource');
-      deleteAiNode(
-          event.currentTarget
-          , nodeResource
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportAiNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageAiNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterAiNode')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterAiNode(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqAiNode_created')?.addEventListener('change', (event) => {
             fqChange('AiNode', event.currentTarget, facetChangeAiNodeSuccess, facetChangeAiNodeError);
           });
@@ -764,3 +724,43 @@ Promise.all([
             facetRangeEndChange('AiNode', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchAiNode')?.addEventListener('click', (event) => {
+    document.querySelector('#patchAiNodeDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postAiNode')?.addEventListener('click', (event) => {
+    document.querySelector('#postAiNodeDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteAiNode')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var nodeResource =  event.currentTarget.getAttribute('data-nodeResource');
+      deleteAiNode(
+          event.currentTarget
+          , nodeResource
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportAiNode')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportAiNodeDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageAiNode')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageAiNodeDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterAiNode')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterAiNode(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

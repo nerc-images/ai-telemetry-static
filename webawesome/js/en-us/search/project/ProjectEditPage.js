@@ -208,6 +208,48 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH podTerminatingCount
+          document.querySelector('#Page_podTerminatingCount')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_podTerminatingCount');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setPodTerminatingCount', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_podTerminatingCount')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_podTerminatingCount')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_podTerminatingCount');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH podsTerminating
+          document.querySelector('#Page_podsTerminating')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_podsTerminating');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setPodsTerminating', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , event.currentTarget
+                  , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_podsTerminating')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_podsTerminating')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_podsTerminating');
+            const valid = form.reportValidity();
+          });
+
           // PATCH fullPvcsCount
           document.querySelector('#Page_fullPvcsCount')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_fullPvcsCount');

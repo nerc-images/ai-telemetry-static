@@ -582,46 +582,6 @@ Promise.all([
   document.querySelector('#pageStatsBareMetalNetwork_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('BareMetalNetwork', 'solrId', false);
   });
-
-  document.querySelector('#htmButton_patchBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#patchBareMetalNetworkDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#postBareMetalNetworkDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteBareMetalNetwork')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var id =  event.currentTarget.getAttribute('data-id');
-      deleteBareMetalNetwork(
-          event.currentTarget
-          , id
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportBareMetalNetworkDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageBareMetalNetworkDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterBareMetalNetwork')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterBareMetalNetwork(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqBareMetalNetwork_created')?.addEventListener('change', (event) => {
             fqChange('BareMetalNetwork', event.currentTarget, facetChangeBareMetalNetworkSuccess, facetChangeBareMetalNetworkError);
           });
@@ -1343,3 +1303,43 @@ Promise.all([
             facetRangeEndChange('BareMetalNetwork', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchBareMetalNetwork')?.addEventListener('click', (event) => {
+    document.querySelector('#patchBareMetalNetworkDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postBareMetalNetwork')?.addEventListener('click', (event) => {
+    document.querySelector('#postBareMetalNetworkDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteBareMetalNetwork')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var id =  event.currentTarget.getAttribute('data-id');
+      deleteBareMetalNetwork(
+          event.currentTarget
+          , id
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportBareMetalNetwork')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportBareMetalNetworkDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageBareMetalNetwork')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageBareMetalNetworkDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterBareMetalNetwork')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterBareMetalNetwork(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });

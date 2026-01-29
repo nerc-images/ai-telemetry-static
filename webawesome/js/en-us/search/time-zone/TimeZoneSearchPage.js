@@ -230,46 +230,6 @@ Promise.all([
   document.querySelector('#pageStatsTimeZone_displayName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('TimeZone', 'displayName', false);
   });
-
-  document.querySelector('#htmButton_patchTimeZone')?.addEventListener('click', (event) => {
-    document.querySelector('#patchTimeZoneDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postTimeZone')?.addEventListener('click', (event) => {
-    document.querySelector('#postTimeZoneDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deleteTimeZone')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      var id =  event.currentTarget.getAttribute('data-id');
-      deleteTimeZone(
-          event.currentTarget
-          , id
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
-
-  document.querySelector('#htmButton_putimportTimeZone')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportTimeZoneDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageTimeZone')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageTimeZoneDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_deletefilterTimeZone')?.addEventListener('click', (event) => {
-    var confirmResponse = confirm('Are you sure you want to delete that?'); 
-    if(confirmResponse) { 
-      deletefilterTimeZone(
-          event.currentTarget
-          , function(response, target) { addGlow(target); }
-          , function(response, target) { addError(target); }
-          );
-    }
-  });
           document.querySelector('#fqTimeZone_created')?.addEventListener('change', (event) => {
             fqChange('TimeZone', event.currentTarget, facetChangeTimeZoneSuccess, facetChangeTimeZoneError);
           });
@@ -451,3 +411,43 @@ Promise.all([
             facetRangeEndChange('TimeZone', event.currentTarget);
           });
 });
+
+  document.querySelector('#htmButton_patchTimeZone')?.addEventListener('click', (event) => {
+    document.querySelector('#patchTimeZoneDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_postTimeZone')?.addEventListener('click', (event) => {
+    document.querySelector('#postTimeZoneDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deleteTimeZone')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      var id =  event.currentTarget.getAttribute('data-id');
+      deleteTimeZone(
+          event.currentTarget
+          , id
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
+
+  document.querySelector('#htmButton_putimportTimeZone')?.addEventListener('click', (event) => {
+    document.querySelector('#putimportTimeZoneDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_searchpageTimeZone')?.addEventListener('click', (event) => {
+    document.querySelector('#searchpageTimeZoneDialog').open = true;
+  });
+
+  document.querySelector('#htmButton_deletefilterTimeZone')?.addEventListener('click', (event) => {
+    var confirmResponse = confirm('Are you sure you want to delete that?'); 
+    if(confirmResponse) { 
+      deletefilterTimeZone(
+          event.currentTarget
+          , function(response, target) { addGlow(target); }
+          , function(response, target) { addError(target); }
+          );
+    }
+  });
