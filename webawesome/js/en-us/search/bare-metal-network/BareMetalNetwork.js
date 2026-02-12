@@ -2152,7 +2152,23 @@ async function postBareMetalNetwork($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -2386,7 +2402,23 @@ async function deleteBareMetalNetwork(target, id, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -2445,7 +2477,23 @@ async function deletefilterBareMetalNetwork(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

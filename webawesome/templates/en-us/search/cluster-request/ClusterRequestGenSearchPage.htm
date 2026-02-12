@@ -326,7 +326,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster request found</span>
             <p class="wa-caption-l ">An OpenShift cluster request</p>
-{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -342,6 +341,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
 {%- endblock htmBodyStartClusterRequestPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -354,7 +354,6 @@
 {% include en-us/search/cluster-request/ClusterRequestSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterRequestPage %}

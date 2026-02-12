@@ -315,7 +315,6 @@
             </div>
             <span class="wa-heading-m ">no ACM hub found</span>
             <p class="wa-caption-l ">An Red Hat Advanced Cluster Management Hub cluster. </p>
-{% include en-us/search/hub/HubSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -331,7 +330,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listHub" id="listHub" class="listHub"  value='{{ toJsonArrayStringInApostrophes(listHub) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageHub() }}
+{% endif -%}
 {%- endblock htmFormHubPage %}
         </div>
 {%- endblock htmBodyMiddleHubPage %}

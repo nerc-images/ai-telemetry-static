@@ -369,7 +369,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster request found</span>
             <p class="wa-caption-l ">An OpenShift cluster request</p>
-{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -385,7 +384,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listClusterRequest" id="listClusterRequest" class="listClusterRequest"  value='{{ toJsonArrayStringInApostrophes(listClusterRequest) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageClusterRequest() }}
+{% endif -%}
 {%- endblock htmFormClusterRequestPage %}
         </div>
 {%- endblock htmBodyMiddleClusterRequestPage %}

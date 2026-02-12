@@ -74,7 +74,7 @@
       function htmLegendVirtualMachine(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
-        var url = result.locationLinks[index];
+        var url = null;
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
@@ -408,7 +408,6 @@
             </div>
             <span class="wa-heading-m ">no virtual machine found</span>
             <p class="wa-caption-l ">A Red Hat OpenShift virtual machine</p>
-{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -424,6 +423,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
 {%- endblock htmBodyStartVirtualMachinePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -436,7 +436,6 @@
 {% include en-us/search/vm/VirtualMachineSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/vm/VirtualMachineSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleVirtualMachinePage %}

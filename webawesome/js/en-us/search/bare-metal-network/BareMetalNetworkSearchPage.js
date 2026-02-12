@@ -1304,14 +1304,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#patchBareMetalNetworkDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#postBareMetalNetworkDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteBareMetalNetwork')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -1323,14 +1315,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportBareMetalNetworkDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageBareMetalNetwork')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageBareMetalNetworkDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterBareMetalNetwork')?.addEventListener('click', (event) => {

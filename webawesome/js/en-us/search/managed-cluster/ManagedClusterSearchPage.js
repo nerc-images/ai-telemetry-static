@@ -434,14 +434,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#patchManagedClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#postManagedClusterDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteManagedCluster')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -453,14 +445,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportManagedClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageManagedCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageManagedClusterDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterManagedCluster')?.addEventListener('click', (event) => {

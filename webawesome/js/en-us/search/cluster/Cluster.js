@@ -115,10 +115,10 @@ async function websocketClusterInner(apiRequest) {
         var inputObjectText = null;
         var inputSolrId = null;
         var inputHubResource = null;
-        var inputLocationColors = null;
-        var inputLocationLinks = null;
-        var inputEntityShortId = null;
         var inputClusterResource = null;
+        var inputLocationColors = null;
+        var inputLocationTitles = null;
+        var inputLocationLinks = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -194,14 +194,14 @@ async function websocketClusterInner(apiRequest) {
           inputSolrId = $response.querySelector('.Page_solrId');
         if(vars.includes('hubResource'))
           inputHubResource = $response.querySelector('.Page_hubResource');
-        if(vars.includes('locationColors'))
-          inputLocationColors = $response.querySelector('.Page_locationColors');
-        if(vars.includes('locationLinks'))
-          inputLocationLinks = $response.querySelector('.Page_locationLinks');
-        if(vars.includes('entityShortId'))
-          inputEntityShortId = $response.querySelector('.Page_entityShortId');
         if(vars.includes('clusterResource'))
           inputClusterResource = $response.querySelector('.Page_clusterResource');
+        if(vars.includes('locationColors'))
+          inputLocationColors = $response.querySelector('.Page_locationColors');
+        if(vars.includes('locationTitles'))
+          inputLocationTitles = $response.querySelector('.Page_locationTitles');
+        if(vars.includes('locationLinks'))
+          inputLocationLinks = $response.querySelector('.Page_locationLinks');
 
         jsWebsocketCluster(clusterResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -578,6 +578,16 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_hubResource'));
         }
 
+        if(inputClusterResource) {
+          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterResource.getAttribute('value');
+            else
+              item.textContent = inputClusterResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterResource'));
+        }
+
         if(inputLocationColors) {
           document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -588,6 +598,16 @@ async function websocketClusterInner(apiRequest) {
           addGlow(document.querySelector('.Page_locationColors'));
         }
 
+        if(inputLocationTitles) {
+          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputLocationTitles.getAttribute('value');
+            else
+              item.textContent = inputLocationTitles.textContent;
+          });
+          addGlow(document.querySelector('.Page_locationTitles'));
+        }
+
         if(inputLocationLinks) {
           document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -596,26 +616,6 @@ async function websocketClusterInner(apiRequest) {
               item.textContent = inputLocationLinks.textContent;
           });
           addGlow(document.querySelector('.Page_locationLinks'));
-        }
-
-        if(inputEntityShortId) {
-          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputEntityShortId.getAttribute('value');
-            else
-              item.textContent = inputEntityShortId.textContent;
-          });
-          addGlow(document.querySelector('.Page_entityShortId'));
-        }
-
-        if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputClusterResource.getAttribute('value');
-            else
-              item.textContent = inputClusterResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_clusterResource'));
         }
 
           pageGraphCluster();
@@ -1083,21 +1083,21 @@ function searchClusterFilters($formFilters) {
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
 
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
       filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
 
+    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
+    if(filterLocationTitles != null && filterLocationTitles !== '')
+      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
+
     var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
     if(filterLocationLinks != null && filterLocationLinks !== '')
       filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
-
-    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
-    if(filterEntityShortId != null && filterEntityShortId !== '')
-      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
   }
   return filters;
 }
@@ -1763,21 +1763,21 @@ function patchClusterFilters($formFilters) {
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
 
+    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
+    if(filterClusterResource != null && filterClusterResource !== '')
+      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
+
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
       filters.push({ name: 'fq', value: 'locationColors:' + filterLocationColors });
 
+    var filterLocationTitles = $formFilters.querySelector('.valueLocationTitles')?.value;
+    if(filterLocationTitles != null && filterLocationTitles !== '')
+      filters.push({ name: 'fq', value: 'locationTitles:' + filterLocationTitles });
+
     var filterLocationLinks = $formFilters.querySelector('.valueLocationLinks')?.value;
     if(filterLocationLinks != null && filterLocationLinks !== '')
       filters.push({ name: 'fq', value: 'locationLinks:' + filterLocationLinks });
-
-    var filterEntityShortId = $formFilters.querySelector('.valueEntityShortId')?.value;
-    if(filterEntityShortId != null && filterEntityShortId !== '')
-      filters.push({ name: 'fq', value: 'entityShortId:' + filterEntityShortId });
-
-    var filterClusterResource = $formFilters.querySelector('.valueClusterResource')?.value;
-    if(filterClusterResource != null && filterClusterResource !== '')
-      filters.push({ name: 'fq', value: 'clusterResource:' + filterClusterResource });
   }
   return filters;
 }
@@ -1821,7 +1821,23 @@ async function postCluster($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1999,7 +2015,23 @@ async function deleteCluster(target, clusterResource, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -2058,7 +2090,23 @@ async function deletefilterCluster(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

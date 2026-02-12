@@ -332,7 +332,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal order found</span>
             <p class="wa-caption-l ">A bare metal order</p>
-{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -348,7 +347,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listBareMetalOrder" id="listBareMetalOrder" class="listBareMetalOrder"  value='{{ toJsonArrayStringInApostrophes(listBareMetalOrder) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageBareMetalOrder() }}
+{% endif -%}
 {%- endblock htmFormBareMetalOrderPage %}
         </div>
 {%- endblock htmBodyMiddleBareMetalOrderPage %}

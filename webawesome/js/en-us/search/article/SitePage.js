@@ -107,6 +107,7 @@ async function websocketSitePageInner(apiRequest) {
         var inputPageImageHeight = null;
         var inputPageImageType = null;
         var inputPageImageAlt = null;
+        var inputPageTemplate = null;
         var inputPrerequisiteArticleIds = null;
         var inputPrerequisiteArticles = null;
         var inputNextArticleIds = null;
@@ -174,6 +175,8 @@ async function websocketSitePageInner(apiRequest) {
           inputPageImageType = $response.querySelector('.Page_pageImageType');
         if(vars.includes('pageImageAlt'))
           inputPageImageAlt = $response.querySelector('.Page_pageImageAlt');
+        if(vars.includes('pageTemplate'))
+          inputPageTemplate = $response.querySelector('.Page_pageTemplate');
         if(vars.includes('prerequisiteArticleIds'))
           inputPrerequisiteArticleIds = $response.querySelector('.Page_prerequisiteArticleIds');
         if(vars.includes('prerequisiteArticles'))
@@ -484,6 +487,16 @@ async function websocketSitePageInner(apiRequest) {
               item.textContent = inputPageImageAlt.textContent;
           });
           addGlow(document.querySelector('.Page_pageImageAlt'));
+        }
+
+        if(inputPageTemplate) {
+          document.querySelectorAll('.Page_pageTemplate').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPageTemplate.getAttribute('value');
+            else
+              item.textContent = inputPageTemplate.textContent;
+          });
+          addGlow(document.querySelector('.Page_pageTemplate'));
         }
 
         if(inputPrerequisiteArticleIds) {
@@ -1170,6 +1183,18 @@ async function patchSitePage($formFilters, $formValues, target, pageId, success,
   if(removePageImageAlt != null && removePageImageAlt !== '')
     vals['removePageImageAlt'] = removePageImageAlt;
 
+  var valuePageTemplate = $formValues.querySelector('.valuePageTemplate')?.value;
+  var removePageTemplate = $formValues.querySelector('.removePageTemplate')?.value === 'true';
+  var setPageTemplate = removePageTemplate ? null : $formValues.querySelector('.setPageTemplate')?.value;
+  var addPageTemplate = $formValues.querySelector('.addPageTemplate')?.value;
+  if(removePageTemplate || setPageTemplate != null && setPageTemplate !== '')
+    vals['setPageTemplate'] = setPageTemplate;
+  if(addPageTemplate != null && addPageTemplate !== '')
+    vals['addPageTemplate'] = addPageTemplate;
+  var removePageTemplate = $formValues.querySelector('.removePageTemplate')?.value;
+  if(removePageTemplate != null && removePageTemplate !== '')
+    vals['removePageTemplate'] = removePageTemplate;
+
   var valuePrerequisiteArticleIds = $formValues.querySelector('.valuePrerequisiteArticleIds')?.value;
   var removePrerequisiteArticleIds = $formValues.querySelector('.removePrerequisiteArticleIds')?.value === 'true';
   var setPrerequisiteArticleIds = removePrerequisiteArticleIds ? null : $formValues.querySelector('.setPrerequisiteArticleIds')?.value;
@@ -1422,7 +1447,23 @@ async function postSitePage($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1505,6 +1546,10 @@ async function postSitePage($formValues, target, success, error) {
   var valuePageImageAlt = $formValues.querySelector('.valuePageImageAlt')?.value;
   if(valuePageImageAlt != null && valuePageImageAlt !== '')
     vals['pageImageAlt'] = valuePageImageAlt;
+
+  var valuePageTemplate = $formValues.querySelector('.valuePageTemplate')?.value;
+  if(valuePageTemplate != null && valuePageTemplate !== '')
+    vals['pageTemplate'] = valuePageTemplate;
 
   var valuePrerequisiteArticleIds = $formValues.querySelector('.valuePrerequisiteArticleIds')?.value;
   if(valuePrerequisiteArticleIds != null && valuePrerequisiteArticleIds !== '')
@@ -1603,7 +1648,23 @@ async function deleteSitePage(target, pageId, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1635,7 +1696,23 @@ async function deletefilterSitePage(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

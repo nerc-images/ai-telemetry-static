@@ -315,7 +315,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal resource class found</span>
             <p class="wa-caption-l ">A bare metal resource class</p>
-{% include en-us/search/bare-metal-resource-class/BareMetalResourceClassSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -331,7 +330,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listBareMetalResourceClass" id="listBareMetalResourceClass" class="listBareMetalResourceClass"  value='{{ toJsonArrayStringInApostrophes(listBareMetalResourceClass) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageBareMetalResourceClass() }}
+{% endif -%}
 {%- endblock htmFormBareMetalResourceClassPage %}
         </div>
 {%- endblock htmBodyMiddleBareMetalResourceClassPage %}
