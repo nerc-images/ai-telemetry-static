@@ -675,23 +675,23 @@
                   <div class="button-on-left ">
                     <wa-button variant="brand"
                         id="{{classApiMethodMethod}}_userPage"
-                        placeholder="[String] user"
-                        label="user"
-                        hint="User page"
+                        placeholder="[String] status report"
+                        label="status report"
+                        hint="View the current status report for this project. "
                         class="button-on-left {{classApiMethodMethod}}_userPage classProject inputProject{{ result.projectResource }}UserPage "
                         name="setUserPage"
                         href="{{ result.userPage | e }}"
                         >
-                      user
+                      status report
                     </wa-button>
                   </div>
-                  <div class="button-description-on-right ">User page</div>
+                  <div class="button-description-on-right ">View the current status report for this project. </div>
   {%- else %}
                   <wa-input
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] user"
-                      label="user"
-                      hint="User page"
+                      placeholder="[String] status report"
+                      label="status report"
+                      hint="View the current status report for this project. "
                       id="{{classApiMethodMethod}}_userPage"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
@@ -875,8 +875,6 @@
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
-              </div>
-              <div class="grid-with-subgrid-2col ">
 
               {%- if "PATCH" in scopes %}
                 {{ htmUserPageProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
@@ -1049,8 +1047,6 @@
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
-              </div>
-              <div class="grid-with-subgrid-2col ">
 
               {%- if "POST" in scopes %}
                 {{ htmUserPageProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
@@ -1304,8 +1300,6 @@
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
-              </div>
-              <div class="grid-with-subgrid-2col ">
 
               {%- if "PATCH" in scopes %}
                 {{ htmUserPageProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
