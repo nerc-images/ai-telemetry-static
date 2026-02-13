@@ -376,14 +376,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchBareMetalResourceClass')?.addEventListener('click', (event) => {
-    document.querySelector('#patchBareMetalResourceClassDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postBareMetalResourceClass')?.addEventListener('click', (event) => {
-    document.querySelector('#postBareMetalResourceClassDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteBareMetalResourceClass')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -395,14 +387,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportBareMetalResourceClass')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportBareMetalResourceClassDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageBareMetalResourceClass')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageBareMetalResourceClassDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterBareMetalResourceClass')?.addEventListener('click', (event) => {

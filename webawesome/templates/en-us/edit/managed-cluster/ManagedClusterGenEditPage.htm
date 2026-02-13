@@ -315,7 +315,6 @@
             </div>
             <span class="wa-heading-m ">no tenant cluster found</span>
             <p class="wa-caption-l ">An OpenShift tenant cluster</p>
-{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -331,7 +330,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listManagedCluster" id="listManagedCluster" class="listManagedCluster"  value='{{ toJsonArrayStringInApostrophes(listManagedCluster) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageManagedCluster() }}
+{% endif -%}
 {%- endblock htmFormManagedClusterPage %}
         </div>
 {%- endblock htmBodyMiddleManagedClusterPage %}

@@ -315,7 +315,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal node found</span>
             <p class="wa-caption-l ">An OpenStack bare metal node</p>
-{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -331,7 +330,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listBareMetalNode" id="listBareMetalNode" class="listBareMetalNode"  value='{{ toJsonArrayStringInApostrophes(listBareMetalNode) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageBareMetalNode() }}
+{% endif -%}
 {%- endblock htmFormBareMetalNodePage %}
         </div>
 {%- endblock htmBodyMiddleBareMetalNodePage %}

@@ -418,6 +418,17 @@ Promise.all([
     facetStatsChange('Cluster', 'hubResource', false);
   });
 
+  document.querySelector('#pageSelectSortCluster_clusterResource')?.addEventListener('change', (event) => {
+    sort('Cluster', 'clusterResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_clusterResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'clusterResource', true);
+  });
+  document.querySelector('#pageStatsCluster_clusterResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'clusterResource', false);
+  });
+
   document.querySelector('#pageSelectSortCluster_locationColors')?.addEventListener('change', (event) => {
     sort('Cluster', 'locationColors', event.currentTarget.value);
   });
@@ -429,6 +440,17 @@ Promise.all([
     facetStatsChange('Cluster', 'locationColors', false);
   });
 
+  document.querySelector('#pageSelectSortCluster_locationTitles')?.addEventListener('change', (event) => {
+    sort('Cluster', 'locationTitles', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsCluster_locationTitles')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Cluster', 'locationTitles', true);
+  });
+  document.querySelector('#pageStatsCluster_locationTitles')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Cluster', 'locationTitles', false);
+  });
+
   document.querySelector('#pageSelectSortCluster_locationLinks')?.addEventListener('change', (event) => {
     sort('Cluster', 'locationLinks', event.currentTarget.value);
   });
@@ -438,28 +460,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsCluster_locationLinks')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Cluster', 'locationLinks', false);
-  });
-
-  document.querySelector('#pageSelectSortCluster_entityShortId')?.addEventListener('change', (event) => {
-    sort('Cluster', 'entityShortId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsCluster_entityShortId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Cluster', 'entityShortId', true);
-  });
-  document.querySelector('#pageStatsCluster_entityShortId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Cluster', 'entityShortId', false);
-  });
-
-  document.querySelector('#pageSelectSortCluster_clusterResource')?.addEventListener('change', (event) => {
-    sort('Cluster', 'clusterResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsCluster_clusterResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Cluster', 'clusterResource', true);
-  });
-  document.querySelector('#pageStatsCluster_clusterResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Cluster', 'clusterResource', false);
   });
           document.querySelector('#fqCluster_created')?.addEventListener('change', (event) => {
             fqChange('Cluster', event.currentTarget, facetChangeClusterSuccess, facetChangeClusterError);
@@ -841,14 +841,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#patchClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#postClusterDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteCluster')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -860,14 +852,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportClusterDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageCluster')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageClusterDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterCluster')?.addEventListener('click', (event) => {

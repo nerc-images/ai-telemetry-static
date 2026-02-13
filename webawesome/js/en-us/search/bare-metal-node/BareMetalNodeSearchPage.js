@@ -579,14 +579,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchBareMetalNode')?.addEventListener('click', (event) => {
-    document.querySelector('#patchBareMetalNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postBareMetalNode')?.addEventListener('click', (event) => {
-    document.querySelector('#postBareMetalNodeDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteBareMetalNode')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -598,14 +590,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportBareMetalNode')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportBareMetalNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageBareMetalNode')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageBareMetalNodeDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterBareMetalNode')?.addEventListener('click', (event) => {

@@ -1109,7 +1109,23 @@ async function postTenant($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1235,7 +1251,23 @@ async function deleteTenant(target, tenantId, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1294,7 +1326,23 @@ async function deletefilterTenant(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

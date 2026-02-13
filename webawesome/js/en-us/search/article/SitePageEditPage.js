@@ -418,6 +418,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH pageTemplate
+          document.querySelector('#Page_pageTemplate')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_pageTemplate');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchSitePageVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
+                  , 'setPageTemplate', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_pageTemplate')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_pageTemplate')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_pageTemplate');
+            const valid = form.reportValidity();
+          });
+
           // PATCH prerequisiteArticleIds
           document.querySelector('#Page_prerequisiteArticleIds')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_prerequisiteArticleIds');
@@ -487,7 +508,7 @@ Promise.all([
             const valid = form.checkValidity();
             if(valid) {
               patchSitePageVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setLabels', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , 'setLabels', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }

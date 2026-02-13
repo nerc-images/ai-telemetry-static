@@ -667,6 +667,59 @@
 {%- macro htmNamespaceTerminatingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputNamespaceTerminatingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputUserPageProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_userPage">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <div class="button-on-left ">
+                    <wa-button variant="brand"
+                        id="{{classApiMethodMethod}}_userPage"
+                        placeholder="[String] status report"
+                        label="status report"
+                        hint="View the current status report for this project. "
+                        class="button-on-left {{classApiMethodMethod}}_userPage classProject inputProject{{ result.projectResource }}UserPage "
+                        name="setUserPage"
+                        href="{{ result.userPage | e }}"
+                        >
+                      status report
+                    </wa-button>
+                  </div>
+                  <div class="button-description-on-right ">View the current status report for this project. </div>
+  {%- else %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] status report"
+                      label="status report"
+                      hint="View the current status report for this project. "
+                      id="{{classApiMethodMethod}}_userPage"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_userPage setUserPage classProject inputProject{{ result.projectResource }}UserPage "
+                      name="setUserPage"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_userPage setUserPage classProject inputProject{{ result.projectResource }}UserPage "
+                      name="setUserPage"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_userPage valueUserPage classProject inputProject{{ result.projectResource }}UserPage "
+                      name="userPage"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.userPage | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmUserPageProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputUserPageProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 
 {%- macro htmFormButton_patchProject() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchProject" duration="5000" closable class="wa-header-l ">
@@ -820,6 +873,16 @@
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmUserPageProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmUserPageProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmUserPageProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -982,6 +1045,16 @@
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmUserPageProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmUserPageProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmUserPageProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -1225,6 +1298,16 @@
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmUserPageProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmUserPageProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmUserPageProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>

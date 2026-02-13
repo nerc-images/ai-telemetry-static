@@ -74,7 +74,7 @@
       function htmLegendAiNode(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
-        var url = result.locationLinks[index];
+        var url = null;
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
@@ -451,7 +451,6 @@
             </div>
             <span class="wa-heading-m ">no AI node found</span>
             <p class="wa-caption-l ">A Red Hat OpenShift node containing GPUs</p>
-{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -467,7 +466,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listAiNode" id="listAiNode" class="listAiNode"  value='{{ toJsonArrayStringInApostrophes(listAiNode) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageAiNode() }}
+{% endif -%}
 {%- endblock htmFormAiNodePage %}
         </div>
 {%- endblock htmBodyMiddleAiNodePage %}

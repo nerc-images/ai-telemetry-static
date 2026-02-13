@@ -342,7 +342,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster order found</span>
             <p class="wa-caption-l ">Manage your own Red Hat OpenShift cluster in the cloud. </p>
-{% include en-us/search/cluster-order/ClusterOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -358,7 +357,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listClusterOrder" id="listClusterOrder" class="listClusterOrder"  value='{{ toJsonArrayStringInApostrophes(listClusterOrder) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageClusterOrder() }}
+{% endif -%}
 {%- endblock htmFormClusterOrderPage %}
         </div>
 {%- endblock htmBodyMiddleClusterOrderPage %}

@@ -1,7 +1,7 @@
 
-{%- macro htmButton_patchBareMetalOrder() %}<wa-button variant="brand" id="htmButton_patchBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchBareMetalOrder() %}<wa-button variant="brand" id="htmButton_patchBareMetalOrder"  data-dialog="open patchBareMetalOrderDialog" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postBareMetalOrder() %}<wa-button variant="brand" id="htmButton_postBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postBareMetalOrder() %}<wa-button variant="brand" id="htmButton_postBareMetalOrder"  data-dialog="open postBareMetalOrderDialog" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deleteBareMetalOrder() %}<wa-button variant="brand" id="htmButton_deleteBareMetalOrder" data-pk={{ result.pk | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 

@@ -299,7 +299,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal order found</span>
             <p class="wa-caption-l ">A bare metal order</p>
-{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -315,6 +314,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
 {%- endblock htmBodyStartBareMetalOrderPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -327,7 +327,6 @@
 {% include en-us/search/bare-metal-order/BareMetalOrderSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalOrderPage %}

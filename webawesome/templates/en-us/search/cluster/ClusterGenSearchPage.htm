@@ -73,7 +73,7 @@
       function htmLegendCluster(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
-        var url = result.locationLinks[index];
+        var url = null;
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
@@ -391,7 +391,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster found</span>
             <p class="wa-caption-l ">A Red Hat OpenShift cluster containing GPUs</p>
-{% include en-us/search/cluster/ClusterSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -407,6 +406,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/cluster/ClusterSearchForm.htm %}
 {%- endblock htmBodyStartClusterPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -419,7 +419,6 @@
 {% include en-us/search/cluster/ClusterSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/cluster/ClusterSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterPage %}

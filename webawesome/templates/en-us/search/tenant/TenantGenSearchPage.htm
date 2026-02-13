@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no tenant found</span>
             <p class="wa-caption-l ">Tenants are separate organizations sharing the same cloud resources. </p>
-{% include en-us/search/tenant/TenantSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/tenant/TenantSearchForm.htm %}
 {%- endblock htmBodyStartTenantPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/tenant/TenantSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/tenant/TenantSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleTenantPage %}
