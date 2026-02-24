@@ -1059,11 +1059,12 @@ function suggestAiNodeHubResource(filters, $list, nodeResource = null, hubResour
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['hubResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(nodeResource.toString()) : val == hubResource);
+        var checked = val == null ? false : (hubResource != null && val === hubResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_hubResource_' + nodeResource + '_hubResource_' + o['hubResource']);
         $input.setAttribute('name', 'hubResource');
@@ -1107,11 +1108,12 @@ function suggestAiNodeClusterResource(filters, $list, nodeResource = null, clust
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['clusterResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(nodeResource.toString()) : val == clusterResource);
+        var checked = val == null ? false : (clusterResource != null && val === clusterResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_clusterResource_' + nodeResource + '_clusterResource_' + o['clusterResource']);
         $input.setAttribute('name', 'clusterResource');

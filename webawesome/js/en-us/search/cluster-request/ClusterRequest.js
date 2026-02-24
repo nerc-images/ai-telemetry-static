@@ -626,11 +626,12 @@ function suggestClusterRequestClusterTemplateTitle(filters, $list, name = null, 
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['title'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(name.toString()) : val == clusterTemplateTitle);
+        var checked = val == null ? false : (clusterTemplateTitle != null && val === clusterTemplateTitle.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_clusterTemplateTitle_' + name + '_title_' + o['title']);
         $input.setAttribute('name', 'title');
@@ -674,11 +675,12 @@ function suggestClusterRequestUserId(filters, $list, name = null, userId = null,
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['userId'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(name.toString()) : val == userId);
+        var checked = val == null ? false : (userId != null && val === userId.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_userId_' + name + '_userId_' + o['userId']);
         $input.setAttribute('name', 'userId');

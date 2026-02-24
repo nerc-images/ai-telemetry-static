@@ -1,0 +1,541 @@
+{%- macro inputPkClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="ClusterOrder_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-id={{ result.id | tojson }}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_pk setPk classClusterOrder inputClusterOrder{{ result.id }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_pk setPk classClusterOrder inputClusterOrder{{ result.id }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_pk valuePk classClusterOrder inputClusterOrder{{ result.id }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_created datetimepicker setCreated classClusterOrder inputClusterOrder{{ result.id }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="ClusterOrder_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-id={{ result.id | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_modified datetimepicker setModified classClusterOrder inputClusterOrder{{ result.id }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="ClusterOrder_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-id={{ result.id | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="ClusterOrder_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_archived classClusterOrder inputClusterOrder{{ result.id }}Archived "
+                      name="setArchived"
+                      data-id={{ result.id | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="ClusterOrder_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="ClusterOrder_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_archived classClusterOrder inputClusterOrder{{ result.id }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_archived classClusterOrder inputClusterOrder{{ result.id }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_archived setArchived valueArchived classClusterOrder inputClusterOrder{{ result.id }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-id={{ result.id | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputIdClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_id">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] order ID"
+                      label="order ID"
+                      hint="The ID of this order"
+                      id="ClusterOrder_{{classApiMethodMethod}}_id"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-id={{ result.id | tojson }}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_id setId classClusterOrder inputClusterOrder{{ result.id }}Id "
+                      name="setId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_id setId classClusterOrder inputClusterOrder{{ result.id }}Id "
+                      name="setId"
+    {%- else %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_id valueId classClusterOrder inputClusterOrder{{ result.id }}Id "
+                      name="id"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.id | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmIdClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputIdClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTemplateIdClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_templateId">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="ClusterOrder_{{classApiMethodMethod}}_templateId_clear"
+                        class="label-on-left ClusterOrder_classApiMethodMethod}}_templateId_clear templateId_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="order template id"
+                      label="order template id"
+                      hint="The template id used for this order"
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_templateId valueObjectSuggest suggestTemplateId "
+                      name="setTemplateId"
+                      id="ClusterOrder_{{classApiMethodMethod}}_templateId"
+                      data-list="listClusterOrderTemplateId_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{{result.templateId | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTemplateIdClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputTemplateIdClusterOrderPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate an OpenShift cluster template to this OpenShift cluster order
+                </div>
+                <ul class="label-on-left-ul " id="listClusterOrderTemplateId_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postClusterTemplate() }}                  <wa-button
+                       id="ClusterOrder_{{classApiMethodMethod}}_templateId_add"
+                       data-dialog="open postClusterTemplateDialog"                      >add an OpenShift cluster template</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputStateClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_state">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] order state"
+                      label="order state"
+                      hint="The state of this order"
+                      id="ClusterOrder_{{classApiMethodMethod}}_state"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-id={{ result.id | tojson }}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_state setState classClusterOrder inputClusterOrder{{ result.id }}State "
+                      name="setState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_state setState classClusterOrder inputClusterOrder{{ result.id }}State "
+                      name="setState"
+    {%- else %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_state valueState classClusterOrder inputClusterOrder{{ result.id }}State "
+                      name="state"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.state | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmStateClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputStateClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputClusterIdClusterOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_clusterId">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] order cluster id"
+                      label="order cluster id"
+                      hint="The cluster id associated with the order"
+                      id="ClusterOrder_{{classApiMethodMethod}}_clusterId"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-id={{ result.id | tojson }}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_clusterId setClusterId classClusterOrder inputClusterOrder{{ result.id }}ClusterId "
+                      name="setClusterId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_clusterId setClusterId classClusterOrder inputClusterOrder{{ result.id }}ClusterId "
+                      name="setClusterId"
+    {%- else %}
+                      class="label-on-left {{ClusterOrder_classApiMethodMethod}}_clusterId valueClusterId classClusterOrder inputClusterOrder{{ result.id }}ClusterId "
+                      name="clusterId"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.clusterId | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmClusterIdClusterOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputClusterIdClusterOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchClusterOrder() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchClusterOrder" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchClusterOrder"
+                >Modify OpenShift cluster order</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchClusterOrder"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchClusterOrder() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchClusterOrderDialog" label="Modify OpenShift cluster order">
+          <form id="htmForm_patchClusterOrder" class="round-row primary-smart-border-radius ">
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_patchClusterOrder() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postClusterOrder() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postClusterOrder" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postClusterOrder"
+                >Create an OpenShift cluster order</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postClusterOrder"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postClusterOrder() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="postClusterOrderDialog" label="Create an OpenShift cluster order">
+          <form id="htmForm_postClusterOrder" class="round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_postClusterOrder() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteClusterOrder() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteClusterOrder" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteClusterOrder"
+                >Delete OpenShift cluster order</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteClusterOrder"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteClusterOrder() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteClusterOrderDialog" label="Delete OpenShift cluster order">
+          <form id="htmForm_deleteClusterOrder" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deleteClusterOrder() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportClusterOrder() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportClusterOrder" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportClusterOrder"
+                >Import OpenShift cluster orders</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportClusterOrder"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportClusterOrder() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportClusterOrderDialog" label="Import OpenShift cluster orders">
+          <form id="htmForm_putimportClusterOrder" class="round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'id': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+          </form>
+          {{ htmFormButton_putimportClusterOrder() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageClusterOrder() %}
+        <div with-header with-footer style="--width: 50vw; " id="searchpageClusterOrderDialog" label="Search OpenShift cluster orders">
+          <div id="htmForm_searchpageClusterOrder" class="round-row primary-smart-border-radius ">
+
+            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPkClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmCreatedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmModifiedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmArchivedClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="HtmRow" id="cluster-order-details">
+              <div slot="summary">
+                <span>cluster order details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTemplateIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmStateClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmStateClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmStateClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmClusterIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmClusterIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmClusterIdClusterOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterClusterOrder() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterClusterOrder" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterClusterOrder"
+                >Delete OpenShift cluster order</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterClusterOrder"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterClusterOrder() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterClusterOrderDialog" label="Delete OpenShift cluster order">
+          <form id="htmForm_deletefilterClusterOrder" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deletefilterClusterOrder() }}
+        </wa-dialog>
+{%- endmacro %}

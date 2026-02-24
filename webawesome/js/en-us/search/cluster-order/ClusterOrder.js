@@ -643,11 +643,12 @@ function suggestClusterOrderTemplateId(filters, $list, id = null, templateId = n
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['id'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(id.toString()) : val == templateId);
+        var checked = val == null ? false : (templateId != null && val === templateId.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_templateId_' + id + '_id_' + o['id']);
         $input.setAttribute('name', 'id');

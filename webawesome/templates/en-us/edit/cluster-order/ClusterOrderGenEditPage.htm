@@ -148,21 +148,23 @@
         {% if result.id is defined %}
           function relate_templateId(event) {
             suggestClusterOrderTemplateId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.templateId is defined %}{'name':'fq','value':'id:{{ result.templateId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.id
-                , window.result.templateId
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.id : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.templateId : null
                 , true
                 );
           }
-          document.querySelector('#POST_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#POST_templateId')?.addEventListener('focus', relate_templateId);
-          document.querySelector('#PATCH_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#PATCH_templateId')?.addEventListener('focus', relate_templateId);
-          document.querySelector('#Page_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#Page_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_POST_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_POST_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_PATCH_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_PATCH_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_Page_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_Page_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterTemplate_POST_id')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterTemplate_POST_id')?.addEventListener('focus', relate_templateId);
           {% if "PATCH" in scopes %}
           suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, true);
           {% else %}
@@ -264,6 +266,15 @@
           event.preventDefault();
           deletefilterClusterOrder(event.target);
           return false;
+        });
+
+        document.querySelector('#htmFormButton_postClusterTemplate')?.addEventListener('click', event => {
+          event.preventDefault();
+          postClusterTemplate(document.querySelector('#htmForm_postClusterTemplate')
+              , document.querySelector('#htmFormButton_postClusterTemplate')
+              , (json, target) => {
+                addGlow(target);
+              });
         });
 {%- block htmScriptInitClusterOrderPage %}{%- endblock htmScriptInitClusterOrderPage %}
       });

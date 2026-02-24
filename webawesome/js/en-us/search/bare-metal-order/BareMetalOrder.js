@@ -785,11 +785,12 @@ function suggestBareMetalOrderNetworkId(filters, $list, pk = null, networkId = n
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['id'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(pk.toString()) : val == networkId);
+        var checked = val == null ? false : (networkId != null && val === networkId.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_networkId_' + pk + '_id_' + o['id']);
         $input.setAttribute('name', 'id');

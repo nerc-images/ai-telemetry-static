@@ -231,21 +231,23 @@
         {% if result.nodeResource is defined %}
           function relate_hubResource(event) {
             suggestAiNodeHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.nodeResource
-                , window.result.hubResource
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.nodeResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hubResource : null
                 , true
                 );
           }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#Page_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#Page_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#AiNode_POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#AiNode_POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#AiNode_PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#AiNode_PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#AiNode_Page_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#AiNode_Page_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#Hub_POST_nodeResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#Hub_POST_nodeResource')?.addEventListener('focus', relate_hubResource);
           {% if "PATCH" in scopes %}
           suggestAiNodeHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listAiNodeHubResource_Page'), window.result.nodeResource, window.result.hubResource, true);
           {% else %}
@@ -257,21 +259,23 @@
           {% endif %}
           function relate_clusterResource(event) {
             suggestAiNodeClusterResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.nodeResource
-                , window.result.clusterResource
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.nodeResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.clusterResource : null
                 , true
                 );
           }
-          document.querySelector('#POST_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
-          document.querySelector('#Page_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#Page_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#AiNode_POST_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#AiNode_POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#AiNode_PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#AiNode_PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#AiNode_Page_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#AiNode_Page_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#Cluster_POST_nodeResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#Cluster_POST_nodeResource')?.addEventListener('focus', relate_clusterResource);
           {% if "PATCH" in scopes %}
           suggestAiNodeClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listAiNodeClusterResource_Page'), window.result.nodeResource, window.result.clusterResource, true);
           {% else %}
@@ -373,6 +377,24 @@
           event.preventDefault();
           deletefilterAiNode(event.target);
           return false;
+        });
+
+        document.querySelector('#htmFormButton_postHub')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHub(document.querySelector('#htmForm_postHub')
+              , document.querySelector('#htmFormButton_postHub')
+              , (json, target) => {
+                addGlow(target);
+              });
+        });
+
+        document.querySelector('#htmFormButton_postCluster')?.addEventListener('click', event => {
+          event.preventDefault();
+          postCluster(document.querySelector('#htmForm_postCluster')
+              , document.querySelector('#htmFormButton_postCluster')
+              , (json, target) => {
+                addGlow(target);
+              });
         });
 {%- block htmScriptInitAiNodePage %}{%- endblock htmScriptInitAiNodePage %}
       });
