@@ -8,7 +8,7 @@ Promise.all([
     ]).then(() => {
 
           // PATCH created
-          document.querySelector('#Page_created')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_created')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_created');
             const valid = form.checkValidity();
             if(valid) {
@@ -29,16 +29,16 @@ Promise.all([
               }
             }
           });
-          document.querySelector('#Page_created')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_created')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_created')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_created')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_created');
             const valid = form.reportValidity();
           });
 
           // PATCH archived
-          document.querySelector('#Page_archived')?.addEventListener('click', (event) => {
+          document.querySelector('#BareMetalNode_Page_archived')?.addEventListener('click', (event) => {
             const form = document.querySelector('#PageForm_archived');
             const valid = form.checkValidity();
             if(valid) {
@@ -53,16 +53,16 @@ Promise.all([
               }
             }
           });
-          document.querySelector('#Page_archived')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_archived')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_archived')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_archived')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_archived');
             const valid = form.reportValidity();
           });
 
           // PATCH leaseInfo
-          document.querySelector('#Page_leaseInfo')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_leaseInfo')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_leaseInfo');
             const valid = form.checkValidity();
             if(valid) {
@@ -74,16 +74,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_leaseInfo')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_leaseInfo')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_leaseInfo')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_leaseInfo')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_leaseInfo');
             const valid = form.reportValidity();
           });
 
           // PATCH networkInfo
-          document.querySelector('#Page_networkInfo')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_networkInfo')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_networkInfo');
             const valid = form.checkValidity();
             if(valid) {
@@ -95,16 +95,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_networkInfo')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_networkInfo')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_networkInfo')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_networkInfo')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_networkInfo');
             const valid = form.reportValidity();
           });
 
           // PATCH nodeId
-          document.querySelector('#Page_nodeId')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodeId');
             const valid = form.checkValidity();
             if(valid) {
@@ -116,16 +116,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodeId')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeId')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodeId')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodeId');
             const valid = form.reportValidity();
           });
 
           // PATCH nodeIsMaintenance
-          document.querySelector('#Page_nodeIsMaintenance')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeIsMaintenance')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodeIsMaintenance');
             const valid = form.checkValidity();
             if(valid) {
@@ -137,16 +137,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodeIsMaintenance')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeIsMaintenance')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodeIsMaintenance')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeIsMaintenance')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodeIsMaintenance');
             const valid = form.reportValidity();
           });
 
           // PATCH nodeLinks
-          document.querySelector('#Page_nodeLinks')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeLinks')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodeLinks');
             const valid = form.checkValidity();
             if(valid) {
@@ -158,16 +158,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodeLinks')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeLinks')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodeLinks')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeLinks')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodeLinks');
             const valid = form.reportValidity();
           });
 
           // PATCH nodeName
-          document.querySelector('#Page_nodeName')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeName')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodeName');
             const valid = form.checkValidity();
             if(valid) {
@@ -179,16 +179,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodeName')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeName')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodeName')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeName')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodeName');
             const valid = form.reportValidity();
           });
 
           // PATCH nodePowerState
-          document.querySelector('#Page_nodePowerState')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodePowerState')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodePowerState');
             const valid = form.checkValidity();
             if(valid) {
@@ -200,16 +200,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodePowerState')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodePowerState')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodePowerState')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodePowerState')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodePowerState');
             const valid = form.reportValidity();
           });
 
           // PATCH nodeProvisionState
-          document.querySelector('#Page_nodeProvisionState')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeProvisionState')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodeProvisionState');
             const valid = form.checkValidity();
             if(valid) {
@@ -221,16 +221,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodeProvisionState')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeProvisionState')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodeProvisionState')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeProvisionState')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodeProvisionState');
             const valid = form.reportValidity();
           });
 
           // PATCH nodeResourceClass
-          document.querySelector('#Page_nodeResourceClass')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeResourceClass')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nodeResourceClass');
             const valid = form.checkValidity();
             if(valid) {
@@ -242,16 +242,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_nodeResourceClass')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeResourceClass')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_nodeResourceClass')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_nodeResourceClass')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_nodeResourceClass');
             const valid = form.reportValidity();
           });
 
           // PATCH sessionId
-          document.querySelector('#Page_sessionId')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
@@ -263,16 +263,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_sessionId')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_sessionId')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_sessionId')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_sessionId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.reportValidity();
           });
 
           // PATCH userKey
-          document.querySelector('#Page_userKey')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_userKey')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
@@ -284,16 +284,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_userKey')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_userKey')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_userKey')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_userKey')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.reportValidity();
           });
 
           // PATCH objectTitle
-          document.querySelector('#Page_objectTitle')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_objectTitle')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
@@ -305,16 +305,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_objectTitle')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_objectTitle')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_objectTitle')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_objectTitle')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.reportValidity();
           });
 
           // PATCH displayPage
-          document.querySelector('#Page_displayPage')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_displayPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -326,16 +326,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_displayPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_displayPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_displayPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_displayPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.reportValidity();
           });
 
           // PATCH editPage
-          document.querySelector('#Page_editPage')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_editPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -347,16 +347,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_editPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_editPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_editPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_editPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.reportValidity();
           });
 
           // PATCH userPage
-          document.querySelector('#Page_userPage')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_userPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -368,16 +368,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_userPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_userPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_userPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_userPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.reportValidity();
           });
 
           // PATCH download
-          document.querySelector('#Page_download')?.addEventListener('change', (event) => {
+          document.querySelector('#BareMetalNode_Page_download')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
@@ -389,10 +389,10 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_download')?.addEventListener('focus', (event) => {
+          document.querySelector('#BareMetalNode_Page_download')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_download')?.addEventListener('blur', (event) => {
+          document.querySelector('#BareMetalNode_Page_download')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_download');
             const valid = form.reportValidity();
           });

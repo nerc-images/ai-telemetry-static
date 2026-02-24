@@ -406,6 +406,17 @@ Promise.all([
   document.querySelector('#pageStatsProject_projectDisplayName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Project', 'projectDisplayName', false);
   });
+
+  document.querySelector('#pageSelectSortProject_statusPageTemplateUri')?.addEventListener('change', (event) => {
+    sort('Project', 'statusPageTemplateUri', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_statusPageTemplateUri')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'statusPageTemplateUri', true);
+  });
+  document.querySelector('#pageStatsProject_statusPageTemplateUri')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'statusPageTemplateUri', false);
+  });
           document.querySelector('#fqProject_created')?.addEventListener('change', (event) => {
             fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });

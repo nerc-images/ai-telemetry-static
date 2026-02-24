@@ -148,21 +148,23 @@
         {% if result.pk is defined %}
           function relate_networkId(event) {
             suggestBareMetalOrderNetworkId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.networkId is defined %}{'name':'fq','value':'id:{{ result.networkId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.pk
-                , window.result.networkId
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.pk : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.networkId : null
                 , true
                 );
           }
-          document.querySelector('#POST_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#POST_networkId')?.addEventListener('focus', relate_networkId);
-          document.querySelector('#PATCH_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#PATCH_networkId')?.addEventListener('focus', relate_networkId);
-          document.querySelector('#Page_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#Page_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_PATCH_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_PATCH_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_Page_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_Page_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalNetwork_POST_pk')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalNetwork_POST_pk')?.addEventListener('focus', relate_networkId);
           {% if "PATCH" in scopes %}
           suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true);
           {% else %}
@@ -254,6 +256,15 @@
           event.preventDefault();
           deletefilterBareMetalOrder(event.target);
           return false;
+        });
+
+        document.querySelector('#htmFormButton_postBareMetalNetwork')?.addEventListener('click', event => {
+          event.preventDefault();
+          postBareMetalNetwork(document.querySelector('#htmForm_postBareMetalNetwork')
+              , document.querySelector('#htmFormButton_postBareMetalNetwork')
+              , (json, target) => {
+                addGlow(target);
+              });
         });
 {%- block htmScriptInitBareMetalOrderPage %}{%- endblock htmScriptInitBareMetalOrderPage %}
       });
