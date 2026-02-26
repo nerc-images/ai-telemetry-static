@@ -4,7 +4,6 @@
 {% include en-us/search/cluster/ClusterSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchProject() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}
