@@ -501,25 +501,4 @@ Promise.all([
             const form = document.querySelector('#PageForm_projectResource');
             const valid = form.reportValidity();
           });
-
-          // PATCH statusPageTemplateUri
-          document.querySelector('#Project_Page_statusPageTemplateUri')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_statusPageTemplateUri');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
-                  , 'setStatusPageTemplateUri', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Project_Page_statusPageTemplateUri')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Project_Page_statusPageTemplateUri')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_statusPageTemplateUri');
-            const valid = form.reportValidity();
-          });
 });

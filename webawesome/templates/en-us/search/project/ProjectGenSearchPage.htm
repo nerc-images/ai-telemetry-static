@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 3;
+        --site-results-number-of-columns: 4;
       }
 {{ super() }}
 {%- block htmStyleProjectPage %}
@@ -445,6 +445,11 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    {% if 'GETManager' in scopes -%}
+                    <div></div>
+                    {% if item.userPage is defined -%}
+                    {% endif -%}
+                    {%- endif %}
                   </div>
                   {% for item in listProject%}
                   <div>
@@ -458,6 +463,21 @@
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.projectName | e }}</span>
                     </a>
+                    {% if 'GETManager' in scopes -%}
+                    {% if item.userPage is defined -%}
+                    <wa-button variant="brand"
+                      id="Project_{{classApiMethodMethod}}_userPage"
+                      placeholder="[String] status report"
+                      label="status report"
+                      title="View the current status report for this project. "
+                      class="button-on-left {{Project_classApiMethodMethod}}_userPage classProject inputProject{{ result.projectResource }}UserPage "
+                      name="setUserPage"
+                      href="{{ item.userPage | e }}"
+                      >
+                        status report
+                    </wa-button>
+                    {% endif -%}
+                    {%- endif %}
                   </div>
                   {% endfor %}
               {% if getColumnHubId is defined %}
@@ -469,6 +489,10 @@
                 </div>
               {% endif %}
               {% if getColumnProjectName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnUserPage is defined %}
                 <div>
                 </div>
               {% endif %}

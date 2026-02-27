@@ -114,7 +114,6 @@ async function websocketProjectInner(apiRequest) {
         var inputClusterResource = null;
         var inputProjectResource = null;
         var inputProjectDisplayName = null;
-        var inputStatusPageTemplateUri = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -188,8 +187,6 @@ async function websocketProjectInner(apiRequest) {
           inputProjectResource = $response.querySelector('.Page_projectResource');
         if(vars.includes('projectDisplayName'))
           inputProjectDisplayName = $response.querySelector('.Page_projectDisplayName');
-        if(vars.includes('statusPageTemplateUri'))
-          inputStatusPageTemplateUri = $response.querySelector('.Page_statusPageTemplateUri');
 
         jsWebsocketProject(projectResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -556,16 +553,6 @@ async function websocketProjectInner(apiRequest) {
           addGlow(document.querySelector('.Page_projectDisplayName'));
         }
 
-        if(inputStatusPageTemplateUri) {
-          document.querySelectorAll('.Page_statusPageTemplateUri').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputStatusPageTemplateUri.getAttribute('value');
-            else
-              item.textContent = inputStatusPageTemplateUri.textContent;
-          });
-          addGlow(document.querySelector('.Page_statusPageTemplateUri'));
-        }
-
           pageGraphProject();
       });
     });
@@ -872,10 +859,6 @@ function searchProjectFilters($formFilters) {
     var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
     if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
       filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
-
-    var filterStatusPageTemplateUri = $formFilters.querySelector('.valueStatusPageTemplateUri')?.value;
-    if(filterStatusPageTemplateUri != null && filterStatusPageTemplateUri !== '')
-      filters.push({ name: 'fq', value: 'statusPageTemplateUri:' + filterStatusPageTemplateUri });
   }
   return filters;
 }
@@ -1427,18 +1410,6 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeProjectResource != null && removeProjectResource !== '')
     vals['removeProjectResource'] = removeProjectResource;
 
-  var valueStatusPageTemplateUri = $formValues.querySelector('.valueStatusPageTemplateUri')?.value;
-  var removeStatusPageTemplateUri = $formValues.querySelector('.removeStatusPageTemplateUri')?.value === 'true';
-  var setStatusPageTemplateUri = removeStatusPageTemplateUri ? null : $formValues.querySelector('.setStatusPageTemplateUri')?.value;
-  var addStatusPageTemplateUri = $formValues.querySelector('.addStatusPageTemplateUri')?.value;
-  if(removeStatusPageTemplateUri || setStatusPageTemplateUri != null && setStatusPageTemplateUri !== '')
-    vals['setStatusPageTemplateUri'] = setStatusPageTemplateUri;
-  if(addStatusPageTemplateUri != null && addStatusPageTemplateUri !== '')
-    vals['addStatusPageTemplateUri'] = addStatusPageTemplateUri;
-  var removeStatusPageTemplateUri = $formValues.querySelector('.removeStatusPageTemplateUri')?.value;
-  if(removeStatusPageTemplateUri != null && removeStatusPageTemplateUri !== '')
-    vals['removeStatusPageTemplateUri'] = removeStatusPageTemplateUri;
-
   patchProjectVals(projectResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'projectResource:' + projectResource}], vals, target, success, error);
 }
 
@@ -1608,10 +1579,6 @@ function patchProjectFilters($formFilters) {
     var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
     if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
       filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
-
-    var filterStatusPageTemplateUri = $formFilters.querySelector('.valueStatusPageTemplateUri')?.value;
-    if(filterStatusPageTemplateUri != null && filterStatusPageTemplateUri !== '')
-      filters.push({ name: 'fq', value: 'statusPageTemplateUri:' + filterStatusPageTemplateUri });
   }
   return filters;
 }
@@ -1786,10 +1753,6 @@ async function postProject($formValues, target, success, error) {
   var valueProjectResource = $formValues.querySelector('.valueProjectResource')?.value;
   if(valueProjectResource != null && valueProjectResource !== '')
     vals['projectResource'] = valueProjectResource;
-
-  var valueStatusPageTemplateUri = $formValues.querySelector('.valueStatusPageTemplateUri')?.value;
-  if(valueStatusPageTemplateUri != null && valueStatusPageTemplateUri !== '')
-    vals['statusPageTemplateUri'] = valueStatusPageTemplateUri;
 
   fetch(
     '/en-us/api/project'
