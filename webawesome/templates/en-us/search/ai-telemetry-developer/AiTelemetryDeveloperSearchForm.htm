@@ -1,7 +1,6 @@
 {% include en-us/search/ai-telemetry-developer/AiTelemetryDeveloperSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchAiTelemetryDeveloper() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

@@ -3,7 +3,6 @@
 {% include en-us/search/user/SiteUserSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchClusterRequest() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}
