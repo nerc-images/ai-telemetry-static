@@ -1,7 +1,6 @@
 {% include en-us/search/hub/HubSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchHub() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

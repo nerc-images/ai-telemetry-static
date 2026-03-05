@@ -1,7 +1,6 @@
 {% include en-us/search/bare-metal-network/BareMetalNetworkSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchBareMetalNetwork() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

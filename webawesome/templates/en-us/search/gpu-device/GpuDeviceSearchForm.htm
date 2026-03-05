@@ -4,7 +4,6 @@
 {% include en-us/search/ai-node/AiNodeSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchGpuDevice() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

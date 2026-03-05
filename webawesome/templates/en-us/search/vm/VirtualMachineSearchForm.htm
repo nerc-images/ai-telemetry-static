@@ -3,7 +3,6 @@
 {% include en-us/search/cluster/ClusterSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchVirtualMachine() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

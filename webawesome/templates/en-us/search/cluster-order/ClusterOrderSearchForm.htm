@@ -2,7 +2,6 @@
 {% include en-us/search/cluster-template/ClusterTemplateSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchClusterOrder() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}
