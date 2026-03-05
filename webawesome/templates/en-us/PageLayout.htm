@@ -564,10 +564,14 @@
                 <div class="wa-stack ">
                   <wa-tooltip for="site-button-user-page">see or change your user profile</wa-tooltip>
                   <wa-tooltip for="site-button-logout" placement="right">log out</wa-tooltip>
-                  <div>
+                  <div class="wa-stack ">
                     <wa-button id="site-button-user-page" variant="brand" href="{{ SITE_BASE_URL }}{% if userId is defined %}/en-us/edit/user/{{ userId }}{% else %}/en-us/search/user{% endif %}" label="see or change your user profile">
                       <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-house-user"></i>
                       <span>my user page</span>
+                    </wa-button>
+                    <wa-button id="site-button-logout" variant="brand" onclick="fetch('/refresh').then(refreshResponse => { window.location.reload(); }); return false;" label="refresh user token">
+                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                      <span>refresh user token</span>
                     </wa-button>
                     <wa-button id="site-button-logout" variant="brand" href="{{ logoutUrl }}" label="sign out">
                       <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-from-portal"></i>
