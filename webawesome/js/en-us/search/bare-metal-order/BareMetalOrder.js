@@ -110,65 +110,65 @@ async function websocketBareMetalOrderInner(apiRequest) {
         var inputSolrId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.BareMetalOrder_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.BareMetalOrder_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.BareMetalOrder_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.BareMetalOrder_Page_archived');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.BareMetalOrder_Page_description');
         if(vars.includes('networkId'))
-          inputNetworkId = $response.querySelector('.Page_networkId');
+          inputNetworkId = $response.querySelector('.BareMetalOrder_Page_networkId');
         if(vars.includes('numberOfFc430'))
-          inputNumberOfFc430 = $response.querySelector('.Page_numberOfFc430');
+          inputNumberOfFc430 = $response.querySelector('.BareMetalOrder_Page_numberOfFc430');
         if(vars.includes('numberOfFc830'))
-          inputNumberOfFc830 = $response.querySelector('.Page_numberOfFc830');
+          inputNumberOfFc830 = $response.querySelector('.BareMetalOrder_Page_numberOfFc830');
         if(vars.includes('numberOfR730xd'))
-          inputNumberOfR730xd = $response.querySelector('.Page_numberOfR730xd');
+          inputNumberOfR730xd = $response.querySelector('.BareMetalOrder_Page_numberOfR730xd');
         if(vars.includes('numberOfWhiteboxFlax1'))
-          inputNumberOfWhiteboxFlax1 = $response.querySelector('.Page_numberOfWhiteboxFlax1');
+          inputNumberOfWhiteboxFlax1 = $response.querySelector('.BareMetalOrder_Page_numberOfWhiteboxFlax1');
         if(vars.includes('numberOfLenovoSd650nv2A100'))
-          inputNumberOfLenovoSd650nv2A100 = $response.querySelector('.Page_numberOfLenovoSd650nv2A100');
+          inputNumberOfLenovoSd650nv2A100 = $response.querySelector('.BareMetalOrder_Page_numberOfLenovoSd650nv2A100');
         if(vars.includes('numberOfLenovoSd665nv3H100'))
-          inputNumberOfLenovoSd665nv3H100 = $response.querySelector('.Page_numberOfLenovoSd665nv3H100');
+          inputNumberOfLenovoSd665nv3H100 = $response.querySelector('.BareMetalOrder_Page_numberOfLenovoSd665nv3H100');
         if(vars.includes('image'))
-          inputImage = $response.querySelector('.Page_image');
+          inputImage = $response.querySelector('.BareMetalOrder_Page_image');
         if(vars.includes('sshPublicKey'))
-          inputSshPublicKey = $response.querySelector('.Page_sshPublicKey');
+          inputSshPublicKey = $response.querySelector('.BareMetalOrder_Page_sshPublicKey');
         if(vars.includes('floatingIp'))
-          inputFloatingIp = $response.querySelector('.Page_floatingIp');
+          inputFloatingIp = $response.querySelector('.BareMetalOrder_Page_floatingIp');
         if(vars.includes('status'))
-          inputStatus = $response.querySelector('.Page_status');
+          inputStatus = $response.querySelector('.BareMetalOrder_Page_status');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.BareMetalOrder_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.BareMetalOrder_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.BareMetalOrder_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.BareMetalOrder_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.BareMetalOrder_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.BareMetalOrder_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.BareMetalOrder_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.BareMetalOrder_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.BareMetalOrder_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.BareMetalOrder_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.BareMetalOrder_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.BareMetalOrder_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.BareMetalOrder_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.BareMetalOrder_Page_solrId');
 
         jsWebsocketBareMetalOrder(pk, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -176,303 +176,303 @@ async function websocketBareMetalOrderInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_archived'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_description'));
         }
 
         if(inputNetworkId) {
-          document.querySelectorAll('.Page_networkId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_networkId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNetworkId.getAttribute('value');
             else
               item.textContent = inputNetworkId.textContent;
           });
-          addGlow(document.querySelector('.Page_networkId'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_networkId'));
         }
 
         if(inputNumberOfFc430) {
-          document.querySelectorAll('.Page_numberOfFc430').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_numberOfFc430').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNumberOfFc430.getAttribute('value');
             else
               item.textContent = inputNumberOfFc430.textContent;
           });
-          addGlow(document.querySelector('.Page_numberOfFc430'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_numberOfFc430'));
         }
 
         if(inputNumberOfFc830) {
-          document.querySelectorAll('.Page_numberOfFc830').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_numberOfFc830').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNumberOfFc830.getAttribute('value');
             else
               item.textContent = inputNumberOfFc830.textContent;
           });
-          addGlow(document.querySelector('.Page_numberOfFc830'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_numberOfFc830'));
         }
 
         if(inputNumberOfR730xd) {
-          document.querySelectorAll('.Page_numberOfR730xd').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_numberOfR730xd').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNumberOfR730xd.getAttribute('value');
             else
               item.textContent = inputNumberOfR730xd.textContent;
           });
-          addGlow(document.querySelector('.Page_numberOfR730xd'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_numberOfR730xd'));
         }
 
         if(inputNumberOfWhiteboxFlax1) {
-          document.querySelectorAll('.Page_numberOfWhiteboxFlax1').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_numberOfWhiteboxFlax1').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNumberOfWhiteboxFlax1.getAttribute('value');
             else
               item.textContent = inputNumberOfWhiteboxFlax1.textContent;
           });
-          addGlow(document.querySelector('.Page_numberOfWhiteboxFlax1'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_numberOfWhiteboxFlax1'));
         }
 
         if(inputNumberOfLenovoSd650nv2A100) {
-          document.querySelectorAll('.Page_numberOfLenovoSd650nv2A100').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_numberOfLenovoSd650nv2A100').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNumberOfLenovoSd650nv2A100.getAttribute('value');
             else
               item.textContent = inputNumberOfLenovoSd650nv2A100.textContent;
           });
-          addGlow(document.querySelector('.Page_numberOfLenovoSd650nv2A100'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_numberOfLenovoSd650nv2A100'));
         }
 
         if(inputNumberOfLenovoSd665nv3H100) {
-          document.querySelectorAll('.Page_numberOfLenovoSd665nv3H100').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_numberOfLenovoSd665nv3H100').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNumberOfLenovoSd665nv3H100.getAttribute('value');
             else
               item.textContent = inputNumberOfLenovoSd665nv3H100.textContent;
           });
-          addGlow(document.querySelector('.Page_numberOfLenovoSd665nv3H100'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_numberOfLenovoSd665nv3H100'));
         }
 
         if(inputImage) {
-          document.querySelectorAll('.Page_image').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_image').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputImage.getAttribute('value');
             else
               item.textContent = inputImage.textContent;
           });
-          addGlow(document.querySelector('.Page_image'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_image'));
         }
 
         if(inputSshPublicKey) {
-          document.querySelectorAll('.Page_sshPublicKey').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_sshPublicKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSshPublicKey.getAttribute('value');
             else
               item.textContent = inputSshPublicKey.textContent;
           });
-          addGlow(document.querySelector('.Page_sshPublicKey'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_sshPublicKey'));
         }
 
         if(inputFloatingIp) {
-          document.querySelectorAll('.Page_floatingIp').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_floatingIp').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputFloatingIp.getAttribute('value');
             else
               item.textContent = inputFloatingIp.textContent;
           });
-          addGlow(document.querySelector('.Page_floatingIp'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_floatingIp'));
         }
 
         if(inputStatus) {
-          document.querySelectorAll('.Page_status').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_status').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputStatus.getAttribute('value');
             else
               item.textContent = inputStatus.textContent;
           });
-          addGlow(document.querySelector('.Page_status'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_status'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalOrder_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.BareMetalOrder_Page_solrId'));
         }
 
           pageGraphBareMetalOrder();
@@ -789,23 +789,34 @@ function suggestBareMetalOrderNetworkId(filters, $list, pk = null, networkId = n
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['id'];
+        var inputVar = 'id';
+        var val = o[inputVar];
         var checked = val == null ? false : (networkId != null && val === networkId.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_networkId_' + pk + '_id_' + o['id']);
-        $input.setAttribute('name', 'id');
-        $input.setAttribute('value', o['id']);
+        $input.setAttribute('id', 'GET_networkId_' + pk + '_id_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueNetworkId ');
         if(pk != null) {
           $input.addEventListener('change', function(event) {
-            patchBareMetalOrderVals([{ name: 'fq', value: 'pk:' + pk }], { [(event.target.checked ? 'set' : 'remove') + 'NetworkId']: o['id'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchBareMetalOrderVals([{ name: 'fq', value: 'pk:' + pk }], { [(event.target.checked ? 'set' : 'remove') + 'NetworkId']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestBareMetalOrderNetworkId(filters, $list, pk, o['id'], relate, target);
+                  suggestBareMetalOrderNetworkId(filters, $list, pk, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -819,7 +830,9 @@ function suggestBareMetalOrderNetworkId(filters, $list, pk = null, networkId = n
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchBareMetalNetworkVals(filters, target, success, error);
+  if (typeof searchBareMetalNetworkVals === 'function') {
+    searchBareMetalNetworkVals(filters, target, success, error);
+  }
 }
 
 function suggestBareMetalOrderObjectSuggest($formFilters, $list, target) {

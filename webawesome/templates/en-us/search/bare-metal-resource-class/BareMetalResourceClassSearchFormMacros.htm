@@ -1,4 +1,4 @@
-{%- macro inputPkBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="BareMetalResourceClass_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_pk setPk classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Pk "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_pk setPk classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_pk setPk classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Pk "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_pk setPk classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_pk valuePk classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Pk "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_pk valuePk classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkBareMetalResourceClassPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkBareMetalResourceClassPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_created datetimepicker setCreated classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Created "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_created datetimepicker setCreated classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="BareMetalResourceClass_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedBareMetalResourceClassPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedBareMetalResourceClassPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_modified datetimepicker setModified classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Modified "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_modified datetimepicker setModified classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="BareMetalResourceClass_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedBareMetalResourceClassPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedBareMetalResourceClassPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_archived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_archived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
                       name="setArchived"
                       data-name={{ result.name | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_archived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_archived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_archived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_archived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_archived setArchived valueArchived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_archived setArchived valueArchived classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,7 +153,7 @@
 {%- macro htmArchivedBareMetalResourceClassPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedBareMetalResourceClassPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputNameBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputNameBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_name">
   {%- endif %}
@@ -165,14 +165,14 @@
                       id="BareMetalResourceClass_{{classApiMethodMethod}}_name"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_name setName classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Name "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_name setName classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Name "
                       name="setName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_name setName classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Name "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_name setName classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Name "
                       name="setName"
     {%- else %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_name valueName classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Name "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_name valueName classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Name "
                       name="name"
     {%- endif %}
   {%- endif %}
@@ -189,7 +189,7 @@
 {%- macro htmNameBareMetalResourceClassPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputNameBareMetalResourceClassPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCountBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCountBareMetalResourceClassPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_count">
   {%- endif %}
@@ -201,14 +201,14 @@
                       id="BareMetalResourceClass_{{classApiMethodMethod}}_count"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_count setCount classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Count "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_count setCount classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Count "
                       name="setCount"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_count setCount classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Count "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_count setCount classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Count "
                       name="setCount"
     {%- else %}
-                      class="label-on-left {{BareMetalResourceClass_classApiMethodMethod}}_count valueCount classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Count "
+                      class="label-on-left BareMetalResourceClass_{{classApiMethodMethod}}_count valueCount classBareMetalResourceClass inputBareMetalResourceClass{{ result.name }}Count "
                       name="count"
     {%- endif %}
   {%- endif %}
@@ -235,7 +235,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchBareMetalResourceClass() %}
+{%- macro htmForm_patchBareMetalResourceClass(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchBareMetalResourceClassDialog" label="Modify bare metal resource class">
           <form id="htmForm_patchBareMetalResourceClass" class="round-row primary-smart-border-radius ">
 
@@ -245,22 +245,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -279,7 +279,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postBareMetalResourceClass() %}
+{%- macro htmForm_postBareMetalResourceClass(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postBareMetalResourceClassDialog" label="Create a bare metal resource class">
           <form id="htmForm_postBareMetalResourceClass" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -290,22 +290,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -324,7 +324,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteBareMetalResourceClass() %}
+{%- macro htmForm_deleteBareMetalResourceClass(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteBareMetalResourceClassDialog" label="Delete bare metal resource class">
           <form id="htmForm_deleteBareMetalResourceClass" class="round-row primary-smart-border-radius ">
           </form>
@@ -341,7 +341,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportBareMetalResourceClass() %}
+{%- macro htmForm_putimportBareMetalResourceClass(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportBareMetalResourceClassDialog" label="Import bare metal resource classes">
           <form id="htmForm_putimportBareMetalResourceClass" class="round-row primary-smart-border-radius ">
             <div>
@@ -357,7 +357,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageBareMetalResourceClass() %}
+{%- macro htmForm_searchpageBareMetalResourceClass(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageBareMetalResourceClassDialog" label="Search bare metal resource classes">
           <div id="htmForm_searchpageBareMetalResourceClass" class="round-row primary-smart-border-radius ">
 
@@ -367,44 +367,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -416,22 +416,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCountBareMetalResourceClassPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -449,7 +449,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterBareMetalResourceClass() %}
+{%- macro htmForm_deletefilterBareMetalResourceClass(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterBareMetalResourceClassDialog" label="Delete bare metal resource class">
           <form id="htmForm_deletefilterBareMetalResourceClass" class="round-row primary-smart-border-radius ">
           </form>

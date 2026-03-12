@@ -1,4 +1,4 @@
-{%- macro inputPkBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_pk setPk classBareMetalOrder inputBareMetalOrder{{ result.pk }}Pk "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_pk setPk classBareMetalOrder inputBareMetalOrder{{ result.pk }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_pk setPk classBareMetalOrder inputBareMetalOrder{{ result.pk }}Pk "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_pk setPk classBareMetalOrder inputBareMetalOrder{{ result.pk }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_pk valuePk classBareMetalOrder inputBareMetalOrder{{ result.pk }}Pk "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_pk valuePk classBareMetalOrder inputBareMetalOrder{{ result.pk }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_created datetimepicker setCreated classBareMetalOrder inputBareMetalOrder{{ result.pk }}Created "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_created datetimepicker setCreated classBareMetalOrder inputBareMetalOrder{{ result.pk }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="BareMetalOrder_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_modified datetimepicker setModified classBareMetalOrder inputBareMetalOrder{{ result.pk }}Modified "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_modified datetimepicker setModified classBareMetalOrder inputBareMetalOrder{{ result.pk }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="BareMetalOrder_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_archived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_archived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
                       name="setArchived"
                       data-pk={{ result.pk | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_archived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_archived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_archived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_archived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_archived setArchived valueArchived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_archived setArchived valueArchived classBareMetalOrder inputBareMetalOrder{{ result.pk }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,7 +153,7 @@
 {%- macro htmArchivedBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDescriptionBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputDescriptionBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
@@ -165,14 +165,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_description setDescription classBareMetalOrder inputBareMetalOrder{{ result.pk }}Description "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_description setDescription classBareMetalOrder inputBareMetalOrder{{ result.pk }}Description "
                       name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_description setDescription classBareMetalOrder inputBareMetalOrder{{ result.pk }}Description "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_description setDescription classBareMetalOrder inputBareMetalOrder{{ result.pk }}Description "
                       name="setDescription"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_description valueDescription classBareMetalOrder inputBareMetalOrder{{ result.pk }}Description "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_description valueDescription classBareMetalOrder inputBareMetalOrder{{ result.pk }}Description "
                       name="description"
     {%- endif %}
   {%- endif %}
@@ -189,14 +189,14 @@
 {%- macro htmDescriptionBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputDescriptionBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputNetworkIdBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputNetworkIdBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_networkId">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="BareMetalOrder_{{classApiMethodMethod}}_networkId_clear"
+                        id="{{ idPrefix }}BareMetalOrder_{{classApiMethodMethod}}_networkId{{ idSuffix }}_clear"
                         class="label-on-left BareMetalOrder_classApiMethodMethod}}_networkId_clear networkId_clear "
                         hint="clear"
                         >
@@ -209,13 +209,13 @@
                       placeholder="bare metal network"
                       label="bare metal network"
                       hint="The bare metal network to use for this order. "
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_networkId valueObjectSuggest suggestNetworkId "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_networkId valueObjectSuggest suggestNetworkId "
                       name="setNetworkId"
-                      id="BareMetalOrder_{{classApiMethodMethod}}_networkId"
+                      id="{{ idPrefix }}BareMetalOrder_{{classApiMethodMethod}}_networkId{{ idSuffix }}"
                       data-list="listBareMetalOrderNetworkId_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
-  {% if 'Page' == classApiMethodMethod -%}
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
                       value="{{result.networkId | e }}"
   {% endif -%}
                   >
@@ -227,7 +227,7 @@
 {%- endmacro %}
 
 {%- macro htmNetworkIdBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputNetworkIdBareMetalOrderPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                {{ inputNetworkIdBareMetalOrderPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate a bare metal network to this bare metal order
@@ -237,14 +237,16 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postBareMetalNetwork() }}                  <wa-button
+                  {{ htmForm_postBareMetalNetwork(idSuffix='_BareMetalOrder_POST_networkId') }}
+                  <wa-button
                        id="BareMetalOrder_{{classApiMethodMethod}}_networkId_add"
-                       data-dialog="open postBareMetalNetworkDialog"                      >add a bare metal network</wa-button>
+                       data-dialog="open postBareMetalNetworkDialog"
+                      >add a bare metal network</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputNumberOfFc430BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=0, max=100) %}
+{%- macro inputNumberOfFc430BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', min=0, max=100) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_numberOfFc430">
   {%- endif %}
@@ -259,14 +261,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_numberOfFc430"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfFc430 setNumberOfFc430 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc430 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfFc430 setNumberOfFc430 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc430 "
                       name="setNumberOfFc430"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfFc430 setNumberOfFc430 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc430 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfFc430 setNumberOfFc430 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc430 "
                       name="setNumberOfFc430"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfFc430 valueNumberOfFc430 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc430 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfFc430 valueNumberOfFc430 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc430 "
                       name="numberOfFc430"
     {%- endif %}
   {%- endif %}
@@ -283,7 +285,7 @@
 {%- macro htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, min=0, max=100) %}
                             {{ inputNumberOfFc430BareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=min, max=max) }}
 {%- endmacro %}
-{%- macro inputNumberOfFc830BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=0, max=100) %}
+{%- macro inputNumberOfFc830BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', min=0, max=100) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_numberOfFc830">
   {%- endif %}
@@ -298,14 +300,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_numberOfFc830"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfFc830 setNumberOfFc830 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc830 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfFc830 setNumberOfFc830 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc830 "
                       name="setNumberOfFc830"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfFc830 setNumberOfFc830 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc830 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfFc830 setNumberOfFc830 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc830 "
                       name="setNumberOfFc830"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfFc830 valueNumberOfFc830 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc830 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfFc830 valueNumberOfFc830 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfFc830 "
                       name="numberOfFc830"
     {%- endif %}
   {%- endif %}
@@ -322,7 +324,7 @@
 {%- macro htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, min=0, max=100) %}
                             {{ inputNumberOfFc830BareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=min, max=max) }}
 {%- endmacro %}
-{%- macro inputNumberOfR730xdBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=0, max=100) %}
+{%- macro inputNumberOfR730xdBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', min=0, max=100) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_numberOfR730xd">
   {%- endif %}
@@ -337,14 +339,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_numberOfR730xd"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfR730xd setNumberOfR730xd classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfR730xd "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfR730xd setNumberOfR730xd classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfR730xd "
                       name="setNumberOfR730xd"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfR730xd setNumberOfR730xd classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfR730xd "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfR730xd setNumberOfR730xd classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfR730xd "
                       name="setNumberOfR730xd"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfR730xd valueNumberOfR730xd classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfR730xd "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfR730xd valueNumberOfR730xd classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfR730xd "
                       name="numberOfR730xd"
     {%- endif %}
   {%- endif %}
@@ -361,7 +363,7 @@
 {%- macro htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, min=0, max=100) %}
                             {{ inputNumberOfR730xdBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=min, max=max) }}
 {%- endmacro %}
-{%- macro inputNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=0, max=100) %}
+{%- macro inputNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', min=0, max=100) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_numberOfWhiteboxFlax1">
   {%- endif %}
@@ -376,14 +378,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_numberOfWhiteboxFlax1"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfWhiteboxFlax1 setNumberOfWhiteboxFlax1 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfWhiteboxFlax1 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfWhiteboxFlax1 setNumberOfWhiteboxFlax1 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfWhiteboxFlax1 "
                       name="setNumberOfWhiteboxFlax1"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfWhiteboxFlax1 setNumberOfWhiteboxFlax1 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfWhiteboxFlax1 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfWhiteboxFlax1 setNumberOfWhiteboxFlax1 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfWhiteboxFlax1 "
                       name="setNumberOfWhiteboxFlax1"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfWhiteboxFlax1 valueNumberOfWhiteboxFlax1 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfWhiteboxFlax1 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfWhiteboxFlax1 valueNumberOfWhiteboxFlax1 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfWhiteboxFlax1 "
                       name="numberOfWhiteboxFlax1"
     {%- endif %}
   {%- endif %}
@@ -400,7 +402,7 @@
 {%- macro htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, min=0, max=100) %}
                             {{ inputNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=min, max=max) }}
 {%- endmacro %}
-{%- macro inputNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=0, max=100) %}
+{%- macro inputNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', min=0, max=100) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_numberOfLenovoSd650nv2A100">
   {%- endif %}
@@ -415,14 +417,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd650nv2A100"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfLenovoSd650nv2A100 setNumberOfLenovoSd650nv2A100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd650nv2A100 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd650nv2A100 setNumberOfLenovoSd650nv2A100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd650nv2A100 "
                       name="setNumberOfLenovoSd650nv2A100"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfLenovoSd650nv2A100 setNumberOfLenovoSd650nv2A100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd650nv2A100 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd650nv2A100 setNumberOfLenovoSd650nv2A100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd650nv2A100 "
                       name="setNumberOfLenovoSd650nv2A100"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfLenovoSd650nv2A100 valueNumberOfLenovoSd650nv2A100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd650nv2A100 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd650nv2A100 valueNumberOfLenovoSd650nv2A100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd650nv2A100 "
                       name="numberOfLenovoSd650nv2A100"
     {%- endif %}
   {%- endif %}
@@ -439,7 +441,7 @@
 {%- macro htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, min=0, max=100) %}
                             {{ inputNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=min, max=max) }}
 {%- endmacro %}
-{%- macro inputNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=0, max=100) %}
+{%- macro inputNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', min=0, max=100) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_numberOfLenovoSd665nv3H100">
   {%- endif %}
@@ -454,14 +456,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd665nv3H100"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfLenovoSd665nv3H100 setNumberOfLenovoSd665nv3H100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd665nv3H100 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd665nv3H100 setNumberOfLenovoSd665nv3H100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd665nv3H100 "
                       name="setNumberOfLenovoSd665nv3H100"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfLenovoSd665nv3H100 setNumberOfLenovoSd665nv3H100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd665nv3H100 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd665nv3H100 setNumberOfLenovoSd665nv3H100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd665nv3H100 "
                       name="setNumberOfLenovoSd665nv3H100"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_numberOfLenovoSd665nv3H100 valueNumberOfLenovoSd665nv3H100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd665nv3H100 "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_numberOfLenovoSd665nv3H100 valueNumberOfLenovoSd665nv3H100 classBareMetalOrder inputBareMetalOrder{{ result.pk }}NumberOfLenovoSd665nv3H100 "
                       name="numberOfLenovoSd665nv3H100"
     {%- endif %}
   {%- endif %}
@@ -478,7 +480,7 @@
 {%- macro htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, min=0, max=100) %}
                             {{ inputNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, min=min, max=max) }}
 {%- endmacro %}
-{%- macro inputImageBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputImageBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_image">
   {%- endif %}
@@ -490,14 +492,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_image"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_image setImage classBareMetalOrder inputBareMetalOrder{{ result.pk }}Image "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_image setImage classBareMetalOrder inputBareMetalOrder{{ result.pk }}Image "
                       name="setImage"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_image setImage classBareMetalOrder inputBareMetalOrder{{ result.pk }}Image "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_image setImage classBareMetalOrder inputBareMetalOrder{{ result.pk }}Image "
                       name="setImage"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_image valueImage classBareMetalOrder inputBareMetalOrder{{ result.pk }}Image "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_image valueImage classBareMetalOrder inputBareMetalOrder{{ result.pk }}Image "
                       name="image"
     {%- endif %}
   {%- endif %}
@@ -518,7 +520,7 @@
 {%- macro htmImageBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputImageBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputSshPublicKeyBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputSshPublicKeyBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_sshPublicKey">
   {%- endif %}
@@ -530,14 +532,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_sshPublicKey"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_sshPublicKey setSshPublicKey classBareMetalOrder inputBareMetalOrder{{ result.pk }}SshPublicKey "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_sshPublicKey setSshPublicKey classBareMetalOrder inputBareMetalOrder{{ result.pk }}SshPublicKey "
                       name="setSshPublicKey"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_sshPublicKey setSshPublicKey classBareMetalOrder inputBareMetalOrder{{ result.pk }}SshPublicKey "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_sshPublicKey setSshPublicKey classBareMetalOrder inputBareMetalOrder{{ result.pk }}SshPublicKey "
                       name="setSshPublicKey"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_sshPublicKey valueSshPublicKey classBareMetalOrder inputBareMetalOrder{{ result.pk }}SshPublicKey "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_sshPublicKey valueSshPublicKey classBareMetalOrder inputBareMetalOrder{{ result.pk }}SshPublicKey "
                       name="sshPublicKey"
     {%- endif %}
   {%- endif %}
@@ -554,7 +556,7 @@
 {%- macro htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSshPublicKeyBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputFloatingIpBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, default=false) %}
+{%- macro inputFloatingIpBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', default=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_floatingIp">
   {%- endif %}
@@ -572,14 +574,14 @@
                       label="floating IP"
                       hint="The floating IP of a bare metal fulfillment"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_floatingIp classBareMetalOrder inputBareMetalOrder{{ result.pk }}FloatingIp "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_floatingIp classBareMetalOrder inputBareMetalOrder{{ result.pk }}FloatingIp "
                       name="setFloatingIp"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_floatingIp classBareMetalOrder inputBareMetalOrder{{ result.pk }}FloatingIp "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_floatingIp classBareMetalOrder inputBareMetalOrder{{ result.pk }}FloatingIp "
                       name="setFloatingIp"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_floatingIp setFloatingIp valueFloatingIp classBareMetalOrder inputBareMetalOrder{{ result.pk }}FloatingIp "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_floatingIp setFloatingIp valueFloatingIp classBareMetalOrder inputBareMetalOrder{{ result.pk }}FloatingIp "
                       name="setFloatingIp"
     {%- endif %}
   {%- endif %}
@@ -603,7 +605,7 @@
 {%- macro htmFloatingIpBareMetalOrderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false, default=false) %}
                             {{ inputFloatingIpBareMetalOrderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputStatusBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputStatusBareMetalOrderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_status">
   {%- endif %}
@@ -615,14 +617,14 @@
                       id="BareMetalOrder_{{classApiMethodMethod}}_status"
   {%- if "Page" == classApiMethodMethod %}
                       data-pk={{ result.pk | tojson }}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_status setStatus classBareMetalOrder inputBareMetalOrder{{ result.pk }}Status "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_status setStatus classBareMetalOrder inputBareMetalOrder{{ result.pk }}Status "
                       name="setStatus"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_status setStatus classBareMetalOrder inputBareMetalOrder{{ result.pk }}Status "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_status setStatus classBareMetalOrder inputBareMetalOrder{{ result.pk }}Status "
                       name="setStatus"
     {%- else %}
-                      class="label-on-left {{BareMetalOrder_classApiMethodMethod}}_status valueStatus classBareMetalOrder inputBareMetalOrder{{ result.pk }}Status "
+                      class="label-on-left BareMetalOrder_{{classApiMethodMethod}}_status valueStatus classBareMetalOrder inputBareMetalOrder{{ result.pk }}Status "
                       name="status"
     {%- endif %}
   {%- endif %}
@@ -649,7 +651,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchBareMetalOrder() %}
+{%- macro htmForm_patchBareMetalOrder(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchBareMetalOrderDialog" label="Modify bare metal order">
           <form id="htmForm_patchBareMetalOrder" class="round-row primary-smart-border-radius ">
 
@@ -659,22 +661,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -687,72 +689,72 @@
               <div class="grid-with-subgrid-2col ">
                 {% if resourceClasses | selectattr('name', 'equalto', 'fc430') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'fc830') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
@@ -765,12 +767,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -782,12 +784,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -799,12 +801,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, default=false, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, default=false, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, default=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -823,7 +825,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postBareMetalOrder() %}
+{%- macro htmForm_postBareMetalOrder(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postBareMetalOrderDialog" label="Create a bare metal order">
           <form id="htmForm_postBareMetalOrder" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -834,22 +836,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -862,72 +864,72 @@
               <div class="grid-with-subgrid-2col ">
                 {% if resourceClasses | selectattr('name', 'equalto', 'fc430') | list | count -%}
                 {% if "POST" in scopes -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'fc830') | list | count -%}
                 {% if "POST" in scopes -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | count -%}
                 {% if "POST" in scopes -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | count -%}
                 {% if "POST" in scopes -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | count -%}
                 {% if "POST" in scopes -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | count -%}
                 {% if "POST" in scopes -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
@@ -940,12 +942,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -957,12 +959,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -974,12 +976,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, default=false, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, default=false, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, default=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -998,7 +1000,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteBareMetalOrder() %}
+{%- macro htmForm_deleteBareMetalOrder(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteBareMetalOrderDialog" label="Delete bare metal order">
           <form id="htmForm_deleteBareMetalOrder" class="round-row primary-smart-border-radius ">
           </form>
@@ -1006,7 +1008,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageBareMetalOrder() %}
+{%- macro htmForm_searchpageBareMetalOrder(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageBareMetalOrderDialog" label="Search bare metal orders">
           <div id="htmForm_searchpageBareMetalOrder" class="round-row primary-smart-border-radius ">
 
@@ -1016,44 +1018,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1065,22 +1067,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNetworkIdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1093,72 +1095,72 @@
               <div class="grid-with-subgrid-2col ">
                 {% if resourceClasses | selectattr('name', 'equalto', 'fc430') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count) }}
+                {{ htmNumberOfFc430BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc430') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'fc830') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count) }}
+                {{ htmNumberOfFc830BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'fc830') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count) }}
+                {{ htmNumberOfR730xdBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'r730xd') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count) }}
+                {{ htmNumberOfWhiteboxFlax1BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'whitebox-flax-1') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd650nv2A100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd650nv2-a100') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
 
                 {% if resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | count -%}
                 {% if "PATCH" in scopes -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count) }}
+                {{ htmNumberOfLenovoSd665nv3H100BareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, min=0, max=(resourceClasses | selectattr('name', 'equalto', 'lenovo-sd665nv3-h100') | list | first).count, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
                 {%- endif %}
@@ -1171,12 +1173,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmImageBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmImageBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1188,12 +1190,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSshPublicKeyBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1205,12 +1207,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, default=false, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, default=false, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, default=false) }}
+                {{ htmFloatingIpBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, default=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1222,12 +1224,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmStatusBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmStatusBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmStatusBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmStatusBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmStatusBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmStatusBareMetalOrderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1245,7 +1247,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterBareMetalOrder() %}
+{%- macro htmForm_deletefilterBareMetalOrder(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterBareMetalOrderDialog" label="Delete bare metal order">
           <form id="htmForm_deletefilterBareMetalOrder" class="round-row primary-smart-border-radius ">
           </form>

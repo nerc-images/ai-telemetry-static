@@ -152,11 +152,12 @@
             suggestProjectTenantResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantId,tenantResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.projectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#Project_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
@@ -167,24 +168,27 @@
           document.querySelector('#Project_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#Tenant_POST_projectResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#Tenant_POST_projectResource')?.addEventListener('focus', relate_tenantResource);
-          {% if "PATCH" in scopes %}
-          suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, true);
-          {% else %}
-          suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, false);
-          {% endif %}
-          {% endif %}
+          if(window.result.tenantResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, true, document.getElementById('Project_Page_tenantResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, true, document.getElementById('Project_Page_tenantResource'));
+          {% else -%}
+            {{'  '}}suggestProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listProjectTenantResource_Page'), window.result.projectResource, window.result.tenantResource, false, document.getElementById('Project_Page_tenantResource'));
+          {% endif -%}
+          {% endif -%}
+          }
           function relate_hubResource(event) {
             suggestProjectHubResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,hubResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.projectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hubResource : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#Project_POST_hubResource')?.addEventListener('input', relate_hubResource);
@@ -195,24 +199,27 @@
           document.querySelector('#Project_Page_hubResource')?.addEventListener('focus', relate_hubResource);
           document.querySelector('#Hub_POST_projectResource')?.addEventListener('input', relate_hubResource);
           document.querySelector('#Hub_POST_projectResource')?.addEventListener('focus', relate_hubResource);
-          {% if "PATCH" in scopes %}
-          suggestProjectHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listProjectHubResource_Page'), window.result.projectResource, window.result.hubResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestProjectHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listProjectHubResource_Page'), window.result.projectResource, window.result.hubResource, true);
-          {% else %}
-          suggestProjectHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listProjectHubResource_Page'), window.result.projectResource, window.result.hubResource, false);
-          {% endif %}
-          {% endif %}
+          if(window.result.hubResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestProjectHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listProjectHubResource_Page'), window.result.projectResource, window.result.hubResource, true, document.getElementById('Project_Page_hubResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestProjectHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listProjectHubResource_Page'), window.result.projectResource, window.result.hubResource, true, document.getElementById('Project_Page_hubResource'));
+          {% else -%}
+            {{'  '}}suggestProjectHubResource([{'name':'fq','value':'hubResource:' + window.result.hubResource}], document.querySelector('#listProjectHubResource_Page'), window.result.projectResource, window.result.hubResource, false, document.getElementById('Project_Page_hubResource'));
+          {% endif -%}
+          {% endif -%}
+          }
           function relate_clusterResource(event) {
             suggestProjectClusterResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,clusterResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.projectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.clusterResource : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#Project_POST_clusterResource')?.addEventListener('input', relate_clusterResource);
@@ -223,15 +230,31 @@
           document.querySelector('#Project_Page_clusterResource')?.addEventListener('focus', relate_clusterResource);
           document.querySelector('#Cluster_POST_projectResource')?.addEventListener('input', relate_clusterResource);
           document.querySelector('#Cluster_POST_projectResource')?.addEventListener('focus', relate_clusterResource);
-          {% if "PATCH" in scopes %}
-          suggestProjectClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listProjectClusterResource_Page'), window.result.projectResource, window.result.clusterResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestProjectClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listProjectClusterResource_Page'), window.result.projectResource, window.result.clusterResource, true);
-          {% else %}
-          suggestProjectClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listProjectClusterResource_Page'), window.result.projectResource, window.result.clusterResource, false);
-          {% endif %}
-          {% endif %}
+          if(window.result.clusterResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestProjectClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listProjectClusterResource_Page'), window.result.projectResource, window.result.clusterResource, true, document.getElementById('Project_Page_clusterResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestProjectClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listProjectClusterResource_Page'), window.result.projectResource, window.result.clusterResource, true, document.getElementById('Project_Page_clusterResource'));
+          {% else -%}
+            {{'  '}}suggestProjectClusterResource([{'name':'fq','value':'clusterResource:' + window.result.clusterResource}], document.querySelector('#listProjectClusterResource_Page'), window.result.projectResource, window.result.clusterResource, false, document.getElementById('Project_Page_clusterResource'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function Cluster_POST_hubResource_Project_POST_clusterResource(event) {
+            suggestClusterHubResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.projectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hubResource : null
+                , true
+                , document.querySelector('#Cluster_POST_hubResource_Project_POST_clusterResource')
+                );
+          }
+          document.querySelector('#Cluster_POST_hubResource_Project_POST_clusterResource')?.addEventListener('input', Cluster_POST_hubResource_Project_POST_clusterResource);
+          document.querySelector('#Cluster_POST_hubResource_Project_POST_clusterResource')?.addEventListener('focus', Cluster_POST_hubResource_Project_POST_clusterResource);
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listProject')?.value;
@@ -332,6 +355,8 @@
               , document.querySelector('#htmFormButton_postTenant')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -341,6 +366,8 @@
               , document.querySelector('#htmFormButton_postHub')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -350,6 +377,8 @@
               , document.querySelector('#htmFormButton_postCluster')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitProjectPage %}{%- endblock htmScriptInitProjectPage %}

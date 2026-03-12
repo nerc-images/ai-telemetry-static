@@ -1,4 +1,4 @@
-{%- macro inputPkClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="ClusterRequest_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_pk setPk classClusterRequest inputClusterRequest{{ result.name }}Pk "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_pk setPk classClusterRequest inputClusterRequest{{ result.name }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_pk setPk classClusterRequest inputClusterRequest{{ result.name }}Pk "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_pk setPk classClusterRequest inputClusterRequest{{ result.name }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_pk valuePk classClusterRequest inputClusterRequest{{ result.name }}Pk "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_pk valuePk classClusterRequest inputClusterRequest{{ result.name }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkClusterRequestPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_created datetimepicker setCreated classClusterRequest inputClusterRequest{{ result.name }}Created "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_created datetimepicker setCreated classClusterRequest inputClusterRequest{{ result.name }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="ClusterRequest_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedClusterRequestPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_modified datetimepicker setModified classClusterRequest inputClusterRequest{{ result.name }}Modified "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_modified datetimepicker setModified classClusterRequest inputClusterRequest{{ result.name }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="ClusterRequest_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedClusterRequestPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_archived classClusterRequest inputClusterRequest{{ result.name }}Archived "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_archived classClusterRequest inputClusterRequest{{ result.name }}Archived "
                       name="setArchived"
                       data-name={{ result.name | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_archived classClusterRequest inputClusterRequest{{ result.name }}Archived "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_archived classClusterRequest inputClusterRequest{{ result.name }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_archived classClusterRequest inputClusterRequest{{ result.name }}Archived "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_archived classClusterRequest inputClusterRequest{{ result.name }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_archived setArchived valueArchived classClusterRequest inputClusterRequest{{ result.name }}Archived "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_archived setArchived valueArchived classClusterRequest inputClusterRequest{{ result.name }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,7 +153,7 @@
 {%- macro htmArchivedClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedClusterRequestPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputNameClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputNameClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_name">
   {%- endif %}
@@ -165,14 +165,14 @@
                       id="ClusterRequest_{{classApiMethodMethod}}_name"
   {%- if "Page" == classApiMethodMethod %}
                       data-name={{ result.name | tojson }}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_name setName classClusterRequest inputClusterRequest{{ result.name }}Name "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_name setName classClusterRequest inputClusterRequest{{ result.name }}Name "
                       name="setName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_name setName classClusterRequest inputClusterRequest{{ result.name }}Name "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_name setName classClusterRequest inputClusterRequest{{ result.name }}Name "
                       name="setName"
     {%- else %}
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_name valueName classClusterRequest inputClusterRequest{{ result.name }}Name "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_name valueName classClusterRequest inputClusterRequest{{ result.name }}Name "
                       name="name"
     {%- endif %}
   {%- endif %}
@@ -189,14 +189,14 @@
 {%- macro htmNameClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputNameClusterRequestPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputClusterTemplateTitleClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputClusterTemplateTitleClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_clusterTemplateTitle">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="ClusterRequest_{{classApiMethodMethod}}_clusterTemplateTitle_clear"
+                        id="{{ idPrefix }}ClusterRequest_{{classApiMethodMethod}}_clusterTemplateTitle{{ idSuffix }}_clear"
                         class="label-on-left ClusterRequest_classApiMethodMethod}}_clusterTemplateTitle_clear clusterTemplateTitle_clear "
                         hint="clear"
                         >
@@ -209,13 +209,13 @@
                       placeholder="cluster template"
                       label="cluster template"
                       hint="The cluster template to use for this request. "
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_clusterTemplateTitle valueObjectSuggest suggestClusterTemplateTitle "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_clusterTemplateTitle valueObjectSuggest suggestClusterTemplateTitle "
                       name="setClusterTemplateTitle"
-                      id="ClusterRequest_{{classApiMethodMethod}}_clusterTemplateTitle"
+                      id="{{ idPrefix }}ClusterRequest_{{classApiMethodMethod}}_clusterTemplateTitle{{ idSuffix }}"
                       data-list="listClusterRequestClusterTemplateTitle_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
-  {% if 'Page' == classApiMethodMethod -%}
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
                       value="{{result.clusterTemplateTitle | e }}"
   {% endif -%}
                   >
@@ -227,7 +227,7 @@
 {%- endmacro %}
 
 {%- macro htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputClusterTemplateTitleClusterRequestPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                {{ inputClusterTemplateTitleClusterRequestPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate an OpenShift cluster template to this OpenShift cluster request
@@ -237,21 +237,23 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postClusterTemplate() }}                  <wa-button
+                  {{ htmForm_postClusterTemplate(idSuffix='_ClusterRequest_POST_clusterTemplateTitle') }}
+                  <wa-button
                        id="ClusterRequest_{{classApiMethodMethod}}_clusterTemplateTitle_add"
-                       data-dialog="open postClusterTemplateDialog"                      >add an OpenShift cluster template</wa-button>
+                       data-dialog="open postClusterTemplateDialog"
+                      >add an OpenShift cluster template</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputUserIdClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputUserIdClusterRequestPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_userId">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="ClusterRequest_{{classApiMethodMethod}}_userId_clear"
+                        id="{{ idPrefix }}ClusterRequest_{{classApiMethodMethod}}_userId{{ idSuffix }}_clear"
                         class="label-on-left ClusterRequest_classApiMethodMethod}}_userId_clear userId_clear "
                         hint="clear"
                         >
@@ -264,13 +266,13 @@
                       placeholder="user"
                       label="user"
                       hint="The user who requested the cluster"
-                      class="label-on-left {{ClusterRequest_classApiMethodMethod}}_userId valueObjectSuggest suggestUserId "
+                      class="label-on-left ClusterRequest_{{classApiMethodMethod}}_userId valueObjectSuggest suggestUserId "
                       name="setUserId"
-                      id="ClusterRequest_{{classApiMethodMethod}}_userId"
+                      id="{{ idPrefix }}ClusterRequest_{{classApiMethodMethod}}_userId{{ idSuffix }}"
                       data-list="listClusterRequestUserId_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
-  {% if 'Page' == classApiMethodMethod -%}
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
                       value="{{result.userId | e }}"
   {% endif -%}
                   >
@@ -282,7 +284,7 @@
 {%- endmacro %}
 
 {%- macro htmUserIdClusterRequestPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputUserIdClusterRequestPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                {{ inputUserIdClusterRequestPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate a site user to this OpenShift cluster request
@@ -292,9 +294,11 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postSiteUser() }}                  <wa-button
+                  {{ htmForm_postSiteUser(idSuffix='_ClusterRequest_POST_userId') }}
+                  <wa-button
                        id="ClusterRequest_{{classApiMethodMethod}}_userId_add"
-                       data-dialog="open postSiteUserDialog"                      >add a site user</wa-button>
+                       data-dialog="open postSiteUserDialog"
+                      >add a site user</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -309,7 +313,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchClusterRequest() %}
+{%- macro htmForm_patchClusterRequest(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchClusterRequestDialog" label="Modify OpenShift cluster request">
           <form id="htmForm_patchClusterRequest" class="round-row primary-smart-border-radius ">
 
@@ -319,32 +323,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -363,7 +367,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postClusterRequest() %}
+{%- macro htmForm_postClusterRequest(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postClusterRequestDialog" label="Create an OpenShift cluster request">
           <form id="htmForm_postClusterRequest" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -374,32 +378,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -418,7 +422,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteClusterRequest() %}
+{%- macro htmForm_deleteClusterRequest(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteClusterRequestDialog" label="Delete OpenShift cluster request">
           <form id="htmForm_deleteClusterRequest" class="round-row primary-smart-border-radius ">
           </form>
@@ -435,7 +439,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportClusterRequest() %}
+{%- macro htmForm_putimportClusterRequest(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportClusterRequestDialog" label="Import OpenShift cluster requests">
           <form id="htmForm_putimportClusterRequest" class="round-row primary-smart-border-radius ">
             <div>
@@ -451,7 +455,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageClusterRequest() %}
+{%- macro htmForm_searchpageClusterRequest(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageClusterRequestDialog" label="Search OpenShift cluster requests">
           <div id="htmForm_searchpageClusterRequest" class="round-row primary-smart-border-radius ">
 
@@ -461,44 +465,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmPkClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmPkClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmCreatedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmCreatedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmModifiedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmModifiedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmArchivedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmArchivedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -510,32 +514,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmClusterTemplateTitleClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if userKey in result.userKeys or "PATCH" in scopes or sessionId == result.sessionId -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if userKey in result.userKeys or "GET" in scopes or sessionId == result.sessionId -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmUserIdClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmUserIdClusterRequestPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -553,7 +557,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterClusterRequest() %}
+{%- macro htmForm_deletefilterClusterRequest(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterClusterRequestDialog" label="Delete OpenShift cluster request">
           <form id="htmForm_deletefilterClusterRequest" class="round-row primary-smart-border-radius ">
           </form>

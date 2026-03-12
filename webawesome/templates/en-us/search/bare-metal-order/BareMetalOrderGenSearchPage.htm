@@ -132,7 +132,7 @@
             suggestBareMetalOrderNetworkId(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.networkId is defined %}{'name':'fq','value':'id:{{ result.networkId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,id,pk,editPage,objectTitle' } ] : [{%- if result.networkId is defined %}{'name':'fq','value':'id:{{ result.networkId }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -252,6 +252,8 @@
               , document.querySelector('#htmFormButton_postBareMetalNetwork')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitBareMetalOrderPage %}{%- endblock htmScriptInitBareMetalOrderPage %}

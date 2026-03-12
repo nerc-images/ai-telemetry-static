@@ -133,7 +133,7 @@
             suggestClusterRequestClusterTemplateTitle(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,title,pk,editPage,objectTitle' } ] : [{%- if result.clusterTemplateTitle is defined %}{'name':'fq','value':'title:{{ result.clusterTemplateTitle }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,title,pk,editPage,objectTitle' } ] : [{%- if result.clusterTemplateTitle is defined %}{'name':'fq','value':'title:{{ result.clusterTemplateTitle }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -149,7 +149,7 @@
             suggestClusterRequestUserId(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,userId,pk,editPage,objectTitle' } ] : [{%- if result.userId is defined %}{'name':'fq','value':'userId:{{ result.userId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,userId,userId,pk,editPage,objectTitle' } ] : [{%- if result.userId is defined %}{'name':'fq','value':'userId:{{ result.userId }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -279,6 +279,8 @@
               , document.querySelector('#htmFormButton_postClusterTemplate')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -288,6 +290,8 @@
               , document.querySelector('#htmFormButton_postSiteUser')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitClusterRequestPage %}{%- endblock htmScriptInitClusterRequestPage %}

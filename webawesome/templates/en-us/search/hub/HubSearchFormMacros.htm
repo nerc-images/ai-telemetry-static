@@ -1,4 +1,4 @@
-{%- macro inputPkHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="Hub_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubId }}Pk "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubId }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubId }}Pk "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_pk setPk classHub inputHub{{ result.hubId }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_pk valuePk classHub inputHub{{ result.hubId }}Pk "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_pk valuePk classHub inputHub{{ result.hubId }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{Hub_classApiMethodMethod}}_created datetimepicker setCreated classHub inputHub{{ result.hubId }}Created "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_created datetimepicker setCreated classHub inputHub{{ result.hubId }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="Hub_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{Hub_classApiMethodMethod}}_modified datetimepicker setModified classHub inputHub{{ result.hubId }}Modified "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_modified datetimepicker setModified classHub inputHub{{ result.hubId }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="Hub_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{Hub_classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
                       data-hubId={{ result.hubId | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_archived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_archived setArchived valueArchived classHub inputHub{{ result.hubId }}Archived "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_archived setArchived valueArchived classHub inputHub{{ result.hubId }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,7 +153,7 @@
 {%- macro htmArchivedHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputHubNameHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputHubNameHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_hubName">
   {%- endif %}
@@ -165,14 +165,14 @@
                       id="Hub_{{classApiMethodMethod}}_hubName"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubId }}HubName "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubId }}HubName "
                       name="setHubName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubId }}HubName "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_hubName setHubName classHub inputHub{{ result.hubId }}HubName "
                       name="setHubName"
     {%- else %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_hubName valueHubName classHub inputHub{{ result.hubId }}HubName "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_hubName valueHubName classHub inputHub{{ result.hubId }}HubName "
                       name="hubName"
     {%- endif %}
   {%- endif %}
@@ -189,7 +189,7 @@
 {%- macro htmHubNameHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputHubNameHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputHubIdHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputHubIdHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_hubId">
   {%- endif %}
@@ -201,14 +201,14 @@
                       id="Hub_{{classApiMethodMethod}}_hubId"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubId }}HubId "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubId }}HubId "
                       name="setHubId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubId }}HubId "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_hubId setHubId classHub inputHub{{ result.hubId }}HubId "
                       name="setHubId"
     {%- else %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_hubId valueHubId classHub inputHub{{ result.hubId }}HubId "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_hubId valueHubId classHub inputHub{{ result.hubId }}HubId "
                       name="hubId"
     {%- endif %}
   {%- endif %}
@@ -225,7 +225,7 @@
 {%- macro htmHubIdHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputHubIdHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDescriptionHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputDescriptionHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
@@ -237,14 +237,14 @@
                       id="Hub_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubId }}Description "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubId }}Description "
                       name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubId }}Description "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_description setDescription classHub inputHub{{ result.hubId }}Description "
                       name="setDescription"
     {%- else %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_description valueDescription classHub inputHub{{ result.hubId }}Description "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_description valueDescription classHub inputHub{{ result.hubId }}Description "
                       name="description"
     {%- endif %}
   {%- endif %}
@@ -261,7 +261,7 @@
 {%- macro htmDescriptionHubPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputDescriptionHubPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPageIdHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPageIdHubPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pageId">
   {%- endif %}
@@ -273,14 +273,14 @@
                       id="Hub_{{classApiMethodMethod}}_pageId"
   {%- if "Page" == classApiMethodMethod %}
                       data-hubId={{ result.hubId | tojson }}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubId }}PageId "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubId }}PageId "
                       name="setPageId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubId }}PageId "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_pageId setPageId classHub inputHub{{ result.hubId }}PageId "
                       name="setPageId"
     {%- else %}
-                      class="label-on-left {{Hub_classApiMethodMethod}}_pageId valuePageId classHub inputHub{{ result.hubId }}PageId "
+                      class="label-on-left Hub_{{classApiMethodMethod}}_pageId valuePageId classHub inputHub{{ result.hubId }}PageId "
                       name="pageId"
     {%- endif %}
   {%- endif %}
@@ -307,7 +307,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchHub() %}
+{%- macro htmForm_patchHub(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHubDialog" label="Modify ACM hub">
           <form id="htmForm_patchHub" class="round-row primary-smart-border-radius ">
 
@@ -317,32 +317,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -354,12 +354,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -378,7 +378,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postHub() %}
+{%- macro htmForm_postHub(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postHubDialog" label="Create an ACM hub">
           <form id="htmForm_postHub" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -389,32 +389,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -426,12 +426,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -450,7 +450,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteHub() %}
+{%- macro htmForm_deleteHub(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHubDialog" label="Delete ACM hub">
           <form id="htmForm_deleteHub" class="round-row primary-smart-border-radius ">
           </form>
@@ -467,7 +467,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportHub() %}
+{%- macro htmForm_putimportHub(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHubDialog" label="Import ACM hubs">
           <form id="htmForm_putimportHub" class="round-row primary-smart-border-radius ">
             <div>
@@ -483,7 +483,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageHub() %}
+{%- macro htmForm_searchpageHub(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageHubDialog" label="Search ACM hubs">
           <div id="htmForm_searchpageHub" class="round-row primary-smart-border-radius ">
 
@@ -493,44 +493,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -542,32 +542,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHubNameHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHubNameHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHubIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHubIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -579,12 +579,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageIdHubPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -602,7 +602,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterHub() %}
+{%- macro htmForm_deletefilterHub(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHubDialog" label="Delete ACM hub">
           <form id="htmForm_deletefilterHub" class="round-row primary-smart-border-radius ">
           </form>

@@ -150,11 +150,12 @@
             suggestBareMetalOrderNetworkId(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,id,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.pk : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.networkId : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('input', relate_networkId);
@@ -165,15 +166,17 @@
           document.querySelector('#BareMetalOrder_Page_networkId')?.addEventListener('focus', relate_networkId);
           document.querySelector('#BareMetalNetwork_POST_pk')?.addEventListener('input', relate_networkId);
           document.querySelector('#BareMetalNetwork_POST_pk')?.addEventListener('focus', relate_networkId);
-          {% if "PATCH" in scopes %}
-          suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true);
-          {% else %}
-          suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, false);
-          {% endif %}
-          {% endif %}
+          if(window.result.networkId) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true, document.getElementById('BareMetalOrder_Page_networkId'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true, document.getElementById('BareMetalOrder_Page_networkId'));
+          {% else -%}
+            {{'  '}}suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, false, document.getElementById('BareMetalOrder_Page_networkId'));
+          {% endif -%}
+          {% endif -%}
+          }
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listBareMetalOrder')?.value;
@@ -264,6 +267,8 @@
               , document.querySelector('#htmFormButton_postBareMetalNetwork')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitBareMetalOrderPage %}{%- endblock htmScriptInitBareMetalOrderPage %}
