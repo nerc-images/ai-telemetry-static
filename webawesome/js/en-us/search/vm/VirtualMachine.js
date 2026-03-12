@@ -109,9 +109,9 @@ async function websocketVirtualMachineInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputVmDisplayName = null;
         var inputHubResource = null;
         var inputVmResource = null;
-        var inputVmDisplayName = null;
         var inputLocationColors = null;
         var inputLocationTitles = null;
         var inputLocationLinks = null;
@@ -179,12 +179,12 @@ async function websocketVirtualMachineInner(apiRequest) {
           inputObjectText = $response.querySelector('.VirtualMachine_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.VirtualMachine_Page_solrId');
+        if(vars.includes('vmDisplayName'))
+          inputVmDisplayName = $response.querySelector('.VirtualMachine_Page_vmDisplayName');
         if(vars.includes('hubResource'))
           inputHubResource = $response.querySelector('.VirtualMachine_Page_hubResource');
         if(vars.includes('vmResource'))
           inputVmResource = $response.querySelector('.VirtualMachine_Page_vmResource');
-        if(vars.includes('vmDisplayName'))
-          inputVmDisplayName = $response.querySelector('.VirtualMachine_Page_vmDisplayName');
         if(vars.includes('locationColors'))
           inputLocationColors = $response.querySelector('.VirtualMachine_Page_locationColors');
         if(vars.includes('locationTitles'))
@@ -509,6 +509,16 @@ async function websocketVirtualMachineInner(apiRequest) {
           addGlow(document.querySelector('.VirtualMachine_Page_solrId'));
         }
 
+        if(inputVmDisplayName) {
+          document.querySelectorAll('.VirtualMachine_Page_vmDisplayName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVmDisplayName.getAttribute('value');
+            else
+              item.textContent = inputVmDisplayName.textContent;
+          });
+          addGlow(document.querySelector('.VirtualMachine_Page_vmDisplayName'));
+        }
+
         if(inputHubResource) {
           document.querySelectorAll('.VirtualMachine_Page_hubResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -527,16 +537,6 @@ async function websocketVirtualMachineInner(apiRequest) {
               item.textContent = inputVmResource.textContent;
           });
           addGlow(document.querySelector('.VirtualMachine_Page_vmResource'));
-        }
-
-        if(inputVmDisplayName) {
-          document.querySelectorAll('.VirtualMachine_Page_vmDisplayName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputVmDisplayName.getAttribute('value');
-            else
-              item.textContent = inputVmDisplayName.textContent;
-          });
-          addGlow(document.querySelector('.VirtualMachine_Page_vmDisplayName'));
         }
 
         if(inputLocationColors) {
@@ -1014,6 +1014,10 @@ function searchVirtualMachineFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
@@ -1021,10 +1025,6 @@ function searchVirtualMachineFilters($formFilters) {
     var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
     if(filterVmResource != null && filterVmResource !== '')
       filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
-
-    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
-    if(filterVmDisplayName != null && filterVmDisplayName !== '')
-      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
 
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
@@ -1677,6 +1677,10 @@ function patchVirtualMachineFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
@@ -1684,10 +1688,6 @@ function patchVirtualMachineFilters($formFilters) {
     var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
     if(filterVmResource != null && filterVmResource !== '')
       filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
-
-    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
-    if(filterVmDisplayName != null && filterVmDisplayName !== '')
-      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
 
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
