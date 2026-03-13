@@ -121,87 +121,87 @@ async function websocketClusterInner(apiRequest) {
         var inputLocationLinks = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.Cluster_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.Cluster_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.Cluster_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.Cluster_Page_archived');
         if(vars.includes('hubId'))
-          inputHubId = $response.querySelector('.Page_hubId');
+          inputHubId = $response.querySelector('.Cluster_Page_hubId');
         if(vars.includes('clusterName'))
-          inputClusterName = $response.querySelector('.Page_clusterName');
+          inputClusterName = $response.querySelector('.Cluster_Page_clusterName');
         if(vars.includes('hubCluster'))
-          inputHubCluster = $response.querySelector('.Page_hubCluster');
+          inputHubCluster = $response.querySelector('.Cluster_Page_hubCluster');
         if(vars.includes('clusterNameMetrics'))
-          inputClusterNameMetrics = $response.querySelector('.Page_clusterNameMetrics');
+          inputClusterNameMetrics = $response.querySelector('.Cluster_Page_clusterNameMetrics');
         if(vars.includes('uniqueName'))
-          inputUniqueName = $response.querySelector('.Page_uniqueName');
+          inputUniqueName = $response.querySelector('.Cluster_Page_uniqueName');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.Cluster_Page_description');
         if(vars.includes('location'))
-          inputLocation = $response.querySelector('.Page_location');
+          inputLocation = $response.querySelector('.Cluster_Page_location');
         if(vars.includes('aiNodesTotal'))
-          inputAiNodesTotal = $response.querySelector('.Page_aiNodesTotal');
+          inputAiNodesTotal = $response.querySelector('.Cluster_Page_aiNodesTotal');
         if(vars.includes('gpuDevicesTotal'))
-          inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
+          inputGpuDevicesTotal = $response.querySelector('.Cluster_Page_gpuDevicesTotal');
         if(vars.includes('vmsTotal'))
-          inputVmsTotal = $response.querySelector('.Page_vmsTotal');
+          inputVmsTotal = $response.querySelector('.Cluster_Page_vmsTotal');
         if(vars.includes('grafanaUrl'))
-          inputGrafanaUrl = $response.querySelector('.Page_grafanaUrl');
+          inputGrafanaUrl = $response.querySelector('.Cluster_Page_grafanaUrl');
         if(vars.includes('cpuCoresTotal'))
-          inputCpuCoresTotal = $response.querySelector('.Page_cpuCoresTotal');
+          inputCpuCoresTotal = $response.querySelector('.Cluster_Page_cpuCoresTotal');
         if(vars.includes('memoryBytesTotal'))
-          inputMemoryBytesTotal = $response.querySelector('.Page_memoryBytesTotal');
+          inputMemoryBytesTotal = $response.querySelector('.Cluster_Page_memoryBytesTotal');
         if(vars.includes('id'))
-          inputId = $response.querySelector('.Page_id');
+          inputId = $response.querySelector('.Cluster_Page_id');
         if(vars.includes('ngsildTenant'))
-          inputNgsildTenant = $response.querySelector('.Page_ngsildTenant');
+          inputNgsildTenant = $response.querySelector('.Cluster_Page_ngsildTenant');
         if(vars.includes('ngsildPath'))
-          inputNgsildPath = $response.querySelector('.Page_ngsildPath');
+          inputNgsildPath = $response.querySelector('.Cluster_Page_ngsildPath');
         if(vars.includes('ngsildContext'))
-          inputNgsildContext = $response.querySelector('.Page_ngsildContext');
+          inputNgsildContext = $response.querySelector('.Cluster_Page_ngsildContext');
         if(vars.includes('ngsildData'))
-          inputNgsildData = $response.querySelector('.Page_ngsildData');
+          inputNgsildData = $response.querySelector('.Cluster_Page_ngsildData');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.Cluster_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.Cluster_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.Cluster_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.Cluster_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.Cluster_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.Cluster_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.Cluster_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.Cluster_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.Cluster_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.Cluster_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.Cluster_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.Cluster_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.Cluster_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.Cluster_Page_solrId');
         if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
+          inputHubResource = $response.querySelector('.Cluster_Page_hubResource');
         if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
+          inputClusterResource = $response.querySelector('.Cluster_Page_clusterResource');
         if(vars.includes('locationColors'))
-          inputLocationColors = $response.querySelector('.Page_locationColors');
+          inputLocationColors = $response.querySelector('.Cluster_Page_locationColors');
         if(vars.includes('locationTitles'))
-          inputLocationTitles = $response.querySelector('.Page_locationTitles');
+          inputLocationTitles = $response.querySelector('.Cluster_Page_locationTitles');
         if(vars.includes('locationLinks'))
-          inputLocationLinks = $response.querySelector('.Page_locationLinks');
+          inputLocationLinks = $response.querySelector('.Cluster_Page_locationLinks');
 
         jsWebsocketCluster(clusterResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -209,413 +209,413 @@ async function websocketClusterInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.Cluster_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.Cluster_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.Cluster_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.Cluster_Page_archived'));
         }
 
         if(inputHubId) {
-          document.querySelectorAll('.Page_hubId').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_hubId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubId.getAttribute('value');
             else
               item.textContent = inputHubId.textContent;
           });
-          addGlow(document.querySelector('.Page_hubId'));
+          addGlow(document.querySelector('.Cluster_Page_hubId'));
         }
 
         if(inputClusterName) {
-          document.querySelectorAll('.Page_clusterName').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_clusterName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterName.getAttribute('value');
             else
               item.textContent = inputClusterName.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterName'));
+          addGlow(document.querySelector('.Cluster_Page_clusterName'));
         }
 
         if(inputHubCluster) {
-          document.querySelectorAll('.Page_hubCluster').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_hubCluster').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubCluster.getAttribute('value');
             else
               item.textContent = inputHubCluster.textContent;
           });
-          addGlow(document.querySelector('.Page_hubCluster'));
+          addGlow(document.querySelector('.Cluster_Page_hubCluster'));
         }
 
         if(inputClusterNameMetrics) {
-          document.querySelectorAll('.Page_clusterNameMetrics').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_clusterNameMetrics').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterNameMetrics.getAttribute('value');
             else
               item.textContent = inputClusterNameMetrics.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterNameMetrics'));
+          addGlow(document.querySelector('.Cluster_Page_clusterNameMetrics'));
         }
 
         if(inputUniqueName) {
-          document.querySelectorAll('.Page_uniqueName').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_uniqueName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUniqueName.getAttribute('value');
             else
               item.textContent = inputUniqueName.textContent;
           });
-          addGlow(document.querySelector('.Page_uniqueName'));
+          addGlow(document.querySelector('.Cluster_Page_uniqueName'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.Cluster_Page_description'));
         }
 
         if(inputLocation) {
-          document.querySelectorAll('.Page_location').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_location').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocation.getAttribute('value');
             else
               item.textContent = inputLocation.textContent;
           });
-          addGlow(document.querySelector('.Page_location'));
+          addGlow(document.querySelector('.Cluster_Page_location'));
         }
 
         if(inputAiNodesTotal) {
-          document.querySelectorAll('.Page_aiNodesTotal').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_aiNodesTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAiNodesTotal.getAttribute('value');
             else
               item.textContent = inputAiNodesTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_aiNodesTotal'));
+          addGlow(document.querySelector('.Cluster_Page_aiNodesTotal'));
         }
 
         if(inputGpuDevicesTotal) {
-          document.querySelectorAll('.Page_gpuDevicesTotal').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_gpuDevicesTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputGpuDevicesTotal.getAttribute('value');
             else
               item.textContent = inputGpuDevicesTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_gpuDevicesTotal'));
+          addGlow(document.querySelector('.Cluster_Page_gpuDevicesTotal'));
         }
 
         if(inputVmsTotal) {
-          document.querySelectorAll('.Page_vmsTotal').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_vmsTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputVmsTotal.getAttribute('value');
             else
               item.textContent = inputVmsTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_vmsTotal'));
+          addGlow(document.querySelector('.Cluster_Page_vmsTotal'));
         }
 
         if(inputGrafanaUrl) {
-          document.querySelectorAll('.Page_grafanaUrl').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_grafanaUrl').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputGrafanaUrl.getAttribute('value');
             else
               item.textContent = inputGrafanaUrl.textContent;
           });
-          addGlow(document.querySelector('.Page_grafanaUrl'));
+          addGlow(document.querySelector('.Cluster_Page_grafanaUrl'));
         }
 
         if(inputCpuCoresTotal) {
-          document.querySelectorAll('.Page_cpuCoresTotal').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_cpuCoresTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCpuCoresTotal.getAttribute('value');
             else
               item.textContent = inputCpuCoresTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_cpuCoresTotal'));
+          addGlow(document.querySelector('.Cluster_Page_cpuCoresTotal'));
         }
 
         if(inputMemoryBytesTotal) {
-          document.querySelectorAll('.Page_memoryBytesTotal').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_memoryBytesTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputMemoryBytesTotal.getAttribute('value');
             else
               item.textContent = inputMemoryBytesTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_memoryBytesTotal'));
+          addGlow(document.querySelector('.Cluster_Page_memoryBytesTotal'));
         }
 
         if(inputId) {
-          document.querySelectorAll('.Page_id').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_id').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputId.getAttribute('value');
             else
               item.textContent = inputId.textContent;
           });
-          addGlow(document.querySelector('.Page_id'));
+          addGlow(document.querySelector('.Cluster_Page_id'));
         }
 
         if(inputNgsildTenant) {
-          document.querySelectorAll('.Page_ngsildTenant').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_ngsildTenant').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildTenant.getAttribute('value');
             else
               item.textContent = inputNgsildTenant.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildTenant'));
+          addGlow(document.querySelector('.Cluster_Page_ngsildTenant'));
         }
 
         if(inputNgsildPath) {
-          document.querySelectorAll('.Page_ngsildPath').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_ngsildPath').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildPath.getAttribute('value');
             else
               item.textContent = inputNgsildPath.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildPath'));
+          addGlow(document.querySelector('.Cluster_Page_ngsildPath'));
         }
 
         if(inputNgsildContext) {
-          document.querySelectorAll('.Page_ngsildContext').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_ngsildContext').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildContext.getAttribute('value');
             else
               item.textContent = inputNgsildContext.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildContext'));
+          addGlow(document.querySelector('.Cluster_Page_ngsildContext'));
         }
 
         if(inputNgsildData) {
-          document.querySelectorAll('.Page_ngsildData').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_ngsildData').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildData.getAttribute('value');
             else
               item.textContent = inputNgsildData.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildData'));
+          addGlow(document.querySelector('.Cluster_Page_ngsildData'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.Cluster_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.Cluster_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.Cluster_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.Cluster_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.Cluster_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.Cluster_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.Cluster_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.Cluster_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.Cluster_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.Cluster_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.Cluster_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.Cluster_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.Cluster_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.Cluster_Page_solrId'));
         }
 
         if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_hubResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubResource.getAttribute('value');
             else
               item.textContent = inputHubResource.textContent;
           });
-          addGlow(document.querySelector('.Page_hubResource'));
+          addGlow(document.querySelector('.Cluster_Page_hubResource'));
         }
 
         if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_clusterResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterResource.getAttribute('value');
             else
               item.textContent = inputClusterResource.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterResource'));
+          addGlow(document.querySelector('.Cluster_Page_clusterResource'));
         }
 
         if(inputLocationColors) {
-          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_locationColors').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationColors.getAttribute('value');
             else
               item.textContent = inputLocationColors.textContent;
           });
-          addGlow(document.querySelector('.Page_locationColors'));
+          addGlow(document.querySelector('.Cluster_Page_locationColors'));
         }
 
         if(inputLocationTitles) {
-          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_locationTitles').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationTitles.getAttribute('value');
             else
               item.textContent = inputLocationTitles.textContent;
           });
-          addGlow(document.querySelector('.Page_locationTitles'));
+          addGlow(document.querySelector('.Cluster_Page_locationTitles'));
         }
 
         if(inputLocationLinks) {
-          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
+          document.querySelectorAll('.Cluster_Page_locationLinks').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationLinks.getAttribute('value');
             else
               item.textContent = inputLocationLinks.textContent;
           });
-          addGlow(document.querySelector('.Page_locationLinks'));
+          addGlow(document.querySelector('.Cluster_Page_locationLinks'));
         }
 
           pageGraphCluster();
@@ -1137,23 +1137,34 @@ function suggestClusterHubResource(filters, $list, clusterResource = null, hubRe
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['hubResource'];
+        var inputVar = 'hubResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (hubResource != null && val === hubResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hubResource_' + clusterResource + '_hubResource_' + o['hubResource']);
-        $input.setAttribute('name', 'hubResource');
-        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('id', 'GET_hubResource_' + clusterResource + '_hubResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHubResource ');
         if(clusterResource != null) {
           $input.addEventListener('change', function(event) {
-            patchClusterVals([{ name: 'fq', value: 'clusterResource:' + clusterResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchClusterVals([{ name: 'fq', value: 'clusterResource:' + clusterResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterHubResource(filters, $list, clusterResource, o['hubResource'], relate, target);
+                  suggestClusterHubResource(filters, $list, clusterResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -1167,7 +1178,9 @@ function suggestClusterHubResource(filters, $list, clusterResource = null, hubRe
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHubVals(filters, target, success, error);
+  if (typeof searchHubVals === 'function') {
+    searchHubVals(filters, target, success, error);
+  }
 }
 
 function suggestClusterObjectSuggest($formFilters, $list, target) {

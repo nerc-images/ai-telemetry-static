@@ -215,7 +215,7 @@
             suggestAiNodeHubResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -231,7 +231,7 @@
             suggestAiNodeClusterResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -361,6 +361,8 @@
               , document.querySelector('#htmFormButton_postHub')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -370,6 +372,8 @@
               , document.querySelector('#htmFormButton_postCluster')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitAiNodePage %}{%- endblock htmScriptInitAiNodePage %}

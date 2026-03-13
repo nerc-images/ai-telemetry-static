@@ -116,77 +116,77 @@ async function websocketProjectInner(apiRequest) {
         var inputProjectDisplayName = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.Project_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.Project_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.Project_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.Project_Page_archived');
         if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
+          inputTenantResource = $response.querySelector('.Project_Page_tenantResource');
         if(vars.includes('hubId'))
-          inputHubId = $response.querySelector('.Page_hubId');
+          inputHubId = $response.querySelector('.Project_Page_hubId');
         if(vars.includes('clusterName'))
-          inputClusterName = $response.querySelector('.Page_clusterName');
+          inputClusterName = $response.querySelector('.Project_Page_clusterName');
         if(vars.includes('projectName'))
-          inputProjectName = $response.querySelector('.Page_projectName');
+          inputProjectName = $response.querySelector('.Project_Page_projectName');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.Project_Page_description');
         if(vars.includes('gpuEnabled'))
-          inputGpuEnabled = $response.querySelector('.Page_gpuEnabled');
+          inputGpuEnabled = $response.querySelector('.Project_Page_gpuEnabled');
         if(vars.includes('podRestartCount'))
-          inputPodRestartCount = $response.querySelector('.Page_podRestartCount');
+          inputPodRestartCount = $response.querySelector('.Project_Page_podRestartCount');
         if(vars.includes('podsRestarting'))
-          inputPodsRestarting = $response.querySelector('.Page_podsRestarting');
+          inputPodsRestarting = $response.querySelector('.Project_Page_podsRestarting');
         if(vars.includes('podTerminatingCount'))
-          inputPodTerminatingCount = $response.querySelector('.Page_podTerminatingCount');
+          inputPodTerminatingCount = $response.querySelector('.Project_Page_podTerminatingCount');
         if(vars.includes('podsTerminating'))
-          inputPodsTerminating = $response.querySelector('.Page_podsTerminating');
+          inputPodsTerminating = $response.querySelector('.Project_Page_podsTerminating');
         if(vars.includes('fullPvcsCount'))
-          inputFullPvcsCount = $response.querySelector('.Page_fullPvcsCount');
+          inputFullPvcsCount = $response.querySelector('.Project_Page_fullPvcsCount');
         if(vars.includes('fullPvcs'))
-          inputFullPvcs = $response.querySelector('.Page_fullPvcs');
+          inputFullPvcs = $response.querySelector('.Project_Page_fullPvcs');
         if(vars.includes('namespaceTerminating'))
-          inputNamespaceTerminating = $response.querySelector('.Page_namespaceTerminating');
+          inputNamespaceTerminating = $response.querySelector('.Project_Page_namespaceTerminating');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.Project_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.Project_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.Project_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.Project_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.Project_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.Project_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.Project_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.Project_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.Project_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.Project_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.Project_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.Project_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.Project_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.Project_Page_solrId');
         if(vars.includes('localClusterName'))
-          inputLocalClusterName = $response.querySelector('.Page_localClusterName');
+          inputLocalClusterName = $response.querySelector('.Project_Page_localClusterName');
         if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
+          inputHubResource = $response.querySelector('.Project_Page_hubResource');
         if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
+          inputClusterResource = $response.querySelector('.Project_Page_clusterResource');
         if(vars.includes('projectResource'))
-          inputProjectResource = $response.querySelector('.Page_projectResource');
+          inputProjectResource = $response.querySelector('.Project_Page_projectResource');
         if(vars.includes('projectDisplayName'))
-          inputProjectDisplayName = $response.querySelector('.Page_projectDisplayName');
+          inputProjectDisplayName = $response.querySelector('.Project_Page_projectDisplayName');
 
         jsWebsocketProject(projectResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -194,363 +194,363 @@ async function websocketProjectInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.Project_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.Project_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.Project_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.Project_Page_archived'));
         }
 
         if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
               item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.Project_Page_tenantResource'));
         }
 
         if(inputHubId) {
-          document.querySelectorAll('.Page_hubId').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_hubId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubId.getAttribute('value');
             else
               item.textContent = inputHubId.textContent;
           });
-          addGlow(document.querySelector('.Page_hubId'));
+          addGlow(document.querySelector('.Project_Page_hubId'));
         }
 
         if(inputClusterName) {
-          document.querySelectorAll('.Page_clusterName').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_clusterName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterName.getAttribute('value');
             else
               item.textContent = inputClusterName.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterName'));
+          addGlow(document.querySelector('.Project_Page_clusterName'));
         }
 
         if(inputProjectName) {
-          document.querySelectorAll('.Page_projectName').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_projectName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProjectName.getAttribute('value');
             else
               item.textContent = inputProjectName.textContent;
           });
-          addGlow(document.querySelector('.Page_projectName'));
+          addGlow(document.querySelector('.Project_Page_projectName'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.Project_Page_description'));
         }
 
         if(inputGpuEnabled) {
-          document.querySelectorAll('.Page_gpuEnabled').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_gpuEnabled').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputGpuEnabled.getAttribute('value');
             else
               item.textContent = inputGpuEnabled.textContent;
           });
-          addGlow(document.querySelector('.Page_gpuEnabled'));
+          addGlow(document.querySelector('.Project_Page_gpuEnabled'));
         }
 
         if(inputPodRestartCount) {
-          document.querySelectorAll('.Page_podRestartCount').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_podRestartCount').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPodRestartCount.getAttribute('value');
             else
               item.textContent = inputPodRestartCount.textContent;
           });
-          addGlow(document.querySelector('.Page_podRestartCount'));
+          addGlow(document.querySelector('.Project_Page_podRestartCount'));
         }
 
         if(inputPodsRestarting) {
-          document.querySelectorAll('.Page_podsRestarting').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_podsRestarting').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPodsRestarting.getAttribute('value');
             else
               item.textContent = inputPodsRestarting.textContent;
           });
-          addGlow(document.querySelector('.Page_podsRestarting'));
+          addGlow(document.querySelector('.Project_Page_podsRestarting'));
         }
 
         if(inputPodTerminatingCount) {
-          document.querySelectorAll('.Page_podTerminatingCount').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_podTerminatingCount').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPodTerminatingCount.getAttribute('value');
             else
               item.textContent = inputPodTerminatingCount.textContent;
           });
-          addGlow(document.querySelector('.Page_podTerminatingCount'));
+          addGlow(document.querySelector('.Project_Page_podTerminatingCount'));
         }
 
         if(inputPodsTerminating) {
-          document.querySelectorAll('.Page_podsTerminating').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_podsTerminating').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPodsTerminating.getAttribute('value');
             else
               item.textContent = inputPodsTerminating.textContent;
           });
-          addGlow(document.querySelector('.Page_podsTerminating'));
+          addGlow(document.querySelector('.Project_Page_podsTerminating'));
         }
 
         if(inputFullPvcsCount) {
-          document.querySelectorAll('.Page_fullPvcsCount').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_fullPvcsCount').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputFullPvcsCount.getAttribute('value');
             else
               item.textContent = inputFullPvcsCount.textContent;
           });
-          addGlow(document.querySelector('.Page_fullPvcsCount'));
+          addGlow(document.querySelector('.Project_Page_fullPvcsCount'));
         }
 
         if(inputFullPvcs) {
-          document.querySelectorAll('.Page_fullPvcs').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_fullPvcs').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputFullPvcs.getAttribute('value');
             else
               item.textContent = inputFullPvcs.textContent;
           });
-          addGlow(document.querySelector('.Page_fullPvcs'));
+          addGlow(document.querySelector('.Project_Page_fullPvcs'));
         }
 
         if(inputNamespaceTerminating) {
-          document.querySelectorAll('.Page_namespaceTerminating').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_namespaceTerminating').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNamespaceTerminating.getAttribute('value');
             else
               item.textContent = inputNamespaceTerminating.textContent;
           });
-          addGlow(document.querySelector('.Page_namespaceTerminating'));
+          addGlow(document.querySelector('.Project_Page_namespaceTerminating'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.Project_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.Project_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.Project_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.Project_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.Project_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.Project_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.Project_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.Project_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.Project_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.Project_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.Project_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.Project_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.Project_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.Project_Page_solrId'));
         }
 
         if(inputLocalClusterName) {
-          document.querySelectorAll('.Page_localClusterName').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_localClusterName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocalClusterName.getAttribute('value');
             else
               item.textContent = inputLocalClusterName.textContent;
           });
-          addGlow(document.querySelector('.Page_localClusterName'));
+          addGlow(document.querySelector('.Project_Page_localClusterName'));
         }
 
         if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_hubResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubResource.getAttribute('value');
             else
               item.textContent = inputHubResource.textContent;
           });
-          addGlow(document.querySelector('.Page_hubResource'));
+          addGlow(document.querySelector('.Project_Page_hubResource'));
         }
 
         if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_clusterResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterResource.getAttribute('value');
             else
               item.textContent = inputClusterResource.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterResource'));
+          addGlow(document.querySelector('.Project_Page_clusterResource'));
         }
 
         if(inputProjectResource) {
-          document.querySelectorAll('.Page_projectResource').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_projectResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProjectResource.getAttribute('value');
             else
               item.textContent = inputProjectResource.textContent;
           });
-          addGlow(document.querySelector('.Page_projectResource'));
+          addGlow(document.querySelector('.Project_Page_projectResource'));
         }
 
         if(inputProjectDisplayName) {
-          document.querySelectorAll('.Page_projectDisplayName').forEach((item, index) => {
+          document.querySelectorAll('.Project_Page_projectDisplayName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProjectDisplayName.getAttribute('value');
             else
               item.textContent = inputProjectDisplayName.textContent;
           });
-          addGlow(document.querySelector('.Page_projectDisplayName'));
+          addGlow(document.querySelector('.Project_Page_projectDisplayName'));
         }
 
           pageGraphProject();
@@ -898,23 +898,34 @@ function suggestProjectTenantResource(filters, $list, projectResource = null, te
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + projectResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + projectResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
         if(projectResource != null) {
           $input.addEventListener('change', function(event) {
-            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestProjectTenantResource(filters, $list, projectResource, o['tenantResource'], relate, target);
+                  suggestProjectTenantResource(filters, $list, projectResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -928,7 +939,9 @@ function suggestProjectTenantResource(filters, $list, projectResource = null, te
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantVals === 'function') {
+    searchTenantVals(filters, target, success, error);
+  }
 }
 
 function suggestProjectHubResource(filters, $list, projectResource = null, hubResource = null, relate=true, target) {
@@ -947,23 +960,34 @@ function suggestProjectHubResource(filters, $list, projectResource = null, hubRe
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['hubResource'];
+        var inputVar = 'hubResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (hubResource != null && val === hubResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hubResource_' + projectResource + '_hubResource_' + o['hubResource']);
-        $input.setAttribute('name', 'hubResource');
-        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('id', 'GET_hubResource_' + projectResource + '_hubResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHubResource ');
         if(projectResource != null) {
           $input.addEventListener('change', function(event) {
-            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestProjectHubResource(filters, $list, projectResource, o['hubResource'], relate, target);
+                  suggestProjectHubResource(filters, $list, projectResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -977,7 +1001,9 @@ function suggestProjectHubResource(filters, $list, projectResource = null, hubRe
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHubVals(filters, target, success, error);
+  if (typeof searchHubVals === 'function') {
+    searchHubVals(filters, target, success, error);
+  }
 }
 
 function suggestProjectClusterResource(filters, $list, projectResource = null, clusterResource = null, relate=true, target) {
@@ -996,23 +1022,34 @@ function suggestProjectClusterResource(filters, $list, projectResource = null, c
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['clusterResource'];
+        var inputVar = 'clusterResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (clusterResource != null && val === clusterResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_clusterResource_' + projectResource + '_clusterResource_' + o['clusterResource']);
-        $input.setAttribute('name', 'clusterResource');
-        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('id', 'GET_clusterResource_' + projectResource + '_clusterResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueClusterResource ');
         if(projectResource != null) {
           $input.addEventListener('change', function(event) {
-            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchProjectVals([{ name: 'fq', value: 'projectResource:' + projectResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestProjectClusterResource(filters, $list, projectResource, o['clusterResource'], relate, target);
+                  suggestProjectClusterResource(filters, $list, projectResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -1026,7 +1063,9 @@ function suggestProjectClusterResource(filters, $list, projectResource = null, c
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchClusterVals(filters, target, success, error);
+  if (typeof searchClusterVals === 'function') {
+    searchClusterVals(filters, target, success, error);
+  }
 }
 
 function suggestProjectObjectSuggest($formFilters, $list, target) {

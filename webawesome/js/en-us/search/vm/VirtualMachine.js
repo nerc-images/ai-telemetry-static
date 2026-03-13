@@ -109,90 +109,90 @@ async function websocketVirtualMachineInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputVmDisplayName = null;
         var inputHubResource = null;
         var inputVmResource = null;
-        var inputVmDisplayName = null;
         var inputLocationColors = null;
         var inputLocationTitles = null;
         var inputLocationLinks = null;
         var inputEntityShortId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.VirtualMachine_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.VirtualMachine_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.VirtualMachine_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.VirtualMachine_Page_archived');
         if(vars.includes('hubId'))
-          inputHubId = $response.querySelector('.Page_hubId');
+          inputHubId = $response.querySelector('.VirtualMachine_Page_hubId');
         if(vars.includes('clusterName'))
-          inputClusterName = $response.querySelector('.Page_clusterName');
+          inputClusterName = $response.querySelector('.VirtualMachine_Page_clusterName');
         if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
+          inputClusterResource = $response.querySelector('.VirtualMachine_Page_clusterResource');
         if(vars.includes('vmProject'))
-          inputVmProject = $response.querySelector('.Page_vmProject');
+          inputVmProject = $response.querySelector('.VirtualMachine_Page_vmProject');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.VirtualMachine_Page_description');
         if(vars.includes('vmName'))
-          inputVmName = $response.querySelector('.Page_vmName');
+          inputVmName = $response.querySelector('.VirtualMachine_Page_vmName');
         if(vars.includes('os'))
-          inputOs = $response.querySelector('.Page_os');
+          inputOs = $response.querySelector('.VirtualMachine_Page_os');
         if(vars.includes('id'))
-          inputId = $response.querySelector('.Page_id');
+          inputId = $response.querySelector('.VirtualMachine_Page_id');
         if(vars.includes('ngsildTenant'))
-          inputNgsildTenant = $response.querySelector('.Page_ngsildTenant');
+          inputNgsildTenant = $response.querySelector('.VirtualMachine_Page_ngsildTenant');
         if(vars.includes('ngsildPath'))
-          inputNgsildPath = $response.querySelector('.Page_ngsildPath');
+          inputNgsildPath = $response.querySelector('.VirtualMachine_Page_ngsildPath');
         if(vars.includes('ngsildContext'))
-          inputNgsildContext = $response.querySelector('.Page_ngsildContext');
+          inputNgsildContext = $response.querySelector('.VirtualMachine_Page_ngsildContext');
         if(vars.includes('ngsildData'))
-          inputNgsildData = $response.querySelector('.Page_ngsildData');
+          inputNgsildData = $response.querySelector('.VirtualMachine_Page_ngsildData');
         if(vars.includes('location'))
-          inputLocation = $response.querySelector('.Page_location');
+          inputLocation = $response.querySelector('.VirtualMachine_Page_location');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.VirtualMachine_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.VirtualMachine_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.VirtualMachine_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.VirtualMachine_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.VirtualMachine_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.VirtualMachine_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.VirtualMachine_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.VirtualMachine_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.VirtualMachine_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.VirtualMachine_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.VirtualMachine_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.VirtualMachine_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.VirtualMachine_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
-        if(vars.includes('vmResource'))
-          inputVmResource = $response.querySelector('.Page_vmResource');
+          inputSolrId = $response.querySelector('.VirtualMachine_Page_solrId');
         if(vars.includes('vmDisplayName'))
-          inputVmDisplayName = $response.querySelector('.Page_vmDisplayName');
+          inputVmDisplayName = $response.querySelector('.VirtualMachine_Page_vmDisplayName');
+        if(vars.includes('hubResource'))
+          inputHubResource = $response.querySelector('.VirtualMachine_Page_hubResource');
+        if(vars.includes('vmResource'))
+          inputVmResource = $response.querySelector('.VirtualMachine_Page_vmResource');
         if(vars.includes('locationColors'))
-          inputLocationColors = $response.querySelector('.Page_locationColors');
+          inputLocationColors = $response.querySelector('.VirtualMachine_Page_locationColors');
         if(vars.includes('locationTitles'))
-          inputLocationTitles = $response.querySelector('.Page_locationTitles');
+          inputLocationTitles = $response.querySelector('.VirtualMachine_Page_locationTitles');
         if(vars.includes('locationLinks'))
-          inputLocationLinks = $response.querySelector('.Page_locationLinks');
+          inputLocationLinks = $response.querySelector('.VirtualMachine_Page_locationLinks');
         if(vars.includes('entityShortId'))
-          inputEntityShortId = $response.querySelector('.Page_entityShortId');
+          inputEntityShortId = $response.querySelector('.VirtualMachine_Page_entityShortId');
 
         jsWebsocketVirtualMachine(vmResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -200,383 +200,383 @@ async function websocketVirtualMachineInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.VirtualMachine_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.VirtualMachine_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.VirtualMachine_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.VirtualMachine_Page_archived'));
         }
 
         if(inputHubId) {
-          document.querySelectorAll('.Page_hubId').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_hubId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubId.getAttribute('value');
             else
               item.textContent = inputHubId.textContent;
           });
-          addGlow(document.querySelector('.Page_hubId'));
+          addGlow(document.querySelector('.VirtualMachine_Page_hubId'));
         }
 
         if(inputClusterName) {
-          document.querySelectorAll('.Page_clusterName').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_clusterName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterName.getAttribute('value');
             else
               item.textContent = inputClusterName.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterName'));
+          addGlow(document.querySelector('.VirtualMachine_Page_clusterName'));
         }
 
         if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_clusterResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterResource.getAttribute('value');
             else
               item.textContent = inputClusterResource.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterResource'));
+          addGlow(document.querySelector('.VirtualMachine_Page_clusterResource'));
         }
 
         if(inputVmProject) {
-          document.querySelectorAll('.Page_vmProject').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_vmProject').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputVmProject.getAttribute('value');
             else
               item.textContent = inputVmProject.textContent;
           });
-          addGlow(document.querySelector('.Page_vmProject'));
+          addGlow(document.querySelector('.VirtualMachine_Page_vmProject'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.VirtualMachine_Page_description'));
         }
 
         if(inputVmName) {
-          document.querySelectorAll('.Page_vmName').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_vmName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputVmName.getAttribute('value');
             else
               item.textContent = inputVmName.textContent;
           });
-          addGlow(document.querySelector('.Page_vmName'));
+          addGlow(document.querySelector('.VirtualMachine_Page_vmName'));
         }
 
         if(inputOs) {
-          document.querySelectorAll('.Page_os').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_os').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputOs.getAttribute('value');
             else
               item.textContent = inputOs.textContent;
           });
-          addGlow(document.querySelector('.Page_os'));
+          addGlow(document.querySelector('.VirtualMachine_Page_os'));
         }
 
         if(inputId) {
-          document.querySelectorAll('.Page_id').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_id').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputId.getAttribute('value');
             else
               item.textContent = inputId.textContent;
           });
-          addGlow(document.querySelector('.Page_id'));
+          addGlow(document.querySelector('.VirtualMachine_Page_id'));
         }
 
         if(inputNgsildTenant) {
-          document.querySelectorAll('.Page_ngsildTenant').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_ngsildTenant').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildTenant.getAttribute('value');
             else
               item.textContent = inputNgsildTenant.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildTenant'));
+          addGlow(document.querySelector('.VirtualMachine_Page_ngsildTenant'));
         }
 
         if(inputNgsildPath) {
-          document.querySelectorAll('.Page_ngsildPath').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_ngsildPath').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildPath.getAttribute('value');
             else
               item.textContent = inputNgsildPath.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildPath'));
+          addGlow(document.querySelector('.VirtualMachine_Page_ngsildPath'));
         }
 
         if(inputNgsildContext) {
-          document.querySelectorAll('.Page_ngsildContext').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_ngsildContext').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildContext.getAttribute('value');
             else
               item.textContent = inputNgsildContext.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildContext'));
+          addGlow(document.querySelector('.VirtualMachine_Page_ngsildContext'));
         }
 
         if(inputNgsildData) {
-          document.querySelectorAll('.Page_ngsildData').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_ngsildData').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildData.getAttribute('value');
             else
               item.textContent = inputNgsildData.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildData'));
+          addGlow(document.querySelector('.VirtualMachine_Page_ngsildData'));
         }
 
         if(inputLocation) {
-          document.querySelectorAll('.Page_location').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_location').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocation.getAttribute('value');
             else
               item.textContent = inputLocation.textContent;
           });
-          addGlow(document.querySelector('.Page_location'));
+          addGlow(document.querySelector('.VirtualMachine_Page_location'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.VirtualMachine_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.VirtualMachine_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.VirtualMachine_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.VirtualMachine_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.VirtualMachine_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.VirtualMachine_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.VirtualMachine_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.VirtualMachine_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.VirtualMachine_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.VirtualMachine_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.VirtualMachine_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.VirtualMachine_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.VirtualMachine_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
-        }
-
-        if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHubResource.getAttribute('value');
-            else
-              item.textContent = inputHubResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_hubResource'));
-        }
-
-        if(inputVmResource) {
-          document.querySelectorAll('.Page_vmResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputVmResource.getAttribute('value');
-            else
-              item.textContent = inputVmResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_vmResource'));
+          addGlow(document.querySelector('.VirtualMachine_Page_solrId'));
         }
 
         if(inputVmDisplayName) {
-          document.querySelectorAll('.Page_vmDisplayName').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_vmDisplayName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputVmDisplayName.getAttribute('value');
             else
               item.textContent = inputVmDisplayName.textContent;
           });
-          addGlow(document.querySelector('.Page_vmDisplayName'));
+          addGlow(document.querySelector('.VirtualMachine_Page_vmDisplayName'));
+        }
+
+        if(inputHubResource) {
+          document.querySelectorAll('.VirtualMachine_Page_hubResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubResource.getAttribute('value');
+            else
+              item.textContent = inputHubResource.textContent;
+          });
+          addGlow(document.querySelector('.VirtualMachine_Page_hubResource'));
+        }
+
+        if(inputVmResource) {
+          document.querySelectorAll('.VirtualMachine_Page_vmResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVmResource.getAttribute('value');
+            else
+              item.textContent = inputVmResource.textContent;
+          });
+          addGlow(document.querySelector('.VirtualMachine_Page_vmResource'));
         }
 
         if(inputLocationColors) {
-          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_locationColors').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationColors.getAttribute('value');
             else
               item.textContent = inputLocationColors.textContent;
           });
-          addGlow(document.querySelector('.Page_locationColors'));
+          addGlow(document.querySelector('.VirtualMachine_Page_locationColors'));
         }
 
         if(inputLocationTitles) {
-          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_locationTitles').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationTitles.getAttribute('value');
             else
               item.textContent = inputLocationTitles.textContent;
           });
-          addGlow(document.querySelector('.Page_locationTitles'));
+          addGlow(document.querySelector('.VirtualMachine_Page_locationTitles'));
         }
 
         if(inputLocationLinks) {
-          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_locationLinks').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationLinks.getAttribute('value');
             else
               item.textContent = inputLocationLinks.textContent;
           });
-          addGlow(document.querySelector('.Page_locationLinks'));
+          addGlow(document.querySelector('.VirtualMachine_Page_locationLinks'));
         }
 
         if(inputEntityShortId) {
-          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
+          document.querySelectorAll('.VirtualMachine_Page_entityShortId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEntityShortId.getAttribute('value');
             else
               item.textContent = inputEntityShortId.textContent;
           });
-          addGlow(document.querySelector('.Page_entityShortId'));
+          addGlow(document.querySelector('.VirtualMachine_Page_entityShortId'));
         }
 
           pageGraphVirtualMachine();
@@ -1014,6 +1014,10 @@ function searchVirtualMachineFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
@@ -1021,10 +1025,6 @@ function searchVirtualMachineFilters($formFilters) {
     var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
     if(filterVmResource != null && filterVmResource !== '')
       filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
-
-    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
-    if(filterVmDisplayName != null && filterVmDisplayName !== '')
-      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
 
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
@@ -1080,23 +1080,34 @@ function suggestVirtualMachineHubResource(filters, $list, vmResource = null, hub
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['hubResource'];
+        var inputVar = 'hubResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (hubResource != null && val === hubResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hubResource_' + vmResource + '_hubResource_' + o['hubResource']);
-        $input.setAttribute('name', 'hubResource');
-        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('id', 'GET_hubResource_' + vmResource + '_hubResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHubResource ');
         if(vmResource != null) {
           $input.addEventListener('change', function(event) {
-            patchVirtualMachineVals([{ name: 'fq', value: 'vmResource:' + vmResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchVirtualMachineVals([{ name: 'fq', value: 'vmResource:' + vmResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestVirtualMachineHubResource(filters, $list, vmResource, o['hubResource'], relate, target);
+                  suggestVirtualMachineHubResource(filters, $list, vmResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -1110,7 +1121,9 @@ function suggestVirtualMachineHubResource(filters, $list, vmResource = null, hub
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHubVals(filters, target, success, error);
+  if (typeof searchHubVals === 'function') {
+    searchHubVals(filters, target, success, error);
+  }
 }
 
 function suggestVirtualMachineClusterResource(filters, $list, vmResource = null, clusterResource = null, relate=true, target) {
@@ -1129,23 +1142,34 @@ function suggestVirtualMachineClusterResource(filters, $list, vmResource = null,
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['clusterResource'];
+        var inputVar = 'clusterResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (clusterResource != null && val === clusterResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_clusterResource_' + vmResource + '_clusterResource_' + o['clusterResource']);
-        $input.setAttribute('name', 'clusterResource');
-        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('id', 'GET_clusterResource_' + vmResource + '_clusterResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueClusterResource ');
         if(vmResource != null) {
           $input.addEventListener('change', function(event) {
-            patchVirtualMachineVals([{ name: 'fq', value: 'vmResource:' + vmResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchVirtualMachineVals([{ name: 'fq', value: 'vmResource:' + vmResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestVirtualMachineClusterResource(filters, $list, vmResource, o['clusterResource'], relate, target);
+                  suggestVirtualMachineClusterResource(filters, $list, vmResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -1159,7 +1183,9 @@ function suggestVirtualMachineClusterResource(filters, $list, vmResource = null,
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchClusterVals(filters, target, success, error);
+  if (typeof searchClusterVals === 'function') {
+    searchClusterVals(filters, target, success, error);
+  }
 }
 
 function suggestVirtualMachineObjectSuggest($formFilters, $list, target) {
@@ -1651,6 +1677,10 @@ function patchVirtualMachineFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
+    if(filterVmDisplayName != null && filterVmDisplayName !== '')
+      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
+
     var filterHubResource = $formFilters.querySelector('.valueHubResource')?.value;
     if(filterHubResource != null && filterHubResource !== '')
       filters.push({ name: 'fq', value: 'hubResource:' + filterHubResource });
@@ -1658,10 +1688,6 @@ function patchVirtualMachineFilters($formFilters) {
     var filterVmResource = $formFilters.querySelector('.valueVmResource')?.value;
     if(filterVmResource != null && filterVmResource !== '')
       filters.push({ name: 'fq', value: 'vmResource:' + filterVmResource });
-
-    var filterVmDisplayName = $formFilters.querySelector('.valueVmDisplayName')?.value;
-    if(filterVmDisplayName != null && filterVmDisplayName !== '')
-      filters.push({ name: 'fq', value: 'vmDisplayName:' + filterVmDisplayName });
 
     var filterLocationColors = $formFilters.querySelector('.valueLocationColors')?.value;
     if(filterLocationColors != null && filterLocationColors !== '')
