@@ -648,14 +648,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchBareMetalOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#patchBareMetalOrderDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postBareMetalOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#postBareMetalOrderDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteBareMetalOrder')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -667,10 +659,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_searchpageBareMetalOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageBareMetalOrderDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterBareMetalOrder')?.addEventListener('click', (event) => {

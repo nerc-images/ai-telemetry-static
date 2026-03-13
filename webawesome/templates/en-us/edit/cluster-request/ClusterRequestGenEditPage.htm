@@ -149,56 +149,66 @@
         {% if result.name is defined %}
           function relate_clusterTemplateTitle(event) {
             suggestClusterRequestClusterTemplateTitle(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,title,pk,editPage,objectTitle' } ] : [{%- if result.clusterTemplateTitle is defined %}{'name':'fq','value':'title:{{ result.clusterTemplateTitle }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,title,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.name
-                , window.result.clusterTemplateTitle
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.name : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.clusterTemplateTitle : null
                 , true
+                , event.target
                 );
           }
-          document.querySelector('#POST_clusterTemplateTitle')?.addEventListener('input', relate_clusterTemplateTitle);
-          document.querySelector('#POST_clusterTemplateTitle')?.addEventListener('focus', relate_clusterTemplateTitle);
-          document.querySelector('#PATCH_clusterTemplateTitle')?.addEventListener('input', relate_clusterTemplateTitle);
-          document.querySelector('#PATCH_clusterTemplateTitle')?.addEventListener('focus', relate_clusterTemplateTitle);
-          document.querySelector('#Page_clusterTemplateTitle')?.addEventListener('input', relate_clusterTemplateTitle);
-          document.querySelector('#Page_clusterTemplateTitle')?.addEventListener('focus', relate_clusterTemplateTitle);
-          {% if "PATCH" in scopes %}
-          suggestClusterRequestClusterTemplateTitle([{'name':'fq','value':'title:' + window.result.clusterTemplateTitle}], document.querySelector('#listClusterRequestClusterTemplateTitle_Page'), window.result.name, window.result.clusterTemplateTitle, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestClusterRequestClusterTemplateTitle([{'name':'fq','value':'title:' + window.result.clusterTemplateTitle}], document.querySelector('#listClusterRequestClusterTemplateTitle_Page'), window.result.name, window.result.clusterTemplateTitle, true);
-          {% else %}
-          suggestClusterRequestClusterTemplateTitle([{'name':'fq','value':'title:' + window.result.clusterTemplateTitle}], document.querySelector('#listClusterRequestClusterTemplateTitle_Page'), window.result.name, window.result.clusterTemplateTitle, false);
-          {% endif %}
-          {% endif %}
+          document.querySelector('#ClusterRequest_POST_clusterTemplateTitle')?.addEventListener('input', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterRequest_POST_clusterTemplateTitle')?.addEventListener('focus', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterRequest_PATCH_clusterTemplateTitle')?.addEventListener('input', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterRequest_PATCH_clusterTemplateTitle')?.addEventListener('focus', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterRequest_Page_clusterTemplateTitle')?.addEventListener('input', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterRequest_Page_clusterTemplateTitle')?.addEventListener('focus', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterTemplate_POST_name')?.addEventListener('input', relate_clusterTemplateTitle);
+          document.querySelector('#ClusterTemplate_POST_name')?.addEventListener('focus', relate_clusterTemplateTitle);
+          if(window.result.clusterTemplateTitle) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestClusterRequestClusterTemplateTitle([{'name':'fq','value':'title:' + window.result.clusterTemplateTitle}], document.querySelector('#listClusterRequestClusterTemplateTitle_Page'), window.result.name, window.result.clusterTemplateTitle, true, document.getElementById('ClusterRequest_Page_clusterTemplateTitle'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestClusterRequestClusterTemplateTitle([{'name':'fq','value':'title:' + window.result.clusterTemplateTitle}], document.querySelector('#listClusterRequestClusterTemplateTitle_Page'), window.result.name, window.result.clusterTemplateTitle, true, document.getElementById('ClusterRequest_Page_clusterTemplateTitle'));
+          {% else -%}
+            {{'  '}}suggestClusterRequestClusterTemplateTitle([{'name':'fq','value':'title:' + window.result.clusterTemplateTitle}], document.querySelector('#listClusterRequestClusterTemplateTitle_Page'), window.result.name, window.result.clusterTemplateTitle, false, document.getElementById('ClusterRequest_Page_clusterTemplateTitle'));
+          {% endif -%}
+          {% endif -%}
+          }
           function relate_userId(event) {
             suggestClusterRequestUserId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,userId,pk,editPage,objectTitle' } ] : [{%- if result.userId is defined %}{'name':'fq','value':'userId:{{ result.userId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,userId,userId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.name
-                , window.result.userId
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.name : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.userId : null
                 , true
+                , event.target
                 );
           }
-          document.querySelector('#POST_userId')?.addEventListener('input', relate_userId);
-          document.querySelector('#POST_userId')?.addEventListener('focus', relate_userId);
-          document.querySelector('#PATCH_userId')?.addEventListener('input', relate_userId);
-          document.querySelector('#PATCH_userId')?.addEventListener('focus', relate_userId);
-          document.querySelector('#Page_userId')?.addEventListener('input', relate_userId);
-          document.querySelector('#Page_userId')?.addEventListener('focus', relate_userId);
-          {% if "PATCH" in scopes %}
-          suggestClusterRequestUserId([{'name':'fq','value':'userId:' + window.result.userId}], document.querySelector('#listClusterRequestUserId_Page'), window.result.name, window.result.userId, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestClusterRequestUserId([{'name':'fq','value':'userId:' + window.result.userId}], document.querySelector('#listClusterRequestUserId_Page'), window.result.name, window.result.userId, true);
-          {% else %}
-          suggestClusterRequestUserId([{'name':'fq','value':'userId:' + window.result.userId}], document.querySelector('#listClusterRequestUserId_Page'), window.result.name, window.result.userId, false);
-          {% endif %}
-          {% endif %}
+          document.querySelector('#ClusterRequest_POST_userId')?.addEventListener('input', relate_userId);
+          document.querySelector('#ClusterRequest_POST_userId')?.addEventListener('focus', relate_userId);
+          document.querySelector('#ClusterRequest_PATCH_userId')?.addEventListener('input', relate_userId);
+          document.querySelector('#ClusterRequest_PATCH_userId')?.addEventListener('focus', relate_userId);
+          document.querySelector('#ClusterRequest_Page_userId')?.addEventListener('input', relate_userId);
+          document.querySelector('#ClusterRequest_Page_userId')?.addEventListener('focus', relate_userId);
+          document.querySelector('#SiteUser_POST_name')?.addEventListener('input', relate_userId);
+          document.querySelector('#SiteUser_POST_name')?.addEventListener('focus', relate_userId);
+          if(window.result.userId) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestClusterRequestUserId([{'name':'fq','value':'userId:' + window.result.userId}], document.querySelector('#listClusterRequestUserId_Page'), window.result.name, window.result.userId, true, document.getElementById('ClusterRequest_Page_userId'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestClusterRequestUserId([{'name':'fq','value':'userId:' + window.result.userId}], document.querySelector('#listClusterRequestUserId_Page'), window.result.name, window.result.userId, true, document.getElementById('ClusterRequest_Page_userId'));
+          {% else -%}
+            {{'  '}}suggestClusterRequestUserId([{'name':'fq','value':'userId:' + window.result.userId}], document.querySelector('#listClusterRequestUserId_Page'), window.result.name, window.result.userId, false, document.getElementById('ClusterRequest_Page_userId'));
+          {% endif -%}
+          {% endif -%}
+          }
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listClusterRequest')?.value;
@@ -292,6 +302,28 @@
           deletefilterClusterRequest(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postClusterTemplate')?.addEventListener('click', event => {
+          event.preventDefault();
+          postClusterTemplate(document.querySelector('#htmForm_postClusterTemplate')
+              , document.querySelector('#htmFormButton_postClusterTemplate')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postSiteUser')?.addEventListener('click', event => {
+          event.preventDefault();
+          postSiteUser(document.querySelector('#htmForm_postSiteUser')
+              , document.querySelector('#htmFormButton_postSiteUser')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitClusterRequestPage %}{%- endblock htmScriptInitClusterRequestPage %}
       });
     </script>
@@ -369,7 +401,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster request found</span>
             <p class="wa-caption-l ">An OpenShift cluster request</p>
-{% include en-us/search/cluster-request/ClusterRequestSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -385,7 +416,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listClusterRequest" id="listClusterRequest" class="listClusterRequest"  value='{{ toJsonArrayStringInApostrophes(listClusterRequest) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageClusterRequest() }}
+{% endif -%}
 {%- endblock htmFormClusterRequestPage %}
         </div>
 {%- endblock htmBodyMiddleClusterRequestPage %}

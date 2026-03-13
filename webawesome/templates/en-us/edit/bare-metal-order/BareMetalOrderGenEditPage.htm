@@ -148,30 +148,35 @@
         {% if result.pk is defined %}
           function relate_networkId(event) {
             suggestBareMetalOrderNetworkId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.networkId is defined %}{'name':'fq','value':'id:{{ result.networkId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,id,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.pk
-                , window.result.networkId
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.pk : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.networkId : null
                 , true
+                , event.target
                 );
           }
-          document.querySelector('#POST_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#POST_networkId')?.addEventListener('focus', relate_networkId);
-          document.querySelector('#PATCH_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#PATCH_networkId')?.addEventListener('focus', relate_networkId);
-          document.querySelector('#Page_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#Page_networkId')?.addEventListener('focus', relate_networkId);
-          {% if "PATCH" in scopes %}
-          suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true);
-          {% else %}
-          suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, false);
-          {% endif %}
-          {% endif %}
+          document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_PATCH_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_PATCH_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_Page_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_Page_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalNetwork_POST_pk')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalNetwork_POST_pk')?.addEventListener('focus', relate_networkId);
+          if(window.result.networkId) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true, document.getElementById('BareMetalOrder_Page_networkId'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, true, document.getElementById('BareMetalOrder_Page_networkId'));
+          {% else -%}
+            {{'  '}}suggestBareMetalOrderNetworkId([{'name':'fq','value':'id:' + window.result.networkId}], document.querySelector('#listBareMetalOrderNetworkId_Page'), window.result.pk, window.result.networkId, false, document.getElementById('BareMetalOrder_Page_networkId'));
+          {% endif -%}
+          {% endif -%}
+          }
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listBareMetalOrder')?.value;
@@ -255,6 +260,17 @@
           deletefilterBareMetalOrder(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postBareMetalNetwork')?.addEventListener('click', event => {
+          event.preventDefault();
+          postBareMetalNetwork(document.querySelector('#htmForm_postBareMetalNetwork')
+              , document.querySelector('#htmFormButton_postBareMetalNetwork')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitBareMetalOrderPage %}{%- endblock htmScriptInitBareMetalOrderPage %}
       });
     </script>
@@ -332,7 +348,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal order found</span>
             <p class="wa-caption-l ">A bare metal order</p>
-{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -348,7 +363,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listBareMetalOrder" id="listBareMetalOrder" class="listBareMetalOrder"  value='{{ toJsonArrayStringInApostrophes(listBareMetalOrder) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageBareMetalOrder() }}
+{% endif -%}
 {%- endblock htmFormBareMetalOrderPage %}
         </div>
 {%- endblock htmBodyMiddleBareMetalOrderPage %}

@@ -148,30 +148,35 @@
         {% if result.id is defined %}
           function relate_templateId(event) {
             suggestClusterOrderTemplateId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.templateId is defined %}{'name':'fq','value':'id:{{ result.templateId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,id,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.id
-                , window.result.templateId
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.id : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.templateId : null
                 , true
+                , event.target
                 );
           }
-          document.querySelector('#POST_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#POST_templateId')?.addEventListener('focus', relate_templateId);
-          document.querySelector('#PATCH_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#PATCH_templateId')?.addEventListener('focus', relate_templateId);
-          document.querySelector('#Page_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#Page_templateId')?.addEventListener('focus', relate_templateId);
-          {% if "PATCH" in scopes %}
-          suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, true);
-          {% else %}
-          suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, false);
-          {% endif %}
-          {% endif %}
+          document.querySelector('#ClusterOrder_POST_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_POST_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_PATCH_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_PATCH_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_Page_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_Page_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterTemplate_POST_id')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterTemplate_POST_id')?.addEventListener('focus', relate_templateId);
+          if(window.result.templateId) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, true, document.getElementById('ClusterOrder_Page_templateId'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, true, document.getElementById('ClusterOrder_Page_templateId'));
+          {% else -%}
+            {{'  '}}suggestClusterOrderTemplateId([{'name':'fq','value':'id:' + window.result.templateId}], document.querySelector('#listClusterOrderTemplateId_Page'), window.result.id, window.result.templateId, false, document.getElementById('ClusterOrder_Page_templateId'));
+          {% endif -%}
+          {% endif -%}
+          }
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listClusterOrder')?.value;
@@ -265,6 +270,17 @@
           deletefilterClusterOrder(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postClusterTemplate')?.addEventListener('click', event => {
+          event.preventDefault();
+          postClusterTemplate(document.querySelector('#htmForm_postClusterTemplate')
+              , document.querySelector('#htmFormButton_postClusterTemplate')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitClusterOrderPage %}{%- endblock htmScriptInitClusterOrderPage %}
       });
     </script>
@@ -342,7 +358,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster order found</span>
             <p class="wa-caption-l ">Manage your own Red Hat OpenShift cluster in the cloud. </p>
-{% include en-us/search/cluster-order/ClusterOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -358,7 +373,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listClusterOrder" id="listClusterOrder" class="listClusterOrder"  value='{{ toJsonArrayStringInApostrophes(listClusterOrder) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageClusterOrder() }}
+{% endif -%}
 {%- endblock htmFormClusterOrderPage %}
         </div>
 {%- endblock htmBodyMiddleClusterOrderPage %}

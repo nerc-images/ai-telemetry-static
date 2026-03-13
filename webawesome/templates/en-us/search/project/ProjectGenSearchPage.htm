@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 3;
+        --site-results-number-of-columns: 4;
       }
 {{ super() }}
 {%- block htmStyleProjectPage %}
@@ -132,9 +132,9 @@
 
           function relate_tenantResource(event) {
             suggestProjectTenantResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantId,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -142,15 +142,15 @@
                 , this
                 );
           }
-          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Project_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Project_POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Project_PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Project_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           function relate_hubResource(event) {
             suggestProjectHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -158,15 +158,15 @@
                 , this
                 );
           }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#Project_POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#Project_POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#Project_PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#Project_PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
           function relate_clusterResource(event) {
             suggestProjectClusterResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -174,10 +174,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#Project_POST_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#Project_POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#Project_PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#Project_PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
         if(projectResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -289,6 +289,39 @@
           deletefilterProject(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          postTenant(document.querySelector('#htmForm_postTenant')
+              , document.querySelector('#htmFormButton_postTenant')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postHub')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHub(document.querySelector('#htmForm_postHub')
+              , document.querySelector('#htmFormButton_postHub')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postCluster')?.addEventListener('click', event => {
+          event.preventDefault();
+          postCluster(document.querySelector('#htmForm_postCluster')
+              , document.querySelector('#htmFormButton_postCluster')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitProjectPage %}{%- endblock htmScriptInitProjectPage %}
       });
     </script>
@@ -343,7 +376,6 @@
             </div>
             <span class="wa-heading-m ">no project found</span>
             <p class="wa-caption-l ">A research project using AI and GPUs</p>
-{% include en-us/search/project/ProjectSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -359,6 +391,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/project/ProjectSearchForm.htm %}
 {%- endblock htmBodyStartProjectPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -371,7 +404,6 @@
 {% include en-us/search/project/ProjectSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/project/ProjectSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleProjectPage %}
@@ -419,6 +451,11 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    {% if 'GETManager' in scopes -%}
+                    <div></div>
+                    {% if item.userPage is defined -%}
+                    {% endif -%}
+                    {%- endif %}
                   </div>
                   {% for item in listProject%}
                   <div>
@@ -432,6 +469,21 @@
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.projectName | e }}</span>
                     </a>
+                    {% if 'GETManager' in scopes -%}
+                    {% if item.userPage is defined -%}
+                    <wa-button variant="brand"
+                      id="Project_{{classApiMethodMethod}}_userPage"
+                      placeholder="[String] status report"
+                      label="status report"
+                      title="View the current status report for this project. "
+                      class="button-on-left Project_{{classApiMethodMethod}}_userPage classProject inputProject{{ result.projectResource }}UserPage "
+                      name="setUserPage"
+                      href="{{ item.userPage | e }}"
+                      >
+                        status report
+                    </wa-button>
+                    {% endif -%}
+                    {%- endif %}
                   </div>
                   {% endfor %}
               {% if getColumnHubId is defined %}
@@ -446,11 +498,13 @@
                 <div>
                 </div>
               {% endif %}
+              {% if getColumnUserPage is defined %}
+                <div>
+                </div>
+              {% endif %}
                 </div>
 {% include en-us/search/project/ProjectPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleProjectPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -458,6 +512,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndProjectPage %}
 {%- include en-us/search/project/ProjectLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndProjectPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

@@ -37,6 +37,22 @@
         </div>
         <div class="wa-cluster ">
 
+          {% if 'GETManager' in scopes -%}
+          {% if project.userPage is defined -%}
+          <wa-button variant="brand"
+            id="Project_{{classApiMethodMethod}}_userPage"
+            placeholder="[String] status report"
+            label="status report"
+            title="View the current status report for this project. "
+            class="button-on-left {{Project_classApiMethodMethod}}_userPage classProject inputProject{{ result.projectResource }}UserPage "
+            name="setUserPage"
+            href="{{ project.userPage | e }}"
+            >
+              status report
+          </wa-button>
+          {% endif -%}
+          {%- endif %}
+
           {% if project.podRestartCount > 0 %}
           <wa-tooltip for="tenantProject-{{ project.projectName }}-pod-restarts">
             <ul>

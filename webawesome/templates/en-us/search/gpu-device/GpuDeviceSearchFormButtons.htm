@@ -1,11 +1,11 @@
 
-{%- macro htmButton_patchGpuDevice() %}<wa-button variant="brand" id="htmButton_patchGpuDevice" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchGpuDevice() %}<wa-button variant="brand" id="htmButton_patchGpuDevice"  data-dialog="open patchGpuDeviceDialog" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postGpuDevice() %}<wa-button variant="brand" id="htmButton_postGpuDevice" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postGpuDevice() %}<wa-button variant="brand" id="htmButton_postGpuDevice"  data-dialog="open postGpuDeviceDialog" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deleteGpuDevice() %}<wa-button variant="brand" id="htmButton_deleteGpuDevice" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportGpuDevice() %}<wa-button variant="brand" id="htmButton_putimportGpuDevice" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportGpuDevice() %}<wa-button variant="brand" id="htmButton_putimportGpuDevice"  data-dialog="open putimportGpuDeviceDialog" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deletefilterGpuDevice() %}<wa-button variant="brand" id="htmButton_deletefilterGpuDevice" data-gpuDeviceResource={{ result.gpuDeviceResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
           <div id="htmSearchForm">

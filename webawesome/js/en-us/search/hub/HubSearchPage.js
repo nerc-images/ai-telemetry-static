@@ -492,14 +492,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchHub')?.addEventListener('click', (event) => {
-    document.querySelector('#patchHubDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postHub')?.addEventListener('click', (event) => {
-    document.querySelector('#postHubDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteHub')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -511,14 +503,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportHub')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportHubDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageHub')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageHubDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterHub')?.addEventListener('click', (event) => {

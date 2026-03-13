@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no ACM hub found</span>
             <p class="wa-caption-l ">An Red Hat Advanced Cluster Management Hub cluster. </p>
-{% include en-us/search/hub/HubSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/hub/HubSearchForm.htm %}
 {%- endblock htmBodyStartHubPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/hub/HubSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/hub/HubSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleHubPage %}
@@ -398,8 +397,6 @@
                 </div>
 {% include en-us/search/hub/HubPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleHubPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -407,6 +404,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndHubPage %}
 {%- include en-us/search/hub/HubLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndHubPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

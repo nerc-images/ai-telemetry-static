@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no tenant cluster found</span>
             <p class="wa-caption-l ">An OpenShift tenant cluster</p>
-{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
 {%- endblock htmBodyStartManagedClusterPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/managed-cluster/ManagedClusterSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/managed-cluster/ManagedClusterSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleManagedClusterPage %}
@@ -418,8 +417,6 @@
                 </div>
 {% include en-us/search/managed-cluster/ManagedClusterPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleManagedClusterPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -427,6 +424,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndManagedClusterPage %}
 {%- include en-us/search/managed-cluster/ManagedClusterLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndManagedClusterPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

@@ -130,9 +130,9 @@
 
           function relate_templateId(event) {
             suggestClusterOrderTemplateId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.templateId is defined %}{'name':'fq','value':'id:{{ result.templateId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,id,pk,editPage,objectTitle' } ] : [{%- if result.templateId is defined %}{'name':'fq','value':'id:{{ result.templateId }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -140,10 +140,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#POST_templateId')?.addEventListener('focus', relate_templateId);
-          document.querySelector('#PATCH_templateId')?.addEventListener('input', relate_templateId);
-          document.querySelector('#PATCH_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_POST_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_POST_templateId')?.addEventListener('focus', relate_templateId);
+          document.querySelector('#ClusterOrder_PATCH_templateId')?.addEventListener('input', relate_templateId);
+          document.querySelector('#ClusterOrder_PATCH_templateId')?.addEventListener('focus', relate_templateId);
         if(id == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -255,6 +255,17 @@
           deletefilterClusterOrder(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postClusterTemplate')?.addEventListener('click', event => {
+          event.preventDefault();
+          postClusterTemplate(document.querySelector('#htmForm_postClusterTemplate')
+              , document.querySelector('#htmFormButton_postClusterTemplate')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitClusterOrderPage %}{%- endblock htmScriptInitClusterOrderPage %}
       });
     </script>
@@ -309,7 +320,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster order found</span>
             <p class="wa-caption-l ">Manage your own Red Hat OpenShift cluster in the cloud. </p>
-{% include en-us/search/cluster-order/ClusterOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -325,6 +335,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/cluster-order/ClusterOrderSearchForm.htm %}
 {%- endblock htmBodyStartClusterOrderPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -337,7 +348,6 @@
 {% include en-us/search/cluster-order/ClusterOrderSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/cluster-order/ClusterOrderSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterOrderPage %}
@@ -435,8 +445,6 @@
                 </div>
 {% include en-us/search/cluster-order/ClusterOrderPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleClusterOrderPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -444,6 +452,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndClusterOrderPage %}
 {%- include en-us/search/cluster-order/ClusterOrderLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndClusterOrderPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

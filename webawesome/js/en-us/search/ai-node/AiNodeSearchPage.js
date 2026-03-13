@@ -725,14 +725,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#patchAiNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#postAiNodeDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteAiNode')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -744,14 +736,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportAiNodeDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageAiNode')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageAiNodeDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterAiNode')?.addEventListener('click', (event) => {

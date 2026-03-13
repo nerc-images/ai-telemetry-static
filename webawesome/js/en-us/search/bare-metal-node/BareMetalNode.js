@@ -107,59 +107,59 @@ async function websocketBareMetalNodeInner(apiRequest) {
         var inputSolrId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.BareMetalNode_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.BareMetalNode_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.BareMetalNode_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.BareMetalNode_Page_archived');
         if(vars.includes('leaseInfo'))
-          inputLeaseInfo = $response.querySelector('.Page_leaseInfo');
+          inputLeaseInfo = $response.querySelector('.BareMetalNode_Page_leaseInfo');
         if(vars.includes('networkInfo'))
-          inputNetworkInfo = $response.querySelector('.Page_networkInfo');
+          inputNetworkInfo = $response.querySelector('.BareMetalNode_Page_networkInfo');
         if(vars.includes('nodeId'))
-          inputNodeId = $response.querySelector('.Page_nodeId');
+          inputNodeId = $response.querySelector('.BareMetalNode_Page_nodeId');
         if(vars.includes('nodeIsMaintenance'))
-          inputNodeIsMaintenance = $response.querySelector('.Page_nodeIsMaintenance');
+          inputNodeIsMaintenance = $response.querySelector('.BareMetalNode_Page_nodeIsMaintenance');
         if(vars.includes('nodeLinks'))
-          inputNodeLinks = $response.querySelector('.Page_nodeLinks');
+          inputNodeLinks = $response.querySelector('.BareMetalNode_Page_nodeLinks');
         if(vars.includes('nodeName'))
-          inputNodeName = $response.querySelector('.Page_nodeName');
+          inputNodeName = $response.querySelector('.BareMetalNode_Page_nodeName');
         if(vars.includes('nodePowerState'))
-          inputNodePowerState = $response.querySelector('.Page_nodePowerState');
+          inputNodePowerState = $response.querySelector('.BareMetalNode_Page_nodePowerState');
         if(vars.includes('nodeProvisionState'))
-          inputNodeProvisionState = $response.querySelector('.Page_nodeProvisionState');
+          inputNodeProvisionState = $response.querySelector('.BareMetalNode_Page_nodeProvisionState');
         if(vars.includes('nodeResourceClass'))
-          inputNodeResourceClass = $response.querySelector('.Page_nodeResourceClass');
+          inputNodeResourceClass = $response.querySelector('.BareMetalNode_Page_nodeResourceClass');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.BareMetalNode_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.BareMetalNode_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.BareMetalNode_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.BareMetalNode_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.BareMetalNode_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.BareMetalNode_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.BareMetalNode_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.BareMetalNode_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.BareMetalNode_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.BareMetalNode_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.BareMetalNode_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.BareMetalNode_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.BareMetalNode_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.BareMetalNode_Page_solrId');
 
         jsWebsocketBareMetalNode(nodeId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -167,273 +167,273 @@ async function websocketBareMetalNodeInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.BareMetalNode_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.BareMetalNode_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.BareMetalNode_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.BareMetalNode_Page_archived'));
         }
 
         if(inputLeaseInfo) {
-          document.querySelectorAll('.Page_leaseInfo').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_leaseInfo').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLeaseInfo.getAttribute('value');
             else
               item.textContent = inputLeaseInfo.textContent;
           });
-          addGlow(document.querySelector('.Page_leaseInfo'));
+          addGlow(document.querySelector('.BareMetalNode_Page_leaseInfo'));
         }
 
         if(inputNetworkInfo) {
-          document.querySelectorAll('.Page_networkInfo').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_networkInfo').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNetworkInfo.getAttribute('value');
             else
               item.textContent = inputNetworkInfo.textContent;
           });
-          addGlow(document.querySelector('.Page_networkInfo'));
+          addGlow(document.querySelector('.BareMetalNode_Page_networkInfo'));
         }
 
         if(inputNodeId) {
-          document.querySelectorAll('.Page_nodeId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodeId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeId.getAttribute('value');
             else
               item.textContent = inputNodeId.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeId'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodeId'));
         }
 
         if(inputNodeIsMaintenance) {
-          document.querySelectorAll('.Page_nodeIsMaintenance').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodeIsMaintenance').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeIsMaintenance.getAttribute('value');
             else
               item.textContent = inputNodeIsMaintenance.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeIsMaintenance'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodeIsMaintenance'));
         }
 
         if(inputNodeLinks) {
-          document.querySelectorAll('.Page_nodeLinks').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodeLinks').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeLinks.getAttribute('value');
             else
               item.textContent = inputNodeLinks.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeLinks'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodeLinks'));
         }
 
         if(inputNodeName) {
-          document.querySelectorAll('.Page_nodeName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodeName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeName.getAttribute('value');
             else
               item.textContent = inputNodeName.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeName'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodeName'));
         }
 
         if(inputNodePowerState) {
-          document.querySelectorAll('.Page_nodePowerState').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodePowerState').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodePowerState.getAttribute('value');
             else
               item.textContent = inputNodePowerState.textContent;
           });
-          addGlow(document.querySelector('.Page_nodePowerState'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodePowerState'));
         }
 
         if(inputNodeProvisionState) {
-          document.querySelectorAll('.Page_nodeProvisionState').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodeProvisionState').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeProvisionState.getAttribute('value');
             else
               item.textContent = inputNodeProvisionState.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeProvisionState'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodeProvisionState'));
         }
 
         if(inputNodeResourceClass) {
-          document.querySelectorAll('.Page_nodeResourceClass').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_nodeResourceClass').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeResourceClass.getAttribute('value');
             else
               item.textContent = inputNodeResourceClass.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeResourceClass'));
+          addGlow(document.querySelector('.BareMetalNode_Page_nodeResourceClass'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.BareMetalNode_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.BareMetalNode_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.BareMetalNode_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.BareMetalNode_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.BareMetalNode_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.BareMetalNode_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.BareMetalNode_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.BareMetalNode_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.BareMetalNode_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.BareMetalNode_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.BareMetalNode_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.BareMetalNode_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.BareMetalNode_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNode_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.BareMetalNode_Page_solrId'));
         }
 
           pageGraphBareMetalNode();
@@ -1175,7 +1175,23 @@ async function postBareMetalNode($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1309,7 +1325,23 @@ async function deleteBareMetalNode(target, nodeId, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1368,7 +1400,23 @@ async function deletefilterBareMetalNode(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

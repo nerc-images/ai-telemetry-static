@@ -1,11 +1,11 @@
 
-{%- macro htmButton_patchClusterOrder() %}<wa-button variant="brand" id="htmButton_patchClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchClusterOrder() %}<wa-button variant="brand" id="htmButton_patchClusterOrder"  data-dialog="open patchClusterOrderDialog" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postClusterOrder() %}<wa-button variant="brand" id="htmButton_postClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postClusterOrder() %}<wa-button variant="brand" id="htmButton_postClusterOrder"  data-dialog="open postClusterOrderDialog" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deleteClusterOrder() %}<wa-button variant="brand" id="htmButton_deleteClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportClusterOrder() %}<wa-button variant="brand" id="htmButton_putimportClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportClusterOrder() %}<wa-button variant="brand" id="htmButton_putimportClusterOrder"  data-dialog="open putimportClusterOrderDialog" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deletefilterClusterOrder() %}<wa-button variant="brand" id="htmButton_deletefilterClusterOrder" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
           <div id="htmSearchForm">

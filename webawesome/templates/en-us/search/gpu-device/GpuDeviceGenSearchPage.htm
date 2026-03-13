@@ -75,7 +75,7 @@
       function htmLegendGpuDevice(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
-        var url = result.locationLinks[index];
+        var url = null;
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
@@ -214,9 +214,9 @@
 
           function relate_hubResource(event) {
             suggestGpuDeviceHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -224,15 +224,15 @@
                 , this
                 );
           }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#GpuDevice_POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#GpuDevice_POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#GpuDevice_PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#GpuDevice_PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
           function relate_clusterResource(event) {
             suggestGpuDeviceClusterResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -240,15 +240,15 @@
                 , this
                 );
           }
-          document.querySelector('#POST_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#GpuDevice_POST_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#GpuDevice_POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#GpuDevice_PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#GpuDevice_PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
           function relate_nodeResource(event) {
             suggestGpuDeviceNodeResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,nodeResource,pk,editPage,objectTitle' } ] : [{%- if result.nodeResource is defined %}{'name':'fq','value':'nodeResource:{{ result.nodeResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,nodeResource,nodeResource,pk,editPage,objectTitle' } ] : [{%- if result.nodeResource is defined %}{'name':'fq','value':'nodeResource:{{ result.nodeResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -256,10 +256,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_nodeResource')?.addEventListener('input', relate_nodeResource);
-          document.querySelector('#POST_nodeResource')?.addEventListener('focus', relate_nodeResource);
-          document.querySelector('#PATCH_nodeResource')?.addEventListener('input', relate_nodeResource);
-          document.querySelector('#PATCH_nodeResource')?.addEventListener('focus', relate_nodeResource);
+          document.querySelector('#GpuDevice_POST_nodeResource')?.addEventListener('input', relate_nodeResource);
+          document.querySelector('#GpuDevice_POST_nodeResource')?.addEventListener('focus', relate_nodeResource);
+          document.querySelector('#GpuDevice_PATCH_nodeResource')?.addEventListener('input', relate_nodeResource);
+          document.querySelector('#GpuDevice_PATCH_nodeResource')?.addEventListener('focus', relate_nodeResource);
         if(gpuDeviceResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -371,6 +371,39 @@
           deletefilterGpuDevice(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postHub')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHub(document.querySelector('#htmForm_postHub')
+              , document.querySelector('#htmFormButton_postHub')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postCluster')?.addEventListener('click', event => {
+          event.preventDefault();
+          postCluster(document.querySelector('#htmForm_postCluster')
+              , document.querySelector('#htmFormButton_postCluster')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postAiNode')?.addEventListener('click', event => {
+          event.preventDefault();
+          postAiNode(document.querySelector('#htmForm_postAiNode')
+              , document.querySelector('#htmFormButton_postAiNode')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitGpuDevicePage %}{%- endblock htmScriptInitGpuDevicePage %}
       });
     </script>
@@ -425,7 +458,6 @@
             </div>
             <span class="wa-heading-m ">no GPU device found</span>
             <p class="wa-caption-l ">A Red Hat OpenShift GPU device containing GPUs</p>
-{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -441,6 +473,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
 {%- endblock htmBodyStartGpuDevicePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -453,7 +486,6 @@
 {% include en-us/search/gpu-device/GpuDeviceSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/gpu-device/GpuDeviceSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleGpuDevicePage %}
@@ -551,8 +583,6 @@
                 </div>
 {% include en-us/search/gpu-device/GpuDevicePaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleGpuDevicePage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -560,6 +590,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndGpuDevicePage %}
 {%- include en-us/search/gpu-device/GpuDeviceLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndGpuDevicePage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

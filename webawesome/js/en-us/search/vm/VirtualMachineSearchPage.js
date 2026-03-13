@@ -352,6 +352,17 @@ Promise.all([
     facetStatsChange('VirtualMachine', 'solrId', false);
   });
 
+  document.querySelector('#pageSelectSortVirtualMachine_vmDisplayName')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'vmDisplayName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'vmDisplayName', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'vmDisplayName', false);
+  });
+
   document.querySelector('#pageSelectSortVirtualMachine_hubResource')?.addEventListener('change', (event) => {
     sort('VirtualMachine', 'hubResource', event.currentTarget.value);
   });
@@ -372,17 +383,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsVirtualMachine_vmResource')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('VirtualMachine', 'vmResource', false);
-  });
-
-  document.querySelector('#pageSelectSortVirtualMachine_vmDisplayName')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'vmDisplayName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'vmDisplayName', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'vmDisplayName', false);
   });
 
   document.querySelector('#pageSelectSortVirtualMachine_locationColors')?.addEventListener('change', (event) => {
@@ -754,14 +754,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchVirtualMachine')?.addEventListener('click', (event) => {
-    document.querySelector('#patchVirtualMachineDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postVirtualMachine')?.addEventListener('click', (event) => {
-    document.querySelector('#postVirtualMachineDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteVirtualMachine')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -773,14 +765,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportVirtualMachine')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportVirtualMachineDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageVirtualMachine')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageVirtualMachineDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterVirtualMachine')?.addEventListener('click', (event) => {

@@ -132,109 +132,109 @@ async function websocketBareMetalNetworkInner(apiRequest) {
         var inputSolrId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.BareMetalNetwork_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.BareMetalNetwork_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.BareMetalNetwork_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.BareMetalNetwork_Page_archived');
         if(vars.includes('id'))
-          inputId = $response.querySelector('.Page_id');
+          inputId = $response.querySelector('.BareMetalNetwork_Page_id');
         if(vars.includes('name'))
-          inputName = $response.querySelector('.Page_name');
+          inputName = $response.querySelector('.BareMetalNetwork_Page_name');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.BareMetalNetwork_Page_description');
         if(vars.includes('availabilityZoneHints'))
-          inputAvailabilityZoneHints = $response.querySelector('.Page_availabilityZoneHints');
+          inputAvailabilityZoneHints = $response.querySelector('.BareMetalNetwork_Page_availabilityZoneHints');
         if(vars.includes('availabilityZones'))
-          inputAvailabilityZones = $response.querySelector('.Page_availabilityZones');
+          inputAvailabilityZones = $response.querySelector('.BareMetalNetwork_Page_availabilityZones');
         if(vars.includes('createdAt'))
-          inputCreatedAt = $response.querySelector('.Page_createdAt');
+          inputCreatedAt = $response.querySelector('.BareMetalNetwork_Page_createdAt');
         if(vars.includes('dnsDomain'))
-          inputDnsDomain = $response.querySelector('.Page_dnsDomain');
+          inputDnsDomain = $response.querySelector('.BareMetalNetwork_Page_dnsDomain');
         if(vars.includes('mtu'))
-          inputMtu = $response.querySelector('.Page_mtu');
+          inputMtu = $response.querySelector('.BareMetalNetwork_Page_mtu');
         if(vars.includes('projectId'))
-          inputProjectId = $response.querySelector('.Page_projectId');
+          inputProjectId = $response.querySelector('.BareMetalNetwork_Page_projectId');
         if(vars.includes('providerNetworkType'))
-          inputProviderNetworkType = $response.querySelector('.Page_providerNetworkType');
+          inputProviderNetworkType = $response.querySelector('.BareMetalNetwork_Page_providerNetworkType');
         if(vars.includes('providerPhysicalNetwork'))
-          inputProviderPhysicalNetwork = $response.querySelector('.Page_providerPhysicalNetwork');
+          inputProviderPhysicalNetwork = $response.querySelector('.BareMetalNetwork_Page_providerPhysicalNetwork');
         if(vars.includes('providerSegmentationId'))
-          inputProviderSegmentationId = $response.querySelector('.Page_providerSegmentationId');
+          inputProviderSegmentationId = $response.querySelector('.BareMetalNetwork_Page_providerSegmentationId');
         if(vars.includes('qosPolicyId'))
-          inputQosPolicyId = $response.querySelector('.Page_qosPolicyId');
+          inputQosPolicyId = $response.querySelector('.BareMetalNetwork_Page_qosPolicyId');
         if(vars.includes('revisionNumber'))
-          inputRevisionNumber = $response.querySelector('.Page_revisionNumber');
+          inputRevisionNumber = $response.querySelector('.BareMetalNetwork_Page_revisionNumber');
         if(vars.includes('status'))
-          inputStatus = $response.querySelector('.Page_status');
+          inputStatus = $response.querySelector('.BareMetalNetwork_Page_status');
         if(vars.includes('subnetIds'))
-          inputSubnetIds = $response.querySelector('.Page_subnetIds');
+          inputSubnetIds = $response.querySelector('.BareMetalNetwork_Page_subnetIds');
         if(vars.includes('tags'))
-          inputTags = $response.querySelector('.Page_tags');
+          inputTags = $response.querySelector('.BareMetalNetwork_Page_tags');
         if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Page_tenantId');
+          inputTenantId = $response.querySelector('.BareMetalNetwork_Page_tenantId');
         if(vars.includes('updatedAt'))
-          inputUpdatedAt = $response.querySelector('.Page_updatedAt');
+          inputUpdatedAt = $response.querySelector('.BareMetalNetwork_Page_updatedAt');
         if(vars.includes('isAdminStateUp'))
-          inputIsAdminStateUp = $response.querySelector('.Page_isAdminStateUp');
+          inputIsAdminStateUp = $response.querySelector('.BareMetalNetwork_Page_isAdminStateUp');
         if(vars.includes('isDefault'))
-          inputIsDefault = $response.querySelector('.Page_isDefault');
+          inputIsDefault = $response.querySelector('.BareMetalNetwork_Page_isDefault');
         if(vars.includes('isPortSecurityEnabled'))
-          inputIsPortSecurityEnabled = $response.querySelector('.Page_isPortSecurityEnabled');
+          inputIsPortSecurityEnabled = $response.querySelector('.BareMetalNetwork_Page_isPortSecurityEnabled');
         if(vars.includes('isRouterExternal'))
-          inputIsRouterExternal = $response.querySelector('.Page_isRouterExternal');
+          inputIsRouterExternal = $response.querySelector('.BareMetalNetwork_Page_isRouterExternal');
         if(vars.includes('isShared'))
-          inputIsShared = $response.querySelector('.Page_isShared');
+          inputIsShared = $response.querySelector('.BareMetalNetwork_Page_isShared');
         if(vars.includes('isVlanQueing'))
-          inputIsVlanQueing = $response.querySelector('.Page_isVlanQueing');
+          inputIsVlanQueing = $response.querySelector('.BareMetalNetwork_Page_isVlanQueing');
         if(vars.includes('isVlanTransparent'))
-          inputIsVlanTransparent = $response.querySelector('.Page_isVlanTransparent');
+          inputIsVlanTransparent = $response.querySelector('.BareMetalNetwork_Page_isVlanTransparent');
         if(vars.includes('l2Adjacency'))
-          inputL2Adjacency = $response.querySelector('.Page_l2Adjacency');
+          inputL2Adjacency = $response.querySelector('.BareMetalNetwork_Page_l2Adjacency');
         if(vars.includes('locationCloud'))
-          inputLocationCloud = $response.querySelector('.Page_locationCloud');
+          inputLocationCloud = $response.querySelector('.BareMetalNetwork_Page_locationCloud');
         if(vars.includes('locationProjectDomainId'))
-          inputLocationProjectDomainId = $response.querySelector('.Page_locationProjectDomainId');
+          inputLocationProjectDomainId = $response.querySelector('.BareMetalNetwork_Page_locationProjectDomainId');
         if(vars.includes('locationProjectDomainName'))
-          inputLocationProjectDomainName = $response.querySelector('.Page_locationProjectDomainName');
+          inputLocationProjectDomainName = $response.querySelector('.BareMetalNetwork_Page_locationProjectDomainName');
         if(vars.includes('locationProjectId'))
-          inputLocationProjectId = $response.querySelector('.Page_locationProjectId');
+          inputLocationProjectId = $response.querySelector('.BareMetalNetwork_Page_locationProjectId');
         if(vars.includes('locationProjectName'))
-          inputLocationProjectName = $response.querySelector('.Page_locationProjectName');
+          inputLocationProjectName = $response.querySelector('.BareMetalNetwork_Page_locationProjectName');
         if(vars.includes('locationRegionName'))
-          inputLocationRegionName = $response.querySelector('.Page_locationRegionName');
+          inputLocationRegionName = $response.querySelector('.BareMetalNetwork_Page_locationRegionName');
         if(vars.includes('locationZone'))
-          inputLocationZone = $response.querySelector('.Page_locationZone');
+          inputLocationZone = $response.querySelector('.BareMetalNetwork_Page_locationZone');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.BareMetalNetwork_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.BareMetalNetwork_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.BareMetalNetwork_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.BareMetalNetwork_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.BareMetalNetwork_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.BareMetalNetwork_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.BareMetalNetwork_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.BareMetalNetwork_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.BareMetalNetwork_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.BareMetalNetwork_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.BareMetalNetwork_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.BareMetalNetwork_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.BareMetalNetwork_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.BareMetalNetwork_Page_solrId');
 
         jsWebsocketBareMetalNetwork(id, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -242,523 +242,523 @@ async function websocketBareMetalNetworkInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_archived'));
         }
 
         if(inputId) {
-          document.querySelectorAll('.Page_id').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_id').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputId.getAttribute('value');
             else
               item.textContent = inputId.textContent;
           });
-          addGlow(document.querySelector('.Page_id'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_id'));
         }
 
         if(inputName) {
-          document.querySelectorAll('.Page_name').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_name').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputName.getAttribute('value');
             else
               item.textContent = inputName.textContent;
           });
-          addGlow(document.querySelector('.Page_name'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_name'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_description'));
         }
 
         if(inputAvailabilityZoneHints) {
-          document.querySelectorAll('.Page_availabilityZoneHints').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_availabilityZoneHints').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAvailabilityZoneHints.getAttribute('value');
             else
               item.textContent = inputAvailabilityZoneHints.textContent;
           });
-          addGlow(document.querySelector('.Page_availabilityZoneHints'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_availabilityZoneHints'));
         }
 
         if(inputAvailabilityZones) {
-          document.querySelectorAll('.Page_availabilityZones').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_availabilityZones').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAvailabilityZones.getAttribute('value');
             else
               item.textContent = inputAvailabilityZones.textContent;
           });
-          addGlow(document.querySelector('.Page_availabilityZones'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_availabilityZones'));
         }
 
         if(inputCreatedAt) {
-          document.querySelectorAll('.Page_createdAt').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_createdAt').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreatedAt.getAttribute('value');
             else
               item.textContent = inputCreatedAt.textContent;
           });
-          addGlow(document.querySelector('.Page_createdAt'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_createdAt'));
         }
 
         if(inputDnsDomain) {
-          document.querySelectorAll('.Page_dnsDomain').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_dnsDomain').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDnsDomain.getAttribute('value');
             else
               item.textContent = inputDnsDomain.textContent;
           });
-          addGlow(document.querySelector('.Page_dnsDomain'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_dnsDomain'));
         }
 
         if(inputMtu) {
-          document.querySelectorAll('.Page_mtu').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_mtu').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputMtu.getAttribute('value');
             else
               item.textContent = inputMtu.textContent;
           });
-          addGlow(document.querySelector('.Page_mtu'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_mtu'));
         }
 
         if(inputProjectId) {
-          document.querySelectorAll('.Page_projectId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_projectId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProjectId.getAttribute('value');
             else
               item.textContent = inputProjectId.textContent;
           });
-          addGlow(document.querySelector('.Page_projectId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_projectId'));
         }
 
         if(inputProviderNetworkType) {
-          document.querySelectorAll('.Page_providerNetworkType').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_providerNetworkType').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProviderNetworkType.getAttribute('value');
             else
               item.textContent = inputProviderNetworkType.textContent;
           });
-          addGlow(document.querySelector('.Page_providerNetworkType'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_providerNetworkType'));
         }
 
         if(inputProviderPhysicalNetwork) {
-          document.querySelectorAll('.Page_providerPhysicalNetwork').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_providerPhysicalNetwork').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProviderPhysicalNetwork.getAttribute('value');
             else
               item.textContent = inputProviderPhysicalNetwork.textContent;
           });
-          addGlow(document.querySelector('.Page_providerPhysicalNetwork'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_providerPhysicalNetwork'));
         }
 
         if(inputProviderSegmentationId) {
-          document.querySelectorAll('.Page_providerSegmentationId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_providerSegmentationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputProviderSegmentationId.getAttribute('value');
             else
               item.textContent = inputProviderSegmentationId.textContent;
           });
-          addGlow(document.querySelector('.Page_providerSegmentationId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_providerSegmentationId'));
         }
 
         if(inputQosPolicyId) {
-          document.querySelectorAll('.Page_qosPolicyId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_qosPolicyId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputQosPolicyId.getAttribute('value');
             else
               item.textContent = inputQosPolicyId.textContent;
           });
-          addGlow(document.querySelector('.Page_qosPolicyId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_qosPolicyId'));
         }
 
         if(inputRevisionNumber) {
-          document.querySelectorAll('.Page_revisionNumber').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_revisionNumber').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputRevisionNumber.getAttribute('value');
             else
               item.textContent = inputRevisionNumber.textContent;
           });
-          addGlow(document.querySelector('.Page_revisionNumber'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_revisionNumber'));
         }
 
         if(inputStatus) {
-          document.querySelectorAll('.Page_status').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_status').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputStatus.getAttribute('value');
             else
               item.textContent = inputStatus.textContent;
           });
-          addGlow(document.querySelector('.Page_status'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_status'));
         }
 
         if(inputSubnetIds) {
-          document.querySelectorAll('.Page_subnetIds').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_subnetIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSubnetIds.getAttribute('value');
             else
               item.textContent = inputSubnetIds.textContent;
           });
-          addGlow(document.querySelector('.Page_subnetIds'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_subnetIds'));
         }
 
         if(inputTags) {
-          document.querySelectorAll('.Page_tags').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_tags').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTags.getAttribute('value');
             else
               item.textContent = inputTags.textContent;
           });
-          addGlow(document.querySelector('.Page_tags'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_tags'));
         }
 
         if(inputTenantId) {
-          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
               item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_tenantId'));
         }
 
         if(inputUpdatedAt) {
-          document.querySelectorAll('.Page_updatedAt').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_updatedAt').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUpdatedAt.getAttribute('value');
             else
               item.textContent = inputUpdatedAt.textContent;
           });
-          addGlow(document.querySelector('.Page_updatedAt'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_updatedAt'));
         }
 
         if(inputIsAdminStateUp) {
-          document.querySelectorAll('.Page_isAdminStateUp').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isAdminStateUp').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsAdminStateUp.getAttribute('value');
             else
               item.textContent = inputIsAdminStateUp.textContent;
           });
-          addGlow(document.querySelector('.Page_isAdminStateUp'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isAdminStateUp'));
         }
 
         if(inputIsDefault) {
-          document.querySelectorAll('.Page_isDefault').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isDefault').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsDefault.getAttribute('value');
             else
               item.textContent = inputIsDefault.textContent;
           });
-          addGlow(document.querySelector('.Page_isDefault'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isDefault'));
         }
 
         if(inputIsPortSecurityEnabled) {
-          document.querySelectorAll('.Page_isPortSecurityEnabled').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isPortSecurityEnabled').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsPortSecurityEnabled.getAttribute('value');
             else
               item.textContent = inputIsPortSecurityEnabled.textContent;
           });
-          addGlow(document.querySelector('.Page_isPortSecurityEnabled'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isPortSecurityEnabled'));
         }
 
         if(inputIsRouterExternal) {
-          document.querySelectorAll('.Page_isRouterExternal').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isRouterExternal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsRouterExternal.getAttribute('value');
             else
               item.textContent = inputIsRouterExternal.textContent;
           });
-          addGlow(document.querySelector('.Page_isRouterExternal'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isRouterExternal'));
         }
 
         if(inputIsShared) {
-          document.querySelectorAll('.Page_isShared').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isShared').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsShared.getAttribute('value');
             else
               item.textContent = inputIsShared.textContent;
           });
-          addGlow(document.querySelector('.Page_isShared'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isShared'));
         }
 
         if(inputIsVlanQueing) {
-          document.querySelectorAll('.Page_isVlanQueing').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isVlanQueing').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsVlanQueing.getAttribute('value');
             else
               item.textContent = inputIsVlanQueing.textContent;
           });
-          addGlow(document.querySelector('.Page_isVlanQueing'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isVlanQueing'));
         }
 
         if(inputIsVlanTransparent) {
-          document.querySelectorAll('.Page_isVlanTransparent').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_isVlanTransparent').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIsVlanTransparent.getAttribute('value');
             else
               item.textContent = inputIsVlanTransparent.textContent;
           });
-          addGlow(document.querySelector('.Page_isVlanTransparent'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_isVlanTransparent'));
         }
 
         if(inputL2Adjacency) {
-          document.querySelectorAll('.Page_l2Adjacency').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_l2Adjacency').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputL2Adjacency.getAttribute('value');
             else
               item.textContent = inputL2Adjacency.textContent;
           });
-          addGlow(document.querySelector('.Page_l2Adjacency'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_l2Adjacency'));
         }
 
         if(inputLocationCloud) {
-          document.querySelectorAll('.Page_locationCloud').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationCloud').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationCloud.getAttribute('value');
             else
               item.textContent = inputLocationCloud.textContent;
           });
-          addGlow(document.querySelector('.Page_locationCloud'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationCloud'));
         }
 
         if(inputLocationProjectDomainId) {
-          document.querySelectorAll('.Page_locationProjectDomainId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationProjectDomainId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationProjectDomainId.getAttribute('value');
             else
               item.textContent = inputLocationProjectDomainId.textContent;
           });
-          addGlow(document.querySelector('.Page_locationProjectDomainId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationProjectDomainId'));
         }
 
         if(inputLocationProjectDomainName) {
-          document.querySelectorAll('.Page_locationProjectDomainName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationProjectDomainName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationProjectDomainName.getAttribute('value');
             else
               item.textContent = inputLocationProjectDomainName.textContent;
           });
-          addGlow(document.querySelector('.Page_locationProjectDomainName'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationProjectDomainName'));
         }
 
         if(inputLocationProjectId) {
-          document.querySelectorAll('.Page_locationProjectId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationProjectId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationProjectId.getAttribute('value');
             else
               item.textContent = inputLocationProjectId.textContent;
           });
-          addGlow(document.querySelector('.Page_locationProjectId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationProjectId'));
         }
 
         if(inputLocationProjectName) {
-          document.querySelectorAll('.Page_locationProjectName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationProjectName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationProjectName.getAttribute('value');
             else
               item.textContent = inputLocationProjectName.textContent;
           });
-          addGlow(document.querySelector('.Page_locationProjectName'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationProjectName'));
         }
 
         if(inputLocationRegionName) {
-          document.querySelectorAll('.Page_locationRegionName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationRegionName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationRegionName.getAttribute('value');
             else
               item.textContent = inputLocationRegionName.textContent;
           });
-          addGlow(document.querySelector('.Page_locationRegionName'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationRegionName'));
         }
 
         if(inputLocationZone) {
-          document.querySelectorAll('.Page_locationZone').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_locationZone').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationZone.getAttribute('value');
             else
               item.textContent = inputLocationZone.textContent;
           });
-          addGlow(document.querySelector('.Page_locationZone'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_locationZone'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.BareMetalNetwork_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.BareMetalNetwork_Page_solrId'));
         }
 
           pageGraphBareMetalNetwork();
@@ -2152,7 +2152,23 @@ async function postBareMetalNetwork($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -2386,7 +2402,23 @@ async function deleteBareMetalNetwork(target, id, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -2445,7 +2477,23 @@ async function deletefilterBareMetalNetwork(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

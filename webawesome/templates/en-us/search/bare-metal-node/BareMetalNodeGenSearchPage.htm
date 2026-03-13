@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal node found</span>
             <p class="wa-caption-l ">An OpenStack bare metal node</p>
-{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
 {%- endblock htmBodyStartBareMetalNodePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/bare-metal-node/BareMetalNodeSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/bare-metal-node/BareMetalNodeSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalNodePage %}
@@ -418,8 +417,6 @@
                 </div>
 {% include en-us/search/bare-metal-node/BareMetalNodePaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleBareMetalNodePage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -427,6 +424,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndBareMetalNodePage %}
 {%- include en-us/search/bare-metal-node/BareMetalNodeLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndBareMetalNodePage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

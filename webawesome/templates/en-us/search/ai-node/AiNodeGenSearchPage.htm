@@ -74,7 +74,7 @@
       function htmLegendAiNode(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
-        var url = result.locationLinks[index];
+        var url = null;
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
@@ -213,9 +213,9 @@
 
           function relate_hubResource(event) {
             suggestAiNodeHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -223,15 +223,15 @@
                 , this
                 );
           }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#AiNode_POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#AiNode_POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#AiNode_PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#AiNode_PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
           function relate_clusterResource(event) {
             suggestAiNodeClusterResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,clusterResource,clusterResource,pk,editPage,objectTitle' } ] : [{%- if result.clusterResource is defined %}{'name':'fq','value':'clusterResource:{{ result.clusterResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -239,10 +239,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
-          document.querySelector('#PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#AiNode_POST_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#AiNode_POST_clusterResource')?.addEventListener('focus', relate_clusterResource);
+          document.querySelector('#AiNode_PATCH_clusterResource')?.addEventListener('input', relate_clusterResource);
+          document.querySelector('#AiNode_PATCH_clusterResource')?.addEventListener('focus', relate_clusterResource);
         if(nodeResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -354,6 +354,28 @@
           deletefilterAiNode(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postHub')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHub(document.querySelector('#htmForm_postHub')
+              , document.querySelector('#htmFormButton_postHub')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postCluster')?.addEventListener('click', event => {
+          event.preventDefault();
+          postCluster(document.querySelector('#htmForm_postCluster')
+              , document.querySelector('#htmFormButton_postCluster')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitAiNodePage %}{%- endblock htmScriptInitAiNodePage %}
       });
     </script>
@@ -408,7 +430,6 @@
             </div>
             <span class="wa-heading-m ">no AI node found</span>
             <p class="wa-caption-l ">A Red Hat OpenShift node containing GPUs</p>
-{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -424,6 +445,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
 {%- endblock htmBodyStartAiNodePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -436,7 +458,6 @@
 {% include en-us/search/ai-node/AiNodeSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/ai-node/AiNodeSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleAiNodePage %}
@@ -514,8 +535,6 @@
                 </div>
 {% include en-us/search/ai-node/AiNodePaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleAiNodePage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -523,6 +542,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndAiNodePage %}
 {%- include en-us/search/ai-node/AiNodeLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndAiNodePage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

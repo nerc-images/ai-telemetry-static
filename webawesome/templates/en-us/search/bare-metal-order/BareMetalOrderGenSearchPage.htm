@@ -130,9 +130,9 @@
 
           function relate_networkId(event) {
             suggestBareMetalOrderNetworkId(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,id,pk,editPage,objectTitle' } ] : [{%- if result.networkId is defined %}{'name':'fq','value':'id:{{ result.networkId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,id,id,pk,editPage,objectTitle' } ] : [{%- if result.networkId is defined %}{'name':'fq','value':'id:{{ result.networkId }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -140,10 +140,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#POST_networkId')?.addEventListener('focus', relate_networkId);
-          document.querySelector('#PATCH_networkId')?.addEventListener('input', relate_networkId);
-          document.querySelector('#PATCH_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_POST_networkId')?.addEventListener('focus', relate_networkId);
+          document.querySelector('#BareMetalOrder_PATCH_networkId')?.addEventListener('input', relate_networkId);
+          document.querySelector('#BareMetalOrder_PATCH_networkId')?.addEventListener('focus', relate_networkId);
         if(pk == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -245,6 +245,17 @@
           deletefilterBareMetalOrder(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postBareMetalNetwork')?.addEventListener('click', event => {
+          event.preventDefault();
+          postBareMetalNetwork(document.querySelector('#htmForm_postBareMetalNetwork')
+              , document.querySelector('#htmFormButton_postBareMetalNetwork')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitBareMetalOrderPage %}{%- endblock htmScriptInitBareMetalOrderPage %}
       });
     </script>
@@ -299,7 +310,6 @@
             </div>
             <span class="wa-heading-m ">no bare metal order found</span>
             <p class="wa-caption-l ">A bare metal order</p>
-{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -315,6 +325,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
 {%- endblock htmBodyStartBareMetalOrderPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -327,7 +338,6 @@
 {% include en-us/search/bare-metal-order/BareMetalOrderSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/bare-metal-order/BareMetalOrderSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleBareMetalOrderPage %}
@@ -336,19 +346,6 @@
 {% include en-us/search/bare-metal-order/BareMetalOrderPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-                    <wa-dropdown id="htmDropdown-pk">
-                      <wa-button variant="brand" slot="trigger" caret>primary key</wa-button>
-                      <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-pk-asc">
-                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                          sort by primary key ascending
-                        </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-pk-desc">
-                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                          sort by primary key descending
-                        </wa-menu-item>
-                      </wa-menu>
-                    </wa-dropdown>
                     <wa-dropdown id="htmDropdown-description">
                       <wa-button variant="brand" slot="trigger" caret>bare metal order description</wa-button>
                       <wa-menu>
@@ -375,25 +372,50 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-networkName">
+                      <wa-button variant="brand" slot="trigger" caret>bare metal network name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_networkName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-networkName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by bare metal network name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_networkName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-networkName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by bare metal network name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-pk">
+                      <wa-button variant="brand" slot="trigger" caret>primary key</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-pk-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by primary key ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortBareMetalOrder_pk'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-BareMetalOrder').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-pk-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by primary key descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listBareMetalOrder%}
                   <div>
                     <a href="{{ item.displayPage }}">
                       <i class="fa-regular fa-share-nodes"></i>
-                      <span>{{ item.pk | e }}</span>
-                    </a>
-                    <a href="{{ item.displayPage }}">
                       <span class="white-space-pre-wrap ">{{ item.description | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.status | e }}</span>
                     </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.networkName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.pk | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
-              {% if getColumnPk is defined %}
-                <div>
-                </div>
-              {% endif %}
               {% if getColumnDescription is defined %}
                 <div>
                 </div>
@@ -402,11 +424,17 @@
                 <div>
                 </div>
               {% endif %}
+              {% if getColumnNetworkName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnPk is defined %}
+                <div>
+                </div>
+              {% endif %}
                 </div>
 {% include en-us/search/bare-metal-order/BareMetalOrderPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleBareMetalOrderPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -414,6 +442,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndBareMetalOrderPage %}
 {%- include en-us/search/bare-metal-order/BareMetalOrderLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndBareMetalOrderPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

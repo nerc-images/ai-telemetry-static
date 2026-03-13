@@ -416,14 +416,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchClusterOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#patchClusterOrderDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postClusterOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#postClusterOrderDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteClusterOrder')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -435,14 +427,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportClusterOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportClusterOrderDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageClusterOrder')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageClusterOrderDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterClusterOrder')?.addEventListener('click', (event) => {

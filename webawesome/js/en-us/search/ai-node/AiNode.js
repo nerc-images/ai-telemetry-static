@@ -117,79 +117,79 @@ async function websocketAiNodeInner(apiRequest) {
         var inputEntityShortId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.AiNode_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.AiNode_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.AiNode_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.AiNode_Page_archived');
         if(vars.includes('hubId'))
-          inputHubId = $response.querySelector('.Page_hubId');
+          inputHubId = $response.querySelector('.AiNode_Page_hubId');
         if(vars.includes('clusterName'))
-          inputClusterName = $response.querySelector('.Page_clusterName');
+          inputClusterName = $response.querySelector('.AiNode_Page_clusterName');
         if(vars.includes('nodeName'))
-          inputNodeName = $response.querySelector('.Page_nodeName');
+          inputNodeName = $response.querySelector('.AiNode_Page_nodeName');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.AiNode_Page_description');
         if(vars.includes('id'))
-          inputId = $response.querySelector('.Page_id');
+          inputId = $response.querySelector('.AiNode_Page_id');
         if(vars.includes('gpuDevicesTotal'))
-          inputGpuDevicesTotal = $response.querySelector('.Page_gpuDevicesTotal');
+          inputGpuDevicesTotal = $response.querySelector('.AiNode_Page_gpuDevicesTotal');
         if(vars.includes('ngsildTenant'))
-          inputNgsildTenant = $response.querySelector('.Page_ngsildTenant');
+          inputNgsildTenant = $response.querySelector('.AiNode_Page_ngsildTenant');
         if(vars.includes('ngsildPath'))
-          inputNgsildPath = $response.querySelector('.Page_ngsildPath');
+          inputNgsildPath = $response.querySelector('.AiNode_Page_ngsildPath');
         if(vars.includes('ngsildContext'))
-          inputNgsildContext = $response.querySelector('.Page_ngsildContext');
+          inputNgsildContext = $response.querySelector('.AiNode_Page_ngsildContext');
         if(vars.includes('ngsildData'))
-          inputNgsildData = $response.querySelector('.Page_ngsildData');
+          inputNgsildData = $response.querySelector('.AiNode_Page_ngsildData');
         if(vars.includes('location'))
-          inputLocation = $response.querySelector('.Page_location');
+          inputLocation = $response.querySelector('.AiNode_Page_location');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.AiNode_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.AiNode_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.AiNode_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.AiNode_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.AiNode_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.AiNode_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.AiNode_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.AiNode_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.AiNode_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.AiNode_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.AiNode_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.AiNode_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.AiNode_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.AiNode_Page_solrId');
         if(vars.includes('hubResource'))
-          inputHubResource = $response.querySelector('.Page_hubResource');
+          inputHubResource = $response.querySelector('.AiNode_Page_hubResource');
         if(vars.includes('clusterResource'))
-          inputClusterResource = $response.querySelector('.Page_clusterResource');
+          inputClusterResource = $response.querySelector('.AiNode_Page_clusterResource');
         if(vars.includes('nodeResource'))
-          inputNodeResource = $response.querySelector('.Page_nodeResource');
+          inputNodeResource = $response.querySelector('.AiNode_Page_nodeResource');
         if(vars.includes('nodeDisplayName'))
-          inputNodeDisplayName = $response.querySelector('.Page_nodeDisplayName');
+          inputNodeDisplayName = $response.querySelector('.AiNode_Page_nodeDisplayName');
         if(vars.includes('locationColors'))
-          inputLocationColors = $response.querySelector('.Page_locationColors');
+          inputLocationColors = $response.querySelector('.AiNode_Page_locationColors');
         if(vars.includes('locationTitles'))
-          inputLocationTitles = $response.querySelector('.Page_locationTitles');
+          inputLocationTitles = $response.querySelector('.AiNode_Page_locationTitles');
         if(vars.includes('locationLinks'))
-          inputLocationLinks = $response.querySelector('.Page_locationLinks');
+          inputLocationLinks = $response.querySelector('.AiNode_Page_locationLinks');
         if(vars.includes('entityShortId'))
-          inputEntityShortId = $response.querySelector('.Page_entityShortId');
+          inputEntityShortId = $response.querySelector('.AiNode_Page_entityShortId');
 
         jsWebsocketAiNode(nodeResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -197,373 +197,373 @@ async function websocketAiNodeInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.AiNode_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.AiNode_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.AiNode_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.AiNode_Page_archived'));
         }
 
         if(inputHubId) {
-          document.querySelectorAll('.Page_hubId').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_hubId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubId.getAttribute('value');
             else
               item.textContent = inputHubId.textContent;
           });
-          addGlow(document.querySelector('.Page_hubId'));
+          addGlow(document.querySelector('.AiNode_Page_hubId'));
         }
 
         if(inputClusterName) {
-          document.querySelectorAll('.Page_clusterName').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_clusterName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterName.getAttribute('value');
             else
               item.textContent = inputClusterName.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterName'));
+          addGlow(document.querySelector('.AiNode_Page_clusterName'));
         }
 
         if(inputNodeName) {
-          document.querySelectorAll('.Page_nodeName').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_nodeName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeName.getAttribute('value');
             else
               item.textContent = inputNodeName.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeName'));
+          addGlow(document.querySelector('.AiNode_Page_nodeName'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.AiNode_Page_description'));
         }
 
         if(inputId) {
-          document.querySelectorAll('.Page_id').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_id').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputId.getAttribute('value');
             else
               item.textContent = inputId.textContent;
           });
-          addGlow(document.querySelector('.Page_id'));
+          addGlow(document.querySelector('.AiNode_Page_id'));
         }
 
         if(inputGpuDevicesTotal) {
-          document.querySelectorAll('.Page_gpuDevicesTotal').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_gpuDevicesTotal').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputGpuDevicesTotal.getAttribute('value');
             else
               item.textContent = inputGpuDevicesTotal.textContent;
           });
-          addGlow(document.querySelector('.Page_gpuDevicesTotal'));
+          addGlow(document.querySelector('.AiNode_Page_gpuDevicesTotal'));
         }
 
         if(inputNgsildTenant) {
-          document.querySelectorAll('.Page_ngsildTenant').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_ngsildTenant').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildTenant.getAttribute('value');
             else
               item.textContent = inputNgsildTenant.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildTenant'));
+          addGlow(document.querySelector('.AiNode_Page_ngsildTenant'));
         }
 
         if(inputNgsildPath) {
-          document.querySelectorAll('.Page_ngsildPath').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_ngsildPath').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildPath.getAttribute('value');
             else
               item.textContent = inputNgsildPath.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildPath'));
+          addGlow(document.querySelector('.AiNode_Page_ngsildPath'));
         }
 
         if(inputNgsildContext) {
-          document.querySelectorAll('.Page_ngsildContext').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_ngsildContext').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildContext.getAttribute('value');
             else
               item.textContent = inputNgsildContext.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildContext'));
+          addGlow(document.querySelector('.AiNode_Page_ngsildContext'));
         }
 
         if(inputNgsildData) {
-          document.querySelectorAll('.Page_ngsildData').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_ngsildData').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNgsildData.getAttribute('value');
             else
               item.textContent = inputNgsildData.textContent;
           });
-          addGlow(document.querySelector('.Page_ngsildData'));
+          addGlow(document.querySelector('.AiNode_Page_ngsildData'));
         }
 
         if(inputLocation) {
-          document.querySelectorAll('.Page_location').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_location').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocation.getAttribute('value');
             else
               item.textContent = inputLocation.textContent;
           });
-          addGlow(document.querySelector('.Page_location'));
+          addGlow(document.querySelector('.AiNode_Page_location'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.AiNode_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.AiNode_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.AiNode_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.AiNode_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.AiNode_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.AiNode_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.AiNode_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.AiNode_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.AiNode_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.AiNode_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.AiNode_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.AiNode_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.AiNode_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.AiNode_Page_solrId'));
         }
 
         if(inputHubResource) {
-          document.querySelectorAll('.Page_hubResource').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_hubResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubResource.getAttribute('value');
             else
               item.textContent = inputHubResource.textContent;
           });
-          addGlow(document.querySelector('.Page_hubResource'));
+          addGlow(document.querySelector('.AiNode_Page_hubResource'));
         }
 
         if(inputClusterResource) {
-          document.querySelectorAll('.Page_clusterResource').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_clusterResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterResource.getAttribute('value');
             else
               item.textContent = inputClusterResource.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterResource'));
+          addGlow(document.querySelector('.AiNode_Page_clusterResource'));
         }
 
         if(inputNodeResource) {
-          document.querySelectorAll('.Page_nodeResource').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_nodeResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeResource.getAttribute('value');
             else
               item.textContent = inputNodeResource.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeResource'));
+          addGlow(document.querySelector('.AiNode_Page_nodeResource'));
         }
 
         if(inputNodeDisplayName) {
-          document.querySelectorAll('.Page_nodeDisplayName').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_nodeDisplayName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNodeDisplayName.getAttribute('value');
             else
               item.textContent = inputNodeDisplayName.textContent;
           });
-          addGlow(document.querySelector('.Page_nodeDisplayName'));
+          addGlow(document.querySelector('.AiNode_Page_nodeDisplayName'));
         }
 
         if(inputLocationColors) {
-          document.querySelectorAll('.Page_locationColors').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_locationColors').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationColors.getAttribute('value');
             else
               item.textContent = inputLocationColors.textContent;
           });
-          addGlow(document.querySelector('.Page_locationColors'));
+          addGlow(document.querySelector('.AiNode_Page_locationColors'));
         }
 
         if(inputLocationTitles) {
-          document.querySelectorAll('.Page_locationTitles').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_locationTitles').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationTitles.getAttribute('value');
             else
               item.textContent = inputLocationTitles.textContent;
           });
-          addGlow(document.querySelector('.Page_locationTitles'));
+          addGlow(document.querySelector('.AiNode_Page_locationTitles'));
         }
 
         if(inputLocationLinks) {
-          document.querySelectorAll('.Page_locationLinks').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_locationLinks').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLocationLinks.getAttribute('value');
             else
               item.textContent = inputLocationLinks.textContent;
           });
-          addGlow(document.querySelector('.Page_locationLinks'));
+          addGlow(document.querySelector('.AiNode_Page_locationLinks'));
         }
 
         if(inputEntityShortId) {
-          document.querySelectorAll('.Page_entityShortId').forEach((item, index) => {
+          document.querySelectorAll('.AiNode_Page_entityShortId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEntityShortId.getAttribute('value');
             else
               item.textContent = inputEntityShortId.textContent;
           });
-          addGlow(document.querySelector('.Page_entityShortId'));
+          addGlow(document.querySelector('.AiNode_Page_entityShortId'));
         }
 
           pageGraphAiNode();
@@ -1059,26 +1059,38 @@ function suggestAiNodeHubResource(filters, $list, nodeResource = null, hubResour
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['hubResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(nodeResource.toString()) : val == hubResource);
+        var inputVar = 'hubResource';
+        var val = o[inputVar];
+        var checked = val == null ? false : (hubResource != null && val === hubResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hubResource_' + nodeResource + '_hubResource_' + o['hubResource']);
-        $input.setAttribute('name', 'hubResource');
-        $input.setAttribute('value', o['hubResource']);
+        $input.setAttribute('id', 'GET_hubResource_' + nodeResource + '_hubResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHubResource ');
         if(nodeResource != null) {
           $input.addEventListener('change', function(event) {
-            patchAiNodeVals([{ name: 'fq', value: 'nodeResource:' + nodeResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o['hubResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchAiNodeVals([{ name: 'fq', value: 'nodeResource:' + nodeResource }], { [(event.target.checked ? 'set' : 'remove') + 'HubResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestAiNodeHubResource(filters, $list, nodeResource, o['hubResource'], relate, target);
+                  suggestAiNodeHubResource(filters, $list, nodeResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -1092,7 +1104,9 @@ function suggestAiNodeHubResource(filters, $list, nodeResource = null, hubResour
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHubVals(filters, target, success, error);
+  if (typeof searchHubVals === 'function') {
+    searchHubVals(filters, target, success, error);
+  }
 }
 
 function suggestAiNodeClusterResource(filters, $list, nodeResource = null, clusterResource = null, relate=true, target) {
@@ -1107,26 +1121,38 @@ function suggestAiNodeClusterResource(filters, $list, nodeResource = null, clust
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['clusterResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(nodeResource.toString()) : val == clusterResource);
+        var inputVar = 'clusterResource';
+        var val = o[inputVar];
+        var checked = val == null ? false : (clusterResource != null && val === clusterResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_clusterResource_' + nodeResource + '_clusterResource_' + o['clusterResource']);
-        $input.setAttribute('name', 'clusterResource');
-        $input.setAttribute('value', o['clusterResource']);
+        $input.setAttribute('id', 'GET_clusterResource_' + nodeResource + '_clusterResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueClusterResource ');
         if(nodeResource != null) {
           $input.addEventListener('change', function(event) {
-            patchAiNodeVals([{ name: 'fq', value: 'nodeResource:' + nodeResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o['clusterResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchAiNodeVals([{ name: 'fq', value: 'nodeResource:' + nodeResource }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestAiNodeClusterResource(filters, $list, nodeResource, o['clusterResource'], relate, target);
+                  suggestAiNodeClusterResource(filters, $list, nodeResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -1140,7 +1166,9 @@ function suggestAiNodeClusterResource(filters, $list, nodeResource = null, clust
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchClusterVals(filters, target, success, error);
+  if (typeof searchClusterVals === 'function') {
+    searchClusterVals(filters, target, success, error);
+  }
 }
 
 function suggestAiNodeObjectSuggest($formFilters, $list, target) {
@@ -1686,7 +1714,23 @@ async function postAiNode($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1840,7 +1884,23 @@ async function deleteAiNode(target, nodeResource, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1899,7 +1959,23 @@ async function deletefilterAiNode(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

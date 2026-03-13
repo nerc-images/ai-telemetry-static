@@ -260,7 +260,7 @@
               <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-solid fa-newspaper"></i>
+                  <i class="fa-duotone fa-regular fa-newspaper"></i>
                   all articles
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -279,7 +279,7 @@
           <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-solid fa-newspaper"></i>
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
               all articles
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -288,11 +288,10 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-solid fa-newspaper"></i>
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
             </div>
             <span class="wa-heading-m ">no article found</span>
             <p class="wa-caption-l ">Read the latest articles to learn more</p>
-{% include en-us/search/article/SitePageSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/article/SitePageSearchForm.htm %}
 {%- endblock htmBodyStartSitePagePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/article/SitePageSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/article/SitePageSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleSitePagePage %}
@@ -359,7 +358,7 @@
                   {% for item in listSitePage%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-solid fa-newspaper"></i>
+                      <i class="fa-duotone fa-regular fa-newspaper"></i>
                       <span>{{ item.name | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
@@ -378,8 +377,6 @@
                 </div>
 {% include en-us/search/article/SitePagePaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleSitePagePage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -387,6 +384,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndSitePagePage %}
 {%- include en-us/search/article/SitePageLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndSitePagePage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

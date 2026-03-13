@@ -101,47 +101,47 @@ async function websocketClusterRequestInner(apiRequest) {
         var inputSolrId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.ClusterRequest_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.ClusterRequest_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.ClusterRequest_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.ClusterRequest_Page_archived');
         if(vars.includes('name'))
-          inputName = $response.querySelector('.Page_name');
+          inputName = $response.querySelector('.ClusterRequest_Page_name');
         if(vars.includes('clusterTemplateTitle'))
-          inputClusterTemplateTitle = $response.querySelector('.Page_clusterTemplateTitle');
+          inputClusterTemplateTitle = $response.querySelector('.ClusterRequest_Page_clusterTemplateTitle');
         if(vars.includes('userId'))
-          inputUserId = $response.querySelector('.Page_userId');
+          inputUserId = $response.querySelector('.ClusterRequest_Page_userId');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.ClusterRequest_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.ClusterRequest_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.ClusterRequest_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.ClusterRequest_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.ClusterRequest_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.ClusterRequest_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.ClusterRequest_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.ClusterRequest_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.ClusterRequest_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.ClusterRequest_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.ClusterRequest_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.ClusterRequest_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.ClusterRequest_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.ClusterRequest_Page_solrId');
 
         jsWebsocketClusterRequest(name, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -149,213 +149,213 @@ async function websocketClusterRequestInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.ClusterRequest_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.ClusterRequest_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.ClusterRequest_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.ClusterRequest_Page_archived'));
         }
 
         if(inputName) {
-          document.querySelectorAll('.Page_name').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_name').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputName.getAttribute('value');
             else
               item.textContent = inputName.textContent;
           });
-          addGlow(document.querySelector('.Page_name'));
+          addGlow(document.querySelector('.ClusterRequest_Page_name'));
         }
 
         if(inputClusterTemplateTitle) {
-          document.querySelectorAll('.Page_clusterTemplateTitle').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_clusterTemplateTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterTemplateTitle.getAttribute('value');
             else
               item.textContent = inputClusterTemplateTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterTemplateTitle'));
+          addGlow(document.querySelector('.ClusterRequest_Page_clusterTemplateTitle'));
         }
 
         if(inputUserId) {
-          document.querySelectorAll('.Page_userId').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_userId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserId.getAttribute('value');
             else
               item.textContent = inputUserId.textContent;
           });
-          addGlow(document.querySelector('.Page_userId'));
+          addGlow(document.querySelector('.ClusterRequest_Page_userId'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.ClusterRequest_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.ClusterRequest_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.ClusterRequest_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.ClusterRequest_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.ClusterRequest_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.ClusterRequest_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.ClusterRequest_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.ClusterRequest_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.ClusterRequest_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.ClusterRequest_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.ClusterRequest_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.ClusterRequest_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.ClusterRequest_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.ClusterRequest_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.ClusterRequest_Page_solrId'));
         }
 
           pageGraphClusterRequest();
@@ -626,26 +626,38 @@ function suggestClusterRequestClusterTemplateTitle(filters, $list, name = null, 
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['title'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(name.toString()) : val == clusterTemplateTitle);
+        var inputVar = 'title';
+        var val = o[inputVar];
+        var checked = val == null ? false : (clusterTemplateTitle != null && val === clusterTemplateTitle.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_clusterTemplateTitle_' + name + '_title_' + o['title']);
-        $input.setAttribute('name', 'title');
-        $input.setAttribute('value', o['title']);
+        $input.setAttribute('id', 'GET_clusterTemplateTitle_' + name + '_title_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueClusterTemplateTitle ');
         if(name != null) {
           $input.addEventListener('change', function(event) {
-            patchClusterRequestVals([{ name: 'fq', value: 'name:' + name }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterTemplateTitle']: o['title'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchClusterRequestVals([{ name: 'fq', value: 'name:' + name }], { [(event.target.checked ? 'set' : 'remove') + 'ClusterTemplateTitle']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterRequestClusterTemplateTitle(filters, $list, name, o['title'], relate, target);
+                  suggestClusterRequestClusterTemplateTitle(filters, $list, name, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -659,7 +671,9 @@ function suggestClusterRequestClusterTemplateTitle(filters, $list, name = null, 
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchClusterTemplateVals(filters, target, success, error);
+  if (typeof searchClusterTemplateVals === 'function') {
+    searchClusterTemplateVals(filters, target, success, error);
+  }
 }
 
 function suggestClusterRequestUserId(filters, $list, name = null, userId = null, relate=true, target) {
@@ -674,26 +688,38 @@ function suggestClusterRequestUserId(filters, $list, name = null, userId = null,
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['userId'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(name.toString()) : val == userId);
+        var inputVar = 'userId';
+        var val = o[inputVar];
+        var checked = val == null ? false : (userId != null && val === userId.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_userId_' + name + '_userId_' + o['userId']);
-        $input.setAttribute('name', 'userId');
-        $input.setAttribute('value', o['userId']);
+        $input.setAttribute('id', 'GET_userId_' + name + '_userId_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueUserId ');
         if(name != null) {
           $input.addEventListener('change', function(event) {
-            patchClusterRequestVals([{ name: 'fq', value: 'name:' + name }], { [(event.target.checked ? 'set' : 'remove') + 'UserId']: o['userId'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchClusterRequestVals([{ name: 'fq', value: 'name:' + name }], { [(event.target.checked ? 'set' : 'remove') + 'UserId']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestClusterRequestUserId(filters, $list, name, o['userId'], relate, target);
+                  suggestClusterRequestUserId(filters, $list, name, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -707,7 +733,9 @@ function suggestClusterRequestUserId(filters, $list, name = null, userId = null,
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchSiteUserVals(filters, target, success, error);
+  if (typeof searchSiteUserVals === 'function') {
+    searchSiteUserVals(filters, target, success, error);
+  }
 }
 
 function suggestClusterRequestObjectSuggest($formFilters, $list, target) {
@@ -1057,7 +1085,23 @@ async function postClusterRequest($formValues, target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1167,7 +1211,23 @@ async function deleteClusterRequest(target, name, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 
@@ -1226,7 +1286,23 @@ async function deletefilterClusterRequest(target, success, error) {
   }
   if(error == null) {
     error = function( jqXhr, target2 ) {
-      addError(target, jqXhr);
+      if(jqXhr.status === 400) {
+        jqXhr.json().then((json) => {
+          if(json?.error?.message === 'Inactive Token') {
+            fetch('/refresh').then(refreshResponse => {
+              if(refreshResponse.ok) {
+                addErrorJson(target, jqXhr);
+              } else {
+                addErrorJson(target, jqXhr);
+              }
+            });
+          } else {
+            addError(target, jqXhr);
+          }
+        });
+      } else {
+        addError(target, jqXhr);
+      }
     };
   }
 

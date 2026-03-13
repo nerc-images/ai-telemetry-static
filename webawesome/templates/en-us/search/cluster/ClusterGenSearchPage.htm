@@ -73,7 +73,7 @@
       function htmLegendCluster(map, shape, result, index, count) {
         var color = result.locationColors[index];
         var title = result.locationTitles[index];
-        var url = result.locationLinks[index];
+        var url = null;
         var htm = '';
         htm += `<div class="cursor-pointer " style="max-width: 400px; ">
 `;
@@ -212,9 +212,9 @@
 
           function relate_hubResource(event) {
             suggestClusterHubResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,hubId,hubResource,pk,editPage,objectTitle' } ] : [{%- if result.hubResource is defined %}{'name':'fq','value':'hubResource:{{ result.hubResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -222,10 +222,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#POST_hubResource')?.addEventListener('focus', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('input', relate_hubResource);
-          document.querySelector('#PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#Cluster_POST_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#Cluster_POST_hubResource')?.addEventListener('focus', relate_hubResource);
+          document.querySelector('#Cluster_PATCH_hubResource')?.addEventListener('input', relate_hubResource);
+          document.querySelector('#Cluster_PATCH_hubResource')?.addEventListener('focus', relate_hubResource);
         if(clusterResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -337,6 +337,17 @@
           deletefilterCluster(event.target);
           return false;
         });
+
+        document.querySelector('#htmFormButton_postHub')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHub(document.querySelector('#htmForm_postHub')
+              , document.querySelector('#htmFormButton_postHub')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
 {%- block htmScriptInitClusterPage %}{%- endblock htmScriptInitClusterPage %}
       });
     </script>
@@ -391,7 +402,6 @@
             </div>
             <span class="wa-heading-m ">no OpenShift cluster found</span>
             <p class="wa-caption-l ">A Red Hat OpenShift cluster containing GPUs</p>
-{% include en-us/search/cluster/ClusterSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -407,6 +417,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/cluster/ClusterSearchForm.htm %}
 {%- endblock htmBodyStartClusterPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -419,7 +430,6 @@
 {% include en-us/search/cluster/ClusterSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/cluster/ClusterSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleClusterPage %}
@@ -454,6 +464,19 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-modified">
+                      <wa-button variant="brand" slot="trigger" caret>modified</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortCluster_modified'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Cluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-modified-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by modified ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortCluster_modified'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Cluster').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-modified-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by modified descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listCluster%}
                   <div>
@@ -463,6 +486,10 @@
                     </a>
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.clusterName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span><wa-format-date weekday="short" month="short" day="numeric" year="numeric" hour="numeric" minute="numeric" second="numeric" time-zone-name="short" date="{{ formatZonedDateTime(item.modified, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, "UTC") }}"></wa-format-date>
+</span>
                     </a>
                   </div>
                   {% endfor %}
@@ -474,11 +501,13 @@
                 <div>
                 </div>
               {% endif %}
+              {% if getColumnModified is defined %}
+                <div>
+                </div>
+              {% endif %}
                 </div>
 {% include en-us/search/cluster/ClusterPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleClusterPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -486,6 +515,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndClusterPage %}
 {%- include en-us/search/cluster/ClusterLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndClusterPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}
