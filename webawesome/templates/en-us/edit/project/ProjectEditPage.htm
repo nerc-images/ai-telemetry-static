@@ -1,6 +1,11 @@
 {% extends "en-us/edit/project/ProjectGenEditPage.htm" %}
 {%- block htmBodyStartProjectPage %}
 {{ super() }}
+{% if result.description is defined %}
+<p>
+  {{ result.description }}
+</p>
+{% endif %}
 {% if result is defined %}
 <wa-details open class="HtmRow" id="observability-dashboard">
   <div slot="summary">

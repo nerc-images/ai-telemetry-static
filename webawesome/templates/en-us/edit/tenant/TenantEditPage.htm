@@ -20,7 +20,12 @@
       <div class="wa-stack ">
         <div class="wa-cluster ">
           <i class="fa-regular fa-people-line fa-2xl "></i>
-          <a href="{{ project.editPage }}">
+          {% if project.description is defined %}
+          <wa-tooltip style="--max-width: 70vw;" for="link-{{ project.projectResource }}">
+            {{ project.description }}
+          </wa-tooltip>
+          {% endif %}
+          <a id="link-{{ project.projectResource }}" href="{{ project.editPage }}">
             <strong>
               {{ project.projectName }}
             </strong> 
@@ -28,11 +33,11 @@
             <strong>
               {{ project.tenantName }}
             </strong> 
-            tenant in
+            tenant in the
             <strong>
-              {{ project.hubId }}
+              {{ project.clusterName }}
             </strong> 
-            hub
+            cluster
           </a>
         </div>
         <div class="wa-cluster ">
