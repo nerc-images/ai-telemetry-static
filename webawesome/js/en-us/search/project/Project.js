@@ -86,7 +86,11 @@ async function websocketProjectInner(apiRequest) {
         var inputHubId = null;
         var inputClusterName = null;
         var inputProjectName = null;
+        var inputProjectDisplayName = null;
+        var inputProjectTitle = null;
         var inputDescription = null;
+        var inputProjectFieldOfScience = null;
+        var inputProjectActive = null;
         var inputGpuEnabled = null;
         var inputPodRestartCount = null;
         var inputPodsRestarting = null;
@@ -113,7 +117,6 @@ async function websocketProjectInner(apiRequest) {
         var inputHubResource = null;
         var inputClusterResource = null;
         var inputProjectResource = null;
-        var inputProjectDisplayName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Project_Page_pk');
@@ -131,8 +134,16 @@ async function websocketProjectInner(apiRequest) {
           inputClusterName = $response.querySelector('.Project_Page_clusterName');
         if(vars.includes('projectName'))
           inputProjectName = $response.querySelector('.Project_Page_projectName');
+        if(vars.includes('projectDisplayName'))
+          inputProjectDisplayName = $response.querySelector('.Project_Page_projectDisplayName');
+        if(vars.includes('projectTitle'))
+          inputProjectTitle = $response.querySelector('.Project_Page_projectTitle');
         if(vars.includes('description'))
           inputDescription = $response.querySelector('.Project_Page_description');
+        if(vars.includes('projectFieldOfScience'))
+          inputProjectFieldOfScience = $response.querySelector('.Project_Page_projectFieldOfScience');
+        if(vars.includes('projectActive'))
+          inputProjectActive = $response.querySelector('.Project_Page_projectActive');
         if(vars.includes('gpuEnabled'))
           inputGpuEnabled = $response.querySelector('.Project_Page_gpuEnabled');
         if(vars.includes('podRestartCount'))
@@ -185,8 +196,6 @@ async function websocketProjectInner(apiRequest) {
           inputClusterResource = $response.querySelector('.Project_Page_clusterResource');
         if(vars.includes('projectResource'))
           inputProjectResource = $response.querySelector('.Project_Page_projectResource');
-        if(vars.includes('projectDisplayName'))
-          inputProjectDisplayName = $response.querySelector('.Project_Page_projectDisplayName');
 
         jsWebsocketProject(projectResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -273,6 +282,26 @@ async function websocketProjectInner(apiRequest) {
           addGlow(document.querySelector('.Project_Page_projectName'));
         }
 
+        if(inputProjectDisplayName) {
+          document.querySelectorAll('.Project_Page_projectDisplayName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputProjectDisplayName.getAttribute('value');
+            else
+              item.textContent = inputProjectDisplayName.textContent;
+          });
+          addGlow(document.querySelector('.Project_Page_projectDisplayName'));
+        }
+
+        if(inputProjectTitle) {
+          document.querySelectorAll('.Project_Page_projectTitle').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputProjectTitle.getAttribute('value');
+            else
+              item.textContent = inputProjectTitle.textContent;
+          });
+          addGlow(document.querySelector('.Project_Page_projectTitle'));
+        }
+
         if(inputDescription) {
           document.querySelectorAll('.Project_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -281,6 +310,26 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputDescription.textContent;
           });
           addGlow(document.querySelector('.Project_Page_description'));
+        }
+
+        if(inputProjectFieldOfScience) {
+          document.querySelectorAll('.Project_Page_projectFieldOfScience').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputProjectFieldOfScience.getAttribute('value');
+            else
+              item.textContent = inputProjectFieldOfScience.textContent;
+          });
+          addGlow(document.querySelector('.Project_Page_projectFieldOfScience'));
+        }
+
+        if(inputProjectActive) {
+          document.querySelectorAll('.Project_Page_projectActive').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputProjectActive.getAttribute('value');
+            else
+              item.textContent = inputProjectActive.textContent;
+          });
+          addGlow(document.querySelector('.Project_Page_projectActive'));
         }
 
         if(inputGpuEnabled) {
@@ -543,16 +592,6 @@ async function websocketProjectInner(apiRequest) {
           addGlow(document.querySelector('.Project_Page_projectResource'));
         }
 
-        if(inputProjectDisplayName) {
-          document.querySelectorAll('.Project_Page_projectDisplayName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputProjectDisplayName.getAttribute('value');
-            else
-              item.textContent = inputProjectDisplayName.textContent;
-          });
-          addGlow(document.querySelector('.Project_Page_projectDisplayName'));
-        }
-
           pageGraphProject();
       });
     });
@@ -736,9 +775,31 @@ function searchProjectFilters($formFilters) {
     if(filterProjectName != null && filterProjectName !== '')
       filters.push({ name: 'fq', value: 'projectName:' + filterProjectName });
 
+    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
+    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
+      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
+
+    var filterProjectTitle = $formFilters.querySelector('.valueProjectTitle')?.value;
+    if(filterProjectTitle != null && filterProjectTitle !== '')
+      filters.push({ name: 'fq', value: 'projectTitle:' + filterProjectTitle });
+
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var filterProjectFieldOfScience = $formFilters.querySelector('.valueProjectFieldOfScience')?.value;
+    if(filterProjectFieldOfScience != null && filterProjectFieldOfScience !== '')
+      filters.push({ name: 'fq', value: 'projectFieldOfScience:' + filterProjectFieldOfScience });
+
+    var $filterProjectActiveCheckbox = $formFilters.querySelector('input.valueProjectActive[type = "checkbox"]');
+    var $filterProjectActiveSelect = $formFilters.querySelector('select.valueProjectActive');
+    var filterProjectActive = $filterProjectActiveSelect.length ? $filterProjectActiveSelect.value : $filterProjectActiveCheckbox.checked;
+    var filterProjectActiveSelectVal = $formFilters.querySelector('select.filterProjectActive')?.value;
+    var filterProjectActive = null;
+    if(filterProjectActiveSelectVal !== '')
+      filterProjectActive = filterProjectActiveSelectVal == 'true';
+    if(filterProjectActive != null && filterProjectActive === true)
+      filters.push({ name: 'fq', value: 'projectActive:' + filterProjectActive });
 
     var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
     var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
@@ -855,10 +916,6 @@ function searchProjectFilters($formFilters) {
     var filterProjectResource = $formFilters.querySelector('.valueProjectResource')?.value;
     if(filterProjectResource != null && filterProjectResource !== '')
       filters.push({ name: 'fq', value: 'projectResource:' + filterProjectResource });
-
-    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
-    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
-      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
   }
   return filters;
 }
@@ -1211,6 +1268,30 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeProjectName != null && removeProjectName !== '')
     vals['removeProjectName'] = removeProjectName;
 
+  var valueProjectDisplayName = $formValues.querySelector('.valueProjectDisplayName')?.value;
+  var removeProjectDisplayName = $formValues.querySelector('.removeProjectDisplayName')?.value === 'true';
+  var setProjectDisplayName = removeProjectDisplayName ? null : $formValues.querySelector('.setProjectDisplayName')?.value;
+  var addProjectDisplayName = $formValues.querySelector('.addProjectDisplayName')?.value;
+  if(removeProjectDisplayName || setProjectDisplayName != null && setProjectDisplayName !== '')
+    vals['setProjectDisplayName'] = setProjectDisplayName;
+  if(addProjectDisplayName != null && addProjectDisplayName !== '')
+    vals['addProjectDisplayName'] = addProjectDisplayName;
+  var removeProjectDisplayName = $formValues.querySelector('.removeProjectDisplayName')?.value;
+  if(removeProjectDisplayName != null && removeProjectDisplayName !== '')
+    vals['removeProjectDisplayName'] = removeProjectDisplayName;
+
+  var valueProjectTitle = $formValues.querySelector('.valueProjectTitle')?.value;
+  var removeProjectTitle = $formValues.querySelector('.removeProjectTitle')?.value === 'true';
+  var setProjectTitle = removeProjectTitle ? null : $formValues.querySelector('.setProjectTitle')?.value;
+  var addProjectTitle = $formValues.querySelector('.addProjectTitle')?.value;
+  if(removeProjectTitle || setProjectTitle != null && setProjectTitle !== '')
+    vals['setProjectTitle'] = setProjectTitle;
+  if(addProjectTitle != null && addProjectTitle !== '')
+    vals['addProjectTitle'] = addProjectTitle;
+  var removeProjectTitle = $formValues.querySelector('.removeProjectTitle')?.value;
+  if(removeProjectTitle != null && removeProjectTitle !== '')
+    vals['removeProjectTitle'] = removeProjectTitle;
+
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
   var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
@@ -1222,6 +1303,37 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   var removeDescription = $formValues.querySelector('.removeDescription')?.value;
   if(removeDescription != null && removeDescription !== '')
     vals['removeDescription'] = removeDescription;
+
+  var valueProjectFieldOfScience = $formValues.querySelector('.valueProjectFieldOfScience')?.value;
+  var removeProjectFieldOfScience = $formValues.querySelector('.removeProjectFieldOfScience')?.value === 'true';
+  var setProjectFieldOfScience = removeProjectFieldOfScience ? null : $formValues.querySelector('.setProjectFieldOfScience')?.value;
+  var addProjectFieldOfScience = $formValues.querySelector('.addProjectFieldOfScience')?.value;
+  if(removeProjectFieldOfScience || setProjectFieldOfScience != null && setProjectFieldOfScience !== '')
+    vals['setProjectFieldOfScience'] = setProjectFieldOfScience;
+  if(addProjectFieldOfScience != null && addProjectFieldOfScience !== '')
+    vals['addProjectFieldOfScience'] = addProjectFieldOfScience;
+  var removeProjectFieldOfScience = $formValues.querySelector('.removeProjectFieldOfScience')?.value;
+  if(removeProjectFieldOfScience != null && removeProjectFieldOfScience !== '')
+    vals['removeProjectFieldOfScience'] = removeProjectFieldOfScience;
+
+  var valueProjectActive = $formValues.querySelector('.valueProjectActive')?.value;
+  var removeProjectActive = $formValues.querySelector('.removeProjectActive')?.value === 'true';
+  if(valueProjectActive != null)
+    valueProjectActive = valueProjectActive === 'true';
+  var valueProjectActiveSelectVal = $formValues.querySelector('select.setProjectActive')?.value;
+  if(valueProjectActiveSelectVal != null)
+    valueProjectActiveSelectVal = valueProjectActiveSelectVal === 'true';
+  if(valueProjectActiveSelectVal != null && valueProjectActiveSelectVal !== '')
+    valueProjectActive = valueProjectActiveSelectVal == 'true';
+  var setProjectActive = removeProjectActive ? null : valueProjectActive;
+  var addProjectActive = $formValues.querySelector('.addProjectActive')?.checked;
+  if(removeProjectActive || setProjectActive != null && setProjectActive !== '')
+    vals['setProjectActive'] = setProjectActive;
+  if(addProjectActive != null && addProjectActive !== '')
+    vals['addProjectActive'] = addProjectActive;
+  var removeProjectActive = $formValues.querySelector('.removeProjectActive')?.checked;
+  if(removeProjectActive != null && removeProjectActive !== '')
+    vals['removeProjectActive'] = removeProjectActive;
 
   var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
   var removeGpuEnabled = $formValues.querySelector('.removeGpuEnabled')?.value === 'true';
@@ -1495,9 +1607,31 @@ function patchProjectFilters($formFilters) {
     if(filterProjectName != null && filterProjectName !== '')
       filters.push({ name: 'fq', value: 'projectName:' + filterProjectName });
 
+    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
+    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
+      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
+
+    var filterProjectTitle = $formFilters.querySelector('.valueProjectTitle')?.value;
+    if(filterProjectTitle != null && filterProjectTitle !== '')
+      filters.push({ name: 'fq', value: 'projectTitle:' + filterProjectTitle });
+
     var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
     if(filterDescription != null && filterDescription !== '')
       filters.push({ name: 'fq', value: 'description:' + filterDescription });
+
+    var filterProjectFieldOfScience = $formFilters.querySelector('.valueProjectFieldOfScience')?.value;
+    if(filterProjectFieldOfScience != null && filterProjectFieldOfScience !== '')
+      filters.push({ name: 'fq', value: 'projectFieldOfScience:' + filterProjectFieldOfScience });
+
+    var $filterProjectActiveCheckbox = $formFilters.querySelector('input.valueProjectActive[type = "checkbox"]');
+    var $filterProjectActiveSelect = $formFilters.querySelector('select.valueProjectActive');
+    var filterProjectActive = $filterProjectActiveSelect.length ? $filterProjectActiveSelect.value : $filterProjectActiveCheckbox.checked;
+    var filterProjectActiveSelectVal = $formFilters.querySelector('select.filterProjectActive')?.value;
+    var filterProjectActive = null;
+    if(filterProjectActiveSelectVal !== '')
+      filterProjectActive = filterProjectActiveSelectVal == 'true';
+    if(filterProjectActive != null && filterProjectActive === true)
+      filters.push({ name: 'fq', value: 'projectActive:' + filterProjectActive });
 
     var $filterGpuEnabledCheckbox = $formFilters.querySelector('input.valueGpuEnabled[type = "checkbox"]');
     var $filterGpuEnabledSelect = $formFilters.querySelector('select.valueGpuEnabled');
@@ -1614,10 +1748,6 @@ function patchProjectFilters($formFilters) {
     var filterProjectResource = $formFilters.querySelector('.valueProjectResource')?.value;
     if(filterProjectResource != null && filterProjectResource !== '')
       filters.push({ name: 'fq', value: 'projectResource:' + filterProjectResource });
-
-    var filterProjectDisplayName = $formFilters.querySelector('.valueProjectDisplayName')?.value;
-    if(filterProjectDisplayName != null && filterProjectDisplayName !== '')
-      filters.push({ name: 'fq', value: 'projectDisplayName:' + filterProjectDisplayName });
   }
   return filters;
 }
@@ -1713,9 +1843,25 @@ async function postProject($formValues, target, success, error) {
   if(valueProjectName != null && valueProjectName !== '')
     vals['projectName'] = valueProjectName;
 
+  var valueProjectDisplayName = $formValues.querySelector('.valueProjectDisplayName')?.value;
+  if(valueProjectDisplayName != null && valueProjectDisplayName !== '')
+    vals['projectDisplayName'] = valueProjectDisplayName;
+
+  var valueProjectTitle = $formValues.querySelector('.valueProjectTitle')?.value;
+  if(valueProjectTitle != null && valueProjectTitle !== '')
+    vals['projectTitle'] = valueProjectTitle;
+
   var valueDescription = $formValues.querySelector('.valueDescription')?.value;
   if(valueDescription != null && valueDescription !== '')
     vals['description'] = valueDescription;
+
+  var valueProjectFieldOfScience = $formValues.querySelector('.valueProjectFieldOfScience')?.value;
+  if(valueProjectFieldOfScience != null && valueProjectFieldOfScience !== '')
+    vals['projectFieldOfScience'] = valueProjectFieldOfScience;
+
+  var valueProjectActive = $formValues.querySelector('.valueProjectActive')?.value;
+  if(valueProjectActive != null && valueProjectActive !== '')
+    vals['projectActive'] = valueProjectActive == 'true';
 
   var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
   if(valueGpuEnabled != null && valueGpuEnabled !== '')
