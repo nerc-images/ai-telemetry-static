@@ -1447,7 +1447,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchBareMetalNetwork(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchBareMetalNetworkDialog" label="Modify bare metal network">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchBareMetalNetworkDialog" label="Modify bare metal network">
           <form id="htmForm_patchBareMetalNetwork" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="bare-metal-network-details">
@@ -1825,7 +1825,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postBareMetalNetwork(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postBareMetalNetworkDialog" label="Create a bare metal network">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postBareMetalNetworkDialog" label="Create a bare metal network">
           <form id="htmForm_postBareMetalNetwork" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -2204,7 +2204,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteBareMetalNetwork(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteBareMetalNetworkDialog" label="Delete bare metal network">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteBareMetalNetworkDialog" label="Delete bare metal network">
           <form id="htmForm_deleteBareMetalNetwork" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteBareMetalNetwork() }}
@@ -2221,7 +2221,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportBareMetalNetwork(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportBareMetalNetworkDialog" label="Import bare metal networks">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportBareMetalNetworkDialog" label="Import bare metal networks">
           <form id="htmForm_putimportBareMetalNetwork" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -2237,7 +2237,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageBareMetalNetwork(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageBareMetalNetworkDialog" label="Search bare metal networks">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageBareMetalNetworkDialog" label="Search bare metal networks">
           <div id="htmForm_searchpageBareMetalNetwork" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -2663,7 +2663,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterBareMetalNetwork(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterBareMetalNetworkDialog" label="Delete bare metal network">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterBareMetalNetworkDialog" label="Delete bare metal network">
           <form id="htmForm_deletefilterBareMetalNetwork" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterBareMetalNetwork() }}

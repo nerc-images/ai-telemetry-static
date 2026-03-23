@@ -652,7 +652,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchBareMetalOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchBareMetalOrderDialog" label="Modify bare metal order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchBareMetalOrderDialog" label="Modify bare metal order">
           <form id="htmForm_patchBareMetalOrder" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="bare-metal-order-details">
@@ -826,7 +826,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postBareMetalOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postBareMetalOrderDialog" label="Create a bare metal order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postBareMetalOrderDialog" label="Create a bare metal order">
           <form id="htmForm_postBareMetalOrder" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -1001,7 +1001,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteBareMetalOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteBareMetalOrderDialog" label="Delete bare metal order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteBareMetalOrderDialog" label="Delete bare metal order">
           <form id="htmForm_deleteBareMetalOrder" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteBareMetalOrder() }}
@@ -1009,7 +1009,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageBareMetalOrder(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageBareMetalOrderDialog" label="Search bare metal orders">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageBareMetalOrderDialog" label="Search bare metal orders">
           <div id="htmForm_searchpageBareMetalOrder" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1248,7 +1248,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterBareMetalOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterBareMetalOrderDialog" label="Delete bare metal order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterBareMetalOrderDialog" label="Delete bare metal order">
           <form id="htmForm_deletefilterBareMetalOrder" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterBareMetalOrder() }}

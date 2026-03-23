@@ -264,28 +264,6 @@ Promise.all([
     facetStatsChange('SitePage', 'description', false);
   });
 
-  document.querySelector('#pageSelectSortSitePage_h1')?.addEventListener('change', (event) => {
-    sort('SitePage', 'h1', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_h1')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'h1', true);
-  });
-  document.querySelector('#pageStatsSitePage_h1')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'h1', false);
-  });
-
-  document.querySelector('#pageSelectSortSitePage_h2')?.addEventListener('change', (event) => {
-    sort('SitePage', 'h2', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_h2')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'h2', true);
-  });
-  document.querySelector('#pageStatsSitePage_h2')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'h2', false);
-  });
-
   document.querySelector('#pageSelectSortSitePage_pageImageWidth')?.addEventListener('change', (event) => {
     sort('SitePage', 'pageImageWidth', event.currentTarget.value);
   });

@@ -653,7 +653,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchVirtualMachine(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchVirtualMachineDialog" label="Modify virtual machine">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchVirtualMachineDialog" label="Modify virtual machine">
           <form id="htmForm_patchVirtualMachine" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="virtual-machine-details">
@@ -811,7 +811,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postVirtualMachine(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postVirtualMachineDialog" label="Create a virtual machine">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postVirtualMachineDialog" label="Create a virtual machine">
           <form id="htmForm_postVirtualMachine" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -970,7 +970,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteVirtualMachine(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteVirtualMachineDialog" label="Delete virtual machine">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteVirtualMachineDialog" label="Delete virtual machine">
           <form id="htmForm_deleteVirtualMachine" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteVirtualMachine() }}
@@ -987,7 +987,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportVirtualMachine(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportVirtualMachineDialog" label="Import virtual machines">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportVirtualMachineDialog" label="Import virtual machines">
           <form id="htmForm_putimportVirtualMachine" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -1003,7 +1003,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageVirtualMachine(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageVirtualMachineDialog" label="Search virtual machines">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageVirtualMachineDialog" label="Search virtual machines">
           <div id="htmForm_searchpageVirtualMachine" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1209,7 +1209,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterVirtualMachine(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterVirtualMachineDialog" label="Delete virtual machine">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterVirtualMachineDialog" label="Delete virtual machine">
           <form id="htmForm_deletefilterVirtualMachine" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterVirtualMachine() }}

@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var name = {% if result.name is defined %}{{ result.name | tojson }}{% else %}null{% endif %};
 
@@ -245,7 +246,33 @@
         });
         document.querySelector('#htmFormButton_patchClusterRequest')?.addEventListener('click', event => {
           event.preventDefault();
-          patchClusterRequest(null, document.querySelector('#htmForm_patchClusterRequest'), document.querySelector('#htmFormButton_patchClusterRequest'), event.target.getAttribute('data-name'));
+          event.target.setAttribute('loading', true);
+          patchClusterRequest(null, document.querySelector('#htmForm_patchClusterRequest')
+              , document.querySelector('#htmFormButton_patchClusterRequest')
+              , event.target.getAttribute('data-name')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -255,10 +282,31 @@
         });
         document.querySelector('#htmFormButton_postClusterRequest')?.addEventListener('click', event => {
           event.preventDefault();
+          event.target.setAttribute('loading', true);
           postClusterRequest(document.querySelector('#htmForm_postClusterRequest')
-          , document.querySelector('#htmFormButton_postClusterRequest')
-          , (json, target) => {
+              , document.querySelector('#htmFormButton_postClusterRequest')
+              , (json, target) => {
             window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
           });
           return false;
         });
@@ -269,7 +317,31 @@
         });
         document.querySelector('#htmFormButton_deleteClusterRequest')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteClusterRequest(event.target, event.target.getAttribute('data-name'));
+          event.target.setAttribute('loading', true);
+          deleteClusterRequest(event.target, event.target.getAttribute('data-name')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -279,7 +351,33 @@
         });
         document.querySelector('#htmFormButton_putimportClusterRequest')?.addEventListener('click', event => {
           event.preventDefault();
-          putimportClusterRequest(document.querySelector('#htmForm_putimportClusterRequest'), document.querySelector('#htmFormButton_putimportClusterRequest'));
+          event.target.setAttribute('loading', true);
+          putimportClusterRequest(document.querySelector('#htmForm_putimportClusterRequest')
+              , document.querySelector('#htmFormButton_putimportClusterRequest')
+              , event.target.getAttribute('data-name')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -289,6 +387,7 @@
         });
         document.querySelector('#htmFormButton_searchpageClusterRequest')?.addEventListener('click', event => {
           event.preventDefault();
+          event.target.setAttribute('loading', true);
           searchpageClusterRequest();
           return false;
         });
@@ -299,7 +398,31 @@
         });
         document.querySelector('#htmFormButton_deletefilterClusterRequest')?.addEventListener('click', event => {
           event.preventDefault();
-          deletefilterClusterRequest(event.target);
+          event.target.setAttribute('loading', true);
+          deletefilterClusterRequest(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -311,7 +434,27 @@
                 addGlow(target);
                 if(json['editPage'])
                   window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
               });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
         });
 
         document.querySelector('#htmFormButton_postSiteUser')?.addEventListener('click', event => {
@@ -322,7 +465,27 @@
                 addGlow(target);
                 if(json['editPage'])
                   window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
               });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
         });
 {%- block htmScriptInitClusterRequestPage %}{%- endblock htmScriptInitClusterRequestPage %}
       });
@@ -408,6 +571,7 @@
 {% endif %}
 {%- block htmFormClusterRequestPage %}
           <form action="/en-us/api/cluster-request" id="ClusterRequestForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.name is defined %}
             <input name="name" class="valueName" type="hidden" value="{{ result.name }}"/>
             {% endif %}

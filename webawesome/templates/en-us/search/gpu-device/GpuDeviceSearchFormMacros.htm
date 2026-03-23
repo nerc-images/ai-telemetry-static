@@ -634,7 +634,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchGpuDevice(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchGpuDeviceDialog" label="Modify GPU device">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchGpuDeviceDialog" label="Modify GPU device">
           <form id="htmForm_patchGpuDevice" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="ai-node-details">
@@ -804,7 +804,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postGpuDevice(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postGpuDeviceDialog" label="Create a GPU device">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postGpuDeviceDialog" label="Create a GPU device">
           <form id="htmForm_postGpuDevice" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -975,7 +975,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteGpuDevice(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteGpuDeviceDialog" label="Delete GPU device">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteGpuDeviceDialog" label="Delete GPU device">
           <form id="htmForm_deleteGpuDevice" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteGpuDevice() }}
@@ -992,7 +992,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportGpuDevice(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportGpuDeviceDialog" label="Import GPU devices">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportGpuDeviceDialog" label="Import GPU devices">
           <form id="htmForm_putimportGpuDevice" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -1008,7 +1008,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageGpuDevice(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageGpuDeviceDialog" label="Search GPU devices">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageGpuDeviceDialog" label="Search GPU devices">
           <div id="htmForm_searchpageGpuDevice" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1226,7 +1226,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterGpuDevice(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterGpuDeviceDialog" label="Delete GPU device">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterGpuDeviceDialog" label="Delete GPU device">
           <form id="htmForm_deletefilterGpuDevice" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterGpuDevice() }}

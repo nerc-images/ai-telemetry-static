@@ -308,7 +308,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchClusterTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchClusterTemplateDialog" label="Modify OpenShift cluster template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchClusterTemplateDialog" label="Modify OpenShift cluster template">
           <form id="htmForm_patchClusterTemplate" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="cluster-template-details">
@@ -372,7 +372,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postClusterTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postClusterTemplateDialog" label="Create an OpenShift cluster template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postClusterTemplateDialog" label="Create an OpenShift cluster template">
           <form id="htmForm_postClusterTemplate" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -437,7 +437,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteClusterTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteClusterTemplateDialog" label="Delete OpenShift cluster template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteClusterTemplateDialog" label="Delete OpenShift cluster template">
           <form id="htmForm_deleteClusterTemplate" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteClusterTemplate() }}
@@ -454,7 +454,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportClusterTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportClusterTemplateDialog" label="Import OpenShift cluster templates">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportClusterTemplateDialog" label="Import OpenShift cluster templates">
           <form id="htmForm_putimportClusterTemplate" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -470,7 +470,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageClusterTemplate(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageClusterTemplateDialog" label="Search OpenShift cluster templates">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageClusterTemplateDialog" label="Search OpenShift cluster templates">
           <div id="htmForm_searchpageClusterTemplate" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -582,7 +582,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterClusterTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterClusterTemplateDialog" label="Delete OpenShift cluster template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterClusterTemplateDialog" label="Delete OpenShift cluster template">
           <form id="htmForm_deletefilterClusterTemplate" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterClusterTemplate() }}

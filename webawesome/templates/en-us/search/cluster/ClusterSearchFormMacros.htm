@@ -847,7 +847,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchClusterDialog" label="Modify OpenShift cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchClusterDialog" label="Modify OpenShift cluster">
           <form id="htmForm_patchCluster" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="cluster-details">
@@ -1065,7 +1065,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postClusterDialog" label="Create an OpenShift cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postClusterDialog" label="Create an OpenShift cluster">
           <form id="htmForm_postCluster" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -1284,7 +1284,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteClusterDialog" label="Delete OpenShift cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteClusterDialog" label="Delete OpenShift cluster">
           <form id="htmForm_deleteCluster" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteCluster() }}
@@ -1301,7 +1301,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportClusterDialog" label="Import OpenShift clusters">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportClusterDialog" label="Import OpenShift clusters">
           <form id="htmForm_putimportCluster" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -1317,7 +1317,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageCluster(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageClusterDialog" label="Search OpenShift clusters">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageClusterDialog" label="Search OpenShift clusters">
           <div id="htmForm_searchpageCluster" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1583,7 +1583,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterClusterDialog" label="Delete OpenShift cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterClusterDialog" label="Delete OpenShift cluster">
           <form id="htmForm_deletefilterCluster" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterCluster() }}

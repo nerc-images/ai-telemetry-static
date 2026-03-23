@@ -236,7 +236,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchBareMetalResourceClass(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchBareMetalResourceClassDialog" label="Modify bare metal resource class">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchBareMetalResourceClassDialog" label="Modify bare metal resource class">
           <form id="htmForm_patchBareMetalResourceClass" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="name">
@@ -280,7 +280,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postBareMetalResourceClass(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postBareMetalResourceClassDialog" label="Create a bare metal resource class">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postBareMetalResourceClassDialog" label="Create a bare metal resource class">
           <form id="htmForm_postBareMetalResourceClass" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -325,7 +325,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteBareMetalResourceClass(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteBareMetalResourceClassDialog" label="Delete bare metal resource class">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteBareMetalResourceClassDialog" label="Delete bare metal resource class">
           <form id="htmForm_deleteBareMetalResourceClass" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteBareMetalResourceClass() }}
@@ -342,7 +342,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportBareMetalResourceClass(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportBareMetalResourceClassDialog" label="Import bare metal resource classes">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportBareMetalResourceClassDialog" label="Import bare metal resource classes">
           <form id="htmForm_putimportBareMetalResourceClass" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -358,7 +358,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageBareMetalResourceClass(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageBareMetalResourceClassDialog" label="Search bare metal resource classes">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageBareMetalResourceClassDialog" label="Search bare metal resource classes">
           <div id="htmForm_searchpageBareMetalResourceClass" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -450,7 +450,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterBareMetalResourceClass(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterBareMetalResourceClassDialog" label="Delete bare metal resource class">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterBareMetalResourceClassDialog" label="Delete bare metal resource class">
           <form id="htmForm_deletefilterBareMetalResourceClass" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterBareMetalResourceClass() }}

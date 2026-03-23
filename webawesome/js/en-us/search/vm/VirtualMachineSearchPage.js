@@ -352,17 +352,6 @@ Promise.all([
     facetStatsChange('VirtualMachine', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortVirtualMachine_vmDisplayName')?.addEventListener('change', (event) => {
-    sort('VirtualMachine', 'vmDisplayName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('VirtualMachine', 'vmDisplayName', true);
-  });
-  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('VirtualMachine', 'vmDisplayName', false);
-  });
-
   document.querySelector('#pageSelectSortVirtualMachine_hubResource')?.addEventListener('change', (event) => {
     sort('VirtualMachine', 'hubResource', event.currentTarget.value);
   });
@@ -383,6 +372,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsVirtualMachine_vmResource')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('VirtualMachine', 'vmResource', false);
+  });
+
+  document.querySelector('#pageSelectSortVirtualMachine_vmDisplayName')?.addEventListener('change', (event) => {
+    sort('VirtualMachine', 'vmDisplayName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('VirtualMachine', 'vmDisplayName', true);
+  });
+  document.querySelector('#pageStatsVirtualMachine_vmDisplayName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('VirtualMachine', 'vmDisplayName', false);
   });
 
   document.querySelector('#pageSelectSortVirtualMachine_locationColors')?.addEventListener('change', (event) => {
