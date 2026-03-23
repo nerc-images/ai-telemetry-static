@@ -124,6 +124,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH projectTitle
+          document.querySelector('#Project_Page_projectTitle')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_projectTitle');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setProjectTitle', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Project_Page_projectTitle')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Project_Page_projectTitle')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_projectTitle');
+            const valid = form.reportValidity();
+          });
+
           // PATCH description
           document.querySelector('#Project_Page_description')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_description');
@@ -142,6 +163,48 @@ Promise.all([
           });
           document.querySelector('#Project_Page_description')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_description');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH projectFieldOfScience
+          document.querySelector('#Project_Page_projectFieldOfScience')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_projectFieldOfScience');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setProjectFieldOfScience', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Project_Page_projectFieldOfScience')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Project_Page_projectFieldOfScience')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_projectFieldOfScience');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH projectActive
+          document.querySelector('#Project_Page_projectActive')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_projectActive');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setProjectActive', event.currentTarget.checked
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Project_Page_projectActive')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Project_Page_projectActive')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_projectActive');
             const valid = form.reportValidity();
           });
 

@@ -99,6 +99,28 @@ Promise.all([
     facetStatsChange('Project', 'projectName', false);
   });
 
+  document.querySelector('#pageSelectSortProject_projectDisplayName')?.addEventListener('change', (event) => {
+    sort('Project', 'projectDisplayName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_projectDisplayName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'projectDisplayName', true);
+  });
+  document.querySelector('#pageStatsProject_projectDisplayName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'projectDisplayName', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_projectTitle')?.addEventListener('change', (event) => {
+    sort('Project', 'projectTitle', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_projectTitle')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'projectTitle', true);
+  });
+  document.querySelector('#pageStatsProject_projectTitle')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'projectTitle', false);
+  });
+
   document.querySelector('#pageSelectSortProject_description')?.addEventListener('change', (event) => {
     sort('Project', 'description', event.currentTarget.value);
   });
@@ -108,6 +130,28 @@ Promise.all([
   });
   document.querySelector('#pageStatsProject_description')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Project', 'description', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_projectFieldOfScience')?.addEventListener('change', (event) => {
+    sort('Project', 'projectFieldOfScience', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_projectFieldOfScience')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'projectFieldOfScience', true);
+  });
+  document.querySelector('#pageStatsProject_projectFieldOfScience')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'projectFieldOfScience', false);
+  });
+
+  document.querySelector('#pageSelectSortProject_projectActive')?.addEventListener('change', (event) => {
+    sort('Project', 'projectActive', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_projectActive')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'projectActive', true);
+  });
+  document.querySelector('#pageStatsProject_projectActive')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'projectActive', false);
   });
 
   document.querySelector('#pageSelectSortProject_gpuEnabled')?.addEventListener('change', (event) => {
@@ -395,17 +439,6 @@ Promise.all([
   document.querySelector('#pageStatsProject_projectResource')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Project', 'projectResource', false);
   });
-
-  document.querySelector('#pageSelectSortProject_projectDisplayName')?.addEventListener('change', (event) => {
-    sort('Project', 'projectDisplayName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsProject_projectDisplayName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Project', 'projectDisplayName', true);
-  });
-  document.querySelector('#pageStatsProject_projectDisplayName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Project', 'projectDisplayName', false);
-  });
           document.querySelector('#fqProject_created')?.addEventListener('change', (event) => {
             fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
@@ -496,6 +529,24 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndProject_projectName')?.addEventListener('change', (event) => {
             facetRangeEndChange('Project', event.currentTarget);
           });
+          document.querySelector('#fqProject_projectTitle')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_projectTitle')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_projectTitle')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_projectTitle')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_projectTitle')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_projectTitle')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
           document.querySelector('#fqProject_description')?.addEventListener('change', (event) => {
             fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
           });
@@ -512,6 +563,42 @@ Promise.all([
             facetRangeStartChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndProject_description')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_projectFieldOfScience')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_projectFieldOfScience')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_projectFieldOfScience')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_projectFieldOfScience')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_projectFieldOfScience')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_projectFieldOfScience')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_projectActive')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_projectActive')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_projectActive')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_projectActive')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_projectActive')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_projectActive')?.addEventListener('change', (event) => {
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_gpuEnabled')?.addEventListener('change', (event) => {
