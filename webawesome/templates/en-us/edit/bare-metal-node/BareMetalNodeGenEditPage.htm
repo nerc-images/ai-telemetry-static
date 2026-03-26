@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var nodeId = {% if result.nodeId is defined %}{{ result.nodeId | tojson }}{% else %}null{% endif %};
 
@@ -181,7 +182,33 @@
         });
         document.querySelector('#htmFormButton_patchBareMetalNode')?.addEventListener('click', event => {
           event.preventDefault();
-          patchBareMetalNode(null, document.querySelector('#htmForm_patchBareMetalNode'), document.querySelector('#htmFormButton_patchBareMetalNode'), event.target.getAttribute('data-nodeId'));
+          event.target.setAttribute('loading', true);
+          patchBareMetalNode(null, document.querySelector('#htmForm_patchBareMetalNode')
+              , document.querySelector('#htmFormButton_patchBareMetalNode')
+              , event.target.getAttribute('data-nodeId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -191,10 +218,31 @@
         });
         document.querySelector('#htmFormButton_postBareMetalNode')?.addEventListener('click', event => {
           event.preventDefault();
+          event.target.setAttribute('loading', true);
           postBareMetalNode(document.querySelector('#htmForm_postBareMetalNode')
-          , document.querySelector('#htmFormButton_postBareMetalNode')
-          , (json, target) => {
+              , document.querySelector('#htmFormButton_postBareMetalNode')
+              , (json, target) => {
             window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
           });
           return false;
         });
@@ -205,7 +253,31 @@
         });
         document.querySelector('#htmFormButton_deleteBareMetalNode')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteBareMetalNode(event.target, event.target.getAttribute('data-nodeId'));
+          event.target.setAttribute('loading', true);
+          deleteBareMetalNode(event.target, event.target.getAttribute('data-nodeId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -215,7 +287,33 @@
         });
         document.querySelector('#htmFormButton_putimportBareMetalNode')?.addEventListener('click', event => {
           event.preventDefault();
-          putimportBareMetalNode(document.querySelector('#htmForm_putimportBareMetalNode'), document.querySelector('#htmFormButton_putimportBareMetalNode'));
+          event.target.setAttribute('loading', true);
+          putimportBareMetalNode(document.querySelector('#htmForm_putimportBareMetalNode')
+              , document.querySelector('#htmFormButton_putimportBareMetalNode')
+              , event.target.getAttribute('data-nodeId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -225,6 +323,7 @@
         });
         document.querySelector('#htmFormButton_searchpageBareMetalNode')?.addEventListener('click', event => {
           event.preventDefault();
+          event.target.setAttribute('loading', true);
           searchpageBareMetalNode();
           return false;
         });
@@ -235,7 +334,31 @@
         });
         document.querySelector('#htmFormButton_deletefilterBareMetalNode')?.addEventListener('click', event => {
           event.preventDefault();
-          deletefilterBareMetalNode(event.target);
+          event.target.setAttribute('loading', true);
+          deletefilterBareMetalNode(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 {%- block htmScriptInitBareMetalNodePage %}{%- endblock htmScriptInitBareMetalNodePage %}
@@ -322,6 +445,7 @@
 {% endif %}
 {%- block htmFormBareMetalNodePage %}
           <form action="/en-us/api/bare-metal-node" id="BareMetalNodeForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.nodeId is defined %}
             <input name="nodeId" class="valueNodeId" type="hidden" value="{{ result.nodeId }}"/>
             {% endif %}

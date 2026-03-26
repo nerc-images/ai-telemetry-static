@@ -308,7 +308,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchManagedCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchManagedClusterDialog" label="Modify tenant cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchManagedClusterDialog" label="Modify tenant cluster">
           <form id="htmForm_patchManagedCluster" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="cluster-details">
@@ -372,7 +372,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postManagedCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postManagedClusterDialog" label="Create a tenant cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postManagedClusterDialog" label="Create a tenant cluster">
           <form id="htmForm_postManagedCluster" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -437,7 +437,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteManagedCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteManagedClusterDialog" label="Delete tenant cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteManagedClusterDialog" label="Delete tenant cluster">
           <form id="htmForm_deleteManagedCluster" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteManagedCluster() }}
@@ -454,7 +454,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportManagedCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportManagedClusterDialog" label="Import tenant clusters">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportManagedClusterDialog" label="Import tenant clusters">
           <form id="htmForm_putimportManagedCluster" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -470,7 +470,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageManagedCluster(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageManagedClusterDialog" label="Search tenant clusters">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageManagedClusterDialog" label="Search tenant clusters">
           <div id="htmForm_searchpageManagedCluster" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -582,7 +582,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterManagedCluster(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterManagedClusterDialog" label="Delete tenant cluster">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterManagedClusterDialog" label="Delete tenant cluster">
           <form id="htmForm_deletefilterManagedCluster" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterManagedCluster() }}

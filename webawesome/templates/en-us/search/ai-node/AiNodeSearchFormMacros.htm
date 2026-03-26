@@ -561,7 +561,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchAiNode(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchAiNodeDialog" label="Modify AI node">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchAiNodeDialog" label="Modify AI node">
           <form id="htmForm_patchAiNode" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="ai-node-details">
@@ -699,7 +699,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postAiNode(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postAiNodeDialog" label="Create an AI node">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postAiNodeDialog" label="Create an AI node">
           <form id="htmForm_postAiNode" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -838,7 +838,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteAiNode(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteAiNodeDialog" label="Delete AI node">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteAiNodeDialog" label="Delete AI node">
           <form id="htmForm_deleteAiNode" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteAiNode() }}
@@ -855,7 +855,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportAiNode(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportAiNodeDialog" label="Import AI nodes">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportAiNodeDialog" label="Import AI nodes">
           <form id="htmForm_putimportAiNode" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -871,7 +871,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageAiNode(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageAiNodeDialog" label="Search AI nodes">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageAiNodeDialog" label="Search AI nodes">
           <div id="htmForm_searchpageAiNode" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1057,7 +1057,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterAiNode(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterAiNodeDialog" label="Delete AI node">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterAiNodeDialog" label="Delete AI node">
           <form id="htmForm_deletefilterAiNode" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterAiNode() }}

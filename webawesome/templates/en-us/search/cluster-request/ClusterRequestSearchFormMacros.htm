@@ -314,7 +314,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchClusterRequest(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchClusterRequestDialog" label="Modify OpenShift cluster request">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchClusterRequestDialog" label="Modify OpenShift cluster request">
           <form id="htmForm_patchClusterRequest" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="cluster-details">
@@ -368,7 +368,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postClusterRequest(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postClusterRequestDialog" label="Create an OpenShift cluster request">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postClusterRequestDialog" label="Create an OpenShift cluster request">
           <form id="htmForm_postClusterRequest" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -423,7 +423,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteClusterRequest(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteClusterRequestDialog" label="Delete OpenShift cluster request">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteClusterRequestDialog" label="Delete OpenShift cluster request">
           <form id="htmForm_deleteClusterRequest" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteClusterRequest() }}
@@ -440,7 +440,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportClusterRequest(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportClusterRequestDialog" label="Import OpenShift cluster requests">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportClusterRequestDialog" label="Import OpenShift cluster requests">
           <form id="htmForm_putimportClusterRequest" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -456,7 +456,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageClusterRequest(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageClusterRequestDialog" label="Search OpenShift cluster requests">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageClusterRequestDialog" label="Search OpenShift cluster requests">
           <div id="htmForm_searchpageClusterRequest" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -558,7 +558,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterClusterRequest(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterClusterRequestDialog" label="Delete OpenShift cluster request">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterClusterRequestDialog" label="Delete OpenShift cluster request">
           <form id="htmForm_deletefilterClusterRequest" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterClusterRequest() }}

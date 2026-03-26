@@ -329,7 +329,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchClusterOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchClusterOrderDialog" label="Modify OpenShift cluster order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchClusterOrderDialog" label="Modify OpenShift cluster order">
           <form id="htmForm_patchClusterOrder" class="round-row primary-smart-border-radius ">
 
               <div class="grid-with-subgrid-2col ">
@@ -359,7 +359,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postClusterOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postClusterOrderDialog" label="Create an OpenShift cluster order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postClusterOrderDialog" label="Create an OpenShift cluster order">
           <form id="htmForm_postClusterOrder" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -390,7 +390,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteClusterOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteClusterOrderDialog" label="Delete OpenShift cluster order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteClusterOrderDialog" label="Delete OpenShift cluster order">
           <form id="htmForm_deleteClusterOrder" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteClusterOrder() }}
@@ -407,7 +407,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportClusterOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportClusterOrderDialog" label="Import OpenShift cluster orders">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportClusterOrderDialog" label="Import OpenShift cluster orders">
           <form id="htmForm_putimportClusterOrder" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -423,7 +423,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageClusterOrder(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageClusterOrderDialog" label="Search OpenShift cluster orders">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageClusterOrderDialog" label="Search OpenShift cluster orders">
           <div id="htmForm_searchpageClusterOrder" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -535,7 +535,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterClusterOrder(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterClusterOrderDialog" label="Delete OpenShift cluster order">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterClusterOrderDialog" label="Delete OpenShift cluster order">
           <form id="htmForm_deletefilterClusterOrder" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterClusterOrder() }}

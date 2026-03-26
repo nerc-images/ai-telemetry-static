@@ -1110,6 +1110,7 @@ function suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource = null, h
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
         $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
@@ -1147,6 +1148,7 @@ function suggestGpuDeviceHubResource(filters, $list, gpuDeviceResource = null, h
         if(checked)
           $input.setAttribute('checked', 'checked');
         var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
         if(relate)
           $li.append($input);
         $li.append($a);
@@ -1172,6 +1174,7 @@ function suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource = nul
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
         $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
@@ -1209,6 +1212,7 @@ function suggestGpuDeviceClusterResource(filters, $list, gpuDeviceResource = nul
         if(checked)
           $input.setAttribute('checked', 'checked');
         var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
         if(relate)
           $li.append($input);
         $li.append($a);
@@ -1234,6 +1238,7 @@ function suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource = null, 
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
         $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
@@ -1271,6 +1276,7 @@ function suggestGpuDeviceNodeResource(filters, $list, gpuDeviceResource = null, 
         if(checked)
           $input.setAttribute('checked', 'checked');
         var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
         if(relate)
           $li.append($input);
         $li.append($a);

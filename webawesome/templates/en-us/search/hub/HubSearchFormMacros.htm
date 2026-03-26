@@ -308,7 +308,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchHub(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHubDialog" label="Modify ACM hub">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHubDialog" label="Modify ACM hub">
           <form id="htmForm_patchHub" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="hub-details">
@@ -379,7 +379,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postHub(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postHubDialog" label="Create an ACM hub">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHubDialog" label="Create an ACM hub">
           <form id="htmForm_postHub" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -451,7 +451,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteHub(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHubDialog" label="Delete ACM hub">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHubDialog" label="Delete ACM hub">
           <form id="htmForm_deleteHub" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteHub() }}
@@ -468,7 +468,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportHub(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHubDialog" label="Import ACM hubs">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHubDialog" label="Import ACM hubs">
           <form id="htmForm_putimportHub" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -484,7 +484,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHub(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageHubDialog" label="Search ACM hubs">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHubDialog" label="Search ACM hubs">
           <div id="htmForm_searchpageHub" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -603,7 +603,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterHub(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHubDialog" label="Delete ACM hub">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHubDialog" label="Delete ACM hub">
           <form id="htmForm_deletefilterHub" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterHub() }}

@@ -1133,6 +1133,7 @@ function suggestClusterHubResource(filters, $list, clusterResource = null, hubRe
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
         $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
@@ -1170,6 +1171,7 @@ function suggestClusterHubResource(filters, $list, clusterResource = null, hubRe
         if(checked)
           $input.setAttribute('checked', 'checked');
         var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
         if(relate)
           $li.append($input);
         $li.append($a);

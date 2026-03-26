@@ -308,7 +308,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchTenantDialog" label="Modify tenant">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantDialog" label="Modify tenant">
           <form id="htmForm_patchTenant" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="tenant-details">
@@ -379,7 +379,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postTenantDialog" label="Create a tenant">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantDialog" label="Create a tenant">
           <form id="htmForm_postTenant" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -451,7 +451,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteTenantDialog" label="Delete tenant">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantDialog" label="Delete tenant">
           <form id="htmForm_deleteTenant" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteTenant() }}
@@ -468,7 +468,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportTenantDialog" label="Import tenants">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantDialog" label="Import tenants">
           <form id="htmForm_putimportTenant" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -484,7 +484,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageTenant(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageTenantDialog" label="Search tenants">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantDialog" label="Search tenants">
           <div id="htmForm_searchpageTenant" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -603,7 +603,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterTenantDialog" label="Delete tenant">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantDialog" label="Delete tenant">
           <form id="htmForm_deletefilterTenant" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterTenant() }}
