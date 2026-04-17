@@ -229,6 +229,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH vllmEnabled
+          document.querySelector('#Project_Page_vllmEnabled')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_vllmEnabled');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
+                  , 'setVllmEnabled', event.currentTarget.checked
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Project_Page_vllmEnabled')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Project_Page_vllmEnabled')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_vllmEnabled');
+            const valid = form.reportValidity();
+          });
+
           // PATCH podRestartCount
           document.querySelector('#Project_Page_podRestartCount')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_podRestartCount');

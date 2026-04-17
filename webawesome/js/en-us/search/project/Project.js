@@ -92,6 +92,7 @@ async function websocketProjectInner(apiRequest) {
         var inputProjectFieldOfScience = null;
         var inputProjectActive = null;
         var inputGpuEnabled = null;
+        var inputVllmEnabled = null;
         var inputPodRestartCount = null;
         var inputPodsRestarting = null;
         var inputPodTerminatingCount = null;
@@ -146,6 +147,8 @@ async function websocketProjectInner(apiRequest) {
           inputProjectActive = $response.querySelector('.Project_Page_projectActive');
         if(vars.includes('gpuEnabled'))
           inputGpuEnabled = $response.querySelector('.Project_Page_gpuEnabled');
+        if(vars.includes('vllmEnabled'))
+          inputVllmEnabled = $response.querySelector('.Project_Page_vllmEnabled');
         if(vars.includes('podRestartCount'))
           inputPodRestartCount = $response.querySelector('.Project_Page_podRestartCount');
         if(vars.includes('podsRestarting'))
@@ -340,6 +343,16 @@ async function websocketProjectInner(apiRequest) {
               item.textContent = inputGpuEnabled.textContent;
           });
           addGlow(document.querySelector('.Project_Page_gpuEnabled'));
+        }
+
+        if(inputVllmEnabled) {
+          document.querySelectorAll('.Project_Page_vllmEnabled').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputVllmEnabled.getAttribute('value');
+            else
+              item.textContent = inputVllmEnabled.textContent;
+          });
+          addGlow(document.querySelector('.Project_Page_vllmEnabled'));
         }
 
         if(inputPodRestartCount) {
@@ -810,6 +823,16 @@ function searchProjectFilters($formFilters) {
       filterGpuEnabled = filterGpuEnabledSelectVal == 'true';
     if(filterGpuEnabled != null && filterGpuEnabled === true)
       filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
+
+    var $filterVllmEnabledCheckbox = $formFilters.querySelector('input.valueVllmEnabled[type = "checkbox"]');
+    var $filterVllmEnabledSelect = $formFilters.querySelector('select.valueVllmEnabled');
+    var filterVllmEnabled = $filterVllmEnabledSelect.length ? $filterVllmEnabledSelect.value : $filterVllmEnabledCheckbox.checked;
+    var filterVllmEnabledSelectVal = $formFilters.querySelector('select.filterVllmEnabled')?.value;
+    var filterVllmEnabled = null;
+    if(filterVllmEnabledSelectVal !== '')
+      filterVllmEnabled = filterVllmEnabledSelectVal == 'true';
+    if(filterVllmEnabled != null && filterVllmEnabled === true)
+      filters.push({ name: 'fq', value: 'vllmEnabled:' + filterVllmEnabled });
 
     var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
     if(filterPodRestartCount != null && filterPodRestartCount !== '')
@@ -1360,6 +1383,25 @@ async function patchProject($formFilters, $formValues, target, projectResource, 
   if(removeGpuEnabled != null && removeGpuEnabled !== '')
     vals['removeGpuEnabled'] = removeGpuEnabled;
 
+  var valueVllmEnabled = $formValues.querySelector('.valueVllmEnabled')?.value;
+  var removeVllmEnabled = $formValues.querySelector('.removeVllmEnabled')?.value === 'true';
+  if(valueVllmEnabled != null)
+    valueVllmEnabled = valueVllmEnabled === 'true';
+  var valueVllmEnabledSelectVal = $formValues.querySelector('select.setVllmEnabled')?.value;
+  if(valueVllmEnabledSelectVal != null)
+    valueVllmEnabledSelectVal = valueVllmEnabledSelectVal === 'true';
+  if(valueVllmEnabledSelectVal != null && valueVllmEnabledSelectVal !== '')
+    valueVllmEnabled = valueVllmEnabledSelectVal == 'true';
+  var setVllmEnabled = removeVllmEnabled ? null : valueVllmEnabled;
+  var addVllmEnabled = $formValues.querySelector('.addVllmEnabled')?.checked;
+  if(removeVllmEnabled || setVllmEnabled != null && setVllmEnabled !== '')
+    vals['setVllmEnabled'] = setVllmEnabled;
+  if(addVllmEnabled != null && addVllmEnabled !== '')
+    vals['addVllmEnabled'] = addVllmEnabled;
+  var removeVllmEnabled = $formValues.querySelector('.removeVllmEnabled')?.checked;
+  if(removeVllmEnabled != null && removeVllmEnabled !== '')
+    vals['removeVllmEnabled'] = removeVllmEnabled;
+
   var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
   var removePodRestartCount = $formValues.querySelector('.removePodRestartCount')?.value === 'true';
   var setPodRestartCount = removePodRestartCount ? null : $formValues.querySelector('.setPodRestartCount')?.value;
@@ -1649,6 +1691,16 @@ function patchProjectFilters($formFilters) {
     if(filterGpuEnabled != null && filterGpuEnabled === true)
       filters.push({ name: 'fq', value: 'gpuEnabled:' + filterGpuEnabled });
 
+    var $filterVllmEnabledCheckbox = $formFilters.querySelector('input.valueVllmEnabled[type = "checkbox"]');
+    var $filterVllmEnabledSelect = $formFilters.querySelector('select.valueVllmEnabled');
+    var filterVllmEnabled = $filterVllmEnabledSelect.length ? $filterVllmEnabledSelect.value : $filterVllmEnabledCheckbox.checked;
+    var filterVllmEnabledSelectVal = $formFilters.querySelector('select.filterVllmEnabled')?.value;
+    var filterVllmEnabled = null;
+    if(filterVllmEnabledSelectVal !== '')
+      filterVllmEnabled = filterVllmEnabledSelectVal == 'true';
+    if(filterVllmEnabled != null && filterVllmEnabled === true)
+      filters.push({ name: 'fq', value: 'vllmEnabled:' + filterVllmEnabled });
+
     var filterPodRestartCount = $formFilters.querySelector('.valuePodRestartCount')?.value;
     if(filterPodRestartCount != null && filterPodRestartCount !== '')
       filters.push({ name: 'fq', value: 'podRestartCount:' + filterPodRestartCount });
@@ -1872,6 +1924,10 @@ async function postProject($formValues, target, success, error) {
   var valueGpuEnabled = $formValues.querySelector('.valueGpuEnabled')?.value;
   if(valueGpuEnabled != null && valueGpuEnabled !== '')
     vals['gpuEnabled'] = valueGpuEnabled == 'true';
+
+  var valueVllmEnabled = $formValues.querySelector('.valueVllmEnabled')?.value;
+  if(valueVllmEnabled != null && valueVllmEnabled !== '')
+    vals['vllmEnabled'] = valueVllmEnabled == 'true';
 
   var valuePodRestartCount = $formValues.querySelector('.valuePodRestartCount')?.value;
   if(valuePodRestartCount != null && valuePodRestartCount !== '')
