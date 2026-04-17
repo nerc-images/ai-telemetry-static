@@ -165,6 +165,17 @@ Promise.all([
     facetStatsChange('Project', 'gpuEnabled', false);
   });
 
+  document.querySelector('#pageSelectSortProject_vllmEnabled')?.addEventListener('change', (event) => {
+    sort('Project', 'vllmEnabled', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsProject_vllmEnabled')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Project', 'vllmEnabled', true);
+  });
+  document.querySelector('#pageStatsProject_vllmEnabled')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Project', 'vllmEnabled', false);
+  });
+
   document.querySelector('#pageSelectSortProject_podRestartCount')?.addEventListener('change', (event) => {
     sort('Project', 'podRestartCount', event.currentTarget.value);
   });
@@ -617,6 +628,24 @@ Promise.all([
             facetRangeStartChange('Project', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndProject_gpuEnabled')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Project', event.currentTarget);
+          });
+          document.querySelector('#fqProject_vllmEnabled')?.addEventListener('change', (event) => {
+            fqChange('Project', event.currentTarget, facetChangeProjectSuccess, facetChangeProjectError);
+          });
+          document.querySelector('#buttonFacetProject_vllmEnabled')?.addEventListener('click', (event) => {
+            facetFieldChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotProject_vllmEnabled')?.addEventListener('change', (event) => {
+            facetPivotChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapProject_vllmEnabled')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartProject_vllmEnabled')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Project', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndProject_vllmEnabled')?.addEventListener('change', (event) => {
             facetRangeEndChange('Project', event.currentTarget);
           });
           document.querySelector('#fqProject_podRestartCount')?.addEventListener('change', (event) => {

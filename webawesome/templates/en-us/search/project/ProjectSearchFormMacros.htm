@@ -560,6 +560,55 @@
 {%- macro htmGpuEnabledProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputGpuEnabledProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputVllmEnabledProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_vllmEnabled">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="Project_{{classApiMethodMethod}}_vllmEnabled"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="Project_{{classApiMethodMethod}}_vllmEnabled"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="VLLM enabled"
+                      label="VLLM enabled"
+                      hint="Whether there is VLLM activity for this project. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left Project_{{classApiMethodMethod}}_vllmEnabled classProject inputProject{{ result.projectResource }}VllmEnabled "
+                      name="setVllmEnabled"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left Project_{{classApiMethodMethod}}_vllmEnabled classProject inputProject{{ result.projectResource }}VllmEnabled "
+                      name="setVllmEnabled"
+    {%- else %}
+                      class="label-on-left Project_{{classApiMethodMethod}}_vllmEnabled setVllmEnabled valueVllmEnabled classProject inputProject{{ result.projectResource }}VllmEnabled "
+                      name="setVllmEnabled"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.vllmEnabled == true %}
+                      checked
+    {%- endif %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      >VLLM enabled</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmVllmEnabledProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputVllmEnabledProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputPodRestartCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_podRestartCount">
@@ -999,6 +1048,16 @@
                 {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
@@ -1211,6 +1270,16 @@
                 {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1506,6 +1575,16 @@
                 {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmVllmEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
