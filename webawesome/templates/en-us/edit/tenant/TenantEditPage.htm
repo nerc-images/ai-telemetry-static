@@ -194,7 +194,7 @@
           , legendTitle='Projects'
           , metricPrefix='namespace:container_memory_usage_bytes:sum{'
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , formatBytes=true
           , datasetLabel='${result.metric.namespace} in ${result.metric.cluster} in ${hubId}'
@@ -206,7 +206,7 @@
           , legendTitle='Projects'
           , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , emptyClusterReplace='node_namespace_pod_container:container_cpu_usage_seconds_total:sum'
           , emptyClusterReplaceWith='namespace:container_cpu_usage:sum'
@@ -221,7 +221,7 @@
           , metricPrefix='namespace:container_memory_usage_bytes:sum{'
           , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard", '
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , yLabelSuffix='% of quota'
           , datasetLabel='${result.metric.namespace} in ${result.metric.cluster} in ${hubId}'
@@ -234,7 +234,7 @@
           , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
           , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard", '
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , yLabelSuffix='% of quota'
           , datasetLabel='${result.metric.namespace} in ${result.metric.cluster} in ${hubId}'
@@ -246,10 +246,12 @@
           , legendTitle='Projects'
           , metricPrefix='sum(DCGM_FI_DEV_GPU_UTIL{'
           , metricSuffix='}) by (cluster,exported_namespace,Hostname,modelName,UUID)'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
-          , projectPrefixLabel='exported_namespace'
+          , modelPrefixLabel='exported_namespace'
           , datasetLabel='${result.metric.exported_namespace} in ${result.metric.cluster} in ${hubId}'
+          , metricLabels=['exported_namespace', 'Hostname', 'modelName']
+          , displayLabels=['project', 'GPU node', 'GPU model']
         ) }}
         {{ hubClusterProjectDashboardAsyncFunction(
           divId='visualization-project-gpu-utilization'
@@ -258,9 +260,9 @@
           , legendTitle='Projects'
           , metricPrefix='sum(DCGM_FI_DEV_GPU_UTIL{'
           , metricSuffix='}) by (cluster,exported_namespace)'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
-          , projectPrefixLabel='exported_namespace'
+          , modelPrefixLabel='exported_namespace'
           , datasetLabel='${result.metric.exported_namespace} in ${result.metric.cluster} in ${hubId}'
         ) }}
         {{ hubClusterProjectDashboardAsyncFunction(
@@ -270,10 +272,12 @@
           , legendTitle='Projects'
           , metricPrefix='sum(DCGM_FI_DEV_MEMORY_TEMP{'
           , metricSuffix='}) by (cluster,exported_namespace,Hostname,modelName,UUID)'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
-          , projectPrefixLabel='exported_namespace'
+          , modelPrefixLabel='exported_namespace'
           , datasetLabel='${result.metric.exported_namespace} in ${result.metric.cluster} in ${hubId}'
+          , metricLabels=['exported_namespace', 'Hostname', 'modelName']
+          , displayLabels=['project', 'GPU node', 'GPU model']
         ) }}
   </script>
 {%- endblock htmScriptsTenantPage %}
