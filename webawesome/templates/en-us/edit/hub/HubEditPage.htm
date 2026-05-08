@@ -1,1 +1,57 @@
 {% extends "en-us/edit/hub/HubGenEditPage.htm" %}
+{% import "en-us/Chart.htm" %}
+{%- block facetChangeHubSuccess %}
+      updateDashboards();
+{% endblock facetChangeHubSuccess -%}
+{%- block htmScriptInitHubPage %}
+      updateDashboards();
+{%- endblock htmScriptInitHubPage %}
+{%- block htmBodyStartHubPage %}
+{{ super() }}
+{% if result.description is defined %}
+<p>
+  {{ result.description }}
+</p>
+{% endif %}
+{% if result is defined %}
+<wa-details open class="HtmRow" id="observability-dashboard">
+  <div slot="summary">
+    Observability dashboard for OpenShift projects
+  </div>
+  <div class="wa-stack ">
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-openshift-downtime', 'OpenShift Container Platform downtime', min=0, max=1) }}
+    </div>
+  </div>
+</wa-details>
+{% endif %}
+{%- endblock htmBodyStartHubPage %}
+
+{%- block htmScriptsHubPage %}
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+      <script src="{{ STATIC_BASE_URL }}/js/chartjs-plugin-zoom.js"></script>
+{{ super() }}
+  <script>
+        {{ updateDashboardsFunctionStart() }}
+        Promise.all([
+            {{ dashboardPromise('visualization-openshift-downtime') }}
+            ]);
+        {{ updateDashboardsFunctionEnd() }}
+
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-openshift-downtime'
+          , classSimpleName='Hub'
+          , legendTitle='Hubs'
+          , metricPrefix='absent(kube_node_status_condition{'
+          , metricSuffix='})'
+          , modelPrefixLabel=''
+          , modelVar='hubName'
+          , timeZone=timeZone
+          , yLabelSuffix=' downtime'
+          , datasetLabel='${hubId} downtime'
+          , fill=true
+          , colors=['red']
+        ) }}
+  </script>
+{%- endblock htmScriptsHubPage %}

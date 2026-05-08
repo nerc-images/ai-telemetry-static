@@ -205,7 +205,7 @@
           , legendTitle='Projects'
           , metricPrefix='namespace:container_memory_usage_bytes:sum{'
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , formatBytes=true
           , yLabelSuffix=' memory'
@@ -218,7 +218,7 @@
           , metricPrefix='namespace:container_memory_usage_bytes:sum{'
           , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard", '
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , tickFormat='.0%'
           , formatPercent=true
@@ -231,7 +231,7 @@
           , legendTitle='Projects'
           , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , emptyClusterReplace='node_namespace_pod_container:container_cpu_usage_seconds_total:sum'
           , emptyClusterReplaceWith='namespace:container_cpu_usage:sum'
@@ -245,7 +245,7 @@
           , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
           , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard", '
           , metricSuffix='}'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , tickFormat='.0%'
           , formatPercent=true
@@ -257,8 +257,8 @@
           , classSimpleName='Project'
           , legendTitle='Projects'
           , metricPrefix='sum(irate(container_network_receive_bytes_total{'
-          , metricSuffix='}[10m])) by (namespace)'
-          , projectVar='projectName'
+          , metricSuffix='}[10m])) by (cluster, namespace)'
+          , modelVar='projectName'
           , timeZone=timeZone
           , formatBytes=true
           , yLabelSuffix=' received'
@@ -269,8 +269,8 @@
           , classSimpleName='Project'
           , legendTitle='Projects'
           , metricPrefix='sum(irate(container_network_transmit_bytes_total{'
-          , metricSuffix='}[10m])) by (namespace)'
-          , projectVar='projectName'
+          , metricSuffix='}[10m])) by (cluster, namespace)'
+          , modelVar='projectName'
           , timeZone=timeZone
           , formatBytes=true
           , yLabelSuffix=' transmitted'
@@ -282,10 +282,10 @@
           , legendTitle='Projects'
           , metricPrefix='sum by (cluster, exported_namespace) (DCGM_FI_DEV_GPU_UTIL{'
           , metricSuffix='} / 100)'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , tickFormat='.0%'
-          , projectPrefixLabel='exported_namespace'
+          , modelPrefixLabel='exported_namespace'
           , yLabelSuffix='% of GPU'
           , openDetailsSelector='.gpu_details'
           , datasetLabel='${result.metric.exported_namespace} in ${result.metric.cluster} in ${hubId}'
@@ -297,11 +297,11 @@
           , metricPrefix='sum by (cluster, exported_namespace) (DCGM_FI_DEV_GPU_UTIL{'
           , metricMiddle='} / 100 / on(cluster, exported_namespace) group_left() label_replace(kube_resourcequota{resource="requests.nvidia.com/gpu", type="hard", '
           , metricSuffix='}, "exported_namespace", "$1", "namespace", "(.*)"))'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , tickFormat='.0%'
-          , projectPrefixLabel='exported_namespace'
-          , projectMiddleLabel='namespace'
+          , modelPrefixLabel='exported_namespace'
+          , modelMiddleLabel='namespace'
           , yLabelSuffix='% of quota'
           , datasetLabel='${result.metric.exported_namespace} in ${result.metric.cluster} in ${hubId}'
         ) }}
@@ -309,11 +309,11 @@
           divId='visualization-project-gpu-resource-request'
           , classSimpleName='Project'
           , legendTitle='Projects'
-          , metricPrefix='count by (cluster, namespace) (kube_pod_resource_request{resource =~ ".*/gpu", '
+          , metricPrefix='sum by (cluster, namespace) (kube_pod_resource_request{resource =~ ".*/gpu", '
           , metricSuffix='})'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
-          , projectPrefixLabel='namespace'
+          , modelPrefixLabel='namespace'
           , yLabelSuffix='GPU request'
           , datasetLabel='${result.metric.namespace} in ${result.metric.cluster} in ${hubId}'
         ) }}
@@ -323,9 +323,9 @@
           , legendTitle='Projects'
           , metricPrefix='sum by (cluster, exported_namespace) (DCGM_FI_DEV_GPU_TEMP{'
           , metricSuffix='})'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
-          , projectPrefixLabel='exported_namespace'
+          , modelPrefixLabel='exported_namespace'
           , yLabelSuffix='temperature ° C'
           , datasetLabel='${result.metric.exported_namespace} in ${result.metric.cluster} in ${hubId}'
         ) }}
@@ -336,12 +336,14 @@
           , metricPrefix='rate(vllm:e2e_request_latency_seconds_sum{'
           , metricMiddle='}[10m]) / rate(vllm:e2e_request_latency_seconds_count{'
           , metricSuffix='}[10m])'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , yLabelPrefix='Latency'
           , yLabelSuffix=' (ms)'
           , openDetailsSelector='.vllm_details'
           , datasetLabel='Average (${result.metric.model_name})'
+          , metricLabels=['model_name', 'pod']
+          , displayLabels=['model', 'pod']
         ) }}
         {{ hubClusterProjectDashboardAsyncFunction(
           divId='visualization-llm-token-throughput'
@@ -350,10 +352,12 @@
           , metricPrefix='label_replace(rate(vllm:prompt_tokens_total{'
           , metricMiddle='}[10m]), "token_type", "Prompt Tokens/Sec", "namespace", "(.+)") or label_replace(rate(vllm:generation_tokens_total{'
           , metricSuffix='}[10m]), "token_type", "Generation Tokens/Sec", "namespace", "(.+)")'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , yLabelPrefix='Tokens per Second'
           , datasetLabel='${result.metric.token_type} (${result.metric.model_name})'
+          , metricLabels=['token_type', 'pod']
+          , displayLabels=['token type', 'pod']
         ) }}
         {{ hubClusterProjectDashboardAsyncFunction(
           divId='visualization-llm-ttft-latency'
@@ -362,11 +366,13 @@
           , metricPrefix='rate(vllm:time_to_first_token_seconds_sum{'
           , metricMiddle='}[10m]) / rate(vllm:time_to_first_token_seconds_count{'
           , metricSuffix='}[10m])'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , yLabelPrefix='Latency'
           , yLabelSuffix=' (ms)'
           , datasetLabel='Average TTFT (${result.metric.model_name})'
+          , metricLabels=['model_name', 'pod']
+          , displayLabels=['model', 'pod']
         ) }}
         {{ hubClusterProjectDashboardAsyncFunction(
           divId='visualization-llm-tpot-latency'
@@ -375,11 +381,13 @@
           , metricPrefix='rate(vllm:time_per_output_token_seconds_sum{'
           , metricMiddle='}[10m]) / rate(vllm:time_per_output_token_seconds_count{'
           , metricSuffix='}[10m])'
-          , projectVar='projectName'
+          , modelVar='projectName'
           , timeZone=timeZone
           , yLabelPrefix='Latency'
           , yLabelSuffix=' (ms)'
           , datasetLabel='Mean TPOT (${result.metric.model_name})'
+          , metricLabels=['model_name', 'pod']
+          , displayLabels=['model', 'pod']
         ) }}
 
         async function queryStorageUtilization(hubId, clusterName, projectName) {

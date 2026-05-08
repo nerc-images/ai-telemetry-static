@@ -68,40 +68,47 @@
         var labelFormat;
         var labelFormatLong;
         if(yearsApart > 1) {
-          labelFormat = 'YYYY';
-          labelFormatLong = 'YYYY';
+          labelFormat = 'ddd MMM D, YYYY';
+          labelFormatLong = 'ddd MMM D, YYYY';
         } else if(monthsApart > 1) {
-          labelFormat = 'MMM YYYY';
-          labelFormatLong = 'MMM YYYY';
+          labelFormat = 'ddd MMM D, YYYY, h:mm a';
+          labelFormatLong = 'ddd MMM D, YYYY, h:mm a';
         } else if(daysApart > 1) {
-          labelFormat = 'ddd MMM D, h:mm a';
+          labelFormat = 'ddd MMM D, YYYY, h:mm a';
           labelFormatLong = 'ddd MMM D, YYYY, h:mm a';
         } else if(hoursApart > 1) {
-          labelFormat = 'ddd MMM D, h:mm a';
+          labelFormat = 'ddd MMM D, YYYY, h:mm a';
           labelFormatLong = 'ddd MMM D, YYYY, h:mm a';
         } else {
-          labelFormat = 'ddd MMM D, h:mm a';
+          labelFormat = 'ddd MMM D, YYYY, h:mm a';
           labelFormatLong = 'ddd MMM D, YYYY, h:mm a';
         }
         var step;
+        var stepTime;
         switch (facetRangeGapVal) {
           case "+1YEAR":
             step = "1y";
+            stepMillis = 31557600000;
             break;
           case "+1MONTH":
             step = "1M";
+            stepMillis = 2678400000;
             break;
           case "+1DAY":
             step = "1d";
+            stepMillis = 86400000;
             break;
           case "+1HOUR":
             step = "1h";
+            stepMillis = 3600000;
             break;
           case "+1MINUTE":
             step = "1m";
+            stepMillis = 60000;
             break;
           default:
             step = "7d";
+            stepMillis = 604800000;
         }
 
         var timeQuery = {
@@ -110,6 +117,7 @@
           , startDate: startDate
           , endDate: endDate
           , step: step
+          , stepMillis: stepMillis
           , timeZone: timeZone
           , minutesApart: minutesApart
           , hoursApart: hoursApart
@@ -127,7 +135,7 @@
 
 {%- macro dashboardCard(divId, cardTitle, style='--point-radius: 2px; ', min=null, max=null) %}
       <div>
-        <wa-line-chart legend-position="bottom" id="{{ divId | e }}" label="{{ cardTitle | e}}" description="" style="{{ style | e | default('') }}"{% if min is defined %}min="{{ min | e }}"{% endif %}{% if max is defined %}max="{{ max | e }}"{% endif %}>
+        <wa-line-chart legend-position="bottom" id="{{ divId | e }}" label="{{ cardTitle | e}}" description="" style="{{ style | e | default('') }}"{% if min is defined %} min="{{ min | e }}"{% endif %}{% if max is defined %} max="{{ max | e }}"{% endif %}>
         </wa-line-chart>
         <wa-details summary="Prometheus Keycloak Proxy queries">
           <table id="{{ divId | e }}-data-links-table" class="wa-zebra-rows">
@@ -150,7 +158,7 @@
       </div>
 {% endmacro -%}
 
-{%- macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', projectPrefixLabel='namespace', projectMiddleLabel=null, projectVar='projectName', tickformat=null, timeZone=null, emptyClusterReplace=null, emptyClusterReplaceWith=null, formatBytes=false, formatPercent=false, xLabelPrefix='', xLabelSuffix='', yLabelPrefix='', yLabelSuffix='', openDetailsSelector=null, datasetLabel=null) %}
+{%- macro hubClusterProjectDashboardAsyncFunction(divId, yaxisTitle, classSimpleName, legendTitle, resultLabel, metricPrefix, metricMiddle='', metricSuffix='', clusterVar='clusterName', modelPrefixLabel='namespace', modelMiddleLabel=null, modelVar='projectName', tickformat=null, timeZone=null, emptyClusterReplace=null, emptyClusterReplaceWith=null, formatBytes=false, formatPercent=false, xLabelPrefix='', xLabelSuffix='', yLabelPrefix='', yLabelSuffix='', openDetailsSelector=null, datasetLabel=null, fill=false, metricLabels=null, displayLabels=null, colors=['blue','pink','green','yellow','purple','orange','indigo','red','cyan','gray']) %}
 
     function {{ jsFunctionName(divId) }}Popover(event) {
       var buttonId = event.target.getAttribute('id');
@@ -170,6 +178,7 @@
       $headerHub.setAttribute('class', 'wa-heading-m ');
       $headerHub.innerText = 'hub: ' + hubId;
       $popoverStack.append($headerHub);
+      {% if classSimpleName != 'Hub' -%}
 
       if(dataMetric.cluster) {
         var $headerCluster = document.createElement('div');
@@ -180,7 +189,7 @@
 
       var $headerProject = document.createElement('div');
       $headerProject.setAttribute('class', 'wa-heading-m ');
-      $headerProject.innerText = 'project: ' + dataMetric.{{ projectPrefixLabel }};
+      $headerProject.innerText = 'project: ' + dataMetric.{{ modelPrefixLabel }};
       $popoverStack.append($headerProject);
       {% if resultLabel is defined -%}
 
@@ -189,6 +198,7 @@
       $headerVar.innerText = '{{ resultLabel }}: ' + dataMetric.{{ resultLabel }};
       $popoverStack.append($headerVar);
       {%- endif %}
+      {% endif -%}
 
       $popoverStack.append(document.createElement('wa-divider'));
 
@@ -269,19 +279,20 @@
         const urls = [];
         const queries = [];
         const hubIds = Object.keys(window.varsFq.hubId.facetField.counts);
-        const clusterNames = Object.keys(window.varsFq.clusterName.facetField.counts);
+        const clusterNames = window.varsFq?.clusterName?.facetField?.counts ? Object.keys(window.varsFq.clusterName.facetField.counts) : [];
         var requestHubIds = [];
         hubIds.forEach((hubId, i) => {
-          var projects = list{{ classSimpleName }}.filter(o => o.hubId === hubId);
-          var uniqueClusterNames = [...new Set(projects.map(item => item.{{ clusterVar }}))];
+          var results = list{{ classSimpleName }}.filter(o => o.hubId === hubId);
+          {% if 'Project' == classSimpleName -%}
+          var uniqueClusterNames = [...new Set(results.map(item => item.{{ clusterVar }}))];
           uniqueClusterNames.forEach(({{ clusterVar }}, i) => {
-            var uniqueProjectNames = [...new Set(projects.filter(project => project.{{ clusterVar }} === {{ clusterVar }}).map(project => project.{{ projectVar }}))];
-            var projectPrefixLabel = (clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '') + '{{ projectPrefixLabel }}=~"' + uniqueProjectNames.join('|') + '"';
-            var projectMiddleLabel = (clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '') + '{{ projectMiddleLabel if projectMiddleLabel is defined else projectPrefixLabel }}=~"' + uniqueProjectNames.join('|') + '"';
-            var query = '{{ metricPrefix }}' + projectPrefixLabel + {% if metricMiddle != '' %}'{{ metricMiddle }}' + projectMiddleLabel + {% endif %}'{{ metricSuffix }}';
+            var uniqueModelNames = [...new Set(results.filter(result => result.{{ clusterVar }} === {{ clusterVar }}).map(result => result.{{ modelVar }}))];
+            var modelPrefixLabel = (clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '') + '{{ modelPrefixLabel }}=~"' + uniqueModelNames.join('|') + '"';
+            var modelMiddleLabel = (clusterNames.length > 0 ? ('cluster="' + {{ clusterVar }} + '", ') : '') + '{{ modelMiddleLabel if modelMiddleLabel is defined else modelPrefixLabel }}=~"' + uniqueModelNames.join('|') + '"';
+            var query = '{{ metricPrefix }}' + modelPrefixLabel + {% if metricMiddle != '' %}'{{ metricMiddle }}' + modelMiddleLabel + {% endif %}'{{ metricSuffix }}';
             {% if emptyClusterReplace is defined -%}
             if(clusterNames.length == 0)
-              query = '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + projectPrefixLabel + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + projectMiddleLabel + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}';
+              query = '{{ metricPrefix | replace(emptyClusterReplace, emptyClusterReplaceWith) }}' + modelPrefixLabel + {% if metricMiddle != '' %}'{{ metricMiddle | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}' + modelMiddleLabel + {% endif %}'{{ metricSuffix | replace(emptyClusterReplace, emptyClusterReplaceWith)  }}';
             {%- endif -%}
             queries.push(query);
             urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
@@ -290,6 +301,16 @@
                 }, timeQuery)).toString());
             requestHubIds.push(hubId);
           });
+          {%- else -%}
+          {% if 'Hub' == classSimpleName -%}
+          var query = '{{ metricPrefix }}' + {% if metricMiddle != '' %}'{{ metricMiddle }}' + {% endif %}'{{ metricSuffix }}';
+          queries.push(query);
+          urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
+              query: query
+              }, timeQuery)).toString());
+          requestHubIds.push(hubId);
+          {%- endif -%}
+          {%- endif -%}{{''}}
         });
         const responses = await Promise.all(urls.map(url => fetch(url)));
         const dataPromises = responses.map(response => response.json());
@@ -313,44 +334,46 @@
           $linkTd.append($linkA);
         });
 
+        {% if metricLabels is not defined and displayLabels is not defined -%}
+        metricLabels = ['hub', 'cluster', '{{ modelPrefixLabel }}'];
+        displayLabels = ['hub', 'cluster', 'project'];
+        {% else -%}
+        metricLabels = [{% for metricLabel in metricLabels %}'{{ metricLabel }}',{% endfor %}];
+        displayLabels = [{% for displayLabel in displayLabels %}'{{ displayLabel }}',{% endfor %}];
+        {% endif -%}
         var $theadTr = document.getElementById('{{ divId | e }}-data-thead-tr');
         $theadTr.innerHTML = '';
+        var $theadTrTd;
 
         var $theadTrTd = document.createElement('td');
         $theadTrTd.innerText = '';
         $theadTr.append($theadTrTd);
 
-        var $theadTrTd = document.createElement('td');
-        $theadTrTd.innerText = 'hub';
-        $theadTr.append($theadTrTd);
-
-        if(clusterNames.length > 0) {
-          $theadTrTd = document.createElement('td');
-          $theadTrTd.innerText = 'cluster';
-          $theadTr.append($theadTrTd);
-        }
-
-        $theadTrTd = document.createElement('td');
-        $theadTrTd.innerText = 'project';
-        $theadTr.append($theadTrTd);
-        {% if resultLabel is defined -%}
+        displayLabels.forEach((displayLabel, i) => {
+          if(displayLabel == 'cluster' && clusterNames.length > 0 || displayLabel != 'cluster') {
+            $theadTrTd = document.createElement('td');
+            $theadTrTd.innerText = displayLabel;
+            $theadTr.append($theadTrTd);
+          }
+        });
 
         $theadTrTd = document.createElement('td');
         $theadTrTd.innerText = '{{ resultLabel | e }}';
         $theadTr.append($theadTrTd);
-        {%- endif %}
 
         $theadTrTd = document.createElement('td');
         $theadTrTd.innerText = '{{ cardTitle | e }}';
         $theadTr.append($theadTrTd);
 
         var $tbody = document.getElementById('{{ divId | e }}-data-tbody');
+        const range = [];
+        let current = new Date(timeQuery.startDate);
+        while (current <= timeQuery.endDate) {
+          range.push(current);
+          labels.push(moment.tz(current, timeQuery.timeZone).format(timeQuery.labelFormat));
+          current = new Date(current.getTime() + timeQuery.stepMillis);
+        }
         responseJsons.forEach((responseJson, i) => {
-          if(labels.length == 0 && responseJson.data.result.length > 0) {
-            responseJson.data.result[0].values.map(values => {
-              labels.push(moment.tz(values[0] * 1000, timeQuery.timeZone).format(timeQuery.labelFormat));
-            });
-          }
           responseJson.data.result.forEach((result, j) => {
             var max = Math.max(...result.values.map(values => parseFloat(values[1])));
             if(max)
@@ -363,34 +386,58 @@
           details.open = max > 0;
         });
         {% endif %}
-        colors = ['blue','pink','green','yellow','purple','orange','indigo','red','cyan','gray'];
+        colors = [{% for color in colors %}'{{ color }}',{% endfor %}];
+        var stepSeconds = timeQuery.stepMillis / 1000;
         responseJsons.forEach((responseJson, i) => {
           var hubId = requestHubIds[i];
           responseJson.data.result.forEach((result, j) => {
             var datasetsIndex = datasets.length;
             result['datasetsIndex'] = datasetsIndex;
+
+            var data = [];
+            var start = new Date(timeQuery.startDate);
+            var startSeconds = start.getTime() / 1000;
+            result.values.forEach((values, i) => {
+              var currentSeconds = values[0];
+              var nextSeconds = (currentSeconds * 1000 + timeQuery.stepMillis) / 1000;
+              if(startSeconds < currentSeconds) {
+                var catchupSeconds = startSeconds;
+                while (catchupSeconds < currentSeconds) {
+                  var nextCatchupSeconds = catchupSeconds + stepSeconds;
+                  data.push({
+                    x: moment.tz(current, timeQuery.timeZone).valueOf()
+                    , y: null
+                  });
+                  catchupSeconds = catchupSeconds + stepSeconds;
+                }
+              }
+              data.push({
+                x: moment.tz(current, timeQuery.timeZone).valueOf()
+              {% if formatBytes -%}
+                {{'  '}}, y: formatBytes(parseFloat(values[1]), max)
+              {% else -%}
+              {% if formatPercent -%}
+                {{'  '}}, y: formatPercent(values[1], 2)
+              {% else -%}
+                {{'  '}}, y: parseFloat(values[1])
+              {% endif -%}
+              {% endif -%}
+              });
+              startSeconds = currentSeconds + stepSeconds;
+            });
+
             datasets.push({
-              label: `{{ datasetLabel | default('', true) }}` //({% if resultLabel is defined %}result.metric.{{ resultLabel }} + ' in ' + {% endif %}result.metric.{{ projectPrefixLabel }} + ' in ' + (result.metric.cluster ? (result.metric.cluster + ' in ') : '') + hubId).substring(0, 90)
+              label: `{{ datasetLabel | default('', true) }}`
               , "backgroundColor": [
                 "var(--wa-color-" + colors[datasetsIndex % colors.length] + "-60)"
               ]
               , "borderColor": [
                 "color-mix(in srgb, var(--wa-color-" + colors[datasetsIndex % colors.length] + "-60) 60%, transparent)"
               ]
-              , data: result.values.map(values => {
-                return {
-                  x: moment.tz(values[0] * 1000, timeQuery.timeZone).valueOf()
-                {% if formatBytes -%}
-                  {{'  '}}, y: formatBytes(parseFloat(values[1]), max)
-                {% else -%}
-                {% if formatPercent -%}
-                  {{'  '}}, y: formatPercent(values[1], 2)
-                {% else -%}
-                  {{'  '}}, y: parseFloat(values[1])
-                {% endif -%}
-                {% endif -%}
-                };
-              })
+              {% if fill -%}
+              , fill: true
+              {% endif -%}
+              , data: data
             });
           });
         });
@@ -440,26 +487,23 @@
             var $tr = document.createElement('tr');
 
             var $iconTd = document.createElement('td');
-            var $icon = document.createElement('div');
-            $icon.setAttribute('style', 'color: ' + borderColor + '; cursor: pointer; user-select: none; font-size: 1.5em; ');
-            $icon.setAttribute('onclick', 'var chart = document.getElementById("' + panelId + '").chart; var dataset = chart.config.data.datasets[' + datasetsIndex + ']; dataset.hidden = dataset.hidden !== true; chart.update(); this.innerText = this.innerText === "▣" ? "□" : "▣"; ');
-            $icon.innerText = '▣';
+            var $icon = document.createElement('wa-checkbox');
+            $icon.checked = true;
+            $icon.setAttribute('style', '--wa-form-control-activated-color: ' + borderColor + '; --wa-form-control-border-color: ' + borderColor + '; --wa-focus-ring: var(--wa-focus-ring-style) var(--wa-focus-ring-width) ' + borderColor + '; ');
+            $icon.setAttribute('onclick', 'var chart = document.getElementById("' + panelId + '").chart; var dataset = chart.config.data.datasets[' + datasetsIndex + ']; dataset.hidden = !this.checked; chart.update(); !this.checked; ');
             $iconTd.append($icon);
             $tr.append($iconTd);
+            var $val;
 
-            var $hub = document.createElement('td');
-            $hub.innerText = hubId;
-            $tr.append($hub);
-
-            if(result.metric.cluster) {
-              var $cluster = document.createElement('td');
-              $cluster.innerText = result.metric.cluster;
-              $tr.append($cluster);
-            }
-
-            var ${{ projectPrefixLabel }} = document.createElement('td');
-            ${{ projectPrefixLabel }}.innerText = result.metric.{{ projectPrefixLabel }};
-            $tr.append(${{ projectPrefixLabel }});
+            metricLabels.forEach((metricLabel, i) => {
+              $val = document.createElement('td');
+              $tr.append($val);
+              if(metricLabel == 'hub') {
+                $val.innerText = hubId;
+              } else if(metricLabel == 'cluster' && clusterNames.length > 0 || metricLabel != 'cluster') {
+                $val.innerText = result.metric[metricLabel];
+              }
+            });
             {% if resultLabel is defined -%}
 
             var ${{ resultLabel }} = document.createElement('td');
@@ -467,7 +511,7 @@
             $tr.append(${{ resultLabel }});
             {%- endif %}
 
-            var $val = document.createElement('td');
+            $val = document.createElement('td');
             $tr.append($val);
 
             var $statsPopover = document.createElement('wa-popover');
