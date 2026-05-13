@@ -53,7 +53,7 @@
         var endValue = document.querySelector("#pageSearchVal-pageFacetRangeEnd-{{ classSimpleName }}-input").value;
         var timeZone = document.querySelector("#pageFacetRangeTimeZoneInput").value;
         var startDate = moment.tz(startValue, 'YYYY-MM-DDTHH:mm', timeZone).utc();
-        var endDate = moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone).utc();
+        var endDate = moment.min(moment.tz(endValue, 'YYYY-MM-DDTHH:mm', timeZone), moment()).utc();
         var start = startDate.toISOString();
         var end = endDate.toISOString();
         const diffInMs = Math.abs(endDate - startDate);
@@ -441,7 +441,7 @@
             });
           });
         });
-        chart.xLabel = timeQuery.startDate.format(timeQuery.labelFormat) + '–' + timeQuery.endDate.format(timeQuery.labelFormatLong) + ' in ' + timeQuery.timeZone;
+        chart.xLabel = moment.tz(timeQuery.startDate, timeQuery.timeZone).format(timeQuery.labelFormat) + '–' + moment.tz(timeQuery.endDate, timeQuery.timeZone).format(timeQuery.labelFormatLong) + ' in ' + timeQuery.timeZone;
         {% if formatBytes -%}
         chart.yLabel = '{{ yLabelPrefix }}' + formatBytesUnit(max) + '{{ yLabelSuffix }}';
         {% else -%}
