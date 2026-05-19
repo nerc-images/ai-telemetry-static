@@ -392,7 +392,7 @@
 
         async function queryStorageUtilization(hubId, clusterName, projectName) {
           // Query for all PVCs with their allocated storage (shows all PVCs regardless of mount status)
-          var allocatedQuery = 'kube_persistentvolumeclaim_resource_requests_storage_bytes{namespace="' + projectName + '"}';
+          var allocatedQuery = 'kube_persistentvolumeclaim_resource_requests_storage_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
 
           // Query for storage used per mounted PVC
           var usedQuery = 'kubelet_volume_stats_used_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
