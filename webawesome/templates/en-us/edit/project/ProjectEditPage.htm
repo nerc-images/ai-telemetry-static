@@ -392,7 +392,7 @@
 
         async function queryStorageUtilization(hubId, clusterName, projectName) {
           // Query for all PVCs with their allocated storage (shows all PVCs regardless of mount status)
-          var allocatedQuery = 'kube_persistentvolumeclaim_resource_requests_storage_bytes{namespace="' + projectName + '"}';
+          var allocatedQuery = 'kube_persistentvolumeclaim_resource_requests_storage_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
 
           // Query for storage used per mounted PVC
           var usedQuery = 'kubelet_volume_stats_used_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
@@ -502,13 +502,13 @@
                   // Storage used (actual bytes used)
                   if ($usedText) {
                     var usedPercent = (totalActualUsed / quotaHard) * 100;
-                    $usedText.innerText = formatBytes(totalActualUsed) + ' / ' + formatBytes(quotaHard) + ' (' + usedPercent.toFixed(1) + '%)';
+                    $usedText.innerText = convertBytes(totalActualUsed) + ' / ' + convertBytes(quotaHard) + ' (' + usedPercent.toFixed(1) + '%)';
                   }
 
                   // Storage allocated (PVC requests)
                   if ($allocatedText) {
                     var allocatedPercent = (quotaAllocated / quotaHard) * 100;
-                    $allocatedText.innerText = formatBytes(quotaAllocated) + ' / ' + formatBytes(quotaHard) + ' (' + allocatedPercent.toFixed(1) + '%)';
+                    $allocatedText.innerText = convertBytes(quotaAllocated) + ' / ' + convertBytes(quotaHard) + ' (' + allocatedPercent.toFixed(1) + '%)';
                   }
 
                   $quotaSection.style.display = 'block';
@@ -553,12 +553,12 @@
                 $tr.append($tdStatus);
 
                 var $tdAllocated = document.createElement('td');
-                $tdAllocated.innerText = formatBytes(allocatedBytes);
+                $tdAllocated.innerText = convertBytes(allocatedBytes);
                 $tdAllocated.style.textAlign = 'right';
                 $tr.append($tdAllocated);
 
                 var $tdUsed = document.createElement('td');
-                $tdUsed.innerText = isMounted ? formatBytes(usedBytes) : '-';
+                $tdUsed.innerText = isMounted ? convertBytes(usedBytes) : '-';
                 $tdUsed.style.textAlign = 'right';
                 $tr.append($tdUsed);
 
@@ -579,8 +579,8 @@
               });
 
               var totalPercent = totalAllocated > 0 ? (totalUsed / totalAllocated * 100) : 0;
-              if ($allocatedTotal) $allocatedTotal.innerText = formatBytes(totalAllocated);
-              if ($usedTotal) $usedTotal.innerText = formatBytes(totalUsed);
+              if ($allocatedTotal) $allocatedTotal.innerText = convertBytes(totalAllocated);
+              if ($usedTotal) $usedTotal.innerText = convertBytes(totalUsed);
               if ($percentTotal) $percentTotal.innerText = totalPercent.toFixed(1) + '%';
 
               $table.style.display = 'table';

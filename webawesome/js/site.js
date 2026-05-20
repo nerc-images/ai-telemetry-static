@@ -522,10 +522,10 @@ function populateDashboardDataQuery(panelId, urls, queries, timeQuery) {
 }
 
 // Convert Bytes to human readable data format
-function formatBytes(bytes) {
-  if (bytes === 0) return '0 B';
+function convertBytes(bytes) {
+  if (!bytes || bytes <= 0 || !isFinite(bytes) || isNaN(bytes)) return '0 B';
   var k = 1024;
   var sizes = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
-  var i = Math.floor(Math.log(bytes) / Math.log(k));
+  var i = Math.max(0, Math.min(Math.floor(Math.log(bytes) / Math.log(k)), sizes.length - 1));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
