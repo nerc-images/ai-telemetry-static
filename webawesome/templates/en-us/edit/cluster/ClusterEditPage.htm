@@ -1,4 +1,11 @@
 {% extends "en-us/edit/cluster/ClusterGenEditPage.htm" %}
+{% import "en-us/Chart.htm" %}
+{%- block facetChangeClusterSuccess %}
+      updateDashboards();
+{% endblock facetChangeClusterSuccess -%}
+{%- block htmScriptInitClusterPage %}
+        updateDashboards();
+{%- endblock htmScriptInitClusterPage %}
 {%- block htmBodyStartClusterPage %}
 {{ super() }}
 {% if result is defined %}
@@ -127,14 +134,8 @@
       </div>
     </div>
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Percent of total memory usage for {{ result.clusterName }} cluster</header>
-        <div id="visualization-cluster-memory-bytes" class=""></div>
-      </wa-card>
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-m ">Percent of total CPU usage for {{ result.clusterName }} cluster</header>
-        <div id="visualization-cluster-cpu-bytes" class=""></div>
-      </wa-card>
+      {{ dashboardCard('visualization-cluster-memory-bytes', 'Percent of total memory usage for {{ result.clusterName }} cluster', min=0) }}
+      {{ dashboardCard('visualization-cluster-cpu-bytes', 'Percent of total CPU usage for {{ result.clusterName }} cluster', min=0) }}
     </div>
     <div class="wa-grid ">
       <div class="wa-stack ">
@@ -163,21 +164,14 @@
       </wa-card>
     </div>
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-l ">GPU temperature per GPU device in cluster {{ result.clusterName }}</header>
-        <div id="visualization-cluster-gpu-temperature" class="wa-grid "></div>
-      </wa-card>
+      {{ dashboardCard('visualization-cluster-gpu-temperature', 'GPU temperature per GPU node in {{ result.clusterName }} cluster', min=0) }}
     </div>
     <div class="wa-grid ">
-      <wa-card with-header>
-        <header slot="header" class="wa-heading-l ">GPU utilization per GPU device in cluster {{ result.clusterName }}</header>
-        <div id="visualization-cluster-gpu-utilization" class="wa-grid "></div>
-      </wa-card>
+      {{ dashboardCard('visualization-cluster-gpu-utilization', 'GPU utilization per GPU node in {{ result.clusterName }} cluster', min=0) }}
     </div>
-    <wa-card with-header>
-      <header slot="header" class="wa-heading-l ">GPU utilization per project in cluster {{ result.clusterName }}</header>
-      <div id="visualization-project-gpu-utilization" class="wa-grid "></div>
-    </wa-card>
+    <div class="wa-grid ">
+      {{ dashboardCard('visualization-project-gpu-utilization', 'GPU utilization per project in cluster {{ result.clusterName }}', min=0) }}
+    </div>
   </div>
 </wa-details>
 {% endif %}
@@ -200,154 +194,103 @@
   }
 }
 {%- endblock htmStyleClusterPage %}
-{%- block htmScriptInitClusterPage %}
 
-      var facetRangeGapVal = document.querySelector("#pageSearchVal-pageFacetRangeGap-Cluster-input").value;
-      var start = '{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var end = '{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm:ss.SSSX", defaultLocaleId, 'UTC') }}';
-      var step;
-      switch (facetRangeGapVal) {
-        case "+1YEAR":
-          step = "1y";
-          break;
-        case "+1MONTH":
-          step = "1M";
-          break;
-        case "+1DAY":
-          step = "1d";
-          break;
-        case "+1HOUR":
-          step = "1h";
-          break;
-        case "+1MINUTE":
-          step = "1m";
-          break;
-        default:
-          step = "7d";
-      }
-
-      var timeQuery = {
-        start: start
-        , end: end
-        , step: step
-      };
-
-      Promise.all([
-          queryMemoryBytesTotal(timeQuery)
-          , queryCpuBytesTotal(timeQuery)
-          , queryGpuNodesTotal()
-          , queryGpuDevicesByNode()
-          , queryGpuDevicesTotal()
-          , queryGpuNodesNotReady()
-          , queryGpuNodesWithoutTaint()
-          , queryGpuTemperature()
-          , queryGpuUtilization()
-          , queryGpuUtilizationPerProject()
+      {% block htmScriptsClusterPage -%}
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+      <script src="{{ STATIC_BASE_URL }}/js/chartjs-plugin-zoom.js"></script>
+      {{ super() }}
+      <script>
+        {{ updateDashboardsFunctionStart() }}
+          Promise.all([
+            {{ dashboardPromise('visualization-cluster-memory-bytes') }}
+            , {{ dashboardPromise('visualization-cluster-cpu-bytes') }}
+            , queryGpuNodesTotal()
+            , queryGpuDevicesByNode()
+            , queryGpuDevicesTotal()
+            , queryGpuNodesNotReady()
+            , queryGpuNodesWithoutTaint()
+            , {{ dashboardPromise('visualization-cluster-gpu-temperature') }}
+            , {{ dashboardPromise('visualization-cluster-gpu-utilization') }}
+            , {{ dashboardPromise('visualization-project-gpu-utilization') }}
           ]);
-{%- endblock htmScriptInitClusterPage %}
-{%- block htmScriptsClusterPage %}
-{{ super() }}
-  <script>
+        {{ updateDashboardsFunctionEnd() }}
 
-    async function queryMemoryBytesTotal(timeQuery) {
-      const urls = [];
-      const hubIds = ['{{ result.hubId }}'];
-      hubIds.forEach((hubId, i) => {
-        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            {% if result.hubId == 'openshift-local' -%}
-            query: 'cluster:memory_usage_bytes:sum / on (prometheus) cluster:capacity_memory_bytes:sum' 
-            {%- else -%}
-            query: 'cluster:memory_usage_bytes:sum / cluster:capacity_memory_bytes:sum{cluster="{{ result.clusterNameMetrics }}", label_node_role_kubernetes_io!="master"}' 
-            {%- endif %}
-            }, timeQuery)).toString());
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-cluster-memory-bytes'
+          , classSimpleName='Cluster'
+          , legendTitle='Clusters'
+          , metricPrefix='cluster:memory_usage_bytes:sum{'
+          , metricMiddle='} / on(cluster) cluster:capacity_memory_bytes:sum{label_node_role_kubernetes_io!="master"'
+          , metricSuffix='}'
+          , modelVar='clusterName'
+          , timeZone=timeZone
+          , formatPercent=true
+          , yLabelSuffix='% memory total'
+          , datasetLabel='${result.metric.cluster} cluster in ${hubId}'
+          , metricLabels=['hub', 'cluster']
+          , displayLabels=['hub', 'cluster']
+        ) }}
 
-      var panelId = 'visualization-cluster-memory-bytes';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        responseJson.data.result.forEach((result, j) => {
-          var hubId = hubIds[i];
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: result.metric.cluster + ' in ' + hubId
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + '</a>')
-          });
-        });
-      });
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-cluster-cpu-bytes'
+          , classSimpleName='Cluster'
+          , legendTitle='Clusters'
+          , metricPrefix='cluster:cpu_usage_cores:sum{'
+          , metricMiddle='} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"'
+          , metricSuffix='})'
+          , modelVar='clusterName'
+          , timeZone=timeZone
+          , formatPercent=true
+          , yLabelSuffix='% CPU total'
+          , datasetLabel='${result.metric.cluster} cluster in ${hubId}'
+          , metricLabels=['hub', 'cluster']
+          , displayLabels=['hub', 'cluster']
+        ) }}
 
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Percent of total memory usage'
-          , tickformat: '.0%'
-        }
-        , legend: {
-          title: {
-            text: 'Clusters'
-          }
-        }
-      };
-      Plotly.newPlot(panelId, traces, layout);
-    }
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-cluster-gpu-temperature'
+          , classSimpleName='Cluster'
+          , legendTitle='Clusters'
+          , metricPrefix='max(DCGM_FI_DEV_MEMORY_TEMP{'
+          , metricSuffix='} * 1.8 + 32) by (cluster,Hostname)'
+          , modelVar='clusterName'
+          , timeZone=timeZone
+          , yLabelSuffix='GPU temperature in F°'
+          , datasetLabel='${result.metric.Hostname} node in ${result.metric.cluster} cluster in ${hubId}'
+          , metricLabels=['hub', 'cluster', 'Hostname']
+          , displayLabels=['hub', 'cluster', 'GPU node']
+        ) }}
 
-    async function queryCpuBytesTotal(timeQuery) {
-      const urls = [];
-      const hubIds = ['{{ result.hubId }}'];
-      hubIds.forEach((hubId, i) => {
-        urls.push('/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query_range?' + new URLSearchParams(Object.assign({ 
-            {% if result.hubId == 'openshift-local' -%}
-            query: 'cluster:cpu_usage_cores:sum / on (prometheus) cluster:capacity_cpu_cores:sum' 
-            {%- else -%}
-            query: 'cluster:cpu_usage_cores:sum{cluster="{{ result.clusterNameMetrics }}"} / on(cluster) sum by (cluster) (cluster:capacity_cpu_cores:sum{label_node_role_kubernetes_io!="master"})' 
-            {%- endif %}
-            }, timeQuery)).toString());
-      });
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const dataPromises = responses.map(response => response.json());
-      const responseJsons = await Promise.all(dataPromises);
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 1));
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-cluster-gpu-utilization'
+          , classSimpleName='Cluster'
+          , legendTitle='Clusters'
+          , metricPrefix='sum(DCGM_FI_DEV_GPU_UTIL{'
+          , metricSuffix='} / 100) by (cluster,Hostname)'
+          , modelVar='clusterName'
+          , timeZone=timeZone
+          , tickFormat='.0%'
+          , yLabelSuffix='number of GPUs utilized'
+          , datasetLabel='${result.metric.Hostname} node in ${result.metric.cluster} cluster in ${hubId}'
+          , metricLabels=['hub', 'cluster', 'Hostname']
+          , displayLabels=['hub', 'cluster', 'GPU node']
+        ) }}
 
-      var panelId = 'visualization-cluster-cpu-bytes';
-      var traces = [];
-      responseJsons.forEach((responseJson, i) => {
-        responseJson.data.result.forEach((result, j) => {
-          var hubId = hubIds[i];
-          traces.push({
-            x: result.values.map(values => new Date(values[0] * 1000))
-            , y: result.values.map(values => parseFloat(values[1]))
-            , mode: 'scatter'
-            , name: result.metric.cluster + ' in ' + hubId
-            , text: result.values.map(values => '<a href="/en-us/edit/cluster/' + result.metric.cluster + '">' + hubId + ' ' + result.metric.cluster + '</a>')
-          });
-        });
-      });
-
-      var layout = {
-        xaxis: {
-          title: 'Time in {{ defaultZoneId }}'
-        }
-        , yaxis: {
-          title: 'Percent of total CPU usage'
-          , tickformat: '.0%'
-        }
-        , legend: {
-          title: {
-            text: 'Clusters'
-          }
-        }
-      };
-      Plotly.newPlot(panelId, traces, layout);
-    }
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-project-gpu-utilization'
+          , classSimpleName='Cluster'
+          , legendTitle='Clusters'
+          , metricPrefix='sum(DCGM_FI_DEV_GPU_UTIL{'
+          , metricSuffix='} / 100) by (cluster,exported_namespace,Hostname)'
+          , modelVar='clusterName'
+          , timeZone=timeZone
+          , tickFormat='.0%'
+          , yLabelSuffix='number of GPUs utilized'
+          , datasetLabel='${result.metric.Hostname} node in ${result.metric.exported_namespace} project in ${result.metric.cluster} cluster in ${hubId}'
+          , metricLabels=['hub', 'cluster', 'exported_namespace', 'Hostname']
+          , displayLabels=['hub', 'cluster', 'project', 'GPU node']
+        ) }}
 
     async function queryGpuNodesTotal() {
       var query = Object.assign({ query: 'sum(gpu_operator_gpu_nodes_total{cluster="{{ result.clusterNameMetrics }}"})' });
@@ -516,117 +459,6 @@
         });
       } else {
         throw new Error(`Failed to query nodes not ready: ${response.status}`);
-      }
-    }
-
-    async function queryGpuTemperature() {
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 24));
-      var timeQuery = {
-        start: start.toISOString()
-        , end: end.toISOString()
-        , step: '100'
-      };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_MEMORY_TEMP{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
-      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
-      if(response.ok) {
-        response.json().then(function(responseJson) {
-          var end = new Date();
-          var start = new Date(new Date().setHours(end.getHours() - 1));
-
-          var panelId = 'visualization-cluster-gpu-temperature';
-          var traces = [];
-          var results = responseJson.data.result;
-          results.forEach((result, i) => {
-            traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
-              , y: result.values.map(values => parseFloat(values[1]))
-              , mode: 'lines+markers'
-              , name: result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName
-              , text: result.values.map(values => '<a href="/en-us/edit/ai-node/' + result.metric.cluster + '-' + result.metric.node + '">' + result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName + '</a>')
-            });
-          });
-
-          var layout = {
-          };
-          Plotly.newPlot(panelId, traces, layout);
-        });
-      } else {
-        throw new Error(`Failed to query nodes not ready: ${response.status}`);
-      }
-    }
-
-    async function queryGpuUtilization() {
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 24));
-      var timeQuery = {
-        start: start.toISOString()
-        , end: end.toISOString()
-        , step: '100'
-      };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,Hostname,modelName,UUID)' }, timeQuery));
-      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
-      if(response.ok) {
-        response.json().then(function(responseJson) {
-          var end = new Date();
-          var start = new Date(new Date().setHours(end.getHours() - 1));
-
-          var panelId = 'visualization-cluster-gpu-utilization';
-          var traces = [];
-          var results = responseJson.data.result;
-          results.forEach((result, i) => {
-            traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
-              , y: result.values.map(values => parseFloat(values[1]))
-              , mode: 'lines+markers'
-              , name: result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName
-              , text: result.values.map(values => '<a href="/en-us/edit/ai-node/' + result.metric.cluster + '-' + result.metric.node + '">' + result.metric.cluster + ' ' + result.metric.Hostname + ' ' + result.metric.modelName + '</a>')
-            });
-          });
-
-          var layout = {
-          };
-          Plotly.newPlot(panelId, traces, layout);
-        });
-      } else {
-        throw new Error(`Failed to query nodes not ready: ${response.status}`);
-      }
-    }
-
-    async function queryGpuUtilizationPerProject() {
-      var end = new Date();
-      var start = new Date(new Date().setHours(end.getHours() - 24));
-      var timeQuery = {
-        start: start.toISOString()
-        , end: end.toISOString()
-        , step: '100'
-      };
-      var query = Object.assign(Object.assign({ query: 'sum(DCGM_FI_DEV_GPU_UTIL{cluster="{{ result.clusterNameMetrics }}"}) by (cluster,exported_namespace)' }, timeQuery));
-      var response = await fetch( '/prom-keycloak-proxy/' + encodeURIComponent('{{ result.hubId }}') + '/api/v1/query_range?' + new URLSearchParams(query).toString(), { method: 'GET' });
-      if(response.ok) {
-        response.json().then(function(responseJson) {
-          var end = new Date();
-          var start = new Date(new Date().setHours(end.getHours() - 1));
-
-          var panelId = 'visualization-project-gpu-utilization';
-          var traces = [];
-          var results = responseJson.data.result;
-          results.forEach((result, i) => {
-            traces.push({
-              x: result.values.map(values => new Date(values[0] * 1000))
-              , y: result.values.map(values => parseFloat(values[1]))
-              , mode: 'lines+markers'
-              , name: result.metric.cluster + ' ' + result.metric.exported_namespace
-              , text: result.values.map(values => '<a href="/en-us/edit/ai-node/' + result.metric.cluster + '-' + result.metric.exported_namespace + '">' + result.metric.cluster + ' ' + result.metric.exported_namespace + '</a>')
-            });
-          });
-
-          var layout = {
-          };
-          Plotly.newPlot(panelId, traces, layout);
-        });
-      } else {
-        throw new Error(`Failed to query projects not ready: ${response.status}`);
       }
     }
 
