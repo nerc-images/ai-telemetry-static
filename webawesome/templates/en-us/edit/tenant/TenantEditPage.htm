@@ -155,6 +155,9 @@
       {{ dashboardCard('visualization-quota-cpu-bytes', 'Project quota CPU usage') }}
     </div>
     <div class="wa-grid ">
+      {{ dashboardCard('visualization-pod-cpu-throttling', 'Total pod CPU throttling', min=0) }}
+    </div>
+    <div class="wa-grid ">
       {{ dashboardCard('visualization-tenant-gpu-utilization', 'GPU utilization per GPU device in tenant {{ result.tenantName }}') }}
     </div>
     <wa-card with-header>
@@ -181,6 +184,7 @@
             , {{ dashboardPromise('visualization-total-cpu-bytes') }}
             , {{ dashboardPromise('visualization-quota-memory-bytes') }}
             , {{ dashboardPromise('visualization-quota-cpu-bytes') }}
+            , {{ dashboardPromise('visualization-pod-cpu-throttling') }}
             , {{ dashboardPromise('visualization-tenant-gpu-utilization') }}
             , {{ dashboardPromise('visualization-project-gpu-utilization') }}
             , {{ dashboardPromise('visualization-tenant-gpu-temperature') }}
@@ -238,6 +242,19 @@
           , timeZone=timeZone
           , yLabelSuffix='% of quota'
           , datasetLabel='${result.metric.namespace} in ${result.metric.cluster} in ${hubId}'
+        ) }}
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-pod-cpu-throttling'
+          , classSimpleName='Project'
+          , legendTitle='Projects'
+          , metricPrefix='sum(irate(container_cpu_cfs_throttled_periods_total{'
+          , metricSuffix='}[10m])) by (cluster, namespace) > 0'
+          , modelVar='projectName'
+          , timeZone=timeZone
+          , yLabelSuffix='throttled periods'
+          , datasetLabel='${result.metric.namespace} in ${result.metric.cluster} in ${hubId}'
+          , metricLabels=['hub', 'cluster', 'namespace']
+          , displayLabels=['hub', 'cluster', 'namespace']
         ) }}
         {{ hubClusterProjectDashboardAsyncFunction(
           divId='visualization-tenant-gpu-utilization'
