@@ -17,6 +17,9 @@
       {{ dashboardCard('visualization-cluster-memory-bytes', 'Percent of total memory usage for all clusters', min=0) }}
       {{ dashboardCard('visualization-cluster-cpu-bytes', 'Percent of total CPU usage for all clusters', min=0) }}
     </div>
+    <div class="wa-grid">
+      {{ dashboardCard('visualization-cluster-dropped-packets-rate', 'Rate of dropped packets (averaged over 1m) for all clusters', min=0)}}
+    </div>
     <div class="wa-grid ">
       {{ dashboardCard('visualization-cluster-gpu-utilization', 'GPU utilization per cluster', min=0) }}
     </div>
@@ -87,6 +90,7 @@
             {{ dashboardPromise('visualization-cluster-memory-bytes') }}
             , {{ dashboardPromise('visualization-cluster-cpu-bytes') }}
             , {{ dashboardPromise('visualization-cluster-gpu-utilization') }}
+            , {{ dashboardPromise('visualization-cluster-dropped-packets-rate')}}
             , queryGpuNodesTotal(timeQuery)
             , queryGpuDevicesTotal(timeQuery)
             , queryGpuDevicesByCluster(timeQuery)
@@ -138,6 +142,21 @@
           , timeZone=timeZone
           , formatPercent=true
           , yLabelSuffix='% GPU utilization in a cycle'
+          , datasetLabel='${result.metric.cluster} cluster in ${hubId}'
+          , metricLabels=['hub', 'cluster']
+          , displayLabels=['hub', 'cluster']
+        ) }}
+
+        {{ hubClusterProjectDashboardAsyncFunction(
+          divId='visualization-cluster-dropped-packets-rate'
+          , classSimpleName='Cluster'
+          , legendTitle='Clusters'
+          , metricPrefix='instance:node_network_receive_drop_excluding_lo:rate1m{'
+          , metricSuffix='} > 0'
+          , modelVar='clusterName'
+          , timeZone=timeZone
+          , formatPercent=false
+          , yLabelSuffix='Rate of packet loss'
           , datasetLabel='${result.metric.cluster} cluster in ${hubId}'
           , metricLabels=['hub', 'cluster']
           , displayLabels=['hub', 'cluster']
