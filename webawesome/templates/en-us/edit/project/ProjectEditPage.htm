@@ -314,7 +314,7 @@
           , classSimpleName='Project'
           , legendTitle='Projects'
           , metricPrefix='namespace:container_memory_usage_bytes:sum{'
-          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard", '
+          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard"'
           , metricSuffix='}'
           , modelVar='projectName'
           , timeZone=timeZone
@@ -341,7 +341,7 @@
           , classSimpleName='Project'
           , legendTitle='Projects'
           , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
-          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard", '
+          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard"'
           , metricSuffix='}'
           , modelVar='projectName'
           , timeZone=timeZone
