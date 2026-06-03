@@ -533,7 +533,7 @@
           var limitQuery = 'sum by (pod) (kube_pod_container_resource_limits{resource="' + (isMemory ? 'memory' : 'cpu') + '", ' + nsFilter + '})';
           var usedQuery = isMemory
             ? 'sum by (pod) (container_memory_working_set_bytes{' + nsFilter + ', container!="", container!="POD"})'
-            : 'sum by (pod) (rate(container_cpu_usage_seconds_total{' + nsFilter + ', container!="", container!="POD"}[5m]))';
+            : 'sum by (pod) (node_namespace_pod_container:container_cpu_usage_seconds_total:sum{' + nsFilter + '})';
           var namespaceUsedQuery = isMemory
             ? 'namespace:container_memory_usage_bytes:sum{' + nsFilter + '}'
             : 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum{' + nsFilter + '}';
@@ -605,6 +605,10 @@
               return;
             }
 
+            if (usedJson.status === 'error') {
+              console.warn(prefix + ' used query error:', usedJson.error);
+            }
+
             var limitMap = buildMetricMap(limitJson);
             var usedMap = buildMetricMap(usedJson);
             var podNames = {};
@@ -653,13 +657,15 @@
                 $tr.append($tdLimit);
 
                 var $tdUsed = document.createElement('td');
-                $tdUsed.innerText = usedVal > 0 ? formatValue(usedVal) : '-';
+                $tdUsed.innerText = (hasLimit || usedVal > 0) ? formatValue(usedVal) : '-';
                 $tdUsed.style.textAlign = 'right';
                 $tr.append($tdUsed);
 
                 var $tdPercent = document.createElement('td');
                 $tdPercent.style.textAlign = 'right';
-                if (hasLimit && usedVal > 0) {
+                if (hasLimit) {
+                  $tdPercent.innerText = usagePercent.toFixed(1) + '%';
+                } else if (usedVal > 0) {
                   $tdPercent.innerText = usagePercent.toFixed(1) + '%';
                 } else {
                   $tdPercent.innerText = '-';
@@ -672,7 +678,7 @@
                 $limitTotal.innerText = totalLimit > 0 ? formatValue(totalLimit) : '-';
               }
               if ($usedTotal) {
-                $usedTotal.innerText = totalUsed > 0 ? formatValue(totalUsed) : '-';
+                $usedTotal.innerText = totalLimit > 0 || totalUsed > 0 ? formatValue(totalUsed) : '-';
               }
               if ($percentTotal) {
                 $percentTotal.innerText = totalLimit > 0 ? totalPercent.toFixed(1) + '%' : '-';
