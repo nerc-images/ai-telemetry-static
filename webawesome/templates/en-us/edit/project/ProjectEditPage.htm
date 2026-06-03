@@ -123,8 +123,8 @@
         <thead>
           <tr>
             <th style="text-align: left;">Pod</th>
-            <th style="text-align: right;">Limit</th>
             <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Limit</th>
             <th style="text-align: right;">Usage %</th>
           </tr>
         </thead>
@@ -133,8 +133,8 @@
         <tfoot>
           <tr>
             <th style="text-align: right;">Totals:</th>
-            <th id="cpu-limit-total" style="text-align: right;"></th>
             <th id="cpu-used-total" style="text-align: right;"></th>
+            <th id="cpu-limit-total" style="text-align: right;"></th>
             <th id="cpu-percent-total" style="text-align: right;"></th>
           </tr>
         </tfoot>
@@ -156,8 +156,8 @@
         <thead>
           <tr>
             <th style="text-align: left;">Pod</th>
-            <th style="text-align: right;">Limit</th>
             <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Limit</th>
             <th style="text-align: right;">Usage %</th>
           </tr>
         </thead>
@@ -166,8 +166,8 @@
         <tfoot>
           <tr>
             <th style="text-align: right;">Totals:</th>
-            <th id="memory-limit-total" style="text-align: right;"></th>
             <th id="memory-used-total" style="text-align: right;"></th>
+            <th id="memory-limit-total" style="text-align: right;"></th>
             <th id="memory-percent-total" style="text-align: right;"></th>
           </tr>
         </tfoot>
@@ -190,8 +190,8 @@
           <tr>
             <th style="text-align: left;">PVC Name</th>
             <th style="text-align: center;">Status</th>
-            <th style="text-align: right;">Allocated</th>
             <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Allocated</th>
             <th style="text-align: right;">Usage %</th>
           </tr>
         </thead>
@@ -200,8 +200,8 @@
         <tfoot>
           <tr>
             <th colspan="2" style="text-align: right;">Totals:</th>
-            <th id="storage-allocated-total" style="text-align: right;"></th>
             <th id="storage-used-total" style="text-align: right;"></th>
+            <th id="storage-allocated-total" style="text-align: right;"></th>
             <th id="storage-percent-total" style="text-align: right;"></th>
           </tr>
         </tfoot>
@@ -651,15 +651,15 @@
                 $tdPod.innerText = pod;
                 $tr.append($tdPod);
 
-                var $tdLimit = document.createElement('td');
-                $tdLimit.innerText = hasLimit ? formatValue(limitVal) : '-';
-                $tdLimit.style.textAlign = 'right';
-                $tr.append($tdLimit);
-
                 var $tdUsed = document.createElement('td');
                 $tdUsed.innerText = (hasLimit || usedVal > 0) ? formatValue(usedVal) : '-';
                 $tdUsed.style.textAlign = 'right';
                 $tr.append($tdUsed);
+
+                var $tdLimit = document.createElement('td');
+                $tdLimit.innerText = hasLimit ? formatValue(limitVal) : '-';
+                $tdLimit.style.textAlign = 'right';
+                $tr.append($tdLimit);
 
                 var $tdPercent = document.createElement('td');
                 $tdPercent.style.textAlign = 'right';
@@ -815,15 +815,15 @@
                 $tdStatus.innerText = isMounted ? 'Mounted' : 'Unmounted';
                 $tr.append($tdStatus);
 
-                var $tdAllocated = document.createElement('td');
-                $tdAllocated.innerText = convertBytes(allocatedBytes);
-                $tdAllocated.style.textAlign = 'right';
-                $tr.append($tdAllocated);
-
                 var $tdUsed = document.createElement('td');
                 $tdUsed.innerText = isMounted ? convertBytes(usedBytes) : '-';
                 $tdUsed.style.textAlign = 'right';
                 $tr.append($tdUsed);
+
+                var $tdAllocated = document.createElement('td');
+                $tdAllocated.innerText = convertBytes(allocatedBytes);
+                $tdAllocated.style.textAlign = 'right';
+                $tr.append($tdAllocated);
 
                 var $tdPercent = document.createElement('td');
                 $tdPercent.style.textAlign = 'right';
