@@ -529,3 +529,58 @@ function convertBytes(bytes) {
   var i = Math.max(0, Math.min(Math.floor(Math.log(bytes) / Math.log(k)), sizes.length - 1));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
+
+// Extract hard limit and allocated (used) values from a kube_resourcequota Prometheus instant query response.
+function parseResourceQuota(quotaJson) {
+  var quotaHard = 0;
+  var quotaAllocated = 0;
+  if (quotaJson.status !== 'error' && quotaJson.data && quotaJson.data.result) {
+    quotaJson.data.result.forEach((result) => {
+      var type = result.metric.type;
+      var value = 0;
+      if (result.value && result.value.length > 1) {
+        value = parseFloat(result.value[1]) || 0;
+      }
+      if (type === 'hard') {
+        quotaHard = value;
+      } else if (type === 'used') {
+        quotaAllocated = value;
+      }
+    });
+  }
+  return { quotaHard: quotaHard, quotaAllocated: quotaAllocated };
+}
+
+// Show namespace "Used" and "Allocated" lines as value / quota hard (percent), matching the storage utilization pattern.
+function updateQuotaSummaryDisplay($quotaSection, $usedText, $allocatedText, quotaJson, actualUsed, formatValue) {
+  if (!$quotaSection) {
+    return;
+  }
+  $quotaSection.style.display = 'none';
+  var parsed = parseResourceQuota(quotaJson);
+  if (parsed.quotaHard > 0) {
+    if ($usedText) {
+      var usedPercent = (actualUsed / parsed.quotaHard) * 100;
+      $usedText.innerText = formatValue(actualUsed) + ' / ' + formatValue(parsed.quotaHard) + ' (' + usedPercent.toFixed(1) + '%)';
+    }
+    if ($allocatedText) {
+      var allocatedPercent = (parsed.quotaAllocated / parsed.quotaHard) * 100;
+      $allocatedText.innerText = formatValue(parsed.quotaAllocated) + ' / ' + formatValue(parsed.quotaHard) + ' (' + allocatedPercent.toFixed(1) + '%)';
+    }
+    $quotaSection.style.display = 'block';
+  }
+}
+
+// Build a pod-name to numeric value map from a Prometheus instant query result (per-pod CPU/memory metrics).
+function buildMetricMap(json) {
+  var map = {};
+  if (json.data && json.data.result) {
+    json.data.result.forEach((result) => {
+      var key = result.metric.pod || 'unknown';
+      if (result.value && result.value.length > 1) {
+        map[key] = parseFloat(result.value[1]) || 0;
+      }
+    });
+  }
+  return map;
+}
