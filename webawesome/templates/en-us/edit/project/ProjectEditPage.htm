@@ -73,13 +73,152 @@
     </div>
   </div>
 </wa-details>
-<wa-details{% if gpuEnabled is defined and gpuEnabled %} open{% endif %} class="gpu_details " id="billing-section">
+<wa-details open class="HtmRow" id="billing-section">
   <div slot="summary">
-    GPU Resource Utilization
+    Resource Utilization
   </div>
   <div class="wa-stack">
     <wa-card with-header>
-      <header slot="header" class="wa-heading-m">GPU Hours Used</header>
+      <header slot="header" class="wa-heading-m">Quota Overview</header>
+      <table class="wa-zebra-rows wa-hover-rows" style="width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">Resource</th>
+            <th style="text-align: right;">Used (Current)</th>
+            <th style="text-align: right;">Allocated (Current)</th>
+            <th style="text-align: right;">Quota Limit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CPU</td>
+            <td id="snapshot-cpu-used" style="text-align: right;">-</td>
+            <td id="snapshot-cpu-allocated" style="text-align: right;">-</td>
+            <td id="snapshot-cpu-hard" style="text-align: right;">-</td>
+          </tr>
+          <tr>
+            <td>Memory</td>
+            <td id="snapshot-memory-used" style="text-align: right;">-</td>
+            <td id="snapshot-memory-allocated" style="text-align: right;">-</td>
+            <td id="snapshot-memory-hard" style="text-align: right;">-</td>
+          </tr>
+          <tr>
+            <td>Storage</td>
+            <td id="snapshot-storage-used" style="text-align: right;">-</td>
+            <td id="snapshot-storage-allocated" style="text-align: right;">-</td>
+            <td id="snapshot-storage-hard" style="text-align: right;">-</td>
+          </tr>
+          <tr>
+            <td>GPU</td>
+            <td id="snapshot-gpu-used" style="text-align: right;">-</td>
+            <td id="snapshot-gpu-allocated" style="text-align: right;">-</td>
+            <td id="snapshot-gpu-hard" style="text-align: right;">-</td>
+          </tr>
+        </tbody>
+      </table>
+    </wa-card>
+    <wa-details summary="Detailed Breakdown">
+    <wa-details summary="CPU Utilization">
+      <table id="cpu-utilization-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">Pod</th>
+            <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Limit</th>
+            <th style="text-align: right;">Usage %</th>
+          </tr>
+        </thead>
+        <tbody id="cpu-utilization-tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th style="text-align: right;">Totals:</th>
+            <th id="cpu-used-total" style="text-align: right;"></th>
+            <th id="cpu-limit-total" style="text-align: right;"></th>
+            <th id="cpu-percent-total" style="text-align: right;"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="cpu-utilization-empty" style="display: none;">
+        No CPU usage data found for running pods in this namespace.
+      </div>
+      <wa-details summary="Query Info" style="margin-top: 1rem;">
+        <p><strong>Quota Query:</strong></p>
+        <code id="cpu-quota-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>Limit Query:</strong></p>
+        <code id="cpu-limit-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>Used Query:</strong></p>
+        <code id="cpu-used-query-display" style="word-break: break-all;"></code>
+      </wa-details>
+    </wa-details>
+    <wa-details summary="Memory Utilization">
+      <table id="memory-utilization-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">Pod</th>
+            <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Limit</th>
+            <th style="text-align: right;">Usage %</th>
+          </tr>
+        </thead>
+        <tbody id="memory-utilization-tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th style="text-align: right;">Totals:</th>
+            <th id="memory-used-total" style="text-align: right;"></th>
+            <th id="memory-limit-total" style="text-align: right;"></th>
+            <th id="memory-percent-total" style="text-align: right;"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="memory-utilization-empty" style="display: none;">
+        No memory usage data found for running pods in this namespace.
+      </div>
+      <wa-details summary="Query Info" style="margin-top: 1rem;">
+        <p><strong>Quota Query:</strong></p>
+        <code id="memory-quota-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>Limit Query:</strong></p>
+        <code id="memory-limit-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>Used Query:</strong></p>
+        <code id="memory-used-query-display" style="word-break: break-all;"></code>
+      </wa-details>
+    </wa-details>
+    <wa-details summary="Storage Utilization">
+      <table id="storage-utilization-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
+        <thead>
+          <tr>
+            <th style="text-align: left;">PVC Name</th>
+            <th style="text-align: center;">Status</th>
+            <th style="text-align: right;">Used</th>
+            <th style="text-align: right;">Allocated</th>
+            <th style="text-align: right;">Usage %</th>
+          </tr>
+        </thead>
+        <tbody id="storage-utilization-tbody">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="2" style="text-align: right;">Totals:</th>
+            <th id="storage-used-total" style="text-align: right;"></th>
+            <th id="storage-allocated-total" style="text-align: right;"></th>
+            <th id="storage-percent-total" style="text-align: right;"></th>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="storage-utilization-empty" style="display: none;">
+        No storage usage data found. PVCs must be mounted to running pods to show usage.
+      </div>
+      <wa-details summary="Query Info" style="margin-top: 1rem;">
+        <p><strong>Quota Query:</strong></p>
+        <code id="storage-quota-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>PVC Allocated Query:</strong></p>
+        <code id="storage-allocated-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>Used Query:</strong></p>
+        <code id="storage-used-query-display" style="word-break: break-all;"></code>
+      </wa-details>
+    </wa-details>
+    <wa-details summary="GPU Hours Used">
       <table id="billing-gpu-hours-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
         <thead>
           <tr>
@@ -106,62 +245,15 @@
           <tbody id="billing-range-info">
           </tbody>
         </table>
-        <p style="margin-top: 0.5rem;"><strong>Query:</strong></p>
+        <p><strong>Quota Query:</strong></p>
+        <code id="gpu-quota-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>GPUs Used (Current) Query:</strong></p>
+        <code id="gpu-used-query-display" style="word-break: break-all;"></code>
+        <p style="margin-top: 0.5rem;"><strong>GPU Hours Query:</strong></p>
         <code id="billing-query-display" style="word-break: break-all;"></code>
       </wa-details>
-    </wa-card>
-  </div>
-</wa-details>
-<wa-details open class="HtmRow" id="billing-section">
-  <div slot="summary">
-    Resource Utilization
-  </div>
-  <div class="wa-stack">
-    <wa-card with-header>
-      <header slot="header" class="wa-heading-m">Storage Utilization</header>
-      <div id="storage-quota-section" style="display: none; margin-bottom: 1rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-          <strong>Storage Used:</strong>
-          <span id="storage-used-text"></span>
-        </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <strong>Storage Allocated:</strong>
-          <span id="storage-allocated-text"></span>
-        </div>
-      </div>
-      <table id="storage-utilization-table" class="wa-zebra-rows wa-hover-rows" style="display: none; width: 100%;">
-        <thead>
-          <tr>
-            <th style="text-align: left;">PVC Name</th>
-            <th style="text-align: center;">Status</th>
-            <th style="text-align: right;">Allocated</th>
-            <th style="text-align: right;">Used</th>
-            <th style="text-align: right;">Usage %</th>
-          </tr>
-        </thead>
-        <tbody id="storage-utilization-tbody">
-        </tbody>
-        <tfoot>
-          <tr>
-            <th colspan="2" style="text-align: right;">Totals:</th>
-            <th id="storage-allocated-total" style="text-align: right;"></th>
-            <th id="storage-used-total" style="text-align: right;"></th>
-            <th id="storage-percent-total" style="text-align: right;"></th>
-          </tr>
-        </tfoot>
-      </table>
-      <div id="storage-utilization-empty" style="display: none;">
-        No storage usage data found. PVCs must be mounted to running pods to show usage.
-      </div>
-      <wa-details summary="Query Info" style="margin-top: 1rem;">
-        <p><strong>Quota Query:</strong></p>
-        <code id="storage-quota-query-display" style="word-break: break-all;"></code>
-        <p style="margin-top: 0.5rem;"><strong>PVC Allocated Query:</strong></p>
-        <code id="storage-allocated-query-display" style="word-break: break-all;"></code>
-        <p style="margin-top: 0.5rem;"><strong>Used Query:</strong></p>
-        <code id="storage-used-query-display" style="word-break: break-all;"></code>
-      </wa-details>
-    </wa-card>
+    </wa-details>
+    </wa-details>
   </div>
 </wa-details>
 {% endif %}
@@ -190,6 +282,8 @@
             , {{ dashboardPromise('visualization-pod-cpu-throttling') }}
             , {{ dashboardPromise('visualization-network-receive') }}
             , {{ dashboardPromise('visualization-network-transmit') }}
+            , queryComputeUtilization('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}', 'cpu')
+            , queryComputeUtilization('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}', 'memory')
             , queryStorageUtilization('{{ result.hubId }}', '{{ result.clusterName }}', '{{ result.projectName }}')
             , {{ dashboardPromise('visualization-project-gpu-utilization') }}
             , {{ dashboardPromise('visualization-quota-gpu-utilization') }}
@@ -220,7 +314,7 @@
           , classSimpleName='Project'
           , legendTitle='Projects'
           , metricPrefix='namespace:container_memory_usage_bytes:sum{'
-          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard", '
+          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.memory", type="hard"'
           , metricSuffix='}'
           , modelVar='projectName'
           , timeZone=timeZone
@@ -247,7 +341,7 @@
           , classSimpleName='Project'
           , legendTitle='Projects'
           , metricPrefix='node_namespace_pod_container:container_cpu_usage_seconds_total:sum{'
-          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard", '
+          , metricMiddle='} / on(cluster, namespace) group_left() kube_resourcequota{resource="limits.cpu", type="hard"'
           , metricSuffix='}'
           , modelVar='projectName'
           , timeZone=timeZone
@@ -407,6 +501,199 @@
           , displayLabels=['model', 'pod']
         ) }}
 
+        function updateQuotaSnapshot(resourcePrefix, quotaJson, actualUsed, formatValue) {
+          var parsed = parseResourceQuota(quotaJson);
+          var $used = document.getElementById('snapshot-' + resourcePrefix + '-used');
+          var $allocated = document.getElementById('snapshot-' + resourcePrefix + '-allocated');
+          var $hard = document.getElementById('snapshot-' + resourcePrefix + '-hard');
+
+          if (!$used || !$allocated || !$hard) {
+            return;
+          }
+
+          if (parsed.quotaHard > 0) {
+            var usedPercent = (actualUsed / parsed.quotaHard) * 100;
+            var allocatedPercent = (parsed.quotaAllocated / parsed.quotaHard) * 100;
+            $used.innerText = formatValue(actualUsed) + ' / ' + formatValue(parsed.quotaHard) + ' (' + usedPercent.toFixed(1) + '%)';
+            $allocated.innerText = formatValue(parsed.quotaAllocated) + ' / ' + formatValue(parsed.quotaHard) + ' (' + allocatedPercent.toFixed(1) + '%)';
+            $hard.innerText = formatValue(parsed.quotaHard);
+          } else {
+            $used.innerText = '-';
+            $allocated.innerText = '-';
+            $hard.innerText = '-';
+          }
+        }
+
+        async function queryComputeUtilization(hubId, clusterName, projectName, resource) {
+          var isMemory = resource === 'memory';
+          var prefix = isMemory ? 'memory' : 'cpu';
+          var nsFilter = 'cluster="' + clusterName + '", namespace="' + projectName + '"';
+          var quotaResource = isMemory ? 'limits.memory' : 'limits.cpu';
+          var quotaQuery = 'kube_resourcequota{' + nsFilter + ', resource="' + quotaResource + '"}';
+          var limitQuery = 'sum by (pod) (kube_pod_container_resource_limits{resource="' + (isMemory ? 'memory' : 'cpu') + '", ' + nsFilter + '})';
+          var usedQuery = isMemory
+            ? 'sum by (pod) (container_memory_working_set_bytes{' + nsFilter + ', container!="", container!="POD"})'
+            : 'sum by (pod) (node_namespace_pod_container:container_cpu_usage_seconds_total:sum{' + nsFilter + '})';
+          var namespaceUsedQuery = isMemory
+            ? 'namespace:container_memory_usage_bytes:sum{' + nsFilter + '}'
+            : 'node_namespace_pod_container:container_cpu_usage_seconds_total:sum{' + nsFilter + '}';
+          var formatValue = isMemory ? convertBytes : formatCores;
+
+          var limitUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: limitQuery
+          }).toString();
+          var usedUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: usedQuery
+          }).toString();
+          var quotaUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: quotaQuery
+          }).toString();
+          var namespaceUsedUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: namespaceUsedQuery
+          }).toString();
+
+          var $table = document.getElementById(prefix + '-utilization-table');
+          var $tbody = document.getElementById(prefix + '-utilization-tbody');
+          var $limitTotal = document.getElementById(prefix + '-limit-total');
+          var $usedTotal = document.getElementById(prefix + '-used-total');
+          var $percentTotal = document.getElementById(prefix + '-percent-total');
+          var $empty = document.getElementById(prefix + '-utilization-empty');
+          var $limitQueryDisplay = document.getElementById(prefix + '-limit-query-display');
+          var $usedQueryDisplay = document.getElementById(prefix + '-used-query-display');
+          var $quotaQueryDisplay = document.getElementById(prefix + '-quota-query-display');
+
+          if (!$table || !$tbody || !$empty) {
+            return;
+          }
+
+          $table.style.display = 'none';
+          $empty.style.display = 'none';
+          if ($quotaQueryDisplay) {
+            $quotaQueryDisplay.innerText = quotaQuery;
+          }
+          if ($limitQueryDisplay) {
+            $limitQueryDisplay.innerText = limitQuery;
+          }
+          if ($usedQueryDisplay) {
+            $usedQueryDisplay.innerText = usedQuery;
+          }
+
+          try {
+            var [limitResponse, usedResponse, quotaResponse, namespaceUsedResponse] = await Promise.all([
+              fetch(limitUrl)
+              , fetch(usedUrl)
+              , fetch(quotaUrl)
+              , fetch(namespaceUsedUrl)
+            ]);
+
+            if (!limitResponse.ok || !usedResponse.ok) {
+              $empty.style.display = 'block';
+              $empty.innerText = 'HTTP Error fetching ' + resource + ' metrics';
+              return;
+            }
+
+            var [limitJson, usedJson, quotaJson, namespaceUsedJson] = await Promise.all([
+              limitResponse.json()
+              , usedResponse.json()
+              , quotaResponse.json()
+              , namespaceUsedResponse.json()
+            ]);
+
+            if (limitJson.status === 'error') {
+              $empty.style.display = 'block';
+              $empty.innerText = 'Prometheus error: ' + (limitJson.error || 'Unknown error');
+              return;
+            }
+
+            if (usedJson.status === 'error') {
+              console.warn(prefix + ' used query error:', usedJson.error);
+            }
+
+            var limitMap = buildMetricMap(limitJson);
+            var usedMap = buildMetricMap(usedJson);
+            var podNames = {};
+            Object.keys(limitMap).forEach((pod) => { podNames[pod] = true; });
+            Object.keys(usedMap).forEach((pod) => { podNames[pod] = true; });
+
+            var namespaceUsed = 0;
+            if (namespaceUsedJson.data && namespaceUsedJson.data.result && namespaceUsedJson.data.result.length > 0) {
+              var nsResult = namespaceUsedJson.data.result[0];
+              if (nsResult.value && nsResult.value.length > 1) {
+                namespaceUsed = parseFloat(nsResult.value[1]) || 0;
+              }
+            }
+
+            if (quotaJson.status === 'error') {
+              console.warn(prefix + ' quota query error:', quotaJson.error);
+            } else {
+              updateQuotaSnapshot(prefix, quotaJson, namespaceUsed, formatValue);
+            }
+
+            var pods = Object.keys(podNames).sort();
+            if (pods.length > 0) {
+              $tbody.innerHTML = '';
+              var totalLimit = 0;
+              var totalUsed = 0;
+
+              pods.forEach((pod) => {
+                var limitVal = limitMap[pod] || 0;
+                var usedVal = usedMap[pod] || 0;
+                var hasLimit = limitVal > 0;
+                var usagePercent = hasLimit ? (usedVal / limitVal * 100) : 0;
+
+                totalLimit += limitVal;
+                totalUsed += usedVal;
+
+                var $tr = document.createElement('tr');
+                $tbody.append($tr);
+
+                var $tdPod = document.createElement('td');
+                $tdPod.innerText = pod;
+                $tr.append($tdPod);
+
+                var $tdUsed = document.createElement('td');
+                $tdUsed.innerText = (hasLimit || usedVal > 0) ? formatValue(usedVal) : '-';
+                $tdUsed.style.textAlign = 'right';
+                $tr.append($tdUsed);
+
+                var $tdLimit = document.createElement('td');
+                $tdLimit.innerText = hasLimit ? formatValue(limitVal) : '-';
+                $tdLimit.style.textAlign = 'right';
+                $tr.append($tdLimit);
+
+                var $tdPercent = document.createElement('td');
+                $tdPercent.style.textAlign = 'right';
+                if (hasLimit) {
+                  $tdPercent.innerText = usagePercent.toFixed(1) + '%';
+                } else if (usedVal > 0) {
+                  $tdPercent.innerText = usagePercent.toFixed(1) + '%';
+                } else {
+                  $tdPercent.innerText = '-';
+                }
+                $tr.append($tdPercent);
+              });
+
+              var totalPercent = totalLimit > 0 ? (totalUsed / totalLimit * 100) : 0;
+              if ($limitTotal) {
+                $limitTotal.innerText = totalLimit > 0 ? formatValue(totalLimit) : '-';
+              }
+              if ($usedTotal) {
+                $usedTotal.innerText = totalLimit > 0 || totalUsed > 0 ? formatValue(totalUsed) : '-';
+              }
+              if ($percentTotal) {
+                $percentTotal.innerText = totalLimit > 0 ? totalPercent.toFixed(1) + '%' : '-';
+              }
+
+              $table.style.display = 'table';
+            } else {
+              $empty.style.display = 'block';
+            }
+          } catch (error) {
+            $empty.style.display = 'block';
+            $empty.innerText = 'Error loading ' + resource + ' data: ' + error.message;
+          }
+        }
+
         async function queryStorageUtilization(hubId, clusterName, projectName) {
           // Query for all PVCs with their allocated storage (shows all PVCs regardless of mount status)
           var allocatedQuery = 'kube_persistentvolumeclaim_resource_requests_storage_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
@@ -415,7 +702,7 @@
           var usedQuery = 'kubelet_volume_stats_used_bytes{cluster="' + clusterName + '", namespace="' + projectName + '"}';
 
           // Query for namespace storage quota (matches any storage-related quota resource)
-          var quotaQuery = 'kube_resourcequota{namespace="' + projectName + '", resource=~".*requests.storage.*"}';
+          var quotaQuery = 'kube_resourcequota{cluster="' + clusterName + '", namespace="' + projectName + '", resource=~".*requests.storage.*"}';
 
           var allocatedUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
             query: allocatedQuery
@@ -439,9 +726,6 @@
           var $allocatedQueryDisplay = document.getElementById('storage-allocated-query-display');
           var $usedQueryDisplay = document.getElementById('storage-used-query-display');
           var $quotaQueryDisplay = document.getElementById('storage-quota-query-display');
-          var $quotaSection = document.getElementById('storage-quota-section');
-          var $usedText = document.getElementById('storage-used-text');
-          var $allocatedText = document.getElementById('storage-allocated-text');
 
           if (!$table || !$tbody || !$empty) {
             return;
@@ -450,7 +734,6 @@
           // Reset state
           $table.style.display = 'none';
           $empty.style.display = 'none';
-          if ($quotaSection) $quotaSection.style.display = 'none';
 
           // Display query info
           if ($quotaQueryDisplay) {
@@ -494,47 +777,10 @@
               });
             }
 
-            // Process quota data - show both used and allocated vs quota limit
-            if ($quotaSection) {
-              if (quotaJson.status === 'error') {
-                console.warn('Quota query error:', quotaJson.error);
-              } else if (quotaJson.data && quotaJson.data.result && quotaJson.data.result.length > 0) {
-                var quotaHard = 0;
-                var quotaAllocated = 0;
-
-                quotaJson.data.result.forEach((result) => {
-                  var type = result.metric.type;
-                  var value = 0;
-                  if (result.value && result.value.length > 1) {
-                    value = parseFloat(result.value[1]) || 0;
-                  }
-                  if (type === 'hard') {
-                    quotaHard = value;
-                  } else if (type === 'used') {
-                    quotaAllocated = value;
-                  }
-                });
-
-                if (quotaHard > 0) {
-                  // Storage used (actual bytes used)
-                  if ($usedText) {
-                    var usedPercent = (totalActualUsed / quotaHard) * 100;
-                    $usedText.innerText = convertBytes(totalActualUsed) + ' / ' + convertBytes(quotaHard) + ' (' + usedPercent.toFixed(1) + '%)';
-                  }
-
-                  // Storage allocated (PVC requests)
-                  if ($allocatedText) {
-                    var allocatedPercent = (quotaAllocated / quotaHard) * 100;
-                    $allocatedText.innerText = convertBytes(quotaAllocated) + ' / ' + convertBytes(quotaHard) + ' (' + allocatedPercent.toFixed(1) + '%)';
-                  }
-
-                  $quotaSection.style.display = 'block';
-                } else {
-                  console.log('Quota query returned data but quotaHard is 0. Results:', quotaJson.data.result);
-                }
-              } else {
-                console.log('Quota query returned no results for:', quotaQuery);
-              }
+            if (quotaJson.status === 'error') {
+              console.warn('Storage quota query error:', quotaJson.error);
+            } else {
+              updateQuotaSnapshot('storage', quotaJson, totalActualUsed, convertBytes);
             }
 
             if (allocatedJson.data && allocatedJson.data.result && allocatedJson.data.result.length > 0) {
@@ -569,26 +815,20 @@
                 $tdStatus.innerText = isMounted ? 'Mounted' : 'Unmounted';
                 $tr.append($tdStatus);
 
-                var $tdAllocated = document.createElement('td');
-                $tdAllocated.innerText = convertBytes(allocatedBytes);
-                $tdAllocated.style.textAlign = 'right';
-                $tr.append($tdAllocated);
-
                 var $tdUsed = document.createElement('td');
                 $tdUsed.innerText = isMounted ? convertBytes(usedBytes) : '-';
                 $tdUsed.style.textAlign = 'right';
                 $tr.append($tdUsed);
 
+                var $tdAllocated = document.createElement('td');
+                $tdAllocated.innerText = convertBytes(allocatedBytes);
+                $tdAllocated.style.textAlign = 'right';
+                $tr.append($tdAllocated);
+
                 var $tdPercent = document.createElement('td');
                 $tdPercent.style.textAlign = 'right';
                 if (isMounted) {
                   $tdPercent.innerText = usagePercent.toFixed(1) + '%';
-                  if (usagePercent >= 90) {
-                    $tdPercent.style.color = 'var(--wa-color-danger-600)';
-                    $tdPercent.style.fontWeight = 'bold';
-                  } else if (usagePercent >= 75) {
-                    $tdPercent.style.color = 'var(--wa-color-warning-600)';
-                  }
                 } else {
                   $tdPercent.innerText = '-';
                 }
@@ -622,35 +862,47 @@
           // 2. Join with kube_node_labels to get the GPU product name
           // 3. sum_over_time adds up all values at 1-minute intervals
           // 4. Divide by 60 to convert minutes to hours
-          var podQuery = '(kube_pod_resource_request{resource=~"nvidia.com.*", node!="", cluster="' + clusterName + '", namespace="' + projectName + '"} unless on(pod, namespace) kube_pod_status_unschedulable{cluster="' + clusterName + '", namespace="' + projectName + '"})';
+          var nsFilter = 'cluster="' + clusterName + '", namespace="' + projectName + '"';
+          var podQuery = '(kube_pod_resource_request{resource=~"nvidia.com.*", node!="", ' + nsFilter + '} unless on(pod, namespace) kube_pod_status_unschedulable{' + nsFilter + '})';
           var joinQuery = podQuery + ' * on(node) group_left(label_nvidia_com_gpu_product) (max by (node, label_nvidia_com_gpu_product) (kube_node_labels{cluster="' + clusterName + '", label_nvidia_com_gpu_product!=""}))';
-          var query = 'sum_over_time((' + joinQuery + ')[' + durationString + ':1m]) / 60';
+          var hoursQuery = 'sum_over_time((' + joinQuery + ')[' + durationString + ':1m]) / 60';
+          var quotaQuery = 'kube_resourcequota{' + nsFilter + ', resource="requests.nvidia.com/gpu"}';
+          var usedNowQuery = 'sum(' + podQuery + ')';
 
-          // Use instant query API (not query_range) since sum_over_time returns a single value
-          var url = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
-            query: query
+          var hoursUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: hoursQuery
             , time: timeQuery.end
           }).toString();
+          var quotaUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: quotaQuery
+          }).toString();
+          var usedNowUrl = '/prom-keycloak-proxy/' + encodeURIComponent(hubId) + '/api/v1/query?' + new URLSearchParams({
+            query: usedNowQuery
+          }).toString();
 
-          // Update UI elements
           var $table = document.getElementById('billing-gpu-hours-table');
           var $tbody = document.getElementById('billing-gpu-hours-tbody');
           var $total = document.getElementById('billing-gpu-hours-total');
           var $empty = document.getElementById('billing-gpu-hours-empty');
           var $queryDisplay = document.getElementById('billing-query-display');
           var $rangeInfo = document.getElementById('billing-range-info');
+          var $quotaQueryDisplay = document.getElementById('gpu-quota-query-display');
+          var $usedQueryDisplay = document.getElementById('gpu-used-query-display');
 
           if (!$table || !$tbody || !$total || !$empty) {
             return;
           }
 
-          // Reset state
           $table.style.display = 'none';
           $empty.style.display = 'none';
-
-          // Display query info
           if ($queryDisplay) {
-            $queryDisplay.innerText = query;
+            $queryDisplay.innerText = hoursQuery;
+          }
+          if ($quotaQueryDisplay) {
+            $quotaQueryDisplay.innerText = quotaQuery;
+          }
+          if ($usedQueryDisplay) {
+            $usedQueryDisplay.innerText = usedNowQuery;
           }
           if ($rangeInfo) {
             $rangeInfo.innerHTML = '';
@@ -674,23 +926,46 @@
           }
 
           try {
-            var response = await fetch(url);
+            var [hoursResponse, quotaResponse, usedNowResponse] = await Promise.all([
+              fetch(hoursUrl)
+              , fetch(quotaUrl)
+              , fetch(usedNowUrl)
+            ]);
 
-            if (!response.ok) {
+            if (!hoursResponse.ok) {
               $empty.style.display = 'block';
-              $empty.innerText = 'HTTP Error: ' + response.status + ' ' + response.statusText;
+              $empty.innerText = 'HTTP Error: ' + hoursResponse.status + ' ' + hoursResponse.statusText;
               return;
             }
 
-            var responseJson = await response.json();
+            var [hoursJson, quotaJson, usedNowJson] = await Promise.all([
+              hoursResponse.json()
+              , quotaResponse.json()
+              , usedNowResponse.json()
+            ]);
 
-            if (responseJson.status === 'error') {
+            var gpusUsedCurrent = 0;
+            if (usedNowJson.data && usedNowJson.data.result && usedNowJson.data.result.length > 0) {
+              var usedResult = usedNowJson.data.result[0];
+              if (usedResult.value && usedResult.value.length > 1) {
+                gpusUsedCurrent = parseFloat(usedResult.value[1]) || 0;
+              }
+            }
+
+            if (quotaJson.status === 'error') {
+              console.warn('GPU quota query error:', quotaJson.error);
+            } else {
+              updateQuotaSnapshot('gpu', quotaJson, gpusUsedCurrent, formatGpuValue);
+            }
+
+            if (hoursJson.status === 'error') {
               $empty.style.display = 'block';
-              $empty.innerText = 'Prometheus error: ' + (responseJson.error || 'Unknown error');
+              $empty.innerText = 'Prometheus error: ' + (hoursJson.error || 'Unknown error');
               return;
             }
 
-            if (responseJson.data && responseJson.data.result && responseJson.data.result.length > 0) {
+            if (hoursJson.data && hoursJson.data.result && hoursJson.data.result.length > 0) {
+              var responseJson = hoursJson;
               $tbody.innerHTML = '';
               var totalGpuHours = 0;
 
@@ -736,6 +1011,17 @@
             $empty.style.display = 'block';
             $empty.innerText = 'Error loading GPU usage data: ' + error.message;
           }
+        }
+        
+        // HELPER FUNCTIONS SECTION
+        function formatCores(value) {
+          var n = (value && isFinite(value)) ? value : 0;
+          return parseFloat(n.toFixed(3)).toString() + ' cores';
+        }
+
+        function formatGpuValue(count) {
+          var n = (count && isFinite(count)) ? Math.round(count * 1000) / 1000 : 0;
+          return n + (n === 1 ? ' GPU' : ' GPUs');
         }
 
   </script>
